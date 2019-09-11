@@ -1,10 +1,24 @@
 var clock = new THREE.Clock();
 
 var scene, renderer, camera, controls;
-var materials = createMaterials();
+var materials;
 
 
 function createMaterials() {
+/*
+  var basisLoader = new THREE.BasisTextureLoader();
+  basisLoader.setTranscoderPath( '../src/vendor/' );
+  basisLoader.detectSupport(renderer);
+
+  basisLoader.load( '../assets/lightmap.basis', function (texture) {
+    // use texture
+  }, null, function (e) {console.error(e);});
+
+  basisLoader.load( '../assets/travertine.basis', function (texture) {
+    // use texture
+  }, null, function (e) {console.error(e);});
+*/
+
   var doorMaterial = new THREE.MeshLambertMaterial();
 
   var lightmapTexture = new THREE.TextureLoader().load('../assets/lightmap.png');
@@ -49,24 +63,26 @@ function init() {
     }
 
   });
-
+  scene.add(controls.getObject());
 
   parent = new THREE.Object3D();
-
-  var loader = new THREE.GLTFLoader();
-  loader.load('../assets/hall.gltf', gltf =>{
-    gltf.scene.traverse(o => o.material = materials[o.name] || null);
-    parent.add( gltf.scene );
-  });
-
-  scene.add(controls.getObject());
   scene.add(parent);
+
   renderer = new THREE.WebGLRenderer();
   renderer.gammaOutput = true;
   renderer.gammaFactor = 2.2;
   renderer.setClearColor( 0x92B4BB );
   renderer.setPixelRatio( window.devicePixelRatio );
   renderer.setSize( window.innerWidth, window.innerHeight );
+
+  materials = createMaterials();
+
+  var gltfLoader = new THREE.GLTFLoader();
+  gltfLoader.load('../assets/hall.gltf', gltf =>{
+    gltf.scene.traverse(o => o.material = materials[o.name] || null);
+    parent.add(gltf.scene);
+  });
+
   document.body.appendChild( renderer.domElement );
 
   window.addEventListener('resize', onWindowResize, false);
