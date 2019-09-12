@@ -1,40 +1,32 @@
+import {loadAssets} from './assetManager.mjs';
+
 var clock = new THREE.Clock();
 
-var scene, renderer, camera, controls;
-var materials;
+var scene, parent, renderer, camera, controls, materials;
+
+var assets = {
+  lightmap_tex: 'lightmap.png',
+  travertine_tex: 'travertine.png',
+  hall_model: 'hall.gltf'
+};
 
 
-function createMaterials() {
-/*
-  var basisLoader = new THREE.BasisTextureLoader();
-  basisLoader.setTranscoderPath( '../src/vendor/' );
-  basisLoader.detectSupport(renderer);
-
-  basisLoader.load( '../assets/lightmap.basis', function (texture) {
-    // use texture
-  }, null, function (e) {console.error(e);});
-
-  basisLoader.load( '../assets/travertine.basis', function (texture) {
-    // use texture
-  }, null, function (e) {console.error(e);});
-*/
-
+function setupMaterials() {
   var doorMaterial = new THREE.MeshLambertMaterial();
+  var lightmapTex = assets['lightmap_tex'];
+  lightmapTex.flipY = false;
 
-  var lightmapTexture = new THREE.TextureLoader().load('../assets/lightmap.png');
-  lightmapTexture.flipY = false;
+  var diffuseTex = assets['travertine_tex'];
+  //diffuseTex.encoding = THREE.sRGBEncoding;
+  diffuseTex.wrapS = THREE.RepeatWrapping;
+  diffuseTex.wrapT = THREE.RepeatWrapping;
+  diffuseTex.repeat.set(2, 2);
 
-  var diffuseTexture = new THREE.TextureLoader().load('../assets/travertine.png');
-  //diffuseTexture.encoding = THREE.sRGBEncoding;
-  diffuseTexture.wrapS = THREE.RepeatWrapping;
-  diffuseTexture.wrapT = THREE.RepeatWrapping;
-  diffuseTexture.repeat.set(2, 2);
-
-  var materials = {
+  var objectMaterials = {
     hall: new THREE.MeshLambertMaterial({
       color: 0xffffff,
-      map: diffuseTexture,
-      lightMap: lightmapTexture
+      map: diffuseTex,
+      lightMap: lightmapTex
     }),
     lightpanels: new THREE.MeshBasicMaterial(),
     doorA: doorMaterial,
@@ -43,9 +35,22 @@ function createMaterials() {
     doorD: doorMaterial
   };
 
-  return materials;
+  for (var i in assets) {
+    // gltf
+    if (assets[i]['scene'] !== undefined) {
+      assets[i].scene.traverse(o => {
+        if (o.type == 'Mesh' && objectMaterials[o.name]) {
+          o.material = objectMaterials[o.name];
+        }
+      });
+    }
+  }
 }
 
+
+function setupHall(){
+  parent.add(assets['hall_model'].scene);
+}
 
 function init() {
   var w = 100;
@@ -73,20 +78,16 @@ function init() {
   renderer.gammaFactor = 2.2;
   renderer.setClearColor( 0x92B4BB );
   renderer.setPixelRatio( window.devicePixelRatio );
-  renderer.setSize( window.innerWidth, window.innerHeight );
-
-  materials = createMaterials();
-
-  var gltfLoader = new THREE.GLTFLoader();
-  gltfLoader.load('../assets/hall.gltf', gltf =>{
-    gltf.scene.traverse(o => o.material = materials[o.name] || null);
-    parent.add(gltf.scene);
-  });
+  renderer.setSize(window.innerWidth, window.innerHeight);
 
   document.body.appendChild( renderer.domElement );
-
   window.addEventListener('resize', onWindowResize, false);
-  renderer.setAnimationLoop(animate);
+
+  loadAssets(renderer, '../assets/', assets, () => {
+    setupMaterials();
+    setupHall();
+    renderer.setAnimationLoop(animate);
+  })
 }
 
 function onWindowResize() {
