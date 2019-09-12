@@ -17,7 +17,8 @@ var assets = {
   lightmap_tex: 'lightmap.png',
   travertine_tex: 'travertine.png',
   hall_model: 'hall.gltf',
-  pano1: 'zapporthorn.basis'
+  pano1: 'zapporthorn.basis',
+  pano1small: 'zapporthorn_small.basis'
 };
 
 function init() {
@@ -34,9 +35,10 @@ function init() {
       case 83: controls.moveForward(-0.2); break;
       case 68: controls.moveRight(0.2); break;
     }
-    if (ev.keyCode - 49 < 9) {
+    const n = ev.keyCode - 49;
+    if (n <= 9 && n >= 0) {
       currentWorld.exit(context);
-      currentWorld = worlds[ev.keyCode - 49];
+      currentWorld = worlds[n];
       currentWorld.enter(context);
     }
 

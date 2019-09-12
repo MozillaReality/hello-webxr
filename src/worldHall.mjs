@@ -1,4 +1,4 @@
-var hall = null;
+var scene, hall, pano1;
 
 export function setup(ctx) {
   const assets = ctx.assets;
@@ -25,24 +25,45 @@ export function setup(ctx) {
     doorD: doorMaterial
   };
 
+  scene = new THREE.Object3D();
+
   hall = assets['hall_model'].scene;
   hall.traverse(o => {
     if (o.type == 'Mesh' && objectMaterials[o.name]) {
       o.material = objectMaterials[o.name];
     }
   });
+
+  const light = new THREE.DirectionalLight(0xffffff);
+  light.position.set(0.2, 1, 0.1);
+
+  assets['pano1small'].encoding = THREE.sRGBEncoding;
+  pano1 = new THREE.Mesh(
+    new THREE.SphereBufferGeometry(0.15, 30, 20),
+    new THREE.MeshPhongMaterial( {
+      map: assets['pano1small'],
+      emissiveMap: assets['pano1small'],
+      emissive: 0xffffff,
+      specular: 0x555555
+    } )
+  );
+  pano1.scale.y = -1;
+  pano1.position.set(3.1, 1.15, 4);
+
+  scene.add(light);
+  scene.add(hall);
+  scene.add(pano1);
 }
 
 export function enter(ctx) {
   ctx.renderer.setClearColor( 0x92B4BB );
-  ctx.scene.add(hall);
+  ctx.scene.add(scene);
 }
 
 export function exit(ctx) {
-  ctx.scene.remove(hall);
-
+  ctx.scene.remove(scene);
 }
 
 export function execute(ctx, delta, time) {
-
+  pano1.material.emissiveIntensity = 0.5 + Math.sin(time * 5) * 0.25 + 0.25;
 }

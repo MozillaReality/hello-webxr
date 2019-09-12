@@ -34,6 +34,7 @@ export function loadAssets(renderer, basePath, assets, onComplete) {
     let assetPath = assets[i];
     var ext = assetPath.substr(assetPath.lastIndexOf('.') + 1).toLowerCase();
     loaders[ext].load(basePath + assetPath, asset => {
+      console.info(`%c ${assetPath} loaded`, 'color:green');
       assets[assetId] = asset;
       if (onComplete && allAssetsLoaded(assets)) { onComplete(); }
     });
