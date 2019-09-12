@@ -1,56 +1,24 @@
 import {loadAssets} from './assetManager.mjs';
+//import {World, System} from './vendor/ecsy.module.js';
+import * as worldHall from './worldHall.mjs';
+import * as worldPanorama from './worldPanorama.mjs';
 
 var clock = new THREE.Clock();
 
-var scene, parent, renderer, camera, controls, materials;
+var scene, parent, renderer, camera, controls, context;
+
+var worlds = [
+  worldHall,
+  worldPanorama
+];
+var currentWorld = null;
 
 var assets = {
   lightmap_tex: 'lightmap.png',
   travertine_tex: 'travertine.png',
-  hall_model: 'hall.gltf'
+  hall_model: 'hall.gltf',
+  pano1: 'zapporthorn.basis'
 };
-
-
-function setupMaterials() {
-  var doorMaterial = new THREE.MeshLambertMaterial();
-  var lightmapTex = assets['lightmap_tex'];
-  lightmapTex.flipY = false;
-
-  var diffuseTex = assets['travertine_tex'];
-  //diffuseTex.encoding = THREE.sRGBEncoding;
-  diffuseTex.wrapS = THREE.RepeatWrapping;
-  diffuseTex.wrapT = THREE.RepeatWrapping;
-  diffuseTex.repeat.set(2, 2);
-
-  var objectMaterials = {
-    hall: new THREE.MeshLambertMaterial({
-      color: 0xffffff,
-      map: diffuseTex,
-      lightMap: lightmapTex
-    }),
-    lightpanels: new THREE.MeshBasicMaterial(),
-    doorA: doorMaterial,
-    doorB: doorMaterial,
-    doorC: doorMaterial,
-    doorD: doorMaterial
-  };
-
-  for (var i in assets) {
-    // gltf
-    if (assets[i]['scene'] !== undefined) {
-      assets[i].scene.traverse(o => {
-        if (o.type == 'Mesh' && objectMaterials[o.name]) {
-          o.material = objectMaterials[o.name];
-        }
-      });
-    }
-  }
-}
-
-
-function setupHall(){
-  parent.add(assets['hall_model'].scene);
-}
 
 function init() {
   var w = 100;
@@ -66,6 +34,11 @@ function init() {
       case 83: controls.moveForward(-0.2); break;
       case 68: controls.moveRight(0.2); break;
     }
+    if (ev.keyCode - 49 < 9) {
+      currentWorld.exit(context);
+      currentWorld = worlds[ev.keyCode - 49];
+      currentWorld.enter(context);
+    }
 
   });
   scene.add(controls.getObject());
@@ -76,16 +49,25 @@ function init() {
   renderer = new THREE.WebGLRenderer();
   renderer.gammaOutput = true;
   renderer.gammaFactor = 2.2;
-  renderer.setClearColor( 0x92B4BB );
   renderer.setPixelRatio( window.devicePixelRatio );
   renderer.setSize(window.innerWidth, window.innerHeight);
 
-  document.body.appendChild( renderer.domElement );
   window.addEventListener('resize', onWindowResize, false);
 
+  context = {
+    assets: assets,
+    scene : parent,
+    renderer: renderer
+  };
+
   loadAssets(renderer, '../assets/', assets, () => {
-    setupMaterials();
-    setupHall();
+    worldHall.setup(context);
+    worldPanorama.setup(context);
+
+    currentWorld = worlds[0];
+    currentWorld.enter(context);
+
+    document.body.appendChild( renderer.domElement );
     renderer.setAnimationLoop(animate);
   })
 }
@@ -93,12 +75,13 @@ function init() {
 function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
-  renderer.setSize( window.innerWidth, window.innerHeight );
+  renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
 function animate() {
   var delta = clock.getDelta();
   var elapsedTime = clock.elapsedTime;
+  currentWorld.execute(context, delta, elapsedTime);
   renderer.render( scene, camera );
 }
 
