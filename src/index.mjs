@@ -21,6 +21,12 @@ var assets = {
   pano1small: 'zapporthorn_small.basis'
 };
 
+function gotoWorld(world) {
+  currentWorld.exit(context);
+  currentWorld = world;
+  currentWorld.enter(context);
+}
+
 function init() {
   var w = 100;
   scene = new THREE.Scene();
@@ -37,9 +43,7 @@ function init() {
     }
     const n = ev.keyCode - 49;
     if (n <= 9 && n >= 0) {
-      currentWorld.exit(context);
-      currentWorld = worlds[n];
-      currentWorld.enter(context);
+      gotoWorld(worlds[n]);
     }
 
   });
@@ -59,7 +63,8 @@ function init() {
   context = {
     assets: assets,
     scene : parent,
-    renderer: renderer
+    renderer: renderer,
+    camera: camera
   };
 
   loadAssets(renderer, '../assets/', assets, () => {
@@ -83,8 +88,12 @@ function onWindowResize() {
 function animate() {
   var delta = clock.getDelta();
   var elapsedTime = clock.elapsedTime;
+  context.goto = null;
   currentWorld.execute(context, delta, elapsedTime);
   renderer.render( scene, camera );
+  if (context.goto !== null) {
+    gotoWorld(context.goto == 'panorama'? worldPanorama : worldHall);
+  }
 }
 
 init();

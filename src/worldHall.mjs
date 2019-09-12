@@ -44,11 +44,12 @@ export function setup(ctx) {
       map: assets['pano1small'],
       emissiveMap: assets['pano1small'],
       emissive: 0xffffff,
-      specular: 0x555555
+      specular: 0x555555,
+      side: THREE.DoubleSide,
     } )
   );
   pano1.scale.y = -1;
-  pano1.position.set(3.1, 1.15, 4);
+  pano1.position.set(3.1, 1.5, 4);
 
   scene.add(light);
   scene.add(hall);
@@ -65,5 +66,21 @@ export function exit(ctx) {
 }
 
 export function execute(ctx, delta, time) {
-  pano1.material.emissiveIntensity = 0.5 + Math.sin(time * 5) * 0.25 + 0.25;
+
+  const dist = ctx.camera.position.distanceTo(pano1.position);
+
+  if (dist < 1) {
+    var v = ctx.camera.position.clone().sub(pano1.position).multiplyScalar(0.08);
+    if (pano1.scale.x < 2) {
+      pano1.scale.multiplyScalar(1.1);
+    }
+    pano1.position.add(v);
+
+    if (dist < 0.1){ ctx.goto = 'panorama'; }
+  } else {
+    pano1.scale.set(1, -1, 1);
+    pano1.position.set(3.1, 1.5, 4);
+    pano1.position.y = 1.5 + Math.cos(time * 3) * 0.02;
+  }
+
 }
