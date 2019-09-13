@@ -50,6 +50,7 @@ export function setup(ctx) {
   );
   pano1.scale.y = -1;
   pano1.position.set(3.1, 1.5, 4);
+  pano1.position.set(1.8, 1.5, 0.5); // TEST
 
   scene.add(light);
   scene.add(hall);
@@ -80,6 +81,7 @@ export function execute(ctx, delta, time) {
   } else {
     pano1.scale.set(1, -1, 1);
     pano1.position.set(3.1, 1.5, 4);
+    pano1.position.set(1.8, 1.5, 0.5); //TEST
     pano1.position.y = 1.5 + Math.cos(time * 3) * 0.02;
   }
 

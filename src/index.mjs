@@ -1,3 +1,4 @@
+import {WEBVR} from './vendor/WebVR.js';
 import {loadAssets} from './assetManager.mjs';
 //import {World, System} from './vendor/ecsy.module.js';
 import * as worldHall from './worldHall.mjs';
@@ -6,6 +7,7 @@ import * as worldPanorama from './worldPanorama.mjs';
 var clock = new THREE.Clock();
 
 var scene, parent, renderer, camera, controls, context;
+var controller1, controller2;
 
 var worlds = [
   worldHall,
@@ -32,6 +34,7 @@ function init() {
   scene = new THREE.Scene();
   camera = new THREE.PerspectiveCamera(80, window.innerWidth / window.innerHeight, 0.005, 10000);
   camera.position.set(0, 1.6, 0);
+  camera.position.set(1.5, 1.6, 2.3); //near pano1
   controls = new THREE.PointerLockControls(camera);
   document.body.addEventListener('click', () => controls.lock());
   document.body.addEventListener('keydown', ev => {
@@ -57,6 +60,7 @@ function init() {
   renderer.gammaFactor = 2.2;
   renderer.setPixelRatio( window.devicePixelRatio );
   renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.vr.enabled = true;
 
   window.addEventListener('resize', onWindowResize, false);
 
@@ -67,6 +71,25 @@ function init() {
     camera: camera
   };
 
+  controller1 = renderer.vr.getController(0);
+  scene.add(controller1);
+  controller1.add(new THREE.Mesh(
+    new THREE.SphereBufferGeometry(0.05, 15, 10),
+    new THREE.MeshLambertMaterial({color: 0xff0000})
+  ));
+
+  //controller1.addEventListener('selectstart', onSelectStart);
+  //controller1.addEventListener('selectend', onSelectEnd);
+
+  controller2 = renderer.vr.getController(1);
+  scene.add(controller2);
+  controller2.add(new THREE.Mesh(
+    new THREE.SphereBufferGeometry(0.05, 15, 10),
+    new THREE.MeshLambertMaterial({color: 0x0000ff})
+  ));
+  //controller2.addEventListener('selectstart', onSelectStart);
+  //controller2.addEventListener('selectend', onSelectEnd);
+
   loadAssets(renderer, '../assets/', assets, () => {
     worldHall.setup(context);
     worldPanorama.setup(context);
@@ -75,6 +98,7 @@ function init() {
     currentWorld.enter(context);
 
     document.body.appendChild( renderer.domElement );
+    document.body.appendChild(WEBVR.createButton(renderer));
     renderer.setAnimationLoop(animate);
   })
 }
