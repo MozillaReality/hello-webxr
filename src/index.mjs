@@ -16,9 +16,11 @@ var worlds = [
 var currentWorld = null;
 
 var assets = {
+  hall_model: 'hall.gltf',
+  generic_controller_model: 'generic_controller.gltf',
   lightmap_tex: 'lightmap.png',
   travertine_tex: 'travertine.png',
-  hall_model: 'hall.gltf',
+  controller_tex: 'controller.png',
   pano1: 'zapporthorn.basis',
   pano1small: 'zapporthorn_small.basis'
 };
@@ -73,24 +75,16 @@ function init() {
 
   controller1 = renderer.vr.getController(0);
   scene.add(controller1);
-  controller1.add(new THREE.Mesh(
-    new THREE.SphereBufferGeometry(0.05, 15, 10),
-    new THREE.MeshLambertMaterial({color: 0xff0000})
-  ));
-
-  //controller1.addEventListener('selectstart', onSelectStart);
-  //controller1.addEventListener('selectend', onSelectEnd);
+  controller1.addEventListener('selectstart', onSelectStart);
+  controller1.addEventListener('selectend', onSelectEnd);
 
   controller2 = renderer.vr.getController(1);
   scene.add(controller2);
-  controller2.add(new THREE.Mesh(
-    new THREE.SphereBufferGeometry(0.05, 15, 10),
-    new THREE.MeshLambertMaterial({color: 0x0000ff})
-  ));
-  //controller2.addEventListener('selectstart', onSelectStart);
-  //controller2.addEventListener('selectend', onSelectEnd);
+  controller2.addEventListener('selectstart', onSelectStart);
+  controller2.addEventListener('selectend', onSelectEnd);
 
   loadAssets(renderer, '../assets/', assets, () => {
+    setupControllers();
     worldHall.setup(context);
     worldPanorama.setup(context);
 
@@ -101,6 +95,27 @@ function init() {
     document.body.appendChild(WEBVR.createButton(renderer));
     renderer.setAnimationLoop(animate);
   })
+}
+
+function setupControllers() {
+  var model = assets['generic_controller_model'].scene;
+  var material = new THREE.MeshLambertMaterial({
+    map: assets['controller_tex'],
+  });
+  model.getObjectByName('body').material = material;
+  model.getObjectByName('trigger').material = material;
+  controller1.add(model);
+  controller2.add(model.clone());
+}
+
+function onSelectStart(ev) {
+  const trigger = ev.target.getObjectByName('trigger');
+  trigger.rotation.x = -0.3;
+}
+
+function onSelectEnd(ev) {
+  const trigger = ev.target.getObjectByName('trigger');
+  trigger.rotation.x = 0;
 }
 
 function onWindowResize() {
