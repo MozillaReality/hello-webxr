@@ -1,5 +1,3 @@
-export var shaders = {
-door_frag : `
 uniform float time;
 uniform float selected;
 varying vec2 vUv;
@@ -13,16 +11,3 @@ void main( void ) {
 
   gl_FragColor = vec4(col, 1.0 );
 }
-`,
-
-door_vert : `
-varying vec2 vUv;
-void main()
-{
-  vUv = uv;
-  vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
-  gl_Position = projectionMatrix * mvPosition;
-}
-`,
-
-};

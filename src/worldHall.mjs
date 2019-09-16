@@ -1,13 +1,17 @@
-var scene, hall, teleport, panoBalls = [];
+var scene, hall, teleport, panoBalls = [], objectMaterials;
 
 export function setup(ctx) {
   const assets = ctx.assets;
 
   const doorMaterial = new THREE.ShaderMaterial({
-    uniforms: {},
-    vertexShader: ctx.shaders.panoball_vert,
-    fragmentShader: ctx.shaders.panoball_frag
+    uniforms: {
+      time: {value: 0},
+      selected: {value: 0}
+    },
+    vertexShader: ctx.shaders.door_vert,
+    fragmentShader: ctx.shaders.door_frag
   });
+
 
   const hallLightmapTex = assets['lightmap_tex'];
   hallLightmapTex.flipY = false;
@@ -18,17 +22,17 @@ export function setup(ctx) {
   hallDiffuseTex.wrapT = THREE.RepeatWrapping;
   hallDiffuseTex.repeat.set(2, 2);
 
-  const objectMaterials = {
+  objectMaterials = {
     hall: new THREE.MeshLambertMaterial({
       color: 0xffffff,
       map: hallDiffuseTex,
       lightMap: hallLightmapTex
     }),
     lightpanels: new THREE.MeshBasicMaterial(),
-    doorA: doorMaterial,
-    doorB: doorMaterial,
-    doorC: doorMaterial,
-    doorD: doorMaterial
+    doorA: doorMaterial.clone(),
+    doorB: doorMaterial.clone(),
+    doorC: doorMaterial.clone(),
+    doorD: doorMaterial.clone()
   };
 
   scene = new THREE.Object3D();
@@ -109,4 +113,9 @@ export function execute(ctx, delta, time) {
     }
   }
 
+  objectMaterials.doorA.uniforms.time.value = time;
+  objectMaterials.doorB.uniforms.time.value = time;
+  objectMaterials.doorC.uniforms.time.value = time;
+  objectMaterials.doorD.uniforms.time.value = time;
+  objectMaterials.doorD.uniforms.selected.value = 1;
 }
