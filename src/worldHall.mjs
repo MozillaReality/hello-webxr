@@ -2,21 +2,27 @@ var scene, hall, teleport, panoBalls = [];
 
 export function setup(ctx) {
   const assets = ctx.assets;
-  const doorMaterial = new THREE.MeshLambertMaterial();
-  const lightmapTex = assets['lightmap_tex'];
-  lightmapTex.flipY = false;
 
-  const diffuseTex = assets['travertine_tex'];
-  //diffuseTex.encoding = THREE.sRGBEncoding;
-  diffuseTex.wrapS = THREE.RepeatWrapping;
-  diffuseTex.wrapT = THREE.RepeatWrapping;
-  diffuseTex.repeat.set(2, 2);
+  const doorMaterial = new THREE.ShaderMaterial({
+    uniforms: {},
+    vertexShader: ctx.shaders.panoball_vert,
+    fragmentShader: ctx.shaders.panoball_frag
+  });
+
+  const hallLightmapTex = assets['lightmap_tex'];
+  hallLightmapTex.flipY = false;
+
+  const hallDiffuseTex = assets['travertine_tex'];
+  //hallDiffuseTex.encoding = THREE.sRGBEncoding;
+  hallDiffuseTex.wrapS = THREE.RepeatWrapping;
+  hallDiffuseTex.wrapT = THREE.RepeatWrapping;
+  hallDiffuseTex.repeat.set(2, 2);
 
   const objectMaterials = {
     hall: new THREE.MeshLambertMaterial({
       color: 0xffffff,
-      map: diffuseTex,
-      lightMap: lightmapTex
+      map: hallDiffuseTex,
+      lightMap: hallLightmapTex
     }),
     lightpanels: new THREE.MeshBasicMaterial(),
     doorA: doorMaterial,

@@ -5,7 +5,7 @@ import * as worldHall from './worldHall.mjs';
 import * as worldPanorama from './worldPanorama.mjs';
 import * as worldPanoramaStereo from './worldPanoramaStereo.mjs';
 import * as worldPhotogrammetryObject from './worldPhotogrammetryObject.mjs'
-
+import {shaders} from './shaders.mjs'
 
 var clock = new THREE.Clock();
 
@@ -79,6 +79,7 @@ function init() {
 
   context = {
     assets: assets,
+    shaders: shaders,
     scene : parent,
     renderer: renderer,
     camera: camera
