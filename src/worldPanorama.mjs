@@ -24,7 +24,6 @@ export function exit(ctx) {
 export function execute(ctx, delta, time) {
   if (timeout == null) { timeout = time; }
   else if (time - timeout > 3) {
-    console.log(ctx.camera.position);
     ctx.camera.position.set(1.5, 1.6, 2.3);
     ctx.goto = 'hall';
   }

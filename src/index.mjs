@@ -3,6 +3,7 @@ import {loadAssets} from './assetManager.mjs';
 //import {World, System} from './vendor/ecsy.module.js';
 import * as worldHall from './worldHall.mjs';
 import * as worldPanorama from './worldPanorama.mjs';
+import * as worldPanoramaStereo from './worldPanoramaStereo.mjs';
 
 var clock = new THREE.Clock();
 
@@ -11,7 +12,8 @@ var controller1, controller2;
 
 var worlds = [
   worldHall,
-  worldPanorama
+  worldPanorama,
+  worldPanoramaStereo
 ];
 var currentWorld = null;
 
@@ -22,7 +24,10 @@ var assets = {
   travertine_tex: 'travertine.png',
   controller_tex: 'controller.png',
   pano1: 'zapporthorn.basis',
-  pano1small: 'zapporthorn_small.basis'
+  pano1small: 'zapporthorn_small.jpg',
+  pano2small: 'andes_small.jpg',
+  andesL: 'andesL.jpg',
+  andesR: 'andesR.jpg'
 };
 
 function gotoWorld(world) {
@@ -87,6 +92,7 @@ function init() {
     setupControllers();
     worldHall.setup(context);
     worldPanorama.setup(context);
+    worldPanoramaStereo.setup(context);
 
     currentWorld = worlds[0];
     currentWorld.enter(context);
@@ -131,7 +137,11 @@ function animate() {
   currentWorld.execute(context, delta, elapsedTime);
   renderer.render( scene, camera );
   if (context.goto !== null) {
-    gotoWorld(context.goto == 'panorama'? worldPanorama : worldHall);
+    switch(context.goto) {
+      case 'panorama0': gotoWorld(worldPanorama); break;
+      case 'panorama1': gotoWorld(worldPanoramaStereo); break;
+      case 'hall': gotoWorld(worldHall); break;
+    }
   }
 }
 

@@ -1,4 +1,4 @@
-var scene, hall, pano1;
+var scene, hall, panoBalls = [];
 
 export function setup(ctx) {
   const assets = ctx.assets;
@@ -39,25 +39,34 @@ export function setup(ctx) {
   const lightFill = new THREE.DirectionalLight(0xfff0ee, 0.3);
   lightFill.position.set(-0.2, -1, -0.1);
 
-  assets['pano1small'].encoding = THREE.sRGBEncoding;
-  pano1 = new THREE.Mesh(
-    new THREE.SphereBufferGeometry(0.15, 30, 20),
-    new THREE.MeshPhongMaterial( {
-      map: assets['pano1small'],
-      emissiveMap: assets['pano1small'],
-      emissive: 0xffffff,
-      specular: 0x555555,
-      side: THREE.DoubleSide,
-    } )
-  );
-  pano1.scale.y = -1;
-  pano1.position.set(3.1, 1.5, 4);
-  pano1.position.set(1.8, 1.5, 0.5); // TEST
+  const panoBallsConfig = [
+    {src: 'pano1small', position: new THREE.Vector3(1.8, 1.5, 0.5)},
+    {src: 'pano2small', position: new THREE.Vector3(0.1, 1.5, 0)}
+  ];
+
+  for (var i = 0; i < panoBallsConfig.length; i++) {
+    const config = panoBallsConfig[i];
+    assets[config.src].encoding = THREE.sRGBEncoding;
+    var pano = new THREE.Mesh(
+      new THREE.SphereBufferGeometry(0.15, 30, 20),
+      new THREE.MeshPhongMaterial( {
+        map: assets[config.src],
+        emissiveMap: assets[config.src],
+        emissive: 0xffffff,
+        specular: 0x555555,
+        side: THREE.DoubleSide,
+      } )
+    );
+    pano.rotation.z = Math.PI;
+    pano.position.copy(config.position);
+    pano.resetPosition = new THREE.Vector3().copy(config.position);
+    panoBalls.push(pano);
+    scene.add(pano);
+  }
 
   scene.add(lightSun);
   scene.add(lightFill);
   scene.add(hall);
-  scene.add(pano1);
 }
 
 export function enter(ctx) {
@@ -71,21 +80,22 @@ export function exit(ctx) {
 
 export function execute(ctx, delta, time) {
 
-  const dist = ctx.camera.position.distanceTo(pano1.position);
+  for (var i = 0; i < panoBalls.length; i++) {
+    const ball = panoBalls[i];
+    const dist = ctx.camera.position.distanceTo(ball.position);
+    if (dist < 1) {
+      var v = ctx.camera.position.clone().sub(ball.position).multiplyScalar(0.08);
+      if (ball.scale.x < 2) {
+        ball.scale.multiplyScalar(1.1);
+      }
+      ball.position.add(v);
 
-  if (dist < 1) {
-    var v = ctx.camera.position.clone().sub(pano1.position).multiplyScalar(0.08);
-    if (pano1.scale.x < 2) {
-      pano1.scale.multiplyScalar(1.1);
+      if (dist < 0.1){ ctx.goto = 'panorama' + i; }
+    } else {
+      ball.scale.set(1, -1, 1);
+      ball.position.copy(ball.resetPosition); //TEST
+      ball.position.y = 1.5 + Math.cos(i + time * 3) * 0.02;
     }
-    pano1.position.add(v);
-
-    if (dist < 0.1){ ctx.goto = 'panorama'; }
-  } else {
-    pano1.scale.set(1, -1, 1);
-    pano1.position.set(3.1, 1.5, 4);
-    pano1.position.set(1.8, 1.5, 0.5); //TEST
-    pano1.position.y = 1.5 + Math.cos(time * 3) * 0.02;
   }
 
 }
