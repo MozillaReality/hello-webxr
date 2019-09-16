@@ -4,6 +4,8 @@ import {loadAssets} from './assetManager.mjs';
 import * as worldHall from './worldHall.mjs';
 import * as worldPanorama from './worldPanorama.mjs';
 import * as worldPanoramaStereo from './worldPanoramaStereo.mjs';
+import * as worldPhotogrammetryObject from './worldPhotogrammetryObject.mjs'
+
 
 var clock = new THREE.Clock();
 
@@ -13,7 +15,8 @@ var controller1, controller2;
 var worlds = [
   worldHall,
   worldPanorama,
-  worldPanoramaStereo
+  worldPanoramaStereo,
+  worldPhotogrammetryObject,
 ];
 var currentWorld = null;
 
@@ -27,7 +30,10 @@ var assets = {
   pano1small: 'zapporthorn_small.jpg',
   pano2small: 'andes_small.jpg',
   andesL: 'andesL.jpg',
-  andesR: 'andesR.jpg'
+  andesR: 'andesR.jpg',
+  pg_floor_tex: 'pg_floor.jpg',
+  pg_object_tex: 'pg_object.jpg',
+  pg_object_model: 'pg_object.gltf'
 };
 
 function gotoWorld(world) {
@@ -93,6 +99,7 @@ function init() {
     worldHall.setup(context);
     worldPanorama.setup(context);
     worldPanoramaStereo.setup(context);
+    worldPhotogrammetryObject.setup(context);
 
     currentWorld = worlds[0];
     currentWorld.enter(context);
@@ -141,6 +148,7 @@ function animate() {
       case 'panorama0': gotoWorld(worldPanorama); break;
       case 'panorama1': gotoWorld(worldPanoramaStereo); break;
       case 'hall': gotoWorld(worldHall); break;
+      case 'pg_object': gotoWorld(worldPhotogrammetryObject); break;
     }
   }
 }
