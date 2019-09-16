@@ -1,4 +1,4 @@
-var scene, hall, panoBalls = [];
+var scene, hall, teleport, panoBalls = [];
 
 export function setup(ctx) {
   const assets = ctx.assets;
@@ -29,6 +29,11 @@ export function setup(ctx) {
 
   hall = assets['hall_model'].scene;
   hall.traverse(o => {
+    if (o.name == 'teleport') {
+      teleport = o;
+      o.visible = false;
+      return;
+    }
     if (o.type == 'Mesh' && objectMaterials[o.name]) {
       o.material = objectMaterials[o.name];
     }
