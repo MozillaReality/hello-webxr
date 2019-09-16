@@ -34,8 +34,10 @@ export function setup(ctx) {
     }
   });
 
-  const light = new THREE.DirectionalLight(0xffffff);
-  light.position.set(0.2, 1, 0.1);
+  const lightSun = new THREE.DirectionalLight(0xeeffff);
+  lightSun.position.set(0.2, 1, 0.1);
+  const lightFill = new THREE.DirectionalLight(0xfff0ee, 0.3);
+  lightFill.position.set(-0.2, -1, -0.1);
 
   assets['pano1small'].encoding = THREE.sRGBEncoding;
   pano1 = new THREE.Mesh(
@@ -52,7 +54,8 @@ export function setup(ctx) {
   pano1.position.set(3.1, 1.5, 4);
   pano1.position.set(1.8, 1.5, 0.5); // TEST
 
-  scene.add(light);
+  scene.add(lightSun);
+  scene.add(lightFill);
   scene.add(hall);
   scene.add(pano1);
 }
