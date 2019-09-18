@@ -29,6 +29,7 @@ var assets = {
   pano1: 'zapporthorn.basis',
   pano1small: 'zapporthorn_small.jpg',
   pano2small: 'andes_small.jpg',
+  panoballfx_tex: 'ballfx.jpg',
   andesL: 'andesL.jpg',
   andesR: 'andesR.jpg',
   pg_floor_tex: 'pg_floor.jpg',
@@ -76,6 +77,10 @@ function init() {
   renderer.vr.enabled = true;
 
   window.addEventListener('resize', onWindowResize, false);
+  setInterval(()=>{
+    console.log('render calls:', renderer.info.render.calls);
+  }, 2000);
+
 
   context = {
     assets: assets,

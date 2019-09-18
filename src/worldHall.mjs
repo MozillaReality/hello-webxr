@@ -1,4 +1,5 @@
 var scene, hall, teleport, panoBalls = [], objectMaterials;
+var panoFxMaterial;
 
 export function setup(ctx) {
   const assets = ctx.assets;
@@ -6,18 +7,19 @@ export function setup(ctx) {
   const doorMaterial = new THREE.ShaderMaterial({
     uniforms: {
       time: {value: 0},
-      selected: {value: 0}
+      selected: {value: 0},
+      tex: {value: assets['travertine_tex']}
     },
-    vertexShader: ctx.shaders.door_vert,
+    vertexShader: ctx.shaders.basic_vert,
     fragmentShader: ctx.shaders.door_frag
   });
 
-
   const hallLightmapTex = assets['lightmap_tex'];
+  hallLightmapTex.encoding = THREE.sRGBEncoding;
   hallLightmapTex.flipY = false;
 
   const hallDiffuseTex = assets['travertine_tex'];
-  //hallDiffuseTex.encoding = THREE.sRGBEncoding;
+  hallDiffuseTex.encoding = THREE.sRGBEncoding;
   hallDiffuseTex.wrapS = THREE.RepeatWrapping;
   hallDiffuseTex.wrapT = THREE.RepeatWrapping;
   hallDiffuseTex.repeat.set(2, 2);
@@ -59,6 +61,22 @@ export function setup(ctx) {
     {src: 'pano2small', position: new THREE.Vector3(0.1, 1.5, 0)}
   ];
 
+
+  const panoGeo = new THREE.SphereBufferGeometry(0.15, 30, 20);
+  assets['panoballfx_tex'].wrapT = THREE.RepeatWrapping;
+  assets['panoballfx_tex'].wrapS = THREE.RepeatWrapping;
+  panoFxMaterial = new THREE.ShaderMaterial({
+    uniforms: {
+      time: {value: 0},
+      tex: {value: assets['panoballfx_tex']}
+    },
+    vertexShader: ctx.shaders.basic_vert,
+    fragmentShader: ctx.shaders.ballfx_frag,
+    blending: THREE.AdditiveBlending,
+    transparent: true
+  });
+
+
   for (var i = 0; i < panoBallsConfig.length; i++) {
     const config = panoBallsConfig[i];
     assets[config.src].encoding = THREE.sRGBEncoding;
@@ -69,12 +87,20 @@ export function setup(ctx) {
         emissiveMap: assets[config.src],
         emissive: 0xffffff,
         specular: 0x555555,
-        side: THREE.DoubleSide,
+        side: THREE.BackSide,
       } )
     );
     pano.rotation.z = Math.PI;
     pano.position.copy(config.position);
     pano.resetPosition = new THREE.Vector3().copy(config.position);
+
+
+    //fx
+    var panofx = new THREE.Mesh(
+      new THREE.SphereBufferGeometry(0.152, 30, 20), panoFxMaterial);
+    pano.add(panofx);
+
+
     panoBalls.push(pano);
     scene.add(pano);
   }
@@ -117,5 +143,6 @@ export function execute(ctx, delta, time) {
   objectMaterials.doorB.uniforms.time.value = time;
   objectMaterials.doorC.uniforms.time.value = time;
   objectMaterials.doorD.uniforms.time.value = time;
+  panoFxMaterial.uniforms.time.value = time;
   objectMaterials.doorD.uniforms.selected.value = 1;
 }
