@@ -26,7 +26,7 @@ var assets = {
   lightmap_tex: 'lightmap.png',
   travertine_tex: 'travertine.png',
   controller_tex: 'controller.png',
-  pano1: 'zapporthorn.basis',
+  pano1: 'zapporthorn.jpg',
   pano1small: 'zapporthorn_small.jpg',
   pano2small: 'andes_small.jpg',
   panoballfx_tex: 'ballfx.jpg',

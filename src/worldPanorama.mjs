@@ -4,9 +4,8 @@ var timeout;
 export function setup(ctx) {
   const assets = ctx.assets;
   const geometry = new THREE.SphereBufferGeometry(5000, 60, 40);
-  geometry.scale( 1, -1, 1 );
   assets['pano1'].encoding = THREE.sRGBEncoding;
-  const material = new THREE.MeshBasicMaterial( { map: assets['pano1'] } );
+  const material = new THREE.MeshBasicMaterial( { map: assets['pano1'], side: THREE.BackSide } );
   pano = new THREE.Mesh(geometry, material);
 
 }
