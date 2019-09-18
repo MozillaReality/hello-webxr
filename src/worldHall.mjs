@@ -1,18 +1,21 @@
 var scene, hall, teleport, panoBalls = [], objectMaterials;
 var panoFxMaterial;
 
-export function setup(ctx) {
-  const assets = ctx.assets;
 
-  const doorMaterial = new THREE.ShaderMaterial({
+function createDoorMaterial(ctx) {
+  return new THREE.ShaderMaterial({
     uniforms: {
       time: {value: 0},
       selected: {value: 0},
-      tex: {value: assets['travertine_tex']}
+      tex: {value: ctx.assets['panoballfx_tex']}
     },
     vertexShader: ctx.shaders.basic_vert,
     fragmentShader: ctx.shaders.door_frag
   });
+}
+
+export function setup(ctx) {
+  const assets = ctx.assets;
 
   const hallLightmapTex = assets['lightmap_tex'];
   hallLightmapTex.encoding = THREE.sRGBEncoding;
@@ -31,10 +34,10 @@ export function setup(ctx) {
       lightMap: hallLightmapTex
     }),
     lightpanels: new THREE.MeshBasicMaterial(),
-    doorA: doorMaterial.clone(),
-    doorB: doorMaterial.clone(),
-    doorC: doorMaterial.clone(),
-    doorD: doorMaterial.clone()
+    doorA: createDoorMaterial(ctx),
+    doorB: createDoorMaterial(ctx),
+    doorC: createDoorMaterial(ctx),
+    doorD: createDoorMaterial(ctx)
   };
 
   scene = new THREE.Object3D();
