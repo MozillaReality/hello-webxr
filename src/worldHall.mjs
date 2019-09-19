@@ -1,5 +1,11 @@
-var scene, hall, teleport, panoBalls = [], objectMaterials;
-var panoFxMaterial;
+var
+  scene,
+  hall,
+  teleportFloor,
+  fader,
+  panoBalls = [],
+  objectMaterials,
+  panoFxMaterial;
 
 
 function createDoorMaterial(ctx) {
@@ -45,7 +51,7 @@ export function setup(ctx) {
   hall = assets['hall_model'].scene;
   hall.traverse(o => {
     if (o.name == 'teleport') {
-      teleport = o;
+      teleportFloor = o;
       o.visible = false;
       return;
     }
@@ -92,9 +98,16 @@ export function setup(ctx) {
     scene.add(pano);
   }
 
+  fader = new THREE.Mesh(
+    new THREE.PlaneBufferGeometry(),
+    new THREE.MeshBasicMaterial({color: 0x000000, transparent: true, depthTest: false})
+  );
+  fader.position.z = -0.1;
+
   scene.add(lightSun);
   scene.add(lightFill);
   scene.add(hall);
+  ctx.camera.add(fader);
 }
 
 export function enter(ctx) {
@@ -120,17 +133,34 @@ export function execute(ctx, delta, time) {
 
       if (dist < 0.1){ ctx.goto = 'panorama' + i; }
     } else {
-      ball.scale.set(1, -1, 1);
-      ball.position.copy(ball.resetPosition); //TEST
+      ball.scale.set(1, 1, 1);
+      ball.position.copy(ball.resetPosition);
       ball.position.y = 1.5 + Math.cos(i + time * 3) * 0.02;
     }
   }
 
+  updateUniforms(time);
+  checkCameraBoundaries(ctx);
+}
+
+function updateUniforms(time) {
   objectMaterials.doorA.uniforms.time.value = time;
   objectMaterials.doorB.uniforms.time.value = time;
   objectMaterials.doorC.uniforms.time.value = time;
   objectMaterials.doorD.uniforms.time.value = time;
-  objectMaterials.doorD.uniforms.selected.value = 1;
+  objectMaterials.doorD.uniforms.selected.value = 1; //test
   panoBalls[0].material.uniforms.time.value = time;
   panoBalls[1].material.uniforms.time.value = time;
+}
+
+function checkCameraBoundaries(ctx) {
+  const cam = ctx.camera.position;
+  const margin = 0.25;
+  var fade = 0;
+  if (cam.y < margin)     { fade = 1 - (cam.y / margin); }
+  else if (cam.x < -5.4)  { fade = (-cam.x - 5.4) / margin; }
+  else if (cam.x > 8)     { fade = (cam.x - 8) / margin; }
+  else if (cam.z < -6.45) { fade = (-cam.z - -6.45) / margin; }
+  else if (cam.z > 6.4)  { fade = (cam.z - 6.4) / margin; }
+  fader.material.opacity = Math.min(1, Math.max(0, fade));
 }

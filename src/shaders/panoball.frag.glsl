@@ -8,7 +8,7 @@ varying vec3 vWorldPos;
 
 void main( void ) {
   vec2 uv = vUv;
-  uv.y =  1.0 - uv.y;
+  //uv.y =  1.0 - uv.y;
 
   vec3 eye = normalize(cameraPosition - vWorldPos);
   float fresnel = abs(dot(eye, vNormal));
