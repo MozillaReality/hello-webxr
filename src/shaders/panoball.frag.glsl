@@ -25,7 +25,6 @@ void main( void ) {
   float t = time * 0.4 + vPosition.x + vPosition.z;
   uv = vec2(vUv.x + t * 0.2, vUv.y + t);
   vec3 fx = texture2D(texfx, uv).rgb * 0.4;
-  //fx.a = 0.5 + sin(t * 5.0) * 0.3;
 
 
   gl_FragColor = vec4(col + fx, 1.0);

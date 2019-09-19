@@ -68,7 +68,7 @@ void main()
     sin(position.x * 50.0 + time),
     sin(position.y * 10.0 + time * 2.0),
     cos(position.z * 40.0 + time)
-  ) * 0.007;
+  ) * 0.003;
 
   vNormal = normalize(inverse(transpose(modelMatrix)) * vec4(normalize(normal), 1.0)).xyz;
   vWorldPos = (modelMatrix * vec4( position, 1.0 )).xyz;
