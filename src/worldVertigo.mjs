@@ -23,7 +23,7 @@ export function setup(ctx) {
 export function enter(ctx) {
   ctx.renderer.setClearColor(0x677FA7);
   ctx.scene.add(city);
-  //ctx.scene.parent.fog = new THREE.FogExp2(0x677FA7, 0.003);
+  ctx.scene.parent.fog = new THREE.FogExp2(0x677FA7, 0.03);
 }
 
 export function exit(ctx) {
