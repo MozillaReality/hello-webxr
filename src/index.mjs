@@ -7,6 +7,7 @@ import * as worldPanoramaStereo from './worldPanoramaStereo.mjs';
 import * as worldPhotogrammetryObject from './worldPhotogrammetryObject.mjs'
 import * as worldCity from './worldCity.mjs'
 import * as worldElevator from './worldElevator.mjs'
+import * as worldVertigo from './worldVertigo.mjs'
 import {shaders} from './shaders.mjs'
 
 var clock = new THREE.Clock();
@@ -16,6 +17,7 @@ var controller1, controller2;
 
 var worlds = [
   worldHall,
+  worldVertigo,
   worldCity,
   worldElevator,
   worldPanorama,
@@ -27,6 +29,7 @@ var currentWorld = 0;
 var assets = {
   hall_model: 'hall.gltf',
   city_model: 'city.glb',
+  vertigo_model: 'vertigo.gltf',
   elevator_model: 'elevator.glb',
   generic_controller_model: 'generic_controller.gltf',
   lightmap_tex: 'lightmap.png',
@@ -43,7 +46,9 @@ var assets = {
   pg_object_model: 'pg_object.gltf',
   elevator_lm_tex: 'elevator_lm.png',
   lanes01_tex: 'lanes01.jpg',
-  pavement_tex: 'pavement.jpg'
+  pavement_tex: 'pavement.jpg',
+  checkboard_tex: 'checkboard.png',
+  vertigo_lm_tex: 'vertigo_lm.jpg'
 };
 
 function gotoWorld(world) {
@@ -112,6 +117,7 @@ function init() {
     worldPhotogrammetryObject.setup(context);
     worldCity.setup(context);
     worldElevator.setup(context);
+    worldVertigo.setup(context);
 
     currentWorld = 0;
     worlds[currentWorld].enter(context);

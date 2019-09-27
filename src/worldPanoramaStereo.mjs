@@ -5,8 +5,8 @@ export function setup(ctx) {
   const geometry = new THREE.SphereBufferGeometry(5000, 60, 40);
   assets['andesL'].encoding = THREE.sRGBEncoding;
   assets['andesR'].encoding = THREE.sRGBEncoding;
-  const materialL = new THREE.MeshBasicMaterial( { map: assets['andesL'], side: THREE.BackSide } );
-  const materialR = new THREE.MeshBasicMaterial( { map: assets['andesR'], side: THREE.BackSide } );
+  const materialL = new THREE.MeshBasicMaterial( { map: assets['andesR'], side: THREE.BackSide } );
+  const materialR = new THREE.MeshBasicMaterial( { map: assets['andesL'], side: THREE.BackSide } );
   panoL = new THREE.Mesh(geometry, materialL);
   panoL.layers.set(1);
   panoR = new THREE.Mesh(geometry, materialR);
