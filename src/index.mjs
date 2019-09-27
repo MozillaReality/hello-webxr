@@ -29,7 +29,7 @@ var currentWorld = 0;
 var assets = {
   hall_model: 'hall.gltf',
   city_model: 'city.glb',
-  vertigo_model: 'vertigo.gltf',
+  vertigo_model: 'vertigo2.gltf',
   elevator_model: 'elevator.glb',
   generic_controller_model: 'generic_controller.gltf',
   lightmap_tex: 'lightmap.png',
@@ -79,7 +79,7 @@ function init() {
   parent = new THREE.Object3D();
   scene.add(parent);
 
-  renderer = new THREE.WebGLRenderer({antialias: true, logarithmicDepthBuffer: false});
+  renderer = new THREE.WebGLRenderer({antialias: false, logarithmicDepthBuffer: false});
   renderer.gammaOutput = true;
   renderer.gammaFactor = 2.2;
   renderer.setPixelRatio( window.devicePixelRatio );

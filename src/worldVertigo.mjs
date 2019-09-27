@@ -10,7 +10,7 @@ export function setup(ctx) {
   var lightmap = assets['vertigo_lm_tex'];
   lightmap.encoding = THREE.sRGBEncoding;
   lightmap.flipY = false;
-  const material = new THREE.MeshLambertMaterial({color: 0xffffff, map: texture, lightMap: lightmap} );
+  const material = new THREE.MeshBasicMaterial({color: 0xffffff, map: texture} );
 
   city = assets['vertigo_model'].scene;
   city.traverse(o => {
@@ -23,7 +23,7 @@ export function setup(ctx) {
 export function enter(ctx) {
   ctx.renderer.setClearColor(0x677FA7);
   ctx.scene.add(city);
-  ctx.scene.parent.fog = new THREE.FogExp2(0x677FA7, 0.03);
+  ctx.scene.parent.fog = new THREE.FogExp2(0x677FA7, 0.004);
 }
 
 export function exit(ctx) {
