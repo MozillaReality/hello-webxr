@@ -48,7 +48,7 @@ var assets = {
   lanes01_tex: 'lanes01.jpg',
   pavement_tex: 'pavement.jpg',
   checkboard_tex: 'checkboard.png',
-  vertigo_lm_tex: 'vertigo_lm.jpg'
+  vertigo_lm_tex: 'vertigo2_lm.jpg'
 };
 
 function gotoWorld(world) {
@@ -79,7 +79,7 @@ function init() {
   parent = new THREE.Object3D();
   scene.add(parent);
 
-  renderer = new THREE.WebGLRenderer({antialias: false, logarithmicDepthBuffer: false});
+  renderer = new THREE.WebGLRenderer({antialias: true, logarithmicDepthBuffer: false});
   renderer.gammaOutput = true;
   renderer.gammaFactor = 2.2;
   renderer.setPixelRatio( window.devicePixelRatio );

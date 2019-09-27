@@ -10,7 +10,7 @@ export function setup(ctx) {
   var lightmap = assets['vertigo_lm_tex'];
   lightmap.encoding = THREE.sRGBEncoding;
   lightmap.flipY = false;
-  const material = new THREE.MeshBasicMaterial({color: 0xffffff, map: texture} );
+  const material = new THREE.MeshBasicMaterial({color: 0xffffff, map: texture, lightMap: lightmap} );
 
   city = assets['vertigo_model'].scene;
   city.traverse(o => {
