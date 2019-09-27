@@ -8,13 +8,14 @@ export function setup(ctx) {
 
   scene.getObjectByName('object').material =
     new THREE.MeshBasicMaterial({map: assets['pg_object_tex']});
-  scene.getObjectByName('floor').material = 
+  scene.getObjectByName('floor').material =
   new THREE.MeshBasicMaterial({map: assets['pg_floor_tex']});
 }
 
 export function enter(ctx) {
   ctx.renderer.setClearColor(0x000000);
   ctx.scene.add(scene);
+  ctx.camera.position.set(0, 1.6, 2);
 }
 
 export function exit(ctx) {

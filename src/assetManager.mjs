@@ -22,6 +22,7 @@ export function loadAssets(renderer, basePath, assets, onComplete) {
 
   var loaders = {
     'gltf':  gltfLoader,
+    'glb':  gltfLoader,
     'obj' :  objLoader,
     'gif' :  texLoader,
     'png' :  texLoader,

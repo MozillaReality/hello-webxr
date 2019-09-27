@@ -5,6 +5,8 @@ import * as worldHall from './worldHall.mjs';
 import * as worldPanorama from './worldPanorama.mjs';
 import * as worldPanoramaStereo from './worldPanoramaStereo.mjs';
 import * as worldPhotogrammetryObject from './worldPhotogrammetryObject.mjs'
+import * as worldCity from './worldCity.mjs'
+import * as worldElevator from './worldElevator.mjs'
 import {shaders} from './shaders.mjs'
 
 var clock = new THREE.Clock();
@@ -14,14 +16,18 @@ var controller1, controller2;
 
 var worlds = [
   worldHall,
+  worldCity,
+  worldElevator,
   worldPanorama,
   worldPanoramaStereo,
   worldPhotogrammetryObject,
 ];
-var currentWorld = null;
+var currentWorld = 0;
 
 var assets = {
   hall_model: 'hall.gltf',
+  city_model: 'city.glb',
+  elevator_model: 'elevator.glb',
   generic_controller_model: 'generic_controller.gltf',
   lightmap_tex: 'lightmap.png',
   travertine_tex: 'travertine.png',
@@ -34,13 +40,16 @@ var assets = {
   andesR: 'andesR.jpg',
   pg_floor_tex: 'pg_floor.jpg',
   pg_object_tex: 'pg_object.jpg',
-  pg_object_model: 'pg_object.gltf'
+  pg_object_model: 'pg_object.gltf',
+  elevator_lm_tex: 'elevator_lm.png',
+  lanes01_tex: 'lanes01.jpg',
+  pavement_tex: 'pavement.jpg'
 };
 
 function gotoWorld(world) {
-  currentWorld.exit(context);
+  worlds[currentWorld].exit(context);
   currentWorld = world;
-  currentWorld.enter(context);
+  worlds[currentWorld].enter(context);
 }
 
 function init() {
@@ -57,19 +66,15 @@ function init() {
       case 65: controls.moveRight(-0.2); break;
       case 83: controls.moveForward(-0.2); break;
       case 68: controls.moveRight(0.2); break;
+      case 78: gotoWorld((currentWorld + 1) % worlds.length); break;
     }
-    const n = ev.keyCode - 49;
-    if (n <= 9 && n >= 0) {
-      gotoWorld(worlds[n]);
-    }
-
   });
   scene.add(controls.getObject());
 
   parent = new THREE.Object3D();
   scene.add(parent);
 
-  renderer = new THREE.WebGLRenderer();
+  renderer = new THREE.WebGLRenderer({antialias: true, logarithmicDepthBuffer: false});
   renderer.gammaOutput = true;
   renderer.gammaFactor = 2.2;
   renderer.setPixelRatio( window.devicePixelRatio );
@@ -80,7 +85,6 @@ function init() {
   setInterval(()=>{
     console.log('render calls:', renderer.info.render.calls);
   }, 2000);
-
 
   context = {
     assets: assets,
@@ -106,9 +110,11 @@ function init() {
     worldPanorama.setup(context);
     worldPanoramaStereo.setup(context);
     worldPhotogrammetryObject.setup(context);
+    worldCity.setup(context);
+    worldElevator.setup(context);
 
-    currentWorld = worlds[0];
-    currentWorld.enter(context);
+    currentWorld = 0;
+    worlds[currentWorld].enter(context);
 
     document.body.appendChild( renderer.domElement );
     document.body.appendChild(WEBVR.createButton(renderer));
@@ -130,6 +136,7 @@ function setupControllers() {
 function onSelectStart(ev) {
   const trigger = ev.target.getObjectByName('trigger');
   trigger.rotation.x = -0.3;
+  gotoWorld((currentWorld + 1) % worlds.length);
 }
 
 function onSelectEnd(ev) {
@@ -147,16 +154,8 @@ function animate() {
   var delta = clock.getDelta();
   var elapsedTime = clock.elapsedTime;
   context.goto = null;
-  currentWorld.execute(context, delta, elapsedTime);
+  worlds[currentWorld].execute(context, delta, elapsedTime);
   renderer.render( scene, camera );
-  if (context.goto !== null) {
-    switch(context.goto) {
-      case 'panorama0': gotoWorld(worldPanorama); break;
-      case 'panorama1': gotoWorld(worldPanoramaStereo); break;
-      case 'hall': gotoWorld(worldHall); break;
-      case 'pg_object': gotoWorld(worldPhotogrammetryObject); break;
-    }
-  }
 }
 
 init();

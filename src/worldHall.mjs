@@ -66,8 +66,8 @@ export function setup(ctx) {
   lightFill.position.set(-0.2, -1, -0.1);
 
   const panoBallsConfig = [
-    {src: 'pano1small', position: new THREE.Vector3(1.0, 1.5, 0.5)},
-    {src: 'pano2small', position: new THREE.Vector3(0.1, 1.5, 0)}
+    {src: 'pano1small', position: new THREE.Vector3(2.0, 1.5, 0.5)},
+    {src: 'pano2small', position: new THREE.Vector3(-2.1, 1.5, 0)}
   ];
 
 
