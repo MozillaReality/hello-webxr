@@ -17,12 +17,12 @@ var controller1, controller2;
 
 var worlds = [
   worldHall,
+  worldPhotogrammetryObject,
   worldVertigo,
   worldCity,
   worldElevator,
   worldPanorama,
   worldPanoramaStereo,
-  worldPhotogrammetryObject,
 ];
 var currentWorld = 0;
 
@@ -41,9 +41,9 @@ var assets = {
   panoballfx_tex: 'ballfx.jpg',
   andesL: 'andesL.jpg',
   andesR: 'andesR.jpg',
-  pg_floor_tex: 'pg_floor.jpg',
-  pg_object_tex: 'pg_object.jpg',
-  pg_object_model: 'pg_object.gltf',
+  pg_floor_tex: 'angel_floor.jpg',
+  pg_object_tex: 'angel.jpg',
+  pg_object_model: 'angel.glb', // TODO: try draco version, angel.min.glb
   elevator_lm_tex: 'elevator_lm.png',
   lanes01_tex: 'lanes01.jpg',
   pavement_tex: 'pavement.jpg',

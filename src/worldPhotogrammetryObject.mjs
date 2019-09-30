@@ -4,7 +4,9 @@ export function setup(ctx) {
   const assets = ctx.assets;
   scene = assets['pg_object_model'].scene;
   assets['pg_object_tex'].encoding = THREE.sRGBEncoding;
+  assets['pg_object_tex'].flipY = false;
   assets['pg_floor_tex'].encoding = THREE.sRGBEncoding;
+  assets['pg_floor_tex'].flipY = false;
 
   scene.getObjectByName('object').material =
     new THREE.MeshBasicMaterial({map: assets['pg_object_tex']});
