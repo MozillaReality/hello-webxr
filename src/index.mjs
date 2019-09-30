@@ -34,6 +34,7 @@ var assets = {
   generic_controller_model: 'generic_controller.gltf',
   lightmap_tex: 'lightmap.png',
   travertine_tex: 'travertine.png',
+  travertine2_tex: 'travertine2.jpg',
   controller_tex: 'controller.png',
   pano1: 'zapporthorn.jpg',
   pano1small: 'zapporthorn_small.jpg',
@@ -41,14 +42,15 @@ var assets = {
   panoballfx_tex: 'ballfx.jpg',
   andesL: 'andesL.jpg',
   andesR: 'andesR.jpg',
-  pg_floor_tex: 'angel_floor.jpg',
+  pg_floor_tex: 'travertine2.jpg',
+  pg_floor_lm_tex: 'angel_floor_lm.jpg',
   pg_object_tex: 'angel.jpg',
   pg_object_model: 'angel.glb', // TODO: try draco version, angel.min.glb
   elevator_lm_tex: 'elevator_lm.png',
   lanes01_tex: 'lanes01.jpg',
   pavement_tex: 'pavement.jpg',
   checkboard_tex: 'checkboard.png',
-  vertigo_lm_tex: 'vertigo2_lm.jpg'
+  vertigo_lm_tex: 'vertigo2_lm.jpg',
 };
 
 function gotoWorld(world) {

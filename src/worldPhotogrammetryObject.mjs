@@ -7,11 +7,16 @@ export function setup(ctx) {
   assets['pg_object_tex'].flipY = false;
   assets['pg_floor_tex'].encoding = THREE.sRGBEncoding;
   assets['pg_floor_tex'].flipY = false;
+  assets['pg_floor_lm_tex'].encoding = THREE.sRGBEncoding;
+  assets['pg_floor_lm_tex'].flipY = false;
+
+  assets['pg_floor_tex'].wrapS = THREE.RepeatWrapping;
+  assets['pg_floor_tex'].wrapT = THREE.RepeatWrapping;
 
   scene.getObjectByName('object').material =
     new THREE.MeshBasicMaterial({map: assets['pg_object_tex']});
   scene.getObjectByName('floor').material =
-  new THREE.MeshBasicMaterial({map: assets['pg_floor_tex']});
+  new THREE.MeshBasicMaterial({map: assets['pg_floor_tex'], lightMap: assets['pg_floor_lm_tex']});
 }
 
 export function enter(ctx) {
@@ -26,4 +31,3 @@ export function exit(ctx) {
 
 export function execute(ctx, delta, time) {
 }
-
