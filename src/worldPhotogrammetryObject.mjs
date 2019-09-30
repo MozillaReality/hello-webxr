@@ -13,10 +13,15 @@ export function setup(ctx) {
   assets['pg_floor_tex'].wrapS = THREE.RepeatWrapping;
   assets['pg_floor_tex'].wrapT = THREE.RepeatWrapping;
 
+  assets['pg_bg_tex'].encoding = THREE.sRGBEncoding;
+  assets['pg_bg_tex'].flipY = false;
+
   scene.getObjectByName('object').material =
     new THREE.MeshBasicMaterial({map: assets['pg_object_tex']});
   scene.getObjectByName('floor').material =
-  new THREE.MeshBasicMaterial({map: assets['pg_floor_tex'], lightMap: assets['pg_floor_lm_tex']});
+    new THREE.MeshBasicMaterial({map: assets['pg_floor_tex'], lightMap: assets['pg_floor_lm_tex']});
+  scene.getObjectByName('bg').material =
+    new THREE.MeshBasicMaterial({map: assets['pg_bg_tex']});
 }
 
 export function enter(ctx) {
