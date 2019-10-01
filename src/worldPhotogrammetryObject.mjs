@@ -16,12 +16,22 @@ export function setup(ctx) {
   assets['pg_bg_tex'].encoding = THREE.sRGBEncoding;
   assets['pg_bg_tex'].flipY = false;
 
+  assets['pg_flare_tex'].encoding = THREE.sRGBEncoding;
+  assets['pg_flare_tex'].flipY = false;
+
+  assets['pg_panel_tex'].encoding = THREE.sRGBEncoding;
+  assets['pg_panel_tex'].flipY = false;
+
   scene.getObjectByName('object').material =
     new THREE.MeshBasicMaterial({map: assets['pg_object_tex']});
   scene.getObjectByName('floor').material =
     new THREE.MeshBasicMaterial({map: assets['pg_floor_tex'], lightMap: assets['pg_floor_lm_tex']});
   scene.getObjectByName('bg').material =
     new THREE.MeshBasicMaterial({map: assets['pg_bg_tex']});
+  scene.getObjectByName('flare').material =
+    new THREE.MeshBasicMaterial({map: assets['pg_flare_tex'], blending: THREE.AdditiveBlending});
+  scene.getObjectByName('panel').material =
+    new THREE.MeshBasicMaterial({map: assets['pg_panel_tex']});
 }
 
 export function enter(ctx) {

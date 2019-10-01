@@ -42,16 +42,20 @@ var assets = {
   panoballfx_tex: 'ballfx.jpg',
   andesL: 'andesL.jpg',
   andesR: 'andesR.jpg',
-  pg_floor_tex: 'travertine2.jpg',
-  pg_floor_lm_tex: 'angel_floor_lm.jpg',
-  pg_object_tex: 'angel.jpg',
-  pg_object_model: 'angel.glb', // TODO: try draco version, angel.min.glb
   elevator_lm_tex: 'elevator_lm.png',
   lanes01_tex: 'lanes01.jpg',
   pavement_tex: 'pavement.jpg',
   checkboard_tex: 'checkboard.png',
   vertigo_lm_tex: 'vertigo2_lm.jpg',
-  pg_bg_tex: 'pg_bg.jpg'
+
+  // photogrammetry object
+  pg_floor_tex: 'travertine2.jpg',
+  pg_floor_lm_tex: 'angel_floor_lm.jpg',
+  pg_object_tex: 'angel.jpg',
+  pg_object_model: 'angel.glb', // TODO: try draco version, angel.min.glb
+  pg_bg_tex: 'pg_bg.jpg',
+  pg_flare_tex: 'flare.jpg',
+  pg_panel_tex: 'panel.jpg',
 };
 
 function gotoWorld(world) {
