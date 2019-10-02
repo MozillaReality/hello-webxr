@@ -2,6 +2,7 @@ var scene, listener, timeout, mixer;
 
 const soundNames = [
   'bells',
+  'horn',
   'cowbell',
   'guiro',
   'mandolin',
@@ -10,7 +11,6 @@ const soundNames = [
   'whistle',
   'castanets',
   'flexatone',
-  'horn',
   'motorhorn',
   'surdo',
   'trumpet',
@@ -27,11 +27,6 @@ export function setup(ctx) {
 
   scene.getObjectByName('floor').material =
     new THREE.MeshBasicMaterial({color: 0xaaaaaa, map: assets['sound_floor_tex']});
-
-  const horn = scene.getObjectByName('horn');
-  horn.children[0].material =
-    new THREE.MeshBasicMaterial({color: 0x00aa00});
-
 
   listener = new THREE.AudioListener();
 
