@@ -50,6 +50,11 @@ var assets = {
   checkboard_tex: 'checkboard.png',
   vertigo_lm_tex: 'vertigo2_lm.jpg',
 
+  // sound
+  sound_model: 'sound.glb',
+  sound_floor_tex: 'sound_floor.jpg',
+  //sound_tex: 'sound.png',
+
   // photogrammetry object
   pg_floor_tex: 'travertine2.jpg',
   pg_floor_lm_tex: 'angel_floor_lm.jpg',

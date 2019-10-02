@@ -1,75 +1,91 @@
-var scene, listener, timeout;
+var scene, listener, timeout, mixer;
 
-var sounds = {
-  'bells.ogg': {position: new THREE.Vector3(1, 2, 1)},
-  'cowbell.ogg': {position: new THREE.Vector3(1, 2, 1)},
-  'guiro.ogg': {position: new THREE.Vector3(1, 2, 1)},
-  'mandolin.ogg': {position: new THREE.Vector3(1, 2, 1)},
-  'squeaker.ogg': {position: new THREE.Vector3(1, 2, 0)},
-  'train.ogg': {position: new THREE.Vector3(1, 2, 0)},
-  'whistle.ogg': {position: new THREE.Vector3(-1, 2, 0)},
-  'castanets.ogg': {position: new THREE.Vector3(-1, 2, 0)},
-  'flexatone.ogg': {position: new THREE.Vector3(-1, 2, -1)},
-  'horn.ogg': {position: new THREE.Vector3(-1, 2, -1)},
-  'motorhorn.ogg': {position: new THREE.Vector3(1, 2, -1)},
-  'surdo.ogg': {position: new THREE.Vector3(-1, 2, -1)},
-  'trumpet.ogg': {position: new THREE.Vector3(1, 2, -1)},
-};
-var soundNames = Object.keys(sounds);
+const soundNames = [
+  'bells',
+  'cowbell',
+  'guiro',
+  'mandolin',
+  'squeaker',
+  'train',
+  'whistle',
+  'castanets',
+  'flexatone',
+  'horn',
+  'motorhorn',
+  'surdo',
+  'trumpet',
+];
+
+var sounds = {};
+soundNames.forEach( i => { sounds[i] = {animations: [], mesh: null, player: null} })
 
 
 export function setup(ctx) {
   const assets = ctx.assets;
-  /*
   scene = assets['sound_model'].scene;
-  assets['sound_tex'].encoding = THREE.sRGBEncoding;
-  assets['sound_tex'].flipY = false;
+  assets['sound_floor_tex'].encoding = THREE.sRGBEncoding;
 
-  scene.getObjectByName('object').material =
-    new THREE.MeshBasicMaterial({map: assets['sound_tex']});
+  scene.getObjectByName('floor').material =
+    new THREE.MeshBasicMaterial({color: 0xaaaaaa, map: assets['sound_floor_tex']});
 
-  */
-
-  scene = new THREE.Object3D();
+  const horn = scene.getObjectByName('horn');
+  horn.children[0].material =
+    new THREE.MeshBasicMaterial({color: 0x00aa00});
 
 
   listener = new THREE.AudioListener();
 
-  for (let i in sounds) {
-    let sound = new THREE.PositionalAudio(listener);
-    let audioLoader = new THREE.AudioLoader();
-    audioLoader.load('assets/ogg/' + i, buffer => {
+  mixer = new THREE.AnimationMixer(scene);
+
+  for (let id in sounds) {
+    const sound = new THREE.PositionalAudio(listener);
+    const audioLoader = new THREE.AudioLoader();
+    audioLoader.load('assets/ogg/' + id + '.ogg', buffer => {
       sound.setBuffer(buffer);
       //sound.setRefDistance(20);
     });
 
-    let sphere = new THREE.SphereGeometry(0.3);
-    let material = new THREE.MeshBasicMaterial();
-    let mesh = new THREE.Mesh(sphere, material);
-    mesh.visible = false;
-    mesh.position.copy(sounds[i].position);
-    scene.add(mesh);
-    mesh.add(sound);
+    const sphere = new THREE.SphereGeometry(0.3);
+    const material = new THREE.MeshBasicMaterial();
 
-    sounds[i].player = sound;
-    sounds[i].mesh = mesh;
+    sounds[id].player = sound;
+    sounds[id].mesh = scene.getObjectByName(id);
+    if (!sounds[id].mesh) { continue; }
+    sounds[id].mesh.visible = false;
+
+    for (let j = 0; j < sounds[id].mesh.children.length; j++) {
+      const obj = sounds[id].mesh.children[j];
+      const clip = THREE.AnimationClip.findByName(assets['sound_model'].animations, `${id}_${obj.name}`);
+      if (!clip) { continue; }
+      const action = mixer.clipAction(clip, sounds[id].mesh);
+      action.loop = THREE.LoopOnce;
+      sounds[id].animations.push(action);
+    }
   }
+  console.log(mixer);
 }
 
 
-var currentSound = 0;
+var currentSound = -1;
 
 function playSound() {
-  let sound = sounds[soundNames[currentSound]];
-
-  sound.player.pause();
-  sound.mesh.visible = false;
-
+  let sound;
+  if (currentSound >= 0) {
+    sound = sounds[soundNames[currentSound]];
+    sound.player.pause();
+    if (sound.animations.length) {
+      sound.mesh.visible = false;
+      sound.animations.forEach( i => {i.stop()});
+    }
+  }
   currentSound = (currentSound + 1) % soundNames.length;
   sound = sounds[soundNames[currentSound]];
 
   sound.player.play();
-  sound.mesh.visible = true;
+  if (sound.animations.length) {
+    sound.mesh.visible = true;
+    sound.animations.forEach( i => {i.play()});
+  }
 
   timeout = setTimeout(playSound, 2000);
 }
@@ -79,7 +95,6 @@ export function enter(ctx) {
   ctx.scene.add(scene);
   ctx.camera.add(listener);
   ctx.camera.position.set(0, 1.6, 0);
-  sounds['cowbell.ogg'].player.play();
   timeout = setTimeout(playSound, 2000);
 }
 
@@ -90,4 +105,5 @@ export function exit(ctx) {
 }
 
 export function execute(ctx, delta, time) {
+  mixer.update(delta);
 }
