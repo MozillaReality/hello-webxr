@@ -33,6 +33,9 @@ export function setup(ctx) {
   mixer = new THREE.AnimationMixer(scene);
 
   for (let id in sounds) {
+    const mesh = scene.getObjectByName(id);
+    if (!mesh) { continue; } // TODO: enable this
+
     const sound = new THREE.PositionalAudio(listener);
     const audioLoader = new THREE.AudioLoader();
     audioLoader.load('assets/ogg/' + id + '.ogg', buffer => {
@@ -40,26 +43,22 @@ export function setup(ctx) {
       //sound.setRefDistance(20);
     });
 
-    const sphere = new THREE.SphereGeometry(0.3);
-    const material = new THREE.MeshBasicMaterial();
-
     sounds[id].player = sound;
-    sounds[id].mesh = scene.getObjectByName(id);
-    if (!sounds[id].mesh) { continue; }
-    sounds[id].mesh.visible = false;
+    sounds[id].mesh = mesh;
+    mesh.visible = false;
+    mesh.add(sound);
 
-    for (let j = 0; j < sounds[id].mesh.children.length; j++) {
-      const obj = sounds[id].mesh.children[j];
+    for (let j = 0; j < mesh.children.length; j++) {
+      const obj = mesh.children[j];
       const clip = THREE.AnimationClip.findByName(assets['sound_model'].animations, `${id}_${obj.name}`);
       if (!clip) { continue; }
-      const action = mixer.clipAction(clip, sounds[id].mesh);
+      const action = mixer.clipAction(clip, mesh);
       action.loop = THREE.LoopOnce;
       sounds[id].animations.push(action);
     }
   }
   console.log(mixer);
 }
-
 
 var currentSound = -1;
 
@@ -73,8 +72,10 @@ function playSound() {
       sound.animations.forEach( i => {i.stop()});
     }
   }
-  currentSound = (currentSound + 1) % soundNames.length;
-  sound = sounds[soundNames[currentSound]];
+  do {
+    currentSound = (currentSound + 1) % soundNames.length;
+    sound = sounds[soundNames[currentSound]];
+  } while(!sound.mesh);
 
   sound.player.play();
   if (sound.animations.length) {
