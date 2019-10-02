@@ -8,6 +8,7 @@ import * as worldPhotogrammetryObject from './worldPhotogrammetryObject.mjs'
 import * as worldCity from './worldCity.mjs'
 import * as worldElevator from './worldElevator.mjs'
 import * as worldVertigo from './worldVertigo.mjs'
+import * as worldSound from './worldSound.mjs'
 import {shaders} from './shaders.mjs'
 
 var clock = new THREE.Clock();
@@ -17,6 +18,7 @@ var controller1, controller2;
 
 var worlds = [
   worldHall,
+  worldSound,
   worldPhotogrammetryObject,
   worldVertigo,
   worldCity,
@@ -125,6 +127,7 @@ function init() {
     worldCity.setup(context);
     worldElevator.setup(context);
     worldVertigo.setup(context);
+    worldSound.setup(context);
 
     currentWorld = 0;
     worlds[currentWorld].enter(context);
