@@ -48,6 +48,13 @@ export function setup(ctx) {
     mesh.visible = false;
     mesh.add(sound);
 
+    const clip = THREE.AnimationClip.findByName(assets['sound_model'].animations, id);
+    if (clip) {
+      const action = mixer.clipAction(clip, mesh);
+      action.loop = THREE.LoopOnce;
+      sounds[id].animations.push(action);
+    }
+
     for (let j = 0; j < mesh.children.length; j++) {
       const obj = mesh.children[j];
       const clip = THREE.AnimationClip.findByName(assets['sound_model'].animations, `${id}_${obj.name}`);
