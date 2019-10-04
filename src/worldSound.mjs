@@ -9,8 +9,6 @@ const soundNames = [
   'squeaker',
   'train',
   'whistle',
-  'castanets',
-  'flexatone',
   'motorhorn',
   'surdo',
   'trumpet',
@@ -19,14 +17,12 @@ const soundNames = [
 var sounds = {};
 soundNames.forEach( i => { sounds[i] = {animations: [], mesh: null, player: null} })
 
+const MAX_REPETITIONS = 3;
+var repetitions = 2;
 
 export function setup(ctx) {
   const assets = ctx.assets;
   scene = assets['sound_model'].scene;
-  assets['sound_floor_tex'].encoding = THREE.sRGBEncoding;
-
-  scene.getObjectByName('floor').material =
-    new THREE.MeshBasicMaterial({color: 0xaaaaaa, map: assets['sound_floor_tex']});
 
   listener = new THREE.AudioListener();
 
@@ -64,7 +60,9 @@ export function setup(ctx) {
       sounds[id].animations.push(action);
     }
   }
-  console.log(mixer);
+
+  var gridHelper = new THREE.GridHelper( 20, 20, 0x222222, 0x080808);
+  scene.add( gridHelper );
 }
 
 var currentSound = -1;
@@ -73,16 +71,22 @@ function playSound() {
   let sound;
   if (currentSound >= 0) {
     sound = sounds[soundNames[currentSound]];
-    sound.player.pause();
+    sound.player.stop();
     if (sound.animations.length) {
       sound.mesh.visible = false;
       sound.animations.forEach( i => {i.stop()});
     }
   }
-  do {
-    currentSound = (currentSound + 1) % soundNames.length;
-    sound = sounds[soundNames[currentSound]];
-  } while(!sound.mesh);
+  repetitions ++;
+  if (repetitions == MAX_REPETITIONS) {
+    repetitions = 0;
+    // get next sound
+    do {
+      currentSound = (currentSound + 1) % soundNames.length;
+      sound = sounds[soundNames[currentSound]];
+    } while(!sound.mesh);
+
+  }
 
   sound.player.play();
   if (sound.animations.length) {
