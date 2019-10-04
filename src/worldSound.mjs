@@ -62,7 +62,12 @@ export function setup(ctx) {
 
     let shadow = new THREE.Mesh(
       new THREE.PlaneBufferGeometry(2, 2),
-      new THREE.MeshBasicMaterial({map: assets['sound_shadow_tex'], transparent: true, opacity: 0})
+      new THREE.MeshBasicMaterial({
+        color: mesh.children[0].material.color,
+        map: assets['sound_shadow_tex'],
+        transparent: true,
+        opacity: 0
+      })
     );
     shadow.position.set(mesh.position.x, 0.001, mesh.position.z);
     shadow.rotation.x = -Math.PI / 2;
