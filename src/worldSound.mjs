@@ -15,10 +15,10 @@ const soundNames = [
 ];
 
 var sounds = {};
-soundNames.forEach( i => { sounds[i] = {animations: [], mesh: null, player: null} })
+soundNames.forEach( i => { sounds[i] = {animations: [], mesh: null, player: null, shadow: null} })
 
-const MAX_REPETITIONS = 3;
-var repetitions = 2;
+const MAX_REPETITIONS = 5;
+var repetitions = MAX_REPETITIONS - 1;
 
 export function setup(ctx) {
   const assets = ctx.assets;
@@ -59,10 +59,19 @@ export function setup(ctx) {
       action.loop = THREE.LoopOnce;
       sounds[id].animations.push(action);
     }
+
+    let shadow = new THREE.Mesh(
+      new THREE.PlaneBufferGeometry(2, 2),
+      new THREE.MeshBasicMaterial({map: assets['sound_shadow_tex'], transparent: true, opacity: 0})
+    );
+    shadow.position.set(mesh.position.x, 0.001, mesh.position.z);
+    shadow.rotation.x = -Math.PI / 2;
+    scene.add(shadow);
+    sounds[id].shadow = shadow;
   }
 
-  var gridHelper = new THREE.GridHelper( 20, 20, 0x222222, 0x080808);
-  scene.add( gridHelper );
+  const gridHelper = new THREE.GridHelper(20, 20, 0x222222, 0x080808);
+  scene.add(gridHelper);
 }
 
 var currentSound = -1;
@@ -85,7 +94,6 @@ function playSound() {
       currentSound = (currentSound + 1) % soundNames.length;
       sound = sounds[soundNames[currentSound]];
     } while(!sound.mesh);
-
   }
 
   sound.player.play();
@@ -93,7 +101,7 @@ function playSound() {
     sound.mesh.visible = true;
     sound.animations.forEach( i => {i.play()});
   }
-
+  sound.shadow.material.opacity = 1;
   timeout = setTimeout(playSound, 2000);
 }
 
@@ -113,4 +121,8 @@ export function exit(ctx) {
 
 export function execute(ctx, delta, time) {
   mixer.update(delta);
+  const sound = sounds[soundNames[currentSound]];
+  if (sound && sound.shadow.material.opacity > 0) {
+    sound.shadow.material.opacity -= delta * 0.5;
+  }
 }

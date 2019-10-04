@@ -52,6 +52,7 @@ var assets = {
 
   // sound
   sound_model: 'sound.glb',
+  sound_shadow_tex: 'sound_shadow.png',
 
   // photogrammetry object
   pg_floor_tex: 'travertine2.jpg',
