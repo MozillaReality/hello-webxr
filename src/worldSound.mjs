@@ -61,12 +61,14 @@ export function setup(ctx) {
     }
 
     let shadow = new THREE.Mesh(
-      new THREE.PlaneBufferGeometry(2, 2),
+      new THREE.PlaneBufferGeometry(3, 3),
       new THREE.MeshBasicMaterial({
         color: mesh.children[0].material.color,
         map: assets['sound_shadow_tex'],
         transparent: true,
-        opacity: 0
+        opacity: 0,
+        depthTest: false,
+        blending: THREE.AdditiveBlending
       })
     );
     shadow.position.set(mesh.position.x, 0.001, mesh.position.z);
