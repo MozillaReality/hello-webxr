@@ -11,6 +11,9 @@ var
 
 var zoom = {object: null, widget: null, controller: null, animation: 0};
 
+const PAINTINGS = ['seurat', 'sorolla', 'bosch', 'degas', 'rembrandt'];
+const PAINTINGS_RATIOS = [1, 1, 1.875, 1, 1];
+
 
 function createDoorMaterial(ctx) {
   return new THREE.ShaderMaterial({
@@ -57,7 +60,6 @@ export function setup(ctx) {
   });
 
   // paintings
-  const PAINTINGS = ['seurat', 'sorolla', 'bosch', 'degas', 'rembrandt', 'hopper'];
   for (let i in PAINTINGS) {
     let painting = PAINTINGS[i];
     let mesh = hall.getObjectByName(painting);
@@ -69,12 +71,13 @@ export function setup(ctx) {
     mesh.material = new THREE.MeshBasicMaterial({
       map: paintingTexture
     });
+    mesh.userData.paintingId = i;
   }
 
   paintings = hall.getObjectByName('paintings');
 
   zoom.widget = new THREE.Mesh(new THREE.PlaneGeometry(), new THREE.MeshBasicMaterial({color:0xff0000}));
-  zoom.widget.geometry.rotateY(-Math.PI / 2);
+  //zoom.widget.geometry.rotateY(-Math.PI / 2);
   zoom.widget.visible = false;
 
   const lightSun = new THREE.DirectionalLight(0xeeffff);
@@ -246,13 +249,14 @@ const zoomAmount = 0.05;
 function refreshZoomUV(hit) {
 
   zoom.widget.position.copy(hit.point);
-  zoom.widget.position.x -= 0.3 * zoom.animation;
+  zoom.widget.position.z += 0.3 * zoom.animation;
 
   const uvs = zoom.widget.geometry.faceVertexUvs[0];
+  const ratio = PAINTINGS_RATIOS[zoom.painting.userData.paintingId];
   //const amount = zoomAmount  // TODO: adjust zoom amount depending on hit.distance
   hit.uv.clampScalar(zoomAmount, 1 - zoomAmount);
-  minUV.set(hit.uv.x - zoomAmount, hit.uv.y + zoomAmount);
-  maxUV.set(hit.uv.x + zoomAmount, hit.uv.y - zoomAmount);
+  minUV.set(hit.uv.x - zoomAmount, hit.uv.y + zoomAmount * ratio);
+  maxUV.set(hit.uv.x + zoomAmount, hit.uv.y - zoomAmount * ratio);
   uvs[0][0].x = minUV.x;
   uvs[0][0].y = maxUV.y;
   uvs[0][1].x = minUV.x;
