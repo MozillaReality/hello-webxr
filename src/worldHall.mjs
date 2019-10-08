@@ -1,3 +1,7 @@
+var loadFont = require('load-bmfont');
+var createFontGeometry = require('three-bmfont-text');
+var MSDFShader = require('three-bmfont-text/shaders/msdf');
+
 var
   scene,
   hall,
@@ -136,6 +140,40 @@ export function enter(ctx) {
   ctx.controllers[1].addEventListener('selectstart', onSelectStart);
   ctx.controllers[1].addEventListener('selectend', onSelectEnd);
   ctx.scene.add(scene);
+
+
+  loadFont('assets/fonts/Metropolis-Bold.json', function(err, font) {
+    var geometry = createFontGeometry({
+      width: 400,
+      align: 'left',
+      font: font
+    })
+
+    geometry.update('Lorem ipsum\nDolor sit amet.')
+
+    // the resulting layout has metrics and bounds
+    //console.log(geometry.layout.height)
+    //console.log(geometry.layout.descender)
+
+    // the texture atlas containing our glyphs
+    var textureLoader = new THREE.TextureLoader();
+    textureLoader.load('assets/fonts/Inter-Bold.png', function (texture) {
+
+      var material = new THREE.RawShaderMaterial(MSDFShader({
+          map: texture,
+          color: 0xffffff,
+          negate: false
+        }));
+
+      var mesh = new THREE.Mesh(geometry, material);
+      ctx.scene.add(mesh);
+      mesh.scale.set(0.001, -0.001, -1.0);
+      mesh.position.set(0, 1, 0);
+    })
+  });
+
+
+
 }
 
 export function exit(ctx) {
