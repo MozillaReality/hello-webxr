@@ -5,7 +5,11 @@ var
   fader,
   panoBalls = [],
   objectMaterials,
-  panoFxMaterial;
+  panoFxMaterial,
+  paintings,
+  controllers;
+
+var zoom = {object: null, widget: null, controller: null};
 
 
 function createDoorMaterial(ctx) {
@@ -27,16 +31,8 @@ export function setup(ctx) {
   hallLightmapTex.encoding = THREE.sRGBEncoding;
   hallLightmapTex.flipY = false;
 
-  const hallDiffuseTex = assets['travertine_tex'];
-  hallDiffuseTex.encoding = THREE.sRGBEncoding;
-  hallDiffuseTex.wrapS = THREE.RepeatWrapping;
-  hallDiffuseTex.wrapT = THREE.RepeatWrapping;
-  hallDiffuseTex.repeat.set(2, 2);
-
   objectMaterials = {
-    hall: new THREE.MeshLambertMaterial({
-      color: 0xffffff,
-      map: hallDiffuseTex,
+    hall: new THREE.MeshBasicMaterial({
       lightMap: hallLightmapTex
     }),
     lightpanels: new THREE.MeshBasicMaterial(),
@@ -60,6 +56,27 @@ export function setup(ctx) {
     }
   });
 
+  // paintings
+  const PAINTINGS = ['seurat', 'sorolla', 'bosch', 'degas', 'rembrandt', 'hopper'];
+  for (let i in PAINTINGS) {
+    let painting = PAINTINGS[i];
+    let mesh = hall.getObjectByName(painting);
+    if (!mesh) { continue; }
+
+    let paintingTexture = assets[`painting_${painting}_tex`];
+    paintingTexture.encoding = THREE.sRGBEncoding;
+    paintingTexture.flipY = false;
+    mesh.material = new THREE.MeshBasicMaterial({
+      map: paintingTexture
+    });
+  }
+
+  paintings = hall.getObjectByName('paintings');
+
+  zoom.widget = new THREE.Mesh(new THREE.PlaneGeometry(), new THREE.MeshBasicMaterial({color:0xff0000}));
+  zoom.widget.geometry.rotateY(-Math.PI / 2);
+  zoom.widget.visible = false;
+
   const lightSun = new THREE.DirectionalLight(0xeeffff);
   lightSun.position.set(0.2, 1, 0.1);
   const lightFill = new THREE.DirectionalLight(0xfff0ee, 0.3);
@@ -69,7 +86,6 @@ export function setup(ctx) {
     {src: 'pano1small', position: new THREE.Vector3(2.0, 1.5, 0.5)},
     {src: 'pano2small', position: new THREE.Vector3(-2.1, 1.5, 0)}
   ];
-
 
   const panoGeo = new THREE.SphereBufferGeometry(0.15, 30, 20);
   assets['panoballfx_tex'].wrapT = THREE.RepeatWrapping;
@@ -107,16 +123,22 @@ export function setup(ctx) {
   scene.add(lightSun);
   scene.add(lightFill);
   scene.add(hall);
+  scene.add(zoom.widget);
   ctx.camera.add(fader);
 }
 
 export function enter(ctx) {
   ctx.renderer.setClearColor( 0x92B4BB );
+  controllers = ctx.controllers;
+  ctx.controllers[1].addEventListener('selectstart', onSelectStart);
+  ctx.controllers[1].addEventListener('selectend', onSelectEnd);
   ctx.scene.add(scene);
 }
 
 export function exit(ctx) {
   ctx.scene.remove(scene);
+  ctx.controllers[1].removeEventListener('selectstart', onSelectStart);
+  ctx.controllers[1].removeEventListener('selectend', onSelectEnd);
 }
 
 export function execute(ctx, delta, time) {
@@ -137,6 +159,10 @@ export function execute(ctx, delta, time) {
       ball.position.copy(ball.resetPosition);
       ball.position.y = 1.5 + Math.cos(i + time * 3) * 0.02;
     }
+  }
+
+  if (zoom.painting) {
+    moveZoom();
   }
 
   updateUniforms(time);
@@ -163,4 +189,77 @@ function checkCameraBoundaries(ctx) {
   else if (cam.z < -6.45) { fade = (-cam.z - -6.45) / margin; }
   else if (cam.z > 6.4)  { fade = (cam.z - 6.4) / margin; }
   fader.material.opacity = Math.min(1, Math.max(0, fade));
+}
+
+
+var raycasterOrigin = new THREE.Vector3();
+var raycasterDirection = new THREE.Vector3();
+
+function onSelectStart(evt) {
+  let controller = evt.target;
+
+  controller.getWorldPosition(raycasterOrigin);
+  controller.getWorldDirection(raycasterDirection);
+  raycasterDirection.negate();
+
+  controller.raycaster.set(raycasterOrigin, raycasterDirection);
+  var intersects = controller.raycaster.intersectObject(paintings, true);
+
+  if (intersects.length == 0) { return; }
+
+  zoom.painting= intersects[0].object;
+  zoom.controller = controller;
+  zoom.widget.material = zoom.painting.material;
+  zoom.widget.visible = true;
+  refreshZoomUV(intersects[0]);
+}
+
+function onSelectEnd(evt) {
+  if (zoom.painting) {
+    zoom.painting = null;
+    zoom.widget.visible = false;
+  }
+}
+
+function moveZoom() {
+  const controller = zoom.controller;
+  controller.getWorldPosition(raycasterOrigin);
+  controller.getWorldDirection(raycasterDirection);
+  raycasterDirection.negate();
+
+  controller.raycaster.set(raycasterOrigin, raycasterDirection);
+  var intersects = controller.raycaster.intersectObject(paintings, true);
+  if (intersects.length == 0 || intersects[0].object !== zoom.painting) { return; }
+
+  refreshZoomUV(intersects[0]);
+}
+
+var minUV = new THREE.Vector2();
+var maxUV = new THREE.Vector2();
+const zoomAmount = 0.05;
+
+function refreshZoomUV(hit) {
+
+  zoom.widget.position.copy(hit.point);
+  zoom.widget.position.x -= 0.3;
+
+  const uvs = zoom.widget.geometry.faceVertexUvs[0];
+  //const amount = zoomAmount  // TODO: adjust zoom amount depending on hit.distance
+  hit.uv.clampScalar(zoomAmount, 1 - zoomAmount);
+  minUV.set(hit.uv.x - zoomAmount, hit.uv.y + zoomAmount);
+  maxUV.set(hit.uv.x + zoomAmount, hit.uv.y - zoomAmount);
+  uvs[0][0].x = minUV.x;
+  uvs[0][0].y = maxUV.y;
+  uvs[0][1].x = minUV.x;
+  uvs[0][1].y = minUV.y;
+  uvs[0][2].x = maxUV.x;
+  uvs[0][2].y = maxUV.y;
+
+  uvs[1][0].x = minUV.x;
+  uvs[1][0].y = minUV.y;
+  uvs[1][1].x = maxUV.x;
+  uvs[1][1].y = minUV.y;
+  uvs[1][2].x = maxUV.x;
+  uvs[1][2].y = maxUV.y;
+  zoom.widget.geometry.uvsNeedUpdate = true;
 }

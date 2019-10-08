@@ -62,6 +62,13 @@ var assets = {
   pg_bg_tex: 'pg_bg.jpg',
   pg_flare_tex: 'flare.jpg',
   pg_panel_tex: 'panel.jpg',
+
+  // paintings
+  painting_seurat_tex: 'paintings/seurat.basis',
+  painting_sorolla_tex: 'paintings/sorolla.basis',
+  painting_bosch_tex: 'paintings/bosch.basis',
+  painting_degas_tex: 'paintings/degas.basis',
+  painting_rembrandt_tex: 'paintings/rembrandt.basis',
 };
 
 function gotoWorld(world) {
@@ -104,14 +111,6 @@ function init() {
     console.log('render calls:', renderer.info.render.calls);
   }, 2000);
 
-  context = {
-    assets: assets,
-    shaders: shaders,
-    scene : parent,
-    renderer: renderer,
-    camera: camera
-  };
-
   controller1 = renderer.vr.getController(0);
   scene.add(controller1);
   controller1.addEventListener('selectstart', onSelectStart);
@@ -119,8 +118,20 @@ function init() {
 
   controller2 = renderer.vr.getController(1);
   scene.add(controller2);
+  controller2.raycaster = new THREE.Raycaster();
+  controller2.raycaster.near = 0.1;
+  //controller2.raycaster.far = 3;
   controller2.addEventListener('selectstart', onSelectStart);
   controller2.addEventListener('selectend', onSelectEnd);
+
+  context = {
+    assets: assets,
+    shaders: shaders,
+    scene : parent,
+    renderer: renderer,
+    camera: camera,
+    controllers: [controller1, controller2]
+  };
 
   loadAssets(renderer, '../assets/', assets, () => {
     setupControllers();
@@ -156,7 +167,7 @@ function setupControllers() {
 function onSelectStart(ev) {
   const trigger = ev.target.getObjectByName('trigger');
   trigger.rotation.x = -0.3;
-  gotoWorld((currentWorld + 1) % worlds.length);
+  //gotoWorld((currentWorld + 1) % worlds.length);
 }
 
 function onSelectEnd(ev) {
