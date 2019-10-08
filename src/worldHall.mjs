@@ -9,7 +9,7 @@ var
   paintings,
   controllers;
 
-var zoom = {object: null, widget: null, controller: null};
+var zoom = {object: null, widget: null, controller: null, animation: 0};
 
 
 function createDoorMaterial(ctx) {
@@ -162,7 +162,7 @@ export function execute(ctx, delta, time) {
   }
 
   if (zoom.painting) {
-    moveZoom();
+    moveZoom(delta);
   }
 
   updateUniforms(time);
@@ -217,11 +217,16 @@ function onSelectStart(evt) {
 function onSelectEnd(evt) {
   if (zoom.painting) {
     zoom.painting = null;
+    zoom.animation = 0;
     zoom.widget.visible = false;
   }
 }
 
-function moveZoom() {
+function moveZoom(delta) {
+
+  if (zoom.animation < 1) {
+    zoom.animation += (1 - zoom.animation) * delta * 4.0;
+  }
   const controller = zoom.controller;
   controller.getWorldPosition(raycasterOrigin);
   controller.getWorldDirection(raycasterDirection);
@@ -241,7 +246,7 @@ const zoomAmount = 0.05;
 function refreshZoomUV(hit) {
 
   zoom.widget.position.copy(hit.point);
-  zoom.widget.position.x -= 0.3;
+  zoom.widget.position.x -= 0.3 * zoom.animation;
 
   const uvs = zoom.widget.geometry.faceVertexUvs[0];
   //const amount = zoomAmount  // TODO: adjust zoom amount depending on hit.distance
