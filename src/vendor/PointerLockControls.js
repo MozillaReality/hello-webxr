@@ -3,7 +3,8 @@
  * @author Mugen87 / https://github.com/Mugen87
  */
 
-THREE.PointerLockControls = function ( camera, domElement ) {
+
+function PointerLockControls ( camera, domElement ) {
 
 	this.domElement = domElement || document.body;
 	this.isLocked = false;
@@ -145,5 +146,4 @@ THREE.PointerLockControls = function ( camera, domElement ) {
 
 };
 
-THREE.PointerLockControls.prototype = Object.create( THREE.EventDispatcher.prototype );
-THREE.PointerLockControls.prototype.constructor = THREE.PointerLockControls;
+THREE.PointerLockControls = PointerLockControls;

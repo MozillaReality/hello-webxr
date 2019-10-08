@@ -1,3 +1,5 @@
+import './vendor/GLTFLoader.js';
+import './vendor/OBJLoader.js';
 
 const BASIS_LIB_PATH = '../src/vendor/';
 
