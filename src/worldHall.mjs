@@ -77,7 +77,7 @@ export function setup(ctx) {
   paintings = hall.getObjectByName('paintings');
 
   zoom.widget = new THREE.Mesh(new THREE.PlaneGeometry(), new THREE.MeshBasicMaterial({color:0xff0000}));
-  //zoom.widget.geometry.rotateY(-Math.PI / 2);
+  zoom.widget.geometry.rotateY(-Math.PI / 2);
   zoom.widget.visible = false;
 
   const lightSun = new THREE.DirectionalLight(0xeeffff);
@@ -249,7 +249,7 @@ const zoomAmount = 0.05;
 function refreshZoomUV(hit) {
 
   zoom.widget.position.copy(hit.point);
-  zoom.widget.position.z += 0.3 * zoom.animation;
+  zoom.widget.position.x -= 0.3 * zoom.animation;
 
   const uvs = zoom.widget.geometry.faceVertexUvs[0];
   const ratio = PAINTINGS_RATIOS[zoom.painting.userData.paintingId];
