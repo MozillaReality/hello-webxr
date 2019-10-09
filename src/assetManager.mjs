@@ -21,24 +21,26 @@ export function loadAssets(renderer, basePath, assets, onComplete) {
   var texLoader = new THREE.TextureLoader();
   var gltfLoader = new THREE.GLTFLoader();
   var objLoader = new THREE.OBJLoader();
+  var fontLoader = new THREE.FontLoader();
 
   var loaders = {
-    'gltf':  gltfLoader,
-    'glb':  gltfLoader,
-    'obj' :  objLoader,
-    'gif' :  texLoader,
-    'png' :  texLoader,
-    'jpg' :  texLoader,
-    'basis': basisLoader
+    'gltf': gltfLoader,
+    'glb': gltfLoader,
+    'obj': objLoader,
+    'gif': texLoader,
+    'png': texLoader,
+    'jpg': texLoader,
+    'basis': basisLoader,
+    'font': fontLoader
   };
 
   for (var i in assets) {
     let assetId = i;
     let assetPath = assets[i];
-    var ext = assetPath.substr(assetPath.lastIndexOf('.') + 1).toLowerCase();
+    let ext = assetPath.substr(assetPath.lastIndexOf('.') + 1).toLowerCase();
     loaders[ext].load(basePath + assetPath, asset => {
       console.info(`%c ${assetPath} loaded`, 'color:green');
-      assets[assetId] = asset;
+      assets[assetId] = ext == 'font'? asset.data : asset;
       if (onComplete && allAssetsLoaded(assets)) { onComplete(); }
     });
   }

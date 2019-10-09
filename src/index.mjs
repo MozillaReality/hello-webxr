@@ -34,6 +34,15 @@ var worlds = [
 var currentWorld = 0;
 
 var assets = {
+  // fonts
+  inter_bold_font: 'fonts/Inter-Bold.font',
+  inter_bold_tex: 'fonts/Inter-Bold.png',
+  inter_regular_font: 'fonts/Inter-Regular.font',
+  inter_regular_tex: 'fonts/Inter-Regular.png',
+  metropolis_bold_font: 'fonts/Metropolis-Bold.font',
+  metropolis_bold_tex: 'fonts/Metropolis-Bold.png',
+
+  //
   hall_model: 'hall.gltf',
   city_model: 'city.glb',
   vertigo_model: 'vertigo2.gltf',
