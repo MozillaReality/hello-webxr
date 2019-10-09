@@ -18,14 +18,15 @@ const PAINTINGS = ['seurat', 'sorolla', 'bosch', 'degas', 'rembrandt'];
 const PAINTINGS_RATIOS = [1, 1, 1.875, 1, 1];
 
 var newsTicker = {
-  url: 'assets/twitter-example.json',
+  url: 'assets/tweets.json',
   hashtag: '#helloWebXR.',
-  author: '@mozuser',
-  message: 'Hi from All Hands Berlin! Really excited to be here. :D #allhands #berlin',
   hashtagText: null,
   authorText: null,
-  messageText: null
+  messageText: null,
+  news: [],
+  current: 0
 };
+
 
 function createDoorMaterial(ctx) {
   return new THREE.ShaderMaterial({
@@ -101,7 +102,7 @@ export function setup(ctx) {
   newsTicker.hashtagText = new Text({
     font: ctx.assets['inter_bold_font'],
     map: ctx.assets['inter_bold_tex'],
-    size: 2.4,
+    size: 2,
     align: 'right',
     anchor: 'right',
     width: 350,
@@ -111,8 +112,8 @@ export function setup(ctx) {
   newsTicker.authorText = new Text({
     font: ctx.assets['inter_bold_font'],
     map: ctx.assets['inter_bold_tex'],
-    size: 3,
-    width: 350,
+    size: 2,
+    width: 500,
     color: 0x67bccd
   });
 
@@ -120,7 +121,7 @@ export function setup(ctx) {
     font: ctx.assets['inter_regular_font'],
     map: ctx.assets['inter_regular_tex'],
     size: 2.6,
-    width: 800,
+    width: 900,
     baseline: 'top',
     color: 0xffffff
   });
@@ -130,7 +131,12 @@ export function setup(ctx) {
     newsTickerMesh.add(newsTicker[`${i}Text`]);
     newsTicker[`${i}Text`].rotation.set(-Math.PI / 2, Math.PI, 0);
     newsTicker[`${i}Text`].position.copy(hall.getObjectByName(i).position);
-    newsTicker[`${i}Text`].value = newsTicker[i];
+  });
+  newsTicker.hashtagText.value = newsTicker.hashtag;
+
+  fetch(newsTicker.url).then(res => res.json()).then(res => {
+    newsTicker.news = res;
+    nextNews();
   });
 
 
@@ -332,4 +338,13 @@ function refreshZoomUV(hit) {
   uvs[1][2].x = maxUV.x;
   uvs[1][2].y = maxUV.y;
   zoom.widget.geometry.uvsNeedUpdate = true;
+}
+
+
+function nextNews() {
+  const n = newsTicker;
+  n.authorText.value = n.news[n.current].author;
+  n.messageText.value = n.news[n.current].message;
+  n.current = (n.current + 1) % n.news.length;
+  setTimeout(nextNews, 3000);
 }

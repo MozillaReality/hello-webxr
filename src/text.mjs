@@ -65,9 +65,6 @@ export class Text extends(THREE.Object3D){
     if (x !== 0 || y !== 0) {
       this.geometry.translate(x, y, 0);
     }
-
-    console.log(this.geometry.layout);
-
   }
 }
 
