@@ -48,11 +48,11 @@ var assets = {
   vertigo_model: 'vertigo2.gltf',
   elevator_model: 'elevator.glb',
   generic_controller_model: 'generic_controller.gltf',
-  lightmap_tex: 'lightmap.png',
+  lightmap_tex: 'lightmap.basis',
   travertine_tex: 'travertine.png',
   travertine2_tex: 'travertine2.jpg',
   controller_tex: 'controller.png',
-  pano1: 'zapporthorn.jpg',
+  pano1: 'zapporthorn.basis',
   pano1small: 'zapporthorn_small.jpg',
   pano2small: 'andes_small.jpg',
   panoballfx_tex: 'ballfx.jpg',
@@ -71,7 +71,7 @@ var assets = {
   // photogrammetry object
   pg_floor_tex: 'travertine2.jpg',
   pg_floor_lm_tex: 'angel_floor_lm.jpg',
-  pg_object_tex: 'angel.jpg',
+  pg_object_tex: 'angel.basis',
   pg_object_model: 'angel.glb', // TODO: try draco version, angel.min.glb
   pg_bg_tex: 'pg_bg.jpg',
   pg_flare_tex: 'flare.jpg',
