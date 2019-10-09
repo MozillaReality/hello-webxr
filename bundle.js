@@ -1,21 +1,12605 @@
-!function(e){var t={};function r(n){if(t[n])return t[n].exports;var o=t[n]={i:n,l:!1,exports:{}};return e[n].call(o.exports,o,o.exports,r),o.l=!0,o.exports}r.m=e,r.c=t,r.d=function(e,t,n){r.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:n})},r.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},r.t=function(e,t){if(1&t&&(e=r(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var n=Object.create(null);if(r.r(n),Object.defineProperty(n,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var o in e)r.d(n,o,function(t){return e[t]}.bind(null,o));return n},r.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return r.d(t,"a",t),t},r.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},r.p="",r(r.s=65)}([function(e,t,r){"use strict";var n=r(27);e.exports=Function.prototype.bind||n},function(e,t,r){"use strict";var n=TypeError,o=Object.getOwnPropertyDescriptor?function(){return Object.getOwnPropertyDescriptor(arguments,"callee").get}():function(){throw new n},i=r(31)(),a=Object.getPrototypeOf||function(e){return e.__proto__},s=void 0,u="undefined"==typeof Uint8Array?void 0:a(Uint8Array),c={"$ %Array%":Array,"$ %ArrayBuffer%":"undefined"==typeof ArrayBuffer?void 0:ArrayBuffer,"$ %ArrayBufferPrototype%":"undefined"==typeof ArrayBuffer?void 0:ArrayBuffer.prototype,"$ %ArrayIteratorPrototype%":i?a([][Symbol.iterator]()):void 0,"$ %ArrayPrototype%":Array.prototype,"$ %ArrayProto_entries%":Array.prototype.entries,"$ %ArrayProto_forEach%":Array.prototype.forEach,"$ %ArrayProto_keys%":Array.prototype.keys,"$ %ArrayProto_values%":Array.prototype.values,"$ %AsyncFromSyncIteratorPrototype%":void 0,"$ %AsyncFunction%":void 0,"$ %AsyncFunctionPrototype%":void 0,"$ %AsyncGenerator%":void 0,"$ %AsyncGeneratorFunction%":void 0,"$ %AsyncGeneratorPrototype%":void 0,"$ %AsyncIteratorPrototype%":s&&i&&Symbol.asyncIterator?s[Symbol.asyncIterator]():void 0,"$ %Atomics%":"undefined"==typeof Atomics?void 0:Atomics,"$ %Boolean%":Boolean,"$ %BooleanPrototype%":Boolean.prototype,"$ %DataView%":"undefined"==typeof DataView?void 0:DataView,"$ %DataViewPrototype%":"undefined"==typeof DataView?void 0:DataView.prototype,"$ %Date%":Date,"$ %DatePrototype%":Date.prototype,"$ %decodeURI%":decodeURI,"$ %decodeURIComponent%":decodeURIComponent,"$ %encodeURI%":encodeURI,"$ %encodeURIComponent%":encodeURIComponent,"$ %Error%":Error,"$ %ErrorPrototype%":Error.prototype,"$ %eval%":eval,"$ %EvalError%":EvalError,"$ %EvalErrorPrototype%":EvalError.prototype,"$ %Float32Array%":"undefined"==typeof Float32Array?void 0:Float32Array,"$ %Float32ArrayPrototype%":"undefined"==typeof Float32Array?void 0:Float32Array.prototype,"$ %Float64Array%":"undefined"==typeof Float64Array?void 0:Float64Array,"$ %Float64ArrayPrototype%":"undefined"==typeof Float64Array?void 0:Float64Array.prototype,"$ %Function%":Function,"$ %FunctionPrototype%":Function.prototype,"$ %Generator%":void 0,"$ %GeneratorFunction%":void 0,"$ %GeneratorPrototype%":void 0,"$ %Int8Array%":"undefined"==typeof Int8Array?void 0:Int8Array,"$ %Int8ArrayPrototype%":"undefined"==typeof Int8Array?void 0:Int8Array.prototype,"$ %Int16Array%":"undefined"==typeof Int16Array?void 0:Int16Array,"$ %Int16ArrayPrototype%":"undefined"==typeof Int16Array?void 0:Int8Array.prototype,"$ %Int32Array%":"undefined"==typeof Int32Array?void 0:Int32Array,"$ %Int32ArrayPrototype%":"undefined"==typeof Int32Array?void 0:Int32Array.prototype,"$ %isFinite%":isFinite,"$ %isNaN%":isNaN,"$ %IteratorPrototype%":i?a(a([][Symbol.iterator]())):void 0,"$ %JSON%":JSON,"$ %JSONParse%":JSON.parse,"$ %Map%":"undefined"==typeof Map?void 0:Map,"$ %MapIteratorPrototype%":"undefined"!=typeof Map&&i?a((new Map)[Symbol.iterator]()):void 0,"$ %MapPrototype%":"undefined"==typeof Map?void 0:Map.prototype,"$ %Math%":Math,"$ %Number%":Number,"$ %NumberPrototype%":Number.prototype,"$ %Object%":Object,"$ %ObjectPrototype%":Object.prototype,"$ %ObjProto_toString%":Object.prototype.toString,"$ %ObjProto_valueOf%":Object.prototype.valueOf,"$ %parseFloat%":parseFloat,"$ %parseInt%":parseInt,"$ %Promise%":"undefined"==typeof Promise?void 0:Promise,"$ %PromisePrototype%":"undefined"==typeof Promise?void 0:Promise.prototype,"$ %PromiseProto_then%":"undefined"==typeof Promise?void 0:Promise.prototype.then,"$ %Promise_all%":"undefined"==typeof Promise?void 0:Promise.all,"$ %Promise_reject%":"undefined"==typeof Promise?void 0:Promise.reject,"$ %Promise_resolve%":"undefined"==typeof Promise?void 0:Promise.resolve,"$ %Proxy%":"undefined"==typeof Proxy?void 0:Proxy,"$ %RangeError%":RangeError,"$ %RangeErrorPrototype%":RangeError.prototype,"$ %ReferenceError%":ReferenceError,"$ %ReferenceErrorPrototype%":ReferenceError.prototype,"$ %Reflect%":"undefined"==typeof Reflect?void 0:Reflect,"$ %RegExp%":RegExp,"$ %RegExpPrototype%":RegExp.prototype,"$ %Set%":"undefined"==typeof Set?void 0:Set,"$ %SetIteratorPrototype%":"undefined"!=typeof Set&&i?a((new Set)[Symbol.iterator]()):void 0,"$ %SetPrototype%":"undefined"==typeof Set?void 0:Set.prototype,"$ %SharedArrayBuffer%":"undefined"==typeof SharedArrayBuffer?void 0:SharedArrayBuffer,"$ %SharedArrayBufferPrototype%":"undefined"==typeof SharedArrayBuffer?void 0:SharedArrayBuffer.prototype,"$ %String%":String,"$ %StringIteratorPrototype%":i?a(""[Symbol.iterator]()):void 0,"$ %StringPrototype%":String.prototype,"$ %Symbol%":i?Symbol:void 0,"$ %SymbolPrototype%":i?Symbol.prototype:void 0,"$ %SyntaxError%":SyntaxError,"$ %SyntaxErrorPrototype%":SyntaxError.prototype,"$ %ThrowTypeError%":o,"$ %TypedArray%":u,"$ %TypedArrayPrototype%":u?u.prototype:void 0,"$ %TypeError%":n,"$ %TypeErrorPrototype%":n.prototype,"$ %Uint8Array%":"undefined"==typeof Uint8Array?void 0:Uint8Array,"$ %Uint8ArrayPrototype%":"undefined"==typeof Uint8Array?void 0:Uint8Array.prototype,"$ %Uint8ClampedArray%":"undefined"==typeof Uint8ClampedArray?void 0:Uint8ClampedArray,"$ %Uint8ClampedArrayPrototype%":"undefined"==typeof Uint8ClampedArray?void 0:Uint8ClampedArray.prototype,"$ %Uint16Array%":"undefined"==typeof Uint16Array?void 0:Uint16Array,"$ %Uint16ArrayPrototype%":"undefined"==typeof Uint16Array?void 0:Uint16Array.prototype,"$ %Uint32Array%":"undefined"==typeof Uint32Array?void 0:Uint32Array,"$ %Uint32ArrayPrototype%":"undefined"==typeof Uint32Array?void 0:Uint32Array.prototype,"$ %URIError%":URIError,"$ %URIErrorPrototype%":URIError.prototype,"$ %WeakMap%":"undefined"==typeof WeakMap?void 0:WeakMap,"$ %WeakMapPrototype%":"undefined"==typeof WeakMap?void 0:WeakMap.prototype,"$ %WeakSet%":"undefined"==typeof WeakSet?void 0:WeakSet,"$ %WeakSetPrototype%":"undefined"==typeof WeakSet?void 0:WeakSet.prototype},l=r(0).call(Function.call,String.prototype.replace),p=/[^%.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|%$))/g,f=/\\(\\)?/g,h=function(e){var t=[];return l(e,p,(function(e,r,n,o){t[t.length]=n?l(o,f,"$1"):r||e})),t},d=function(e,t){var r="$ "+e;if(!(r in c))throw new SyntaxError("intrinsic "+e+" does not exist!");if(void 0===c[r]&&!t)throw new n("intrinsic "+e+" exists, but is not available. Please file an issue!");return c[r]};e.exports=function(e,t){if(arguments.length>1&&"boolean"!=typeof t)throw new TypeError('"allowMissing" argument must be a boolean');var r=h(e);if(0===r.length)return d(e,t);for(var n=d("%"+r[0]+"%",t),o=1;o<r.length;o+=1)null!=n&&(n=n[r[o]]);return n}},function(e,t,r){"use strict";(function(e){
-/*!
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/index.mjs");
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./node_modules/an-array/index.js":
+/*!****************************************!*\
+  !*** ./node_modules/an-array/index.js ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var str = Object.prototype.toString
+
+module.exports = anArray
+
+function anArray(arr) {
+  return (
+       arr.BYTES_PER_ELEMENT
+    && str.call(arr.buffer) === '[object ArrayBuffer]'
+    || Array.isArray(arr)
+  )
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/as-number/index.js":
+/*!*****************************************!*\
+  !*** ./node_modules/as-number/index.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = function numtype(num, def) {
+	return typeof num === 'number'
+		? num 
+		: (typeof def === 'number' ? def : 0)
+}
+
+/***/ }),
+
+/***/ "./node_modules/base64-js/index.js":
+/*!*****************************************!*\
+  !*** ./node_modules/base64-js/index.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.byteLength = byteLength
+exports.toByteArray = toByteArray
+exports.fromByteArray = fromByteArray
+
+var lookup = []
+var revLookup = []
+var Arr = typeof Uint8Array !== 'undefined' ? Uint8Array : Array
+
+var code = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+for (var i = 0, len = code.length; i < len; ++i) {
+  lookup[i] = code[i]
+  revLookup[code.charCodeAt(i)] = i
+}
+
+// Support decoding URL-safe base64 strings, as Node.js does.
+// See: https://en.wikipedia.org/wiki/Base64#URL_applications
+revLookup['-'.charCodeAt(0)] = 62
+revLookup['_'.charCodeAt(0)] = 63
+
+function getLens (b64) {
+  var len = b64.length
+
+  if (len % 4 > 0) {
+    throw new Error('Invalid string. Length must be a multiple of 4')
+  }
+
+  // Trim off extra bytes after placeholder bytes are found
+  // See: https://github.com/beatgammit/base64-js/issues/42
+  var validLen = b64.indexOf('=')
+  if (validLen === -1) validLen = len
+
+  var placeHoldersLen = validLen === len
+    ? 0
+    : 4 - (validLen % 4)
+
+  return [validLen, placeHoldersLen]
+}
+
+// base64 is 4/3 + up to two characters of the original data
+function byteLength (b64) {
+  var lens = getLens(b64)
+  var validLen = lens[0]
+  var placeHoldersLen = lens[1]
+  return ((validLen + placeHoldersLen) * 3 / 4) - placeHoldersLen
+}
+
+function _byteLength (b64, validLen, placeHoldersLen) {
+  return ((validLen + placeHoldersLen) * 3 / 4) - placeHoldersLen
+}
+
+function toByteArray (b64) {
+  var tmp
+  var lens = getLens(b64)
+  var validLen = lens[0]
+  var placeHoldersLen = lens[1]
+
+  var arr = new Arr(_byteLength(b64, validLen, placeHoldersLen))
+
+  var curByte = 0
+
+  // if there are placeholders, only get up to the last complete 4 chars
+  var len = placeHoldersLen > 0
+    ? validLen - 4
+    : validLen
+
+  var i
+  for (i = 0; i < len; i += 4) {
+    tmp =
+      (revLookup[b64.charCodeAt(i)] << 18) |
+      (revLookup[b64.charCodeAt(i + 1)] << 12) |
+      (revLookup[b64.charCodeAt(i + 2)] << 6) |
+      revLookup[b64.charCodeAt(i + 3)]
+    arr[curByte++] = (tmp >> 16) & 0xFF
+    arr[curByte++] = (tmp >> 8) & 0xFF
+    arr[curByte++] = tmp & 0xFF
+  }
+
+  if (placeHoldersLen === 2) {
+    tmp =
+      (revLookup[b64.charCodeAt(i)] << 2) |
+      (revLookup[b64.charCodeAt(i + 1)] >> 4)
+    arr[curByte++] = tmp & 0xFF
+  }
+
+  if (placeHoldersLen === 1) {
+    tmp =
+      (revLookup[b64.charCodeAt(i)] << 10) |
+      (revLookup[b64.charCodeAt(i + 1)] << 4) |
+      (revLookup[b64.charCodeAt(i + 2)] >> 2)
+    arr[curByte++] = (tmp >> 8) & 0xFF
+    arr[curByte++] = tmp & 0xFF
+  }
+
+  return arr
+}
+
+function tripletToBase64 (num) {
+  return lookup[num >> 18 & 0x3F] +
+    lookup[num >> 12 & 0x3F] +
+    lookup[num >> 6 & 0x3F] +
+    lookup[num & 0x3F]
+}
+
+function encodeChunk (uint8, start, end) {
+  var tmp
+  var output = []
+  for (var i = start; i < end; i += 3) {
+    tmp =
+      ((uint8[i] << 16) & 0xFF0000) +
+      ((uint8[i + 1] << 8) & 0xFF00) +
+      (uint8[i + 2] & 0xFF)
+    output.push(tripletToBase64(tmp))
+  }
+  return output.join('')
+}
+
+function fromByteArray (uint8) {
+  var tmp
+  var len = uint8.length
+  var extraBytes = len % 3 // if we have 1 byte left, pad 2 bytes
+  var parts = []
+  var maxChunkLength = 16383 // must be multiple of 3
+
+  // go through the array every three bytes, we'll deal with trailing stuff later
+  for (var i = 0, len2 = len - extraBytes; i < len2; i += maxChunkLength) {
+    parts.push(encodeChunk(
+      uint8, i, (i + maxChunkLength) > len2 ? len2 : (i + maxChunkLength)
+    ))
+  }
+
+  // pad the end with zeros, but make sure to not forget the extra bytes
+  if (extraBytes === 1) {
+    tmp = uint8[len - 1]
+    parts.push(
+      lookup[tmp >> 2] +
+      lookup[(tmp << 4) & 0x3F] +
+      '=='
+    )
+  } else if (extraBytes === 2) {
+    tmp = (uint8[len - 2] << 8) + uint8[len - 1]
+    parts.push(
+      lookup[tmp >> 10] +
+      lookup[(tmp >> 4) & 0x3F] +
+      lookup[(tmp << 2) & 0x3F] +
+      '='
+    )
+  }
+
+  return parts.join('')
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/buffer-equal/index.js":
+/*!********************************************!*\
+  !*** ./node_modules/buffer-equal/index.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Buffer = __webpack_require__(/*! buffer */ "./node_modules/buffer/index.js").Buffer; // for use with browserify
+
+module.exports = function (a, b) {
+    if (!Buffer.isBuffer(a)) return undefined;
+    if (!Buffer.isBuffer(b)) return undefined;
+    if (typeof a.equals === 'function') return a.equals(b);
+    if (a.length !== b.length) return false;
+    
+    for (var i = 0; i < a.length; i++) {
+        if (a[i] !== b[i]) return false;
+    }
+    
+    return true;
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/buffer/index.js":
+/*!**************************************!*\
+  !*** ./node_modules/buffer/index.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(global) {/*!
  * The buffer module from node.js, for the browser.
  *
  * @author   Feross Aboukhadijeh <feross@feross.org> <http://feross.org>
  * @license  MIT
  */
-var n=r(19),o=r(20),i=r(21);function a(){return u.TYPED_ARRAY_SUPPORT?2147483647:1073741823}function s(e,t){if(a()<t)throw new RangeError("Invalid typed array length");return u.TYPED_ARRAY_SUPPORT?(e=new Uint8Array(t)).__proto__=u.prototype:(null===e&&(e=new u(t)),e.length=t),e}function u(e,t,r){if(!(u.TYPED_ARRAY_SUPPORT||this instanceof u))return new u(e,t,r);if("number"==typeof e){if("string"==typeof t)throw new Error("If encoding is specified then the first argument must be a string");return p(this,e)}return c(this,e,t,r)}function c(e,t,r,n){if("number"==typeof t)throw new TypeError('"value" argument must not be a number');return"undefined"!=typeof ArrayBuffer&&t instanceof ArrayBuffer?function(e,t,r,n){if(t.byteLength,r<0||t.byteLength<r)throw new RangeError("'offset' is out of bounds");if(t.byteLength<r+(n||0))throw new RangeError("'length' is out of bounds");t=void 0===r&&void 0===n?new Uint8Array(t):void 0===n?new Uint8Array(t,r):new Uint8Array(t,r,n);u.TYPED_ARRAY_SUPPORT?(e=t).__proto__=u.prototype:e=f(e,t);return e}(e,t,r,n):"string"==typeof t?function(e,t,r){"string"==typeof r&&""!==r||(r="utf8");if(!u.isEncoding(r))throw new TypeError('"encoding" must be a valid string encoding');var n=0|d(t,r),o=(e=s(e,n)).write(t,r);o!==n&&(e=e.slice(0,o));return e}(e,t,r):function(e,t){if(u.isBuffer(t)){var r=0|h(t.length);return 0===(e=s(e,r)).length?e:(t.copy(e,0,0,r),e)}if(t){if("undefined"!=typeof ArrayBuffer&&t.buffer instanceof ArrayBuffer||"length"in t)return"number"!=typeof t.length||(n=t.length)!=n?s(e,0):f(e,t);if("Buffer"===t.type&&i(t.data))return f(e,t.data)}var n;throw new TypeError("First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object.")}(e,t)}function l(e){if("number"!=typeof e)throw new TypeError('"size" argument must be a number');if(e<0)throw new RangeError('"size" argument must not be negative')}function p(e,t){if(l(t),e=s(e,t<0?0:0|h(t)),!u.TYPED_ARRAY_SUPPORT)for(var r=0;r<t;++r)e[r]=0;return e}function f(e,t){var r=t.length<0?0:0|h(t.length);e=s(e,r);for(var n=0;n<r;n+=1)e[n]=255&t[n];return e}function h(e){if(e>=a())throw new RangeError("Attempt to allocate Buffer larger than maximum size: 0x"+a().toString(16)+" bytes");return 0|e}function d(e,t){if(u.isBuffer(e))return e.length;if("undefined"!=typeof ArrayBuffer&&"function"==typeof ArrayBuffer.isView&&(ArrayBuffer.isView(e)||e instanceof ArrayBuffer))return e.byteLength;"string"!=typeof e&&(e=""+e);var r=e.length;if(0===r)return 0;for(var n=!1;;)switch(t){case"ascii":case"latin1":case"binary":return r;case"utf8":case"utf-8":case void 0:return N(e).length;case"ucs2":case"ucs-2":case"utf16le":case"utf-16le":return 2*r;case"hex":return r>>>1;case"base64":return G(e).length;default:if(n)return N(e).length;t=(""+t).toLowerCase(),n=!0}}function m(e,t,r){var n=!1;if((void 0===t||t<0)&&(t=0),t>this.length)return"";if((void 0===r||r>this.length)&&(r=this.length),r<=0)return"";if((r>>>=0)<=(t>>>=0))return"";for(e||(e="utf8");;)switch(e){case"hex":return H(this,t,r);case"utf8":case"utf-8":return S(this,t,r);case"ascii":return A(this,t,r);case"latin1":case"binary":return L(this,t,r);case"base64":return _(this,t,r);case"ucs2":case"ucs-2":case"utf16le":case"utf-16le":return P(this,t,r);default:if(n)throw new TypeError("Unknown encoding: "+e);e=(e+"").toLowerCase(),n=!0}}function g(e,t,r){var n=e[t];e[t]=e[r],e[r]=n}function v(e,t,r,n,o){if(0===e.length)return-1;if("string"==typeof r?(n=r,r=0):r>2147483647?r=2147483647:r<-2147483648&&(r=-2147483648),r=+r,isNaN(r)&&(r=o?0:e.length-1),r<0&&(r=e.length+r),r>=e.length){if(o)return-1;r=e.length-1}else if(r<0){if(!o)return-1;r=0}if("string"==typeof t&&(t=u.from(t,n)),u.isBuffer(t))return 0===t.length?-1:y(e,t,r,n,o);if("number"==typeof t)return t&=255,u.TYPED_ARRAY_SUPPORT&&"function"==typeof Uint8Array.prototype.indexOf?o?Uint8Array.prototype.indexOf.call(e,t,r):Uint8Array.prototype.lastIndexOf.call(e,t,r):y(e,[t],r,n,o);throw new TypeError("val must be string, number or Buffer")}function y(e,t,r,n,o){var i,a=1,s=e.length,u=t.length;if(void 0!==n&&("ucs2"===(n=String(n).toLowerCase())||"ucs-2"===n||"utf16le"===n||"utf-16le"===n)){if(e.length<2||t.length<2)return-1;a=2,s/=2,u/=2,r/=2}function c(e,t){return 1===a?e[t]:e.readUInt16BE(t*a)}if(o){var l=-1;for(i=r;i<s;i++)if(c(e,i)===c(t,-1===l?0:i-l)){if(-1===l&&(l=i),i-l+1===u)return l*a}else-1!==l&&(i-=i-l),l=-1}else for(r+u>s&&(r=s-u),i=r;i>=0;i--){for(var p=!0,f=0;f<u;f++)if(c(e,i+f)!==c(t,f)){p=!1;break}if(p)return i}return-1}function E(e,t,r,n){r=Number(r)||0;var o=e.length-r;n?(n=Number(n))>o&&(n=o):n=o;var i=t.length;if(i%2!=0)throw new TypeError("Invalid hex string");n>i/2&&(n=i/2);for(var a=0;a<n;++a){var s=parseInt(t.substr(2*a,2),16);if(isNaN(s))return a;e[r+a]=s}return a}function b(e,t,r,n){return $(N(t,e.length-r),e,r,n)}function T(e,t,r,n){return $(function(e){for(var t=[],r=0;r<e.length;++r)t.push(255&e.charCodeAt(r));return t}(t),e,r,n)}function w(e,t,r,n){return T(e,t,r,n)}function R(e,t,r,n){return $(G(t),e,r,n)}function x(e,t,r,n){return $(function(e,t){for(var r,n,o,i=[],a=0;a<e.length&&!((t-=2)<0);++a)r=e.charCodeAt(a),n=r>>8,o=r%256,i.push(o),i.push(n);return i}(t,e.length-r),e,r,n)}function _(e,t,r){return 0===t&&r===e.length?n.fromByteArray(e):n.fromByteArray(e.slice(t,r))}function S(e,t,r){r=Math.min(e.length,r);for(var n=[],o=t;o<r;){var i,a,s,u,c=e[o],l=null,p=c>239?4:c>223?3:c>191?2:1;if(o+p<=r)switch(p){case 1:c<128&&(l=c);break;case 2:128==(192&(i=e[o+1]))&&(u=(31&c)<<6|63&i)>127&&(l=u);break;case 3:i=e[o+1],a=e[o+2],128==(192&i)&&128==(192&a)&&(u=(15&c)<<12|(63&i)<<6|63&a)>2047&&(u<55296||u>57343)&&(l=u);break;case 4:i=e[o+1],a=e[o+2],s=e[o+3],128==(192&i)&&128==(192&a)&&128==(192&s)&&(u=(15&c)<<18|(63&i)<<12|(63&a)<<6|63&s)>65535&&u<1114112&&(l=u)}null===l?(l=65533,p=1):l>65535&&(l-=65536,n.push(l>>>10&1023|55296),l=56320|1023&l),n.push(l),o+=p}return function(e){var t=e.length;if(t<=M)return String.fromCharCode.apply(String,e);var r="",n=0;for(;n<t;)r+=String.fromCharCode.apply(String,e.slice(n,n+=M));return r}(n)}t.Buffer=u,t.SlowBuffer=function(e){+e!=e&&(e=0);return u.alloc(+e)},t.INSPECT_MAX_BYTES=50,u.TYPED_ARRAY_SUPPORT=void 0!==e.TYPED_ARRAY_SUPPORT?e.TYPED_ARRAY_SUPPORT:function(){try{var e=new Uint8Array(1);return e.__proto__={__proto__:Uint8Array.prototype,foo:function(){return 42}},42===e.foo()&&"function"==typeof e.subarray&&0===e.subarray(1,1).byteLength}catch(e){return!1}}(),t.kMaxLength=a(),u.poolSize=8192,u._augment=function(e){return e.__proto__=u.prototype,e},u.from=function(e,t,r){return c(null,e,t,r)},u.TYPED_ARRAY_SUPPORT&&(u.prototype.__proto__=Uint8Array.prototype,u.__proto__=Uint8Array,"undefined"!=typeof Symbol&&Symbol.species&&u[Symbol.species]===u&&Object.defineProperty(u,Symbol.species,{value:null,configurable:!0})),u.alloc=function(e,t,r){return function(e,t,r,n){return l(t),t<=0?s(e,t):void 0!==r?"string"==typeof n?s(e,t).fill(r,n):s(e,t).fill(r):s(e,t)}(null,e,t,r)},u.allocUnsafe=function(e){return p(null,e)},u.allocUnsafeSlow=function(e){return p(null,e)},u.isBuffer=function(e){return!(null==e||!e._isBuffer)},u.compare=function(e,t){if(!u.isBuffer(e)||!u.isBuffer(t))throw new TypeError("Arguments must be Buffers");if(e===t)return 0;for(var r=e.length,n=t.length,o=0,i=Math.min(r,n);o<i;++o)if(e[o]!==t[o]){r=e[o],n=t[o];break}return r<n?-1:n<r?1:0},u.isEncoding=function(e){switch(String(e).toLowerCase()){case"hex":case"utf8":case"utf-8":case"ascii":case"latin1":case"binary":case"base64":case"ucs2":case"ucs-2":case"utf16le":case"utf-16le":return!0;default:return!1}},u.concat=function(e,t){if(!i(e))throw new TypeError('"list" argument must be an Array of Buffers');if(0===e.length)return u.alloc(0);var r;if(void 0===t)for(t=0,r=0;r<e.length;++r)t+=e[r].length;var n=u.allocUnsafe(t),o=0;for(r=0;r<e.length;++r){var a=e[r];if(!u.isBuffer(a))throw new TypeError('"list" argument must be an Array of Buffers');a.copy(n,o),o+=a.length}return n},u.byteLength=d,u.prototype._isBuffer=!0,u.prototype.swap16=function(){var e=this.length;if(e%2!=0)throw new RangeError("Buffer size must be a multiple of 16-bits");for(var t=0;t<e;t+=2)g(this,t,t+1);return this},u.prototype.swap32=function(){var e=this.length;if(e%4!=0)throw new RangeError("Buffer size must be a multiple of 32-bits");for(var t=0;t<e;t+=4)g(this,t,t+3),g(this,t+1,t+2);return this},u.prototype.swap64=function(){var e=this.length;if(e%8!=0)throw new RangeError("Buffer size must be a multiple of 64-bits");for(var t=0;t<e;t+=8)g(this,t,t+7),g(this,t+1,t+6),g(this,t+2,t+5),g(this,t+3,t+4);return this},u.prototype.toString=function(){var e=0|this.length;return 0===e?"":0===arguments.length?S(this,0,e):m.apply(this,arguments)},u.prototype.equals=function(e){if(!u.isBuffer(e))throw new TypeError("Argument must be a Buffer");return this===e||0===u.compare(this,e)},u.prototype.inspect=function(){var e="",r=t.INSPECT_MAX_BYTES;return this.length>0&&(e=this.toString("hex",0,r).match(/.{2}/g).join(" "),this.length>r&&(e+=" ... ")),"<Buffer "+e+">"},u.prototype.compare=function(e,t,r,n,o){if(!u.isBuffer(e))throw new TypeError("Argument must be a Buffer");if(void 0===t&&(t=0),void 0===r&&(r=e?e.length:0),void 0===n&&(n=0),void 0===o&&(o=this.length),t<0||r>e.length||n<0||o>this.length)throw new RangeError("out of range index");if(n>=o&&t>=r)return 0;if(n>=o)return-1;if(t>=r)return 1;if(this===e)return 0;for(var i=(o>>>=0)-(n>>>=0),a=(r>>>=0)-(t>>>=0),s=Math.min(i,a),c=this.slice(n,o),l=e.slice(t,r),p=0;p<s;++p)if(c[p]!==l[p]){i=c[p],a=l[p];break}return i<a?-1:a<i?1:0},u.prototype.includes=function(e,t,r){return-1!==this.indexOf(e,t,r)},u.prototype.indexOf=function(e,t,r){return v(this,e,t,r,!0)},u.prototype.lastIndexOf=function(e,t,r){return v(this,e,t,r,!1)},u.prototype.write=function(e,t,r,n){if(void 0===t)n="utf8",r=this.length,t=0;else if(void 0===r&&"string"==typeof t)n=t,r=this.length,t=0;else{if(!isFinite(t))throw new Error("Buffer.write(string, encoding, offset[, length]) is no longer supported");t|=0,isFinite(r)?(r|=0,void 0===n&&(n="utf8")):(n=r,r=void 0)}var o=this.length-t;if((void 0===r||r>o)&&(r=o),e.length>0&&(r<0||t<0)||t>this.length)throw new RangeError("Attempt to write outside buffer bounds");n||(n="utf8");for(var i=!1;;)switch(n){case"hex":return E(this,e,t,r);case"utf8":case"utf-8":return b(this,e,t,r);case"ascii":return T(this,e,t,r);case"latin1":case"binary":return w(this,e,t,r);case"base64":return R(this,e,t,r);case"ucs2":case"ucs-2":case"utf16le":case"utf-16le":return x(this,e,t,r);default:if(i)throw new TypeError("Unknown encoding: "+n);n=(""+n).toLowerCase(),i=!0}},u.prototype.toJSON=function(){return{type:"Buffer",data:Array.prototype.slice.call(this._arr||this,0)}};var M=4096;function A(e,t,r){var n="";r=Math.min(e.length,r);for(var o=t;o<r;++o)n+=String.fromCharCode(127&e[o]);return n}function L(e,t,r){var n="";r=Math.min(e.length,r);for(var o=t;o<r;++o)n+=String.fromCharCode(e[o]);return n}function H(e,t,r){var n=e.length;(!t||t<0)&&(t=0),(!r||r<0||r>n)&&(r=n);for(var o="",i=t;i<r;++i)o+=k(e[i]);return o}function P(e,t,r){for(var n=e.slice(t,r),o="",i=0;i<n.length;i+=2)o+=String.fromCharCode(n[i]+256*n[i+1]);return o}function B(e,t,r){if(e%1!=0||e<0)throw new RangeError("offset is not uint");if(e+t>r)throw new RangeError("Trying to access beyond buffer length")}function I(e,t,r,n,o,i){if(!u.isBuffer(e))throw new TypeError('"buffer" argument must be a Buffer instance');if(t>o||t<i)throw new RangeError('"value" argument is out of bounds');if(r+n>e.length)throw new RangeError("Index out of range")}function O(e,t,r,n){t<0&&(t=65535+t+1);for(var o=0,i=Math.min(e.length-r,2);o<i;++o)e[r+o]=(t&255<<8*(n?o:1-o))>>>8*(n?o:1-o)}function C(e,t,r,n){t<0&&(t=4294967295+t+1);for(var o=0,i=Math.min(e.length-r,4);o<i;++o)e[r+o]=t>>>8*(n?o:3-o)&255}function U(e,t,r,n,o,i){if(r+n>e.length)throw new RangeError("Index out of range");if(r<0)throw new RangeError("Index out of range")}function j(e,t,r,n,i){return i||U(e,0,r,4),o.write(e,t,r,n,23,4),r+4}function F(e,t,r,n,i){return i||U(e,0,r,8),o.write(e,t,r,n,52,8),r+8}u.prototype.slice=function(e,t){var r,n=this.length;if((e=~~e)<0?(e+=n)<0&&(e=0):e>n&&(e=n),(t=void 0===t?n:~~t)<0?(t+=n)<0&&(t=0):t>n&&(t=n),t<e&&(t=e),u.TYPED_ARRAY_SUPPORT)(r=this.subarray(e,t)).__proto__=u.prototype;else{var o=t-e;r=new u(o,void 0);for(var i=0;i<o;++i)r[i]=this[i+e]}return r},u.prototype.readUIntLE=function(e,t,r){e|=0,t|=0,r||B(e,t,this.length);for(var n=this[e],o=1,i=0;++i<t&&(o*=256);)n+=this[e+i]*o;return n},u.prototype.readUIntBE=function(e,t,r){e|=0,t|=0,r||B(e,t,this.length);for(var n=this[e+--t],o=1;t>0&&(o*=256);)n+=this[e+--t]*o;return n},u.prototype.readUInt8=function(e,t){return t||B(e,1,this.length),this[e]},u.prototype.readUInt16LE=function(e,t){return t||B(e,2,this.length),this[e]|this[e+1]<<8},u.prototype.readUInt16BE=function(e,t){return t||B(e,2,this.length),this[e]<<8|this[e+1]},u.prototype.readUInt32LE=function(e,t){return t||B(e,4,this.length),(this[e]|this[e+1]<<8|this[e+2]<<16)+16777216*this[e+3]},u.prototype.readUInt32BE=function(e,t){return t||B(e,4,this.length),16777216*this[e]+(this[e+1]<<16|this[e+2]<<8|this[e+3])},u.prototype.readIntLE=function(e,t,r){e|=0,t|=0,r||B(e,t,this.length);for(var n=this[e],o=1,i=0;++i<t&&(o*=256);)n+=this[e+i]*o;return n>=(o*=128)&&(n-=Math.pow(2,8*t)),n},u.prototype.readIntBE=function(e,t,r){e|=0,t|=0,r||B(e,t,this.length);for(var n=t,o=1,i=this[e+--n];n>0&&(o*=256);)i+=this[e+--n]*o;return i>=(o*=128)&&(i-=Math.pow(2,8*t)),i},u.prototype.readInt8=function(e,t){return t||B(e,1,this.length),128&this[e]?-1*(255-this[e]+1):this[e]},u.prototype.readInt16LE=function(e,t){t||B(e,2,this.length);var r=this[e]|this[e+1]<<8;return 32768&r?4294901760|r:r},u.prototype.readInt16BE=function(e,t){t||B(e,2,this.length);var r=this[e+1]|this[e]<<8;return 32768&r?4294901760|r:r},u.prototype.readInt32LE=function(e,t){return t||B(e,4,this.length),this[e]|this[e+1]<<8|this[e+2]<<16|this[e+3]<<24},u.prototype.readInt32BE=function(e,t){return t||B(e,4,this.length),this[e]<<24|this[e+1]<<16|this[e+2]<<8|this[e+3]},u.prototype.readFloatLE=function(e,t){return t||B(e,4,this.length),o.read(this,e,!0,23,4)},u.prototype.readFloatBE=function(e,t){return t||B(e,4,this.length),o.read(this,e,!1,23,4)},u.prototype.readDoubleLE=function(e,t){return t||B(e,8,this.length),o.read(this,e,!0,52,8)},u.prototype.readDoubleBE=function(e,t){return t||B(e,8,this.length),o.read(this,e,!1,52,8)},u.prototype.writeUIntLE=function(e,t,r,n){(e=+e,t|=0,r|=0,n)||I(this,e,t,r,Math.pow(2,8*r)-1,0);var o=1,i=0;for(this[t]=255&e;++i<r&&(o*=256);)this[t+i]=e/o&255;return t+r},u.prototype.writeUIntBE=function(e,t,r,n){(e=+e,t|=0,r|=0,n)||I(this,e,t,r,Math.pow(2,8*r)-1,0);var o=r-1,i=1;for(this[t+o]=255&e;--o>=0&&(i*=256);)this[t+o]=e/i&255;return t+r},u.prototype.writeUInt8=function(e,t,r){return e=+e,t|=0,r||I(this,e,t,1,255,0),u.TYPED_ARRAY_SUPPORT||(e=Math.floor(e)),this[t]=255&e,t+1},u.prototype.writeUInt16LE=function(e,t,r){return e=+e,t|=0,r||I(this,e,t,2,65535,0),u.TYPED_ARRAY_SUPPORT?(this[t]=255&e,this[t+1]=e>>>8):O(this,e,t,!0),t+2},u.prototype.writeUInt16BE=function(e,t,r){return e=+e,t|=0,r||I(this,e,t,2,65535,0),u.TYPED_ARRAY_SUPPORT?(this[t]=e>>>8,this[t+1]=255&e):O(this,e,t,!1),t+2},u.prototype.writeUInt32LE=function(e,t,r){return e=+e,t|=0,r||I(this,e,t,4,4294967295,0),u.TYPED_ARRAY_SUPPORT?(this[t+3]=e>>>24,this[t+2]=e>>>16,this[t+1]=e>>>8,this[t]=255&e):C(this,e,t,!0),t+4},u.prototype.writeUInt32BE=function(e,t,r){return e=+e,t|=0,r||I(this,e,t,4,4294967295,0),u.TYPED_ARRAY_SUPPORT?(this[t]=e>>>24,this[t+1]=e>>>16,this[t+2]=e>>>8,this[t+3]=255&e):C(this,e,t,!1),t+4},u.prototype.writeIntLE=function(e,t,r,n){if(e=+e,t|=0,!n){var o=Math.pow(2,8*r-1);I(this,e,t,r,o-1,-o)}var i=0,a=1,s=0;for(this[t]=255&e;++i<r&&(a*=256);)e<0&&0===s&&0!==this[t+i-1]&&(s=1),this[t+i]=(e/a>>0)-s&255;return t+r},u.prototype.writeIntBE=function(e,t,r,n){if(e=+e,t|=0,!n){var o=Math.pow(2,8*r-1);I(this,e,t,r,o-1,-o)}var i=r-1,a=1,s=0;for(this[t+i]=255&e;--i>=0&&(a*=256);)e<0&&0===s&&0!==this[t+i+1]&&(s=1),this[t+i]=(e/a>>0)-s&255;return t+r},u.prototype.writeInt8=function(e,t,r){return e=+e,t|=0,r||I(this,e,t,1,127,-128),u.TYPED_ARRAY_SUPPORT||(e=Math.floor(e)),e<0&&(e=255+e+1),this[t]=255&e,t+1},u.prototype.writeInt16LE=function(e,t,r){return e=+e,t|=0,r||I(this,e,t,2,32767,-32768),u.TYPED_ARRAY_SUPPORT?(this[t]=255&e,this[t+1]=e>>>8):O(this,e,t,!0),t+2},u.prototype.writeInt16BE=function(e,t,r){return e=+e,t|=0,r||I(this,e,t,2,32767,-32768),u.TYPED_ARRAY_SUPPORT?(this[t]=e>>>8,this[t+1]=255&e):O(this,e,t,!1),t+2},u.prototype.writeInt32LE=function(e,t,r){return e=+e,t|=0,r||I(this,e,t,4,2147483647,-2147483648),u.TYPED_ARRAY_SUPPORT?(this[t]=255&e,this[t+1]=e>>>8,this[t+2]=e>>>16,this[t+3]=e>>>24):C(this,e,t,!0),t+4},u.prototype.writeInt32BE=function(e,t,r){return e=+e,t|=0,r||I(this,e,t,4,2147483647,-2147483648),e<0&&(e=4294967295+e+1),u.TYPED_ARRAY_SUPPORT?(this[t]=e>>>24,this[t+1]=e>>>16,this[t+2]=e>>>8,this[t+3]=255&e):C(this,e,t,!1),t+4},u.prototype.writeFloatLE=function(e,t,r){return j(this,e,t,!0,r)},u.prototype.writeFloatBE=function(e,t,r){return j(this,e,t,!1,r)},u.prototype.writeDoubleLE=function(e,t,r){return F(this,e,t,!0,r)},u.prototype.writeDoubleBE=function(e,t,r){return F(this,e,t,!1,r)},u.prototype.copy=function(e,t,r,n){if(r||(r=0),n||0===n||(n=this.length),t>=e.length&&(t=e.length),t||(t=0),n>0&&n<r&&(n=r),n===r)return 0;if(0===e.length||0===this.length)return 0;if(t<0)throw new RangeError("targetStart out of bounds");if(r<0||r>=this.length)throw new RangeError("sourceStart out of bounds");if(n<0)throw new RangeError("sourceEnd out of bounds");n>this.length&&(n=this.length),e.length-t<n-r&&(n=e.length-t+r);var o,i=n-r;if(this===e&&r<t&&t<n)for(o=i-1;o>=0;--o)e[o+t]=this[o+r];else if(i<1e3||!u.TYPED_ARRAY_SUPPORT)for(o=0;o<i;++o)e[o+t]=this[o+r];else Uint8Array.prototype.set.call(e,this.subarray(r,r+i),t);return i},u.prototype.fill=function(e,t,r,n){if("string"==typeof e){if("string"==typeof t?(n=t,t=0,r=this.length):"string"==typeof r&&(n=r,r=this.length),1===e.length){var o=e.charCodeAt(0);o<256&&(e=o)}if(void 0!==n&&"string"!=typeof n)throw new TypeError("encoding must be a string");if("string"==typeof n&&!u.isEncoding(n))throw new TypeError("Unknown encoding: "+n)}else"number"==typeof e&&(e&=255);if(t<0||this.length<t||this.length<r)throw new RangeError("Out of range index");if(r<=t)return this;var i;if(t>>>=0,r=void 0===r?this.length:r>>>0,e||(e=0),"number"==typeof e)for(i=t;i<r;++i)this[i]=e;else{var a=u.isBuffer(e)?e:N(new u(e,n).toString()),s=a.length;for(i=0;i<r-t;++i)this[i+t]=a[i%s]}return this};var D=/[^+\/0-9A-Za-z-_]/g;function k(e){return e<16?"0"+e.toString(16):e.toString(16)}function N(e,t){var r;t=t||1/0;for(var n=e.length,o=null,i=[],a=0;a<n;++a){if((r=e.charCodeAt(a))>55295&&r<57344){if(!o){if(r>56319){(t-=3)>-1&&i.push(239,191,189);continue}if(a+1===n){(t-=3)>-1&&i.push(239,191,189);continue}o=r;continue}if(r<56320){(t-=3)>-1&&i.push(239,191,189),o=r;continue}r=65536+(o-55296<<10|r-56320)}else o&&(t-=3)>-1&&i.push(239,191,189);if(o=null,r<128){if((t-=1)<0)break;i.push(r)}else if(r<2048){if((t-=2)<0)break;i.push(r>>6|192,63&r|128)}else if(r<65536){if((t-=3)<0)break;i.push(r>>12|224,r>>6&63|128,63&r|128)}else{if(!(r<1114112))throw new Error("Invalid code point");if((t-=4)<0)break;i.push(r>>18|240,r>>12&63|128,r>>6&63|128,63&r|128)}}return i}function G(e){return n.toByteArray(function(e){if((e=function(e){return e.trim?e.trim():e.replace(/^\s+|\s+$/g,"")}(e).replace(D,"")).length<2)return"";for(;e.length%4!=0;)e+="=";return e}(e))}function $(e,t,r,n){for(var o=0;o<n&&!(o+r>=t.length||o>=e.length);++o)t[o+r]=e[o];return o}}).call(this,r(3))},function(e,t){var r;r=function(){return this}();try{r=r||new Function("return this")()}catch(e){"object"==typeof window&&(r=window)}e.exports=r},function(e,t,r){"use strict";var n=r(0);e.exports=n.call(Function.call,Object.prototype.hasOwnProperty)},function(e,t,r){"use strict";var n=Function.prototype.toString,o=/^\s*class\b/,i=function(e){try{var t=n.call(e);return o.test(t)}catch(e){return!1}},a=Object.prototype.toString,s="function"==typeof Symbol&&"symbol"==typeof Symbol.toStringTag;e.exports=function(e){if(!e)return!1;if("function"!=typeof e&&"object"!=typeof e)return!1;if("function"==typeof e&&!e.prototype)return!0;if(s)return function(e){try{return!i(e)&&(n.call(e),!0)}catch(e){return!1}}(e);if(i(e))return!1;var t=a.call(e);return"[object Function]"===t||"[object GeneratorFunction]"===t}},function(e,t){e.exports=function(){for(var e={},t=0;t<arguments.length;t++){var n=arguments[t];for(var o in n)r.call(n,o)&&(e[o]=n[o])}return e};var r=Object.prototype.hasOwnProperty},function(e,t,r){"use strict";var n=r(28),o="function"==typeof Symbol&&"symbol"==typeof Symbol("foo"),i=Object.prototype.toString,a=Array.prototype.concat,s=Object.defineProperty,u=s&&function(){var e={};try{for(var t in s(e,"x",{enumerable:!1,value:e}),e)return!1;return e.x===e}catch(e){return!1}}(),c=function(e,t,r,n){var o;t in e&&("function"!=typeof(o=n)||"[object Function]"!==i.call(o)||!n())||(u?s(e,t,{configurable:!0,enumerable:!1,value:r,writable:!0}):e[t]=r)},l=function(e,t){var r=arguments.length>2?arguments[2]:{},i=n(t);o&&(i=a.call(i,Object.getOwnPropertySymbols(t)));for(var s=0;s<i.length;s+=1)c(e,i[s],t[i[s]],r[i[s]])};l.supportsDescriptors=!!u,e.exports=l},function(e,t,r){"use strict";var n=Object.prototype.toString;e.exports=function(e){var t=n.call(e),r="[object Arguments]"===t;return r||(r="[object Array]"!==t&&null!==e&&"object"==typeof e&&"number"==typeof e.length&&e.length>=0&&"[object Function]"===n.call(e.callee)),r}},function(e,t,r){"use strict";var n=r(0),o=r(30),i=n.call(Function.call,String.prototype.replace),a=/^[\x09\x0A\x0B\x0C\x0D\x20\xA0\u1680\u180E\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200A\u202F\u205F\u3000\u2028\u2029\uFEFF]+/,s=/[\x09\x0A\x0B\x0C\x0D\x20\xA0\u1680\u180E\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200A\u202F\u205F\u3000\u2028\u2029\uFEFF]+$/;e.exports=function(){var e=o.ToString(o.CheckObjectCoercible(this));return i(i(e,a,""),s,"")}},function(e,t,r){"use strict";var n=r(1),o=r(40),i=o(n("String.prototype.indexOf"));e.exports=function(e,t){var r=n(e,!!t);return"function"==typeof r&&i(e,".prototype.")?o(r):r}},function(e,t,r){"use strict";var n=r(9);e.exports=function(){return String.prototype.trim&&"​"==="​".trim()?String.prototype.trim:n}},function(e,t){e.exports=function(e){switch(e){case"int8":return Int8Array;case"int16":return Int16Array;case"int32":return Int32Array;case"uint8":return Uint8Array;case"uint16":return Uint16Array;case"uint32":return Uint32Array;case"float32":return Float32Array;case"float64":return Float64Array;case"array":return Array;case"uint8_clamped":return Uint8ClampedArray}}},function(e,t,r){"use strict";
+/* eslint-disable no-proto */
+
+
+
+var base64 = __webpack_require__(/*! base64-js */ "./node_modules/base64-js/index.js")
+var ieee754 = __webpack_require__(/*! ieee754 */ "./node_modules/ieee754/index.js")
+var isArray = __webpack_require__(/*! isarray */ "./node_modules/isarray/index.js")
+
+exports.Buffer = Buffer
+exports.SlowBuffer = SlowBuffer
+exports.INSPECT_MAX_BYTES = 50
+
+/**
+ * If `Buffer.TYPED_ARRAY_SUPPORT`:
+ *   === true    Use Uint8Array implementation (fastest)
+ *   === false   Use Object implementation (most compatible, even IE6)
+ *
+ * Browsers that support typed arrays are IE 10+, Firefox 4+, Chrome 7+, Safari 5.1+,
+ * Opera 11.6+, iOS 4.2+.
+ *
+ * Due to various browser bugs, sometimes the Object implementation will be used even
+ * when the browser supports typed arrays.
+ *
+ * Note:
+ *
+ *   - Firefox 4-29 lacks support for adding new properties to `Uint8Array` instances,
+ *     See: https://bugzilla.mozilla.org/show_bug.cgi?id=695438.
+ *
+ *   - Chrome 9-10 is missing the `TypedArray.prototype.subarray` function.
+ *
+ *   - IE10 has a broken `TypedArray.prototype.subarray` function which returns arrays of
+ *     incorrect length in some situations.
+
+ * We detect these buggy browsers and set `Buffer.TYPED_ARRAY_SUPPORT` to `false` so they
+ * get the Object implementation, which is slower but behaves correctly.
+ */
+Buffer.TYPED_ARRAY_SUPPORT = global.TYPED_ARRAY_SUPPORT !== undefined
+  ? global.TYPED_ARRAY_SUPPORT
+  : typedArraySupport()
+
 /*
-object-assign
-(c) Sindre Sorhus
-@license MIT
-*/var n=Object.getOwnPropertySymbols,o=Object.prototype.hasOwnProperty,i=Object.prototype.propertyIsEnumerable;function a(e){if(null==e)throw new TypeError("Object.assign cannot be called with null or undefined");return Object(e)}e.exports=function(){try{if(!Object.assign)return!1;var e=new String("abc");if(e[5]="de","5"===Object.getOwnPropertyNames(e)[0])return!1;for(var t={},r=0;r<10;r++)t["_"+String.fromCharCode(r)]=r;if("0123456789"!==Object.getOwnPropertyNames(t).map((function(e){return t[e]})).join(""))return!1;var n={};return"abcdefghijklmnopqrst".split("").forEach((function(e){n[e]=e})),"abcdefghijklmnopqrst"===Object.keys(Object.assign({},n)).join("")}catch(e){return!1}}()?Object.assign:function(e,t){for(var r,s,u=a(e),c=1;c<arguments.length;c++){for(var l in r=Object(arguments[c]))o.call(r,l)&&(u[l]=r[l]);if(n){s=n(r);for(var p=0;p<s.length;p++)i.call(r,s[p])&&(u[s[p]]=r[s[p]])}}return u}},function(e,t){THREE.PointerLockControls=function(e,t){this.domElement=t||document.body,this.isLocked=!1;var r,n=this,o={type:"change"},i={type:"lock"},a={type:"unlock"},s=new THREE.Euler(0,0,0,"YXZ"),u=Math.PI/2,c=new THREE.Vector3;function l(t){if(!1!==n.isLocked){var r=t.movementX||t.mozMovementX||t.webkitMovementX||0,i=t.movementY||t.mozMovementY||t.webkitMovementY||0;s.setFromQuaternion(e.quaternion),s.y-=.002*r,s.x-=.002*i,s.x=Math.max(-u,Math.min(u,s.x)),e.quaternion.setFromEuler(s),n.dispatchEvent(o)}}function p(){document.pointerLockElement===n.domElement?(n.dispatchEvent(i),n.isLocked=!0):(n.dispatchEvent(a),n.isLocked=!1)}function f(){console.error("THREE.PointerLockControls: Unable to use Pointer Lock API")}this.connect=function(){document.addEventListener("mousemove",l,!1),document.addEventListener("pointerlockchange",p,!1),document.addEventListener("pointerlockerror",f,!1)},this.disconnect=function(){document.removeEventListener("mousemove",l,!1),document.removeEventListener("pointerlockchange",p,!1),document.removeEventListener("pointerlockerror",f,!1)},this.dispose=function(){this.disconnect()},this.getObject=function(){return e},this.getDirection=(r=new THREE.Vector3(0,0,-1),function(t){return t.copy(r).applyQuaternion(e.quaternion)}),this.moveForward=function(t){c.setFromMatrixColumn(e.matrix,0),c.crossVectors(e.up,c),e.position.addScaledVector(c,t)},this.moveRight=function(t){c.setFromMatrixColumn(e.matrix,0),e.position.addScaledVector(c,t)},this.lock=function(){this.domElement.requestPointerLock()},this.unlock=function(){document.exitPointerLock()},this.connect()}},function(e,t){THREE.GLTFLoader=function(){function e(e){THREE.Loader.call(this,e),this.dracoLoader=null,this.ddsLoader=null}function t(){var e={};return{get:function(t){return e[t]},add:function(t,r){e[t]=r},remove:function(t){delete e[t]},removeAll:function(){e={}}}}e.prototype=Object.assign(Object.create(THREE.Loader.prototype),{constructor:e,load:function(e,t,r,n){var o,i=this;o=""!==this.resourcePath?this.resourcePath:""!==this.path?this.path:THREE.LoaderUtils.extractUrlBase(e),i.manager.itemStart(e);var a=function(t){n?n(t):console.error(t),i.manager.itemError(e),i.manager.itemEnd(e)},s=new THREE.FileLoader(i.manager);s.setPath(this.path),s.setResponseType("arraybuffer"),"use-credentials"===i.crossOrigin&&s.setWithCredentials(!0),s.load(e,(function(r){try{i.parse(r,o,(function(r){t(r),i.manager.itemEnd(e)}),a)}catch(e){a(e)}}),r,a)},setDRACOLoader:function(e){return this.dracoLoader=e,this},setDDSLoader:function(e){return this.ddsLoader=e,this},parse:function(e,t,s,u){var h,d={};if("string"==typeof e)h=e;else if(THREE.LoaderUtils.decodeText(new Uint8Array(e,0,4))===a){try{d[r.KHR_BINARY_GLTF]=new c(e)}catch(e){return void(u&&u(e))}h=d[r.KHR_BINARY_GLTF].content}else h=THREE.LoaderUtils.decodeText(new Uint8Array(e));var m=JSON.parse(h);if(void 0===m.asset||m.asset.version[0]<2)u&&u(new Error("THREE.GLTFLoader: Unsupported asset. glTF versions >=2.0 are supported. Use LegacyGLTFLoader instead."));else{if(m.extensionsUsed)for(var g=0;g<m.extensionsUsed.length;++g){var v=m.extensionsUsed[g],y=m.extensionsRequired||[];switch(v){case r.KHR_LIGHTS_PUNCTUAL:d[v]=new o(m);break;case r.KHR_MATERIALS_UNLIT:d[v]=new i;break;case r.KHR_MATERIALS_PBR_SPECULAR_GLOSSINESS:d[v]=new f;break;case r.KHR_DRACO_MESH_COMPRESSION:d[v]=new l(m,this.dracoLoader);break;case r.MSFT_TEXTURE_DDS:d[r.MSFT_TEXTURE_DDS]=new n(this.ddsLoader);break;case r.KHR_TEXTURE_TRANSFORM:d[r.KHR_TEXTURE_TRANSFORM]=new p;break;default:y.indexOf(v)>=0&&console.warn('THREE.GLTFLoader: Unknown extension "'+v+'".')}}new D(m,d,{path:t||this.resourcePath||"",crossOrigin:this.crossOrigin,manager:this.manager}).parse(s,u)}}});var r={KHR_BINARY_GLTF:"KHR_binary_glTF",KHR_DRACO_MESH_COMPRESSION:"KHR_draco_mesh_compression",KHR_LIGHTS_PUNCTUAL:"KHR_lights_punctual",KHR_MATERIALS_PBR_SPECULAR_GLOSSINESS:"KHR_materials_pbrSpecularGlossiness",KHR_MATERIALS_UNLIT:"KHR_materials_unlit",KHR_TEXTURE_TRANSFORM:"KHR_texture_transform",MSFT_TEXTURE_DDS:"MSFT_texture_dds"};function n(e){if(!e)throw new Error("THREE.GLTFLoader: Attempting to load .dds texture without importing THREE.DDSLoader");this.name=r.MSFT_TEXTURE_DDS,this.ddsLoader=e}function o(e){this.name=r.KHR_LIGHTS_PUNCTUAL;var t=e.extensions&&e.extensions[r.KHR_LIGHTS_PUNCTUAL]||{};this.lightDefs=t.lights||[]}function i(){this.name=r.KHR_MATERIALS_UNLIT}o.prototype.loadLight=function(e){var t,r=this.lightDefs[e],n=new THREE.Color(16777215);void 0!==r.color&&n.fromArray(r.color);var o=void 0!==r.range?r.range:0;switch(r.type){case"directional":(t=new THREE.DirectionalLight(n)).target.position.set(0,0,-1),t.add(t.target);break;case"point":(t=new THREE.PointLight(n)).distance=o;break;case"spot":(t=new THREE.SpotLight(n)).distance=o,r.spot=r.spot||{},r.spot.innerConeAngle=void 0!==r.spot.innerConeAngle?r.spot.innerConeAngle:0,r.spot.outerConeAngle=void 0!==r.spot.outerConeAngle?r.spot.outerConeAngle:Math.PI/4,t.angle=r.spot.outerConeAngle,t.penumbra=1-r.spot.innerConeAngle/r.spot.outerConeAngle,t.target.position.set(0,0,-1),t.add(t.target);break;default:throw new Error('THREE.GLTFLoader: Unexpected light type, "'+r.type+'".')}return t.position.set(0,0,0),t.decay=2,void 0!==r.intensity&&(t.intensity=r.intensity),t.name=r.name||"light_"+e,Promise.resolve(t)},i.prototype.getMaterialType=function(){return THREE.MeshBasicMaterial},i.prototype.extendParams=function(e,t,r){var n=[];e.color=new THREE.Color(1,1,1),e.opacity=1;var o=t.pbrMetallicRoughness;if(o){if(Array.isArray(o.baseColorFactor)){var i=o.baseColorFactor;e.color.fromArray(i),e.opacity=i[3]}void 0!==o.baseColorTexture&&n.push(r.assignTexture(e,"map",o.baseColorTexture))}return Promise.all(n)};var a="glTF",s=12,u={JSON:1313821514,BIN:5130562};function c(e){this.name=r.KHR_BINARY_GLTF,this.content=null,this.body=null;var t=new DataView(e,0,s);if(this.header={magic:THREE.LoaderUtils.decodeText(new Uint8Array(e.slice(0,4))),version:t.getUint32(4,!0),length:t.getUint32(8,!0)},this.header.magic!==a)throw new Error("THREE.GLTFLoader: Unsupported glTF-Binary header.");if(this.header.version<2)throw new Error("THREE.GLTFLoader: Legacy binary file detected. Use LegacyGLTFLoader instead.");for(var n=new DataView(e,s),o=0;o<n.byteLength;){var i=n.getUint32(o,!0);o+=4;var c=n.getUint32(o,!0);if(o+=4,c===u.JSON){var l=new Uint8Array(e,s+o,i);this.content=THREE.LoaderUtils.decodeText(l)}else if(c===u.BIN){var p=s+o;this.body=e.slice(p,p+i)}o+=i}if(null===this.content)throw new Error("THREE.GLTFLoader: JSON content not found.")}function l(e,t){if(!t)throw new Error("THREE.GLTFLoader: No DRACOLoader instance provided.");this.name=r.KHR_DRACO_MESH_COMPRESSION,this.json=e,this.dracoLoader=t}function p(){this.name=r.KHR_TEXTURE_TRANSFORM}function f(){return{name:r.KHR_MATERIALS_PBR_SPECULAR_GLOSSINESS,specularGlossinessParams:["color","map","lightMap","lightMapIntensity","aoMap","aoMapIntensity","emissive","emissiveIntensity","emissiveMap","bumpMap","bumpScale","normalMap","displacementMap","displacementScale","displacementBias","specularMap","specular","glossinessMap","glossiness","alphaMap","envMap","envMapIntensity","refractionRatio"],getMaterialType:function(){return THREE.ShaderMaterial},extendParams:function(e,t,r){var n=t.extensions[this.name],o=THREE.ShaderLib.standard,i=THREE.UniformsUtils.clone(o.uniforms),a=["#ifdef USE_SPECULARMAP","\tuniform sampler2D specularMap;","#endif"].join("\n"),s=["#ifdef USE_GLOSSINESSMAP","\tuniform sampler2D glossinessMap;","#endif"].join("\n"),u=["vec3 specularFactor = specular;","#ifdef USE_SPECULARMAP","\tvec4 texelSpecular = texture2D( specularMap, vUv );","\ttexelSpecular = sRGBToLinear( texelSpecular );","\t// reads channel RGB, compatible with a glTF Specular-Glossiness (RGBA) texture","\tspecularFactor *= texelSpecular.rgb;","#endif"].join("\n"),c=["float glossinessFactor = glossiness;","#ifdef USE_GLOSSINESSMAP","\tvec4 texelGlossiness = texture2D( glossinessMap, vUv );","\t// reads channel A, compatible with a glTF Specular-Glossiness (RGBA) texture","\tglossinessFactor *= texelGlossiness.a;","#endif"].join("\n"),l=["PhysicalMaterial material;","material.diffuseColor = diffuseColor.rgb;","material.specularRoughness = clamp( 1.0 - glossinessFactor, 0.04, 1.0 );","material.specularColor = specularFactor.rgb;"].join("\n"),p=o.fragmentShader.replace("uniform float roughness;","uniform vec3 specular;").replace("uniform float metalness;","uniform float glossiness;").replace("#include <roughnessmap_pars_fragment>",a).replace("#include <metalnessmap_pars_fragment>",s).replace("#include <roughnessmap_fragment>",u).replace("#include <metalnessmap_fragment>",c).replace("#include <lights_physical_fragment>",l);delete i.roughness,delete i.metalness,delete i.roughnessMap,delete i.metalnessMap,i.specular={value:(new THREE.Color).setHex(1118481)},i.glossiness={value:.5},i.specularMap={value:null},i.glossinessMap={value:null},e.vertexShader=o.vertexShader,e.fragmentShader=p,e.uniforms=i,e.defines={STANDARD:""},e.color=new THREE.Color(1,1,1),e.opacity=1;var f=[];if(Array.isArray(n.diffuseFactor)){var h=n.diffuseFactor;e.color.fromArray(h),e.opacity=h[3]}if(void 0!==n.diffuseTexture&&f.push(r.assignTexture(e,"map",n.diffuseTexture)),e.emissive=new THREE.Color(0,0,0),e.glossiness=void 0!==n.glossinessFactor?n.glossinessFactor:1,e.specular=new THREE.Color(1,1,1),Array.isArray(n.specularFactor)&&e.specular.fromArray(n.specularFactor),void 0!==n.specularGlossinessTexture){var d=n.specularGlossinessTexture;f.push(r.assignTexture(e,"glossinessMap",d)),f.push(r.assignTexture(e,"specularMap",d))}return Promise.all(f)},createMaterial:function(e){var t=new THREE.ShaderMaterial({defines:e.defines,vertexShader:e.vertexShader,fragmentShader:e.fragmentShader,uniforms:e.uniforms,fog:!0,lights:!0,opacity:e.opacity,transparent:e.transparent});return t.isGLTFSpecularGlossinessMaterial=!0,t.color=e.color,t.map=void 0===e.map?null:e.map,t.lightMap=null,t.lightMapIntensity=1,t.aoMap=void 0===e.aoMap?null:e.aoMap,t.aoMapIntensity=1,t.emissive=e.emissive,t.emissiveIntensity=1,t.emissiveMap=void 0===e.emissiveMap?null:e.emissiveMap,t.bumpMap=void 0===e.bumpMap?null:e.bumpMap,t.bumpScale=1,t.normalMap=void 0===e.normalMap?null:e.normalMap,e.normalScale&&(t.normalScale=e.normalScale),t.displacementMap=null,t.displacementScale=1,t.displacementBias=0,t.specularMap=void 0===e.specularMap?null:e.specularMap,t.specular=e.specular,t.glossinessMap=void 0===e.glossinessMap?null:e.glossinessMap,t.glossiness=e.glossiness,t.alphaMap=null,t.envMap=void 0===e.envMap?null:e.envMap,t.envMapIntensity=1,t.refractionRatio=.98,t.extensions.derivatives=!0,t},cloneMaterial:function(e){var t=e.clone();t.isGLTFSpecularGlossinessMaterial=!0;for(var r=this.specularGlossinessParams,n=0,o=r.length;n<o;n++){var i=e[r[n]];t[r[n]]=i&&i.isColor?i.clone():i}return t},refreshUniforms:function(e,t,r,n,o){if(!0===o.isGLTFSpecularGlossinessMaterial){var i,a=o.uniforms,s=o.defines;a.opacity.value=o.opacity,a.diffuse.value.copy(o.color),a.emissive.value.copy(o.emissive).multiplyScalar(o.emissiveIntensity),a.map.value=o.map,a.specularMap.value=o.specularMap,a.alphaMap.value=o.alphaMap,a.lightMap.value=o.lightMap,a.lightMapIntensity.value=o.lightMapIntensity,a.aoMap.value=o.aoMap,a.aoMapIntensity.value=o.aoMapIntensity,o.map?i=o.map:o.specularMap?i=o.specularMap:o.displacementMap?i=o.displacementMap:o.normalMap?i=o.normalMap:o.bumpMap?i=o.bumpMap:o.glossinessMap?i=o.glossinessMap:o.alphaMap?i=o.alphaMap:o.emissiveMap&&(i=o.emissiveMap),void 0!==i&&(i.isWebGLRenderTarget&&(i=i.texture),!0===i.matrixAutoUpdate&&i.updateMatrix(),a.uvTransform.value.copy(i.matrix)),o.envMap&&(a.envMap.value=o.envMap,a.envMapIntensity.value=o.envMapIntensity,a.flipEnvMap.value=o.envMap.isCubeTexture?-1:1,a.reflectivity.value=o.reflectivity,a.refractionRatio.value=o.refractionRatio,a.maxMipLevel.value=e.properties.get(o.envMap).__maxMipLevel),a.specular.value.copy(o.specular),a.glossiness.value=o.glossiness,a.glossinessMap.value=o.glossinessMap,a.emissiveMap.value=o.emissiveMap,a.bumpMap.value=o.bumpMap,a.normalMap.value=o.normalMap,a.displacementMap.value=o.displacementMap,a.displacementScale.value=o.displacementScale,a.displacementBias.value=o.displacementBias,null!==a.glossinessMap.value&&void 0===s.USE_GLOSSINESSMAP&&(s.USE_GLOSSINESSMAP="",s.USE_ROUGHNESSMAP=""),null===a.glossinessMap.value&&void 0!==s.USE_GLOSSINESSMAP&&(delete s.USE_GLOSSINESSMAP,delete s.USE_ROUGHNESSMAP)}}}}function h(e,t,r,n){THREE.Interpolant.call(this,e,t,r,n)}l.prototype.decodePrimitive=function(e,t){var r=this.json,n=this.dracoLoader,o=e.extensions[this.name].bufferView,i=e.extensions[this.name].attributes,a={},s={},u={};for(var c in i){var l=S[c]||c.toLowerCase();a[l]=i[c]}for(c in e.attributes){l=S[c]||c.toLowerCase();if(void 0!==i[c]){var p=r.accessors[e.attributes[c]],f=w[p.componentType];u[l]=f,s[l]=!0===p.normalized}}return t.getDependency("bufferView",o).then((function(e){return new Promise((function(t){n.decodeDracoFile(e,(function(e){for(var r in e.attributes){var n=e.attributes[r],o=s[r];void 0!==o&&(n.normalized=o)}t(e)}),a,u)}))}))},p.prototype.extendTexture=function(e,t){return e=e.clone(),void 0!==t.offset&&e.offset.fromArray(t.offset),void 0!==t.rotation&&(e.rotation=t.rotation),void 0!==t.scale&&e.repeat.fromArray(t.scale),void 0!==t.texCoord&&console.warn('THREE.GLTFLoader: Custom UV sets in "'+this.name+'" extension not yet supported.'),e.needsUpdate=!0,e},h.prototype=Object.create(THREE.Interpolant.prototype),h.prototype.constructor=h,h.prototype.copySampleValue_=function(e){for(var t=this.resultBuffer,r=this.sampleValues,n=this.valueSize,o=e*n*3+n,i=0;i!==n;i++)t[i]=r[o+i];return t},h.prototype.beforeStart_=h.prototype.copySampleValue_,h.prototype.afterEnd_=h.prototype.copySampleValue_,h.prototype.interpolate_=function(e,t,r,n){for(var o=this.resultBuffer,i=this.sampleValues,a=this.valueSize,s=2*a,u=3*a,c=n-t,l=(r-t)/c,p=l*l,f=p*l,h=e*u,d=h-u,m=-2*f+3*p,g=f-p,v=1-m,y=g-p+l,E=0;E!==a;E++){var b=i[d+E+a],T=i[d+E+s]*c,w=i[h+E+a],R=i[h+E]*c;o[E]=v*b+y*T+m*w+g*R}return o};var d,m=0,g=1,v=2,y=3,E=4,b=5,T=6,w={5120:Int8Array,5121:Uint8Array,5122:Int16Array,5123:Uint16Array,5125:Uint32Array,5126:Float32Array},R={9728:THREE.NearestFilter,9729:THREE.LinearFilter,9984:THREE.NearestMipmapNearestFilter,9985:THREE.LinearMipmapNearestFilter,9986:THREE.NearestMipmapLinearFilter,9987:THREE.LinearMipmapLinearFilter},x={33071:THREE.ClampToEdgeWrapping,33648:THREE.MirroredRepeatWrapping,10497:THREE.RepeatWrapping},_={SCALAR:1,VEC2:2,VEC3:3,VEC4:4,MAT2:4,MAT3:9,MAT4:16},S={POSITION:"position",NORMAL:"normal",TANGENT:"tangent",TEXCOORD_0:"uv",TEXCOORD_1:"uv2",COLOR_0:"color",WEIGHTS_0:"skinWeight",JOINTS_0:"skinIndex"},M={scale:"scale",translation:"position",rotation:"quaternion",weights:"morphTargetInfluences"},A={CUBICSPLINE:void 0,LINEAR:THREE.InterpolateLinear,STEP:THREE.InterpolateDiscrete},L="OPAQUE",H="MASK",P="BLEND",B={"image/png":THREE.RGBAFormat,"image/jpeg":THREE.RGBFormat};function I(e,t){return"string"!=typeof e||""===e?"":(/^https?:\/\//i.test(t)&&/^\//.test(e)&&(t=t.replace(/(^https?:\/\/[^\/]+).*/i,"$1")),/^(https?:)?\/\//i.test(e)?e:/^data:.*,.*$/i.test(e)?e:/^blob:.*$/i.test(e)?e:t+e)}function O(e,t,r){for(var n in r.extensions)void 0===e[n]&&(t.userData.gltfExtensions=t.userData.gltfExtensions||{},t.userData.gltfExtensions[n]=r.extensions[n])}function C(e,t){void 0!==t.extras&&("object"==typeof t.extras?Object.assign(e.userData,t.extras):console.warn("THREE.GLTFLoader: Ignoring primitive type .extras, "+t.extras))}function U(e,t){if(e.updateMorphTargets(),void 0!==t.weights)for(var r=0,n=t.weights.length;r<n;r++)e.morphTargetInfluences[r]=t.weights[r];if(t.extras&&Array.isArray(t.extras.targetNames)){var o=t.extras.targetNames;if(e.morphTargetInfluences.length===o.length){e.morphTargetDictionary={};for(r=0,n=o.length;r<n;r++)e.morphTargetDictionary[o[r]]=r}else console.warn("THREE.GLTFLoader: Invalid extras.targetNames length. Ignoring names.")}}function j(e){for(var t="",r=Object.keys(e).sort(),n=0,o=r.length;n<o;n++)t+=r[n]+":"+e[r[n]]+";";return t}function F(e){if(e.isInterleavedBufferAttribute){for(var t=e.count,r=e.itemSize,n=e.array.slice(0,t*r),o=0,i=0;o<t;++o)n[i++]=e.getX(o),r>=2&&(n[i++]=e.getY(o)),r>=3&&(n[i++]=e.getZ(o)),r>=4&&(n[i++]=e.getW(o));return new THREE.BufferAttribute(n,r,e.normalized)}return e.clone()}function D(e,r,n){this.json=e||{},this.extensions=r||{},this.options=n||{},this.cache=new t,this.primitiveCache={},this.textureLoader=new THREE.TextureLoader(this.options.manager),this.textureLoader.setCrossOrigin(this.options.crossOrigin),this.fileLoader=new THREE.FileLoader(this.options.manager),this.fileLoader.setResponseType("arraybuffer"),"use-credentials"===this.options.crossOrigin&&this.fileLoader.setWithCredentials(!0)}function k(e,t,r){var n=t.attributes,o=[];function i(t,n){return r.getDependency("accessor",t).then((function(t){e.addAttribute(n,t)}))}for(var a in n){var s=S[a]||a.toLowerCase();s in e.attributes||o.push(i(n[a],s))}if(void 0!==t.indices&&!e.index){var u=r.getDependency("accessor",t.indices).then((function(t){e.setIndex(t)}));o.push(u)}return C(e,t),Promise.all(o).then((function(){return void 0!==t.targets?function(e,t,r){for(var n=!1,o=!1,i=0,a=t.length;i<a;i++){if(void 0!==(c=t[i]).POSITION&&(n=!0),void 0!==c.NORMAL&&(o=!0),n&&o)break}if(!n&&!o)return Promise.resolve(e);var s=[],u=[];for(i=0,a=t.length;i<a;i++){var c=t[i];if(n){var l=void 0!==c.POSITION?r.getDependency("accessor",c.POSITION):e.attributes.position;s.push(l)}if(o){l=void 0!==c.NORMAL?r.getDependency("accessor",c.NORMAL):e.attributes.normal;u.push(l)}}return Promise.all([Promise.all(s),Promise.all(u)]).then((function(r){for(var i=r[0],a=r[1],s=0,u=i.length;s<u;s++)e.attributes.position!==i[s]&&(i[s]=F(i[s]));for(s=0,u=a.length;s<u;s++)e.attributes.normal!==a[s]&&(a[s]=F(a[s]));for(s=0,u=t.length;s<u;s++){var c=t[s],l="morphTarget"+s;if(n&&void 0!==c.POSITION){var p=i[s];p.name=l;for(var f=e.attributes.position,h=0,d=p.count;h<d;h++)p.setXYZ(h,p.getX(h)+f.getX(h),p.getY(h)+f.getY(h),p.getZ(h)+f.getZ(h))}if(o&&void 0!==c.NORMAL){var m=a[s];m.name=l;var g=e.attributes.normal;for(h=0,d=m.count;h<d;h++)m.setXYZ(h,m.getX(h)+g.getX(h),m.getY(h)+g.getY(h),m.getZ(h)+g.getZ(h))}}return n&&(e.morphAttributes.position=i),o&&(e.morphAttributes.normal=a),e}))}(e,t.targets,r):e}))}return D.prototype.parse=function(e,t){var r=this,n=this.json,o=this.extensions;this.cache.removeAll(),this.markDefs(),Promise.all([this.getDependencies("scene"),this.getDependencies("animation"),this.getDependencies("camera")]).then((function(t){var i={scene:t[0][n.scene||0],scenes:t[0],animations:t[1],cameras:t[2],asset:n.asset,parser:r,userData:{}};O(o,i,n),C(i,n),e(i)})).catch(t)},D.prototype.markDefs=function(){for(var e=this.json.nodes||[],t=this.json.skins||[],r=this.json.meshes||[],n={},o={},i=0,a=t.length;i<a;i++)for(var s=t[i].joints,u=0,c=s.length;u<c;u++)e[s[u]].isBone=!0;for(var l=0,p=e.length;l<p;l++){var f=e[l];void 0!==f.mesh&&(void 0===n[f.mesh]&&(n[f.mesh]=o[f.mesh]=0),n[f.mesh]++,void 0!==f.skin&&(r[f.mesh].isSkinnedMesh=!0))}this.json.meshReferences=n,this.json.meshUses=o},D.prototype.getDependency=function(e,t){var n=e+":"+t,o=this.cache.get(n);if(!o){switch(e){case"scene":o=this.loadScene(t);break;case"node":o=this.loadNode(t);break;case"mesh":o=this.loadMesh(t);break;case"accessor":o=this.loadAccessor(t);break;case"bufferView":o=this.loadBufferView(t);break;case"buffer":o=this.loadBuffer(t);break;case"material":o=this.loadMaterial(t);break;case"texture":o=this.loadTexture(t);break;case"skin":o=this.loadSkin(t);break;case"animation":o=this.loadAnimation(t);break;case"camera":o=this.loadCamera(t);break;case"light":o=this.extensions[r.KHR_LIGHTS_PUNCTUAL].loadLight(t);break;default:throw new Error("Unknown type: "+e)}this.cache.add(n,o)}return o},D.prototype.getDependencies=function(e){var t=this.cache.get(e);if(!t){var r=this,n=this.json[e+("mesh"===e?"es":"s")]||[];t=Promise.all(n.map((function(t,n){return r.getDependency(e,n)}))),this.cache.add(e,t)}return t},D.prototype.loadBuffer=function(e){var t=this.json.buffers[e],n=this.fileLoader;if(t.type&&"arraybuffer"!==t.type)throw new Error("THREE.GLTFLoader: "+t.type+" buffer type is not supported.");if(void 0===t.uri&&0===e)return Promise.resolve(this.extensions[r.KHR_BINARY_GLTF].body);var o=this.options;return new Promise((function(e,r){n.load(I(t.uri,o.path),e,void 0,(function(){r(new Error('THREE.GLTFLoader: Failed to load buffer "'+t.uri+'".'))}))}))},D.prototype.loadBufferView=function(e){var t=this.json.bufferViews[e];return this.getDependency("buffer",t.buffer).then((function(e){var r=t.byteLength||0,n=t.byteOffset||0;return e.slice(n,n+r)}))},D.prototype.loadAccessor=function(e){var t=this,r=this.json,n=this.json.accessors[e];if(void 0===n.bufferView&&void 0===n.sparse)return Promise.resolve(null);var o=[];return void 0!==n.bufferView?o.push(this.getDependency("bufferView",n.bufferView)):o.push(null),void 0!==n.sparse&&(o.push(this.getDependency("bufferView",n.sparse.indices.bufferView)),o.push(this.getDependency("bufferView",n.sparse.values.bufferView))),Promise.all(o).then((function(e){var o,i,a=e[0],s=_[n.type],u=w[n.componentType],c=u.BYTES_PER_ELEMENT,l=c*s,p=n.byteOffset||0,f=void 0!==n.bufferView?r.bufferViews[n.bufferView].byteStride:void 0,h=!0===n.normalized;if(f&&f!==l){var d=Math.floor(p/f),m="InterleavedBuffer:"+n.bufferView+":"+n.componentType+":"+d+":"+n.count,g=t.cache.get(m);g||(o=new u(a,d*f,n.count*f/c),g=new THREE.InterleavedBuffer(o,f/c),t.cache.add(m,g)),i=new THREE.InterleavedBufferAttribute(g,s,p%f/c,h)}else o=null===a?new u(n.count*s):new u(a,p,n.count*s),i=new THREE.BufferAttribute(o,s,h);if(void 0!==n.sparse){var v=_.SCALAR,y=w[n.sparse.indices.componentType],E=n.sparse.indices.byteOffset||0,b=n.sparse.values.byteOffset||0,T=new y(e[1],E,n.sparse.count*v),R=new u(e[2],b,n.sparse.count*s);null!==a&&(i=new THREE.BufferAttribute(i.array.slice(),i.itemSize,i.normalized));for(var x=0,S=T.length;x<S;x++){var M=T[x];if(i.setX(M,R[x*s]),s>=2&&i.setY(M,R[x*s+1]),s>=3&&i.setZ(M,R[x*s+2]),s>=4&&i.setW(M,R[x*s+3]),s>=5)throw new Error("THREE.GLTFLoader: Unsupported itemSize in sparse BufferAttribute.")}}return i}))},D.prototype.loadTexture=function(e){var t,n=this,o=this.json,i=this.options,a=this.textureLoader,s=window.URL||window.webkitURL,u=o.textures[e],c=u.extensions||{},l=(t=c[r.MSFT_TEXTURE_DDS]?o.images[c[r.MSFT_TEXTURE_DDS].source]:o.images[u.source]).uri,p=!1;return void 0!==t.bufferView&&(l=n.getDependency("bufferView",t.bufferView).then((function(e){p=!0;var r=new Blob([e],{type:t.mimeType});return l=s.createObjectURL(r)}))),Promise.resolve(l).then((function(e){var t=i.manager.getHandler(e);return t||(t=c[r.MSFT_TEXTURE_DDS]?n.extensions[r.MSFT_TEXTURE_DDS].ddsLoader:a),new Promise((function(r,n){t.load(I(e,i.path),r,void 0,n)}))})).then((function(e){!0===p&&s.revokeObjectURL(l),e.flipY=!1,void 0!==u.name&&(e.name=u.name),t.mimeType in B&&(e.format=B[t.mimeType]);var r=(o.samplers||{})[u.sampler]||{};return e.magFilter=R[r.magFilter]||THREE.LinearFilter,e.minFilter=R[r.minFilter]||THREE.LinearMipmapLinearFilter,e.wrapS=x[r.wrapS]||THREE.RepeatWrapping,e.wrapT=x[r.wrapT]||THREE.RepeatWrapping,e}))},D.prototype.assignTexture=function(e,t,n){var o=this;return this.getDependency("texture",n.index).then((function(i){if(!i.isCompressedTexture)switch(t){case"aoMap":case"emissiveMap":case"metalnessMap":case"normalMap":case"roughnessMap":i.format=THREE.RGBFormat}if(o.extensions[r.KHR_TEXTURE_TRANSFORM]){var a=void 0!==n.extensions?n.extensions[r.KHR_TEXTURE_TRANSFORM]:void 0;a&&(i=o.extensions[r.KHR_TEXTURE_TRANSFORM].extendTexture(i,a))}e[t]=i}))},D.prototype.assignFinalMaterial=function(e){var t=e.geometry,n=e.material,o=this.extensions,i=void 0!==t.attributes.tangent,a=void 0!==t.attributes.color,s=void 0===t.attributes.normal,u=!0===e.isSkinnedMesh,c=Object.keys(t.morphAttributes).length>0,l=c&&void 0!==t.morphAttributes.normal;if(e.isPoints){var p="PointsMaterial:"+n.uuid,f=this.cache.get(p);f||(f=new THREE.PointsMaterial,THREE.Material.prototype.copy.call(f,n),f.color.copy(n.color),f.map=n.map,f.lights=!1,f.sizeAttenuation=!1,this.cache.add(p,f)),n=f}else if(e.isLine){p="LineBasicMaterial:"+n.uuid;var h=this.cache.get(p);h||(h=new THREE.LineBasicMaterial,THREE.Material.prototype.copy.call(h,n),h.color.copy(n.color),h.lights=!1,this.cache.add(p,h)),n=h}if(i||a||s||u||c){p="ClonedMaterial:"+n.uuid+":";n.isGLTFSpecularGlossinessMaterial&&(p+="specular-glossiness:"),u&&(p+="skinning:"),i&&(p+="vertex-tangents:"),a&&(p+="vertex-colors:"),s&&(p+="flat-shading:"),c&&(p+="morph-targets:"),l&&(p+="morph-normals:");var d=this.cache.get(p);d||(d=n.isGLTFSpecularGlossinessMaterial?o[r.KHR_MATERIALS_PBR_SPECULAR_GLOSSINESS].cloneMaterial(n):n.clone(),u&&(d.skinning=!0),i&&(d.vertexTangents=!0),a&&(d.vertexColors=THREE.VertexColors),s&&(d.flatShading=!0),c&&(d.morphTargets=!0),l&&(d.morphNormals=!0),this.cache.add(p,d)),n=d}n.aoMap&&void 0===t.attributes.uv2&&void 0!==t.attributes.uv&&(console.log("THREE.GLTFLoader: Duplicating UVs to support aoMap."),t.addAttribute("uv2",new THREE.BufferAttribute(t.attributes.uv.array,2))),n.isGLTFSpecularGlossinessMaterial&&(e.onBeforeRender=o[r.KHR_MATERIALS_PBR_SPECULAR_GLOSSINESS].refreshUniforms),e.material=n},D.prototype.loadMaterial=function(e){var t,n=this.json,o=this.extensions,i=n.materials[e],a={},s=i.extensions||{},u=[];if(s[r.KHR_MATERIALS_PBR_SPECULAR_GLOSSINESS]){var c=o[r.KHR_MATERIALS_PBR_SPECULAR_GLOSSINESS];t=c.getMaterialType(),u.push(c.extendParams(a,i,this))}else if(s[r.KHR_MATERIALS_UNLIT]){var l=o[r.KHR_MATERIALS_UNLIT];t=l.getMaterialType(),u.push(l.extendParams(a,i,this))}else{t=THREE.MeshStandardMaterial;var p=i.pbrMetallicRoughness||{};if(a.color=new THREE.Color(1,1,1),a.opacity=1,Array.isArray(p.baseColorFactor)){var f=p.baseColorFactor;a.color.fromArray(f),a.opacity=f[3]}void 0!==p.baseColorTexture&&u.push(this.assignTexture(a,"map",p.baseColorTexture)),a.metalness=void 0!==p.metallicFactor?p.metallicFactor:1,a.roughness=void 0!==p.roughnessFactor?p.roughnessFactor:1,void 0!==p.metallicRoughnessTexture&&(u.push(this.assignTexture(a,"metalnessMap",p.metallicRoughnessTexture)),u.push(this.assignTexture(a,"roughnessMap",p.metallicRoughnessTexture)))}!0===i.doubleSided&&(a.side=THREE.DoubleSide);var h=i.alphaMode||L;return h===P?a.transparent=!0:(a.transparent=!1,h===H&&(a.alphaTest=void 0!==i.alphaCutoff?i.alphaCutoff:.5)),void 0!==i.normalTexture&&t!==THREE.MeshBasicMaterial&&(u.push(this.assignTexture(a,"normalMap",i.normalTexture)),a.normalScale=new THREE.Vector2(1,1),void 0!==i.normalTexture.scale&&a.normalScale.set(i.normalTexture.scale,i.normalTexture.scale)),void 0!==i.occlusionTexture&&t!==THREE.MeshBasicMaterial&&(u.push(this.assignTexture(a,"aoMap",i.occlusionTexture)),void 0!==i.occlusionTexture.strength&&(a.aoMapIntensity=i.occlusionTexture.strength)),void 0!==i.emissiveFactor&&t!==THREE.MeshBasicMaterial&&(a.emissive=(new THREE.Color).fromArray(i.emissiveFactor)),void 0!==i.emissiveTexture&&t!==THREE.MeshBasicMaterial&&u.push(this.assignTexture(a,"emissiveMap",i.emissiveTexture)),Promise.all(u).then((function(){var e;return e=t===THREE.ShaderMaterial?o[r.KHR_MATERIALS_PBR_SPECULAR_GLOSSINESS].createMaterial(a):new t(a),void 0!==i.name&&(e.name=i.name),e.map&&(e.map.encoding=THREE.sRGBEncoding),e.emissiveMap&&(e.emissiveMap.encoding=THREE.sRGBEncoding),e.specularMap&&(e.specularMap.encoding=THREE.sRGBEncoding),C(e,i),i.extensions&&O(o,e,i),e}))},D.prototype.loadGeometries=function(e){var t=this,n=this.extensions,o=this.primitiveCache;function i(e){return n[r.KHR_DRACO_MESH_COMPRESSION].decodePrimitive(e,t).then((function(r){return k(r,e,t)}))}for(var a,s,u=[],c=0,l=e.length;c<l;c++){var p,f=e[c],h=(s=void 0,(s=(a=f).extensions&&a.extensions[r.KHR_DRACO_MESH_COMPRESSION])?"draco:"+s.bufferView+":"+s.indices+":"+j(s.attributes):a.indices+":"+j(a.attributes)+":"+a.mode),d=o[h];if(d)u.push(d.promise);else p=f.extensions&&f.extensions[r.KHR_DRACO_MESH_COMPRESSION]?i(f):k(new THREE.BufferGeometry,f,t),o[h]={primitive:f,promise:p},u.push(p)}return Promise.all(u)},D.prototype.loadMesh=function(e){for(var t=this,r=this.json.meshes[e],n=r.primitives,o=[],i=0,a=n.length;i<a;i++){var s=void 0===n[i].material?d=d||new THREE.MeshStandardMaterial({color:16777215,emissive:0,metalness:1,roughness:1,transparent:!1,depthTest:!0,side:THREE.FrontSide}):this.getDependency("material",n[i].material);o.push(s)}return Promise.all(o).then((function(o){return t.loadGeometries(n).then((function(i){for(var a=[],s=0,u=i.length;s<u;s++){var c,l=i[s],p=n[s],f=o[s];if(p.mode===E||p.mode===b||p.mode===T||void 0===p.mode)!0!==(c=!0===r.isSkinnedMesh?new THREE.SkinnedMesh(l,f):new THREE.Mesh(l,f)).isSkinnedMesh||c.geometry.attributes.skinWeight.normalized||c.normalizeSkinWeights(),p.mode===b?c.drawMode=THREE.TriangleStripDrawMode:p.mode===T&&(c.drawMode=THREE.TriangleFanDrawMode);else if(p.mode===g)c=new THREE.LineSegments(l,f);else if(p.mode===y)c=new THREE.Line(l,f);else if(p.mode===v)c=new THREE.LineLoop(l,f);else{if(p.mode!==m)throw new Error("THREE.GLTFLoader: Primitive mode unsupported: "+p.mode);c=new THREE.Points(l,f)}Object.keys(c.geometry.morphAttributes).length>0&&U(c,r),c.name=r.name||"mesh_"+e,i.length>1&&(c.name+="_"+s),C(c,r),t.assignFinalMaterial(c),a.push(c)}if(1===a.length)return a[0];var h=new THREE.Group;for(s=0,u=a.length;s<u;s++)h.add(a[s]);return h}))}))},D.prototype.loadCamera=function(e){var t,r=this.json.cameras[e],n=r[r.type];if(n)return"perspective"===r.type?t=new THREE.PerspectiveCamera(THREE.Math.radToDeg(n.yfov),n.aspectRatio||1,n.znear||1,n.zfar||2e6):"orthographic"===r.type&&(t=new THREE.OrthographicCamera(n.xmag/-2,n.xmag/2,n.ymag/2,n.ymag/-2,n.znear,n.zfar)),void 0!==r.name&&(t.name=r.name),C(t,r),Promise.resolve(t);console.warn("THREE.GLTFLoader: Missing camera parameters.")},D.prototype.loadSkin=function(e){var t=this.json.skins[e],r={joints:t.joints};return void 0===t.inverseBindMatrices?Promise.resolve(r):this.getDependency("accessor",t.inverseBindMatrices).then((function(e){return r.inverseBindMatrices=e,r}))},D.prototype.loadAnimation=function(e){for(var t=this.json.animations[e],r=[],n=[],o=[],i=[],a=[],s=0,u=t.channels.length;s<u;s++){var c=t.channels[s],l=t.samplers[c.sampler],p=c.target,f=void 0!==p.node?p.node:p.id,d=void 0!==t.parameters?t.parameters[l.input]:l.input,m=void 0!==t.parameters?t.parameters[l.output]:l.output;r.push(this.getDependency("node",f)),n.push(this.getDependency("accessor",d)),o.push(this.getDependency("accessor",m)),i.push(l),a.push(p)}return Promise.all([Promise.all(r),Promise.all(n),Promise.all(o),Promise.all(i),Promise.all(a)]).then((function(r){for(var n=r[0],o=r[1],i=r[2],a=r[3],s=r[4],u=[],c=0,l=n.length;c<l;c++){var p=n[c],f=o[c],d=i[c],m=a[c],g=s[c];if(void 0!==p){var v;switch(p.updateMatrix(),p.matrixAutoUpdate=!0,M[g.path]){case M.weights:v=THREE.NumberKeyframeTrack;break;case M.rotation:v=THREE.QuaternionKeyframeTrack;break;case M.position:case M.scale:default:v=THREE.VectorKeyframeTrack}var y=p.name?p.name:p.uuid,E=void 0!==m.interpolation?A[m.interpolation]:THREE.InterpolateLinear,b=[];M[g.path]===M.weights?p.traverse((function(e){!0===e.isMesh&&e.morphTargetInfluences&&b.push(e.name?e.name:e.uuid)})):b.push(y);var T=d.array;if(d.normalized){var w;if(T.constructor===Int8Array)w=1/127;else if(T.constructor===Uint8Array)w=1/255;else if(T.constructor==Int16Array)w=1/32767;else{if(T.constructor!==Uint16Array)throw new Error("THREE.GLTFLoader: Unsupported output accessor component type.");w=1/65535}for(var R=new Float32Array(T.length),x=0,_=T.length;x<_;x++)R[x]=T[x]*w;T=R}for(x=0,_=b.length;x<_;x++){var S=new v(b[x]+"."+M[g.path],f.array,T,E);"CUBICSPLINE"===m.interpolation&&(S.createInterpolant=function(e){return new h(this.times,this.values,this.getValueSize()/3,e)},S.createInterpolant.isInterpolantFactoryMethodGLTFCubicSpline=!0),u.push(S)}}}var L=void 0!==t.name?t.name:"animation_"+e;return new THREE.AnimationClip(L,void 0,u)}))},D.prototype.loadNode=function(e){var t,n=this.json,o=this.extensions,i=this,a=n.meshReferences,s=n.meshUses,u=n.nodes[e];return(t=[],void 0!==u.mesh&&t.push(i.getDependency("mesh",u.mesh).then((function(e){var t;if(a[u.mesh]>1){var r=s[u.mesh]++;(t=e.clone()).name+="_instance_"+r,t.onBeforeRender=e.onBeforeRender;for(var n=0,o=t.children.length;n<o;n++)t.children[n].name+="_instance_"+r,t.children[n].onBeforeRender=e.children[n].onBeforeRender}else t=e;return void 0!==u.weights&&t.traverse((function(e){if(e.isMesh)for(var t=0,r=u.weights.length;t<r;t++)e.morphTargetInfluences[t]=u.weights[t]})),t}))),void 0!==u.camera&&t.push(i.getDependency("camera",u.camera)),u.extensions&&u.extensions[r.KHR_LIGHTS_PUNCTUAL]&&void 0!==u.extensions[r.KHR_LIGHTS_PUNCTUAL].light&&t.push(i.getDependency("light",u.extensions[r.KHR_LIGHTS_PUNCTUAL].light)),Promise.all(t)).then((function(e){var t;if((t=!0===u.isBone?new THREE.Bone:e.length>1?new THREE.Group:1===e.length?e[0]:new THREE.Object3D)!==e[0])for(var r=0,n=e.length;r<n;r++)t.add(e[r]);if(void 0!==u.name&&(t.userData.name=u.name,t.name=THREE.PropertyBinding.sanitizeNodeName(u.name)),C(t,u),u.extensions&&O(o,t,u),void 0!==u.matrix){var i=new THREE.Matrix4;i.fromArray(u.matrix),t.applyMatrix(i)}else void 0!==u.translation&&t.position.fromArray(u.translation),void 0!==u.rotation&&t.quaternion.fromArray(u.rotation),void 0!==u.scale&&t.scale.fromArray(u.scale);return t}))},D.prototype.loadScene=function(){function e(t,r,n,o){var i=n.nodes[t];return o.getDependency("node",t).then((function(e){return void 0===i.skin?e:o.getDependency("skin",i.skin).then((function(e){for(var r=[],n=0,i=(t=e).joints.length;n<i;n++)r.push(o.getDependency("node",t.joints[n]));return Promise.all(r)})).then((function(r){return e.traverse((function(e){if(e.isMesh){for(var n=[],o=[],i=0,a=r.length;i<a;i++){var s=r[i];if(s){n.push(s);var u=new THREE.Matrix4;void 0!==t.inverseBindMatrices&&u.fromArray(t.inverseBindMatrices.array,16*i),o.push(u)}else console.warn('THREE.GLTFLoader: Joint "%s" could not be found.',t.joints[i])}e.bind(new THREE.Skeleton(n,o),e.matrixWorld)}})),e}));var t})).then((function(t){r.add(t);var a=[];if(i.children)for(var s=i.children,u=0,c=s.length;u<c;u++){var l=s[u];a.push(e(l,t,n,o))}return Promise.all(a)}))}return function(t){var r=this.json,n=this.extensions,o=this.json.scenes[t],i=new THREE.Scene;void 0!==o.name&&(i.name=o.name),C(i,o),o.extensions&&O(n,i,o);for(var a=o.nodes||[],s=[],u=0,c=a.length;u<c;u++)s.push(e(a[u],i,r,this));return Promise.all(s).then((function(){return i}))}}(),e}()},function(e,t){THREE.OBJLoader=function(){var e=/^[og]\s*(.+)?/,t=/^mtllib /,r=/^usemtl /;function n(){var e={objects:[],object:{},vertices:[],normals:[],colors:[],uvs:[],materialLibraries:[],startObject:function(e,t){if(this.object&&!1===this.object.fromDeclaration)return this.object.name=e,void(this.object.fromDeclaration=!1!==t);var r=this.object&&"function"==typeof this.object.currentMaterial?this.object.currentMaterial():void 0;if(this.object&&"function"==typeof this.object._finalize&&this.object._finalize(!0),this.object={name:e||"",fromDeclaration:!1!==t,geometry:{vertices:[],normals:[],colors:[],uvs:[]},materials:[],smooth:!0,startMaterial:function(e,t){var r=this._finalize(!1);r&&(r.inherited||r.groupCount<=0)&&this.materials.splice(r.index,1);var n={index:this.materials.length,name:e||"",mtllib:Array.isArray(t)&&t.length>0?t[t.length-1]:"",smooth:void 0!==r?r.smooth:this.smooth,groupStart:void 0!==r?r.groupEnd:0,groupEnd:-1,groupCount:-1,inherited:!1,clone:function(e){var t={index:"number"==typeof e?e:this.index,name:this.name,mtllib:this.mtllib,smooth:this.smooth,groupStart:0,groupEnd:-1,groupCount:-1,inherited:!1};return t.clone=this.clone.bind(t),t}};return this.materials.push(n),n},currentMaterial:function(){if(this.materials.length>0)return this.materials[this.materials.length-1]},_finalize:function(e){var t=this.currentMaterial();if(t&&-1===t.groupEnd&&(t.groupEnd=this.geometry.vertices.length/3,t.groupCount=t.groupEnd-t.groupStart,t.inherited=!1),e&&this.materials.length>1)for(var r=this.materials.length-1;r>=0;r--)this.materials[r].groupCount<=0&&this.materials.splice(r,1);return e&&0===this.materials.length&&this.materials.push({name:"",smooth:this.smooth}),t}},r&&r.name&&"function"==typeof r.clone){var n=r.clone(0);n.inherited=!0,this.object.materials.push(n)}this.objects.push(this.object)},finalize:function(){this.object&&"function"==typeof this.object._finalize&&this.object._finalize(!0)},parseVertexIndex:function(e,t){var r=parseInt(e,10);return 3*(r>=0?r-1:r+t/3)},parseNormalIndex:function(e,t){var r=parseInt(e,10);return 3*(r>=0?r-1:r+t/3)},parseUVIndex:function(e,t){var r=parseInt(e,10);return 2*(r>=0?r-1:r+t/2)},addVertex:function(e,t,r){var n=this.vertices,o=this.object.geometry.vertices;o.push(n[e+0],n[e+1],n[e+2]),o.push(n[t+0],n[t+1],n[t+2]),o.push(n[r+0],n[r+1],n[r+2])},addVertexPoint:function(e){var t=this.vertices;this.object.geometry.vertices.push(t[e+0],t[e+1],t[e+2])},addVertexLine:function(e){var t=this.vertices;this.object.geometry.vertices.push(t[e+0],t[e+1],t[e+2])},addNormal:function(e,t,r){var n=this.normals,o=this.object.geometry.normals;o.push(n[e+0],n[e+1],n[e+2]),o.push(n[t+0],n[t+1],n[t+2]),o.push(n[r+0],n[r+1],n[r+2])},addColor:function(e,t,r){var n=this.colors,o=this.object.geometry.colors;o.push(n[e+0],n[e+1],n[e+2]),o.push(n[t+0],n[t+1],n[t+2]),o.push(n[r+0],n[r+1],n[r+2])},addUV:function(e,t,r){var n=this.uvs,o=this.object.geometry.uvs;o.push(n[e+0],n[e+1]),o.push(n[t+0],n[t+1]),o.push(n[r+0],n[r+1])},addUVLine:function(e){var t=this.uvs;this.object.geometry.uvs.push(t[e+0],t[e+1])},addFace:function(e,t,r,n,o,i,a,s,u){var c=this.vertices.length,l=this.parseVertexIndex(e,c),p=this.parseVertexIndex(t,c),f=this.parseVertexIndex(r,c);if(this.addVertex(l,p,f),void 0!==n&&""!==n){var h=this.uvs.length;l=this.parseUVIndex(n,h),p=this.parseUVIndex(o,h),f=this.parseUVIndex(i,h),this.addUV(l,p,f)}if(void 0!==a&&""!==a){var d=this.normals.length;l=this.parseNormalIndex(a,d),p=a===s?l:this.parseNormalIndex(s,d),f=a===u?l:this.parseNormalIndex(u,d),this.addNormal(l,p,f)}this.colors.length>0&&this.addColor(l,p,f)},addPointGeometry:function(e){this.object.geometry.type="Points";for(var t=this.vertices.length,r=0,n=e.length;r<n;r++)this.addVertexPoint(this.parseVertexIndex(e[r],t))},addLineGeometry:function(e,t){this.object.geometry.type="Line";for(var r=this.vertices.length,n=this.uvs.length,o=0,i=e.length;o<i;o++)this.addVertexLine(this.parseVertexIndex(e[o],r));var a=0;for(i=t.length;a<i;a++)this.addUVLine(this.parseUVIndex(t[a],n))}};return e.startObject("",!1),e}function o(e){this.manager=void 0!==e?e:THREE.DefaultLoadingManager,this.materials=null}return o.prototype={constructor:o,load:function(e,t,r,n){var o=this,i=new THREE.FileLoader(o.manager);i.setPath(this.path),i.load(e,(function(e){t(o.parse(e))}),r,n)},setPath:function(e){return this.path=e,this},setMaterials:function(e){return this.materials=e,this},parse:function(o){console.time("OBJLoader");var i=new n;-1!==o.indexOf("\r\n")&&(o=o.replace(/\r\n/g,"\n")),-1!==o.indexOf("\\\n")&&(o=o.replace(/\\\n/g,""));for(var a=o.split("\n"),s="",u="",c=[],l="function"==typeof"".trimLeft,p=0,f=a.length;p<f;p++)if(s=a[p],0!==(s=l?s.trimLeft():s.trim()).length&&"#"!==(u=s.charAt(0)))if("v"===u){var h=s.split(/\s+/);switch(h[0]){case"v":i.vertices.push(parseFloat(h[1]),parseFloat(h[2]),parseFloat(h[3])),h.length>=7&&i.colors.push(parseFloat(h[4]),parseFloat(h[5]),parseFloat(h[6]));break;case"vn":i.normals.push(parseFloat(h[1]),parseFloat(h[2]),parseFloat(h[3]));break;case"vt":i.uvs.push(parseFloat(h[1]),parseFloat(h[2]))}}else if("f"===u){for(var d=s.substr(1).trim().split(/\s+/),m=[],g=0,v=d.length;g<v;g++){var y=d[g];if(y.length>0){var E=y.split("/");m.push(E)}}var b=m[0];for(g=1,v=m.length-1;g<v;g++){var T=m[g],w=m[g+1];i.addFace(b[0],T[0],w[0],b[1],T[1],w[1],b[2],T[2],w[2])}}else if("l"===u){var R=s.substring(1).trim().split(" "),x=[],_=[];if(-1===s.indexOf("/"))x=R;else for(var S=0,M=R.length;S<M;S++){var A=R[S].split("/");""!==A[0]&&x.push(A[0]),""!==A[1]&&_.push(A[1])}i.addLineGeometry(x,_)}else if("p"===u){var L=s.substr(1).trim().split(" ");i.addPointGeometry(L)}else if(null!==(c=e.exec(s))){var H=(" "+c[0].substr(1).trim()).substr(1);i.startObject(H)}else if(r.test(s))i.object.startMaterial(s.substring(7).trim(),i.materialLibraries);else if(t.test(s))i.materialLibraries.push(s.substring(7).trim());else{if("s"!==u){if("\0"===s)continue;throw new Error('THREE.OBJLoader: Unexpected line: "'+s+'"')}if((c=s.split(" ")).length>1){var P=c[1].trim().toLowerCase();i.object.smooth="0"!==P&&"off"!==P}else i.object.smooth=!0;(Y=i.object.currentMaterial())&&(Y.smooth=i.object.smooth)}i.finalize();var B=new THREE.Group;B.materialLibraries=[].concat(i.materialLibraries);for(p=0,f=i.objects.length;p<f;p++){var I=i.objects[p],O=I.geometry,C=I.materials,U="Line"===O.type,j="Points"===O.type,F=!1;if(0!==O.vertices.length){var D=new THREE.BufferGeometry;D.addAttribute("position",new THREE.Float32BufferAttribute(O.vertices,3)),O.normals.length>0?D.addAttribute("normal",new THREE.Float32BufferAttribute(O.normals,3)):D.computeVertexNormals(),O.colors.length>0&&(F=!0,D.addAttribute("color",new THREE.Float32BufferAttribute(O.colors,3))),O.uvs.length>0&&D.addAttribute("uv",new THREE.Float32BufferAttribute(O.uvs,2));for(var k,N=[],G=0,$=C.length;G<$;G++){var V=C[G],Y=void 0;if(null!==this.materials)if(Y=this.materials.create(V.name),!U||!Y||Y instanceof THREE.LineBasicMaterial){if(j&&Y&&!(Y instanceof THREE.PointsMaterial)){var X=new THREE.PointsMaterial({size:10,sizeAttenuation:!1});THREE.Material.prototype.copy.call(X,Y),X.color.copy(Y.color),X.map=Y.map,X.lights=!1,Y=X}}else{var z=new THREE.LineBasicMaterial;THREE.Material.prototype.copy.call(z,Y),z.color.copy(Y.color),z.lights=!1,Y=z}Y||((Y=U?new THREE.LineBasicMaterial:j?new THREE.PointsMaterial({size:1,sizeAttenuation:!1}):new THREE.MeshPhongMaterial).name=V.name),Y.flatShading=!V.smooth,Y.vertexColors=F?THREE.VertexColors:THREE.NoColors,N.push(Y)}if(N.length>1){for(G=0,$=C.length;G<$;G++){V=C[G];D.addGroup(V.groupStart,V.groupCount,G)}k=U?new THREE.LineSegments(D,N):j?new THREE.Points(D,N):new THREE.Mesh(D,N)}else k=U?new THREE.LineSegments(D,N[0]):j?new THREE.Points(D,N[0]):new THREE.Mesh(D,N[0]);k.name=I.name,B.add(k)}}return console.timeEnd("OBJLoader"),B}},o}()},function(e,t){THREE.BasisTextureLoader=function(e){THREE.Loader.call(this,e),this.transcoderPath="",this.transcoderBinary=null,this.transcoderPending=null,this.workerLimit=4,this.workerPool=[],this.workerNextTaskID=1,this.workerSourceURL="",this.workerConfig={format:null,etcSupported:!1,dxtSupported:!1,pvrtcSupported:!1}},THREE.BasisTextureLoader.prototype=Object.assign(Object.create(THREE.Loader.prototype),{constructor:THREE.BasisTextureLoader,setTranscoderPath:function(e){return this.transcoderPath=e,this},setWorkerLimit:function(e){return this.workerLimit=e,this},detectSupport:function(e){var t=this.workerConfig;if(t.etcSupported=!!e.extensions.get("WEBGL_compressed_texture_etc1"),t.dxtSupported=!!e.extensions.get("WEBGL_compressed_texture_s3tc"),t.pvrtcSupported=!!e.extensions.get("WEBGL_compressed_texture_pvrtc")||!!e.extensions.get("WEBKIT_WEBGL_compressed_texture_pvrtc"),t.etcSupported)t.format=THREE.BasisTextureLoader.BASIS_FORMAT.cTFETC1;else if(t.dxtSupported)t.format=THREE.BasisTextureLoader.BASIS_FORMAT.cTFBC1;else{if(!t.pvrtcSupported)throw new Error("THREE.BasisTextureLoader: No suitable compressed texture format found.");t.format=THREE.BasisTextureLoader.BASIS_FORMAT.cTFPVRTC1_4_OPAQUE_ONLY}return this},load:function(e,t,r,n){var o=new THREE.FileLoader(this.manager);o.setResponseType("arraybuffer"),o.load(e,e=>{this._createTexture(e).then(t).catch(n)},r,n)},_createTexture:function(e){var t,r,n=this._getWorker().then(n=>(t=n,r=this.workerNextTaskID++,new Promise((n,o)=>{t._callbacks[r]={resolve:n,reject:o},t._taskCosts[r]=e.byteLength,t._taskLoad+=t._taskCosts[r],t.postMessage({type:"transcode",id:r,buffer:e},[e])}))).then(e=>{var t,r=this.workerConfig,{width:n,height:o,mipmaps:i}=e;if(r.etcSupported)t=new THREE.CompressedTexture(i,n,o,THREE.RGB_ETC1_Format);else if(r.dxtSupported)t=new THREE.CompressedTexture(i,n,o,THREE.BasisTextureLoader.DXT_FORMAT_MAP[r.format],THREE.UnsignedByteType);else{if(!r.pvrtcSupported)throw new Error("THREE.BasisTextureLoader: No supported format available.");t=new THREE.CompressedTexture(i,n,o,THREE.RGB_PVRTC_4BPPV1_Format)}return t.minFilter=1===i.length?THREE.LinearFilter:THREE.LinearMipmapLinearFilter,t.magFilter=THREE.LinearFilter,t.generateMipmaps=!1,t.needsUpdate=!0,t});return n.finally(()=>{t&&r&&(t._taskLoad-=t._taskCosts[r],delete t._callbacks[r],delete t._taskCosts[r])}),n},_initTranscoder:function(){if(!this.transcoderBinary){var e=new THREE.FileLoader(this.manager);e.setPath(this.transcoderPath);var t=new Promise((t,r)=>{e.load("basis_transcoder.js",t,void 0,r)}),r=new THREE.FileLoader(this.manager);r.setPath(this.transcoderPath),r.setResponseType("arraybuffer");var n=new Promise((e,t)=>{r.load("basis_transcoder.wasm",e,void 0,t)});this.transcoderPending=Promise.all([t,n]).then(([e,t])=>{var r=THREE.BasisTextureLoader.BasisWorker.toString(),n=["/* basis_transcoder.js */","var Module;","function createBasisModule () {","  "+e,"  return Module;","}","","/* worker */",r.substring(r.indexOf("{")+1,r.lastIndexOf("}"))].join("\n");this.workerSourceURL=URL.createObjectURL(new Blob([n])),this.transcoderBinary=t})}return this.transcoderPending},_getWorker:function(){return this._initTranscoder().then(()=>{if(this.workerPool.length<this.workerLimit){var e=new Worker(this.workerSourceURL);e._callbacks={},e._taskCosts={},e._taskLoad=0,e.postMessage({type:"init",config:this.workerConfig,transcoderBinary:this.transcoderBinary}),e.onmessage=function(t){var r=t.data;switch(r.type){case"transcode":e._callbacks[r.id].resolve(r);break;case"error":e._callbacks[r.id].reject(r);break;default:console.error('THREE.BasisTextureLoader: Unexpected message, "'+r.type+'"')}},this.workerPool.push(e)}else this.workerPool.sort((function(e,t){return e._taskLoad>t._taskLoad?-1:1}));return this.workerPool[this.workerPool.length-1]})},dispose:function(){for(var e=0;e<this.workerPool.length;e++)this.workerPool[e].terminate();return this.workerPool.length=0,this}}),THREE.BasisTextureLoader.BASIS_FORMAT={cTFETC1:0,cTFBC1:1,cTFBC4:2,cTFPVRTC1_4_OPAQUE_ONLY:3,cTFBC7_M6_OPAQUE_ONLY:4,cTFETC2:5,cTFBC3:6,cTFBC5:7},THREE.BasisTextureLoader.DXT_FORMAT={COMPRESSED_RGB_S3TC_DXT1_EXT:33776,COMPRESSED_RGBA_S3TC_DXT1_EXT:33777,COMPRESSED_RGBA_S3TC_DXT3_EXT:33778,COMPRESSED_RGBA_S3TC_DXT5_EXT:33779},THREE.BasisTextureLoader.DXT_FORMAT_MAP={},THREE.BasisTextureLoader.DXT_FORMAT_MAP[THREE.BasisTextureLoader.BASIS_FORMAT.cTFBC1]=THREE.BasisTextureLoader.DXT_FORMAT.COMPRESSED_RGB_S3TC_DXT1_EXT,THREE.BasisTextureLoader.DXT_FORMAT_MAP[THREE.BasisTextureLoader.BASIS_FORMAT.cTFBC3]=THREE.BasisTextureLoader.DXT_FORMAT.COMPRESSED_RGBA_S3TC_DXT5_EXT,THREE.BasisTextureLoader.BasisWorker=function(){var e,t,r;onmessage=function(n){var o,i=n.data;switch(i.type){case"init":e=i.config,o=i.transcoderBinary,t=new Promise(e=>{Module={wasmBinary:o,onRuntimeInitialized:e}}).then(()=>{var{BasisFile:e,initializeBasis:t}=Module;r=e,t()}),createBasisModule();break;case"transcode":t.then(()=>{try{for(var{width:t,height:n,mipmaps:o}=function(t){var n=new r(new Uint8Array(t)),o=n.getImageWidth(0,0),i=n.getImageHeight(0,0),a=n.getNumLevels(0);function s(){n.close(),n.delete()}if(!o||!i||!a)throw s(),new Error("THREE.BasisTextureLoader:  Invalid .basis file");if(!n.startTranscoding())throw s(),new Error("THREE.BasisTextureLoader: .startTranscoding failed");n.getHasAlpha()&&console.warn("THREE.BasisTextureLoader: Alpha not yet implemented.");for(var u=[],c=0;c<a;c++){var l=n.getImageWidth(0,c),p=n.getImageHeight(0,c),f=new Uint8Array(n.getImageTranscodedSizeInBytes(0,c,e.format));if(!n.transcodeImage(f,0,c,e.format,e.etcSupported?0:e.dxtSupported?1:0,0))throw s(),new Error("THREE.BasisTextureLoader: .transcodeImage failed.");u.push({data:f,width:l,height:p})}return s(),{width:o,height:i,mipmaps:u}}(i.buffer),a=[],s=0;s<o.length;++s)a.push(o[s].data.buffer);self.postMessage({type:"transcode",id:i.id,width:t,height:n,mipmaps:o},a)}catch(e){console.error(e),self.postMessage({type:"error",id:i.id,error:e.message})}})}}}},function(e,t,r){(function(t){var n=r(22),o=function(){},i=r(45),a=r(46),s=r(49),u=r(50),c=r(6),l=self.XMLHttpRequest&&"withCredentials"in new XMLHttpRequest;e.exports=function(e,r){r="function"==typeof r?r:o,"string"==typeof e?e={uri:e}:e||(e={}),e.binary&&(e=function(e){if(l)return c(e,{responseType:"arraybuffer"});if(void 0===self.XMLHttpRequest)throw new Error("your browser does not support XHR loading");var t=new self.XMLHttpRequest;return t.overrideMimeType("text/plain; charset=x-user-defined"),c({xhr:t},e)}(e)),n(e,(function(n,c,l){if(n)return r(n);if(!/^2/.test(c.statusCode))return r(new Error("http status code: "+c.statusCode));if(!l)return r(new Error("no body result"));var p,f,h=!1;if(p=l,"[object ArrayBuffer]"===Object.prototype.toString.call(p)){var d=new Uint8Array(l);l=new t(d,"binary")}u(l)&&(h=!0,"string"==typeof l&&(l=new t(l,"binary"))),h||(t.isBuffer(l)&&(l=l.toString(e.encoding)),l=l.trim());try{var m=c.headers["content-type"];f=h?s(l):/json/.test(m)||"{"===l.charAt(0)?JSON.parse(l):/xml/.test(m)||"<"===l.charAt(0)?a(l):i(l)}catch(e){r(new Error("error parsing font "+e.message)),r=o}r(null,f)}))}}).call(this,r(2).Buffer)},function(e,t,r){"use strict";t.byteLength=function(e){var t=c(e),r=t[0],n=t[1];return 3*(r+n)/4-n},t.toByteArray=function(e){var t,r,n=c(e),a=n[0],s=n[1],u=new i(function(e,t,r){return 3*(t+r)/4-r}(0,a,s)),l=0,p=s>0?a-4:a;for(r=0;r<p;r+=4)t=o[e.charCodeAt(r)]<<18|o[e.charCodeAt(r+1)]<<12|o[e.charCodeAt(r+2)]<<6|o[e.charCodeAt(r+3)],u[l++]=t>>16&255,u[l++]=t>>8&255,u[l++]=255&t;2===s&&(t=o[e.charCodeAt(r)]<<2|o[e.charCodeAt(r+1)]>>4,u[l++]=255&t);1===s&&(t=o[e.charCodeAt(r)]<<10|o[e.charCodeAt(r+1)]<<4|o[e.charCodeAt(r+2)]>>2,u[l++]=t>>8&255,u[l++]=255&t);return u},t.fromByteArray=function(e){for(var t,r=e.length,o=r%3,i=[],a=0,s=r-o;a<s;a+=16383)i.push(l(e,a,a+16383>s?s:a+16383));1===o?(t=e[r-1],i.push(n[t>>2]+n[t<<4&63]+"==")):2===o&&(t=(e[r-2]<<8)+e[r-1],i.push(n[t>>10]+n[t>>4&63]+n[t<<2&63]+"="));return i.join("")};for(var n=[],o=[],i="undefined"!=typeof Uint8Array?Uint8Array:Array,a="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",s=0,u=a.length;s<u;++s)n[s]=a[s],o[a.charCodeAt(s)]=s;function c(e){var t=e.length;if(t%4>0)throw new Error("Invalid string. Length must be a multiple of 4");var r=e.indexOf("=");return-1===r&&(r=t),[r,r===t?0:4-r%4]}function l(e,t,r){for(var o,i,a=[],s=t;s<r;s+=3)o=(e[s]<<16&16711680)+(e[s+1]<<8&65280)+(255&e[s+2]),a.push(n[(i=o)>>18&63]+n[i>>12&63]+n[i>>6&63]+n[63&i]);return a.join("")}o["-".charCodeAt(0)]=62,o["_".charCodeAt(0)]=63},function(e,t){t.read=function(e,t,r,n,o){var i,a,s=8*o-n-1,u=(1<<s)-1,c=u>>1,l=-7,p=r?o-1:0,f=r?-1:1,h=e[t+p];for(p+=f,i=h&(1<<-l)-1,h>>=-l,l+=s;l>0;i=256*i+e[t+p],p+=f,l-=8);for(a=i&(1<<-l)-1,i>>=-l,l+=n;l>0;a=256*a+e[t+p],p+=f,l-=8);if(0===i)i=1-c;else{if(i===u)return a?NaN:1/0*(h?-1:1);a+=Math.pow(2,n),i-=c}return(h?-1:1)*a*Math.pow(2,i-n)},t.write=function(e,t,r,n,o,i){var a,s,u,c=8*i-o-1,l=(1<<c)-1,p=l>>1,f=23===o?Math.pow(2,-24)-Math.pow(2,-77):0,h=n?0:i-1,d=n?1:-1,m=t<0||0===t&&1/t<0?1:0;for(t=Math.abs(t),isNaN(t)||t===1/0?(s=isNaN(t)?1:0,a=l):(a=Math.floor(Math.log(t)/Math.LN2),t*(u=Math.pow(2,-a))<1&&(a--,u*=2),(t+=a+p>=1?f/u:f*Math.pow(2,1-p))*u>=2&&(a++,u/=2),a+p>=l?(s=0,a=l):a+p>=1?(s=(t*u-1)*Math.pow(2,o),a+=p):(s=t*Math.pow(2,p-1)*Math.pow(2,o),a=0));o>=8;e[r+h]=255&s,h+=d,s/=256,o-=8);for(a=a<<o|s,c+=o;c>0;e[r+h]=255&a,h+=d,a/=256,c-=8);e[r+h-d]|=128*m}},function(e,t){var r={}.toString;e.exports=Array.isArray||function(e){return"[object Array]"==r.call(e)}},function(e,t,r){"use strict";var n=r(23),o=r(24),i=r(25),a=r(6);function s(e,t,r){var n=e;return o(t)?(r=t,"string"==typeof e&&(n={uri:e})):n=a(t,{uri:e}),n.callback=r,n}function u(e,t,r){return c(t=s(e,t,r))}function c(e){if(void 0===e.callback)throw new Error("callback argument missing");var t=!1,r=function(r,n,o){t||(t=!0,e.callback(r,n,o))};function n(){var e=void 0;if(e=l.response?l.response:l.responseText||function(e){try{if("document"===e.responseType)return e.responseXML;var t=e.responseXML&&"parsererror"===e.responseXML.documentElement.nodeName;if(""===e.responseType&&!t)return e.responseXML}catch(e){}return null}(l),v)try{e=JSON.parse(e)}catch(e){}return e}function o(e){return clearTimeout(p),e instanceof Error||(e=new Error(""+(e||"Unknown XMLHttpRequest Error"))),e.statusCode=0,r(e,y)}function a(){if(!c){var t;clearTimeout(p),t=e.useXDR&&void 0===l.status?200:1223===l.status?204:l.status;var o=y,a=null;return 0!==t?(o={body:n(),statusCode:t,method:h,headers:{},url:f,rawRequest:l},l.getAllResponseHeaders&&(o.headers=i(l.getAllResponseHeaders()))):a=new Error("Internal XMLHttpRequest Error"),r(a,o,o.body)}}var s,c,l=e.xhr||null;l||(l=e.cors||e.useXDR?new u.XDomainRequest:new u.XMLHttpRequest);var p,f=l.url=e.uri||e.url,h=l.method=e.method||"GET",d=e.body||e.data,m=l.headers=e.headers||{},g=!!e.sync,v=!1,y={body:void 0,headers:{},statusCode:0,method:h,url:f,rawRequest:l};if("json"in e&&!1!==e.json&&(v=!0,m.accept||m.Accept||(m.Accept="application/json"),"GET"!==h&&"HEAD"!==h&&(m["content-type"]||m["Content-Type"]||(m["Content-Type"]="application/json"),d=JSON.stringify(!0===e.json?d:e.json))),l.onreadystatechange=function(){4===l.readyState&&setTimeout(a,0)},l.onload=a,l.onerror=o,l.onprogress=function(){},l.onabort=function(){c=!0},l.ontimeout=o,l.open(h,f,!g,e.username,e.password),g||(l.withCredentials=!!e.withCredentials),!g&&e.timeout>0&&(p=setTimeout((function(){if(!c){c=!0,l.abort("timeout");var e=new Error("XMLHttpRequest timeout");e.code="ETIMEDOUT",o(e)}}),e.timeout)),l.setRequestHeader)for(s in m)m.hasOwnProperty(s)&&l.setRequestHeader(s,m[s]);else if(e.headers&&!function(e){for(var t in e)if(e.hasOwnProperty(t))return!1;return!0}(e.headers))throw new Error("Headers cannot be set on an XDomainRequest object");return"responseType"in e&&(l.responseType=e.responseType),"beforeSend"in e&&"function"==typeof e.beforeSend&&e.beforeSend(l),l.send(d||null),l}e.exports=u,e.exports.default=u,u.XMLHttpRequest=n.XMLHttpRequest||function(){},u.XDomainRequest="withCredentials"in new u.XMLHttpRequest?u.XMLHttpRequest:n.XDomainRequest,function(e,t){for(var r=0;r<e.length;r++)t(e[r])}(["get","put","post","patch","head","delete"],(function(e){u["delete"===e?"del":e]=function(t,r,n){return(r=s(t,r,n)).method=e.toUpperCase(),c(r)}}))},function(e,t,r){(function(t){var r;r="undefined"!=typeof window?window:void 0!==t?t:"undefined"!=typeof self?self:{},e.exports=r}).call(this,r(3))},function(e,t){e.exports=function(e){var t=r.call(e);return"[object Function]"===t||"function"==typeof e&&"[object RegExp]"!==t||"undefined"!=typeof window&&(e===window.setTimeout||e===window.alert||e===window.confirm||e===window.prompt)};var r=Object.prototype.toString},function(e,t,r){var n=r(26),o=r(44);e.exports=function(e){if(!e)return{};var t={};return o(n(e).split("\n"),(function(e){var r,o=e.indexOf(":"),i=n(e.slice(0,o)).toLowerCase(),a=n(e.slice(o+1));void 0===t[i]?t[i]=a:(r=t[i],"[object Array]"===Object.prototype.toString.call(r)?t[i].push(a):t[i]=[t[i],a])})),t}},function(e,t,r){"use strict";var n=r(0),o=r(7),i=r(9),a=r(11),s=r(43),u=n.call(Function.call,a());o(u,{getPolyfill:a,implementation:i,shim:s}),e.exports=u},function(e,t,r){"use strict";var n="Function.prototype.bind called on incompatible ",o=Array.prototype.slice,i=Object.prototype.toString;e.exports=function(e){var t=this;if("function"!=typeof t||"[object Function]"!==i.call(t))throw new TypeError(n+t);for(var r,a=o.call(arguments,1),s=function(){if(this instanceof r){var n=t.apply(this,a.concat(o.call(arguments)));return Object(n)===n?n:this}return t.apply(e,a.concat(o.call(arguments)))},u=Math.max(0,t.length-a.length),c=[],l=0;l<u;l++)c.push("$"+l);if(r=Function("binder","return function ("+c.join(",")+"){ return binder.apply(this,arguments); }")(s),t.prototype){var p=function(){};p.prototype=t.prototype,r.prototype=new p,p.prototype=null}return r}},function(e,t,r){"use strict";var n=Array.prototype.slice,o=r(8),i=Object.keys,a=i?function(e){return i(e)}:r(29),s=Object.keys;a.shim=function(){Object.keys?function(){var e=Object.keys(arguments);return e&&e.length===arguments.length}(1,2)||(Object.keys=function(e){return o(e)?s(n.call(e)):s(e)}):Object.keys=a;return Object.keys||a},e.exports=a},function(e,t,r){"use strict";var n;if(!Object.keys){var o=Object.prototype.hasOwnProperty,i=Object.prototype.toString,a=r(8),s=Object.prototype.propertyIsEnumerable,u=!s.call({toString:null},"toString"),c=s.call((function(){}),"prototype"),l=["toString","toLocaleString","valueOf","hasOwnProperty","isPrototypeOf","propertyIsEnumerable","constructor"],p=function(e){var t=e.constructor;return t&&t.prototype===e},f={$applicationCache:!0,$console:!0,$external:!0,$frame:!0,$frameElement:!0,$frames:!0,$innerHeight:!0,$innerWidth:!0,$onmozfullscreenchange:!0,$onmozfullscreenerror:!0,$outerHeight:!0,$outerWidth:!0,$pageXOffset:!0,$pageYOffset:!0,$parent:!0,$scrollLeft:!0,$scrollTop:!0,$scrollX:!0,$scrollY:!0,$self:!0,$webkitIndexedDB:!0,$webkitStorageInfo:!0,$window:!0},h=function(){if("undefined"==typeof window)return!1;for(var e in window)try{if(!f["$"+e]&&o.call(window,e)&&null!==window[e]&&"object"==typeof window[e])try{p(window[e])}catch(e){return!0}}catch(e){return!0}return!1}();n=function(e){var t=null!==e&&"object"==typeof e,r="[object Function]"===i.call(e),n=a(e),s=t&&"[object String]"===i.call(e),f=[];if(!t&&!r&&!n)throw new TypeError("Object.keys called on a non-object");var d=c&&r;if(s&&e.length>0&&!o.call(e,0))for(var m=0;m<e.length;++m)f.push(String(m));if(n&&e.length>0)for(var g=0;g<e.length;++g)f.push(String(g));else for(var v in e)d&&"prototype"===v||!o.call(e,v)||f.push(String(v));if(u)for(var y=function(e){if("undefined"==typeof window||!h)return p(e);try{return p(e)}catch(e){return!1}}(e),E=0;E<l.length;++E)y&&"constructor"===l[E]||!o.call(e,l[E])||f.push(l[E]);return f}}e.exports=n},function(e,t,r){"use strict";var n=r(1),o=n("%Object%"),i=n("%EvalError%"),a=n("%TypeError%"),s=n("%String%"),u=n("%Date%"),c=n("%Number%"),l=n("%Math.floor%"),p=n("%Date.UTC%"),f=n("%Math.abs%"),h=r(33),d=r(34),m=r(35),g=r(36),v=r(37),y=r(38),E=r(39),b=r(10),T=r(5),w=r(41),R=r(4),x=b("Date.prototype.getUTCFullYear"),_={ToPrimitive:w,ToBoolean:function(e){return!!e},ToNumber:function(e){return+e},ToInteger:function(e){var t=this.ToNumber(e);return m(t)?0:0!==t&&g(t)?v(t)*Math.floor(Math.abs(t)):t},ToInt32:function(e){return this.ToNumber(e)>>0},ToUint32:function(e){return this.ToNumber(e)>>>0},ToUint16:function(e){var t=this.ToNumber(e);if(m(t)||0===t||!g(t))return 0;var r=v(t)*Math.floor(Math.abs(t));return y(r,65536)},ToString:function(e){return s(e)},ToObject:function(e){return this.CheckObjectCoercible(e),o(e)},CheckObjectCoercible:function(e,t){if(null==e)throw new a(t||"Cannot call method on "+e);return e},IsCallable:T,SameValue:function(e,t){return e===t?0!==e||1/e==1/t:m(e)&&m(t)},Type:function(e){return null===e?"Null":void 0===e?"Undefined":"function"==typeof e||"object"==typeof e?"Object":"number"==typeof e?"Number":"boolean"==typeof e?"Boolean":"string"==typeof e?"String":void 0},IsPropertyDescriptor:function(e){return d(this,e)},IsAccessorDescriptor:function(e){return void 0!==e&&(h(this,"Property Descriptor","Desc",e),!(!R(e,"[[Get]]")&&!R(e,"[[Set]]")))},IsDataDescriptor:function(e){return void 0!==e&&(h(this,"Property Descriptor","Desc",e),!(!R(e,"[[Value]]")&&!R(e,"[[Writable]]")))},IsGenericDescriptor:function(e){return void 0!==e&&(h(this,"Property Descriptor","Desc",e),!this.IsAccessorDescriptor(e)&&!this.IsDataDescriptor(e))},FromPropertyDescriptor:function(e){if(void 0===e)return e;if(h(this,"Property Descriptor","Desc",e),this.IsDataDescriptor(e))return{value:e["[[Value]]"],writable:!!e["[[Writable]]"],enumerable:!!e["[[Enumerable]]"],configurable:!!e["[[Configurable]]"]};if(this.IsAccessorDescriptor(e))return{get:e["[[Get]]"],set:e["[[Set]]"],enumerable:!!e["[[Enumerable]]"],configurable:!!e["[[Configurable]]"]};throw new a("FromPropertyDescriptor must be called with a fully populated Property Descriptor")},ToPropertyDescriptor:function(e){if("Object"!==this.Type(e))throw new a("ToPropertyDescriptor requires an object");var t={};if(R(e,"enumerable")&&(t["[[Enumerable]]"]=this.ToBoolean(e.enumerable)),R(e,"configurable")&&(t["[[Configurable]]"]=this.ToBoolean(e.configurable)),R(e,"value")&&(t["[[Value]]"]=e.value),R(e,"writable")&&(t["[[Writable]]"]=this.ToBoolean(e.writable)),R(e,"get")){var r=e.get;if(void 0!==r&&!this.IsCallable(r))throw new TypeError("getter must be a function");t["[[Get]]"]=r}if(R(e,"set")){var n=e.set;if(void 0!==n&&!this.IsCallable(n))throw new a("setter must be a function");t["[[Set]]"]=n}if((R(t,"[[Get]]")||R(t,"[[Set]]"))&&(R(t,"[[Value]]")||R(t,"[[Writable]]")))throw new a("Invalid property descriptor. Cannot both specify accessors and a value or writable attribute");return t},"Abstract Equality Comparison":function(e,t){var r=this.Type(e),n=this.Type(t);return r===n?e===t:null==e&&null==t||("Number"===r&&"String"===n?this["Abstract Equality Comparison"](e,this.ToNumber(t)):"String"===r&&"Number"===n?this["Abstract Equality Comparison"](this.ToNumber(e),t):"Boolean"===r?this["Abstract Equality Comparison"](this.ToNumber(e),t):"Boolean"===n?this["Abstract Equality Comparison"](e,this.ToNumber(t)):"String"!==r&&"Number"!==r||"Object"!==n?"Object"===r&&("String"===n||"Number"===n)&&this["Abstract Equality Comparison"](this.ToPrimitive(e),t):this["Abstract Equality Comparison"](e,this.ToPrimitive(t)))},"Strict Equality Comparison":function(e,t){var r=this.Type(e);return r===this.Type(t)&&("Undefined"===r||"Null"===r||e===t)},"Abstract Relational Comparison":function(e,t,r){if("Boolean"!==this.Type(r))throw new a("Assertion failed: LeftFirst argument must be a Boolean");var n,o;if(r?(n=this.ToPrimitive(e,c),o=this.ToPrimitive(t,c)):(o=this.ToPrimitive(t,c),n=this.ToPrimitive(e,c)),!("String"===this.Type(n)&&"String"===this.Type(o))){var i=this.ToNumber(n),s=this.ToNumber(o);if(m(i)||m(s))return;return(!g(i)||!g(s)||i!==s)&&((0!==i||0!==s)&&(i!==1/0&&(s===1/0||s!==-1/0&&(i===-1/0||i<s))))}return!E(o,n)&&(!!E(n,o)||n<o)},msFromTime:function(e){return y(e,1e3)},SecFromTime:function(e){return y(l(e/1e3),60)},MinFromTime:function(e){return y(l(e/6e4),60)},HourFromTime:function(e){return y(l(e/36e5),24)},Day:function(e){return l(e/864e5)},TimeWithinDay:function(e){return y(e,864e5)},DayFromYear:function(e){return 365*(e-1970)+l((e-1969)/4)-l((e-1901)/100)+l((e-1601)/400)},TimeFromYear:function(e){return 864e5*this.DayFromYear(e)},YearFromTime:function(e){return x(new u(e))},WeekDay:function(e){return y(this.Day(e)+4,7)},DaysInYear:function(e){return 0!==y(e,4)?365:0!==y(e,100)?366:0!==y(e,400)?365:366},InLeapYear:function(e){var t=this.DaysInYear(this.YearFromTime(e));if(365===t)return 0;if(366===t)return 1;throw new i("Assertion failed: there are not 365 or 366 days in a year, got: "+t)},DayWithinYear:function(e){return this.Day(e)-this.DayFromYear(this.YearFromTime(e))},MonthFromTime:function(e){var t=this.DayWithinYear(e);if(0<=t&&t<31)return 0;var r=this.InLeapYear(e);return 31<=t&&t<59+r?1:59+r<=t&&t<90+r?2:90+r<=t&&t<120+r?3:120+r<=t&&t<151+r?4:151+r<=t&&t<181+r?5:181+r<=t&&t<212+r?6:212+r<=t&&t<243+r?7:243+r<=t&&t<273+r?8:273+r<=t&&t<304+r?9:304+r<=t&&t<334+r?10:334+r<=t&&t<365+r?11:void 0},DateFromTime:function(e){var t=this.MonthFromTime(e),r=this.DayWithinYear(e);if(0===t)return r+1;if(1===t)return r-30;var n=this.InLeapYear(e);if(2===t)return r-58-n;if(3===t)return r-89-n;if(4===t)return r-119-n;if(5===t)return r-150-n;if(6===t)return r-180-n;if(7===t)return r-211-n;if(8===t)return r-242-n;if(9===t)return r-272-n;if(10===t)return r-303-n;if(11===t)return r-333-n;throw new i("Assertion failed: MonthFromTime returned an impossible value: "+t)},MakeDay:function(e,t,r){if(!g(e)||!g(t)||!g(r))return NaN;var n=this.ToInteger(e),o=this.ToInteger(t),i=this.ToInteger(r),a=n+l(o/12),s=y(o,12),u=p(a,s,1);return this.YearFromTime(u)!==a||this.MonthFromTime(u)!==s||1!==this.DateFromTime(u)?NaN:this.Day(u)+i-1},MakeDate:function(e,t){return g(e)&&g(t)?864e5*e+t:NaN},MakeTime:function(e,t,r,n){return g(e)&&g(t)&&g(r)&&g(n)?36e5*this.ToInteger(e)+6e4*this.ToInteger(t)+1e3*this.ToInteger(r)+this.ToInteger(n):NaN},TimeClip:function(e){return!g(e)||f(e)>864e13?NaN:c(new u(this.ToNumber(e)))},modulo:function(e,t){return y(e,t)}};e.exports=_},function(e,t,r){"use strict";(function(t){var n=t.Symbol,o=r(32);e.exports=function(){return"function"==typeof n&&("function"==typeof Symbol&&("symbol"==typeof n("foo")&&("symbol"==typeof Symbol("bar")&&o())))}}).call(this,r(3))},function(e,t,r){"use strict";e.exports=function(){if("function"!=typeof Symbol||"function"!=typeof Object.getOwnPropertySymbols)return!1;if("symbol"==typeof Symbol.iterator)return!0;var e={},t=Symbol("test"),r=Object(t);if("string"==typeof t)return!1;if("[object Symbol]"!==Object.prototype.toString.call(t))return!1;if("[object Symbol]"!==Object.prototype.toString.call(r))return!1;for(t in e[t]=42,e)return!1;if("function"==typeof Object.keys&&0!==Object.keys(e).length)return!1;if("function"==typeof Object.getOwnPropertyNames&&0!==Object.getOwnPropertyNames(e).length)return!1;var n=Object.getOwnPropertySymbols(e);if(1!==n.length||n[0]!==t)return!1;if(!Object.prototype.propertyIsEnumerable.call(e,t))return!1;if("function"==typeof Object.getOwnPropertyDescriptor){var o=Object.getOwnPropertyDescriptor(e,t);if(42!==o.value||!0!==o.enumerable)return!1}return!0}},function(e,t,r){"use strict";var n=r(1),o=n("%TypeError%"),i=n("%SyntaxError%"),a=r(4),s={"Property Descriptor":function(e,t){if("Object"!==e.Type(t))return!1;var r={"[[Configurable]]":!0,"[[Enumerable]]":!0,"[[Get]]":!0,"[[Set]]":!0,"[[Value]]":!0,"[[Writable]]":!0};for(var n in t)if(a(t,n)&&!r[n])return!1;var i=a(t,"[[Value]]"),s=a(t,"[[Get]]")||a(t,"[[Set]]");if(i&&s)throw new o("Property Descriptors may not be both accessor and data descriptors");return!0}};e.exports=function(e,t,r,n){var a=s[t];if("function"!=typeof a)throw new i("unknown record type: "+t);if(!a(e,n))throw new o(r+" must be a "+t)}},function(e,t,r){"use strict";var n=r(1),o=r(4),i=n("%TypeError%");e.exports=function(e,t){if("Object"!==e.Type(t))return!1;var r={"[[Configurable]]":!0,"[[Enumerable]]":!0,"[[Get]]":!0,"[[Set]]":!0,"[[Value]]":!0,"[[Writable]]":!0};for(var n in t)if(o(t,n)&&!r[n])return!1;if(e.IsDataDescriptor(t)&&e.IsAccessorDescriptor(t))throw new i("Property Descriptors may not be both accessor and data descriptors");return!0}},function(e,t,r){"use strict";e.exports=Number.isNaN||function(e){return e!=e}},function(e,t,r){"use strict";var n=Number.isNaN||function(e){return e!=e};e.exports=Number.isFinite||function(e){return"number"==typeof e&&!n(e)&&e!==1/0&&e!==-1/0}},function(e,t,r){"use strict";e.exports=function(e){return e>=0?1:-1}},function(e,t,r){"use strict";e.exports=function(e,t){var r=e%t;return Math.floor(r>=0?r:r+t)}},function(e,t,r){"use strict";var n=r(10)("String.prototype.slice");e.exports=function(e,t){return e===t||!(e.length>t.length)&&n(t,0,e.length)===e}},function(e,t,r){"use strict";var n=r(0),o=r(1)("%Function%"),i=o.apply,a=o.call;e.exports=function(){return n.apply(a,arguments)},e.exports.apply=function(){return n.apply(i,arguments)}},function(e,t,r){"use strict";var n=Object.prototype.toString,o=r(42),i=r(5),a=function(e){var t;if((t=arguments.length>1?arguments[1]:"[object Date]"===n.call(e)?String:Number)===String||t===Number){var r,a,s=t===String?["toString","valueOf"]:["valueOf","toString"];for(a=0;a<s.length;++a)if(i(e[s[a]])&&(r=e[s[a]](),o(r)))return r;throw new TypeError("No default value")}throw new TypeError("invalid [[DefaultValue]] hint supplied")};e.exports=function(e){return o(e)?e:arguments.length>1?a(e,arguments[1]):a(e)}},function(e,t){e.exports=function(e){return null===e||"function"!=typeof e&&"object"!=typeof e}},function(e,t,r){"use strict";var n=r(7),o=r(11);e.exports=function(){var e=o();return n(String.prototype,{trim:e},{trim:function(){return String.prototype.trim!==e}}),e}},function(e,t,r){"use strict";var n=r(5),o=Object.prototype.toString,i=Object.prototype.hasOwnProperty,a=function(e,t,r){for(var n=0,o=e.length;n<o;n++)i.call(e,n)&&(null==r?t(e[n],n,e):t.call(r,e[n],n,e))},s=function(e,t,r){for(var n=0,o=e.length;n<o;n++)null==r?t(e.charAt(n),n,e):t.call(r,e.charAt(n),n,e)},u=function(e,t,r){for(var n in e)i.call(e,n)&&(null==r?t(e[n],n,e):t.call(r,e[n],n,e))};e.exports=function(e,t,r){if(!n(t))throw new TypeError("iterator must be a function");var i;arguments.length>=3&&(i=r),"[object Array]"===o.call(e)?a(e,t,i):"string"==typeof e?s(e,t,i):u(e,t,i)}},function(e,t){function r(e,t){if(!(e=e.replace(/\t+/g," ").trim()))return null;var r=e.indexOf(" ");if(-1===r)throw new Error("no named row at line "+t);var o=e.substring(0,r);e=(e=(e=(e=e.substring(r+1)).replace(/letter=[\'\"]\S+[\'\"]/gi,"")).split("=")).map((function(e){return e.trim().match(/(".*?"|[^"\s]+)+(?=\s*|\s*$)/g)}));for(var i=[],a=0;a<e.length;a++){var s=e[a];0===a?i.push({key:s[0],data:""}):a===e.length-1?i[i.length-1].data=n(s[0]):(i[i.length-1].data=n(s[0]),i.push({key:s[1],data:""}))}var u={key:o,data:{}};return i.forEach((function(e){u.data[e.key]=e.data})),u}function n(e){return e&&0!==e.length?0===e.indexOf('"')||0===e.indexOf("'")?e.substring(1,e.length-1):-1!==e.indexOf(",")?function(e){return e.split(",").map((function(e){return parseInt(e,10)}))}(e):parseInt(e,10):""}e.exports=function(e){if(!e)throw new Error("no data provided");var t={pages:[],chars:[],kernings:[]},n=(e=e.toString().trim()).split(/\r\n?|\n/g);if(0===n.length)throw new Error("no data in BMFont file");for(var o=0;o<n.length;o++){var i=r(n[o],o);if(i)if("page"===i.key){if("number"!=typeof i.data.id)throw new Error("malformed file at line "+o+" -- needs page id=N");if("string"!=typeof i.data.file)throw new Error("malformed file at line "+o+' -- needs page file="path"');t.pages[i.data.id]=i.data.file}else"chars"===i.key||"kernings"===i.key||("char"===i.key?t.chars.push(i.data):"kerning"===i.key?t.kernings.push(i.data):t[i.key]=i.data)}return t}},function(e,t,r){var n=r(47),o=r(48),i={scaleh:"scaleH",scalew:"scaleW",stretchh:"stretchH",lineheight:"lineHeight",alphachnl:"alphaChnl",redchnl:"redChnl",greenchnl:"greenChnl",bluechnl:"blueChnl"};function a(e){return function(e){for(var t=[],r=0;r<e.attributes.length;r++)t.push(e.attributes[r]);return t}(e).reduce((function(e,t){var r;return e[(r=t.nodeName,i[r.toLowerCase()]||r)]=t.nodeValue,e}),{})}e.exports=function(e){e=e.toString();var t=o(e),r={pages:[],chars:[],kernings:[]};["info","common"].forEach((function(e){var o=t.getElementsByTagName(e)[0];o&&(r[e]=n(a(o)))}));var i=t.getElementsByTagName("pages")[0];if(!i)throw new Error("malformed file -- no <pages> element");for(var s=i.getElementsByTagName("page"),u=0;u<s.length;u++){var c=s[u],l=parseInt(c.getAttribute("id"),10),p=c.getAttribute("file");if(isNaN(l))throw new Error('malformed file -- page "id" attribute is NaN');if(!p)throw new Error('malformed file -- needs page "file" attribute');r.pages[parseInt(l,10)]=p}return["chars","kernings"].forEach((function(e){var o=t.getElementsByTagName(e)[0];if(o)for(var i=e.substring(0,e.length-1),s=o.getElementsByTagName(i),u=0;u<s.length;u++){var c=s[u];r[e].push(n(a(c)))}})),r}},function(e,t){e.exports=function(e){for(var t in"chasrset"in e&&(e.charset=e.chasrset,delete e.chasrset),e)"face"!==t&&"charset"!==t&&(e[t]="padding"===t||"spacing"===t?e[t].split(",").map((function(e){return parseInt(e,10)})):parseInt(e[t],10));return e}},function(e,t){e.exports=void 0!==self.DOMParser?function(e){return(new self.DOMParser).parseFromString(e,"application/xml")}:void 0!==self.ActiveXObject&&new self.ActiveXObject("Microsoft.XMLDOM")?function(e){var t=new self.ActiveXObject("Microsoft.XMLDOM");return t.async="false",t.loadXML(e),t}:function(e){var t=document.createElement("div");return t.innerHTML=e,t}},function(e,t){var r=[66,77,70];function n(e,t,r){if(r>t.length-1)return 0;var n=t.readUInt8(r++),i=t.readInt32LE(r);switch(r+=4,n){case 1:e.info=function(e,t){var r={};r.size=e.readInt16LE(t);var n=e.readUInt8(t+2);r.smooth=n>>7&1,r.unicode=n>>6&1,r.italic=n>>5&1,r.bold=n>>4&1,n>>3&1&&(r.fixedHeight=1);return r.charset=e.readUInt8(t+3)||"",r.stretchH=e.readUInt16LE(t+4),r.aa=e.readUInt8(t+6),r.padding=[e.readInt8(t+7),e.readInt8(t+8),e.readInt8(t+9),e.readInt8(t+10)],r.spacing=[e.readInt8(t+11),e.readInt8(t+12)],r.outline=e.readUInt8(t+13),r.face=function(e,t){return o(e,t).toString("utf8")}(e,t+14),r}(t,r);break;case 2:e.common=function(e,t){var r={};r.lineHeight=e.readUInt16LE(t),r.base=e.readUInt16LE(t+2),r.scaleW=e.readUInt16LE(t+4),r.scaleH=e.readUInt16LE(t+6),r.pages=e.readUInt16LE(t+8);e.readUInt8(t+10);return r.packed=0,r.alphaChnl=e.readUInt8(t+11),r.redChnl=e.readUInt8(t+12),r.greenChnl=e.readUInt8(t+13),r.blueChnl=e.readUInt8(t+14),r}(t,r);break;case 3:e.pages=function(e,t,r){for(var n=[],i=o(e,t),a=i.length+1,s=r/a,u=0;u<s;u++)n[u]=e.slice(t,t+i.length).toString("utf8"),t+=a;return n}(t,r,i);break;case 4:e.chars=function(e,t,r){for(var n=[],o=r/20,i=0;i<o;i++){var a={},s=20*i;a.id=e.readUInt32LE(t+0+s),a.x=e.readUInt16LE(t+4+s),a.y=e.readUInt16LE(t+6+s),a.width=e.readUInt16LE(t+8+s),a.height=e.readUInt16LE(t+10+s),a.xoffset=e.readInt16LE(t+12+s),a.yoffset=e.readInt16LE(t+14+s),a.xadvance=e.readInt16LE(t+16+s),a.page=e.readUInt8(t+18+s),a.chnl=e.readUInt8(t+19+s),n[i]=a}return n}(t,r,i);break;case 5:e.kernings=function(e,t,r){for(var n=[],o=r/10,i=0;i<o;i++){var a={},s=10*i;a.first=e.readUInt32LE(t+0+s),a.second=e.readUInt32LE(t+4+s),a.amount=e.readInt16LE(t+8+s),n[i]=a}return n}(t,r,i)}return 5+i}function o(e,t){for(var r=t;r<e.length&&0!==e[r];r++);return e.slice(t,r)}e.exports=function(e){if(e.length<6)throw new Error("invalid buffer length for BMFont");if(!r.every((function(t,r){return e.readUInt8(r)===t})))throw new Error("BMFont missing BMF byte header");var t=3;if(e.readUInt8(t++)>3)throw new Error("Only supports BMFont Binary v3 (BMFont App v1.10)");for(var o={kernings:[],chars:[]},i=0;i<5;i++)t+=n(o,e,t);return o}},function(e,t,r){(function(t){var n=r(51),o=new t([66,77,70,3]);e.exports=function(e){return"string"==typeof e?"BMF"===e.substring(0,3):e.length>4&&n(e.slice(0,4),o)}}).call(this,r(2).Buffer)},function(e,t,r){var n=r(2).Buffer;e.exports=function(e,t){if(n.isBuffer(e)&&n.isBuffer(t)){if("function"==typeof e.equals)return e.equals(t);if(e.length!==t.length)return!1;for(var r=0;r<e.length;r++)if(e[r]!==t[r])return!1;return!0}}},function(e,t,r){var n=r(53),o=r(56),i=r(57),a=r(60),s=r(13),u=r(62),c=r(63),l=THREE.BufferGeometry;function p(e){l.call(this),"string"==typeof e&&(e={text:e}),this._opt=s({},e),e&&this.update(e)}e.exports=function(e){return new p(e)},o(p,l),p.prototype.update=function(e){if("string"==typeof e&&(e={text:e}),!(e=s({},this._opt,e)).font)throw new TypeError("must specify a { font } in options");this.layout=n(e);var t=!1!==e.flipY,r=e.font,o=r.common.scaleW,c=r.common.scaleH,l=this.layout.glyphs.filter((function(e){var t=e.data;return t.width*t.height>0}));this.visibleGlyphs=l;var p=u.positions(l),f=u.uvs(l,o,c,t),h=i({clockwise:!0,type:"uint16",count:l.length});if(a.index(this,h,1,"uint16"),a.attr(this,"position",p,2),a.attr(this,"uv",f,2),!e.multipage&&"page"in this.attributes)this.removeAttribute("page");else if(e.multipage){var d=u.pages(l);a.attr(this,"page",d,1)}},p.prototype.computeBoundingSphere=function(){null===this.boundingSphere&&(this.boundingSphere=new THREE.Sphere);var e=this.attributes.position.array,t=this.attributes.position.itemSize;if(!e||!t||e.length<2)return this.boundingSphere.radius=0,void this.boundingSphere.center.set(0,0,0);c.computeSphere(e,this.boundingSphere),isNaN(this.boundingSphere.radius)&&console.error('THREE.BufferGeometry.computeBoundingSphere(): Computed radius is NaN. The "position" attribute is likely to have NaN values.')},p.prototype.computeBoundingBox=function(){null===this.boundingBox&&(this.boundingBox=new THREE.Box3);var e=this.boundingBox,t=this.attributes.position.array,r=this.attributes.position.itemSize;!t||!r||t.length<2?e.makeEmpty():c.computeBox(t,e)}},function(e,t,r){var n=r(54),o=r(6),i=r(55),a=["x","e","a","o","n","s","r","c","u","m","v","w","z"],s=["m","w"],u=["H","I","N","E","F","K","L","T","U","V","W","X","Y","Z"],c="\t".charCodeAt(0),l=" ".charCodeAt(0),p=0,f=1,h=2;function d(e){this.glyphs=[],this._measure=this.computeMetrics.bind(this),this.update(e)}function m(e){return new Function(["return function "+e+"() {","  return this._"+e,"}"].join("\n"))()}function g(e,t){if(!e.chars||0===e.chars.length)return null;var r=y(e.chars,t);return r>=0?e.chars[r]:null}function v(e,t,r){if(!e.kernings||0===e.kernings.length)return 0;for(var n=e.kernings,o=0;o<n.length;o++){var i=n[o];if(i.first===t&&i.second===r)return i.amount}return 0}function y(e,t,r){for(var n=r=r||0;n<e.length;n++)if(e[n].id===t)return n;return-1}e.exports=function(e){return new d(e)},d.prototype.update=function(e){if(e=o({measure:this._measure},e),this._opt=e,this._opt.tabSize=i(this._opt.tabSize,4),!e.font)throw new Error("must provide a valid bitmap font");var t=this.glyphs,r=e.text||"",s=e.font;this._setupSpaceGlyphs(s);var c=n.lines(r,e),l=e.width||0;t.length=0;var d=c.reduce((function(e,t){return Math.max(e,t.width,l)}),0),m=0,g=0,E=i(e.lineHeight,s.common.lineHeight),b=s.common.base,T=E-b,w=e.letterSpacing||0,R=E*c.length-T,x=function(e){if("center"===e)return f;if("right"===e)return h;return p}(this._opt.align);g-=R,this._width=d,this._height=R,this._descender=E-b,this._baseline=b,this._xHeight=function(e){for(var t=0;t<a.length;t++){var r=a[t].charCodeAt(0),n=y(e.chars,r);if(n>=0)return e.chars[n].height}return 0}(s),this._capHeight=function(e){for(var t=0;t<u.length;t++){var r=u[t].charCodeAt(0),n=y(e.chars,r);if(n>=0)return e.chars[n].height}return 0}(s),this._lineHeight=E,this._ascender=E-T-this._xHeight;var _=this;c.forEach((function(e,n){for(var o,i=e.start,a=e.end,u=e.width,c=i;c<a;c++){var l=r.charCodeAt(c),p=_.getGlyph(s,l);if(p){o&&(m+=v(s,o.id,p.id));var y=m;x===f?y+=(d-u)/2:x===h&&(y+=d-u),t.push({position:[y,g],data:p,index:c,line:n}),m+=p.xadvance+w,o=p}}g+=E,m=0})),this._linesTotal=c.length},d.prototype._setupSpaceGlyphs=function(e){if(this._fallbackSpaceGlyph=null,this._fallbackTabGlyph=null,e.chars&&0!==e.chars.length){var t=g(e,l)||function(e){for(var t=0;t<s.length;t++){var r=s[t].charCodeAt(0),n=y(e.chars,r);if(n>=0)return e.chars[n]}return 0}(e)||e.chars[0],r=this._opt.tabSize*t.xadvance;this._fallbackSpaceGlyph=t,this._fallbackTabGlyph=o(t,{x:0,y:0,xadvance:r,id:c,xoffset:0,yoffset:0,width:0,height:0})}},d.prototype.getGlyph=function(e,t){var r=g(e,t);return r||(t===c?this._fallbackTabGlyph:t===l?this._fallbackSpaceGlyph:null)},d.prototype.computeMetrics=function(e,t,r,n){var o,i=this._opt.letterSpacing||0,a=this._opt.font,s=0,u=0,c=0;if(!a.chars||0===a.chars.length)return{start:t,end:t,width:0};r=Math.min(e.length,r);for(var l=t;l<r;l++){var p,f=e.charCodeAt(l);if(p=this.getGlyph(a,f)){p.xoffset;var h=(s+=o?v(a,o.id,p.id):0)+p.xadvance+i,d=s+p.width;if(d>=n||h>=n)break;s=h,u=d,o=p}c++}return o&&(u+=o.xoffset),{start:t,end:t+c,width:u}},["width","height","descender","ascender","xHeight","baseline","capHeight","lineHeight"].forEach((function(e){Object.defineProperty(d.prototype,e,{get:m(e),configurable:!0})}))},function(e,t){var r=/\n/,n="\n",o=/\s/;function i(e,t,r,n){var o=e.indexOf(t,r);return-1===o||o>n?n:o}function a(e){return o.test(e)}function s(e,t,r,n){return{start:t,end:t+Math.min(n,r-t)}}e.exports=function(t,r){return e.exports.lines(t,r).map((function(e){return t.substring(e.start,e.end)})).join("\n")},e.exports.lines=function(e,t){if(0===(t=t||{}).width&&"nowrap"!==t.mode)return[];e=e||"";var o="number"==typeof t.width?t.width:Number.MAX_VALUE,u=Math.max(0,t.start||0),c="number"==typeof t.end?t.end:e.length,l=t.mode,p=t.measure||s;return"pre"===l?function(e,t,n,o,i){for(var a=[],s=n,u=n;u<o&&u<t.length;u++){var c=t.charAt(u),l=r.test(c);if(l||u===o-1){var p=e(t,s,l?u:u+1,i);a.push(p),s=u+1}}return a}(p,e,u,c,o):function(e,t,r,o,s,u){var c=[],l=s;"nowrap"===u&&(l=Number.MAX_VALUE);for(;r<o&&r<t.length;){for(var p=i(t,n,r,o);r<p&&a(t.charAt(r));)r++;var f=e(t,r,p,l),h=r+(f.end-f.start),d=h+n.length;if(h<p){for(;h>r&&!a(t.charAt(h));)h--;if(h===r)d>r+n.length&&d--,h=d;else for(d=h;h>r&&a(t.charAt(h-n.length));)h--}if(h>=r){var m=e(t,r,h,l);c.push(m)}r=d}return c}(p,e,u,c,o,l)}},function(e,t){e.exports=function(e,t){return"number"==typeof e?e:"number"==typeof t?t:0}},function(e,t){"function"==typeof Object.create?e.exports=function(e,t){t&&(e.super_=t,e.prototype=Object.create(t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}))}:e.exports=function(e,t){if(t){e.super_=t;var r=function(){};r.prototype=t.prototype,e.prototype=new r,e.prototype.constructor=e}}},function(e,t,r){var n=r(12),o=r(58),i=r(59),a=[0,2,3],s=[2,1,3];e.exports=function(e,t){e&&(o(e)||i(e))||(t=e||{},e=null);for(var r="string"==typeof(t="number"==typeof t?{count:t}:t||{}).type?t.type:"uint16",u="number"==typeof t.count?t.count:1,c=t.start||0,l=!1!==t.clockwise?a:s,p=l[0],f=l[1],h=l[2],d=6*u,m=e||new(n(r))(d),g=0,v=0;g<d;g+=6,v+=4){var y=g+c;m[y+0]=v+0,m[y+1]=v+1,m[y+2]=v+2,m[y+3]=v+p,m[y+4]=v+f,m[y+5]=v+h}return m}},function(e,t){var r=Object.prototype.toString;e.exports=function(e){return e.BYTES_PER_ELEMENT&&"[object ArrayBuffer]"===r.call(e.buffer)||Array.isArray(e)}},function(e,t){function r(e){return!!e.constructor&&"function"==typeof e.constructor.isBuffer&&e.constructor.isBuffer(e)}
+ * Export kMaxLength after typed array support is determined.
+ */
+exports.kMaxLength = kMaxLength()
+
+function typedArraySupport () {
+  try {
+    var arr = new Uint8Array(1)
+    arr.__proto__ = {__proto__: Uint8Array.prototype, foo: function () { return 42 }}
+    return arr.foo() === 42 && // typed array instances can be augmented
+        typeof arr.subarray === 'function' && // chrome 9-10 lack `subarray`
+        arr.subarray(1, 1).byteLength === 0 // ie10 has broken `subarray`
+  } catch (e) {
+    return false
+  }
+}
+
+function kMaxLength () {
+  return Buffer.TYPED_ARRAY_SUPPORT
+    ? 0x7fffffff
+    : 0x3fffffff
+}
+
+function createBuffer (that, length) {
+  if (kMaxLength() < length) {
+    throw new RangeError('Invalid typed array length')
+  }
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    // Return an augmented `Uint8Array` instance, for best performance
+    that = new Uint8Array(length)
+    that.__proto__ = Buffer.prototype
+  } else {
+    // Fallback: Return an object instance of the Buffer class
+    if (that === null) {
+      that = new Buffer(length)
+    }
+    that.length = length
+  }
+
+  return that
+}
+
+/**
+ * The Buffer constructor returns instances of `Uint8Array` that have their
+ * prototype changed to `Buffer.prototype`. Furthermore, `Buffer` is a subclass of
+ * `Uint8Array`, so the returned instances will have all the node `Buffer` methods
+ * and the `Uint8Array` methods. Square bracket notation works as expected -- it
+ * returns a single octet.
+ *
+ * The `Uint8Array` prototype remains unmodified.
+ */
+
+function Buffer (arg, encodingOrOffset, length) {
+  if (!Buffer.TYPED_ARRAY_SUPPORT && !(this instanceof Buffer)) {
+    return new Buffer(arg, encodingOrOffset, length)
+  }
+
+  // Common case.
+  if (typeof arg === 'number') {
+    if (typeof encodingOrOffset === 'string') {
+      throw new Error(
+        'If encoding is specified then the first argument must be a string'
+      )
+    }
+    return allocUnsafe(this, arg)
+  }
+  return from(this, arg, encodingOrOffset, length)
+}
+
+Buffer.poolSize = 8192 // not used by this implementation
+
+// TODO: Legacy, not needed anymore. Remove in next major version.
+Buffer._augment = function (arr) {
+  arr.__proto__ = Buffer.prototype
+  return arr
+}
+
+function from (that, value, encodingOrOffset, length) {
+  if (typeof value === 'number') {
+    throw new TypeError('"value" argument must not be a number')
+  }
+
+  if (typeof ArrayBuffer !== 'undefined' && value instanceof ArrayBuffer) {
+    return fromArrayBuffer(that, value, encodingOrOffset, length)
+  }
+
+  if (typeof value === 'string') {
+    return fromString(that, value, encodingOrOffset)
+  }
+
+  return fromObject(that, value)
+}
+
+/**
+ * Functionally equivalent to Buffer(arg, encoding) but throws a TypeError
+ * if value is a number.
+ * Buffer.from(str[, encoding])
+ * Buffer.from(array)
+ * Buffer.from(buffer)
+ * Buffer.from(arrayBuffer[, byteOffset[, length]])
+ **/
+Buffer.from = function (value, encodingOrOffset, length) {
+  return from(null, value, encodingOrOffset, length)
+}
+
+if (Buffer.TYPED_ARRAY_SUPPORT) {
+  Buffer.prototype.__proto__ = Uint8Array.prototype
+  Buffer.__proto__ = Uint8Array
+  if (typeof Symbol !== 'undefined' && Symbol.species &&
+      Buffer[Symbol.species] === Buffer) {
+    // Fix subarray() in ES2016. See: https://github.com/feross/buffer/pull/97
+    Object.defineProperty(Buffer, Symbol.species, {
+      value: null,
+      configurable: true
+    })
+  }
+}
+
+function assertSize (size) {
+  if (typeof size !== 'number') {
+    throw new TypeError('"size" argument must be a number')
+  } else if (size < 0) {
+    throw new RangeError('"size" argument must not be negative')
+  }
+}
+
+function alloc (that, size, fill, encoding) {
+  assertSize(size)
+  if (size <= 0) {
+    return createBuffer(that, size)
+  }
+  if (fill !== undefined) {
+    // Only pay attention to encoding if it's a string. This
+    // prevents accidentally sending in a number that would
+    // be interpretted as a start offset.
+    return typeof encoding === 'string'
+      ? createBuffer(that, size).fill(fill, encoding)
+      : createBuffer(that, size).fill(fill)
+  }
+  return createBuffer(that, size)
+}
+
+/**
+ * Creates a new filled Buffer instance.
+ * alloc(size[, fill[, encoding]])
+ **/
+Buffer.alloc = function (size, fill, encoding) {
+  return alloc(null, size, fill, encoding)
+}
+
+function allocUnsafe (that, size) {
+  assertSize(size)
+  that = createBuffer(that, size < 0 ? 0 : checked(size) | 0)
+  if (!Buffer.TYPED_ARRAY_SUPPORT) {
+    for (var i = 0; i < size; ++i) {
+      that[i] = 0
+    }
+  }
+  return that
+}
+
+/**
+ * Equivalent to Buffer(num), by default creates a non-zero-filled Buffer instance.
+ * */
+Buffer.allocUnsafe = function (size) {
+  return allocUnsafe(null, size)
+}
+/**
+ * Equivalent to SlowBuffer(num), by default creates a non-zero-filled Buffer instance.
+ */
+Buffer.allocUnsafeSlow = function (size) {
+  return allocUnsafe(null, size)
+}
+
+function fromString (that, string, encoding) {
+  if (typeof encoding !== 'string' || encoding === '') {
+    encoding = 'utf8'
+  }
+
+  if (!Buffer.isEncoding(encoding)) {
+    throw new TypeError('"encoding" must be a valid string encoding')
+  }
+
+  var length = byteLength(string, encoding) | 0
+  that = createBuffer(that, length)
+
+  var actual = that.write(string, encoding)
+
+  if (actual !== length) {
+    // Writing a hex string, for example, that contains invalid characters will
+    // cause everything after the first invalid character to be ignored. (e.g.
+    // 'abxxcd' will be treated as 'ab')
+    that = that.slice(0, actual)
+  }
+
+  return that
+}
+
+function fromArrayLike (that, array) {
+  var length = array.length < 0 ? 0 : checked(array.length) | 0
+  that = createBuffer(that, length)
+  for (var i = 0; i < length; i += 1) {
+    that[i] = array[i] & 255
+  }
+  return that
+}
+
+function fromArrayBuffer (that, array, byteOffset, length) {
+  array.byteLength // this throws if `array` is not a valid ArrayBuffer
+
+  if (byteOffset < 0 || array.byteLength < byteOffset) {
+    throw new RangeError('\'offset\' is out of bounds')
+  }
+
+  if (array.byteLength < byteOffset + (length || 0)) {
+    throw new RangeError('\'length\' is out of bounds')
+  }
+
+  if (byteOffset === undefined && length === undefined) {
+    array = new Uint8Array(array)
+  } else if (length === undefined) {
+    array = new Uint8Array(array, byteOffset)
+  } else {
+    array = new Uint8Array(array, byteOffset, length)
+  }
+
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    // Return an augmented `Uint8Array` instance, for best performance
+    that = array
+    that.__proto__ = Buffer.prototype
+  } else {
+    // Fallback: Return an object instance of the Buffer class
+    that = fromArrayLike(that, array)
+  }
+  return that
+}
+
+function fromObject (that, obj) {
+  if (Buffer.isBuffer(obj)) {
+    var len = checked(obj.length) | 0
+    that = createBuffer(that, len)
+
+    if (that.length === 0) {
+      return that
+    }
+
+    obj.copy(that, 0, 0, len)
+    return that
+  }
+
+  if (obj) {
+    if ((typeof ArrayBuffer !== 'undefined' &&
+        obj.buffer instanceof ArrayBuffer) || 'length' in obj) {
+      if (typeof obj.length !== 'number' || isnan(obj.length)) {
+        return createBuffer(that, 0)
+      }
+      return fromArrayLike(that, obj)
+    }
+
+    if (obj.type === 'Buffer' && isArray(obj.data)) {
+      return fromArrayLike(that, obj.data)
+    }
+  }
+
+  throw new TypeError('First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object.')
+}
+
+function checked (length) {
+  // Note: cannot use `length < kMaxLength()` here because that fails when
+  // length is NaN (which is otherwise coerced to zero.)
+  if (length >= kMaxLength()) {
+    throw new RangeError('Attempt to allocate Buffer larger than maximum ' +
+                         'size: 0x' + kMaxLength().toString(16) + ' bytes')
+  }
+  return length | 0
+}
+
+function SlowBuffer (length) {
+  if (+length != length) { // eslint-disable-line eqeqeq
+    length = 0
+  }
+  return Buffer.alloc(+length)
+}
+
+Buffer.isBuffer = function isBuffer (b) {
+  return !!(b != null && b._isBuffer)
+}
+
+Buffer.compare = function compare (a, b) {
+  if (!Buffer.isBuffer(a) || !Buffer.isBuffer(b)) {
+    throw new TypeError('Arguments must be Buffers')
+  }
+
+  if (a === b) return 0
+
+  var x = a.length
+  var y = b.length
+
+  for (var i = 0, len = Math.min(x, y); i < len; ++i) {
+    if (a[i] !== b[i]) {
+      x = a[i]
+      y = b[i]
+      break
+    }
+  }
+
+  if (x < y) return -1
+  if (y < x) return 1
+  return 0
+}
+
+Buffer.isEncoding = function isEncoding (encoding) {
+  switch (String(encoding).toLowerCase()) {
+    case 'hex':
+    case 'utf8':
+    case 'utf-8':
+    case 'ascii':
+    case 'latin1':
+    case 'binary':
+    case 'base64':
+    case 'ucs2':
+    case 'ucs-2':
+    case 'utf16le':
+    case 'utf-16le':
+      return true
+    default:
+      return false
+  }
+}
+
+Buffer.concat = function concat (list, length) {
+  if (!isArray(list)) {
+    throw new TypeError('"list" argument must be an Array of Buffers')
+  }
+
+  if (list.length === 0) {
+    return Buffer.alloc(0)
+  }
+
+  var i
+  if (length === undefined) {
+    length = 0
+    for (i = 0; i < list.length; ++i) {
+      length += list[i].length
+    }
+  }
+
+  var buffer = Buffer.allocUnsafe(length)
+  var pos = 0
+  for (i = 0; i < list.length; ++i) {
+    var buf = list[i]
+    if (!Buffer.isBuffer(buf)) {
+      throw new TypeError('"list" argument must be an Array of Buffers')
+    }
+    buf.copy(buffer, pos)
+    pos += buf.length
+  }
+  return buffer
+}
+
+function byteLength (string, encoding) {
+  if (Buffer.isBuffer(string)) {
+    return string.length
+  }
+  if (typeof ArrayBuffer !== 'undefined' && typeof ArrayBuffer.isView === 'function' &&
+      (ArrayBuffer.isView(string) || string instanceof ArrayBuffer)) {
+    return string.byteLength
+  }
+  if (typeof string !== 'string') {
+    string = '' + string
+  }
+
+  var len = string.length
+  if (len === 0) return 0
+
+  // Use a for loop to avoid recursion
+  var loweredCase = false
+  for (;;) {
+    switch (encoding) {
+      case 'ascii':
+      case 'latin1':
+      case 'binary':
+        return len
+      case 'utf8':
+      case 'utf-8':
+      case undefined:
+        return utf8ToBytes(string).length
+      case 'ucs2':
+      case 'ucs-2':
+      case 'utf16le':
+      case 'utf-16le':
+        return len * 2
+      case 'hex':
+        return len >>> 1
+      case 'base64':
+        return base64ToBytes(string).length
+      default:
+        if (loweredCase) return utf8ToBytes(string).length // assume utf8
+        encoding = ('' + encoding).toLowerCase()
+        loweredCase = true
+    }
+  }
+}
+Buffer.byteLength = byteLength
+
+function slowToString (encoding, start, end) {
+  var loweredCase = false
+
+  // No need to verify that "this.length <= MAX_UINT32" since it's a read-only
+  // property of a typed array.
+
+  // This behaves neither like String nor Uint8Array in that we set start/end
+  // to their upper/lower bounds if the value passed is out of range.
+  // undefined is handled specially as per ECMA-262 6th Edition,
+  // Section 13.3.3.7 Runtime Semantics: KeyedBindingInitialization.
+  if (start === undefined || start < 0) {
+    start = 0
+  }
+  // Return early if start > this.length. Done here to prevent potential uint32
+  // coercion fail below.
+  if (start > this.length) {
+    return ''
+  }
+
+  if (end === undefined || end > this.length) {
+    end = this.length
+  }
+
+  if (end <= 0) {
+    return ''
+  }
+
+  // Force coersion to uint32. This will also coerce falsey/NaN values to 0.
+  end >>>= 0
+  start >>>= 0
+
+  if (end <= start) {
+    return ''
+  }
+
+  if (!encoding) encoding = 'utf8'
+
+  while (true) {
+    switch (encoding) {
+      case 'hex':
+        return hexSlice(this, start, end)
+
+      case 'utf8':
+      case 'utf-8':
+        return utf8Slice(this, start, end)
+
+      case 'ascii':
+        return asciiSlice(this, start, end)
+
+      case 'latin1':
+      case 'binary':
+        return latin1Slice(this, start, end)
+
+      case 'base64':
+        return base64Slice(this, start, end)
+
+      case 'ucs2':
+      case 'ucs-2':
+      case 'utf16le':
+      case 'utf-16le':
+        return utf16leSlice(this, start, end)
+
+      default:
+        if (loweredCase) throw new TypeError('Unknown encoding: ' + encoding)
+        encoding = (encoding + '').toLowerCase()
+        loweredCase = true
+    }
+  }
+}
+
+// The property is used by `Buffer.isBuffer` and `is-buffer` (in Safari 5-7) to detect
+// Buffer instances.
+Buffer.prototype._isBuffer = true
+
+function swap (b, n, m) {
+  var i = b[n]
+  b[n] = b[m]
+  b[m] = i
+}
+
+Buffer.prototype.swap16 = function swap16 () {
+  var len = this.length
+  if (len % 2 !== 0) {
+    throw new RangeError('Buffer size must be a multiple of 16-bits')
+  }
+  for (var i = 0; i < len; i += 2) {
+    swap(this, i, i + 1)
+  }
+  return this
+}
+
+Buffer.prototype.swap32 = function swap32 () {
+  var len = this.length
+  if (len % 4 !== 0) {
+    throw new RangeError('Buffer size must be a multiple of 32-bits')
+  }
+  for (var i = 0; i < len; i += 4) {
+    swap(this, i, i + 3)
+    swap(this, i + 1, i + 2)
+  }
+  return this
+}
+
+Buffer.prototype.swap64 = function swap64 () {
+  var len = this.length
+  if (len % 8 !== 0) {
+    throw new RangeError('Buffer size must be a multiple of 64-bits')
+  }
+  for (var i = 0; i < len; i += 8) {
+    swap(this, i, i + 7)
+    swap(this, i + 1, i + 6)
+    swap(this, i + 2, i + 5)
+    swap(this, i + 3, i + 4)
+  }
+  return this
+}
+
+Buffer.prototype.toString = function toString () {
+  var length = this.length | 0
+  if (length === 0) return ''
+  if (arguments.length === 0) return utf8Slice(this, 0, length)
+  return slowToString.apply(this, arguments)
+}
+
+Buffer.prototype.equals = function equals (b) {
+  if (!Buffer.isBuffer(b)) throw new TypeError('Argument must be a Buffer')
+  if (this === b) return true
+  return Buffer.compare(this, b) === 0
+}
+
+Buffer.prototype.inspect = function inspect () {
+  var str = ''
+  var max = exports.INSPECT_MAX_BYTES
+  if (this.length > 0) {
+    str = this.toString('hex', 0, max).match(/.{2}/g).join(' ')
+    if (this.length > max) str += ' ... '
+  }
+  return '<Buffer ' + str + '>'
+}
+
+Buffer.prototype.compare = function compare (target, start, end, thisStart, thisEnd) {
+  if (!Buffer.isBuffer(target)) {
+    throw new TypeError('Argument must be a Buffer')
+  }
+
+  if (start === undefined) {
+    start = 0
+  }
+  if (end === undefined) {
+    end = target ? target.length : 0
+  }
+  if (thisStart === undefined) {
+    thisStart = 0
+  }
+  if (thisEnd === undefined) {
+    thisEnd = this.length
+  }
+
+  if (start < 0 || end > target.length || thisStart < 0 || thisEnd > this.length) {
+    throw new RangeError('out of range index')
+  }
+
+  if (thisStart >= thisEnd && start >= end) {
+    return 0
+  }
+  if (thisStart >= thisEnd) {
+    return -1
+  }
+  if (start >= end) {
+    return 1
+  }
+
+  start >>>= 0
+  end >>>= 0
+  thisStart >>>= 0
+  thisEnd >>>= 0
+
+  if (this === target) return 0
+
+  var x = thisEnd - thisStart
+  var y = end - start
+  var len = Math.min(x, y)
+
+  var thisCopy = this.slice(thisStart, thisEnd)
+  var targetCopy = target.slice(start, end)
+
+  for (var i = 0; i < len; ++i) {
+    if (thisCopy[i] !== targetCopy[i]) {
+      x = thisCopy[i]
+      y = targetCopy[i]
+      break
+    }
+  }
+
+  if (x < y) return -1
+  if (y < x) return 1
+  return 0
+}
+
+// Finds either the first index of `val` in `buffer` at offset >= `byteOffset`,
+// OR the last index of `val` in `buffer` at offset <= `byteOffset`.
+//
+// Arguments:
+// - buffer - a Buffer to search
+// - val - a string, Buffer, or number
+// - byteOffset - an index into `buffer`; will be clamped to an int32
+// - encoding - an optional encoding, relevant is val is a string
+// - dir - true for indexOf, false for lastIndexOf
+function bidirectionalIndexOf (buffer, val, byteOffset, encoding, dir) {
+  // Empty buffer means no match
+  if (buffer.length === 0) return -1
+
+  // Normalize byteOffset
+  if (typeof byteOffset === 'string') {
+    encoding = byteOffset
+    byteOffset = 0
+  } else if (byteOffset > 0x7fffffff) {
+    byteOffset = 0x7fffffff
+  } else if (byteOffset < -0x80000000) {
+    byteOffset = -0x80000000
+  }
+  byteOffset = +byteOffset  // Coerce to Number.
+  if (isNaN(byteOffset)) {
+    // byteOffset: it it's undefined, null, NaN, "foo", etc, search whole buffer
+    byteOffset = dir ? 0 : (buffer.length - 1)
+  }
+
+  // Normalize byteOffset: negative offsets start from the end of the buffer
+  if (byteOffset < 0) byteOffset = buffer.length + byteOffset
+  if (byteOffset >= buffer.length) {
+    if (dir) return -1
+    else byteOffset = buffer.length - 1
+  } else if (byteOffset < 0) {
+    if (dir) byteOffset = 0
+    else return -1
+  }
+
+  // Normalize val
+  if (typeof val === 'string') {
+    val = Buffer.from(val, encoding)
+  }
+
+  // Finally, search either indexOf (if dir is true) or lastIndexOf
+  if (Buffer.isBuffer(val)) {
+    // Special case: looking for empty string/buffer always fails
+    if (val.length === 0) {
+      return -1
+    }
+    return arrayIndexOf(buffer, val, byteOffset, encoding, dir)
+  } else if (typeof val === 'number') {
+    val = val & 0xFF // Search for a byte value [0-255]
+    if (Buffer.TYPED_ARRAY_SUPPORT &&
+        typeof Uint8Array.prototype.indexOf === 'function') {
+      if (dir) {
+        return Uint8Array.prototype.indexOf.call(buffer, val, byteOffset)
+      } else {
+        return Uint8Array.prototype.lastIndexOf.call(buffer, val, byteOffset)
+      }
+    }
+    return arrayIndexOf(buffer, [ val ], byteOffset, encoding, dir)
+  }
+
+  throw new TypeError('val must be string, number or Buffer')
+}
+
+function arrayIndexOf (arr, val, byteOffset, encoding, dir) {
+  var indexSize = 1
+  var arrLength = arr.length
+  var valLength = val.length
+
+  if (encoding !== undefined) {
+    encoding = String(encoding).toLowerCase()
+    if (encoding === 'ucs2' || encoding === 'ucs-2' ||
+        encoding === 'utf16le' || encoding === 'utf-16le') {
+      if (arr.length < 2 || val.length < 2) {
+        return -1
+      }
+      indexSize = 2
+      arrLength /= 2
+      valLength /= 2
+      byteOffset /= 2
+    }
+  }
+
+  function read (buf, i) {
+    if (indexSize === 1) {
+      return buf[i]
+    } else {
+      return buf.readUInt16BE(i * indexSize)
+    }
+  }
+
+  var i
+  if (dir) {
+    var foundIndex = -1
+    for (i = byteOffset; i < arrLength; i++) {
+      if (read(arr, i) === read(val, foundIndex === -1 ? 0 : i - foundIndex)) {
+        if (foundIndex === -1) foundIndex = i
+        if (i - foundIndex + 1 === valLength) return foundIndex * indexSize
+      } else {
+        if (foundIndex !== -1) i -= i - foundIndex
+        foundIndex = -1
+      }
+    }
+  } else {
+    if (byteOffset + valLength > arrLength) byteOffset = arrLength - valLength
+    for (i = byteOffset; i >= 0; i--) {
+      var found = true
+      for (var j = 0; j < valLength; j++) {
+        if (read(arr, i + j) !== read(val, j)) {
+          found = false
+          break
+        }
+      }
+      if (found) return i
+    }
+  }
+
+  return -1
+}
+
+Buffer.prototype.includes = function includes (val, byteOffset, encoding) {
+  return this.indexOf(val, byteOffset, encoding) !== -1
+}
+
+Buffer.prototype.indexOf = function indexOf (val, byteOffset, encoding) {
+  return bidirectionalIndexOf(this, val, byteOffset, encoding, true)
+}
+
+Buffer.prototype.lastIndexOf = function lastIndexOf (val, byteOffset, encoding) {
+  return bidirectionalIndexOf(this, val, byteOffset, encoding, false)
+}
+
+function hexWrite (buf, string, offset, length) {
+  offset = Number(offset) || 0
+  var remaining = buf.length - offset
+  if (!length) {
+    length = remaining
+  } else {
+    length = Number(length)
+    if (length > remaining) {
+      length = remaining
+    }
+  }
+
+  // must be an even number of digits
+  var strLen = string.length
+  if (strLen % 2 !== 0) throw new TypeError('Invalid hex string')
+
+  if (length > strLen / 2) {
+    length = strLen / 2
+  }
+  for (var i = 0; i < length; ++i) {
+    var parsed = parseInt(string.substr(i * 2, 2), 16)
+    if (isNaN(parsed)) return i
+    buf[offset + i] = parsed
+  }
+  return i
+}
+
+function utf8Write (buf, string, offset, length) {
+  return blitBuffer(utf8ToBytes(string, buf.length - offset), buf, offset, length)
+}
+
+function asciiWrite (buf, string, offset, length) {
+  return blitBuffer(asciiToBytes(string), buf, offset, length)
+}
+
+function latin1Write (buf, string, offset, length) {
+  return asciiWrite(buf, string, offset, length)
+}
+
+function base64Write (buf, string, offset, length) {
+  return blitBuffer(base64ToBytes(string), buf, offset, length)
+}
+
+function ucs2Write (buf, string, offset, length) {
+  return blitBuffer(utf16leToBytes(string, buf.length - offset), buf, offset, length)
+}
+
+Buffer.prototype.write = function write (string, offset, length, encoding) {
+  // Buffer#write(string)
+  if (offset === undefined) {
+    encoding = 'utf8'
+    length = this.length
+    offset = 0
+  // Buffer#write(string, encoding)
+  } else if (length === undefined && typeof offset === 'string') {
+    encoding = offset
+    length = this.length
+    offset = 0
+  // Buffer#write(string, offset[, length][, encoding])
+  } else if (isFinite(offset)) {
+    offset = offset | 0
+    if (isFinite(length)) {
+      length = length | 0
+      if (encoding === undefined) encoding = 'utf8'
+    } else {
+      encoding = length
+      length = undefined
+    }
+  // legacy write(string, encoding, offset, length) - remove in v0.13
+  } else {
+    throw new Error(
+      'Buffer.write(string, encoding, offset[, length]) is no longer supported'
+    )
+  }
+
+  var remaining = this.length - offset
+  if (length === undefined || length > remaining) length = remaining
+
+  if ((string.length > 0 && (length < 0 || offset < 0)) || offset > this.length) {
+    throw new RangeError('Attempt to write outside buffer bounds')
+  }
+
+  if (!encoding) encoding = 'utf8'
+
+  var loweredCase = false
+  for (;;) {
+    switch (encoding) {
+      case 'hex':
+        return hexWrite(this, string, offset, length)
+
+      case 'utf8':
+      case 'utf-8':
+        return utf8Write(this, string, offset, length)
+
+      case 'ascii':
+        return asciiWrite(this, string, offset, length)
+
+      case 'latin1':
+      case 'binary':
+        return latin1Write(this, string, offset, length)
+
+      case 'base64':
+        // Warning: maxLength not taken into account in base64Write
+        return base64Write(this, string, offset, length)
+
+      case 'ucs2':
+      case 'ucs-2':
+      case 'utf16le':
+      case 'utf-16le':
+        return ucs2Write(this, string, offset, length)
+
+      default:
+        if (loweredCase) throw new TypeError('Unknown encoding: ' + encoding)
+        encoding = ('' + encoding).toLowerCase()
+        loweredCase = true
+    }
+  }
+}
+
+Buffer.prototype.toJSON = function toJSON () {
+  return {
+    type: 'Buffer',
+    data: Array.prototype.slice.call(this._arr || this, 0)
+  }
+}
+
+function base64Slice (buf, start, end) {
+  if (start === 0 && end === buf.length) {
+    return base64.fromByteArray(buf)
+  } else {
+    return base64.fromByteArray(buf.slice(start, end))
+  }
+}
+
+function utf8Slice (buf, start, end) {
+  end = Math.min(buf.length, end)
+  var res = []
+
+  var i = start
+  while (i < end) {
+    var firstByte = buf[i]
+    var codePoint = null
+    var bytesPerSequence = (firstByte > 0xEF) ? 4
+      : (firstByte > 0xDF) ? 3
+      : (firstByte > 0xBF) ? 2
+      : 1
+
+    if (i + bytesPerSequence <= end) {
+      var secondByte, thirdByte, fourthByte, tempCodePoint
+
+      switch (bytesPerSequence) {
+        case 1:
+          if (firstByte < 0x80) {
+            codePoint = firstByte
+          }
+          break
+        case 2:
+          secondByte = buf[i + 1]
+          if ((secondByte & 0xC0) === 0x80) {
+            tempCodePoint = (firstByte & 0x1F) << 0x6 | (secondByte & 0x3F)
+            if (tempCodePoint > 0x7F) {
+              codePoint = tempCodePoint
+            }
+          }
+          break
+        case 3:
+          secondByte = buf[i + 1]
+          thirdByte = buf[i + 2]
+          if ((secondByte & 0xC0) === 0x80 && (thirdByte & 0xC0) === 0x80) {
+            tempCodePoint = (firstByte & 0xF) << 0xC | (secondByte & 0x3F) << 0x6 | (thirdByte & 0x3F)
+            if (tempCodePoint > 0x7FF && (tempCodePoint < 0xD800 || tempCodePoint > 0xDFFF)) {
+              codePoint = tempCodePoint
+            }
+          }
+          break
+        case 4:
+          secondByte = buf[i + 1]
+          thirdByte = buf[i + 2]
+          fourthByte = buf[i + 3]
+          if ((secondByte & 0xC0) === 0x80 && (thirdByte & 0xC0) === 0x80 && (fourthByte & 0xC0) === 0x80) {
+            tempCodePoint = (firstByte & 0xF) << 0x12 | (secondByte & 0x3F) << 0xC | (thirdByte & 0x3F) << 0x6 | (fourthByte & 0x3F)
+            if (tempCodePoint > 0xFFFF && tempCodePoint < 0x110000) {
+              codePoint = tempCodePoint
+            }
+          }
+      }
+    }
+
+    if (codePoint === null) {
+      // we did not generate a valid codePoint so insert a
+      // replacement char (U+FFFD) and advance only 1 byte
+      codePoint = 0xFFFD
+      bytesPerSequence = 1
+    } else if (codePoint > 0xFFFF) {
+      // encode to utf16 (surrogate pair dance)
+      codePoint -= 0x10000
+      res.push(codePoint >>> 10 & 0x3FF | 0xD800)
+      codePoint = 0xDC00 | codePoint & 0x3FF
+    }
+
+    res.push(codePoint)
+    i += bytesPerSequence
+  }
+
+  return decodeCodePointsArray(res)
+}
+
+// Based on http://stackoverflow.com/a/22747272/680742, the browser with
+// the lowest limit is Chrome, with 0x10000 args.
+// We go 1 magnitude less, for safety
+var MAX_ARGUMENTS_LENGTH = 0x1000
+
+function decodeCodePointsArray (codePoints) {
+  var len = codePoints.length
+  if (len <= MAX_ARGUMENTS_LENGTH) {
+    return String.fromCharCode.apply(String, codePoints) // avoid extra slice()
+  }
+
+  // Decode in chunks to avoid "call stack size exceeded".
+  var res = ''
+  var i = 0
+  while (i < len) {
+    res += String.fromCharCode.apply(
+      String,
+      codePoints.slice(i, i += MAX_ARGUMENTS_LENGTH)
+    )
+  }
+  return res
+}
+
+function asciiSlice (buf, start, end) {
+  var ret = ''
+  end = Math.min(buf.length, end)
+
+  for (var i = start; i < end; ++i) {
+    ret += String.fromCharCode(buf[i] & 0x7F)
+  }
+  return ret
+}
+
+function latin1Slice (buf, start, end) {
+  var ret = ''
+  end = Math.min(buf.length, end)
+
+  for (var i = start; i < end; ++i) {
+    ret += String.fromCharCode(buf[i])
+  }
+  return ret
+}
+
+function hexSlice (buf, start, end) {
+  var len = buf.length
+
+  if (!start || start < 0) start = 0
+  if (!end || end < 0 || end > len) end = len
+
+  var out = ''
+  for (var i = start; i < end; ++i) {
+    out += toHex(buf[i])
+  }
+  return out
+}
+
+function utf16leSlice (buf, start, end) {
+  var bytes = buf.slice(start, end)
+  var res = ''
+  for (var i = 0; i < bytes.length; i += 2) {
+    res += String.fromCharCode(bytes[i] + bytes[i + 1] * 256)
+  }
+  return res
+}
+
+Buffer.prototype.slice = function slice (start, end) {
+  var len = this.length
+  start = ~~start
+  end = end === undefined ? len : ~~end
+
+  if (start < 0) {
+    start += len
+    if (start < 0) start = 0
+  } else if (start > len) {
+    start = len
+  }
+
+  if (end < 0) {
+    end += len
+    if (end < 0) end = 0
+  } else if (end > len) {
+    end = len
+  }
+
+  if (end < start) end = start
+
+  var newBuf
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    newBuf = this.subarray(start, end)
+    newBuf.__proto__ = Buffer.prototype
+  } else {
+    var sliceLen = end - start
+    newBuf = new Buffer(sliceLen, undefined)
+    for (var i = 0; i < sliceLen; ++i) {
+      newBuf[i] = this[i + start]
+    }
+  }
+
+  return newBuf
+}
+
+/*
+ * Need to make sure that buffer isn't trying to write out of bounds.
+ */
+function checkOffset (offset, ext, length) {
+  if ((offset % 1) !== 0 || offset < 0) throw new RangeError('offset is not uint')
+  if (offset + ext > length) throw new RangeError('Trying to access beyond buffer length')
+}
+
+Buffer.prototype.readUIntLE = function readUIntLE (offset, byteLength, noAssert) {
+  offset = offset | 0
+  byteLength = byteLength | 0
+  if (!noAssert) checkOffset(offset, byteLength, this.length)
+
+  var val = this[offset]
+  var mul = 1
+  var i = 0
+  while (++i < byteLength && (mul *= 0x100)) {
+    val += this[offset + i] * mul
+  }
+
+  return val
+}
+
+Buffer.prototype.readUIntBE = function readUIntBE (offset, byteLength, noAssert) {
+  offset = offset | 0
+  byteLength = byteLength | 0
+  if (!noAssert) {
+    checkOffset(offset, byteLength, this.length)
+  }
+
+  var val = this[offset + --byteLength]
+  var mul = 1
+  while (byteLength > 0 && (mul *= 0x100)) {
+    val += this[offset + --byteLength] * mul
+  }
+
+  return val
+}
+
+Buffer.prototype.readUInt8 = function readUInt8 (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 1, this.length)
+  return this[offset]
+}
+
+Buffer.prototype.readUInt16LE = function readUInt16LE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 2, this.length)
+  return this[offset] | (this[offset + 1] << 8)
+}
+
+Buffer.prototype.readUInt16BE = function readUInt16BE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 2, this.length)
+  return (this[offset] << 8) | this[offset + 1]
+}
+
+Buffer.prototype.readUInt32LE = function readUInt32LE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 4, this.length)
+
+  return ((this[offset]) |
+      (this[offset + 1] << 8) |
+      (this[offset + 2] << 16)) +
+      (this[offset + 3] * 0x1000000)
+}
+
+Buffer.prototype.readUInt32BE = function readUInt32BE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 4, this.length)
+
+  return (this[offset] * 0x1000000) +
+    ((this[offset + 1] << 16) |
+    (this[offset + 2] << 8) |
+    this[offset + 3])
+}
+
+Buffer.prototype.readIntLE = function readIntLE (offset, byteLength, noAssert) {
+  offset = offset | 0
+  byteLength = byteLength | 0
+  if (!noAssert) checkOffset(offset, byteLength, this.length)
+
+  var val = this[offset]
+  var mul = 1
+  var i = 0
+  while (++i < byteLength && (mul *= 0x100)) {
+    val += this[offset + i] * mul
+  }
+  mul *= 0x80
+
+  if (val >= mul) val -= Math.pow(2, 8 * byteLength)
+
+  return val
+}
+
+Buffer.prototype.readIntBE = function readIntBE (offset, byteLength, noAssert) {
+  offset = offset | 0
+  byteLength = byteLength | 0
+  if (!noAssert) checkOffset(offset, byteLength, this.length)
+
+  var i = byteLength
+  var mul = 1
+  var val = this[offset + --i]
+  while (i > 0 && (mul *= 0x100)) {
+    val += this[offset + --i] * mul
+  }
+  mul *= 0x80
+
+  if (val >= mul) val -= Math.pow(2, 8 * byteLength)
+
+  return val
+}
+
+Buffer.prototype.readInt8 = function readInt8 (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 1, this.length)
+  if (!(this[offset] & 0x80)) return (this[offset])
+  return ((0xff - this[offset] + 1) * -1)
+}
+
+Buffer.prototype.readInt16LE = function readInt16LE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 2, this.length)
+  var val = this[offset] | (this[offset + 1] << 8)
+  return (val & 0x8000) ? val | 0xFFFF0000 : val
+}
+
+Buffer.prototype.readInt16BE = function readInt16BE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 2, this.length)
+  var val = this[offset + 1] | (this[offset] << 8)
+  return (val & 0x8000) ? val | 0xFFFF0000 : val
+}
+
+Buffer.prototype.readInt32LE = function readInt32LE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 4, this.length)
+
+  return (this[offset]) |
+    (this[offset + 1] << 8) |
+    (this[offset + 2] << 16) |
+    (this[offset + 3] << 24)
+}
+
+Buffer.prototype.readInt32BE = function readInt32BE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 4, this.length)
+
+  return (this[offset] << 24) |
+    (this[offset + 1] << 16) |
+    (this[offset + 2] << 8) |
+    (this[offset + 3])
+}
+
+Buffer.prototype.readFloatLE = function readFloatLE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 4, this.length)
+  return ieee754.read(this, offset, true, 23, 4)
+}
+
+Buffer.prototype.readFloatBE = function readFloatBE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 4, this.length)
+  return ieee754.read(this, offset, false, 23, 4)
+}
+
+Buffer.prototype.readDoubleLE = function readDoubleLE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 8, this.length)
+  return ieee754.read(this, offset, true, 52, 8)
+}
+
+Buffer.prototype.readDoubleBE = function readDoubleBE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 8, this.length)
+  return ieee754.read(this, offset, false, 52, 8)
+}
+
+function checkInt (buf, value, offset, ext, max, min) {
+  if (!Buffer.isBuffer(buf)) throw new TypeError('"buffer" argument must be a Buffer instance')
+  if (value > max || value < min) throw new RangeError('"value" argument is out of bounds')
+  if (offset + ext > buf.length) throw new RangeError('Index out of range')
+}
+
+Buffer.prototype.writeUIntLE = function writeUIntLE (value, offset, byteLength, noAssert) {
+  value = +value
+  offset = offset | 0
+  byteLength = byteLength | 0
+  if (!noAssert) {
+    var maxBytes = Math.pow(2, 8 * byteLength) - 1
+    checkInt(this, value, offset, byteLength, maxBytes, 0)
+  }
+
+  var mul = 1
+  var i = 0
+  this[offset] = value & 0xFF
+  while (++i < byteLength && (mul *= 0x100)) {
+    this[offset + i] = (value / mul) & 0xFF
+  }
+
+  return offset + byteLength
+}
+
+Buffer.prototype.writeUIntBE = function writeUIntBE (value, offset, byteLength, noAssert) {
+  value = +value
+  offset = offset | 0
+  byteLength = byteLength | 0
+  if (!noAssert) {
+    var maxBytes = Math.pow(2, 8 * byteLength) - 1
+    checkInt(this, value, offset, byteLength, maxBytes, 0)
+  }
+
+  var i = byteLength - 1
+  var mul = 1
+  this[offset + i] = value & 0xFF
+  while (--i >= 0 && (mul *= 0x100)) {
+    this[offset + i] = (value / mul) & 0xFF
+  }
+
+  return offset + byteLength
+}
+
+Buffer.prototype.writeUInt8 = function writeUInt8 (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 1, 0xff, 0)
+  if (!Buffer.TYPED_ARRAY_SUPPORT) value = Math.floor(value)
+  this[offset] = (value & 0xff)
+  return offset + 1
+}
+
+function objectWriteUInt16 (buf, value, offset, littleEndian) {
+  if (value < 0) value = 0xffff + value + 1
+  for (var i = 0, j = Math.min(buf.length - offset, 2); i < j; ++i) {
+    buf[offset + i] = (value & (0xff << (8 * (littleEndian ? i : 1 - i)))) >>>
+      (littleEndian ? i : 1 - i) * 8
+  }
+}
+
+Buffer.prototype.writeUInt16LE = function writeUInt16LE (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 2, 0xffff, 0)
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    this[offset] = (value & 0xff)
+    this[offset + 1] = (value >>> 8)
+  } else {
+    objectWriteUInt16(this, value, offset, true)
+  }
+  return offset + 2
+}
+
+Buffer.prototype.writeUInt16BE = function writeUInt16BE (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 2, 0xffff, 0)
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    this[offset] = (value >>> 8)
+    this[offset + 1] = (value & 0xff)
+  } else {
+    objectWriteUInt16(this, value, offset, false)
+  }
+  return offset + 2
+}
+
+function objectWriteUInt32 (buf, value, offset, littleEndian) {
+  if (value < 0) value = 0xffffffff + value + 1
+  for (var i = 0, j = Math.min(buf.length - offset, 4); i < j; ++i) {
+    buf[offset + i] = (value >>> (littleEndian ? i : 3 - i) * 8) & 0xff
+  }
+}
+
+Buffer.prototype.writeUInt32LE = function writeUInt32LE (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 4, 0xffffffff, 0)
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    this[offset + 3] = (value >>> 24)
+    this[offset + 2] = (value >>> 16)
+    this[offset + 1] = (value >>> 8)
+    this[offset] = (value & 0xff)
+  } else {
+    objectWriteUInt32(this, value, offset, true)
+  }
+  return offset + 4
+}
+
+Buffer.prototype.writeUInt32BE = function writeUInt32BE (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 4, 0xffffffff, 0)
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    this[offset] = (value >>> 24)
+    this[offset + 1] = (value >>> 16)
+    this[offset + 2] = (value >>> 8)
+    this[offset + 3] = (value & 0xff)
+  } else {
+    objectWriteUInt32(this, value, offset, false)
+  }
+  return offset + 4
+}
+
+Buffer.prototype.writeIntLE = function writeIntLE (value, offset, byteLength, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) {
+    var limit = Math.pow(2, 8 * byteLength - 1)
+
+    checkInt(this, value, offset, byteLength, limit - 1, -limit)
+  }
+
+  var i = 0
+  var mul = 1
+  var sub = 0
+  this[offset] = value & 0xFF
+  while (++i < byteLength && (mul *= 0x100)) {
+    if (value < 0 && sub === 0 && this[offset + i - 1] !== 0) {
+      sub = 1
+    }
+    this[offset + i] = ((value / mul) >> 0) - sub & 0xFF
+  }
+
+  return offset + byteLength
+}
+
+Buffer.prototype.writeIntBE = function writeIntBE (value, offset, byteLength, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) {
+    var limit = Math.pow(2, 8 * byteLength - 1)
+
+    checkInt(this, value, offset, byteLength, limit - 1, -limit)
+  }
+
+  var i = byteLength - 1
+  var mul = 1
+  var sub = 0
+  this[offset + i] = value & 0xFF
+  while (--i >= 0 && (mul *= 0x100)) {
+    if (value < 0 && sub === 0 && this[offset + i + 1] !== 0) {
+      sub = 1
+    }
+    this[offset + i] = ((value / mul) >> 0) - sub & 0xFF
+  }
+
+  return offset + byteLength
+}
+
+Buffer.prototype.writeInt8 = function writeInt8 (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 1, 0x7f, -0x80)
+  if (!Buffer.TYPED_ARRAY_SUPPORT) value = Math.floor(value)
+  if (value < 0) value = 0xff + value + 1
+  this[offset] = (value & 0xff)
+  return offset + 1
+}
+
+Buffer.prototype.writeInt16LE = function writeInt16LE (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 2, 0x7fff, -0x8000)
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    this[offset] = (value & 0xff)
+    this[offset + 1] = (value >>> 8)
+  } else {
+    objectWriteUInt16(this, value, offset, true)
+  }
+  return offset + 2
+}
+
+Buffer.prototype.writeInt16BE = function writeInt16BE (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 2, 0x7fff, -0x8000)
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    this[offset] = (value >>> 8)
+    this[offset + 1] = (value & 0xff)
+  } else {
+    objectWriteUInt16(this, value, offset, false)
+  }
+  return offset + 2
+}
+
+Buffer.prototype.writeInt32LE = function writeInt32LE (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 4, 0x7fffffff, -0x80000000)
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    this[offset] = (value & 0xff)
+    this[offset + 1] = (value >>> 8)
+    this[offset + 2] = (value >>> 16)
+    this[offset + 3] = (value >>> 24)
+  } else {
+    objectWriteUInt32(this, value, offset, true)
+  }
+  return offset + 4
+}
+
+Buffer.prototype.writeInt32BE = function writeInt32BE (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 4, 0x7fffffff, -0x80000000)
+  if (value < 0) value = 0xffffffff + value + 1
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    this[offset] = (value >>> 24)
+    this[offset + 1] = (value >>> 16)
+    this[offset + 2] = (value >>> 8)
+    this[offset + 3] = (value & 0xff)
+  } else {
+    objectWriteUInt32(this, value, offset, false)
+  }
+  return offset + 4
+}
+
+function checkIEEE754 (buf, value, offset, ext, max, min) {
+  if (offset + ext > buf.length) throw new RangeError('Index out of range')
+  if (offset < 0) throw new RangeError('Index out of range')
+}
+
+function writeFloat (buf, value, offset, littleEndian, noAssert) {
+  if (!noAssert) {
+    checkIEEE754(buf, value, offset, 4, 3.4028234663852886e+38, -3.4028234663852886e+38)
+  }
+  ieee754.write(buf, value, offset, littleEndian, 23, 4)
+  return offset + 4
+}
+
+Buffer.prototype.writeFloatLE = function writeFloatLE (value, offset, noAssert) {
+  return writeFloat(this, value, offset, true, noAssert)
+}
+
+Buffer.prototype.writeFloatBE = function writeFloatBE (value, offset, noAssert) {
+  return writeFloat(this, value, offset, false, noAssert)
+}
+
+function writeDouble (buf, value, offset, littleEndian, noAssert) {
+  if (!noAssert) {
+    checkIEEE754(buf, value, offset, 8, 1.7976931348623157E+308, -1.7976931348623157E+308)
+  }
+  ieee754.write(buf, value, offset, littleEndian, 52, 8)
+  return offset + 8
+}
+
+Buffer.prototype.writeDoubleLE = function writeDoubleLE (value, offset, noAssert) {
+  return writeDouble(this, value, offset, true, noAssert)
+}
+
+Buffer.prototype.writeDoubleBE = function writeDoubleBE (value, offset, noAssert) {
+  return writeDouble(this, value, offset, false, noAssert)
+}
+
+// copy(targetBuffer, targetStart=0, sourceStart=0, sourceEnd=buffer.length)
+Buffer.prototype.copy = function copy (target, targetStart, start, end) {
+  if (!start) start = 0
+  if (!end && end !== 0) end = this.length
+  if (targetStart >= target.length) targetStart = target.length
+  if (!targetStart) targetStart = 0
+  if (end > 0 && end < start) end = start
+
+  // Copy 0 bytes; we're done
+  if (end === start) return 0
+  if (target.length === 0 || this.length === 0) return 0
+
+  // Fatal error conditions
+  if (targetStart < 0) {
+    throw new RangeError('targetStart out of bounds')
+  }
+  if (start < 0 || start >= this.length) throw new RangeError('sourceStart out of bounds')
+  if (end < 0) throw new RangeError('sourceEnd out of bounds')
+
+  // Are we oob?
+  if (end > this.length) end = this.length
+  if (target.length - targetStart < end - start) {
+    end = target.length - targetStart + start
+  }
+
+  var len = end - start
+  var i
+
+  if (this === target && start < targetStart && targetStart < end) {
+    // descending copy from end
+    for (i = len - 1; i >= 0; --i) {
+      target[i + targetStart] = this[i + start]
+    }
+  } else if (len < 1000 || !Buffer.TYPED_ARRAY_SUPPORT) {
+    // ascending copy from start
+    for (i = 0; i < len; ++i) {
+      target[i + targetStart] = this[i + start]
+    }
+  } else {
+    Uint8Array.prototype.set.call(
+      target,
+      this.subarray(start, start + len),
+      targetStart
+    )
+  }
+
+  return len
+}
+
+// Usage:
+//    buffer.fill(number[, offset[, end]])
+//    buffer.fill(buffer[, offset[, end]])
+//    buffer.fill(string[, offset[, end]][, encoding])
+Buffer.prototype.fill = function fill (val, start, end, encoding) {
+  // Handle string cases:
+  if (typeof val === 'string') {
+    if (typeof start === 'string') {
+      encoding = start
+      start = 0
+      end = this.length
+    } else if (typeof end === 'string') {
+      encoding = end
+      end = this.length
+    }
+    if (val.length === 1) {
+      var code = val.charCodeAt(0)
+      if (code < 256) {
+        val = code
+      }
+    }
+    if (encoding !== undefined && typeof encoding !== 'string') {
+      throw new TypeError('encoding must be a string')
+    }
+    if (typeof encoding === 'string' && !Buffer.isEncoding(encoding)) {
+      throw new TypeError('Unknown encoding: ' + encoding)
+    }
+  } else if (typeof val === 'number') {
+    val = val & 255
+  }
+
+  // Invalid ranges are not set to a default, so can range check early.
+  if (start < 0 || this.length < start || this.length < end) {
+    throw new RangeError('Out of range index')
+  }
+
+  if (end <= start) {
+    return this
+  }
+
+  start = start >>> 0
+  end = end === undefined ? this.length : end >>> 0
+
+  if (!val) val = 0
+
+  var i
+  if (typeof val === 'number') {
+    for (i = start; i < end; ++i) {
+      this[i] = val
+    }
+  } else {
+    var bytes = Buffer.isBuffer(val)
+      ? val
+      : utf8ToBytes(new Buffer(val, encoding).toString())
+    var len = bytes.length
+    for (i = 0; i < end - start; ++i) {
+      this[i + start] = bytes[i % len]
+    }
+  }
+
+  return this
+}
+
+// HELPER FUNCTIONS
+// ================
+
+var INVALID_BASE64_RE = /[^+\/0-9A-Za-z-_]/g
+
+function base64clean (str) {
+  // Node strips out invalid characters like \n and \t from the string, base64-js does not
+  str = stringtrim(str).replace(INVALID_BASE64_RE, '')
+  // Node converts strings with length < 2 to ''
+  if (str.length < 2) return ''
+  // Node allows for non-padded base64 strings (missing trailing ===), base64-js does not
+  while (str.length % 4 !== 0) {
+    str = str + '='
+  }
+  return str
+}
+
+function stringtrim (str) {
+  if (str.trim) return str.trim()
+  return str.replace(/^\s+|\s+$/g, '')
+}
+
+function toHex (n) {
+  if (n < 16) return '0' + n.toString(16)
+  return n.toString(16)
+}
+
+function utf8ToBytes (string, units) {
+  units = units || Infinity
+  var codePoint
+  var length = string.length
+  var leadSurrogate = null
+  var bytes = []
+
+  for (var i = 0; i < length; ++i) {
+    codePoint = string.charCodeAt(i)
+
+    // is surrogate component
+    if (codePoint > 0xD7FF && codePoint < 0xE000) {
+      // last char was a lead
+      if (!leadSurrogate) {
+        // no lead yet
+        if (codePoint > 0xDBFF) {
+          // unexpected trail
+          if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
+          continue
+        } else if (i + 1 === length) {
+          // unpaired lead
+          if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
+          continue
+        }
+
+        // valid lead
+        leadSurrogate = codePoint
+
+        continue
+      }
+
+      // 2 leads in a row
+      if (codePoint < 0xDC00) {
+        if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
+        leadSurrogate = codePoint
+        continue
+      }
+
+      // valid surrogate pair
+      codePoint = (leadSurrogate - 0xD800 << 10 | codePoint - 0xDC00) + 0x10000
+    } else if (leadSurrogate) {
+      // valid bmp char, but last char was a lead
+      if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
+    }
+
+    leadSurrogate = null
+
+    // encode utf8
+    if (codePoint < 0x80) {
+      if ((units -= 1) < 0) break
+      bytes.push(codePoint)
+    } else if (codePoint < 0x800) {
+      if ((units -= 2) < 0) break
+      bytes.push(
+        codePoint >> 0x6 | 0xC0,
+        codePoint & 0x3F | 0x80
+      )
+    } else if (codePoint < 0x10000) {
+      if ((units -= 3) < 0) break
+      bytes.push(
+        codePoint >> 0xC | 0xE0,
+        codePoint >> 0x6 & 0x3F | 0x80,
+        codePoint & 0x3F | 0x80
+      )
+    } else if (codePoint < 0x110000) {
+      if ((units -= 4) < 0) break
+      bytes.push(
+        codePoint >> 0x12 | 0xF0,
+        codePoint >> 0xC & 0x3F | 0x80,
+        codePoint >> 0x6 & 0x3F | 0x80,
+        codePoint & 0x3F | 0x80
+      )
+    } else {
+      throw new Error('Invalid code point')
+    }
+  }
+
+  return bytes
+}
+
+function asciiToBytes (str) {
+  var byteArray = []
+  for (var i = 0; i < str.length; ++i) {
+    // Node's code seems to be doing this and not & 0x7F..
+    byteArray.push(str.charCodeAt(i) & 0xFF)
+  }
+  return byteArray
+}
+
+function utf16leToBytes (str, units) {
+  var c, hi, lo
+  var byteArray = []
+  for (var i = 0; i < str.length; ++i) {
+    if ((units -= 2) < 0) break
+
+    c = str.charCodeAt(i)
+    hi = c >> 8
+    lo = c % 256
+    byteArray.push(lo)
+    byteArray.push(hi)
+  }
+
+  return byteArray
+}
+
+function base64ToBytes (str) {
+  return base64.toByteArray(base64clean(str))
+}
+
+function blitBuffer (src, dst, offset, length) {
+  for (var i = 0; i < length; ++i) {
+    if ((i + offset >= dst.length) || (i >= src.length)) break
+    dst[i + offset] = src[i]
+  }
+  return i
+}
+
+function isnan (val) {
+  return val !== val // eslint-disable-line no-self-compare
+}
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
+
+/***/ }),
+
+/***/ "./node_modules/define-properties/index.js":
+/*!*************************************************!*\
+  !*** ./node_modules/define-properties/index.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var keys = __webpack_require__(/*! object-keys */ "./node_modules/object-keys/index.js");
+var hasSymbols = typeof Symbol === 'function' && typeof Symbol('foo') === 'symbol';
+
+var toStr = Object.prototype.toString;
+var concat = Array.prototype.concat;
+var origDefineProperty = Object.defineProperty;
+
+var isFunction = function (fn) {
+	return typeof fn === 'function' && toStr.call(fn) === '[object Function]';
+};
+
+var arePropertyDescriptorsSupported = function () {
+	var obj = {};
+	try {
+		origDefineProperty(obj, 'x', { enumerable: false, value: obj });
+		// eslint-disable-next-line no-unused-vars, no-restricted-syntax
+		for (var _ in obj) { // jscs:ignore disallowUnusedVariables
+			return false;
+		}
+		return obj.x === obj;
+	} catch (e) { /* this is IE 8. */
+		return false;
+	}
+};
+var supportsDescriptors = origDefineProperty && arePropertyDescriptorsSupported();
+
+var defineProperty = function (object, name, value, predicate) {
+	if (name in object && (!isFunction(predicate) || !predicate())) {
+		return;
+	}
+	if (supportsDescriptors) {
+		origDefineProperty(object, name, {
+			configurable: true,
+			enumerable: false,
+			value: value,
+			writable: true
+		});
+	} else {
+		object[name] = value;
+	}
+};
+
+var defineProperties = function (object, map) {
+	var predicates = arguments.length > 2 ? arguments[2] : {};
+	var props = keys(map);
+	if (hasSymbols) {
+		props = concat.call(props, Object.getOwnPropertySymbols(map));
+	}
+	for (var i = 0; i < props.length; i += 1) {
+		defineProperty(object, props[i], map[props[i]], predicates[props[i]]);
+	}
+};
+
+defineProperties.supportsDescriptors = !!supportsDescriptors;
+
+module.exports = defineProperties;
+
+
+/***/ }),
+
+/***/ "./node_modules/dtype/index.js":
+/*!*************************************!*\
+  !*** ./node_modules/dtype/index.js ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = function(dtype) {
+  switch (dtype) {
+    case 'int8':
+      return Int8Array
+    case 'int16':
+      return Int16Array
+    case 'int32':
+      return Int32Array
+    case 'uint8':
+      return Uint8Array
+    case 'uint16':
+      return Uint16Array
+    case 'uint32':
+      return Uint32Array
+    case 'float32':
+      return Float32Array
+    case 'float64':
+      return Float64Array
+    case 'array':
+      return Array
+    case 'uint8_clamped':
+      return Uint8ClampedArray
+  }
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/es-abstract/GetIntrinsic.js":
+/*!**************************************************!*\
+  !*** ./node_modules/es-abstract/GetIntrinsic.js ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/* globals
+	Atomics,
+	SharedArrayBuffer,
+*/
+
+var undefined; // eslint-disable-line no-shadow-restricted-names
+
+var $TypeError = TypeError;
+
+var ThrowTypeError = Object.getOwnPropertyDescriptor
+	? (function () { return Object.getOwnPropertyDescriptor(arguments, 'callee').get; }())
+	: function () { throw new $TypeError(); };
+
+var hasSymbols = __webpack_require__(/*! has-symbols */ "./node_modules/has-symbols/index.js")();
+
+var getProto = Object.getPrototypeOf || function (x) { return x.__proto__; }; // eslint-disable-line no-proto
+
+var generator; // = function * () {};
+var generatorFunction = generator ? getProto(generator) : undefined;
+var asyncFn; // async function() {};
+var asyncFunction = asyncFn ? asyncFn.constructor : undefined;
+var asyncGen; // async function * () {};
+var asyncGenFunction = asyncGen ? getProto(asyncGen) : undefined;
+var asyncGenIterator = asyncGen ? asyncGen() : undefined;
+
+var TypedArray = typeof Uint8Array === 'undefined' ? undefined : getProto(Uint8Array);
+
+var INTRINSICS = {
+	'$ %Array%': Array,
+	'$ %ArrayBuffer%': typeof ArrayBuffer === 'undefined' ? undefined : ArrayBuffer,
+	'$ %ArrayBufferPrototype%': typeof ArrayBuffer === 'undefined' ? undefined : ArrayBuffer.prototype,
+	'$ %ArrayIteratorPrototype%': hasSymbols ? getProto([][Symbol.iterator]()) : undefined,
+	'$ %ArrayPrototype%': Array.prototype,
+	'$ %ArrayProto_entries%': Array.prototype.entries,
+	'$ %ArrayProto_forEach%': Array.prototype.forEach,
+	'$ %ArrayProto_keys%': Array.prototype.keys,
+	'$ %ArrayProto_values%': Array.prototype.values,
+	'$ %AsyncFromSyncIteratorPrototype%': undefined,
+	'$ %AsyncFunction%': asyncFunction,
+	'$ %AsyncFunctionPrototype%': asyncFunction ? asyncFunction.prototype : undefined,
+	'$ %AsyncGenerator%': asyncGen ? getProto(asyncGenIterator) : undefined,
+	'$ %AsyncGeneratorFunction%': asyncGenFunction,
+	'$ %AsyncGeneratorPrototype%': asyncGenFunction ? asyncGenFunction.prototype : undefined,
+	'$ %AsyncIteratorPrototype%': asyncGenIterator && hasSymbols && Symbol.asyncIterator ? asyncGenIterator[Symbol.asyncIterator]() : undefined,
+	'$ %Atomics%': typeof Atomics === 'undefined' ? undefined : Atomics,
+	'$ %Boolean%': Boolean,
+	'$ %BooleanPrototype%': Boolean.prototype,
+	'$ %DataView%': typeof DataView === 'undefined' ? undefined : DataView,
+	'$ %DataViewPrototype%': typeof DataView === 'undefined' ? undefined : DataView.prototype,
+	'$ %Date%': Date,
+	'$ %DatePrototype%': Date.prototype,
+	'$ %decodeURI%': decodeURI,
+	'$ %decodeURIComponent%': decodeURIComponent,
+	'$ %encodeURI%': encodeURI,
+	'$ %encodeURIComponent%': encodeURIComponent,
+	'$ %Error%': Error,
+	'$ %ErrorPrototype%': Error.prototype,
+	'$ %eval%': eval, // eslint-disable-line no-eval
+	'$ %EvalError%': EvalError,
+	'$ %EvalErrorPrototype%': EvalError.prototype,
+	'$ %Float32Array%': typeof Float32Array === 'undefined' ? undefined : Float32Array,
+	'$ %Float32ArrayPrototype%': typeof Float32Array === 'undefined' ? undefined : Float32Array.prototype,
+	'$ %Float64Array%': typeof Float64Array === 'undefined' ? undefined : Float64Array,
+	'$ %Float64ArrayPrototype%': typeof Float64Array === 'undefined' ? undefined : Float64Array.prototype,
+	'$ %Function%': Function,
+	'$ %FunctionPrototype%': Function.prototype,
+	'$ %Generator%': generator ? getProto(generator()) : undefined,
+	'$ %GeneratorFunction%': generatorFunction,
+	'$ %GeneratorPrototype%': generatorFunction ? generatorFunction.prototype : undefined,
+	'$ %Int8Array%': typeof Int8Array === 'undefined' ? undefined : Int8Array,
+	'$ %Int8ArrayPrototype%': typeof Int8Array === 'undefined' ? undefined : Int8Array.prototype,
+	'$ %Int16Array%': typeof Int16Array === 'undefined' ? undefined : Int16Array,
+	'$ %Int16ArrayPrototype%': typeof Int16Array === 'undefined' ? undefined : Int8Array.prototype,
+	'$ %Int32Array%': typeof Int32Array === 'undefined' ? undefined : Int32Array,
+	'$ %Int32ArrayPrototype%': typeof Int32Array === 'undefined' ? undefined : Int32Array.prototype,
+	'$ %isFinite%': isFinite,
+	'$ %isNaN%': isNaN,
+	'$ %IteratorPrototype%': hasSymbols ? getProto(getProto([][Symbol.iterator]())) : undefined,
+	'$ %JSON%': JSON,
+	'$ %JSONParse%': JSON.parse,
+	'$ %Map%': typeof Map === 'undefined' ? undefined : Map,
+	'$ %MapIteratorPrototype%': typeof Map === 'undefined' || !hasSymbols ? undefined : getProto(new Map()[Symbol.iterator]()),
+	'$ %MapPrototype%': typeof Map === 'undefined' ? undefined : Map.prototype,
+	'$ %Math%': Math,
+	'$ %Number%': Number,
+	'$ %NumberPrototype%': Number.prototype,
+	'$ %Object%': Object,
+	'$ %ObjectPrototype%': Object.prototype,
+	'$ %ObjProto_toString%': Object.prototype.toString,
+	'$ %ObjProto_valueOf%': Object.prototype.valueOf,
+	'$ %parseFloat%': parseFloat,
+	'$ %parseInt%': parseInt,
+	'$ %Promise%': typeof Promise === 'undefined' ? undefined : Promise,
+	'$ %PromisePrototype%': typeof Promise === 'undefined' ? undefined : Promise.prototype,
+	'$ %PromiseProto_then%': typeof Promise === 'undefined' ? undefined : Promise.prototype.then,
+	'$ %Promise_all%': typeof Promise === 'undefined' ? undefined : Promise.all,
+	'$ %Promise_reject%': typeof Promise === 'undefined' ? undefined : Promise.reject,
+	'$ %Promise_resolve%': typeof Promise === 'undefined' ? undefined : Promise.resolve,
+	'$ %Proxy%': typeof Proxy === 'undefined' ? undefined : Proxy,
+	'$ %RangeError%': RangeError,
+	'$ %RangeErrorPrototype%': RangeError.prototype,
+	'$ %ReferenceError%': ReferenceError,
+	'$ %ReferenceErrorPrototype%': ReferenceError.prototype,
+	'$ %Reflect%': typeof Reflect === 'undefined' ? undefined : Reflect,
+	'$ %RegExp%': RegExp,
+	'$ %RegExpPrototype%': RegExp.prototype,
+	'$ %Set%': typeof Set === 'undefined' ? undefined : Set,
+	'$ %SetIteratorPrototype%': typeof Set === 'undefined' || !hasSymbols ? undefined : getProto(new Set()[Symbol.iterator]()),
+	'$ %SetPrototype%': typeof Set === 'undefined' ? undefined : Set.prototype,
+	'$ %SharedArrayBuffer%': typeof SharedArrayBuffer === 'undefined' ? undefined : SharedArrayBuffer,
+	'$ %SharedArrayBufferPrototype%': typeof SharedArrayBuffer === 'undefined' ? undefined : SharedArrayBuffer.prototype,
+	'$ %String%': String,
+	'$ %StringIteratorPrototype%': hasSymbols ? getProto(''[Symbol.iterator]()) : undefined,
+	'$ %StringPrototype%': String.prototype,
+	'$ %Symbol%': hasSymbols ? Symbol : undefined,
+	'$ %SymbolPrototype%': hasSymbols ? Symbol.prototype : undefined,
+	'$ %SyntaxError%': SyntaxError,
+	'$ %SyntaxErrorPrototype%': SyntaxError.prototype,
+	'$ %ThrowTypeError%': ThrowTypeError,
+	'$ %TypedArray%': TypedArray,
+	'$ %TypedArrayPrototype%': TypedArray ? TypedArray.prototype : undefined,
+	'$ %TypeError%': $TypeError,
+	'$ %TypeErrorPrototype%': $TypeError.prototype,
+	'$ %Uint8Array%': typeof Uint8Array === 'undefined' ? undefined : Uint8Array,
+	'$ %Uint8ArrayPrototype%': typeof Uint8Array === 'undefined' ? undefined : Uint8Array.prototype,
+	'$ %Uint8ClampedArray%': typeof Uint8ClampedArray === 'undefined' ? undefined : Uint8ClampedArray,
+	'$ %Uint8ClampedArrayPrototype%': typeof Uint8ClampedArray === 'undefined' ? undefined : Uint8ClampedArray.prototype,
+	'$ %Uint16Array%': typeof Uint16Array === 'undefined' ? undefined : Uint16Array,
+	'$ %Uint16ArrayPrototype%': typeof Uint16Array === 'undefined' ? undefined : Uint16Array.prototype,
+	'$ %Uint32Array%': typeof Uint32Array === 'undefined' ? undefined : Uint32Array,
+	'$ %Uint32ArrayPrototype%': typeof Uint32Array === 'undefined' ? undefined : Uint32Array.prototype,
+	'$ %URIError%': URIError,
+	'$ %URIErrorPrototype%': URIError.prototype,
+	'$ %WeakMap%': typeof WeakMap === 'undefined' ? undefined : WeakMap,
+	'$ %WeakMapPrototype%': typeof WeakMap === 'undefined' ? undefined : WeakMap.prototype,
+	'$ %WeakSet%': typeof WeakSet === 'undefined' ? undefined : WeakSet,
+	'$ %WeakSetPrototype%': typeof WeakSet === 'undefined' ? undefined : WeakSet.prototype
+};
+
+var bind = __webpack_require__(/*! function-bind */ "./node_modules/function-bind/index.js");
+var $replace = bind.call(Function.call, String.prototype.replace);
+
+/* adapted from https://github.com/lodash/lodash/blob/4.17.15/dist/lodash.js#L6735-L6744 */
+var rePropName = /[^%.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|%$))/g;
+var reEscapeChar = /\\(\\)?/g; /** Used to match backslashes in property paths. */
+var stringToPath = function stringToPath(string) {
+	var result = [];
+	$replace(string, rePropName, function (match, number, quote, subString) {
+		result[result.length] = quote ? $replace(subString, reEscapeChar, '$1') : (number || match);
+	});
+	return result;
+};
+/* end adaptation */
+
+var getBaseIntrinsic = function getBaseIntrinsic(name, allowMissing) {
+	var key = '$ ' + name;
+	if (!(key in INTRINSICS)) {
+		throw new SyntaxError('intrinsic ' + name + ' does not exist!');
+	}
+
+	// istanbul ignore if // hopefully this is impossible to test :-)
+	if (typeof INTRINSICS[key] === 'undefined' && !allowMissing) {
+		throw new $TypeError('intrinsic ' + name + ' exists, but is not available. Please file an issue!');
+	}
+
+	return INTRINSICS[key];
+};
+
+module.exports = function GetIntrinsic(name, allowMissing) {
+	if (arguments.length > 1 && typeof allowMissing !== 'boolean') {
+		throw new TypeError('"allowMissing" argument must be a boolean');
+	}
+
+	var parts = stringToPath(name);
+
+	if (parts.length === 0) {
+		return getBaseIntrinsic(name, allowMissing);
+	}
+
+	var value = getBaseIntrinsic('%' + parts[0] + '%', allowMissing);
+	for (var i = 1; i < parts.length; i += 1) {
+		if (value != null) {
+			value = value[parts[i]];
+		}
+	}
+	return value;
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/es-abstract/es5.js":
+/*!*****************************************!*\
+  !*** ./node_modules/es-abstract/es5.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var GetIntrinsic = __webpack_require__(/*! ./GetIntrinsic */ "./node_modules/es-abstract/GetIntrinsic.js");
+
+var $Object = GetIntrinsic('%Object%');
+var $EvalError = GetIntrinsic('%EvalError%');
+var $TypeError = GetIntrinsic('%TypeError%');
+var $String = GetIntrinsic('%String%');
+var $Date = GetIntrinsic('%Date%');
+var $Number = GetIntrinsic('%Number%');
+var $floor = GetIntrinsic('%Math.floor%');
+var $DateUTC = GetIntrinsic('%Date.UTC%');
+var $abs = GetIntrinsic('%Math.abs%');
+
+var assertRecord = __webpack_require__(/*! ./helpers/assertRecord */ "./node_modules/es-abstract/helpers/assertRecord.js");
+var isPropertyDescriptor = __webpack_require__(/*! ./helpers/isPropertyDescriptor */ "./node_modules/es-abstract/helpers/isPropertyDescriptor.js");
+var $isNaN = __webpack_require__(/*! ./helpers/isNaN */ "./node_modules/es-abstract/helpers/isNaN.js");
+var $isFinite = __webpack_require__(/*! ./helpers/isFinite */ "./node_modules/es-abstract/helpers/isFinite.js");
+var sign = __webpack_require__(/*! ./helpers/sign */ "./node_modules/es-abstract/helpers/sign.js");
+var mod = __webpack_require__(/*! ./helpers/mod */ "./node_modules/es-abstract/helpers/mod.js");
+var isPrefixOf = __webpack_require__(/*! ./helpers/isPrefixOf */ "./node_modules/es-abstract/helpers/isPrefixOf.js");
+var callBound = __webpack_require__(/*! ./helpers/callBound */ "./node_modules/es-abstract/helpers/callBound.js");
+
+var IsCallable = __webpack_require__(/*! is-callable */ "./node_modules/is-callable/index.js");
+var toPrimitive = __webpack_require__(/*! es-to-primitive/es5 */ "./node_modules/es-to-primitive/es5.js");
+
+var has = __webpack_require__(/*! has */ "./node_modules/has/src/index.js");
+
+var $getUTCFullYear = callBound('Date.prototype.getUTCFullYear');
+
+var HoursPerDay = 24;
+var MinutesPerHour = 60;
+var SecondsPerMinute = 60;
+var msPerSecond = 1e3;
+var msPerMinute = msPerSecond * SecondsPerMinute;
+var msPerHour = msPerMinute * MinutesPerHour;
+var msPerDay = 86400000;
+
+// https://es5.github.io/#x9
+var ES5 = {
+	ToPrimitive: toPrimitive,
+
+	ToBoolean: function ToBoolean(value) {
+		return !!value;
+	},
+	ToNumber: function ToNumber(value) {
+		return +value; // eslint-disable-line no-implicit-coercion
+	},
+	ToInteger: function ToInteger(value) {
+		var number = this.ToNumber(value);
+		if ($isNaN(number)) { return 0; }
+		if (number === 0 || !$isFinite(number)) { return number; }
+		return sign(number) * Math.floor(Math.abs(number));
+	},
+	ToInt32: function ToInt32(x) {
+		return this.ToNumber(x) >> 0;
+	},
+	ToUint32: function ToUint32(x) {
+		return this.ToNumber(x) >>> 0;
+	},
+	ToUint16: function ToUint16(value) {
+		var number = this.ToNumber(value);
+		if ($isNaN(number) || number === 0 || !$isFinite(number)) { return 0; }
+		var posInt = sign(number) * Math.floor(Math.abs(number));
+		return mod(posInt, 0x10000);
+	},
+	ToString: function ToString(value) {
+		return $String(value);
+	},
+	ToObject: function ToObject(value) {
+		this.CheckObjectCoercible(value);
+		return $Object(value);
+	},
+	CheckObjectCoercible: function CheckObjectCoercible(value, optMessage) {
+		/* jshint eqnull:true */
+		if (value == null) {
+			throw new $TypeError(optMessage || 'Cannot call method on ' + value);
+		}
+		return value;
+	},
+	IsCallable: IsCallable,
+	SameValue: function SameValue(x, y) {
+		if (x === y) { // 0 === -0, but they are not identical.
+			if (x === 0) { return 1 / x === 1 / y; }
+			return true;
+		}
+		return $isNaN(x) && $isNaN(y);
+	},
+
+	// https://ecma-international.org/ecma-262/5.1/#sec-8
+	Type: function Type(x) {
+		if (x === null) {
+			return 'Null';
+		}
+		if (typeof x === 'undefined') {
+			return 'Undefined';
+		}
+		if (typeof x === 'function' || typeof x === 'object') {
+			return 'Object';
+		}
+		if (typeof x === 'number') {
+			return 'Number';
+		}
+		if (typeof x === 'boolean') {
+			return 'Boolean';
+		}
+		if (typeof x === 'string') {
+			return 'String';
+		}
+	},
+
+	// https://ecma-international.org/ecma-262/6.0/#sec-property-descriptor-specification-type
+	IsPropertyDescriptor: function IsPropertyDescriptor(Desc) {
+		return isPropertyDescriptor(this, Desc);
+	},
+
+	// https://ecma-international.org/ecma-262/5.1/#sec-8.10.1
+	IsAccessorDescriptor: function IsAccessorDescriptor(Desc) {
+		if (typeof Desc === 'undefined') {
+			return false;
+		}
+
+		assertRecord(this, 'Property Descriptor', 'Desc', Desc);
+
+		if (!has(Desc, '[[Get]]') && !has(Desc, '[[Set]]')) {
+			return false;
+		}
+
+		return true;
+	},
+
+	// https://ecma-international.org/ecma-262/5.1/#sec-8.10.2
+	IsDataDescriptor: function IsDataDescriptor(Desc) {
+		if (typeof Desc === 'undefined') {
+			return false;
+		}
+
+		assertRecord(this, 'Property Descriptor', 'Desc', Desc);
+
+		if (!has(Desc, '[[Value]]') && !has(Desc, '[[Writable]]')) {
+			return false;
+		}
+
+		return true;
+	},
+
+	// https://ecma-international.org/ecma-262/5.1/#sec-8.10.3
+	IsGenericDescriptor: function IsGenericDescriptor(Desc) {
+		if (typeof Desc === 'undefined') {
+			return false;
+		}
+
+		assertRecord(this, 'Property Descriptor', 'Desc', Desc);
+
+		if (!this.IsAccessorDescriptor(Desc) && !this.IsDataDescriptor(Desc)) {
+			return true;
+		}
+
+		return false;
+	},
+
+	// https://ecma-international.org/ecma-262/5.1/#sec-8.10.4
+	FromPropertyDescriptor: function FromPropertyDescriptor(Desc) {
+		if (typeof Desc === 'undefined') {
+			return Desc;
+		}
+
+		assertRecord(this, 'Property Descriptor', 'Desc', Desc);
+
+		if (this.IsDataDescriptor(Desc)) {
+			return {
+				value: Desc['[[Value]]'],
+				writable: !!Desc['[[Writable]]'],
+				enumerable: !!Desc['[[Enumerable]]'],
+				configurable: !!Desc['[[Configurable]]']
+			};
+		} else if (this.IsAccessorDescriptor(Desc)) {
+			return {
+				get: Desc['[[Get]]'],
+				set: Desc['[[Set]]'],
+				enumerable: !!Desc['[[Enumerable]]'],
+				configurable: !!Desc['[[Configurable]]']
+			};
+		} else {
+			throw new $TypeError('FromPropertyDescriptor must be called with a fully populated Property Descriptor');
+		}
+	},
+
+	// https://ecma-international.org/ecma-262/5.1/#sec-8.10.5
+	ToPropertyDescriptor: function ToPropertyDescriptor(Obj) {
+		if (this.Type(Obj) !== 'Object') {
+			throw new $TypeError('ToPropertyDescriptor requires an object');
+		}
+
+		var desc = {};
+		if (has(Obj, 'enumerable')) {
+			desc['[[Enumerable]]'] = this.ToBoolean(Obj.enumerable);
+		}
+		if (has(Obj, 'configurable')) {
+			desc['[[Configurable]]'] = this.ToBoolean(Obj.configurable);
+		}
+		if (has(Obj, 'value')) {
+			desc['[[Value]]'] = Obj.value;
+		}
+		if (has(Obj, 'writable')) {
+			desc['[[Writable]]'] = this.ToBoolean(Obj.writable);
+		}
+		if (has(Obj, 'get')) {
+			var getter = Obj.get;
+			if (typeof getter !== 'undefined' && !this.IsCallable(getter)) {
+				throw new TypeError('getter must be a function');
+			}
+			desc['[[Get]]'] = getter;
+		}
+		if (has(Obj, 'set')) {
+			var setter = Obj.set;
+			if (typeof setter !== 'undefined' && !this.IsCallable(setter)) {
+				throw new $TypeError('setter must be a function');
+			}
+			desc['[[Set]]'] = setter;
+		}
+
+		if ((has(desc, '[[Get]]') || has(desc, '[[Set]]')) && (has(desc, '[[Value]]') || has(desc, '[[Writable]]'))) {
+			throw new $TypeError('Invalid property descriptor. Cannot both specify accessors and a value or writable attribute');
+		}
+		return desc;
+	},
+
+	// https://ecma-international.org/ecma-262/5.1/#sec-11.9.3
+	'Abstract Equality Comparison': function AbstractEqualityComparison(x, y) {
+		var xType = this.Type(x);
+		var yType = this.Type(y);
+		if (xType === yType) {
+			return x === y; // ES6+ specified this shortcut anyways.
+		}
+		if (x == null && y == null) {
+			return true;
+		}
+		if (xType === 'Number' && yType === 'String') {
+			return this['Abstract Equality Comparison'](x, this.ToNumber(y));
+		}
+		if (xType === 'String' && yType === 'Number') {
+			return this['Abstract Equality Comparison'](this.ToNumber(x), y);
+		}
+		if (xType === 'Boolean') {
+			return this['Abstract Equality Comparison'](this.ToNumber(x), y);
+		}
+		if (yType === 'Boolean') {
+			return this['Abstract Equality Comparison'](x, this.ToNumber(y));
+		}
+		if ((xType === 'String' || xType === 'Number') && yType === 'Object') {
+			return this['Abstract Equality Comparison'](x, this.ToPrimitive(y));
+		}
+		if (xType === 'Object' && (yType === 'String' || yType === 'Number')) {
+			return this['Abstract Equality Comparison'](this.ToPrimitive(x), y);
+		}
+		return false;
+	},
+
+	// https://ecma-international.org/ecma-262/5.1/#sec-11.9.6
+	'Strict Equality Comparison': function StrictEqualityComparison(x, y) {
+		var xType = this.Type(x);
+		var yType = this.Type(y);
+		if (xType !== yType) {
+			return false;
+		}
+		if (xType === 'Undefined' || xType === 'Null') {
+			return true;
+		}
+		return x === y; // shortcut for steps 4-7
+	},
+
+	// https://ecma-international.org/ecma-262/5.1/#sec-11.8.5
+	// eslint-disable-next-line max-statements
+	'Abstract Relational Comparison': function AbstractRelationalComparison(x, y, LeftFirst) {
+		if (this.Type(LeftFirst) !== 'Boolean') {
+			throw new $TypeError('Assertion failed: LeftFirst argument must be a Boolean');
+		}
+		var px;
+		var py;
+		if (LeftFirst) {
+			px = this.ToPrimitive(x, $Number);
+			py = this.ToPrimitive(y, $Number);
+		} else {
+			py = this.ToPrimitive(y, $Number);
+			px = this.ToPrimitive(x, $Number);
+		}
+		var bothStrings = this.Type(px) === 'String' && this.Type(py) === 'String';
+		if (!bothStrings) {
+			var nx = this.ToNumber(px);
+			var ny = this.ToNumber(py);
+			if ($isNaN(nx) || $isNaN(ny)) {
+				return undefined;
+			}
+			if ($isFinite(nx) && $isFinite(ny) && nx === ny) {
+				return false;
+			}
+			if (nx === 0 && ny === 0) {
+				return false;
+			}
+			if (nx === Infinity) {
+				return false;
+			}
+			if (ny === Infinity) {
+				return true;
+			}
+			if (ny === -Infinity) {
+				return false;
+			}
+			if (nx === -Infinity) {
+				return true;
+			}
+			return nx < ny; // by now, these are both nonzero, finite, and not equal
+		}
+		if (isPrefixOf(py, px)) {
+			return false;
+		}
+		if (isPrefixOf(px, py)) {
+			return true;
+		}
+		return px < py; // both strings, neither a prefix of the other. shortcut for steps c-f
+	},
+
+	// https://ecma-international.org/ecma-262/5.1/#sec-15.9.1.10
+	msFromTime: function msFromTime(t) {
+		return mod(t, msPerSecond);
+	},
+
+	// https://ecma-international.org/ecma-262/5.1/#sec-15.9.1.10
+	SecFromTime: function SecFromTime(t) {
+		return mod($floor(t / msPerSecond), SecondsPerMinute);
+	},
+
+	// https://ecma-international.org/ecma-262/5.1/#sec-15.9.1.10
+	MinFromTime: function MinFromTime(t) {
+		return mod($floor(t / msPerMinute), MinutesPerHour);
+	},
+
+	// https://ecma-international.org/ecma-262/5.1/#sec-15.9.1.10
+	HourFromTime: function HourFromTime(t) {
+		return mod($floor(t / msPerHour), HoursPerDay);
+	},
+
+	// https://ecma-international.org/ecma-262/5.1/#sec-15.9.1.2
+	Day: function Day(t) {
+		return $floor(t / msPerDay);
+	},
+
+	// https://ecma-international.org/ecma-262/5.1/#sec-15.9.1.2
+	TimeWithinDay: function TimeWithinDay(t) {
+		return mod(t, msPerDay);
+	},
+
+	// https://ecma-international.org/ecma-262/5.1/#sec-15.9.1.3
+	DayFromYear: function DayFromYear(y) {
+		return (365 * (y - 1970)) + $floor((y - 1969) / 4) - $floor((y - 1901) / 100) + $floor((y - 1601) / 400);
+	},
+
+	// https://ecma-international.org/ecma-262/5.1/#sec-15.9.1.3
+	TimeFromYear: function TimeFromYear(y) {
+		return msPerDay * this.DayFromYear(y);
+	},
+
+	// https://ecma-international.org/ecma-262/5.1/#sec-15.9.1.3
+	YearFromTime: function YearFromTime(t) {
+		// largest y such that this.TimeFromYear(y) <= t
+		return $getUTCFullYear(new $Date(t));
+	},
+
+	// https://ecma-international.org/ecma-262/5.1/#sec-15.9.1.6
+	WeekDay: function WeekDay(t) {
+		return mod(this.Day(t) + 4, 7);
+	},
+
+	// https://ecma-international.org/ecma-262/5.1/#sec-15.9.1.3
+	DaysInYear: function DaysInYear(y) {
+		if (mod(y, 4) !== 0) {
+			return 365;
+		}
+		if (mod(y, 100) !== 0) {
+			return 366;
+		}
+		if (mod(y, 400) !== 0) {
+			return 365;
+		}
+		return 366;
+	},
+
+	// https://ecma-international.org/ecma-262/5.1/#sec-15.9.1.3
+	InLeapYear: function InLeapYear(t) {
+		var days = this.DaysInYear(this.YearFromTime(t));
+		if (days === 365) {
+			return 0;
+		}
+		if (days === 366) {
+			return 1;
+		}
+		throw new $EvalError('Assertion failed: there are not 365 or 366 days in a year, got: ' + days);
+	},
+
+	// https://ecma-international.org/ecma-262/5.1/#sec-15.9.1.4
+	DayWithinYear: function DayWithinYear(t) {
+		return this.Day(t) - this.DayFromYear(this.YearFromTime(t));
+	},
+
+	// https://ecma-international.org/ecma-262/5.1/#sec-15.9.1.4
+	MonthFromTime: function MonthFromTime(t) {
+		var day = this.DayWithinYear(t);
+		if (0 <= day && day < 31) {
+			return 0;
+		}
+		var leap = this.InLeapYear(t);
+		if (31 <= day && day < (59 + leap)) {
+			return 1;
+		}
+		if ((59 + leap) <= day && day < (90 + leap)) {
+			return 2;
+		}
+		if ((90 + leap) <= day && day < (120 + leap)) {
+			return 3;
+		}
+		if ((120 + leap) <= day && day < (151 + leap)) {
+			return 4;
+		}
+		if ((151 + leap) <= day && day < (181 + leap)) {
+			return 5;
+		}
+		if ((181 + leap) <= day && day < (212 + leap)) {
+			return 6;
+		}
+		if ((212 + leap) <= day && day < (243 + leap)) {
+			return 7;
+		}
+		if ((243 + leap) <= day && day < (273 + leap)) {
+			return 8;
+		}
+		if ((273 + leap) <= day && day < (304 + leap)) {
+			return 9;
+		}
+		if ((304 + leap) <= day && day < (334 + leap)) {
+			return 10;
+		}
+		if ((334 + leap) <= day && day < (365 + leap)) {
+			return 11;
+		}
+	},
+
+	// https://ecma-international.org/ecma-262/5.1/#sec-15.9.1.5
+	DateFromTime: function DateFromTime(t) {
+		var m = this.MonthFromTime(t);
+		var d = this.DayWithinYear(t);
+		if (m === 0) {
+			return d + 1;
+		}
+		if (m === 1) {
+			return d - 30;
+		}
+		var leap = this.InLeapYear(t);
+		if (m === 2) {
+			return d - 58 - leap;
+		}
+		if (m === 3) {
+			return d - 89 - leap;
+		}
+		if (m === 4) {
+			return d - 119 - leap;
+		}
+		if (m === 5) {
+			return d - 150 - leap;
+		}
+		if (m === 6) {
+			return d - 180 - leap;
+		}
+		if (m === 7) {
+			return d - 211 - leap;
+		}
+		if (m === 8) {
+			return d - 242 - leap;
+		}
+		if (m === 9) {
+			return d - 272 - leap;
+		}
+		if (m === 10) {
+			return d - 303 - leap;
+		}
+		if (m === 11) {
+			return d - 333 - leap;
+		}
+		throw new $EvalError('Assertion failed: MonthFromTime returned an impossible value: ' + m);
+	},
+
+	// https://ecma-international.org/ecma-262/5.1/#sec-15.9.1.12
+	MakeDay: function MakeDay(year, month, date) {
+		if (!$isFinite(year) || !$isFinite(month) || !$isFinite(date)) {
+			return NaN;
+		}
+		var y = this.ToInteger(year);
+		var m = this.ToInteger(month);
+		var dt = this.ToInteger(date);
+		var ym = y + $floor(m / 12);
+		var mn = mod(m, 12);
+		var t = $DateUTC(ym, mn, 1);
+		if (this.YearFromTime(t) !== ym || this.MonthFromTime(t) !== mn || this.DateFromTime(t) !== 1) {
+			return NaN;
+		}
+		return this.Day(t) + dt - 1;
+	},
+
+	// https://ecma-international.org/ecma-262/5.1/#sec-15.9.1.13
+	MakeDate: function MakeDate(day, time) {
+		if (!$isFinite(day) || !$isFinite(time)) {
+			return NaN;
+		}
+		return (day * msPerDay) + time;
+	},
+
+	// https://ecma-international.org/ecma-262/5.1/#sec-15.9.1.11
+	MakeTime: function MakeTime(hour, min, sec, ms) {
+		if (!$isFinite(hour) || !$isFinite(min) || !$isFinite(sec) || !$isFinite(ms)) {
+			return NaN;
+		}
+		var h = this.ToInteger(hour);
+		var m = this.ToInteger(min);
+		var s = this.ToInteger(sec);
+		var milli = this.ToInteger(ms);
+		var t = (h * msPerHour) + (m * msPerMinute) + (s * msPerSecond) + milli;
+		return t;
+	},
+
+	// https://ecma-international.org/ecma-262/5.1/#sec-15.9.1.14
+	TimeClip: function TimeClip(time) {
+		if (!$isFinite(time) || $abs(time) > 8.64e15) {
+			return NaN;
+		}
+		return $Number(new $Date(this.ToNumber(time)));
+	},
+
+	// https://ecma-international.org/ecma-262/5.1/#sec-5.2
+	modulo: function modulo(x, y) {
+		return mod(x, y);
+	}
+};
+
+module.exports = ES5;
+
+
+/***/ }),
+
+/***/ "./node_modules/es-abstract/helpers/assertRecord.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/es-abstract/helpers/assertRecord.js ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var GetIntrinsic = __webpack_require__(/*! ../GetIntrinsic */ "./node_modules/es-abstract/GetIntrinsic.js");
+
+var $TypeError = GetIntrinsic('%TypeError%');
+var $SyntaxError = GetIntrinsic('%SyntaxError%');
+
+var has = __webpack_require__(/*! has */ "./node_modules/has/src/index.js");
+
+var predicates = {
+	// https://ecma-international.org/ecma-262/6.0/#sec-property-descriptor-specification-type
+	'Property Descriptor': function isPropertyDescriptor(ES, Desc) {
+		if (ES.Type(Desc) !== 'Object') {
+			return false;
+		}
+		var allowed = {
+			'[[Configurable]]': true,
+			'[[Enumerable]]': true,
+			'[[Get]]': true,
+			'[[Set]]': true,
+			'[[Value]]': true,
+			'[[Writable]]': true
+		};
+
+		for (var key in Desc) { // eslint-disable-line
+			if (has(Desc, key) && !allowed[key]) {
+				return false;
+			}
+		}
+
+		var isData = has(Desc, '[[Value]]');
+		var IsAccessor = has(Desc, '[[Get]]') || has(Desc, '[[Set]]');
+		if (isData && IsAccessor) {
+			throw new $TypeError('Property Descriptors may not be both accessor and data descriptors');
+		}
+		return true;
+	}
+};
+
+module.exports = function assertRecord(ES, recordType, argumentName, value) {
+	var predicate = predicates[recordType];
+	if (typeof predicate !== 'function') {
+		throw new $SyntaxError('unknown record type: ' + recordType);
+	}
+	if (!predicate(ES, value)) {
+		throw new $TypeError(argumentName + ' must be a ' + recordType);
+	}
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/es-abstract/helpers/callBind.js":
+/*!******************************************************!*\
+  !*** ./node_modules/es-abstract/helpers/callBind.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var bind = __webpack_require__(/*! function-bind */ "./node_modules/function-bind/index.js");
+
+var GetIntrinsic = __webpack_require__(/*! ../GetIntrinsic */ "./node_modules/es-abstract/GetIntrinsic.js");
+
+var $Function = GetIntrinsic('%Function%');
+var $apply = $Function.apply;
+var $call = $Function.call;
+
+module.exports = function callBind() {
+	return bind.apply($call, arguments);
+};
+
+module.exports.apply = function applyBind() {
+	return bind.apply($apply, arguments);
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/es-abstract/helpers/callBound.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/es-abstract/helpers/callBound.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var GetIntrinsic = __webpack_require__(/*! ../GetIntrinsic */ "./node_modules/es-abstract/GetIntrinsic.js");
+
+var callBind = __webpack_require__(/*! ./callBind */ "./node_modules/es-abstract/helpers/callBind.js");
+
+var $indexOf = callBind(GetIntrinsic('String.prototype.indexOf'));
+
+module.exports = function callBoundIntrinsic(name, allowMissing) {
+	var intrinsic = GetIntrinsic(name, !!allowMissing);
+	if (typeof intrinsic === 'function' && $indexOf(name, '.prototype.')) {
+		return callBind(intrinsic);
+	}
+	return intrinsic;
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/es-abstract/helpers/isFinite.js":
+/*!******************************************************!*\
+  !*** ./node_modules/es-abstract/helpers/isFinite.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var $isNaN = Number.isNaN || function (a) { return a !== a; };
+
+module.exports = Number.isFinite || function (x) { return typeof x === 'number' && !$isNaN(x) && x !== Infinity && x !== -Infinity; };
+
+
+/***/ }),
+
+/***/ "./node_modules/es-abstract/helpers/isNaN.js":
+/*!***************************************************!*\
+  !*** ./node_modules/es-abstract/helpers/isNaN.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = Number.isNaN || function isNaN(a) {
+	return a !== a;
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/es-abstract/helpers/isPrefixOf.js":
+/*!********************************************************!*\
+  !*** ./node_modules/es-abstract/helpers/isPrefixOf.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var $strSlice = __webpack_require__(/*! ../helpers/callBound */ "./node_modules/es-abstract/helpers/callBound.js")('String.prototype.slice');
+
+module.exports = function isPrefixOf(prefix, string) {
+	if (prefix === string) {
+		return true;
+	}
+	if (prefix.length > string.length) {
+		return false;
+	}
+	return $strSlice(string, 0, prefix.length) === prefix;
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/es-abstract/helpers/isPropertyDescriptor.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/es-abstract/helpers/isPropertyDescriptor.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var GetIntrinsic = __webpack_require__(/*! ../GetIntrinsic */ "./node_modules/es-abstract/GetIntrinsic.js");
+
+var has = __webpack_require__(/*! has */ "./node_modules/has/src/index.js");
+var $TypeError = GetIntrinsic('%TypeError%');
+
+module.exports = function IsPropertyDescriptor(ES, Desc) {
+	if (ES.Type(Desc) !== 'Object') {
+		return false;
+	}
+	var allowed = {
+		'[[Configurable]]': true,
+		'[[Enumerable]]': true,
+		'[[Get]]': true,
+		'[[Set]]': true,
+		'[[Value]]': true,
+		'[[Writable]]': true
+	};
+
+    for (var key in Desc) { // eslint-disable-line
+		if (has(Desc, key) && !allowed[key]) {
+			return false;
+		}
+	}
+
+	if (ES.IsDataDescriptor(Desc) && ES.IsAccessorDescriptor(Desc)) {
+		throw new $TypeError('Property Descriptors may not be both accessor and data descriptors');
+	}
+	return true;
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/es-abstract/helpers/mod.js":
+/*!*************************************************!*\
+  !*** ./node_modules/es-abstract/helpers/mod.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = function mod(number, modulo) {
+	var remain = number % modulo;
+	return Math.floor(remain >= 0 ? remain : remain + modulo);
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/es-abstract/helpers/sign.js":
+/*!**************************************************!*\
+  !*** ./node_modules/es-abstract/helpers/sign.js ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = function sign(number) {
+	return number >= 0 ? 1 : -1;
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/es-to-primitive/es5.js":
+/*!*********************************************!*\
+  !*** ./node_modules/es-to-primitive/es5.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var toStr = Object.prototype.toString;
+
+var isPrimitive = __webpack_require__(/*! ./helpers/isPrimitive */ "./node_modules/es-to-primitive/helpers/isPrimitive.js");
+
+var isCallable = __webpack_require__(/*! is-callable */ "./node_modules/is-callable/index.js");
+
+// http://ecma-international.org/ecma-262/5.1/#sec-8.12.8
+var ES5internalSlots = {
+	'[[DefaultValue]]': function (O) {
+		var actualHint;
+		if (arguments.length > 1) {
+			actualHint = arguments[1];
+		} else {
+			actualHint = toStr.call(O) === '[object Date]' ? String : Number;
+		}
+
+		if (actualHint === String || actualHint === Number) {
+			var methods = actualHint === String ? ['toString', 'valueOf'] : ['valueOf', 'toString'];
+			var value, i;
+			for (i = 0; i < methods.length; ++i) {
+				if (isCallable(O[methods[i]])) {
+					value = O[methods[i]]();
+					if (isPrimitive(value)) {
+						return value;
+					}
+				}
+			}
+			throw new TypeError('No default value');
+		}
+		throw new TypeError('invalid [[DefaultValue]] hint supplied');
+	}
+};
+
+// http://ecma-international.org/ecma-262/5.1/#sec-9.1
+module.exports = function ToPrimitive(input) {
+	if (isPrimitive(input)) {
+		return input;
+	}
+	if (arguments.length > 1) {
+		return ES5internalSlots['[[DefaultValue]]'](input, arguments[1]);
+	}
+	return ES5internalSlots['[[DefaultValue]]'](input);
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/es-to-primitive/helpers/isPrimitive.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/es-to-primitive/helpers/isPrimitive.js ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = function isPrimitive(value) {
+	return value === null || (typeof value !== 'function' && typeof value !== 'object');
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/flatten-vertex-data/index.js":
+/*!***************************************************!*\
+  !*** ./node_modules/flatten-vertex-data/index.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/*eslint new-cap:0*/
+var dtype = __webpack_require__(/*! dtype */ "./node_modules/dtype/index.js")
+
+module.exports = flattenVertexData
+
+function flattenVertexData (data, output, offset) {
+  if (!data) throw new TypeError('must specify data as first parameter')
+  offset = +(offset || 0) | 0
+
+  if (Array.isArray(data) && (data[0] && typeof data[0][0] === 'number')) {
+    var dim = data[0].length
+    var length = data.length * dim
+    var i, j, k, l
+
+    // no output specified, create a new typed array
+    if (!output || typeof output === 'string') {
+      output = new (dtype(output || 'float32'))(length + offset)
+    }
+
+    var dstLength = output.length - offset
+    if (length !== dstLength) {
+      throw new Error('source length ' + length + ' (' + dim + 'x' + data.length + ')' +
+        ' does not match destination length ' + dstLength)
+    }
+
+    for (i = 0, k = offset; i < data.length; i++) {
+      for (j = 0; j < dim; j++) {
+        output[k++] = data[i][j] === null ? NaN : data[i][j]
+      }
+    }
+  } else {
+    if (!output || typeof output === 'string') {
+      // no output, create a new one
+      var Ctor = dtype(output || 'float32')
+
+      // handle arrays separately due to possible nulls
+      if (Array.isArray(data) || output === 'array') {
+        output = new Ctor(data.length + offset)
+        for (i = 0, k = offset, l = output.length; k < l; k++, i++) {
+          output[k] = data[i] === null ? NaN : data[i]
+        }
+      } else {
+        if (offset === 0) {
+          output = new Ctor(data)
+        } else {
+          output = new Ctor(data.length + offset)
+
+          output.set(data, offset)
+        }
+      }
+    } else {
+      // store output in existing array
+      output.set(data, offset)
+    }
+  }
+
+  return output
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/for-each/index.js":
+/*!****************************************!*\
+  !*** ./node_modules/for-each/index.js ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var isCallable = __webpack_require__(/*! is-callable */ "./node_modules/is-callable/index.js");
+
+var toStr = Object.prototype.toString;
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+
+var forEachArray = function forEachArray(array, iterator, receiver) {
+    for (var i = 0, len = array.length; i < len; i++) {
+        if (hasOwnProperty.call(array, i)) {
+            if (receiver == null) {
+                iterator(array[i], i, array);
+            } else {
+                iterator.call(receiver, array[i], i, array);
+            }
+        }
+    }
+};
+
+var forEachString = function forEachString(string, iterator, receiver) {
+    for (var i = 0, len = string.length; i < len; i++) {
+        // no such thing as a sparse string.
+        if (receiver == null) {
+            iterator(string.charAt(i), i, string);
+        } else {
+            iterator.call(receiver, string.charAt(i), i, string);
+        }
+    }
+};
+
+var forEachObject = function forEachObject(object, iterator, receiver) {
+    for (var k in object) {
+        if (hasOwnProperty.call(object, k)) {
+            if (receiver == null) {
+                iterator(object[k], k, object);
+            } else {
+                iterator.call(receiver, object[k], k, object);
+            }
+        }
+    }
+};
+
+var forEach = function forEach(list, iterator, thisArg) {
+    if (!isCallable(iterator)) {
+        throw new TypeError('iterator must be a function');
+    }
+
+    var receiver;
+    if (arguments.length >= 3) {
+        receiver = thisArg;
+    }
+
+    if (toStr.call(list) === '[object Array]') {
+        forEachArray(list, iterator, receiver);
+    } else if (typeof list === 'string') {
+        forEachString(list, iterator, receiver);
+    } else {
+        forEachObject(list, iterator, receiver);
+    }
+};
+
+module.exports = forEach;
+
+
+/***/ }),
+
+/***/ "./node_modules/function-bind/implementation.js":
+/*!******************************************************!*\
+  !*** ./node_modules/function-bind/implementation.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/* eslint no-invalid-this: 1 */
+
+var ERROR_MESSAGE = 'Function.prototype.bind called on incompatible ';
+var slice = Array.prototype.slice;
+var toStr = Object.prototype.toString;
+var funcType = '[object Function]';
+
+module.exports = function bind(that) {
+    var target = this;
+    if (typeof target !== 'function' || toStr.call(target) !== funcType) {
+        throw new TypeError(ERROR_MESSAGE + target);
+    }
+    var args = slice.call(arguments, 1);
+
+    var bound;
+    var binder = function () {
+        if (this instanceof bound) {
+            var result = target.apply(
+                this,
+                args.concat(slice.call(arguments))
+            );
+            if (Object(result) === result) {
+                return result;
+            }
+            return this;
+        } else {
+            return target.apply(
+                that,
+                args.concat(slice.call(arguments))
+            );
+        }
+    };
+
+    var boundLength = Math.max(0, target.length - args.length);
+    var boundArgs = [];
+    for (var i = 0; i < boundLength; i++) {
+        boundArgs.push('$' + i);
+    }
+
+    bound = Function('binder', 'return function (' + boundArgs.join(',') + '){ return binder.apply(this,arguments); }')(binder);
+
+    if (target.prototype) {
+        var Empty = function Empty() {};
+        Empty.prototype = target.prototype;
+        bound.prototype = new Empty();
+        Empty.prototype = null;
+    }
+
+    return bound;
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/function-bind/index.js":
+/*!*********************************************!*\
+  !*** ./node_modules/function-bind/index.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var implementation = __webpack_require__(/*! ./implementation */ "./node_modules/function-bind/implementation.js");
+
+module.exports = Function.prototype.bind || implementation;
+
+
+/***/ }),
+
+/***/ "./node_modules/global/window.js":
+/*!***************************************!*\
+  !*** ./node_modules/global/window.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global) {var win;
+
+if (typeof window !== "undefined") {
+    win = window;
+} else if (typeof global !== "undefined") {
+    win = global;
+} else if (typeof self !== "undefined"){
+    win = self;
+} else {
+    win = {};
+}
+
+module.exports = win;
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
+
+/***/ }),
+
+/***/ "./node_modules/has-symbols/index.js":
+/*!*******************************************!*\
+  !*** ./node_modules/has-symbols/index.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(global) {
+
+var origSymbol = global.Symbol;
+var hasSymbolSham = __webpack_require__(/*! ./shams */ "./node_modules/has-symbols/shams.js");
+
+module.exports = function hasNativeSymbols() {
+	if (typeof origSymbol !== 'function') { return false; }
+	if (typeof Symbol !== 'function') { return false; }
+	if (typeof origSymbol('foo') !== 'symbol') { return false; }
+	if (typeof Symbol('bar') !== 'symbol') { return false; }
+
+	return hasSymbolSham();
+};
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
+
+/***/ }),
+
+/***/ "./node_modules/has-symbols/shams.js":
+/*!*******************************************!*\
+  !*** ./node_modules/has-symbols/shams.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/* eslint complexity: [2, 17], max-statements: [2, 33] */
+module.exports = function hasSymbols() {
+	if (typeof Symbol !== 'function' || typeof Object.getOwnPropertySymbols !== 'function') { return false; }
+	if (typeof Symbol.iterator === 'symbol') { return true; }
+
+	var obj = {};
+	var sym = Symbol('test');
+	var symObj = Object(sym);
+	if (typeof sym === 'string') { return false; }
+
+	if (Object.prototype.toString.call(sym) !== '[object Symbol]') { return false; }
+	if (Object.prototype.toString.call(symObj) !== '[object Symbol]') { return false; }
+
+	// temp disabled per https://github.com/ljharb/object.assign/issues/17
+	// if (sym instanceof Symbol) { return false; }
+	// temp disabled per https://github.com/WebReflection/get-own-property-symbols/issues/4
+	// if (!(symObj instanceof Symbol)) { return false; }
+
+	// if (typeof Symbol.prototype.toString !== 'function') { return false; }
+	// if (String(sym) !== Symbol.prototype.toString.call(sym)) { return false; }
+
+	var symVal = 42;
+	obj[sym] = symVal;
+	for (sym in obj) { return false; } // eslint-disable-line no-restricted-syntax
+	if (typeof Object.keys === 'function' && Object.keys(obj).length !== 0) { return false; }
+
+	if (typeof Object.getOwnPropertyNames === 'function' && Object.getOwnPropertyNames(obj).length !== 0) { return false; }
+
+	var syms = Object.getOwnPropertySymbols(obj);
+	if (syms.length !== 1 || syms[0] !== sym) { return false; }
+
+	if (!Object.prototype.propertyIsEnumerable.call(obj, sym)) { return false; }
+
+	if (typeof Object.getOwnPropertyDescriptor === 'function') {
+		var descriptor = Object.getOwnPropertyDescriptor(obj, sym);
+		if (descriptor.value !== symVal || descriptor.enumerable !== true) { return false; }
+	}
+
+	return true;
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/has/src/index.js":
+/*!***************************************!*\
+  !*** ./node_modules/has/src/index.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var bind = __webpack_require__(/*! function-bind */ "./node_modules/function-bind/index.js");
+
+module.exports = bind.call(Function.call, Object.prototype.hasOwnProperty);
+
+
+/***/ }),
+
+/***/ "./node_modules/ieee754/index.js":
+/*!***************************************!*\
+  !*** ./node_modules/ieee754/index.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+exports.read = function (buffer, offset, isLE, mLen, nBytes) {
+  var e, m
+  var eLen = (nBytes * 8) - mLen - 1
+  var eMax = (1 << eLen) - 1
+  var eBias = eMax >> 1
+  var nBits = -7
+  var i = isLE ? (nBytes - 1) : 0
+  var d = isLE ? -1 : 1
+  var s = buffer[offset + i]
+
+  i += d
+
+  e = s & ((1 << (-nBits)) - 1)
+  s >>= (-nBits)
+  nBits += eLen
+  for (; nBits > 0; e = (e * 256) + buffer[offset + i], i += d, nBits -= 8) {}
+
+  m = e & ((1 << (-nBits)) - 1)
+  e >>= (-nBits)
+  nBits += mLen
+  for (; nBits > 0; m = (m * 256) + buffer[offset + i], i += d, nBits -= 8) {}
+
+  if (e === 0) {
+    e = 1 - eBias
+  } else if (e === eMax) {
+    return m ? NaN : ((s ? -1 : 1) * Infinity)
+  } else {
+    m = m + Math.pow(2, mLen)
+    e = e - eBias
+  }
+  return (s ? -1 : 1) * m * Math.pow(2, e - mLen)
+}
+
+exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
+  var e, m, c
+  var eLen = (nBytes * 8) - mLen - 1
+  var eMax = (1 << eLen) - 1
+  var eBias = eMax >> 1
+  var rt = (mLen === 23 ? Math.pow(2, -24) - Math.pow(2, -77) : 0)
+  var i = isLE ? 0 : (nBytes - 1)
+  var d = isLE ? 1 : -1
+  var s = value < 0 || (value === 0 && 1 / value < 0) ? 1 : 0
+
+  value = Math.abs(value)
+
+  if (isNaN(value) || value === Infinity) {
+    m = isNaN(value) ? 1 : 0
+    e = eMax
+  } else {
+    e = Math.floor(Math.log(value) / Math.LN2)
+    if (value * (c = Math.pow(2, -e)) < 1) {
+      e--
+      c *= 2
+    }
+    if (e + eBias >= 1) {
+      value += rt / c
+    } else {
+      value += rt * Math.pow(2, 1 - eBias)
+    }
+    if (value * c >= 2) {
+      e++
+      c /= 2
+    }
+
+    if (e + eBias >= eMax) {
+      m = 0
+      e = eMax
+    } else if (e + eBias >= 1) {
+      m = ((value * c) - 1) * Math.pow(2, mLen)
+      e = e + eBias
+    } else {
+      m = value * Math.pow(2, eBias - 1) * Math.pow(2, mLen)
+      e = 0
+    }
+  }
+
+  for (; mLen >= 8; buffer[offset + i] = m & 0xff, i += d, m /= 256, mLen -= 8) {}
+
+  e = (e << mLen) | m
+  eLen += mLen
+  for (; eLen > 0; buffer[offset + i] = e & 0xff, i += d, e /= 256, eLen -= 8) {}
+
+  buffer[offset + i - d] |= s * 128
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/inherits/inherits_browser.js":
+/*!***************************************************!*\
+  !*** ./node_modules/inherits/inherits_browser.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+if (typeof Object.create === 'function') {
+  // implementation from standard node.js 'util' module
+  module.exports = function inherits(ctor, superCtor) {
+    if (superCtor) {
+      ctor.super_ = superCtor
+      ctor.prototype = Object.create(superCtor.prototype, {
+        constructor: {
+          value: ctor,
+          enumerable: false,
+          writable: true,
+          configurable: true
+        }
+      })
+    }
+  };
+} else {
+  // old school shim for old browsers
+  module.exports = function inherits(ctor, superCtor) {
+    if (superCtor) {
+      ctor.super_ = superCtor
+      var TempCtor = function () {}
+      TempCtor.prototype = superCtor.prototype
+      ctor.prototype = new TempCtor()
+      ctor.prototype.constructor = ctor
+    }
+  }
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/is-buffer/index.js":
+/*!*****************************************!*\
+  !*** ./node_modules/is-buffer/index.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 /*!
  * Determine if an object is a Buffer
  *
  * @author   Feross Aboukhadijeh <https://feross.org>
  * @license  MIT
  */
-e.exports=function(e){return null!=e&&(r(e)||function(e){return"function"==typeof e.readFloatLE&&"function"==typeof e.slice&&r(e.slice(0,0))}(e)||!!e._isBuffer)}},function(e,t,r){var n=r(61),o=!1;function i(e,t,r,i){if(t=t||[],!e||function(e,t,r){if(e.itemSize!==r)return!0;if(!e.array)return!0;var n=e.array.length;return Array.isArray(t)&&Array.isArray(t[0])?n!==t.length*r:n!==t.length}(e,t,r)){t=n(t,i);var a=e&&"function"!=typeof e.setArray;return e&&!a||(a&&!o&&(o=!0,console.warn(["A WebGL buffer is being updated with a new size or itemSize, ","however this version of ThreeJS only supports fixed-size buffers.","\nThe old buffer may still be kept in memory.\n","To avoid memory leaks, it is recommended that you dispose ","your geometries and create new ones, or update to ThreeJS r82 or newer.\n","See here for discussion:\n","https://github.com/mrdoob/three.js/pull/9631"].join(""))),e=new THREE.BufferAttribute(t,r)),e.itemSize=r,e.needsUpdate=!0,"function"==typeof e.setArray&&e.setArray(t),e}return n(t,e.array),e.needsUpdate=!0,null}e.exports.attr=function(e,t,r,n,o){"number"!=typeof n&&(n=3);"string"!=typeof o&&(o="float32");if(Array.isArray(r)&&Array.isArray(r[0])&&r[0].length!==n)throw new Error("Nested vertex array has unexpected size; expected "+n+" but found "+r[0].length);var a=i(e.getAttribute(t),r,n,o);a&&e.addAttribute(t,a)},e.exports.index=function(e,t,r,n){"number"!=typeof r&&(r=1);"string"!=typeof n&&(n="uint16");var o=!e.index&&"function"!=typeof e.setIndex,a=i(o?e.getAttribute("index"):e.index,t,r,n);a&&(o?e.addAttribute("index",a):e.index=a)}},function(e,t,r){var n=r(12);e.exports=function(e,t,r){if(!e)throw new TypeError("must specify data as first parameter");if(r=0|+(r||0),Array.isArray(e)&&e[0]&&"number"==typeof e[0][0]){var o,i,a,s,u=e[0].length,c=e.length*u;t&&"string"!=typeof t||(t=new(n(t||"float32"))(c+r));var l=t.length-r;if(c!==l)throw new Error("source length "+c+" ("+u+"x"+e.length+") does not match destination length "+l);for(o=0,a=r;o<e.length;o++)for(i=0;i<u;i++)t[a++]=null===e[o][i]?NaN:e[o][i]}else if(t&&"string"!=typeof t)t.set(e,r);else{var p=n(t||"float32");if(Array.isArray(e)||"array"===t)for(t=new p(e.length+r),o=0,a=r,s=t.length;a<s;a++,o++)t[a]=null===e[o]?NaN:e[o];else 0===r?t=new p(e):(t=new p(e.length+r)).set(e,r)}return t}},function(e,t){e.exports.pages=function(e){var t=new Float32Array(4*e.length*1),r=0;return e.forEach((function(e){var n=e.data.page||0;t[r++]=n,t[r++]=n,t[r++]=n,t[r++]=n})),t},e.exports.uvs=function(e,t,r,n){var o=new Float32Array(4*e.length*2),i=0;return e.forEach((function(e){var a=e.data,s=a.x+a.width,u=a.y+a.height,c=a.x/t,l=a.y/r,p=s/t,f=u/r;n&&(l=(r-a.y)/r,f=(r-u)/r),o[i++]=c,o[i++]=l,o[i++]=c,o[i++]=f,o[i++]=p,o[i++]=f,o[i++]=p,o[i++]=l})),o},e.exports.positions=function(e){var t=new Float32Array(4*e.length*2),r=0;return e.forEach((function(e){var n=e.data,o=e.position[0]+n.xoffset,i=e.position[1]+n.yoffset,a=n.width,s=n.height;t[r++]=o,t[r++]=i,t[r++]=o,t[r++]=i+s,t[r++]=o+a,t[r++]=i+s,t[r++]=o+a,t[r++]=i})),t}},function(e,t){var r=2,n={min:[0,0],max:[0,0]};function o(e){var t=e.length/r;n.min[0]=e[0],n.min[1]=e[1],n.max[0]=e[0],n.max[1]=e[1];for(var o=0;o<t;o++){var i=e[o*r+0],a=e[o*r+1];n.min[0]=Math.min(i,n.min[0]),n.min[1]=Math.min(a,n.min[1]),n.max[0]=Math.max(i,n.max[0]),n.max[1]=Math.max(a,n.max[1])}}e.exports.computeBox=function(e,t){o(e),t.min.set(n.min[0],n.min[1],0),t.max.set(n.max[0],n.max[1],0)},e.exports.computeSphere=function(e,t){o(e);var r=n.min[0],i=n.min[1],a=n.max[0]-r,s=n.max[1]-i,u=Math.sqrt(a*a+s*s);t.center.set(r+a/2,i+s/2,0),t.radius=u/2}},function(e,t,r){var n=r(13);e.exports=function(e){var t="number"==typeof(e=e||{}).opacity?e.opacity:1,r="number"==typeof e.alphaTest?e.alphaTest:1e-4,o=e.precision||"highp",i=e.color,a=e.map,s="boolean"!=typeof e.negate||e.negate;return delete e.map,delete e.color,delete e.precision,delete e.opacity,delete e.negate,n({uniforms:{opacity:{type:"f",value:t},map:{type:"t",value:a||new THREE.Texture},color:{type:"c",value:new THREE.Color(i)}},vertexShader:["attribute vec2 uv;","attribute vec4 position;","uniform mat4 projectionMatrix;","uniform mat4 modelViewMatrix;","varying vec2 vUv;","void main() {","vUv = uv;","gl_Position = projectionMatrix * modelViewMatrix * position;","}"].join("\n"),fragmentShader:["#ifdef GL_OES_standard_derivatives","#extension GL_OES_standard_derivatives : enable","#endif","precision "+o+" float;","uniform float opacity;","uniform vec3 color;","uniform sampler2D map;","varying vec2 vUv;","float median(float r, float g, float b) {","  return max(min(r, g), min(max(r, g), b));","}","void main() {","  vec3 sample = "+(s?"1.0 - ":"")+"texture2D(map, vUv).rgb;","  float sigDist = median(sample.r, sample.g, sample.b) - 0.5;","  float alpha = clamp(sigDist/fwidth(sigDist) + 0.5, 0.0, 1.0);","  gl_FragColor = vec4(color.xyz, alpha * opacity);",0===r?"":"  if (gl_FragColor.a < "+r+") discard;","}"].join("\n")},e)}},function(e,t,r){"use strict";r.r(t);var n={};r.r(n),r.d(n,"setup",(function(){return S})),r.d(n,"enter",(function(){return M})),r.d(n,"exit",(function(){return A})),r.d(n,"execute",(function(){return L}));var o={};r.r(o),r.d(o,"setup",(function(){return G})),r.d(o,"enter",(function(){return $})),r.d(o,"exit",(function(){return V})),r.d(o,"execute",(function(){return Y}));var i={};r.r(i),r.d(i,"setup",(function(){return X})),r.d(i,"enter",(function(){return z})),r.d(i,"exit",(function(){return W})),r.d(i,"execute",(function(){return K}));var a={};r.r(a),r.d(a,"setup",(function(){return q})),r.d(a,"enter",(function(){return J})),r.d(a,"exit",(function(){return Z})),r.d(a,"execute",(function(){return Q}));var s={};r.r(s),r.d(s,"setup",(function(){return oe})),r.d(s,"enter",(function(){return ie})),r.d(s,"exit",(function(){return ae})),r.d(s,"execute",(function(){return se}));var u={};r.r(u),r.d(u,"setup",(function(){return fe})),r.d(u,"enter",(function(){return he})),r.d(u,"exit",(function(){return de})),r.d(u,"execute",(function(){return me}));var c={};r.r(c),r.d(c,"setup",(function(){return Te})),r.d(c,"enter",(function(){return we})),r.d(c,"exit",(function(){return Re})),r.d(c,"execute",(function(){return xe}));var l={};r.r(l),r.d(l,"setup",(function(){return Le})),r.d(l,"enter",(function(){return Be})),r.d(l,"exit",(function(){return Ie})),r.d(l,"execute",(function(){return Oe}));r(14);var p={createButton:function(e,t){function r(t){a.style.display="",a.style.cursor="pointer",a.style.left="calc(50% - 50px)",a.style.width="100px",a.textContent="ENTER VR",a.onmouseenter=function(){a.style.opacity="1.0"},a.onmouseleave=function(){a.style.opacity="0.5"},a.onclick=function(){t.isPresenting?t.exitPresent():t.requestPresent([{source:e.domElement}])},e.vr.setDevice(t)}function n(){a.style.display="",a.style.cursor="auto",a.style.left="calc(50% - 75px)",a.style.width="150px",a.onmouseenter=null,a.onmouseleave=null,a.onclick=null}function o(){n(),a.textContent="VR NOT FOUND",e.vr.setDevice(null)}function i(e){e.style.position="absolute",e.style.bottom="20px",e.style.padding="12px 6px",e.style.border="1px solid #fff",e.style.borderRadius="4px",e.style.background="rgba(0,0,0,0.1)",e.style.color="#fff",e.style.font="normal 13px sans-serif",e.style.textAlign="center",e.style.opacity="0.5",e.style.outline="none",e.style.zIndex="999"}var a;if(t&&t.referenceSpaceType&&e.vr.setReferenceSpaceType(t.referenceSpaceType),"xr"in navigator&&"supportsSession"in navigator.xr)return(a=document.createElement("button")).style.display="none",i(a),navigator.xr.supportsSession("immersive-vr").then((function(){var t=null;function r(r){r.addEventListener("end",n),e.vr.setSession(r),a.textContent="EXIT XR",t=r}function n(){t.removeEventListener("end",n),e.vr.setSession(null),a.textContent="ENTER XR",t=null}a.style.display="",a.style.cursor="pointer",a.style.left="calc(50% - 50px)",a.style.width="100px",a.textContent="ENTER XR",a.onmouseenter=function(){a.style.opacity="1.0"},a.onmouseleave=function(){a.style.opacity="0.5"},a.onclick=function(){null===t?navigator.xr.requestSession("immersive-vr").then(r):t.end()}})).catch((function(){n(),a.textContent="XR NOT FOUND"})),a;if("getVRDisplays"in navigator)return(a=document.createElement("button")).style.display="none",i(a),window.addEventListener("vrdisplayconnect",(function(e){r(e.display)}),!1),window.addEventListener("vrdisplaydisconnect",(function(){o()}),!1),window.addEventListener("vrdisplaypresentchange",(function(e){a.textContent=e.display.isPresenting?"EXIT VR":"ENTER VR"}),!1),window.addEventListener("vrdisplayactivate",(function(t){t.display.requestPresent([{source:e.domElement}])}),!1),navigator.getVRDisplays().then((function(e){e.length>0?r(e[0]):o()})).catch(o),a;var s=document.createElement("a");return s.href="https://webvr.info",s.innerHTML="WEBVR NOT SUPPORTED",s.style.left="calc(50% - 90px)",s.style.width="180px",s.style.textDecoration="none",i(s),s}};r(15),r(16);const f="../src/vendor/";function h(e){for(var t in e)if("string"==typeof e[t])return!1;return!0}r(17),r(18);var d=r(52),m=r(64);var g,v,y,E,b,T=[],w={object:null,widget:null,controller:null,animation:0};const R=["seurat","sorolla","bosch","degas","rembrandt"],x=[1,1,1.875,1,1];function _(e){return new THREE.ShaderMaterial({uniforms:{time:{value:0},selected:{value:0},tex:{value:e.assets.panoballfx_tex}},vertexShader:e.shaders.basic_vert,fragmentShader:e.shaders.door_frag})}function S(e){const t=e.assets,r=t.lightmap_tex;r.encoding=THREE.sRGBEncoding,r.flipY=!1,E={hall:new THREE.MeshBasicMaterial({lightMap:r}),lightpanels:new THREE.MeshBasicMaterial,doorA:_(e),doorB:_(e),doorC:_(e),doorD:_(e)},g=new THREE.Object3D,(v=t.hall_model.scene).traverse(e=>{if("teleport"==e.name)return e,void(e.visible=!1);"Mesh"==e.type&&E[e.name]&&(e.material=E[e.name])});for(let e in R){let r=R[e],n=v.getObjectByName(r);if(!n)continue;let o=t[`painting_${r}_tex`];o.encoding=THREE.sRGBEncoding,o.flipY=!1,n.material=new THREE.MeshBasicMaterial({map:o}),n.userData.paintingId=e}b=v.getObjectByName("paintings"),w.widget=new THREE.Mesh(new THREE.PlaneGeometry,new THREE.MeshBasicMaterial({color:16711680})),w.widget.geometry.rotateY(-Math.PI/2),w.widget.visible=!1;const n=new THREE.DirectionalLight(15663103);n.position.set(.2,1,.1);const o=new THREE.DirectionalLight(16773358,.3);o.position.set(-.2,-1,-.1);const i=[{src:"pano1small",position:new THREE.Vector3(2,1.5,.5)},{src:"pano2small",position:new THREE.Vector3(-2.1,1.5,0)}];new THREE.SphereBufferGeometry(.15,30,20);t.panoballfx_tex.wrapT=THREE.RepeatWrapping,t.panoballfx_tex.wrapS=THREE.RepeatWrapping;for(var a=0;a<i.length;a++){const r=i[a];t[r.src].encoding=THREE.sRGBEncoding;var s=new THREE.Mesh(new THREE.SphereBufferGeometry(.15,30,20),new THREE.ShaderMaterial({uniforms:{time:{value:0},tex:{value:t[r.src]},texfx:{value:t.panoballfx_tex}},vertexShader:e.shaders.panoball_vert,fragmentShader:e.shaders.panoball_frag,side:THREE.BackSide}));s.position.copy(r.position),s.resetPosition=(new THREE.Vector3).copy(r.position),T.push(s),g.add(s)}(y=new THREE.Mesh(new THREE.PlaneBufferGeometry,new THREE.MeshBasicMaterial({color:0,transparent:!0,depthTest:!1}))).position.z=-.1,g.add(n),g.add(o),g.add(v),g.add(w.widget),e.camera.add(y)}function M(e){e.renderer.setClearColor(9614523),e.controllers,e.controllers[1].addEventListener("selectstart",B),e.controllers[1].addEventListener("selectend",I),e.scene.add(g),e.scene.add(function(e,t,r,n){const o=new THREE.SphereBufferGeometry(.01),i=new THREE.MeshBasicMaterial({color:n||16711680}),a=new THREE.Mesh(o,i);return a.position.set(e,t,r),a}(0,1,0));var t=function(e){if(!e.font)return void console.warn("createText(): <font> not defined");if(!e.map)return void console.warn("createText(): texture <map> not defined");const t=e.value||"[TEXT HERE]",r=e.width||300,n=e.size||1,o=e.align||"left",i=e.color||16777215,a=e.anchor||e.align,s=e.baseline||"bottom",u=!0===e.negate,c=d({width:r,align:o,font:e.font});c.update(t);const l=c.layout;let p=0,f=0;"top"===s?f=l._height+l._ascender:"center"===s&&(f=l._height/2),"right"===a?p=-l._width:"center"===a&&(p=-l._width/2),0===p&&0===f||c.translate(p,f,0);const h=new THREE.RawShaderMaterial(m({map:e.map,color:i,negate:u})),g=new THREE.Mesh(c,h);g.scale.set(.001*n,.001*n,1),g.rotation.x=Math.PI;const v=new THREE.Object3D;return v.add(g),v}({font:e.assets.inter_bold_font,map:e.assets.inter_bold_tex,size:3,value:"Lorem ipsum\nDolor sit ameeett!",width:350,align:"left",color:16777215,negate:!1});t.position.set(0,1,0),t.rotation.x=10*Math.PI/180,e.scene.add(t)}function A(e){e.scene.remove(g),e.controllers[1].removeEventListener("selectstart",B),e.controllers[1].removeEventListener("selectend",I)}function L(e,t,r){for(var n=0;n<T.length;n++){const t=T[n],i=e.camera.position.distanceTo(t.position);if(i<1){var o=e.camera.position.clone().sub(t.position).multiplyScalar(.08);t.scale.x<2&&t.scale.multiplyScalar(1.1),t.position.add(o),i<.1&&(e.goto="panorama"+n)}else t.scale.set(1,1,1),t.position.copy(t.resetPosition),t.position.y=1.5+.02*Math.cos(n+3*r)}w.painting&&function(e){w.animation<1&&(w.animation+=(1-w.animation)*e*4);const t=w.controller;t.getWorldPosition(H),t.getWorldDirection(P),P.negate(),t.raycaster.set(H,P);var r=t.raycaster.intersectObject(b,!0);if(0==r.length||r[0].object!==w.painting)return;j(r[0])}(t),function(e){E.doorA.uniforms.time.value=e,E.doorB.uniforms.time.value=e,E.doorC.uniforms.time.value=e,E.doorD.uniforms.time.value=e,E.doorD.uniforms.selected.value=1,T[0].material.uniforms.time.value=e,T[1].material.uniforms.time.value=e}(r),function(e){const t=e.camera.position;var r=0;t.y<.25?r=1-t.y/.25:t.x<-5.4?r=(-t.x-5.4)/.25:t.x>8?r=(t.x-8)/.25:t.z<-6.45?r=(-t.z- -6.45)/.25:t.z>6.4&&(r=(t.z-6.4)/.25);y.material.opacity=Math.min(1,Math.max(0,r))}(e)}var H=new THREE.Vector3,P=new THREE.Vector3;function B(e){let t=e.target;t.getWorldPosition(H),t.getWorldDirection(P),P.negate(),t.raycaster.set(H,P);var r=t.raycaster.intersectObject(b,!0);0!=r.length&&(w.painting=r[0].object,w.controller=t,w.widget.material=w.painting.material,w.widget.visible=!0,j(r[0]))}function I(e){w.painting&&(w.painting=null,w.animation=0,w.widget.visible=!1)}var O=new THREE.Vector2,C=new THREE.Vector2;const U=.05;function j(e){w.widget.position.copy(e.point),w.widget.position.x-=.3*w.animation;const t=w.widget.geometry.faceVertexUvs[0],r=x[w.painting.userData.paintingId];e.uv.clampScalar(U,1-U),O.set(e.uv.x-U,e.uv.y+U*r),C.set(e.uv.x+U,e.uv.y-U*r),t[0][0].x=O.x,t[0][0].y=C.y,t[0][1].x=O.x,t[0][1].y=O.y,t[0][2].x=C.x,t[0][2].y=C.y,t[1][0].x=O.x,t[1][0].y=O.y,t[1][1].x=C.x,t[1][1].y=O.y,t[1][2].x=C.x,t[1][2].y=C.y,w.widget.geometry.uvsNeedUpdate=!0}var F,D,k,N=null;function G(e){const t=e.assets,r=new THREE.SphereBufferGeometry(5e3,60,40);t.pano1.encoding=THREE.sRGBEncoding;const n=new THREE.MeshBasicMaterial({map:t.pano1,side:THREE.BackSide});N=new THREE.Mesh(r,n)}function $(e){e.renderer.setClearColor(0),e.scene.add(N)}function V(e){e.scene.remove(N)}function Y(e,t,r){}function X(e){const t=e.assets,r=new THREE.SphereBufferGeometry(5e3,60,40);t.andesL.encoding=THREE.sRGBEncoding,t.andesR.encoding=THREE.sRGBEncoding;const n=new THREE.MeshBasicMaterial({map:t.andesR,side:THREE.BackSide}),o=new THREE.MeshBasicMaterial({map:t.andesL,side:THREE.BackSide});(F=new THREE.Mesh(r,n)).layers.set(1),(D=new THREE.Mesh(r,o)).layers.set(2)}function z(e){e.renderer.setClearColor(0),e.scene.add(F),e.scene.add(D),e.camera.layers.enable(1)}function W(e){e.scene.remove(F),e.scene.remove(D),e.camera.layers.disable(1)}function K(e,t,r){}function q(e){const t=e.assets;k=t.pg_object_model.scene,t.pg_object_tex.encoding=THREE.sRGBEncoding,t.pg_object_tex.flipY=!1,t.pg_floor_tex.encoding=THREE.sRGBEncoding,t.pg_floor_tex.flipY=!1,t.pg_floor_lm_tex.encoding=THREE.sRGBEncoding,t.pg_floor_lm_tex.flipY=!1,t.pg_floor_tex.wrapS=THREE.RepeatWrapping,t.pg_floor_tex.wrapT=THREE.RepeatWrapping,t.pg_bg_tex.encoding=THREE.sRGBEncoding,t.pg_bg_tex.flipY=!1,t.pg_flare_tex.encoding=THREE.sRGBEncoding,t.pg_flare_tex.flipY=!1,t.pg_panel_tex.encoding=THREE.sRGBEncoding,t.pg_panel_tex.flipY=!1,k.getObjectByName("object").material=new THREE.MeshBasicMaterial({map:t.pg_object_tex}),k.getObjectByName("floor").material=new THREE.MeshBasicMaterial({map:t.pg_floor_tex,lightMap:t.pg_floor_lm_tex}),k.getObjectByName("bg").material=new THREE.MeshBasicMaterial({map:t.pg_bg_tex}),k.getObjectByName("flare").material=new THREE.MeshBasicMaterial({map:t.pg_flare_tex,blending:THREE.AdditiveBlending}),k.getObjectByName("panel").material=new THREE.MeshBasicMaterial({map:t.pg_panel_tex})}function J(e){e.renderer.setClearColor(0),e.scene.add(k),e.camera.position.set(0,1.6,2)}function Z(e){e.scene.remove(k)}function Q(e,t,r){}var ee=null,te=null,re=null,ne=null;function oe(e){const t=e.assets;var r=t.pavement_tex;r.wrapS=THREE.RepeatWrapping,r.wrapT=THREE.RepeatWrapping,r.repeat.set(6,6);const n=new THREE.MeshLambertMaterial({color:16777215,map:r});(ne=new THREE.Object3D).position.set(-3,200,-1.4),ee=t.city_model.scene,te=new THREE.DirectionalLight(16777215,1,10),re=new THREE.AmbientLight(16777215,.03),te.position.set(0,8,-1),re.position.set(0,-40,-1),ee.traverse(e=>{"Mesh"==e.type&&(e.material=n)})}function ie(e){e.renderer.setClearColor(12833506),e.scene.add(ee),e.scene.add(te),e.scene.add(re),e.scene.parent.fog=new THREE.FogExp2(12833506,.003),e.scene.add(ne),ne.add(e.camera)}function ae(e){e.scene.remove(ee),e.scene.remove(te),e.scene.remove(re),e.scene.parent.fog=null,e.scene.add(e.camera),e.scene.remove(ne)}function se(e,t,r){}var ue=null,ce=null,le=null,pe=null;function fe(e){const t=e.assets;var r=t.lanes01_tex,n=t.elevator_lm_tex;n.flipY=!1,r.wrapS=THREE.RepeatWrapping,r.wrapT=THREE.RepeatWrapping;const o=new THREE.MeshBasicMaterial({color:16777215,map:r,lightMap:n});(pe=new THREE.Mesh(new THREE.BoxBufferGeometry,new THREE.MeshLambertMaterial({map:r}))).position.set(0,1,-3),ue=t.elevator_model.scene,ce=new THREE.PointLight(16777215,1,10),le=new THREE.AmbientLight(16777215,.03),ce.position.set(0,8,-1),le.position.set(0,-40,-1),ue.traverse(e=>{"Mesh"==e.type&&(e.material=o)})}function he(e){e.renderer.setClearColor(11193599),e.scene.add(ue),e.scene.add(pe),e.scene.add(ce),e.scene.add(le),e.camera.position.set(0,1.6,0)}function de(e){e.scene.remove(ue),e.scene.remove(pe),e.scene.remove(ce),e.scene.remove(le)}function me(e,t,r){pe.position.y=5*Math.sin(r/2),pe.rotation.x+=.3*t,pe.rotation.y+=.2*t,pe.rotation.z+=.1*t}var ge,ve,ye,Ee,be=null;function Te(e){const t=e.assets;var r=t.checkboard_tex;r.wrapS=THREE.RepeatWrapping,r.wrapT=THREE.RepeatWrapping;var n=t.vertigo_lm_tex;n.encoding=THREE.sRGBEncoding,n.flipY=!1;const o=new THREE.MeshBasicMaterial({color:16777215,map:r,lightMap:n});(be=t.vertigo_model.scene).traverse(e=>{"Mesh"==e.type&&(e.material=o)})}function we(e){e.renderer.setClearColor(6782887),e.scene.add(be),e.scene.parent.fog=new THREE.FogExp2(6782887,.004)}function Re(e){e.scene.remove(be),e.scene.parent.fog=null}function xe(e,t,r){}const _e=["bells","horn","cowbell","guiro","mandolin","squeaker","train","whistle","motorhorn","surdo","trumpet"];var Se={};_e.forEach(e=>{Se[e]={animations:[],mesh:null,player:null,shadow:null}});const Me=5;var Ae=Me-1;function Le(e){const t=e.assets;ge=t.sound_model.scene,ve=new THREE.AudioListener,Ee=new THREE.AnimationMixer(ge);for(let e in Se){const r=ge.getObjectByName(e);if(!r)continue;const n=new THREE.PositionalAudio(ve);(new THREE.AudioLoader).load("assets/ogg/"+e+".ogg",e=>{n.setBuffer(e)}),Se[e].player=n,Se[e].mesh=r,r.visible=!1,r.add(n);const o=THREE.AnimationClip.findByName(t.sound_model.animations,e);if(o){const t=Ee.clipAction(o,r);t.loop=THREE.LoopOnce,Se[e].animations.push(t)}for(let n=0;n<r.children.length;n++){const o=r.children[n],i=THREE.AnimationClip.findByName(t.sound_model.animations,`${e}_${o.name}`);if(!i)continue;const a=Ee.clipAction(i,r);a.loop=THREE.LoopOnce,Se[e].animations.push(a)}let i=new THREE.Mesh(new THREE.PlaneBufferGeometry(3,3),new THREE.MeshBasicMaterial({color:r.children[0].material.color,map:t.sound_shadow_tex,transparent:!0,opacity:0,depthTest:!1,blending:THREE.AdditiveBlending}));i.position.set(r.position.x,.001,r.position.z),i.rotation.x=-Math.PI/2,ge.add(i),Se[e].shadow=i}const r=new THREE.GridHelper(20,20,2236962,526344);ge.add(r)}var He=-1;function Pe(){let e;if(He>=0&&((e=Se[_e[He]]).player.stop(),e.animations.length&&(e.mesh.visible=!1,e.animations.forEach(e=>{e.stop()}))),++Ae==Me){Ae=0;do{He=(He+1)%_e.length,e=Se[_e[He]]}while(!e.mesh)}e.player.play(),e.animations.length&&(e.mesh.visible=!0,e.animations.forEach(e=>{e.play()})),e.shadow.material.opacity=1,ye=setTimeout(Pe,2e3)}function Be(e){e.renderer.setClearColor(0),e.scene.add(ge),e.camera.add(ve),e.camera.position.set(0,1.6,0),ye=setTimeout(Pe,2e3)}function Ie(e){e.scene.remove(ge),e.camera.remove(ve),clearTimeout(ye)}function Oe(e,t,r){Ee.update(t);const n=Se[_e[He]];n&&n.shadow.material.opacity>0&&(n.shadow.material.opacity-=.5*t)}var Ce={door_frag:"\nuniform float time;\nuniform float selected;\nuniform sampler2D tex;\nvarying vec2 vUv;\n\nvoid main( void ) {\n  float t = time * 0.3;\n  vec2 uv = vec2(vUv.x + sin(t) * cos(t * 0.1 + vUv.y), vUv.y * sin(t * 0.3) + t);\n  vec4 col = texture2D(tex, uv) * 0.5;\n  gl_FragColor = vec4(col.xyz, 1.0);\n}\n",ballfx_frag:"\nuniform float time;\nuniform sampler2D tex;\nvarying vec2 vUv;\nvarying vec3 vPosition;\nvarying vec3 vNormal;\n\n\nvoid main( void ) {\n  float t = time + vPosition.x + vPosition.z;\n  vec2 uv = vec2(vUv.x + t * 0.2, vUv.y + t);\n  vec4 col = texture2D(tex, uv);\n  col.a = 0.5 + sin(t * 5.0) * 0.3;\n\n  gl_FragColor = col;\n}\n",basic_vert:"\nvarying vec2 vUv;\nvarying vec3 vPosition;\nvoid main()\n{\n  vUv = uv;\n  vPosition = position;\n  vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);\n  gl_Position = projectionMatrix * mvPosition;\n}\n",panoball_vert:"\nvarying vec2 vUv;\nvarying vec3 vPosition;\nvarying vec3 vNormal;\nvarying vec3 vWorldPos;\nuniform float time;\n\nmat4 inverse(mat4 m) {\n  float\n      a00 = m[0][0], a01 = m[0][1], a02 = m[0][2], a03 = m[0][3],\n      a10 = m[1][0], a11 = m[1][1], a12 = m[1][2], a13 = m[1][3],\n      a20 = m[2][0], a21 = m[2][1], a22 = m[2][2], a23 = m[2][3],\n      a30 = m[3][0], a31 = m[3][1], a32 = m[3][2], a33 = m[3][3],\n\n      b00 = a00 * a11 - a01 * a10,\n      b01 = a00 * a12 - a02 * a10,\n      b02 = a00 * a13 - a03 * a10,\n      b03 = a01 * a12 - a02 * a11,\n      b04 = a01 * a13 - a03 * a11,\n      b05 = a02 * a13 - a03 * a12,\n      b06 = a20 * a31 - a21 * a30,\n      b07 = a20 * a32 - a22 * a30,\n      b08 = a20 * a33 - a23 * a30,\n      b09 = a21 * a32 - a22 * a31,\n      b10 = a21 * a33 - a23 * a31,\n      b11 = a22 * a33 - a23 * a32,\n\n      det = b00 * b11 - b01 * b10 + b02 * b09 + b03 * b08 - b04 * b07 + b05 * b06;\n\n  return mat4(\n      a11 * b11 - a12 * b10 + a13 * b09,\n      a02 * b10 - a01 * b11 - a03 * b09,\n      a31 * b05 - a32 * b04 + a33 * b03,\n      a22 * b04 - a21 * b05 - a23 * b03,\n      a12 * b08 - a10 * b11 - a13 * b07,\n      a00 * b11 - a02 * b08 + a03 * b07,\n      a32 * b02 - a30 * b05 - a33 * b01,\n      a20 * b05 - a22 * b02 + a23 * b01,\n      a10 * b10 - a11 * b08 + a13 * b06,\n      a01 * b08 - a00 * b10 - a03 * b06,\n      a30 * b04 - a31 * b02 + a33 * b00,\n      a21 * b02 - a20 * b04 - a23 * b00,\n      a11 * b07 - a10 * b09 - a12 * b06,\n      a00 * b09 - a01 * b07 + a02 * b06,\n      a31 * b01 - a30 * b03 - a32 * b00,\n      a20 * b03 - a21 * b01 + a22 * b00) / det;\n}\n\n\nmat4 transpose(in mat4 m) {\n  vec4 i0 = m[0];\n  vec4 i1 = m[1];\n  vec4 i2 = m[2];\n  vec4 i3 = m[3];\n\n  return mat4(\n    vec4(i0.x, i1.x, i2.x, i3.x),\n    vec4(i0.y, i1.y, i2.y, i3.y),\n    vec4(i0.z, i1.z, i2.z, i3.z),\n    vec4(i0.w, i1.w, i2.w, i3.w)\n  );\n}\n\nvoid main()\n{\n  vUv = uv;\n\n  vec3 offset = vec3(\n    sin(position.x * 50.0 + time),\n    sin(position.y * 10.0 + time * 2.0),\n    cos(position.z * 40.0 + time)\n  ) * 0.003;\n\n  vNormal = normalize(inverse(transpose(modelMatrix)) * vec4(normalize(normal), 1.0)).xyz;\n  vWorldPos = (modelMatrix * vec4( position, 1.0 )).xyz;\n\n  vPosition = position;\n  vec4 mvPosition = modelViewMatrix * vec4(position + offset, 1.0);\n  gl_Position = projectionMatrix * mvPosition;\n}\n",ballfx_vert:"\nvarying vec2 vUv;\nvarying vec3 vPosition;\nvarying vec3 vNormal;\n\nvoid main()\n{\n  vUv = uv;\n\n  vNormal = normalize(normalMatrix * normal);\n\n  vPosition = position;\n  vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);\n  gl_Position = projectionMatrix * mvPosition;\n}\n",panoball_frag:"\nuniform sampler2D tex, texfx;\nuniform float time;\nvarying vec2 vUv;\nvarying vec3 vPosition;\nvarying vec3 vNormal;\nvarying vec3 vWorldPos;\n\n\nvoid main( void ) {\n  vec2 uv = vUv;\n  //uv.y =  1.0 - uv.y;\n\n  vec3 eye = normalize(cameraPosition - vWorldPos);\n  float fresnel = abs(dot(eye, vNormal));\n  float shift = pow((1.0 - fresnel), 4.0) * 0.05;\n\n  vec3 col = vec3(\n    texture2D(tex, uv - shift).r,\n    texture2D(tex, uv).g,\n    texture2D(tex, uv + shift).b\n  );\n\n  col = mix(col * 0.7, vec3(1.0), 0.7 - fresnel);\n\n  float t = time * 0.4 + vPosition.x + vPosition.z;\n  uv = vec2(vUv.x + t * 0.2, vUv.y + t);\n  vec3 fx = texture2D(texfx, uv).rgb * 0.4;\n\n\n  gl_FragColor = vec4(col + fx, 1.0);\n}\n"};r.d(t,"init",(function(){return We}));var Ue,je,Fe,De,ke,Ne,Ge,$e,Ve=new THREE.Clock,Ye=[n,l,a,c,s,u,o,i],Xe=0,ze={inter_bold_font:"fonts/Inter-Bold.font",inter_bold_tex:"fonts/Inter-Bold.png",inter_regular_font:"fonts/Inter-Regular.font",inter_regular_tex:"fonts/Inter-Regular.png",metropolis_bold_font:"fonts/Metropolis-Bold.font",metropolis_bold_tex:"fonts/Metropolis-Bold.png",hall_model:"hall.gltf",city_model:"city.glb",vertigo_model:"vertigo2.gltf",elevator_model:"elevator.glb",generic_controller_model:"generic_controller.gltf",lightmap_tex:"lightmap.png",travertine_tex:"travertine.png",travertine2_tex:"travertine2.jpg",controller_tex:"controller.png",pano1:"zapporthorn.jpg",pano1small:"zapporthorn_small.jpg",pano2small:"andes_small.jpg",panoballfx_tex:"ballfx.jpg",andesL:"andesL.jpg",andesR:"andesR.jpg",elevator_lm_tex:"elevator_lm.png",lanes01_tex:"lanes01.jpg",pavement_tex:"pavement.jpg",checkboard_tex:"checkboard.png",vertigo_lm_tex:"vertigo2_lm.jpg",sound_model:"sound.glb",sound_shadow_tex:"sound_shadow.png",pg_floor_tex:"travertine2.jpg",pg_floor_lm_tex:"angel_floor_lm.jpg",pg_object_tex:"angel.jpg",pg_object_model:"angel.glb",pg_bg_tex:"pg_bg.jpg",pg_flare_tex:"flare.jpg",pg_panel_tex:"panel.jpg",painting_seurat_tex:"paintings/seurat.basis",painting_sorolla_tex:"paintings/sorolla.basis",painting_bosch_tex:"paintings/bosch.basis",painting_degas_tex:"paintings/degas.basis",painting_rembrandt_tex:"paintings/rembrandt.basis"};function We(){Ue=new THREE.Scene,(De=new THREE.PerspectiveCamera(80,window.innerWidth/window.innerHeight,.005,1e4)).position.set(0,1.6,0),De.position.set(1.5,1.6,2.3),ke=new THREE.PointerLockControls(De),document.body.addEventListener("click",()=>ke.lock()),document.body.addEventListener("keydown",e=>{switch(e.keyCode){case 87:ke.moveForward(.2);break;case 65:ke.moveRight(-.2);break;case 83:ke.moveForward(-.2);break;case 68:ke.moveRight(.2);break;case 78:!function(e){Ye[Xe].exit(Ne),Ye[Xe=e].enter(Ne)}((Xe+1)%Ye.length)}}),Ue.add(ke.getObject()),je=new THREE.Object3D,Ue.add(je),(Fe=new THREE.WebGLRenderer({antialias:!0,logarithmicDepthBuffer:!1})).gammaOutput=!0,Fe.gammaFactor=2.2,Fe.setPixelRatio(window.devicePixelRatio),Fe.setSize(window.innerWidth,window.innerHeight),Fe.vr.enabled=!0,window.addEventListener("resize",Je,!1),setInterval(()=>{console.log("render calls:",Fe.info.render.calls)},2e3),Ge=Fe.vr.getController(0),Ue.add(Ge),Ge.addEventListener("selectstart",Ke),Ge.addEventListener("selectend",qe),$e=Fe.vr.getController(1),Ue.add($e),$e.raycaster=new THREE.Raycaster,$e.raycaster.near=.1,$e.addEventListener("selectstart",Ke),$e.addEventListener("selectend",qe),Ne={assets:ze,shaders:Ce,scene:je,renderer:Fe,camera:De,controllers:[Ge,$e]},function(e,t,r,n){t&&"/"!=t[t.length-1]&&(t+="/");var o=new THREE.BasisTextureLoader;o.setTranscoderPath(f),o.detectSupport(e);var i=new THREE.TextureLoader,a=new THREE.GLTFLoader,s={gltf:a,glb:a,obj:new THREE.OBJLoader,gif:i,png:i,jpg:i,basis:o,font:new THREE.FontLoader};for(var u in r){let e=u,o=r[u],i=o.substr(o.lastIndexOf(".")+1).toLowerCase();s[i].load(t+o,t=>{console.info(`%c ${o} loaded`,"color:green"),r[e]="font"==i?t.data:t,n&&h(r)&&n()})}}(Fe,"../assets/",ze,()=>{!function(){var e=ze.generic_controller_model.scene,t=new THREE.MeshLambertMaterial({map:ze.controller_tex});e.getObjectByName("body").material=t,e.getObjectByName("trigger").material=t,Ge.add(e),$e.add(e.clone())}(),S(Ne),G(Ne),X(Ne),q(Ne),oe(Ne),fe(Ne),Te(Ne),Le(Ne),Ye[Xe=0].enter(Ne),document.body.appendChild(Fe.domElement),document.body.appendChild(p.createButton(Fe)),Fe.setAnimationLoop(Ze)})}function Ke(e){e.target.getObjectByName("trigger").rotation.x=-.3}function qe(e){e.target.getObjectByName("trigger").rotation.x=0}function Je(){De.aspect=window.innerWidth/window.innerHeight,De.updateProjectionMatrix(),Fe.setSize(window.innerWidth,window.innerHeight)}function Ze(){var e=Ve.getDelta(),t=Ve.elapsedTime;Ne.goto=null,Ye[Xe].execute(Ne,e,t),Fe.render(Ue,De)}window.onload=()=>{We()}}]);
+
+// The _isBuffer check is for Safari 5-7 support, because it's missing
+// Object.prototype.constructor. Remove this eventually
+module.exports = function (obj) {
+  return obj != null && (isBuffer(obj) || isSlowBuffer(obj) || !!obj._isBuffer)
+}
+
+function isBuffer (obj) {
+  return !!obj.constructor && typeof obj.constructor.isBuffer === 'function' && obj.constructor.isBuffer(obj)
+}
+
+// For Node v0.10 support. Remove this eventually.
+function isSlowBuffer (obj) {
+  return typeof obj.readFloatLE === 'function' && typeof obj.slice === 'function' && isBuffer(obj.slice(0, 0))
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/is-callable/index.js":
+/*!*******************************************!*\
+  !*** ./node_modules/is-callable/index.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var fnToStr = Function.prototype.toString;
+
+var constructorRegex = /^\s*class\b/;
+var isES6ClassFn = function isES6ClassFunction(value) {
+	try {
+		var fnStr = fnToStr.call(value);
+		return constructorRegex.test(fnStr);
+	} catch (e) {
+		return false; // not a function
+	}
+};
+
+var tryFunctionObject = function tryFunctionToStr(value) {
+	try {
+		if (isES6ClassFn(value)) { return false; }
+		fnToStr.call(value);
+		return true;
+	} catch (e) {
+		return false;
+	}
+};
+var toStr = Object.prototype.toString;
+var fnClass = '[object Function]';
+var genClass = '[object GeneratorFunction]';
+var hasToStringTag = typeof Symbol === 'function' && typeof Symbol.toStringTag === 'symbol';
+
+module.exports = function isCallable(value) {
+	if (!value) { return false; }
+	if (typeof value !== 'function' && typeof value !== 'object') { return false; }
+	if (typeof value === 'function' && !value.prototype) { return true; }
+	if (hasToStringTag) { return tryFunctionObject(value); }
+	if (isES6ClassFn(value)) { return false; }
+	var strClass = toStr.call(value);
+	return strClass === fnClass || strClass === genClass;
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/is-function/index.js":
+/*!*******************************************!*\
+  !*** ./node_modules/is-function/index.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = isFunction
+
+var toString = Object.prototype.toString
+
+function isFunction (fn) {
+  var string = toString.call(fn)
+  return string === '[object Function]' ||
+    (typeof fn === 'function' && string !== '[object RegExp]') ||
+    (typeof window !== 'undefined' &&
+     // IE8 and below
+     (fn === window.setTimeout ||
+      fn === window.alert ||
+      fn === window.confirm ||
+      fn === window.prompt))
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/isarray/index.js":
+/*!***************************************!*\
+  !*** ./node_modules/isarray/index.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var toString = {}.toString;
+
+module.exports = Array.isArray || function (arr) {
+  return toString.call(arr) == '[object Array]';
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/layout-bmfont-text/index.js":
+/*!**************************************************!*\
+  !*** ./node_modules/layout-bmfont-text/index.js ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var wordWrap = __webpack_require__(/*! word-wrapper */ "./node_modules/word-wrapper/index.js")
+var xtend = __webpack_require__(/*! xtend */ "./node_modules/xtend/immutable.js")
+var number = __webpack_require__(/*! as-number */ "./node_modules/as-number/index.js")
+
+var X_HEIGHTS = ['x', 'e', 'a', 'o', 'n', 's', 'r', 'c', 'u', 'm', 'v', 'w', 'z']
+var M_WIDTHS = ['m', 'w']
+var CAP_HEIGHTS = ['H', 'I', 'N', 'E', 'F', 'K', 'L', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+
+
+var TAB_ID = '\t'.charCodeAt(0)
+var SPACE_ID = ' '.charCodeAt(0)
+var ALIGN_LEFT = 0, 
+    ALIGN_CENTER = 1, 
+    ALIGN_RIGHT = 2
+
+module.exports = function createLayout(opt) {
+  return new TextLayout(opt)
+}
+
+function TextLayout(opt) {
+  this.glyphs = []
+  this._measure = this.computeMetrics.bind(this)
+  this.update(opt)
+}
+
+TextLayout.prototype.update = function(opt) {
+  opt = xtend({
+    measure: this._measure
+  }, opt)
+  this._opt = opt
+  this._opt.tabSize = number(this._opt.tabSize, 4)
+
+  if (!opt.font)
+    throw new Error('must provide a valid bitmap font')
+
+  var glyphs = this.glyphs
+  var text = opt.text||'' 
+  var font = opt.font
+  this._setupSpaceGlyphs(font)
+  
+  var lines = wordWrap.lines(text, opt)
+  var minWidth = opt.width || 0
+
+  //clear glyphs
+  glyphs.length = 0
+
+  //get max line width
+  var maxLineWidth = lines.reduce(function(prev, line) {
+    return Math.max(prev, line.width, minWidth)
+  }, 0)
+
+  //the pen position
+  var x = 0
+  var y = 0
+  var lineHeight = number(opt.lineHeight, font.common.lineHeight)
+  var baseline = font.common.base
+  var descender = lineHeight-baseline
+  var letterSpacing = opt.letterSpacing || 0
+  var height = lineHeight * lines.length - descender
+  var align = getAlignType(this._opt.align)
+
+  //draw text along baseline
+  y -= height
+  
+  //the metrics for this text layout
+  this._width = maxLineWidth
+  this._height = height
+  this._descender = lineHeight - baseline
+  this._baseline = baseline
+  this._xHeight = getXHeight(font)
+  this._capHeight = getCapHeight(font)
+  this._lineHeight = lineHeight
+  this._ascender = lineHeight - descender - this._xHeight
+    
+  //layout each glyph
+  var self = this
+  lines.forEach(function(line, lineIndex) {
+    var start = line.start
+    var end = line.end
+    var lineWidth = line.width
+    var lastGlyph
+    
+    //for each glyph in that line...
+    for (var i=start; i<end; i++) {
+      var id = text.charCodeAt(i)
+      var glyph = self.getGlyph(font, id)
+      if (glyph) {
+        if (lastGlyph) 
+          x += getKerning(font, lastGlyph.id, glyph.id)
+
+        var tx = x
+        if (align === ALIGN_CENTER) 
+          tx += (maxLineWidth-lineWidth)/2
+        else if (align === ALIGN_RIGHT)
+          tx += (maxLineWidth-lineWidth)
+
+        glyphs.push({
+          position: [tx, y],
+          data: glyph,
+          index: i,
+          line: lineIndex
+        })  
+
+        //move pen forward
+        x += glyph.xadvance + letterSpacing
+        lastGlyph = glyph
+      }
+    }
+
+    //next line down
+    y += lineHeight
+    x = 0
+  })
+  this._linesTotal = lines.length;
+}
+
+TextLayout.prototype._setupSpaceGlyphs = function(font) {
+  //These are fallbacks, when the font doesn't include
+  //' ' or '\t' glyphs
+  this._fallbackSpaceGlyph = null
+  this._fallbackTabGlyph = null
+
+  if (!font.chars || font.chars.length === 0)
+    return
+
+  //try to get space glyph
+  //then fall back to the 'm' or 'w' glyphs
+  //then fall back to the first glyph available
+  var space = getGlyphById(font, SPACE_ID) 
+          || getMGlyph(font) 
+          || font.chars[0]
+
+  //and create a fallback for tab
+  var tabWidth = this._opt.tabSize * space.xadvance
+  this._fallbackSpaceGlyph = space
+  this._fallbackTabGlyph = xtend(space, {
+    x: 0, y: 0, xadvance: tabWidth, id: TAB_ID, 
+    xoffset: 0, yoffset: 0, width: 0, height: 0
+  })
+}
+
+TextLayout.prototype.getGlyph = function(font, id) {
+  var glyph = getGlyphById(font, id)
+  if (glyph)
+    return glyph
+  else if (id === TAB_ID) 
+    return this._fallbackTabGlyph
+  else if (id === SPACE_ID) 
+    return this._fallbackSpaceGlyph
+  return null
+}
+
+TextLayout.prototype.computeMetrics = function(text, start, end, width) {
+  var letterSpacing = this._opt.letterSpacing || 0
+  var font = this._opt.font
+  var curPen = 0
+  var curWidth = 0
+  var count = 0
+  var glyph
+  var lastGlyph
+
+  if (!font.chars || font.chars.length === 0) {
+    return {
+      start: start,
+      end: start,
+      width: 0
+    }
+  }
+
+  end = Math.min(text.length, end)
+  for (var i=start; i < end; i++) {
+    var id = text.charCodeAt(i)
+    var glyph = this.getGlyph(font, id)
+
+    if (glyph) {
+      //move pen forward
+      var xoff = glyph.xoffset
+      var kern = lastGlyph ? getKerning(font, lastGlyph.id, glyph.id) : 0
+      curPen += kern
+
+      var nextPen = curPen + glyph.xadvance + letterSpacing
+      var nextWidth = curPen + glyph.width
+
+      //we've hit our limit; we can't move onto the next glyph
+      if (nextWidth >= width || nextPen >= width)
+        break
+
+      //otherwise continue along our line
+      curPen = nextPen
+      curWidth = nextWidth
+      lastGlyph = glyph
+    }
+    count++
+  }
+  
+  //make sure rightmost edge lines up with rendered glyphs
+  if (lastGlyph)
+    curWidth += lastGlyph.xoffset
+
+  return {
+    start: start,
+    end: start + count,
+    width: curWidth
+  }
+}
+
+//getters for the private vars
+;['width', 'height', 
+  'descender', 'ascender',
+  'xHeight', 'baseline',
+  'capHeight',
+  'lineHeight' ].forEach(addGetter)
+
+function addGetter(name) {
+  Object.defineProperty(TextLayout.prototype, name, {
+    get: wrapper(name),
+    configurable: true
+  })
+}
+
+//create lookups for private vars
+function wrapper(name) {
+  return (new Function([
+    'return function '+name+'() {',
+    '  return this._'+name,
+    '}'
+  ].join('\n')))()
+}
+
+function getGlyphById(font, id) {
+  if (!font.chars || font.chars.length === 0)
+    return null
+
+  var glyphIdx = findChar(font.chars, id)
+  if (glyphIdx >= 0)
+    return font.chars[glyphIdx]
+  return null
+}
+
+function getXHeight(font) {
+  for (var i=0; i<X_HEIGHTS.length; i++) {
+    var id = X_HEIGHTS[i].charCodeAt(0)
+    var idx = findChar(font.chars, id)
+    if (idx >= 0) 
+      return font.chars[idx].height
+  }
+  return 0
+}
+
+function getMGlyph(font) {
+  for (var i=0; i<M_WIDTHS.length; i++) {
+    var id = M_WIDTHS[i].charCodeAt(0)
+    var idx = findChar(font.chars, id)
+    if (idx >= 0) 
+      return font.chars[idx]
+  }
+  return 0
+}
+
+function getCapHeight(font) {
+  for (var i=0; i<CAP_HEIGHTS.length; i++) {
+    var id = CAP_HEIGHTS[i].charCodeAt(0)
+    var idx = findChar(font.chars, id)
+    if (idx >= 0) 
+      return font.chars[idx].height
+  }
+  return 0
+}
+
+function getKerning(font, left, right) {
+  if (!font.kernings || font.kernings.length === 0)
+    return 0
+
+  var table = font.kernings
+  for (var i=0; i<table.length; i++) {
+    var kern = table[i]
+    if (kern.first === left && kern.second === right)
+      return kern.amount
+  }
+  return 0
+}
+
+function getAlignType(align) {
+  if (align === 'center')
+    return ALIGN_CENTER
+  else if (align === 'right')
+    return ALIGN_RIGHT
+  return ALIGN_LEFT
+}
+
+function findChar (array, value, start) {
+  start = start || 0
+  for (var i = start; i < array.length; i++) {
+    if (array[i].id === value) {
+      return i
+    }
+  }
+  return -1
+}
+
+/***/ }),
+
+/***/ "./node_modules/load-bmfont/browser.js":
+/*!*********************************************!*\
+  !*** ./node_modules/load-bmfont/browser.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(Buffer) {var xhr = __webpack_require__(/*! xhr */ "./node_modules/xhr/index.js")
+var noop = function(){}
+var parseASCII = __webpack_require__(/*! parse-bmfont-ascii */ "./node_modules/parse-bmfont-ascii/index.js")
+var parseXML = __webpack_require__(/*! parse-bmfont-xml */ "./node_modules/parse-bmfont-xml/lib/browser.js")
+var readBinary = __webpack_require__(/*! parse-bmfont-binary */ "./node_modules/parse-bmfont-binary/index.js")
+var isBinaryFormat = __webpack_require__(/*! ./lib/is-binary */ "./node_modules/load-bmfont/lib/is-binary.js")
+var xtend = __webpack_require__(/*! xtend */ "./node_modules/xtend/immutable.js")
+
+var xml2 = (function hasXML2() {
+  return self.XMLHttpRequest && "withCredentials" in new XMLHttpRequest
+})()
+
+module.exports = function(opt, cb) {
+  cb = typeof cb === 'function' ? cb : noop
+
+  if (typeof opt === 'string')
+    opt = { uri: opt }
+  else if (!opt)
+    opt = {}
+
+  var expectBinary = opt.binary
+  if (expectBinary)
+    opt = getBinaryOpts(opt)
+
+  xhr(opt, function(err, res, body) {
+    if (err)
+      return cb(err)
+    if (!/^2/.test(res.statusCode))
+      return cb(new Error('http status code: '+res.statusCode))
+    if (!body)
+      return cb(new Error('no body result'))
+
+    var binary = false 
+
+    //if the response type is an array buffer,
+    //we need to convert it into a regular Buffer object
+    if (isArrayBuffer(body)) {
+      var array = new Uint8Array(body)
+      body = new Buffer(array, 'binary')
+    }
+
+    //now check the string/Buffer response
+    //and see if it has a binary BMF header
+    if (isBinaryFormat(body)) {
+      binary = true
+      //if we have a string, turn it into a Buffer
+      if (typeof body === 'string') 
+        body = new Buffer(body, 'binary')
+    } 
+
+    //we are not parsing a binary format, just ASCII/XML/etc
+    if (!binary) {
+      //might still be a buffer if responseType is 'arraybuffer'
+      if (Buffer.isBuffer(body))
+        body = body.toString(opt.encoding)
+      body = body.trim()
+    }
+
+    var result
+    try {
+      var type = res.headers['content-type']
+      if (binary)
+        result = readBinary(body)
+      else if (/json/.test(type) || body.charAt(0) === '{')
+        result = JSON.parse(body)
+      else if (/xml/.test(type)  || body.charAt(0) === '<')
+        result = parseXML(body)
+      else
+        result = parseASCII(body)
+    } catch (e) {
+      cb(new Error('error parsing font '+e.message))
+      cb = noop
+    }
+    cb(null, result)
+  })
+}
+
+function isArrayBuffer(arr) {
+  var str = Object.prototype.toString
+  return str.call(arr) === '[object ArrayBuffer]'
+}
+
+function getBinaryOpts(opt) {
+  //IE10+ and other modern browsers support array buffers
+  if (xml2)
+    return xtend(opt, { responseType: 'arraybuffer' })
+  
+  if (typeof self.XMLHttpRequest === 'undefined')
+    throw new Error('your browser does not support XHR loading')
+
+  //IE9 and XML1 browsers could still use an override
+  var req = new self.XMLHttpRequest()
+  req.overrideMimeType('text/plain; charset=x-user-defined')
+  return xtend({
+    xhr: req
+  }, opt)
+}
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../buffer/index.js */ "./node_modules/buffer/index.js").Buffer))
+
+/***/ }),
+
+/***/ "./node_modules/load-bmfont/lib/is-binary.js":
+/*!***************************************************!*\
+  !*** ./node_modules/load-bmfont/lib/is-binary.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(Buffer) {var equal = __webpack_require__(/*! buffer-equal */ "./node_modules/buffer-equal/index.js")
+var HEADER = new Buffer([66, 77, 70, 3])
+
+module.exports = function(buf) {
+  if (typeof buf === 'string')
+    return buf.substring(0, 3) === 'BMF'
+  return buf.length > 4 && equal(buf.slice(0, 4), HEADER)
+}
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../buffer/index.js */ "./node_modules/buffer/index.js").Buffer))
+
+/***/ }),
+
+/***/ "./node_modules/object-assign/index.js":
+/*!*********************************************!*\
+  !*** ./node_modules/object-assign/index.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/*
+object-assign
+(c) Sindre Sorhus
+@license MIT
+*/
+
+
+/* eslint-disable no-unused-vars */
+var getOwnPropertySymbols = Object.getOwnPropertySymbols;
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+var propIsEnumerable = Object.prototype.propertyIsEnumerable;
+
+function toObject(val) {
+	if (val === null || val === undefined) {
+		throw new TypeError('Object.assign cannot be called with null or undefined');
+	}
+
+	return Object(val);
+}
+
+function shouldUseNative() {
+	try {
+		if (!Object.assign) {
+			return false;
+		}
+
+		// Detect buggy property enumeration order in older V8 versions.
+
+		// https://bugs.chromium.org/p/v8/issues/detail?id=4118
+		var test1 = new String('abc');  // eslint-disable-line no-new-wrappers
+		test1[5] = 'de';
+		if (Object.getOwnPropertyNames(test1)[0] === '5') {
+			return false;
+		}
+
+		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
+		var test2 = {};
+		for (var i = 0; i < 10; i++) {
+			test2['_' + String.fromCharCode(i)] = i;
+		}
+		var order2 = Object.getOwnPropertyNames(test2).map(function (n) {
+			return test2[n];
+		});
+		if (order2.join('') !== '0123456789') {
+			return false;
+		}
+
+		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
+		var test3 = {};
+		'abcdefghijklmnopqrst'.split('').forEach(function (letter) {
+			test3[letter] = letter;
+		});
+		if (Object.keys(Object.assign({}, test3)).join('') !==
+				'abcdefghijklmnopqrst') {
+			return false;
+		}
+
+		return true;
+	} catch (err) {
+		// We don't expect any of the above to throw, but better to be safe.
+		return false;
+	}
+}
+
+module.exports = shouldUseNative() ? Object.assign : function (target, source) {
+	var from;
+	var to = toObject(target);
+	var symbols;
+
+	for (var s = 1; s < arguments.length; s++) {
+		from = Object(arguments[s]);
+
+		for (var key in from) {
+			if (hasOwnProperty.call(from, key)) {
+				to[key] = from[key];
+			}
+		}
+
+		if (getOwnPropertySymbols) {
+			symbols = getOwnPropertySymbols(from);
+			for (var i = 0; i < symbols.length; i++) {
+				if (propIsEnumerable.call(from, symbols[i])) {
+					to[symbols[i]] = from[symbols[i]];
+				}
+			}
+		}
+	}
+
+	return to;
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/object-keys/implementation.js":
+/*!****************************************************!*\
+  !*** ./node_modules/object-keys/implementation.js ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var keysShim;
+if (!Object.keys) {
+	// modified from https://github.com/es-shims/es5-shim
+	var has = Object.prototype.hasOwnProperty;
+	var toStr = Object.prototype.toString;
+	var isArgs = __webpack_require__(/*! ./isArguments */ "./node_modules/object-keys/isArguments.js"); // eslint-disable-line global-require
+	var isEnumerable = Object.prototype.propertyIsEnumerable;
+	var hasDontEnumBug = !isEnumerable.call({ toString: null }, 'toString');
+	var hasProtoEnumBug = isEnumerable.call(function () {}, 'prototype');
+	var dontEnums = [
+		'toString',
+		'toLocaleString',
+		'valueOf',
+		'hasOwnProperty',
+		'isPrototypeOf',
+		'propertyIsEnumerable',
+		'constructor'
+	];
+	var equalsConstructorPrototype = function (o) {
+		var ctor = o.constructor;
+		return ctor && ctor.prototype === o;
+	};
+	var excludedKeys = {
+		$applicationCache: true,
+		$console: true,
+		$external: true,
+		$frame: true,
+		$frameElement: true,
+		$frames: true,
+		$innerHeight: true,
+		$innerWidth: true,
+		$onmozfullscreenchange: true,
+		$onmozfullscreenerror: true,
+		$outerHeight: true,
+		$outerWidth: true,
+		$pageXOffset: true,
+		$pageYOffset: true,
+		$parent: true,
+		$scrollLeft: true,
+		$scrollTop: true,
+		$scrollX: true,
+		$scrollY: true,
+		$self: true,
+		$webkitIndexedDB: true,
+		$webkitStorageInfo: true,
+		$window: true
+	};
+	var hasAutomationEqualityBug = (function () {
+		/* global window */
+		if (typeof window === 'undefined') { return false; }
+		for (var k in window) {
+			try {
+				if (!excludedKeys['$' + k] && has.call(window, k) && window[k] !== null && typeof window[k] === 'object') {
+					try {
+						equalsConstructorPrototype(window[k]);
+					} catch (e) {
+						return true;
+					}
+				}
+			} catch (e) {
+				return true;
+			}
+		}
+		return false;
+	}());
+	var equalsConstructorPrototypeIfNotBuggy = function (o) {
+		/* global window */
+		if (typeof window === 'undefined' || !hasAutomationEqualityBug) {
+			return equalsConstructorPrototype(o);
+		}
+		try {
+			return equalsConstructorPrototype(o);
+		} catch (e) {
+			return false;
+		}
+	};
+
+	keysShim = function keys(object) {
+		var isObject = object !== null && typeof object === 'object';
+		var isFunction = toStr.call(object) === '[object Function]';
+		var isArguments = isArgs(object);
+		var isString = isObject && toStr.call(object) === '[object String]';
+		var theKeys = [];
+
+		if (!isObject && !isFunction && !isArguments) {
+			throw new TypeError('Object.keys called on a non-object');
+		}
+
+		var skipProto = hasProtoEnumBug && isFunction;
+		if (isString && object.length > 0 && !has.call(object, 0)) {
+			for (var i = 0; i < object.length; ++i) {
+				theKeys.push(String(i));
+			}
+		}
+
+		if (isArguments && object.length > 0) {
+			for (var j = 0; j < object.length; ++j) {
+				theKeys.push(String(j));
+			}
+		} else {
+			for (var name in object) {
+				if (!(skipProto && name === 'prototype') && has.call(object, name)) {
+					theKeys.push(String(name));
+				}
+			}
+		}
+
+		if (hasDontEnumBug) {
+			var skipConstructor = equalsConstructorPrototypeIfNotBuggy(object);
+
+			for (var k = 0; k < dontEnums.length; ++k) {
+				if (!(skipConstructor && dontEnums[k] === 'constructor') && has.call(object, dontEnums[k])) {
+					theKeys.push(dontEnums[k]);
+				}
+			}
+		}
+		return theKeys;
+	};
+}
+module.exports = keysShim;
+
+
+/***/ }),
+
+/***/ "./node_modules/object-keys/index.js":
+/*!*******************************************!*\
+  !*** ./node_modules/object-keys/index.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var slice = Array.prototype.slice;
+var isArgs = __webpack_require__(/*! ./isArguments */ "./node_modules/object-keys/isArguments.js");
+
+var origKeys = Object.keys;
+var keysShim = origKeys ? function keys(o) { return origKeys(o); } : __webpack_require__(/*! ./implementation */ "./node_modules/object-keys/implementation.js");
+
+var originalKeys = Object.keys;
+
+keysShim.shim = function shimObjectKeys() {
+	if (Object.keys) {
+		var keysWorksWithArguments = (function () {
+			// Safari 5.0 bug
+			var args = Object.keys(arguments);
+			return args && args.length === arguments.length;
+		}(1, 2));
+		if (!keysWorksWithArguments) {
+			Object.keys = function keys(object) { // eslint-disable-line func-name-matching
+				if (isArgs(object)) {
+					return originalKeys(slice.call(object));
+				}
+				return originalKeys(object);
+			};
+		}
+	} else {
+		Object.keys = keysShim;
+	}
+	return Object.keys || keysShim;
+};
+
+module.exports = keysShim;
+
+
+/***/ }),
+
+/***/ "./node_modules/object-keys/isArguments.js":
+/*!*************************************************!*\
+  !*** ./node_modules/object-keys/isArguments.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var toStr = Object.prototype.toString;
+
+module.exports = function isArguments(value) {
+	var str = toStr.call(value);
+	var isArgs = str === '[object Arguments]';
+	if (!isArgs) {
+		isArgs = str !== '[object Array]' &&
+			value !== null &&
+			typeof value === 'object' &&
+			typeof value.length === 'number' &&
+			value.length >= 0 &&
+			toStr.call(value.callee) === '[object Function]';
+	}
+	return isArgs;
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/parse-bmfont-ascii/index.js":
+/*!**************************************************!*\
+  !*** ./node_modules/parse-bmfont-ascii/index.js ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = function parseBMFontAscii(data) {
+  if (!data)
+    throw new Error('no data provided')
+  data = data.toString().trim()
+
+  var output = {
+    pages: [],
+    chars: [],
+    kernings: []
+  }
+
+  var lines = data.split(/\r\n?|\n/g)
+
+  if (lines.length === 0)
+    throw new Error('no data in BMFont file')
+
+  for (var i = 0; i < lines.length; i++) {
+    var lineData = splitLine(lines[i], i)
+    if (!lineData) //skip empty lines
+      continue
+
+    if (lineData.key === 'page') {
+      if (typeof lineData.data.id !== 'number')
+        throw new Error('malformed file at line ' + i + ' -- needs page id=N')
+      if (typeof lineData.data.file !== 'string')
+        throw new Error('malformed file at line ' + i + ' -- needs page file="path"')
+      output.pages[lineData.data.id] = lineData.data.file
+    } else if (lineData.key === 'chars' || lineData.key === 'kernings') {
+      //... do nothing for these two ...
+    } else if (lineData.key === 'char') {
+      output.chars.push(lineData.data)
+    } else if (lineData.key === 'kerning') {
+      output.kernings.push(lineData.data)
+    } else {
+      output[lineData.key] = lineData.data
+    }
+  }
+
+  return output
+}
+
+function splitLine(line, idx) {
+  line = line.replace(/\t+/g, ' ').trim()
+  if (!line)
+    return null
+
+  var space = line.indexOf(' ')
+  if (space === -1) 
+    throw new Error("no named row at line " + idx)
+
+  var key = line.substring(0, space)
+
+  line = line.substring(space + 1)
+  //clear "letter" field as it is non-standard and
+  //requires additional complexity to parse " / = symbols
+  line = line.replace(/letter=[\'\"]\S+[\'\"]/gi, '')  
+  line = line.split("=")
+  line = line.map(function(str) {
+    return str.trim().match((/(".*?"|[^"\s]+)+(?=\s*|\s*$)/g))
+  })
+
+  var data = []
+  for (var i = 0; i < line.length; i++) {
+    var dt = line[i]
+    if (i === 0) {
+      data.push({
+        key: dt[0],
+        data: ""
+      })
+    } else if (i === line.length - 1) {
+      data[data.length - 1].data = parseData(dt[0])
+    } else {
+      data[data.length - 1].data = parseData(dt[0])
+      data.push({
+        key: dt[1],
+        data: ""
+      })
+    }
+  }
+
+  var out = {
+    key: key,
+    data: {}
+  }
+
+  data.forEach(function(v) {
+    out.data[v.key] = v.data;
+  })
+
+  return out
+}
+
+function parseData(data) {
+  if (!data || data.length === 0)
+    return ""
+
+  if (data.indexOf('"') === 0 || data.indexOf("'") === 0)
+    return data.substring(1, data.length - 1)
+  if (data.indexOf(',') !== -1)
+    return parseIntList(data)
+  return parseInt(data, 10)
+}
+
+function parseIntList(data) {
+  return data.split(',').map(function(val) {
+    return parseInt(val, 10)
+  })
+}
+
+/***/ }),
+
+/***/ "./node_modules/parse-bmfont-binary/index.js":
+/*!***************************************************!*\
+  !*** ./node_modules/parse-bmfont-binary/index.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var HEADER = [66, 77, 70]
+
+module.exports = function readBMFontBinary(buf) {
+  if (buf.length < 6)
+    throw new Error('invalid buffer length for BMFont')
+
+  var header = HEADER.every(function(byte, i) {
+    return buf.readUInt8(i) === byte
+  })
+
+  if (!header)
+    throw new Error('BMFont missing BMF byte header')
+
+  var i = 3
+  var vers = buf.readUInt8(i++)
+  if (vers > 3)
+    throw new Error('Only supports BMFont Binary v3 (BMFont App v1.10)')
+  
+  var target = { kernings: [], chars: [] }
+  for (var b=0; b<5; b++)
+    i += readBlock(target, buf, i)
+  return target
+}
+
+function readBlock(target, buf, i) {
+  if (i > buf.length-1)
+    return 0
+
+  var blockID = buf.readUInt8(i++)
+  var blockSize = buf.readInt32LE(i)
+  i += 4
+
+  switch(blockID) {
+    case 1: 
+      target.info = readInfo(buf, i)
+      break
+    case 2:
+      target.common = readCommon(buf, i)
+      break
+    case 3:
+      target.pages = readPages(buf, i, blockSize)
+      break
+    case 4:
+      target.chars = readChars(buf, i, blockSize)
+      break
+    case 5:
+      target.kernings = readKernings(buf, i, blockSize)
+      break
+  }
+  return 5 + blockSize
+}
+
+function readInfo(buf, i) {
+  var info = {}
+  info.size = buf.readInt16LE(i)
+
+  var bitField = buf.readUInt8(i+2)
+  info.smooth = (bitField >> 7) & 1
+  info.unicode = (bitField >> 6) & 1
+  info.italic = (bitField >> 5) & 1
+  info.bold = (bitField >> 4) & 1
+  
+  //fixedHeight is only mentioned in binary spec 
+  if ((bitField >> 3) & 1)
+    info.fixedHeight = 1
+  
+  info.charset = buf.readUInt8(i+3) || ''
+  info.stretchH = buf.readUInt16LE(i+4)
+  info.aa = buf.readUInt8(i+6)
+  info.padding = [
+    buf.readInt8(i+7),
+    buf.readInt8(i+8),
+    buf.readInt8(i+9),
+    buf.readInt8(i+10)
+  ]
+  info.spacing = [
+    buf.readInt8(i+11),
+    buf.readInt8(i+12)
+  ]
+  info.outline = buf.readUInt8(i+13)
+  info.face = readStringNT(buf, i+14)
+  return info
+}
+
+function readCommon(buf, i) {
+  var common = {}
+  common.lineHeight = buf.readUInt16LE(i)
+  common.base = buf.readUInt16LE(i+2)
+  common.scaleW = buf.readUInt16LE(i+4)
+  common.scaleH = buf.readUInt16LE(i+6)
+  common.pages = buf.readUInt16LE(i+8)
+  var bitField = buf.readUInt8(i+10)
+  common.packed = 0
+  common.alphaChnl = buf.readUInt8(i+11)
+  common.redChnl = buf.readUInt8(i+12)
+  common.greenChnl = buf.readUInt8(i+13)
+  common.blueChnl = buf.readUInt8(i+14)
+  return common
+}
+
+function readPages(buf, i, size) {
+  var pages = []
+  var text = readNameNT(buf, i)
+  var len = text.length+1
+  var count = size / len
+  for (var c=0; c<count; c++) {
+    pages[c] = buf.slice(i, i+text.length).toString('utf8')
+    i += len
+  }
+  return pages
+}
+
+function readChars(buf, i, blockSize) {
+  var chars = []
+
+  var count = blockSize / 20
+  for (var c=0; c<count; c++) {
+    var char = {}
+    var off = c*20
+    char.id = buf.readUInt32LE(i + 0 + off)
+    char.x = buf.readUInt16LE(i + 4 + off)
+    char.y = buf.readUInt16LE(i + 6 + off)
+    char.width = buf.readUInt16LE(i + 8 + off)
+    char.height = buf.readUInt16LE(i + 10 + off)
+    char.xoffset = buf.readInt16LE(i + 12 + off)
+    char.yoffset = buf.readInt16LE(i + 14 + off)
+    char.xadvance = buf.readInt16LE(i + 16 + off)
+    char.page = buf.readUInt8(i + 18 + off)
+    char.chnl = buf.readUInt8(i + 19 + off)
+    chars[c] = char
+  }
+  return chars
+}
+
+function readKernings(buf, i, blockSize) {
+  var kernings = []
+  var count = blockSize / 10
+  for (var c=0; c<count; c++) {
+    var kern = {}
+    var off = c*10
+    kern.first = buf.readUInt32LE(i + 0 + off)
+    kern.second = buf.readUInt32LE(i + 4 + off)
+    kern.amount = buf.readInt16LE(i + 8 + off)
+    kernings[c] = kern
+  }
+  return kernings
+}
+
+function readNameNT(buf, offset) {
+  var pos=offset
+  for (; pos<buf.length; pos++) {
+    if (buf[pos] === 0x00) 
+      break
+  }
+  return buf.slice(offset, pos)
+}
+
+function readStringNT(buf, offset) {
+  return readNameNT(buf, offset).toString('utf8')
+}
+
+/***/ }),
+
+/***/ "./node_modules/parse-bmfont-xml/lib/browser.js":
+/*!******************************************************!*\
+  !*** ./node_modules/parse-bmfont-xml/lib/browser.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var parseAttributes = __webpack_require__(/*! ./parse-attribs */ "./node_modules/parse-bmfont-xml/lib/parse-attribs.js")
+var parseFromString = __webpack_require__(/*! xml-parse-from-string */ "./node_modules/xml-parse-from-string/index.js")
+
+//In some cases element.attribute.nodeName can return
+//all lowercase values.. so we need to map them to the correct 
+//case
+var NAME_MAP = {
+  scaleh: 'scaleH',
+  scalew: 'scaleW',
+  stretchh: 'stretchH',
+  lineheight: 'lineHeight',
+  alphachnl: 'alphaChnl',
+  redchnl: 'redChnl',
+  greenchnl: 'greenChnl',
+  bluechnl: 'blueChnl'
+}
+
+module.exports = function parse(data) {
+  data = data.toString()
+  
+  var xmlRoot = parseFromString(data)
+  var output = {
+    pages: [],
+    chars: [],
+    kernings: []
+  }
+
+  //get config settings
+  ;['info', 'common'].forEach(function(key) {
+    var element = xmlRoot.getElementsByTagName(key)[0]
+    if (element)
+      output[key] = parseAttributes(getAttribs(element))
+  })
+
+  //get page info
+  var pageRoot = xmlRoot.getElementsByTagName('pages')[0]
+  if (!pageRoot)
+    throw new Error('malformed file -- no <pages> element')
+  var pages = pageRoot.getElementsByTagName('page')
+  for (var i=0; i<pages.length; i++) {
+    var p = pages[i]
+    var id = parseInt(p.getAttribute('id'), 10)
+    var file = p.getAttribute('file')
+    if (isNaN(id))
+      throw new Error('malformed file -- page "id" attribute is NaN')
+    if (!file)
+      throw new Error('malformed file -- needs page "file" attribute')
+    output.pages[parseInt(id, 10)] = file
+  }
+
+  //get kernings / chars
+  ;['chars', 'kernings'].forEach(function(key) {
+    var element = xmlRoot.getElementsByTagName(key)[0]
+    if (!element)
+      return
+    var childTag = key.substring(0, key.length-1)
+    var children = element.getElementsByTagName(childTag)
+    for (var i=0; i<children.length; i++) {      
+      var child = children[i]
+      output[key].push(parseAttributes(getAttribs(child)))
+    }
+  })
+  return output
+}
+
+function getAttribs(element) {
+  var attribs = getAttribList(element)
+  return attribs.reduce(function(dict, attrib) {
+    var key = mapName(attrib.nodeName)
+    dict[key] = attrib.nodeValue
+    return dict
+  }, {})
+}
+
+function getAttribList(element) {
+  //IE8+ and modern browsers
+  var attribs = []
+  for (var i=0; i<element.attributes.length; i++)
+    attribs.push(element.attributes[i])
+  return attribs
+}
+
+function mapName(nodeName) {
+  return NAME_MAP[nodeName.toLowerCase()] || nodeName
+}
+
+/***/ }),
+
+/***/ "./node_modules/parse-bmfont-xml/lib/parse-attribs.js":
+/*!************************************************************!*\
+  !*** ./node_modules/parse-bmfont-xml/lib/parse-attribs.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+//Some versions of GlyphDesigner have a typo
+//that causes some bugs with parsing. 
+//Need to confirm with recent version of the software
+//to see whether this is still an issue or not.
+var GLYPH_DESIGNER_ERROR = 'chasrset'
+
+module.exports = function parseAttributes(obj) {
+  if (GLYPH_DESIGNER_ERROR in obj) {
+    obj['charset'] = obj[GLYPH_DESIGNER_ERROR]
+    delete obj[GLYPH_DESIGNER_ERROR]
+  }
+
+  for (var k in obj) {
+    if (k === 'face' || k === 'charset') 
+      continue
+    else if (k === 'padding' || k === 'spacing')
+      obj[k] = parseIntList(obj[k])
+    else
+      obj[k] = parseInt(obj[k], 10) 
+  }
+  return obj
+}
+
+function parseIntList(data) {
+  return data.split(',').map(function(val) {
+    return parseInt(val, 10)
+  })
+}
+
+/***/ }),
+
+/***/ "./node_modules/parse-headers/parse-headers.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/parse-headers/parse-headers.js ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var trim = __webpack_require__(/*! string.prototype.trim */ "./node_modules/string.prototype.trim/index.js")
+  , forEach = __webpack_require__(/*! for-each */ "./node_modules/for-each/index.js")
+  , isArray = function(arg) {
+      return Object.prototype.toString.call(arg) === '[object Array]';
+    }
+
+module.exports = function (headers) {
+  if (!headers)
+    return {}
+
+  var result = {}
+
+  forEach(
+      trim(headers).split('\n')
+    , function (row) {
+        var index = row.indexOf(':')
+          , key = trim(row.slice(0, index)).toLowerCase()
+          , value = trim(row.slice(index + 1))
+
+        if (typeof(result[key]) === 'undefined') {
+          result[key] = value
+        } else if (isArray(result[key])) {
+          result[key].push(value)
+        } else {
+          result[key] = [ result[key], value ]
+        }
+      }
+  )
+
+  return result
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/quad-indices/index.js":
+/*!********************************************!*\
+  !*** ./node_modules/quad-indices/index.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var dtype = __webpack_require__(/*! dtype */ "./node_modules/dtype/index.js")
+var anArray = __webpack_require__(/*! an-array */ "./node_modules/an-array/index.js")
+var isBuffer = __webpack_require__(/*! is-buffer */ "./node_modules/is-buffer/index.js")
+
+var CW = [0, 2, 3]
+var CCW = [2, 1, 3]
+
+module.exports = function createQuadElements(array, opt) {
+    //if user didn't specify an output array
+    if (!array || !(anArray(array) || isBuffer(array))) {
+        opt = array || {}
+        array = null
+    }
+
+    if (typeof opt === 'number') //backwards-compatible
+        opt = { count: opt }
+    else
+        opt = opt || {}
+
+    var type = typeof opt.type === 'string' ? opt.type : 'uint16'
+    var count = typeof opt.count === 'number' ? opt.count : 1
+    var start = (opt.start || 0) 
+
+    var dir = opt.clockwise !== false ? CW : CCW,
+        a = dir[0], 
+        b = dir[1],
+        c = dir[2]
+
+    var numIndices = count * 6
+
+    var indices = array || new (dtype(type))(numIndices)
+    for (var i = 0, j = 0; i < numIndices; i += 6, j += 4) {
+        var x = i + start
+        indices[x + 0] = j + 0
+        indices[x + 1] = j + 1
+        indices[x + 2] = j + 2
+        indices[x + 3] = j + a
+        indices[x + 4] = j + b
+        indices[x + 5] = j + c
+    }
+    return indices
+}
+
+/***/ }),
+
+/***/ "./node_modules/string.prototype.trim/implementation.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/string.prototype.trim/implementation.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var bind = __webpack_require__(/*! function-bind */ "./node_modules/function-bind/index.js");
+var ES = __webpack_require__(/*! es-abstract/es5 */ "./node_modules/es-abstract/es5.js");
+var replace = bind.call(Function.call, String.prototype.replace);
+
+/* eslint-disable no-control-regex */
+var leftWhitespace = /^[\x09\x0A\x0B\x0C\x0D\x20\xA0\u1680\u180E\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200A\u202F\u205F\u3000\u2028\u2029\uFEFF]+/;
+var rightWhitespace = /[\x09\x0A\x0B\x0C\x0D\x20\xA0\u1680\u180E\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200A\u202F\u205F\u3000\u2028\u2029\uFEFF]+$/;
+/* eslint-enable no-control-regex */
+
+module.exports = function trim() {
+	var S = ES.ToString(ES.CheckObjectCoercible(this));
+	return replace(replace(S, leftWhitespace, ''), rightWhitespace, '');
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/string.prototype.trim/index.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/string.prototype.trim/index.js ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var bind = __webpack_require__(/*! function-bind */ "./node_modules/function-bind/index.js");
+var define = __webpack_require__(/*! define-properties */ "./node_modules/define-properties/index.js");
+
+var implementation = __webpack_require__(/*! ./implementation */ "./node_modules/string.prototype.trim/implementation.js");
+var getPolyfill = __webpack_require__(/*! ./polyfill */ "./node_modules/string.prototype.trim/polyfill.js");
+var shim = __webpack_require__(/*! ./shim */ "./node_modules/string.prototype.trim/shim.js");
+
+var boundTrim = bind.call(Function.call, getPolyfill());
+
+define(boundTrim, {
+	getPolyfill: getPolyfill,
+	implementation: implementation,
+	shim: shim
+});
+
+module.exports = boundTrim;
+
+
+/***/ }),
+
+/***/ "./node_modules/string.prototype.trim/polyfill.js":
+/*!********************************************************!*\
+  !*** ./node_modules/string.prototype.trim/polyfill.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var implementation = __webpack_require__(/*! ./implementation */ "./node_modules/string.prototype.trim/implementation.js");
+
+var zeroWidthSpace = '\u200b';
+
+module.exports = function getPolyfill() {
+	if (String.prototype.trim && zeroWidthSpace.trim() === zeroWidthSpace) {
+		return String.prototype.trim;
+	}
+	return implementation;
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/string.prototype.trim/shim.js":
+/*!****************************************************!*\
+  !*** ./node_modules/string.prototype.trim/shim.js ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var define = __webpack_require__(/*! define-properties */ "./node_modules/define-properties/index.js");
+var getPolyfill = __webpack_require__(/*! ./polyfill */ "./node_modules/string.prototype.trim/polyfill.js");
+
+module.exports = function shimStringTrim() {
+	var polyfill = getPolyfill();
+	define(String.prototype, { trim: polyfill }, {
+		trim: function testTrim() {
+			return String.prototype.trim !== polyfill;
+		}
+	});
+	return polyfill;
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/three-bmfont-text/index.js":
+/*!*************************************************!*\
+  !*** ./node_modules/three-bmfont-text/index.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var createLayout = __webpack_require__(/*! layout-bmfont-text */ "./node_modules/layout-bmfont-text/index.js")
+var inherits = __webpack_require__(/*! inherits */ "./node_modules/inherits/inherits_browser.js")
+var createIndices = __webpack_require__(/*! quad-indices */ "./node_modules/quad-indices/index.js")
+var buffer = __webpack_require__(/*! three-buffer-vertex-data */ "./node_modules/three-buffer-vertex-data/index.js")
+var assign = __webpack_require__(/*! object-assign */ "./node_modules/object-assign/index.js")
+
+var vertices = __webpack_require__(/*! ./lib/vertices */ "./node_modules/three-bmfont-text/lib/vertices.js")
+var utils = __webpack_require__(/*! ./lib/utils */ "./node_modules/three-bmfont-text/lib/utils.js")
+
+var Base = THREE.BufferGeometry
+
+module.exports = function createTextGeometry (opt) {
+  return new TextGeometry(opt)
+}
+
+function TextGeometry (opt) {
+  Base.call(this)
+
+  if (typeof opt === 'string') {
+    opt = { text: opt }
+  }
+
+  // use these as default values for any subsequent
+  // calls to update()
+  this._opt = assign({}, opt)
+
+  // also do an initial setup...
+  if (opt) this.update(opt)
+}
+
+inherits(TextGeometry, Base)
+
+TextGeometry.prototype.update = function (opt) {
+  if (typeof opt === 'string') {
+    opt = { text: opt }
+  }
+
+  // use constructor defaults
+  opt = assign({}, this._opt, opt)
+
+  if (!opt.font) {
+    throw new TypeError('must specify a { font } in options')
+  }
+
+  this.layout = createLayout(opt)
+
+  // get vec2 texcoords
+  var flipY = opt.flipY !== false
+
+  // the desired BMFont data
+  var font = opt.font
+
+  // determine texture size from font file
+  var texWidth = font.common.scaleW
+  var texHeight = font.common.scaleH
+
+  // get visible glyphs
+  var glyphs = this.layout.glyphs.filter(function (glyph) {
+    var bitmap = glyph.data
+    return bitmap.width * bitmap.height > 0
+  })
+
+  // provide visible glyphs for convenience
+  this.visibleGlyphs = glyphs
+
+  // get common vertex data
+  var positions = vertices.positions(glyphs)
+  var uvs = vertices.uvs(glyphs, texWidth, texHeight, flipY)
+  var indices = createIndices({
+    clockwise: true,
+    type: 'uint16',
+    count: glyphs.length
+  })
+
+  // update vertex data
+  buffer.index(this, indices, 1, 'uint16')
+  buffer.attr(this, 'position', positions, 2)
+  buffer.attr(this, 'uv', uvs, 2)
+
+  // update multipage data
+  if (!opt.multipage && 'page' in this.attributes) {
+    // disable multipage rendering
+    this.removeAttribute('page')
+  } else if (opt.multipage) {
+    var pages = vertices.pages(glyphs)
+    // enable multipage rendering
+    buffer.attr(this, 'page', pages, 1)
+  }
+}
+
+TextGeometry.prototype.computeBoundingSphere = function () {
+  if (this.boundingSphere === null) {
+    this.boundingSphere = new THREE.Sphere()
+  }
+
+  var positions = this.attributes.position.array
+  var itemSize = this.attributes.position.itemSize
+  if (!positions || !itemSize || positions.length < 2) {
+    this.boundingSphere.radius = 0
+    this.boundingSphere.center.set(0, 0, 0)
+    return
+  }
+  utils.computeSphere(positions, this.boundingSphere)
+  if (isNaN(this.boundingSphere.radius)) {
+    console.error('THREE.BufferGeometry.computeBoundingSphere(): ' +
+      'Computed radius is NaN. The ' +
+      '"position" attribute is likely to have NaN values.')
+  }
+}
+
+TextGeometry.prototype.computeBoundingBox = function () {
+  if (this.boundingBox === null) {
+    this.boundingBox = new THREE.Box3()
+  }
+
+  var bbox = this.boundingBox
+  var positions = this.attributes.position.array
+  var itemSize = this.attributes.position.itemSize
+  if (!positions || !itemSize || positions.length < 2) {
+    bbox.makeEmpty()
+    return
+  }
+  utils.computeBox(positions, bbox)
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/three-bmfont-text/lib/utils.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/three-bmfont-text/lib/utils.js ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var itemSize = 2
+var box = { min: [0, 0], max: [0, 0] }
+
+function bounds (positions) {
+  var count = positions.length / itemSize
+  box.min[0] = positions[0]
+  box.min[1] = positions[1]
+  box.max[0] = positions[0]
+  box.max[1] = positions[1]
+
+  for (var i = 0; i < count; i++) {
+    var x = positions[i * itemSize + 0]
+    var y = positions[i * itemSize + 1]
+    box.min[0] = Math.min(x, box.min[0])
+    box.min[1] = Math.min(y, box.min[1])
+    box.max[0] = Math.max(x, box.max[0])
+    box.max[1] = Math.max(y, box.max[1])
+  }
+}
+
+module.exports.computeBox = function (positions, output) {
+  bounds(positions)
+  output.min.set(box.min[0], box.min[1], 0)
+  output.max.set(box.max[0], box.max[1], 0)
+}
+
+module.exports.computeSphere = function (positions, output) {
+  bounds(positions)
+  var minX = box.min[0]
+  var minY = box.min[1]
+  var maxX = box.max[0]
+  var maxY = box.max[1]
+  var width = maxX - minX
+  var height = maxY - minY
+  var length = Math.sqrt(width * width + height * height)
+  output.center.set(minX + width / 2, minY + height / 2, 0)
+  output.radius = length / 2
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/three-bmfont-text/lib/vertices.js":
+/*!********************************************************!*\
+  !*** ./node_modules/three-bmfont-text/lib/vertices.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports.pages = function pages (glyphs) {
+  var pages = new Float32Array(glyphs.length * 4 * 1)
+  var i = 0
+  glyphs.forEach(function (glyph) {
+    var id = glyph.data.page || 0
+    pages[i++] = id
+    pages[i++] = id
+    pages[i++] = id
+    pages[i++] = id
+  })
+  return pages
+}
+
+module.exports.uvs = function uvs (glyphs, texWidth, texHeight, flipY) {
+  var uvs = new Float32Array(glyphs.length * 4 * 2)
+  var i = 0
+  glyphs.forEach(function (glyph) {
+    var bitmap = glyph.data
+    var bw = (bitmap.x + bitmap.width)
+    var bh = (bitmap.y + bitmap.height)
+
+    // top left position
+    var u0 = bitmap.x / texWidth
+    var v1 = bitmap.y / texHeight
+    var u1 = bw / texWidth
+    var v0 = bh / texHeight
+
+    if (flipY) {
+      v1 = (texHeight - bitmap.y) / texHeight
+      v0 = (texHeight - bh) / texHeight
+    }
+
+    // BL
+    uvs[i++] = u0
+    uvs[i++] = v1
+    // TL
+    uvs[i++] = u0
+    uvs[i++] = v0
+    // TR
+    uvs[i++] = u1
+    uvs[i++] = v0
+    // BR
+    uvs[i++] = u1
+    uvs[i++] = v1
+  })
+  return uvs
+}
+
+module.exports.positions = function positions (glyphs) {
+  var positions = new Float32Array(glyphs.length * 4 * 2)
+  var i = 0
+  glyphs.forEach(function (glyph) {
+    var bitmap = glyph.data
+
+    // bottom left position
+    var x = glyph.position[0] + bitmap.xoffset
+    var y = glyph.position[1] + bitmap.yoffset
+
+    // quad size
+    var w = bitmap.width
+    var h = bitmap.height
+
+    // BL
+    positions[i++] = x
+    positions[i++] = y
+    // TL
+    positions[i++] = x
+    positions[i++] = y + h
+    // TR
+    positions[i++] = x + w
+    positions[i++] = y + h
+    // BR
+    positions[i++] = x + w
+    positions[i++] = y
+  })
+  return positions
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/three-bmfont-text/shaders/msdf.js":
+/*!********************************************************!*\
+  !*** ./node_modules/three-bmfont-text/shaders/msdf.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var assign = __webpack_require__(/*! object-assign */ "./node_modules/object-assign/index.js");
+
+module.exports = function createMSDFShader (opt) {
+  opt = opt || {};
+  var opacity = typeof opt.opacity === 'number' ? opt.opacity : 1;
+  var alphaTest = typeof opt.alphaTest === 'number' ? opt.alphaTest : 0.0001;
+  var precision = opt.precision || 'highp';
+  var color = opt.color;
+  var map = opt.map;
+  var negate = typeof opt.negate === 'boolean' ? opt.negate : true;
+
+  // remove to satisfy r73
+  delete opt.map;
+  delete opt.color;
+  delete opt.precision;
+  delete opt.opacity;
+  delete opt.negate;
+
+  return assign({
+    uniforms: {
+      opacity: { type: 'f', value: opacity },
+      map: { type: 't', value: map || new THREE.Texture() },
+      color: { type: 'c', value: new THREE.Color(color) }
+    },
+    vertexShader: [
+      'attribute vec2 uv;',
+      'attribute vec4 position;',
+      'uniform mat4 projectionMatrix;',
+      'uniform mat4 modelViewMatrix;',
+      'varying vec2 vUv;',
+      'void main() {',
+      'vUv = uv;',
+      'gl_Position = projectionMatrix * modelViewMatrix * position;',
+      '}'
+    ].join('\n'),
+    fragmentShader: [
+      '#ifdef GL_OES_standard_derivatives',
+      '#extension GL_OES_standard_derivatives : enable',
+      '#endif',
+      'precision ' + precision + ' float;',
+      'uniform float opacity;',
+      'uniform vec3 color;',
+      'uniform sampler2D map;',
+      'varying vec2 vUv;',
+
+      'float median(float r, float g, float b) {',
+      '  return max(min(r, g), min(max(r, g), b));',
+      '}',
+
+      'void main() {',
+      '  vec3 sample = ' + (negate ? '1.0 - ' : '') + 'texture2D(map, vUv).rgb;',
+      '  float sigDist = median(sample.r, sample.g, sample.b) - 0.5;',
+      '  float alpha = clamp(sigDist/fwidth(sigDist) + 0.5, 0.0, 1.0);',
+      '  gl_FragColor = vec4(color.xyz, alpha * opacity);',
+      alphaTest === 0
+        ? ''
+        : '  if (gl_FragColor.a < ' + alphaTest + ') discard;',
+      '}'
+    ].join('\n')
+  }, opt);
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/three-buffer-vertex-data/index.js":
+/*!********************************************************!*\
+  !*** ./node_modules/three-buffer-vertex-data/index.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var flatten = __webpack_require__(/*! flatten-vertex-data */ "./node_modules/flatten-vertex-data/index.js")
+var warned = false;
+
+module.exports.attr = setAttribute
+module.exports.index = setIndex
+
+function setIndex (geometry, data, itemSize, dtype) {
+  if (typeof itemSize !== 'number') itemSize = 1
+  if (typeof dtype !== 'string') dtype = 'uint16'
+
+  var isR69 = !geometry.index && typeof geometry.setIndex !== 'function'
+  var attrib = isR69 ? geometry.getAttribute('index') : geometry.index
+  var newAttrib = updateAttribute(attrib, data, itemSize, dtype)
+  if (newAttrib) {
+    if (isR69) geometry.addAttribute('index', newAttrib)
+    else geometry.index = newAttrib
+  }
+}
+
+function setAttribute (geometry, key, data, itemSize, dtype) {
+  if (typeof itemSize !== 'number') itemSize = 3
+  if (typeof dtype !== 'string') dtype = 'float32'
+  if (Array.isArray(data) &&
+    Array.isArray(data[0]) &&
+    data[0].length !== itemSize) {
+    throw new Error('Nested vertex array has unexpected size; expected ' +
+      itemSize + ' but found ' + data[0].length)
+  }
+
+  var attrib = geometry.getAttribute(key)
+  var newAttrib = updateAttribute(attrib, data, itemSize, dtype)
+  if (newAttrib) {
+    geometry.addAttribute(key, newAttrib)
+  }
+}
+
+function updateAttribute (attrib, data, itemSize, dtype) {
+  data = data || []
+  if (!attrib || rebuildAttribute(attrib, data, itemSize)) {
+    // create a new array with desired type
+    data = flatten(data, dtype)
+
+    var needsNewBuffer = attrib && typeof attrib.setArray !== 'function'
+    if (!attrib || needsNewBuffer) {
+      // We are on an old version of ThreeJS which can't
+      // support growing / shrinking buffers, so we need
+      // to build a new buffer
+      if (needsNewBuffer && !warned) {
+        warned = true
+        console.warn([
+          'A WebGL buffer is being updated with a new size or itemSize, ',
+          'however this version of ThreeJS only supports fixed-size buffers.',
+          '\nThe old buffer may still be kept in memory.\n',
+          'To avoid memory leaks, it is recommended that you dispose ',
+          'your geometries and create new ones, or update to ThreeJS r82 or newer.\n',
+          'See here for discussion:\n',
+          'https://github.com/mrdoob/three.js/pull/9631'
+        ].join(''))
+      }
+
+      // Build a new attribute
+      attrib = new THREE.BufferAttribute(data, itemSize);
+    }
+
+    attrib.itemSize = itemSize
+    attrib.needsUpdate = true
+
+    // New versions of ThreeJS suggest using setArray
+    // to change the data. It will use bufferData internally,
+    // so you can change the array size without any issues
+    if (typeof attrib.setArray === 'function') {
+      attrib.setArray(data)
+    }
+
+    return attrib
+  } else {
+    // copy data into the existing array
+    flatten(data, attrib.array)
+    attrib.needsUpdate = true
+    return null
+  }
+}
+
+// Test whether the attribute needs to be re-created,
+// returns false if we can re-use it as-is.
+function rebuildAttribute (attrib, data, itemSize) {
+  if (attrib.itemSize !== itemSize) return true
+  if (!attrib.array) return true
+  var attribLength = attrib.array.length
+  if (Array.isArray(data) && Array.isArray(data[0])) {
+    // [ [ x, y, z ] ]
+    return attribLength !== data.length * itemSize
+  } else {
+    // [ x, y, z ]
+    return attribLength !== data.length
+  }
+  return false
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/webpack/buildin/global.js":
+/*!***********************************!*\
+  !*** (webpack)/buildin/global.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || new Function("return this")();
+} catch (e) {
+	// This works if the window reference is available
+	if (typeof window === "object") g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+
+/***/ "./node_modules/word-wrapper/index.js":
+/*!********************************************!*\
+  !*** ./node_modules/word-wrapper/index.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var newline = /\n/
+var newlineChar = '\n'
+var whitespace = /\s/
+
+module.exports = function(text, opt) {
+    var lines = module.exports.lines(text, opt)
+    return lines.map(function(line) {
+        return text.substring(line.start, line.end)
+    }).join('\n')
+}
+
+module.exports.lines = function wordwrap(text, opt) {
+    opt = opt||{}
+
+    //zero width results in nothing visible
+    if (opt.width === 0 && opt.mode !== 'nowrap') 
+        return []
+
+    text = text||''
+    var width = typeof opt.width === 'number' ? opt.width : Number.MAX_VALUE
+    var start = Math.max(0, opt.start||0)
+    var end = typeof opt.end === 'number' ? opt.end : text.length
+    var mode = opt.mode
+
+    var measure = opt.measure || monospace
+    if (mode === 'pre')
+        return pre(measure, text, start, end, width)
+    else
+        return greedy(measure, text, start, end, width, mode)
+}
+
+function idxOf(text, chr, start, end) {
+    var idx = text.indexOf(chr, start)
+    if (idx === -1 || idx > end)
+        return end
+    return idx
+}
+
+function isWhitespace(chr) {
+    return whitespace.test(chr)
+}
+
+function pre(measure, text, start, end, width) {
+    var lines = []
+    var lineStart = start
+    for (var i=start; i<end && i<text.length; i++) {
+        var chr = text.charAt(i)
+        var isNewline = newline.test(chr)
+
+        //If we've reached a newline, then step down a line
+        //Or if we've reached the EOF
+        if (isNewline || i===end-1) {
+            var lineEnd = isNewline ? i : i+1
+            var measured = measure(text, lineStart, lineEnd, width)
+            lines.push(measured)
+            
+            lineStart = i+1
+        }
+    }
+    return lines
+}
+
+function greedy(measure, text, start, end, width, mode) {
+    //A greedy word wrapper based on LibGDX algorithm
+    //https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/graphics/g2d/BitmapFontCache.java
+    var lines = []
+
+    var testWidth = width
+    //if 'nowrap' is specified, we only wrap on newline chars
+    if (mode === 'nowrap')
+        testWidth = Number.MAX_VALUE
+
+    while (start < end && start < text.length) {
+        //get next newline position
+        var newLine = idxOf(text, newlineChar, start, end)
+
+        //eat whitespace at start of line
+        while (start < newLine) {
+            if (!isWhitespace( text.charAt(start) ))
+                break
+            start++
+        }
+
+        //determine visible # of glyphs for the available width
+        var measured = measure(text, start, newLine, testWidth)
+
+        var lineEnd = start + (measured.end-measured.start)
+        var nextStart = lineEnd + newlineChar.length
+
+        //if we had to cut the line before the next newline...
+        if (lineEnd < newLine) {
+            //find char to break on
+            while (lineEnd > start) {
+                if (isWhitespace(text.charAt(lineEnd)))
+                    break
+                lineEnd--
+            }
+            if (lineEnd === start) {
+                if (nextStart > start + newlineChar.length) nextStart--
+                lineEnd = nextStart // If no characters to break, show all.
+            } else {
+                nextStart = lineEnd
+                //eat whitespace at end of line
+                while (lineEnd > start) {
+                    if (!isWhitespace(text.charAt(lineEnd - newlineChar.length)))
+                        break
+                    lineEnd--
+                }
+            }
+        }
+        if (lineEnd >= start) {
+            var result = measure(text, start, lineEnd, testWidth)
+            lines.push(result)
+        }
+        start = nextStart
+    }
+    return lines
+}
+
+//determines the visible number of glyphs within a given width
+function monospace(text, start, end, width) {
+    var glyphs = Math.min(width, end-start)
+    return {
+        start: start,
+        end: start+glyphs
+    }
+}
+
+/***/ }),
+
+/***/ "./node_modules/xhr/index.js":
+/*!***********************************!*\
+  !*** ./node_modules/xhr/index.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var window = __webpack_require__(/*! global/window */ "./node_modules/global/window.js")
+var isFunction = __webpack_require__(/*! is-function */ "./node_modules/is-function/index.js")
+var parseHeaders = __webpack_require__(/*! parse-headers */ "./node_modules/parse-headers/parse-headers.js")
+var xtend = __webpack_require__(/*! xtend */ "./node_modules/xtend/immutable.js")
+
+module.exports = createXHR
+// Allow use of default import syntax in TypeScript
+module.exports.default = createXHR;
+createXHR.XMLHttpRequest = window.XMLHttpRequest || noop
+createXHR.XDomainRequest = "withCredentials" in (new createXHR.XMLHttpRequest()) ? createXHR.XMLHttpRequest : window.XDomainRequest
+
+forEachArray(["get", "put", "post", "patch", "head", "delete"], function(method) {
+    createXHR[method === "delete" ? "del" : method] = function(uri, options, callback) {
+        options = initParams(uri, options, callback)
+        options.method = method.toUpperCase()
+        return _createXHR(options)
+    }
+})
+
+function forEachArray(array, iterator) {
+    for (var i = 0; i < array.length; i++) {
+        iterator(array[i])
+    }
+}
+
+function isEmpty(obj){
+    for(var i in obj){
+        if(obj.hasOwnProperty(i)) return false
+    }
+    return true
+}
+
+function initParams(uri, options, callback) {
+    var params = uri
+
+    if (isFunction(options)) {
+        callback = options
+        if (typeof uri === "string") {
+            params = {uri:uri}
+        }
+    } else {
+        params = xtend(options, {uri: uri})
+    }
+
+    params.callback = callback
+    return params
+}
+
+function createXHR(uri, options, callback) {
+    options = initParams(uri, options, callback)
+    return _createXHR(options)
+}
+
+function _createXHR(options) {
+    if(typeof options.callback === "undefined"){
+        throw new Error("callback argument missing")
+    }
+
+    var called = false
+    var callback = function cbOnce(err, response, body){
+        if(!called){
+            called = true
+            options.callback(err, response, body)
+        }
+    }
+
+    function readystatechange() {
+        if (xhr.readyState === 4) {
+            setTimeout(loadFunc, 0)
+        }
+    }
+
+    function getBody() {
+        // Chrome with requestType=blob throws errors arround when even testing access to responseText
+        var body = undefined
+
+        if (xhr.response) {
+            body = xhr.response
+        } else {
+            body = xhr.responseText || getXml(xhr)
+        }
+
+        if (isJson) {
+            try {
+                body = JSON.parse(body)
+            } catch (e) {}
+        }
+
+        return body
+    }
+
+    function errorFunc(evt) {
+        clearTimeout(timeoutTimer)
+        if(!(evt instanceof Error)){
+            evt = new Error("" + (evt || "Unknown XMLHttpRequest Error") )
+        }
+        evt.statusCode = 0
+        return callback(evt, failureResponse)
+    }
+
+    // will load the data & process the response in a special response object
+    function loadFunc() {
+        if (aborted) return
+        var status
+        clearTimeout(timeoutTimer)
+        if(options.useXDR && xhr.status===undefined) {
+            //IE8 CORS GET successful response doesn't have a status field, but body is fine
+            status = 200
+        } else {
+            status = (xhr.status === 1223 ? 204 : xhr.status)
+        }
+        var response = failureResponse
+        var err = null
+
+        if (status !== 0){
+            response = {
+                body: getBody(),
+                statusCode: status,
+                method: method,
+                headers: {},
+                url: uri,
+                rawRequest: xhr
+            }
+            if(xhr.getAllResponseHeaders){ //remember xhr can in fact be XDR for CORS in IE
+                response.headers = parseHeaders(xhr.getAllResponseHeaders())
+            }
+        } else {
+            err = new Error("Internal XMLHttpRequest Error")
+        }
+        return callback(err, response, response.body)
+    }
+
+    var xhr = options.xhr || null
+
+    if (!xhr) {
+        if (options.cors || options.useXDR) {
+            xhr = new createXHR.XDomainRequest()
+        }else{
+            xhr = new createXHR.XMLHttpRequest()
+        }
+    }
+
+    var key
+    var aborted
+    var uri = xhr.url = options.uri || options.url
+    var method = xhr.method = options.method || "GET"
+    var body = options.body || options.data
+    var headers = xhr.headers = options.headers || {}
+    var sync = !!options.sync
+    var isJson = false
+    var timeoutTimer
+    var failureResponse = {
+        body: undefined,
+        headers: {},
+        statusCode: 0,
+        method: method,
+        url: uri,
+        rawRequest: xhr
+    }
+
+    if ("json" in options && options.json !== false) {
+        isJson = true
+        headers["accept"] || headers["Accept"] || (headers["Accept"] = "application/json") //Don't override existing accept header declared by user
+        if (method !== "GET" && method !== "HEAD") {
+            headers["content-type"] || headers["Content-Type"] || (headers["Content-Type"] = "application/json") //Don't override existing accept header declared by user
+            body = JSON.stringify(options.json === true ? body : options.json)
+        }
+    }
+
+    xhr.onreadystatechange = readystatechange
+    xhr.onload = loadFunc
+    xhr.onerror = errorFunc
+    // IE9 must have onprogress be set to a unique function.
+    xhr.onprogress = function () {
+        // IE must die
+    }
+    xhr.onabort = function(){
+        aborted = true;
+    }
+    xhr.ontimeout = errorFunc
+    xhr.open(method, uri, !sync, options.username, options.password)
+    //has to be after open
+    if(!sync) {
+        xhr.withCredentials = !!options.withCredentials
+    }
+    // Cannot set timeout with sync request
+    // not setting timeout on the xhr object, because of old webkits etc. not handling that correctly
+    // both npm's request and jquery 1.x use this kind of timeout, so this is being consistent
+    if (!sync && options.timeout > 0 ) {
+        timeoutTimer = setTimeout(function(){
+            if (aborted) return
+            aborted = true//IE9 may still call readystatechange
+            xhr.abort("timeout")
+            var e = new Error("XMLHttpRequest timeout")
+            e.code = "ETIMEDOUT"
+            errorFunc(e)
+        }, options.timeout )
+    }
+
+    if (xhr.setRequestHeader) {
+        for(key in headers){
+            if(headers.hasOwnProperty(key)){
+                xhr.setRequestHeader(key, headers[key])
+            }
+        }
+    } else if (options.headers && !isEmpty(options.headers)) {
+        throw new Error("Headers cannot be set on an XDomainRequest object")
+    }
+
+    if ("responseType" in options) {
+        xhr.responseType = options.responseType
+    }
+
+    if ("beforeSend" in options &&
+        typeof options.beforeSend === "function"
+    ) {
+        options.beforeSend(xhr)
+    }
+
+    // Microsoft Edge browser sends "undefined" when send is called with undefined value.
+    // XMLHttpRequest spec says to pass null as body to indicate no body
+    // See https://github.com/naugtur/xhr/issues/100.
+    xhr.send(body || null)
+
+    return xhr
+
+
+}
+
+function getXml(xhr) {
+    // xhr.responseXML will throw Exception "InvalidStateError" or "DOMException"
+    // See https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/responseXML.
+    try {
+        if (xhr.responseType === "document") {
+            return xhr.responseXML
+        }
+        var firefoxBugTakenEffect = xhr.responseXML && xhr.responseXML.documentElement.nodeName === "parsererror"
+        if (xhr.responseType === "" && !firefoxBugTakenEffect) {
+            return xhr.responseXML
+        }
+    } catch (e) {}
+
+    return null
+}
+
+function noop() {}
+
+
+/***/ }),
+
+/***/ "./node_modules/xml-parse-from-string/index.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/xml-parse-from-string/index.js ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = (function xmlparser() {
+  //common browsers
+  if (typeof self.DOMParser !== 'undefined') {
+    return function(str) {
+      var parser = new self.DOMParser()
+      return parser.parseFromString(str, 'application/xml')
+    }
+  } 
+
+  //IE8 fallback
+  if (typeof self.ActiveXObject !== 'undefined'
+      && new self.ActiveXObject('Microsoft.XMLDOM')) {
+    return function(str) {
+      var xmlDoc = new self.ActiveXObject("Microsoft.XMLDOM")
+      xmlDoc.async = "false"
+      xmlDoc.loadXML(str)
+      return xmlDoc
+    }
+  }
+
+  //last resort fallback
+  return function(str) {
+    var div = document.createElement('div')
+    div.innerHTML = str
+    return div
+  }
+})()
+
+
+/***/ }),
+
+/***/ "./node_modules/xtend/immutable.js":
+/*!*****************************************!*\
+  !*** ./node_modules/xtend/immutable.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = extend
+
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+
+function extend() {
+    var target = {}
+
+    for (var i = 0; i < arguments.length; i++) {
+        var source = arguments[i]
+
+        for (var key in source) {
+            if (hasOwnProperty.call(source, key)) {
+                target[key] = source[key]
+            }
+        }
+    }
+
+    return target
+}
+
+
+/***/ }),
+
+/***/ "./src/assetManager.mjs":
+/*!******************************!*\
+  !*** ./src/assetManager.mjs ***!
+  \******************************/
+/*! exports provided: loadAssets */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loadAssets", function() { return loadAssets; });
+/* harmony import */ var _vendor_GLTFLoader_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./vendor/GLTFLoader.js */ "./src/vendor/GLTFLoader.js");
+/* harmony import */ var _vendor_GLTFLoader_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_vendor_GLTFLoader_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _vendor_OBJLoader_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./vendor/OBJLoader.js */ "./src/vendor/OBJLoader.js");
+/* harmony import */ var _vendor_OBJLoader_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_vendor_OBJLoader_js__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+const BASIS_LIB_PATH = '../src/vendor/';
+
+function allAssetsLoaded(assets) {
+  for (var i in assets) {
+    if (typeof assets[i] === 'string') { return false; }
+  }
+  return true;
+}
+
+function loadAssets(renderer, basePath, assets, onComplete) {
+  if (basePath && basePath[basePath.length - 1] != '/') {
+    basePath += '/';
+  }
+
+  var basisLoader = new THREE.BasisTextureLoader();
+  basisLoader.setTranscoderPath(BASIS_LIB_PATH);
+  basisLoader.detectSupport(renderer);
+  var texLoader = new THREE.TextureLoader();
+  var gltfLoader = new THREE.GLTFLoader();
+  var objLoader = new THREE.OBJLoader();
+  var fontLoader = new THREE.FontLoader();
+
+  var loaders = {
+    'gltf': gltfLoader,
+    'glb': gltfLoader,
+    'obj': objLoader,
+    'gif': texLoader,
+    'png': texLoader,
+    'jpg': texLoader,
+    'basis': basisLoader,
+    'font': fontLoader
+  };
+
+  for (var i in assets) {
+    let assetId = i;
+    let assetPath = assets[i];
+    let ext = assetPath.substr(assetPath.lastIndexOf('.') + 1).toLowerCase();
+    loaders[ext].load(basePath + assetPath, asset => {
+      console.info(`%c ${assetPath} loaded`, 'color:green');
+      assets[assetId] = ext == 'font'? asset.data : asset;
+      if (onComplete && allAssetsLoaded(assets)) { onComplete(); }
+    });
+  }
+}
+
+
+/***/ }),
+
+/***/ "./src/index.mjs":
+/*!***********************!*\
+  !*** ./src/index.mjs ***!
+  \***********************/
+/*! exports provided: init */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "init", function() { return init; });
+/* harmony import */ var _vendor_PointerLockControls_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./vendor/PointerLockControls.js */ "./src/vendor/PointerLockControls.js");
+/* harmony import */ var _vendor_PointerLockControls_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_vendor_PointerLockControls_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _vendor_WebVR_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./vendor/WebVR.js */ "./src/vendor/WebVR.js");
+/* harmony import */ var _assetManager_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./assetManager.mjs */ "./src/assetManager.mjs");
+/* harmony import */ var _vendor_BasisTextureLoader_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./vendor/BasisTextureLoader.js */ "./src/vendor/BasisTextureLoader.js");
+/* harmony import */ var _vendor_BasisTextureLoader_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_vendor_BasisTextureLoader_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _worldHall_mjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./worldHall.mjs */ "./src/worldHall.mjs");
+/* harmony import */ var _worldPanorama_mjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./worldPanorama.mjs */ "./src/worldPanorama.mjs");
+/* harmony import */ var _worldPanoramaStereo_mjs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./worldPanoramaStereo.mjs */ "./src/worldPanoramaStereo.mjs");
+/* harmony import */ var _worldPhotogrammetryObject_mjs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./worldPhotogrammetryObject.mjs */ "./src/worldPhotogrammetryObject.mjs");
+/* harmony import */ var _worldCity_mjs__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./worldCity.mjs */ "./src/worldCity.mjs");
+/* harmony import */ var _worldElevator_mjs__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./worldElevator.mjs */ "./src/worldElevator.mjs");
+/* harmony import */ var _worldVertigo_mjs__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./worldVertigo.mjs */ "./src/worldVertigo.mjs");
+/* harmony import */ var _worldSound_mjs__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./worldSound.mjs */ "./src/worldSound.mjs");
+/* harmony import */ var _shaders_mjs__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./shaders.mjs */ "./src/shaders.mjs");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var clock = new THREE.Clock();
+
+
+var scene, parent, renderer, camera, controls, context;
+var controller1, controller2;
+
+var worlds = [
+  _worldHall_mjs__WEBPACK_IMPORTED_MODULE_4__,
+  _worldSound_mjs__WEBPACK_IMPORTED_MODULE_11__,
+  _worldPhotogrammetryObject_mjs__WEBPACK_IMPORTED_MODULE_7__,
+  _worldVertigo_mjs__WEBPACK_IMPORTED_MODULE_10__,
+  _worldCity_mjs__WEBPACK_IMPORTED_MODULE_8__,
+  _worldElevator_mjs__WEBPACK_IMPORTED_MODULE_9__,
+  _worldPanorama_mjs__WEBPACK_IMPORTED_MODULE_5__,
+  _worldPanoramaStereo_mjs__WEBPACK_IMPORTED_MODULE_6__,
+];
+var currentWorld = 0;
+
+var assets = {
+  // fonts
+  inter_bold_font: 'fonts/Inter-Bold.font',
+  inter_bold_tex: 'fonts/Inter-Bold.png',
+  inter_regular_font: 'fonts/Inter-Regular.font',
+  inter_regular_tex: 'fonts/Inter-Regular.png',
+  metropolis_bold_font: 'fonts/Metropolis-Bold.font',
+  metropolis_bold_tex: 'fonts/Metropolis-Bold.png',
+
+  //
+  hall_model: 'hall.gltf',
+  city_model: 'city.glb',
+  vertigo_model: 'vertigo2.gltf',
+  elevator_model: 'elevator.glb',
+  generic_controller_model: 'generic_controller.gltf',
+  lightmap_tex: 'lightmap.basis',
+  travertine_tex: 'travertine.png',
+  travertine2_tex: 'travertine2.jpg',
+  controller_tex: 'controller.png',
+  pano1: 'zapporthorn.basis',
+  pano1small: 'zapporthorn_small.jpg',
+  pano2small: 'andes_small.jpg',
+  panoballfx_tex: 'ballfx.jpg',
+  andesL: 'andesL.jpg',
+  andesR: 'andesR.jpg',
+  elevator_lm_tex: 'elevator_lm.png',
+  lanes01_tex: 'lanes01.jpg',
+  pavement_tex: 'pavement.jpg',
+  checkboard_tex: 'checkboard.png',
+  vertigo_lm_tex: 'vertigo2_lm.jpg',
+
+  // sound
+  sound_model: 'sound.glb',
+  sound_shadow_tex: 'sound_shadow.png',
+
+  // photogrammetry object
+  pg_floor_tex: 'travertine2.jpg',
+  pg_floor_lm_tex: 'angel_floor_lm.jpg',
+  pg_object_tex: 'angel.basis',
+  pg_object_model: 'angel.glb', // TODO: try draco version, angel.min.glb
+  pg_bg_tex: 'pg_bg.jpg',
+  pg_flare_tex: 'flare.jpg',
+  pg_panel_tex: 'panel.jpg',
+
+  // paintings
+  painting_seurat_tex: 'paintings/seurat.basis',
+  painting_sorolla_tex: 'paintings/sorolla.basis',
+  painting_bosch_tex: 'paintings/bosch.basis',
+  painting_degas_tex: 'paintings/degas.basis',
+  painting_rembrandt_tex: 'paintings/rembrandt.basis',
+};
+
+function gotoWorld(world) {
+  worlds[currentWorld].exit(context);
+  currentWorld = world;
+  worlds[currentWorld].enter(context);
+}
+
+function init() {
+  var w = 100;
+  scene = new THREE.Scene();
+  camera = new THREE.PerspectiveCamera(80, window.innerWidth / window.innerHeight, 0.005, 10000);
+  camera.position.set(0, 1.6, 0);
+  camera.position.set(1.5, 1.6, 2.3); //near pano1
+  controls = new THREE.PointerLockControls(camera);
+  document.body.addEventListener('click', () => controls.lock());
+  document.body.addEventListener('keydown', ev => {
+    switch(ev.keyCode) {
+      case 87: controls.moveForward(0.2); break;
+      case 65: controls.moveRight(-0.2); break;
+      case 83: controls.moveForward(-0.2); break;
+      case 68: controls.moveRight(0.2); break;
+      case 78: gotoWorld((currentWorld + 1) % worlds.length); break;
+    }
+  });
+  scene.add(controls.getObject());
+
+  parent = new THREE.Object3D();
+  scene.add(parent);
+
+  renderer = new THREE.WebGLRenderer({antialias: true, logarithmicDepthBuffer: false});
+  renderer.gammaOutput = true;
+  renderer.gammaFactor = 2.2;
+  renderer.setPixelRatio( window.devicePixelRatio );
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.vr.enabled = true;
+
+  window.addEventListener('resize', onWindowResize, false);
+  setInterval(()=>{
+    console.log('render calls:', renderer.info.render.calls);
+  }, 2000);
+
+  controller1 = renderer.vr.getController(0);
+  scene.add(controller1);
+  controller1.addEventListener('selectstart', onSelectStart);
+  controller1.addEventListener('selectend', onSelectEnd);
+
+  controller2 = renderer.vr.getController(1);
+  scene.add(controller2);
+  controller2.raycaster = new THREE.Raycaster();
+  controller2.raycaster.near = 0.1;
+  //controller2.raycaster.far = 3;
+  controller2.addEventListener('selectstart', onSelectStart);
+  controller2.addEventListener('selectend', onSelectEnd);
+
+  context = {
+    assets: assets,
+    shaders: _shaders_mjs__WEBPACK_IMPORTED_MODULE_12__["shaders"],
+    scene : parent,
+    renderer: renderer,
+    camera: camera,
+    controllers: [controller1, controller2]
+  };
+
+  Object(_assetManager_mjs__WEBPACK_IMPORTED_MODULE_2__["loadAssets"])(renderer, '../assets/', assets, () => {
+    setupControllers();
+    _worldHall_mjs__WEBPACK_IMPORTED_MODULE_4__["setup"](context);
+    _worldPanorama_mjs__WEBPACK_IMPORTED_MODULE_5__["setup"](context);
+    _worldPanoramaStereo_mjs__WEBPACK_IMPORTED_MODULE_6__["setup"](context);
+    _worldPhotogrammetryObject_mjs__WEBPACK_IMPORTED_MODULE_7__["setup"](context);
+    _worldCity_mjs__WEBPACK_IMPORTED_MODULE_8__["setup"](context);
+    _worldElevator_mjs__WEBPACK_IMPORTED_MODULE_9__["setup"](context);
+    _worldVertigo_mjs__WEBPACK_IMPORTED_MODULE_10__["setup"](context);
+    _worldSound_mjs__WEBPACK_IMPORTED_MODULE_11__["setup"](context);
+
+    currentWorld = 0;
+    worlds[currentWorld].enter(context);
+
+    document.body.appendChild( renderer.domElement );
+    document.body.appendChild(_vendor_WebVR_js__WEBPACK_IMPORTED_MODULE_1__["WEBVR"].createButton(renderer));
+    renderer.setAnimationLoop(animate);
+  })
+}
+
+function setupControllers() {
+  var model = assets['generic_controller_model'].scene;
+  var material = new THREE.MeshLambertMaterial({
+    map: assets['controller_tex'],
+  });
+  model.getObjectByName('body').material = material;
+  model.getObjectByName('trigger').material = material;
+  controller1.add(model);
+  controller2.add(model.clone());
+}
+
+function onSelectStart(ev) {
+  const trigger = ev.target.getObjectByName('trigger');
+  trigger.rotation.x = -0.3;
+  //gotoWorld((currentWorld + 1) % worlds.length);
+}
+
+function onSelectEnd(ev) {
+  const trigger = ev.target.getObjectByName('trigger');
+  trigger.rotation.x = 0;
+}
+
+function onWindowResize() {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+}
+
+function animate() {
+  var delta = clock.getDelta();
+  var elapsedTime = clock.elapsedTime;
+  context.goto = null;
+  worlds[currentWorld].execute(context, delta, elapsedTime);
+  renderer.render( scene, camera );
+}
+
+window.onload = () => {init()};
+
+
+/***/ }),
+
+/***/ "./src/shaders.mjs":
+/*!*************************!*\
+  !*** ./src/shaders.mjs ***!
+  \*************************/
+/*! exports provided: shaders */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "shaders", function() { return shaders; });
+var shaders = {
+door_frag : `
+uniform float time;
+uniform float selected;
+uniform sampler2D tex;
+varying vec2 vUv;
+
+void main( void ) {
+  float t = time * 0.3;
+  vec2 uv = vec2(vUv.x + sin(t) * cos(t * 0.1 + vUv.y), vUv.y * sin(t * 0.3) + t);
+  vec4 col = texture2D(tex, uv) * 0.5;
+  gl_FragColor = vec4(col.xyz, 1.0);
+}
+`,
+
+ballfx_frag : `
+uniform float time;
+uniform sampler2D tex;
+varying vec2 vUv;
+varying vec3 vPosition;
+varying vec3 vNormal;
+
+
+void main( void ) {
+  float t = time + vPosition.x + vPosition.z;
+  vec2 uv = vec2(vUv.x + t * 0.2, vUv.y + t);
+  vec4 col = texture2D(tex, uv);
+  col.a = 0.5 + sin(t * 5.0) * 0.3;
+
+  gl_FragColor = col;
+}
+`,
+
+basic_vert : `
+varying vec2 vUv;
+varying vec3 vPosition;
+void main()
+{
+  vUv = uv;
+  vPosition = position;
+  vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+  gl_Position = projectionMatrix * mvPosition;
+}
+`,
+
+panoball_vert : `
+varying vec2 vUv;
+varying vec3 vPosition;
+varying vec3 vNormal;
+varying vec3 vWorldPos;
+uniform float time;
+
+mat4 inverse(mat4 m) {
+  float
+      a00 = m[0][0], a01 = m[0][1], a02 = m[0][2], a03 = m[0][3],
+      a10 = m[1][0], a11 = m[1][1], a12 = m[1][2], a13 = m[1][3],
+      a20 = m[2][0], a21 = m[2][1], a22 = m[2][2], a23 = m[2][3],
+      a30 = m[3][0], a31 = m[3][1], a32 = m[3][2], a33 = m[3][3],
+
+      b00 = a00 * a11 - a01 * a10,
+      b01 = a00 * a12 - a02 * a10,
+      b02 = a00 * a13 - a03 * a10,
+      b03 = a01 * a12 - a02 * a11,
+      b04 = a01 * a13 - a03 * a11,
+      b05 = a02 * a13 - a03 * a12,
+      b06 = a20 * a31 - a21 * a30,
+      b07 = a20 * a32 - a22 * a30,
+      b08 = a20 * a33 - a23 * a30,
+      b09 = a21 * a32 - a22 * a31,
+      b10 = a21 * a33 - a23 * a31,
+      b11 = a22 * a33 - a23 * a32,
+
+      det = b00 * b11 - b01 * b10 + b02 * b09 + b03 * b08 - b04 * b07 + b05 * b06;
+
+  return mat4(
+      a11 * b11 - a12 * b10 + a13 * b09,
+      a02 * b10 - a01 * b11 - a03 * b09,
+      a31 * b05 - a32 * b04 + a33 * b03,
+      a22 * b04 - a21 * b05 - a23 * b03,
+      a12 * b08 - a10 * b11 - a13 * b07,
+      a00 * b11 - a02 * b08 + a03 * b07,
+      a32 * b02 - a30 * b05 - a33 * b01,
+      a20 * b05 - a22 * b02 + a23 * b01,
+      a10 * b10 - a11 * b08 + a13 * b06,
+      a01 * b08 - a00 * b10 - a03 * b06,
+      a30 * b04 - a31 * b02 + a33 * b00,
+      a21 * b02 - a20 * b04 - a23 * b00,
+      a11 * b07 - a10 * b09 - a12 * b06,
+      a00 * b09 - a01 * b07 + a02 * b06,
+      a31 * b01 - a30 * b03 - a32 * b00,
+      a20 * b03 - a21 * b01 + a22 * b00) / det;
+}
+
+
+mat4 transpose(in mat4 m) {
+  vec4 i0 = m[0];
+  vec4 i1 = m[1];
+  vec4 i2 = m[2];
+  vec4 i3 = m[3];
+
+  return mat4(
+    vec4(i0.x, i1.x, i2.x, i3.x),
+    vec4(i0.y, i1.y, i2.y, i3.y),
+    vec4(i0.z, i1.z, i2.z, i3.z),
+    vec4(i0.w, i1.w, i2.w, i3.w)
+  );
+}
+
+void main()
+{
+  vUv = uv;
+
+  vec3 offset = vec3(
+    sin(position.x * 50.0 + time),
+    sin(position.y * 10.0 + time * 2.0),
+    cos(position.z * 40.0 + time)
+  ) * 0.003;
+
+  vNormal = normalize(inverse(transpose(modelMatrix)) * vec4(normalize(normal), 1.0)).xyz;
+  vWorldPos = (modelMatrix * vec4( position, 1.0 )).xyz;
+
+  vPosition = position;
+  vec4 mvPosition = modelViewMatrix * vec4(position + offset, 1.0);
+  gl_Position = projectionMatrix * mvPosition;
+}
+`,
+
+ballfx_vert : `
+varying vec2 vUv;
+varying vec3 vPosition;
+varying vec3 vNormal;
+
+void main()
+{
+  vUv = uv;
+
+  vNormal = normalize(normalMatrix * normal);
+
+  vPosition = position;
+  vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+  gl_Position = projectionMatrix * mvPosition;
+}
+`,
+
+panoball_frag : `
+uniform sampler2D tex, texfx;
+uniform float time;
+varying vec2 vUv;
+varying vec3 vPosition;
+varying vec3 vNormal;
+varying vec3 vWorldPos;
+
+
+void main( void ) {
+  vec2 uv = vUv;
+  //uv.y =  1.0 - uv.y;
+
+  vec3 eye = normalize(cameraPosition - vWorldPos);
+  float fresnel = abs(dot(eye, vNormal));
+  float shift = pow((1.0 - fresnel), 4.0) * 0.05;
+
+  vec3 col = vec3(
+    texture2D(tex, uv - shift).r,
+    texture2D(tex, uv).g,
+    texture2D(tex, uv + shift).b
+  );
+
+  col = mix(col * 0.7, vec3(1.0), 0.7 - fresnel);
+
+  float t = time * 0.4 + vPosition.x + vPosition.z;
+  uv = vec2(vUv.x + t * 0.2, vUv.y + t);
+  vec3 fx = texture2D(texfx, uv).rgb * 0.4;
+
+
+  gl_FragColor = vec4(col + fx, 1.0);
+}
+`,
+
+};
+
+/***/ }),
+
+/***/ "./src/text.mjs":
+/*!**********************!*\
+  !*** ./src/text.mjs ***!
+  \**********************/
+/*! exports provided: Text */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Text", function() { return Text; });
+var loadFont = __webpack_require__(/*! load-bmfont */ "./node_modules/load-bmfont/browser.js");
+var createFontGeometry = __webpack_require__(/*! three-bmfont-text */ "./node_modules/three-bmfont-text/index.js");
+var MSDFShader = __webpack_require__(/*! three-bmfont-text/shaders/msdf */ "./node_modules/three-bmfont-text/shaders/msdf.js");
+
+class Text extends(THREE.Object3D){
+
+  constructor(opts){
+    super();
+
+    if (!opts.font){
+      console.warn('createText(): <font> not defined');
+      return;
+    }
+    if (!opts.map){
+      console.warn('createText(): texture <map> not defined');
+      return;
+    }
+
+    this.width = opts.width || 300;
+    this.size = opts.size || 1;
+    this.align = opts.align || 'left';
+    this.color = opts.color || 0xffffff;
+    this.anchor = opts.anchor || opts.align;
+    this.baseline = opts.baseline || 'bottom';
+    this.negate = opts.negate !== true ? false : true;
+
+    this.geometry = createFontGeometry({
+      width: this.width,
+      align: this.align,
+      font: opts.font
+    })
+
+    this.material = new THREE.RawShaderMaterial(MSDFShader({
+      map: opts.map,
+      color: this.color,
+      negate: this.negate
+    }));
+
+    const mesh = new THREE.Mesh(this.geometry, this.material);
+    mesh.scale.set(0.001 * this.size, 0.001 * this.size, 1.0);
+    mesh.rotation.x = Math.PI / 2;
+    this.add(mesh);
+
+    this.value = opts.value || '[TEXT]';
+  }
+
+  set value(text) {
+    this.geometry.update(text);
+
+    const layout = this.geometry.layout;
+    let x = 0, y = 0;
+
+    if (this.baseline === 'top') {
+      y = layout._height + layout._ascender;
+    } else if (this.baseline === 'center') {
+      y = layout._height / 2;
+    }
+
+    if (this.anchor === 'right') {
+      x = -layout._width;
+    } else if (this.anchor === 'center') {
+      x = -layout._width / 2;
+    }
+
+    if (x !== 0 || y !== 0) {
+      this.geometry.translate(x, y, 0);
+    }
+
+    console.log(this.geometry.layout);
+
+  }
+}
+
+
+
+
+
+
+/***/ }),
+
+/***/ "./src/utils.mjs":
+/*!***********************!*\
+  !*** ./src/utils.mjs ***!
+  \***********************/
+/*! exports provided: newMarker */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "newMarker", function() { return newMarker; });
+
+function newMarker(x, y, z, color){
+  const geo = new THREE.SphereBufferGeometry(0.04);
+  const mat = new THREE.MeshBasicMaterial({color: color ? color : 0xff0000});
+  const mesh = new THREE.Mesh(geo, mat);
+  if (typeof x === 'object') {
+    mesh.position.copy(x);
+  } else {
+    mesh.position.set(x, y, z);
+  }
+  return mesh;
+}
+
+
+/***/ }),
+
+/***/ "./src/vendor/BasisTextureLoader.js":
+/*!******************************************!*\
+  !*** ./src/vendor/BasisTextureLoader.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * @author Don McCurdy / https://www.donmccurdy.com
+ * @author Austin Eng / https://github.com/austinEng
+ * @author Shrek Shao / https://github.com/shrekshao
+ */
+
+/* global Module, createBasisModule */
+
+/**
+ * Loader for Basis Universal GPU Texture Codec.
+ *
+ * Basis Universal is a "supercompressed" GPU texture and texture video
+ * compression system that outputs a highly compressed intermediate file format
+ * (.basis) that can be quickly transcoded to a wide variety of GPU texture
+ * compression formats.
+ *
+ * This loader parallelizes the transcoding process across a configurable number
+ * of web workers, before transferring the transcoded compressed texture back
+ * to the main thread.
+ */
+THREE.BasisTextureLoader = function ( manager ) {
+
+	THREE.Loader.call( this, manager );
+
+	this.transcoderPath = '';
+	this.transcoderBinary = null;
+	this.transcoderPending = null;
+
+	this.workerLimit = 4;
+	this.workerPool = [];
+	this.workerNextTaskID = 1;
+	this.workerSourceURL = '';
+	this.workerConfig = {
+		format: null,
+		etcSupported: false,
+		dxtSupported: false,
+		pvrtcSupported: false,
+	};
+
+};
+
+THREE.BasisTextureLoader.prototype = Object.assign( Object.create( THREE.Loader.prototype ), {
+
+	constructor: THREE.BasisTextureLoader,
+
+	setTranscoderPath: function ( path ) {
+
+		this.transcoderPath = path;
+
+		return this;
+
+	},
+
+	setWorkerLimit: function ( workerLimit ) {
+
+		this.workerLimit = workerLimit;
+
+		return this;
+
+	},
+
+	detectSupport: function ( renderer ) {
+
+		var config = this.workerConfig;
+
+		config.etcSupported = !! renderer.extensions.get( 'WEBGL_compressed_texture_etc1' );
+		config.dxtSupported = !! renderer.extensions.get( 'WEBGL_compressed_texture_s3tc' );
+		config.pvrtcSupported = !! renderer.extensions.get( 'WEBGL_compressed_texture_pvrtc' )
+			|| !! renderer.extensions.get( 'WEBKIT_WEBGL_compressed_texture_pvrtc' );
+
+		if ( config.etcSupported ) {
+
+			config.format = THREE.BasisTextureLoader.BASIS_FORMAT.cTFETC1;
+
+		} else if ( config.dxtSupported ) {
+
+			config.format = THREE.BasisTextureLoader.BASIS_FORMAT.cTFBC1;
+
+		} else if ( config.pvrtcSupported ) {
+
+			config.format = THREE.BasisTextureLoader.BASIS_FORMAT.cTFPVRTC1_4_OPAQUE_ONLY;
+
+		} else {
+
+			throw new Error( 'THREE.BasisTextureLoader: No suitable compressed texture format found.' );
+
+		}
+
+		return this;
+
+	},
+
+	load: function ( url, onLoad, onProgress, onError ) {
+
+		var loader = new THREE.FileLoader( this.manager );
+
+		loader.setResponseType( 'arraybuffer' );
+
+		loader.load( url, ( buffer ) => {
+
+			this._createTexture( buffer )
+				.then( onLoad )
+				.catch( onError );
+
+		}, onProgress, onError );
+
+	},
+
+	/**
+	 * @param  {ArrayBuffer} buffer
+	 * @return {Promise<THREE.CompressedTexture>}
+	 */
+	_createTexture: function ( buffer ) {
+
+		var worker;
+		var taskID;
+
+		var texturePending = this._getWorker()
+			.then( ( _worker ) => {
+
+				worker = _worker;
+				taskID = this.workerNextTaskID ++;
+
+				return new Promise( ( resolve, reject ) => {
+
+					worker._callbacks[ taskID ] = { resolve, reject };
+					worker._taskCosts[ taskID ] = buffer.byteLength;
+					worker._taskLoad += worker._taskCosts[ taskID ];
+
+					worker.postMessage( { type: 'transcode', id: taskID, buffer }, [ buffer ] );
+
+				} );
+
+			} )
+			.then( ( message ) => {
+
+				var config = this.workerConfig;
+
+				var { width, height, mipmaps } = message;
+
+				var texture;
+
+				if ( config.etcSupported ) {
+
+					texture = new THREE.CompressedTexture( mipmaps, width, height, THREE.RGB_ETC1_Format );
+
+				} else if ( config.dxtSupported ) {
+
+					texture = new THREE.CompressedTexture( mipmaps, width, height, THREE.BasisTextureLoader.DXT_FORMAT_MAP[ config.format ], THREE.UnsignedByteType );
+
+				} else if ( config.pvrtcSupported ) {
+
+					texture = new THREE.CompressedTexture( mipmaps, width, height, THREE.RGB_PVRTC_4BPPV1_Format );
+
+				} else {
+
+					throw new Error( 'THREE.BasisTextureLoader: No supported format available.' );
+
+				}
+
+				texture.minFilter = mipmaps.length === 1 ? THREE.LinearFilter : THREE.LinearMipmapLinearFilter;
+				texture.magFilter = THREE.LinearFilter;
+				texture.generateMipmaps = false;
+				texture.needsUpdate = true;
+
+				return texture;
+
+			} );
+
+		texturePending
+			.finally( () => {
+
+				if ( worker && taskID ) {
+
+					worker._taskLoad -= worker._taskCosts[ taskID ];
+					delete worker._callbacks[ taskID ];
+					delete worker._taskCosts[ taskID ];
+
+				}
+
+			} );
+
+		return texturePending;
+
+	},
+
+	_initTranscoder: function () {
+
+		if ( ! this.transcoderBinary ) {
+
+			// Load transcoder wrapper.
+			var jsLoader = new THREE.FileLoader( this.manager );
+			jsLoader.setPath( this.transcoderPath );
+			var jsContent = new Promise( ( resolve, reject ) => {
+
+				jsLoader.load( 'basis_transcoder.js', resolve, undefined, reject );
+
+			} );
+
+			// Load transcoder WASM binary.
+			var binaryLoader = new THREE.FileLoader( this.manager );
+			binaryLoader.setPath( this.transcoderPath );
+			binaryLoader.setResponseType( 'arraybuffer' );
+			var binaryContent = new Promise( ( resolve, reject ) => {
+
+				binaryLoader.load( 'basis_transcoder.wasm', resolve, undefined, reject );
+
+			} );
+
+			this.transcoderPending = Promise.all( [ jsContent, binaryContent ] )
+				.then( ( [ jsContent, binaryContent ] ) => {
+
+					var fn = THREE.BasisTextureLoader.BasisWorker.toString();
+
+					var body = [
+						'/* basis_transcoder.js */',
+						'var Module;',
+						'function createBasisModule () {',
+						'  ' + jsContent,
+						'  return Module;',
+						'}',
+						'',
+						'/* worker */',
+						fn.substring( fn.indexOf( '{' ) + 1, fn.lastIndexOf( '}' ) )
+					].join( '\n' );
+
+					this.workerSourceURL = URL.createObjectURL( new Blob( [ body ] ) );
+					this.transcoderBinary = binaryContent;
+
+				} );
+
+		}
+
+		return this.transcoderPending;
+
+	},
+
+	_getWorker: function () {
+
+		return this._initTranscoder().then( () => {
+
+			if ( this.workerPool.length < this.workerLimit ) {
+
+				var worker = new Worker( this.workerSourceURL );
+
+				worker._callbacks = {};
+				worker._taskCosts = {};
+				worker._taskLoad = 0;
+
+				worker.postMessage( {
+					type: 'init',
+					config: this.workerConfig,
+					transcoderBinary: this.transcoderBinary,
+				} );
+
+				worker.onmessage = function ( e ) {
+
+					var message = e.data;
+
+					switch ( message.type ) {
+
+						case 'transcode':
+							worker._callbacks[ message.id ].resolve( message );
+							break;
+
+						case 'error':
+							worker._callbacks[ message.id ].reject( message );
+							break;
+
+						default:
+							console.error( 'THREE.BasisTextureLoader: Unexpected message, "' + message.type + '"' );
+
+					}
+
+				};
+
+				this.workerPool.push( worker );
+
+			} else {
+
+				this.workerPool.sort( function ( a, b ) {
+
+					return a._taskLoad > b._taskLoad ? - 1 : 1;
+
+				} );
+
+			}
+
+			return this.workerPool[ this.workerPool.length - 1 ];
+
+		} );
+
+	},
+
+	dispose: function () {
+
+		for ( var i = 0; i < this.workerPool.length; i ++ ) {
+
+			this.workerPool[ i ].terminate();
+
+		}
+
+		this.workerPool.length = 0;
+
+		return this;
+
+	}
+
+} );
+
+/* CONSTANTS */
+
+THREE.BasisTextureLoader.BASIS_FORMAT = {
+	cTFETC1: 0,
+	cTFBC1: 1,
+	cTFBC4: 2,
+	cTFPVRTC1_4_OPAQUE_ONLY: 3,
+	cTFBC7_M6_OPAQUE_ONLY: 4,
+	cTFETC2: 5,
+	cTFBC3: 6,
+	cTFBC5: 7,
+};
+
+// DXT formats, from:
+// http://www.khronos.org/registry/webgl/extensions/WEBGL_compressed_texture_s3tc/
+THREE.BasisTextureLoader.DXT_FORMAT = {
+	COMPRESSED_RGB_S3TC_DXT1_EXT: 0x83F0,
+	COMPRESSED_RGBA_S3TC_DXT1_EXT: 0x83F1,
+	COMPRESSED_RGBA_S3TC_DXT3_EXT: 0x83F2,
+	COMPRESSED_RGBA_S3TC_DXT5_EXT: 0x83F3,
+};
+THREE.BasisTextureLoader.DXT_FORMAT_MAP = {};
+THREE.BasisTextureLoader.DXT_FORMAT_MAP[ THREE.BasisTextureLoader.BASIS_FORMAT.cTFBC1 ] =
+	THREE.BasisTextureLoader.DXT_FORMAT.COMPRESSED_RGB_S3TC_DXT1_EXT;
+THREE.BasisTextureLoader.DXT_FORMAT_MAP[ THREE.BasisTextureLoader.BASIS_FORMAT.cTFBC3 ] =
+	THREE.BasisTextureLoader.DXT_FORMAT.COMPRESSED_RGBA_S3TC_DXT5_EXT;
+
+/* WEB WORKER */
+
+THREE.BasisTextureLoader.BasisWorker = function () {
+
+	var config;
+	var transcoderPending;
+	var _BasisFile;
+
+	onmessage = function ( e ) {
+
+		var message = e.data;
+
+		switch ( message.type ) {
+
+			case 'init':
+				config = message.config;
+				init( message.transcoderBinary );
+				break;
+
+			case 'transcode':
+				transcoderPending.then( () => {
+
+					try {
+
+						var { width, height, mipmaps } = transcode( message.buffer );
+
+						var buffers = [];
+
+						for ( var i = 0; i < mipmaps.length; ++ i ) {
+
+							buffers.push( mipmaps[ i ].data.buffer );
+
+						}
+
+						self.postMessage( { type: 'transcode', id: message.id, width, height, mipmaps }, buffers );
+
+					} catch ( error ) {
+
+						console.error( error );
+
+						self.postMessage( { type: 'error', id: message.id, error: error.message } );
+
+					}
+
+				} );
+				break;
+
+		}
+
+	};
+
+	function init( wasmBinary ) {
+
+		transcoderPending = new Promise( ( resolve ) => {
+
+			// The 'Module' global is used by the Basis wrapper, which will check for
+			// the 'wasmBinary' property before trying to load the file itself.
+
+			// TODO(donmccurdy): This only works with a modified version of the
+			// emscripten-generated wrapper. The default seems to have a bug making it
+			// impossible to override the WASM binary.
+			Module = { wasmBinary, onRuntimeInitialized: resolve };
+
+		} ).then( () => {
+
+			var { BasisFile, initializeBasis } = Module;
+
+			_BasisFile = BasisFile;
+
+			initializeBasis();
+
+		} );
+
+		createBasisModule();
+
+	}
+
+	function transcode( buffer ) {
+
+		var basisFile = new _BasisFile( new Uint8Array( buffer ) );
+
+		var width = basisFile.getImageWidth( 0, 0 );
+		var height = basisFile.getImageHeight( 0, 0 );
+		var levels = basisFile.getNumLevels( 0 );
+
+		function cleanup() {
+
+			basisFile.close();
+			basisFile.delete();
+
+		}
+
+		if ( ! width || ! height || ! levels ) {
+
+			cleanup();
+			throw new Error( 'THREE.BasisTextureLoader:  Invalid .basis file' );
+
+		}
+
+		if ( ! basisFile.startTranscoding() ) {
+
+			cleanup();
+			throw new Error( 'THREE.BasisTextureLoader: .startTranscoding failed' );
+
+		}
+
+		if ( basisFile.getHasAlpha() ) {
+
+			console.warn( 'THREE.BasisTextureLoader: Alpha not yet implemented.' );
+
+		}
+
+		var mipmaps = [];
+
+		for ( var mip = 0; mip < levels; mip ++ ) {
+
+			var mipWidth = basisFile.getImageWidth( 0, mip );
+			var mipHeight = basisFile.getImageHeight( 0, mip );
+			var dst = new Uint8Array( basisFile.getImageTranscodedSizeInBytes( 0, mip, config.format ) );
+
+			var status = basisFile.transcodeImage(
+				dst,
+				0,
+				mip,
+				config.format,
+				config.etcSupported ? 0 : ( config.dxtSupported ? 1 : 0 ),
+				0
+			);
+
+			if ( ! status ) {
+
+				cleanup();
+				throw new Error( 'THREE.BasisTextureLoader: .transcodeImage failed.' );
+
+			}
+
+			mipmaps.push( { data: dst, width: mipWidth, height: mipHeight } );
+
+		}
+
+		cleanup();
+
+		return { width, height, mipmaps };
+
+	}
+
+};
+
+
+/***/ }),
+
+/***/ "./src/vendor/GLTFLoader.js":
+/*!**********************************!*\
+  !*** ./src/vendor/GLTFLoader.js ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * @author Rich Tibbett / https://github.com/richtr
+ * @author mrdoob / http://mrdoob.com/
+ * @author Tony Parisi / http://www.tonyparisi.com/
+ * @author Takahiro / https://github.com/takahirox
+ * @author Don McCurdy / https://www.donmccurdy.com
+ */
+
+THREE.GLTFLoader = ( function () {
+
+	function GLTFLoader( manager ) {
+
+		THREE.Loader.call( this, manager );
+
+		this.dracoLoader = null;
+		this.ddsLoader = null;
+
+	}
+
+	GLTFLoader.prototype = Object.assign( Object.create( THREE.Loader.prototype ), {
+
+		constructor: GLTFLoader,
+
+		load: function ( url, onLoad, onProgress, onError ) {
+
+			var scope = this;
+
+			var resourcePath;
+
+			if ( this.resourcePath !== '' ) {
+
+				resourcePath = this.resourcePath;
+
+			} else if ( this.path !== '' ) {
+
+				resourcePath = this.path;
+
+			} else {
+
+				resourcePath = THREE.LoaderUtils.extractUrlBase( url );
+
+			}
+
+			// Tells the LoadingManager to track an extra item, which resolves after
+			// the model is fully loaded. This means the count of items loaded will
+			// be incorrect, but ensures manager.onLoad() does not fire early.
+			scope.manager.itemStart( url );
+
+			var _onError = function ( e ) {
+
+				if ( onError ) {
+
+					onError( e );
+
+				} else {
+
+					console.error( e );
+
+				}
+
+				scope.manager.itemError( url );
+				scope.manager.itemEnd( url );
+
+			};
+
+			var loader = new THREE.FileLoader( scope.manager );
+
+			loader.setPath( this.path );
+			loader.setResponseType( 'arraybuffer' );
+
+			if ( scope.crossOrigin === 'use-credentials' ) {
+
+				loader.setWithCredentials( true );
+
+			}
+
+			loader.load( url, function ( data ) {
+
+				try {
+
+					scope.parse( data, resourcePath, function ( gltf ) {
+
+						onLoad( gltf );
+
+						scope.manager.itemEnd( url );
+
+					}, _onError );
+
+				} catch ( e ) {
+
+					_onError( e );
+
+				}
+
+			}, onProgress, _onError );
+
+		},
+
+		setDRACOLoader: function ( dracoLoader ) {
+
+			this.dracoLoader = dracoLoader;
+			return this;
+
+		},
+
+		setDDSLoader: function ( ddsLoader ) {
+
+			this.ddsLoader = ddsLoader;
+			return this;
+
+		},
+
+		parse: function ( data, path, onLoad, onError ) {
+
+			var content;
+			var extensions = {};
+
+			if ( typeof data === 'string' ) {
+
+				content = data;
+
+			} else {
+
+				var magic = THREE.LoaderUtils.decodeText( new Uint8Array( data, 0, 4 ) );
+
+				if ( magic === BINARY_EXTENSION_HEADER_MAGIC ) {
+
+					try {
+
+						extensions[ EXTENSIONS.KHR_BINARY_GLTF ] = new GLTFBinaryExtension( data );
+
+					} catch ( error ) {
+
+						if ( onError ) onError( error );
+						return;
+
+					}
+
+					content = extensions[ EXTENSIONS.KHR_BINARY_GLTF ].content;
+
+				} else {
+
+					content = THREE.LoaderUtils.decodeText( new Uint8Array( data ) );
+
+				}
+
+			}
+
+			var json = JSON.parse( content );
+
+			if ( json.asset === undefined || json.asset.version[ 0 ] < 2 ) {
+
+				if ( onError ) onError( new Error( 'THREE.GLTFLoader: Unsupported asset. glTF versions >=2.0 are supported. Use LegacyGLTFLoader instead.' ) );
+				return;
+
+			}
+
+			if ( json.extensionsUsed ) {
+
+				for ( var i = 0; i < json.extensionsUsed.length; ++ i ) {
+
+					var extensionName = json.extensionsUsed[ i ];
+					var extensionsRequired = json.extensionsRequired || [];
+
+					switch ( extensionName ) {
+
+						case EXTENSIONS.KHR_LIGHTS_PUNCTUAL:
+							extensions[ extensionName ] = new GLTFLightsExtension( json );
+							break;
+
+						case EXTENSIONS.KHR_MATERIALS_UNLIT:
+							extensions[ extensionName ] = new GLTFMaterialsUnlitExtension();
+							break;
+
+						case EXTENSIONS.KHR_MATERIALS_PBR_SPECULAR_GLOSSINESS:
+							extensions[ extensionName ] = new GLTFMaterialsPbrSpecularGlossinessExtension();
+							break;
+
+						case EXTENSIONS.KHR_DRACO_MESH_COMPRESSION:
+							extensions[ extensionName ] = new GLTFDracoMeshCompressionExtension( json, this.dracoLoader );
+							break;
+
+						case EXTENSIONS.MSFT_TEXTURE_DDS:
+							extensions[ EXTENSIONS.MSFT_TEXTURE_DDS ] = new GLTFTextureDDSExtension( this.ddsLoader );
+							break;
+
+						case EXTENSIONS.KHR_TEXTURE_TRANSFORM:
+							extensions[ EXTENSIONS.KHR_TEXTURE_TRANSFORM ] = new GLTFTextureTransformExtension();
+							break;
+
+						default:
+
+							if ( extensionsRequired.indexOf( extensionName ) >= 0 ) {
+
+								console.warn( 'THREE.GLTFLoader: Unknown extension "' + extensionName + '".' );
+
+							}
+
+					}
+
+				}
+
+			}
+
+			var parser = new GLTFParser( json, extensions, {
+
+				path: path || this.resourcePath || '',
+				crossOrigin: this.crossOrigin,
+				manager: this.manager
+
+			} );
+
+			parser.parse( onLoad, onError );
+
+		}
+
+	} );
+
+	/* GLTFREGISTRY */
+
+	function GLTFRegistry() {
+
+		var objects = {};
+
+		return	{
+
+			get: function ( key ) {
+
+				return objects[ key ];
+
+			},
+
+			add: function ( key, object ) {
+
+				objects[ key ] = object;
+
+			},
+
+			remove: function ( key ) {
+
+				delete objects[ key ];
+
+			},
+
+			removeAll: function () {
+
+				objects = {};
+
+			}
+
+		};
+
+	}
+
+	/*********************************/
+	/********** EXTENSIONS ***********/
+	/*********************************/
+
+	var EXTENSIONS = {
+		KHR_BINARY_GLTF: 'KHR_binary_glTF',
+		KHR_DRACO_MESH_COMPRESSION: 'KHR_draco_mesh_compression',
+		KHR_LIGHTS_PUNCTUAL: 'KHR_lights_punctual',
+		KHR_MATERIALS_PBR_SPECULAR_GLOSSINESS: 'KHR_materials_pbrSpecularGlossiness',
+		KHR_MATERIALS_UNLIT: 'KHR_materials_unlit',
+		KHR_TEXTURE_TRANSFORM: 'KHR_texture_transform',
+		MSFT_TEXTURE_DDS: 'MSFT_texture_dds'
+	};
+
+	/**
+	 * DDS Texture Extension
+	 *
+	 * Specification:
+	 * https://github.com/KhronosGroup/glTF/tree/master/extensions/2.0/Vendor/MSFT_texture_dds
+	 *
+	 */
+	function GLTFTextureDDSExtension( ddsLoader ) {
+
+		if ( ! ddsLoader ) {
+
+			throw new Error( 'THREE.GLTFLoader: Attempting to load .dds texture without importing THREE.DDSLoader' );
+
+		}
+
+		this.name = EXTENSIONS.MSFT_TEXTURE_DDS;
+		this.ddsLoader = ddsLoader;
+
+	}
+
+	/**
+	 * Lights Extension
+	 *
+	 * Specification: PENDING
+	 */
+	function GLTFLightsExtension( json ) {
+
+		this.name = EXTENSIONS.KHR_LIGHTS_PUNCTUAL;
+
+		var extension = ( json.extensions && json.extensions[ EXTENSIONS.KHR_LIGHTS_PUNCTUAL ] ) || {};
+		this.lightDefs = extension.lights || [];
+
+	}
+
+	GLTFLightsExtension.prototype.loadLight = function ( lightIndex ) {
+
+		var lightDef = this.lightDefs[ lightIndex ];
+		var lightNode;
+
+		var color = new THREE.Color( 0xffffff );
+		if ( lightDef.color !== undefined ) color.fromArray( lightDef.color );
+
+		var range = lightDef.range !== undefined ? lightDef.range : 0;
+
+		switch ( lightDef.type ) {
+
+			case 'directional':
+				lightNode = new THREE.DirectionalLight( color );
+				lightNode.target.position.set( 0, 0, - 1 );
+				lightNode.add( lightNode.target );
+				break;
+
+			case 'point':
+				lightNode = new THREE.PointLight( color );
+				lightNode.distance = range;
+				break;
+
+			case 'spot':
+				lightNode = new THREE.SpotLight( color );
+				lightNode.distance = range;
+				// Handle spotlight properties.
+				lightDef.spot = lightDef.spot || {};
+				lightDef.spot.innerConeAngle = lightDef.spot.innerConeAngle !== undefined ? lightDef.spot.innerConeAngle : 0;
+				lightDef.spot.outerConeAngle = lightDef.spot.outerConeAngle !== undefined ? lightDef.spot.outerConeAngle : Math.PI / 4.0;
+				lightNode.angle = lightDef.spot.outerConeAngle;
+				lightNode.penumbra = 1.0 - lightDef.spot.innerConeAngle / lightDef.spot.outerConeAngle;
+				lightNode.target.position.set( 0, 0, - 1 );
+				lightNode.add( lightNode.target );
+				break;
+
+			default:
+				throw new Error( 'THREE.GLTFLoader: Unexpected light type, "' + lightDef.type + '".' );
+
+		}
+
+		// Some lights (e.g. spot) default to a position other than the origin. Reset the position
+		// here, because node-level parsing will only override position if explicitly specified.
+		lightNode.position.set( 0, 0, 0 );
+
+		lightNode.decay = 2;
+
+		if ( lightDef.intensity !== undefined ) lightNode.intensity = lightDef.intensity;
+
+		lightNode.name = lightDef.name || ( 'light_' + lightIndex );
+
+		return Promise.resolve( lightNode );
+
+	};
+
+	/**
+	 * Unlit Materials Extension (pending)
+	 *
+	 * PR: https://github.com/KhronosGroup/glTF/pull/1163
+	 */
+	function GLTFMaterialsUnlitExtension() {
+
+		this.name = EXTENSIONS.KHR_MATERIALS_UNLIT;
+
+	}
+
+	GLTFMaterialsUnlitExtension.prototype.getMaterialType = function () {
+
+		return THREE.MeshBasicMaterial;
+
+	};
+
+	GLTFMaterialsUnlitExtension.prototype.extendParams = function ( materialParams, materialDef, parser ) {
+
+		var pending = [];
+
+		materialParams.color = new THREE.Color( 1.0, 1.0, 1.0 );
+		materialParams.opacity = 1.0;
+
+		var metallicRoughness = materialDef.pbrMetallicRoughness;
+
+		if ( metallicRoughness ) {
+
+			if ( Array.isArray( metallicRoughness.baseColorFactor ) ) {
+
+				var array = metallicRoughness.baseColorFactor;
+
+				materialParams.color.fromArray( array );
+				materialParams.opacity = array[ 3 ];
+
+			}
+
+			if ( metallicRoughness.baseColorTexture !== undefined ) {
+
+				pending.push( parser.assignTexture( materialParams, 'map', metallicRoughness.baseColorTexture ) );
+
+			}
+
+		}
+
+		return Promise.all( pending );
+
+	};
+
+	/* BINARY EXTENSION */
+	var BINARY_EXTENSION_HEADER_MAGIC = 'glTF';
+	var BINARY_EXTENSION_HEADER_LENGTH = 12;
+	var BINARY_EXTENSION_CHUNK_TYPES = { JSON: 0x4E4F534A, BIN: 0x004E4942 };
+
+	function GLTFBinaryExtension( data ) {
+
+		this.name = EXTENSIONS.KHR_BINARY_GLTF;
+		this.content = null;
+		this.body = null;
+
+		var headerView = new DataView( data, 0, BINARY_EXTENSION_HEADER_LENGTH );
+
+		this.header = {
+			magic: THREE.LoaderUtils.decodeText( new Uint8Array( data.slice( 0, 4 ) ) ),
+			version: headerView.getUint32( 4, true ),
+			length: headerView.getUint32( 8, true )
+		};
+
+		if ( this.header.magic !== BINARY_EXTENSION_HEADER_MAGIC ) {
+
+			throw new Error( 'THREE.GLTFLoader: Unsupported glTF-Binary header.' );
+
+		} else if ( this.header.version < 2.0 ) {
+
+			throw new Error( 'THREE.GLTFLoader: Legacy binary file detected. Use LegacyGLTFLoader instead.' );
+
+		}
+
+		var chunkView = new DataView( data, BINARY_EXTENSION_HEADER_LENGTH );
+		var chunkIndex = 0;
+
+		while ( chunkIndex < chunkView.byteLength ) {
+
+			var chunkLength = chunkView.getUint32( chunkIndex, true );
+			chunkIndex += 4;
+
+			var chunkType = chunkView.getUint32( chunkIndex, true );
+			chunkIndex += 4;
+
+			if ( chunkType === BINARY_EXTENSION_CHUNK_TYPES.JSON ) {
+
+				var contentArray = new Uint8Array( data, BINARY_EXTENSION_HEADER_LENGTH + chunkIndex, chunkLength );
+				this.content = THREE.LoaderUtils.decodeText( contentArray );
+
+			} else if ( chunkType === BINARY_EXTENSION_CHUNK_TYPES.BIN ) {
+
+				var byteOffset = BINARY_EXTENSION_HEADER_LENGTH + chunkIndex;
+				this.body = data.slice( byteOffset, byteOffset + chunkLength );
+
+			}
+
+			// Clients must ignore chunks with unknown types.
+
+			chunkIndex += chunkLength;
+
+		}
+
+		if ( this.content === null ) {
+
+			throw new Error( 'THREE.GLTFLoader: JSON content not found.' );
+
+		}
+
+	}
+
+	/**
+	 * DRACO Mesh Compression Extension
+	 *
+	 * Specification: https://github.com/KhronosGroup/glTF/pull/874
+	 */
+	function GLTFDracoMeshCompressionExtension( json, dracoLoader ) {
+
+		if ( ! dracoLoader ) {
+
+			throw new Error( 'THREE.GLTFLoader: No DRACOLoader instance provided.' );
+
+		}
+
+		this.name = EXTENSIONS.KHR_DRACO_MESH_COMPRESSION;
+		this.json = json;
+		this.dracoLoader = dracoLoader;
+
+	}
+
+	GLTFDracoMeshCompressionExtension.prototype.decodePrimitive = function ( primitive, parser ) {
+
+		var json = this.json;
+		var dracoLoader = this.dracoLoader;
+		var bufferViewIndex = primitive.extensions[ this.name ].bufferView;
+		var gltfAttributeMap = primitive.extensions[ this.name ].attributes;
+		var threeAttributeMap = {};
+		var attributeNormalizedMap = {};
+		var attributeTypeMap = {};
+
+		for ( var attributeName in gltfAttributeMap ) {
+
+			var threeAttributeName = ATTRIBUTES[ attributeName ] || attributeName.toLowerCase();
+
+			threeAttributeMap[ threeAttributeName ] = gltfAttributeMap[ attributeName ];
+
+		}
+
+		for ( attributeName in primitive.attributes ) {
+
+			var threeAttributeName = ATTRIBUTES[ attributeName ] || attributeName.toLowerCase();
+
+			if ( gltfAttributeMap[ attributeName ] !== undefined ) {
+
+				var accessorDef = json.accessors[ primitive.attributes[ attributeName ] ];
+				var componentType = WEBGL_COMPONENT_TYPES[ accessorDef.componentType ];
+
+				attributeTypeMap[ threeAttributeName ] = componentType;
+				attributeNormalizedMap[ threeAttributeName ] = accessorDef.normalized === true;
+
+			}
+
+		}
+
+		return parser.getDependency( 'bufferView', bufferViewIndex ).then( function ( bufferView ) {
+
+			return new Promise( function ( resolve ) {
+
+				dracoLoader.decodeDracoFile( bufferView, function ( geometry ) {
+
+					for ( var attributeName in geometry.attributes ) {
+
+						var attribute = geometry.attributes[ attributeName ];
+						var normalized = attributeNormalizedMap[ attributeName ];
+
+						if ( normalized !== undefined ) attribute.normalized = normalized;
+
+					}
+
+					resolve( geometry );
+
+				}, threeAttributeMap, attributeTypeMap );
+
+			} );
+
+		} );
+
+	};
+
+	/**
+	 * Texture Transform Extension
+	 *
+	 * Specification:
+	 */
+	function GLTFTextureTransformExtension() {
+
+		this.name = EXTENSIONS.KHR_TEXTURE_TRANSFORM;
+
+	}
+
+	GLTFTextureTransformExtension.prototype.extendTexture = function ( texture, transform ) {
+
+		texture = texture.clone();
+
+		if ( transform.offset !== undefined ) {
+
+			texture.offset.fromArray( transform.offset );
+
+		}
+
+		if ( transform.rotation !== undefined ) {
+
+			texture.rotation = transform.rotation;
+
+		}
+
+		if ( transform.scale !== undefined ) {
+
+			texture.repeat.fromArray( transform.scale );
+
+		}
+
+		if ( transform.texCoord !== undefined ) {
+
+			console.warn( 'THREE.GLTFLoader: Custom UV sets in "' + this.name + '" extension not yet supported.' );
+
+		}
+
+		texture.needsUpdate = true;
+
+		return texture;
+
+	};
+
+	/**
+	 * Specular-Glossiness Extension
+	 *
+	 * Specification: https://github.com/KhronosGroup/glTF/tree/master/extensions/2.0/Khronos/KHR_materials_pbrSpecularGlossiness
+	 */
+	function GLTFMaterialsPbrSpecularGlossinessExtension() {
+
+		return {
+
+			name: EXTENSIONS.KHR_MATERIALS_PBR_SPECULAR_GLOSSINESS,
+
+			specularGlossinessParams: [
+				'color',
+				'map',
+				'lightMap',
+				'lightMapIntensity',
+				'aoMap',
+				'aoMapIntensity',
+				'emissive',
+				'emissiveIntensity',
+				'emissiveMap',
+				'bumpMap',
+				'bumpScale',
+				'normalMap',
+				'displacementMap',
+				'displacementScale',
+				'displacementBias',
+				'specularMap',
+				'specular',
+				'glossinessMap',
+				'glossiness',
+				'alphaMap',
+				'envMap',
+				'envMapIntensity',
+				'refractionRatio',
+			],
+
+			getMaterialType: function () {
+
+				return THREE.ShaderMaterial;
+
+			},
+
+			extendParams: function ( materialParams, materialDef, parser ) {
+
+				var pbrSpecularGlossiness = materialDef.extensions[ this.name ];
+
+				var shader = THREE.ShaderLib[ 'standard' ];
+
+				var uniforms = THREE.UniformsUtils.clone( shader.uniforms );
+
+				var specularMapParsFragmentChunk = [
+					'#ifdef USE_SPECULARMAP',
+					'	uniform sampler2D specularMap;',
+					'#endif'
+				].join( '\n' );
+
+				var glossinessMapParsFragmentChunk = [
+					'#ifdef USE_GLOSSINESSMAP',
+					'	uniform sampler2D glossinessMap;',
+					'#endif'
+				].join( '\n' );
+
+				var specularMapFragmentChunk = [
+					'vec3 specularFactor = specular;',
+					'#ifdef USE_SPECULARMAP',
+					'	vec4 texelSpecular = texture2D( specularMap, vUv );',
+					'	texelSpecular = sRGBToLinear( texelSpecular );',
+					'	// reads channel RGB, compatible with a glTF Specular-Glossiness (RGBA) texture',
+					'	specularFactor *= texelSpecular.rgb;',
+					'#endif'
+				].join( '\n' );
+
+				var glossinessMapFragmentChunk = [
+					'float glossinessFactor = glossiness;',
+					'#ifdef USE_GLOSSINESSMAP',
+					'	vec4 texelGlossiness = texture2D( glossinessMap, vUv );',
+					'	// reads channel A, compatible with a glTF Specular-Glossiness (RGBA) texture',
+					'	glossinessFactor *= texelGlossiness.a;',
+					'#endif'
+				].join( '\n' );
+
+				var lightPhysicalFragmentChunk = [
+					'PhysicalMaterial material;',
+					'material.diffuseColor = diffuseColor.rgb;',
+					'material.specularRoughness = clamp( 1.0 - glossinessFactor, 0.04, 1.0 );',
+					'material.specularColor = specularFactor.rgb;',
+				].join( '\n' );
+
+				var fragmentShader = shader.fragmentShader
+					.replace( 'uniform float roughness;', 'uniform vec3 specular;' )
+					.replace( 'uniform float metalness;', 'uniform float glossiness;' )
+					.replace( '#include <roughnessmap_pars_fragment>', specularMapParsFragmentChunk )
+					.replace( '#include <metalnessmap_pars_fragment>', glossinessMapParsFragmentChunk )
+					.replace( '#include <roughnessmap_fragment>', specularMapFragmentChunk )
+					.replace( '#include <metalnessmap_fragment>', glossinessMapFragmentChunk )
+					.replace( '#include <lights_physical_fragment>', lightPhysicalFragmentChunk );
+
+				delete uniforms.roughness;
+				delete uniforms.metalness;
+				delete uniforms.roughnessMap;
+				delete uniforms.metalnessMap;
+
+				uniforms.specular = { value: new THREE.Color().setHex( 0x111111 ) };
+				uniforms.glossiness = { value: 0.5 };
+				uniforms.specularMap = { value: null };
+				uniforms.glossinessMap = { value: null };
+
+				materialParams.vertexShader = shader.vertexShader;
+				materialParams.fragmentShader = fragmentShader;
+				materialParams.uniforms = uniforms;
+				materialParams.defines = { 'STANDARD': '' };
+
+				materialParams.color = new THREE.Color( 1.0, 1.0, 1.0 );
+				materialParams.opacity = 1.0;
+
+				var pending = [];
+
+				if ( Array.isArray( pbrSpecularGlossiness.diffuseFactor ) ) {
+
+					var array = pbrSpecularGlossiness.diffuseFactor;
+
+					materialParams.color.fromArray( array );
+					materialParams.opacity = array[ 3 ];
+
+				}
+
+				if ( pbrSpecularGlossiness.diffuseTexture !== undefined ) {
+
+					pending.push( parser.assignTexture( materialParams, 'map', pbrSpecularGlossiness.diffuseTexture ) );
+
+				}
+
+				materialParams.emissive = new THREE.Color( 0.0, 0.0, 0.0 );
+				materialParams.glossiness = pbrSpecularGlossiness.glossinessFactor !== undefined ? pbrSpecularGlossiness.glossinessFactor : 1.0;
+				materialParams.specular = new THREE.Color( 1.0, 1.0, 1.0 );
+
+				if ( Array.isArray( pbrSpecularGlossiness.specularFactor ) ) {
+
+					materialParams.specular.fromArray( pbrSpecularGlossiness.specularFactor );
+
+				}
+
+				if ( pbrSpecularGlossiness.specularGlossinessTexture !== undefined ) {
+
+					var specGlossMapDef = pbrSpecularGlossiness.specularGlossinessTexture;
+					pending.push( parser.assignTexture( materialParams, 'glossinessMap', specGlossMapDef ) );
+					pending.push( parser.assignTexture( materialParams, 'specularMap', specGlossMapDef ) );
+
+				}
+
+				return Promise.all( pending );
+
+			},
+
+			createMaterial: function ( params ) {
+
+				// setup material properties based on MeshStandardMaterial for Specular-Glossiness
+
+				var material = new THREE.ShaderMaterial( {
+					defines: params.defines,
+					vertexShader: params.vertexShader,
+					fragmentShader: params.fragmentShader,
+					uniforms: params.uniforms,
+					fog: true,
+					lights: true,
+					opacity: params.opacity,
+					transparent: params.transparent
+				} );
+
+				material.isGLTFSpecularGlossinessMaterial = true;
+
+				material.color = params.color;
+
+				material.map = params.map === undefined ? null : params.map;
+
+				material.lightMap = null;
+				material.lightMapIntensity = 1.0;
+
+				material.aoMap = params.aoMap === undefined ? null : params.aoMap;
+				material.aoMapIntensity = 1.0;
+
+				material.emissive = params.emissive;
+				material.emissiveIntensity = 1.0;
+				material.emissiveMap = params.emissiveMap === undefined ? null : params.emissiveMap;
+
+				material.bumpMap = params.bumpMap === undefined ? null : params.bumpMap;
+				material.bumpScale = 1;
+
+				material.normalMap = params.normalMap === undefined ? null : params.normalMap;
+
+				if ( params.normalScale ) material.normalScale = params.normalScale;
+
+				material.displacementMap = null;
+				material.displacementScale = 1;
+				material.displacementBias = 0;
+
+				material.specularMap = params.specularMap === undefined ? null : params.specularMap;
+				material.specular = params.specular;
+
+				material.glossinessMap = params.glossinessMap === undefined ? null : params.glossinessMap;
+				material.glossiness = params.glossiness;
+
+				material.alphaMap = null;
+
+				material.envMap = params.envMap === undefined ? null : params.envMap;
+				material.envMapIntensity = 1.0;
+
+				material.refractionRatio = 0.98;
+
+				material.extensions.derivatives = true;
+
+				return material;
+
+			},
+
+			/**
+			 * Clones a GLTFSpecularGlossinessMaterial instance. The ShaderMaterial.copy() method can
+			 * copy only properties it knows about or inherits, and misses many properties that would
+			 * normally be defined by MeshStandardMaterial.
+			 *
+			 * This method allows GLTFSpecularGlossinessMaterials to be cloned in the process of
+			 * loading a glTF model, but cloning later (e.g. by the user) would require these changes
+			 * AND also updating `.onBeforeRender` on the parent mesh.
+			 *
+			 * @param  {THREE.ShaderMaterial} source
+			 * @return {THREE.ShaderMaterial}
+			 */
+			cloneMaterial: function ( source ) {
+
+				var target = source.clone();
+
+				target.isGLTFSpecularGlossinessMaterial = true;
+
+				var params = this.specularGlossinessParams;
+
+				for ( var i = 0, il = params.length; i < il; i ++ ) {
+
+					var value = source[ params[ i ] ];
+					target[ params[ i ] ] = ( value && value.isColor ) ? value.clone() : value;
+
+				}
+
+				return target;
+
+			},
+
+			// Here's based on refreshUniformsCommon() and refreshUniformsStandard() in WebGLRenderer.
+			refreshUniforms: function ( renderer, scene, camera, geometry, material ) {
+
+				if ( material.isGLTFSpecularGlossinessMaterial !== true ) {
+
+					return;
+
+				}
+
+				var uniforms = material.uniforms;
+				var defines = material.defines;
+
+				uniforms.opacity.value = material.opacity;
+
+				uniforms.diffuse.value.copy( material.color );
+				uniforms.emissive.value.copy( material.emissive ).multiplyScalar( material.emissiveIntensity );
+
+				uniforms.map.value = material.map;
+				uniforms.specularMap.value = material.specularMap;
+				uniforms.alphaMap.value = material.alphaMap;
+
+				uniforms.lightMap.value = material.lightMap;
+				uniforms.lightMapIntensity.value = material.lightMapIntensity;
+
+				uniforms.aoMap.value = material.aoMap;
+				uniforms.aoMapIntensity.value = material.aoMapIntensity;
+
+				// uv repeat and offset setting priorities
+				// 1. color map
+				// 2. specular map
+				// 3. normal map
+				// 4. bump map
+				// 5. alpha map
+				// 6. emissive map
+
+				var uvScaleMap;
+
+				if ( material.map ) {
+
+					uvScaleMap = material.map;
+
+				} else if ( material.specularMap ) {
+
+					uvScaleMap = material.specularMap;
+
+				} else if ( material.displacementMap ) {
+
+					uvScaleMap = material.displacementMap;
+
+				} else if ( material.normalMap ) {
+
+					uvScaleMap = material.normalMap;
+
+				} else if ( material.bumpMap ) {
+
+					uvScaleMap = material.bumpMap;
+
+				} else if ( material.glossinessMap ) {
+
+					uvScaleMap = material.glossinessMap;
+
+				} else if ( material.alphaMap ) {
+
+					uvScaleMap = material.alphaMap;
+
+				} else if ( material.emissiveMap ) {
+
+					uvScaleMap = material.emissiveMap;
+
+				}
+
+				if ( uvScaleMap !== undefined ) {
+
+					// backwards compatibility
+					if ( uvScaleMap.isWebGLRenderTarget ) {
+
+						uvScaleMap = uvScaleMap.texture;
+
+					}
+
+					if ( uvScaleMap.matrixAutoUpdate === true ) {
+
+						uvScaleMap.updateMatrix();
+
+					}
+
+					uniforms.uvTransform.value.copy( uvScaleMap.matrix );
+
+				}
+
+				if ( material.envMap ) {
+
+					uniforms.envMap.value = material.envMap;
+					uniforms.envMapIntensity.value = material.envMapIntensity;
+
+					// don't flip CubeTexture envMaps, flip everything else:
+					//  WebGLRenderTargetCube will be flipped for backwards compatibility
+					//  WebGLRenderTargetCube.texture will be flipped because it's a Texture and NOT a CubeTexture
+					// this check must be handled differently, or removed entirely, if WebGLRenderTargetCube uses a CubeTexture in the future
+					uniforms.flipEnvMap.value = material.envMap.isCubeTexture ? - 1 : 1;
+
+					uniforms.reflectivity.value = material.reflectivity;
+					uniforms.refractionRatio.value = material.refractionRatio;
+
+					uniforms.maxMipLevel.value = renderer.properties.get( material.envMap ).__maxMipLevel;
+
+				}
+
+				uniforms.specular.value.copy( material.specular );
+				uniforms.glossiness.value = material.glossiness;
+
+				uniforms.glossinessMap.value = material.glossinessMap;
+
+				uniforms.emissiveMap.value = material.emissiveMap;
+				uniforms.bumpMap.value = material.bumpMap;
+				uniforms.normalMap.value = material.normalMap;
+
+				uniforms.displacementMap.value = material.displacementMap;
+				uniforms.displacementScale.value = material.displacementScale;
+				uniforms.displacementBias.value = material.displacementBias;
+
+				if ( uniforms.glossinessMap.value !== null && defines.USE_GLOSSINESSMAP === undefined ) {
+
+					defines.USE_GLOSSINESSMAP = '';
+					// set USE_ROUGHNESSMAP to enable vUv
+					defines.USE_ROUGHNESSMAP = '';
+
+				}
+
+				if ( uniforms.glossinessMap.value === null && defines.USE_GLOSSINESSMAP !== undefined ) {
+
+					delete defines.USE_GLOSSINESSMAP;
+					delete defines.USE_ROUGHNESSMAP;
+
+				}
+
+			}
+
+		};
+
+	}
+
+	/*********************************/
+	/********** INTERPOLATION ********/
+	/*********************************/
+
+	// Spline Interpolation
+	// Specification: https://github.com/KhronosGroup/glTF/blob/master/specification/2.0/README.md#appendix-c-spline-interpolation
+	function GLTFCubicSplineInterpolant( parameterPositions, sampleValues, sampleSize, resultBuffer ) {
+
+		THREE.Interpolant.call( this, parameterPositions, sampleValues, sampleSize, resultBuffer );
+
+	}
+
+	GLTFCubicSplineInterpolant.prototype = Object.create( THREE.Interpolant.prototype );
+	GLTFCubicSplineInterpolant.prototype.constructor = GLTFCubicSplineInterpolant;
+
+	GLTFCubicSplineInterpolant.prototype.copySampleValue_ = function ( index ) {
+
+		// Copies a sample value to the result buffer. See description of glTF
+		// CUBICSPLINE values layout in interpolate_() function below.
+
+		var result = this.resultBuffer,
+			values = this.sampleValues,
+			valueSize = this.valueSize,
+			offset = index * valueSize * 3 + valueSize;
+
+		for ( var i = 0; i !== valueSize; i ++ ) {
+
+			result[ i ] = values[ offset + i ];
+
+		}
+
+		return result;
+
+	};
+
+	GLTFCubicSplineInterpolant.prototype.beforeStart_ = GLTFCubicSplineInterpolant.prototype.copySampleValue_;
+
+	GLTFCubicSplineInterpolant.prototype.afterEnd_ = GLTFCubicSplineInterpolant.prototype.copySampleValue_;
+
+	GLTFCubicSplineInterpolant.prototype.interpolate_ = function ( i1, t0, t, t1 ) {
+
+		var result = this.resultBuffer;
+		var values = this.sampleValues;
+		var stride = this.valueSize;
+
+		var stride2 = stride * 2;
+		var stride3 = stride * 3;
+
+		var td = t1 - t0;
+
+		var p = ( t - t0 ) / td;
+		var pp = p * p;
+		var ppp = pp * p;
+
+		var offset1 = i1 * stride3;
+		var offset0 = offset1 - stride3;
+
+		var s2 = - 2 * ppp + 3 * pp;
+		var s3 = ppp - pp;
+		var s0 = 1 - s2;
+		var s1 = s3 - pp + p;
+
+		// Layout of keyframe output values for CUBICSPLINE animations:
+		//   [ inTangent_1, splineVertex_1, outTangent_1, inTangent_2, splineVertex_2, ... ]
+		for ( var i = 0; i !== stride; i ++ ) {
+
+			var p0 = values[ offset0 + i + stride ]; // splineVertex_k
+			var m0 = values[ offset0 + i + stride2 ] * td; // outTangent_k * (t_k+1 - t_k)
+			var p1 = values[ offset1 + i + stride ]; // splineVertex_k+1
+			var m1 = values[ offset1 + i ] * td; // inTangent_k+1 * (t_k+1 - t_k)
+
+			result[ i ] = s0 * p0 + s1 * m0 + s2 * p1 + s3 * m1;
+
+		}
+
+		return result;
+
+	};
+
+	/*********************************/
+	/********** INTERNALS ************/
+	/*********************************/
+
+	/* CONSTANTS */
+
+	var WEBGL_CONSTANTS = {
+		FLOAT: 5126,
+		//FLOAT_MAT2: 35674,
+		FLOAT_MAT3: 35675,
+		FLOAT_MAT4: 35676,
+		FLOAT_VEC2: 35664,
+		FLOAT_VEC3: 35665,
+		FLOAT_VEC4: 35666,
+		LINEAR: 9729,
+		REPEAT: 10497,
+		SAMPLER_2D: 35678,
+		POINTS: 0,
+		LINES: 1,
+		LINE_LOOP: 2,
+		LINE_STRIP: 3,
+		TRIANGLES: 4,
+		TRIANGLE_STRIP: 5,
+		TRIANGLE_FAN: 6,
+		UNSIGNED_BYTE: 5121,
+		UNSIGNED_SHORT: 5123
+	};
+
+	var WEBGL_COMPONENT_TYPES = {
+		5120: Int8Array,
+		5121: Uint8Array,
+		5122: Int16Array,
+		5123: Uint16Array,
+		5125: Uint32Array,
+		5126: Float32Array
+	};
+
+	var WEBGL_FILTERS = {
+		9728: THREE.NearestFilter,
+		9729: THREE.LinearFilter,
+		9984: THREE.NearestMipmapNearestFilter,
+		9985: THREE.LinearMipmapNearestFilter,
+		9986: THREE.NearestMipmapLinearFilter,
+		9987: THREE.LinearMipmapLinearFilter
+	};
+
+	var WEBGL_WRAPPINGS = {
+		33071: THREE.ClampToEdgeWrapping,
+		33648: THREE.MirroredRepeatWrapping,
+		10497: THREE.RepeatWrapping
+	};
+
+	var WEBGL_TYPE_SIZES = {
+		'SCALAR': 1,
+		'VEC2': 2,
+		'VEC3': 3,
+		'VEC4': 4,
+		'MAT2': 4,
+		'MAT3': 9,
+		'MAT4': 16
+	};
+
+	var ATTRIBUTES = {
+		POSITION: 'position',
+		NORMAL: 'normal',
+		TANGENT: 'tangent',
+		TEXCOORD_0: 'uv',
+		TEXCOORD_1: 'uv2',
+		COLOR_0: 'color',
+		WEIGHTS_0: 'skinWeight',
+		JOINTS_0: 'skinIndex',
+	};
+
+	var PATH_PROPERTIES = {
+		scale: 'scale',
+		translation: 'position',
+		rotation: 'quaternion',
+		weights: 'morphTargetInfluences'
+	};
+
+	var INTERPOLATION = {
+		CUBICSPLINE: undefined, // We use a custom interpolant (GLTFCubicSplineInterpolation) for CUBICSPLINE tracks. Each
+		                        // keyframe track will be initialized with a default interpolation type, then modified.
+		LINEAR: THREE.InterpolateLinear,
+		STEP: THREE.InterpolateDiscrete
+	};
+
+	var ALPHA_MODES = {
+		OPAQUE: 'OPAQUE',
+		MASK: 'MASK',
+		BLEND: 'BLEND'
+	};
+
+	var MIME_TYPE_FORMATS = {
+		'image/png': THREE.RGBAFormat,
+		'image/jpeg': THREE.RGBFormat
+	};
+
+	/* UTILITY FUNCTIONS */
+
+	function resolveURL( url, path ) {
+
+		// Invalid URL
+		if ( typeof url !== 'string' || url === '' ) return '';
+
+		// Host Relative URL
+		if ( /^https?:\/\//i.test( path ) && /^\//.test( url ) ) {
+
+			path = path.replace( /(^https?:\/\/[^\/]+).*/i, '$1' );
+
+		}
+
+		// Absolute URL http://,https://,//
+		if ( /^(https?:)?\/\//i.test( url ) ) return url;
+
+		// Data URI
+		if ( /^data:.*,.*$/i.test( url ) ) return url;
+
+		// Blob URL
+		if ( /^blob:.*$/i.test( url ) ) return url;
+
+		// Relative URL
+		return path + url;
+
+	}
+
+	var defaultMaterial;
+
+	/**
+	 * Specification: https://github.com/KhronosGroup/glTF/blob/master/specification/2.0/README.md#default-material
+	 */
+	function createDefaultMaterial() {
+
+		defaultMaterial = defaultMaterial || new THREE.MeshStandardMaterial( {
+			color: 0xFFFFFF,
+			emissive: 0x000000,
+			metalness: 1,
+			roughness: 1,
+			transparent: false,
+			depthTest: true,
+			side: THREE.FrontSide
+		} );
+
+		return defaultMaterial;
+
+	}
+
+	function addUnknownExtensionsToUserData( knownExtensions, object, objectDef ) {
+
+		// Add unknown glTF extensions to an object's userData.
+
+		for ( var name in objectDef.extensions ) {
+
+			if ( knownExtensions[ name ] === undefined ) {
+
+				object.userData.gltfExtensions = object.userData.gltfExtensions || {};
+				object.userData.gltfExtensions[ name ] = objectDef.extensions[ name ];
+
+			}
+
+		}
+
+	}
+
+	/**
+	 * @param {THREE.Object3D|THREE.Material|THREE.BufferGeometry} object
+	 * @param {GLTF.definition} gltfDef
+	 */
+	function assignExtrasToUserData( object, gltfDef ) {
+
+		if ( gltfDef.extras !== undefined ) {
+
+			if ( typeof gltfDef.extras === 'object' ) {
+
+				Object.assign( object.userData, gltfDef.extras );
+
+			} else {
+
+				console.warn( 'THREE.GLTFLoader: Ignoring primitive type .extras, ' + gltfDef.extras );
+
+			}
+
+		}
+
+	}
+
+	/**
+	 * Specification: https://github.com/KhronosGroup/glTF/blob/master/specification/2.0/README.md#morph-targets
+	 *
+	 * @param {THREE.BufferGeometry} geometry
+	 * @param {Array<GLTF.Target>} targets
+	 * @param {GLTFParser} parser
+	 * @return {Promise<THREE.BufferGeometry>}
+	 */
+	function addMorphTargets( geometry, targets, parser ) {
+
+		var hasMorphPosition = false;
+		var hasMorphNormal = false;
+
+		for ( var i = 0, il = targets.length; i < il; i ++ ) {
+
+			var target = targets[ i ];
+
+			if ( target.POSITION !== undefined ) hasMorphPosition = true;
+			if ( target.NORMAL !== undefined ) hasMorphNormal = true;
+
+			if ( hasMorphPosition && hasMorphNormal ) break;
+
+		}
+
+		if ( ! hasMorphPosition && ! hasMorphNormal ) return Promise.resolve( geometry );
+
+		var pendingPositionAccessors = [];
+		var pendingNormalAccessors = [];
+
+		for ( var i = 0, il = targets.length; i < il; i ++ ) {
+
+			var target = targets[ i ];
+
+			if ( hasMorphPosition ) {
+
+				var pendingAccessor = target.POSITION !== undefined
+					? parser.getDependency( 'accessor', target.POSITION )
+					: geometry.attributes.position;
+
+				pendingPositionAccessors.push( pendingAccessor );
+
+			}
+
+			if ( hasMorphNormal ) {
+
+				var pendingAccessor = target.NORMAL !== undefined
+					? parser.getDependency( 'accessor', target.NORMAL )
+					: geometry.attributes.normal;
+
+				pendingNormalAccessors.push( pendingAccessor );
+
+			}
+
+		}
+
+		return Promise.all( [
+			Promise.all( pendingPositionAccessors ),
+			Promise.all( pendingNormalAccessors )
+		] ).then( function ( accessors ) {
+
+			var morphPositions = accessors[ 0 ];
+			var morphNormals = accessors[ 1 ];
+
+			// Clone morph target accessors before modifying them.
+
+			for ( var i = 0, il = morphPositions.length; i < il; i ++ ) {
+
+				if ( geometry.attributes.position === morphPositions[ i ] ) continue;
+
+				morphPositions[ i ] = cloneBufferAttribute( morphPositions[ i ] );
+
+			}
+
+			for ( var i = 0, il = morphNormals.length; i < il; i ++ ) {
+
+				if ( geometry.attributes.normal === morphNormals[ i ] ) continue;
+
+				morphNormals[ i ] = cloneBufferAttribute( morphNormals[ i ] );
+
+			}
+
+			for ( var i = 0, il = targets.length; i < il; i ++ ) {
+
+				var target = targets[ i ];
+				var attributeName = 'morphTarget' + i;
+
+				if ( hasMorphPosition ) {
+
+					// Three.js morph position is absolute value. The formula is
+					//   basePosition
+					//     + weight0 * ( morphPosition0 - basePosition )
+					//     + weight1 * ( morphPosition1 - basePosition )
+					//     ...
+					// while the glTF one is relative
+					//   basePosition
+					//     + weight0 * glTFmorphPosition0
+					//     + weight1 * glTFmorphPosition1
+					//     ...
+					// then we need to convert from relative to absolute here.
+
+					if ( target.POSITION !== undefined ) {
+
+						var positionAttribute = morphPositions[ i ];
+						positionAttribute.name = attributeName;
+
+						var position = geometry.attributes.position;
+
+						for ( var j = 0, jl = positionAttribute.count; j < jl; j ++ ) {
+
+							positionAttribute.setXYZ(
+								j,
+								positionAttribute.getX( j ) + position.getX( j ),
+								positionAttribute.getY( j ) + position.getY( j ),
+								positionAttribute.getZ( j ) + position.getZ( j )
+							);
+
+						}
+
+					}
+
+				}
+
+				if ( hasMorphNormal ) {
+
+					// see target.POSITION's comment
+
+					if ( target.NORMAL !== undefined ) {
+
+						var normalAttribute = morphNormals[ i ];
+						normalAttribute.name = attributeName;
+
+						var normal = geometry.attributes.normal;
+
+						for ( var j = 0, jl = normalAttribute.count; j < jl; j ++ ) {
+
+							normalAttribute.setXYZ(
+								j,
+								normalAttribute.getX( j ) + normal.getX( j ),
+								normalAttribute.getY( j ) + normal.getY( j ),
+								normalAttribute.getZ( j ) + normal.getZ( j )
+							);
+
+						}
+
+					}
+
+				}
+
+			}
+
+			if ( hasMorphPosition ) geometry.morphAttributes.position = morphPositions;
+			if ( hasMorphNormal ) geometry.morphAttributes.normal = morphNormals;
+
+			return geometry;
+
+		} );
+
+	}
+
+	/**
+	 * @param {THREE.Mesh} mesh
+	 * @param {GLTF.Mesh} meshDef
+	 */
+	function updateMorphTargets( mesh, meshDef ) {
+
+		mesh.updateMorphTargets();
+
+		if ( meshDef.weights !== undefined ) {
+
+			for ( var i = 0, il = meshDef.weights.length; i < il; i ++ ) {
+
+				mesh.morphTargetInfluences[ i ] = meshDef.weights[ i ];
+
+			}
+
+		}
+
+		// .extras has user-defined data, so check that .extras.targetNames is an array.
+		if ( meshDef.extras && Array.isArray( meshDef.extras.targetNames ) ) {
+
+			var targetNames = meshDef.extras.targetNames;
+
+			if ( mesh.morphTargetInfluences.length === targetNames.length ) {
+
+				mesh.morphTargetDictionary = {};
+
+				for ( var i = 0, il = targetNames.length; i < il; i ++ ) {
+
+					mesh.morphTargetDictionary[ targetNames[ i ] ] = i;
+
+				}
+
+			} else {
+
+				console.warn( 'THREE.GLTFLoader: Invalid extras.targetNames length. Ignoring names.' );
+
+			}
+
+		}
+
+	}
+
+	function createPrimitiveKey( primitiveDef ) {
+
+		var dracoExtension = primitiveDef.extensions && primitiveDef.extensions[ EXTENSIONS.KHR_DRACO_MESH_COMPRESSION ];
+		var geometryKey;
+
+		if ( dracoExtension ) {
+
+			geometryKey = 'draco:' + dracoExtension.bufferView
+				+ ':' + dracoExtension.indices
+				+ ':' + createAttributesKey( dracoExtension.attributes );
+
+		} else {
+
+			geometryKey = primitiveDef.indices + ':' + createAttributesKey( primitiveDef.attributes ) + ':' + primitiveDef.mode;
+
+		}
+
+		return geometryKey;
+
+	}
+
+	function createAttributesKey( attributes ) {
+
+		var attributesKey = '';
+
+		var keys = Object.keys( attributes ).sort();
+
+		for ( var i = 0, il = keys.length; i < il; i ++ ) {
+
+			attributesKey += keys[ i ] + ':' + attributes[ keys[ i ] ] + ';';
+
+		}
+
+		return attributesKey;
+
+	}
+
+	function cloneBufferAttribute( attribute ) {
+
+		if ( attribute.isInterleavedBufferAttribute ) {
+
+			var count = attribute.count;
+			var itemSize = attribute.itemSize;
+			var array = attribute.array.slice( 0, count * itemSize );
+
+			for ( var i = 0, j = 0; i < count; ++ i ) {
+
+				array[ j ++ ] = attribute.getX( i );
+				if ( itemSize >= 2 ) array[ j ++ ] = attribute.getY( i );
+				if ( itemSize >= 3 ) array[ j ++ ] = attribute.getZ( i );
+				if ( itemSize >= 4 ) array[ j ++ ] = attribute.getW( i );
+
+			}
+
+			return new THREE.BufferAttribute( array, itemSize, attribute.normalized );
+
+		}
+
+		return attribute.clone();
+
+	}
+
+	/* GLTF PARSER */
+
+	function GLTFParser( json, extensions, options ) {
+
+		this.json = json || {};
+		this.extensions = extensions || {};
+		this.options = options || {};
+
+		// loader object cache
+		this.cache = new GLTFRegistry();
+
+		// BufferGeometry caching
+		this.primitiveCache = {};
+
+		this.textureLoader = new THREE.TextureLoader( this.options.manager );
+		this.textureLoader.setCrossOrigin( this.options.crossOrigin );
+
+		this.fileLoader = new THREE.FileLoader( this.options.manager );
+		this.fileLoader.setResponseType( 'arraybuffer' );
+
+		if ( this.options.crossOrigin === 'use-credentials' ) {
+
+			this.fileLoader.setWithCredentials( true );
+
+		}
+
+	}
+
+	GLTFParser.prototype.parse = function ( onLoad, onError ) {
+
+		var parser = this;
+		var json = this.json;
+		var extensions = this.extensions;
+
+		// Clear the loader cache
+		this.cache.removeAll();
+
+		// Mark the special nodes/meshes in json for efficient parse
+		this.markDefs();
+
+		Promise.all( [
+
+			this.getDependencies( 'scene' ),
+			this.getDependencies( 'animation' ),
+			this.getDependencies( 'camera' ),
+
+		] ).then( function ( dependencies ) {
+
+			var result = {
+				scene: dependencies[ 0 ][ json.scene || 0 ],
+				scenes: dependencies[ 0 ],
+				animations: dependencies[ 1 ],
+				cameras: dependencies[ 2 ],
+				asset: json.asset,
+				parser: parser,
+				userData: {}
+			};
+
+			addUnknownExtensionsToUserData( extensions, result, json );
+
+			assignExtrasToUserData( result, json );
+
+			onLoad( result );
+
+		} ).catch( onError );
+
+	};
+
+	/**
+	 * Marks the special nodes/meshes in json for efficient parse.
+	 */
+	GLTFParser.prototype.markDefs = function () {
+
+		var nodeDefs = this.json.nodes || [];
+		var skinDefs = this.json.skins || [];
+		var meshDefs = this.json.meshes || [];
+
+		var meshReferences = {};
+		var meshUses = {};
+
+		// Nothing in the node definition indicates whether it is a Bone or an
+		// Object3D. Use the skins' joint references to mark bones.
+		for ( var skinIndex = 0, skinLength = skinDefs.length; skinIndex < skinLength; skinIndex ++ ) {
+
+			var joints = skinDefs[ skinIndex ].joints;
+
+			for ( var i = 0, il = joints.length; i < il; i ++ ) {
+
+				nodeDefs[ joints[ i ] ].isBone = true;
+
+			}
+
+		}
+
+		// Meshes can (and should) be reused by multiple nodes in a glTF asset. To
+		// avoid having more than one THREE.Mesh with the same name, count
+		// references and rename instances below.
+		//
+		// Example: CesiumMilkTruck sample model reuses "Wheel" meshes.
+		for ( var nodeIndex = 0, nodeLength = nodeDefs.length; nodeIndex < nodeLength; nodeIndex ++ ) {
+
+			var nodeDef = nodeDefs[ nodeIndex ];
+
+			if ( nodeDef.mesh !== undefined ) {
+
+				if ( meshReferences[ nodeDef.mesh ] === undefined ) {
+
+					meshReferences[ nodeDef.mesh ] = meshUses[ nodeDef.mesh ] = 0;
+
+				}
+
+				meshReferences[ nodeDef.mesh ] ++;
+
+				// Nothing in the mesh definition indicates whether it is
+				// a SkinnedMesh or Mesh. Use the node's mesh reference
+				// to mark SkinnedMesh if node has skin.
+				if ( nodeDef.skin !== undefined ) {
+
+					meshDefs[ nodeDef.mesh ].isSkinnedMesh = true;
+
+				}
+
+			}
+
+		}
+
+		this.json.meshReferences = meshReferences;
+		this.json.meshUses = meshUses;
+
+	};
+
+	/**
+	 * Requests the specified dependency asynchronously, with caching.
+	 * @param {string} type
+	 * @param {number} index
+	 * @return {Promise<THREE.Object3D|THREE.Material|THREE.Texture|THREE.AnimationClip|ArrayBuffer|Object>}
+	 */
+	GLTFParser.prototype.getDependency = function ( type, index ) {
+
+		var cacheKey = type + ':' + index;
+		var dependency = this.cache.get( cacheKey );
+
+		if ( ! dependency ) {
+
+			switch ( type ) {
+
+				case 'scene':
+					dependency = this.loadScene( index );
+					break;
+
+				case 'node':
+					dependency = this.loadNode( index );
+					break;
+
+				case 'mesh':
+					dependency = this.loadMesh( index );
+					break;
+
+				case 'accessor':
+					dependency = this.loadAccessor( index );
+					break;
+
+				case 'bufferView':
+					dependency = this.loadBufferView( index );
+					break;
+
+				case 'buffer':
+					dependency = this.loadBuffer( index );
+					break;
+
+				case 'material':
+					dependency = this.loadMaterial( index );
+					break;
+
+				case 'texture':
+					dependency = this.loadTexture( index );
+					break;
+
+				case 'skin':
+					dependency = this.loadSkin( index );
+					break;
+
+				case 'animation':
+					dependency = this.loadAnimation( index );
+					break;
+
+				case 'camera':
+					dependency = this.loadCamera( index );
+					break;
+
+				case 'light':
+					dependency = this.extensions[ EXTENSIONS.KHR_LIGHTS_PUNCTUAL ].loadLight( index );
+					break;
+
+				default:
+					throw new Error( 'Unknown type: ' + type );
+
+			}
+
+			this.cache.add( cacheKey, dependency );
+
+		}
+
+		return dependency;
+
+	};
+
+	/**
+	 * Requests all dependencies of the specified type asynchronously, with caching.
+	 * @param {string} type
+	 * @return {Promise<Array<Object>>}
+	 */
+	GLTFParser.prototype.getDependencies = function ( type ) {
+
+		var dependencies = this.cache.get( type );
+
+		if ( ! dependencies ) {
+
+			var parser = this;
+			var defs = this.json[ type + ( type === 'mesh' ? 'es' : 's' ) ] || [];
+
+			dependencies = Promise.all( defs.map( function ( def, index ) {
+
+				return parser.getDependency( type, index );
+
+			} ) );
+
+			this.cache.add( type, dependencies );
+
+		}
+
+		return dependencies;
+
+	};
+
+	/**
+	 * Specification: https://github.com/KhronosGroup/glTF/blob/master/specification/2.0/README.md#buffers-and-buffer-views
+	 * @param {number} bufferIndex
+	 * @return {Promise<ArrayBuffer>}
+	 */
+	GLTFParser.prototype.loadBuffer = function ( bufferIndex ) {
+
+		var bufferDef = this.json.buffers[ bufferIndex ];
+		var loader = this.fileLoader;
+
+		if ( bufferDef.type && bufferDef.type !== 'arraybuffer' ) {
+
+			throw new Error( 'THREE.GLTFLoader: ' + bufferDef.type + ' buffer type is not supported.' );
+
+		}
+
+		// If present, GLB container is required to be the first buffer.
+		if ( bufferDef.uri === undefined && bufferIndex === 0 ) {
+
+			return Promise.resolve( this.extensions[ EXTENSIONS.KHR_BINARY_GLTF ].body );
+
+		}
+
+		var options = this.options;
+
+		return new Promise( function ( resolve, reject ) {
+
+			loader.load( resolveURL( bufferDef.uri, options.path ), resolve, undefined, function () {
+
+				reject( new Error( 'THREE.GLTFLoader: Failed to load buffer "' + bufferDef.uri + '".' ) );
+
+			} );
+
+		} );
+
+	};
+
+	/**
+	 * Specification: https://github.com/KhronosGroup/glTF/blob/master/specification/2.0/README.md#buffers-and-buffer-views
+	 * @param {number} bufferViewIndex
+	 * @return {Promise<ArrayBuffer>}
+	 */
+	GLTFParser.prototype.loadBufferView = function ( bufferViewIndex ) {
+
+		var bufferViewDef = this.json.bufferViews[ bufferViewIndex ];
+
+		return this.getDependency( 'buffer', bufferViewDef.buffer ).then( function ( buffer ) {
+
+			var byteLength = bufferViewDef.byteLength || 0;
+			var byteOffset = bufferViewDef.byteOffset || 0;
+			return buffer.slice( byteOffset, byteOffset + byteLength );
+
+		} );
+
+	};
+
+	/**
+	 * Specification: https://github.com/KhronosGroup/glTF/blob/master/specification/2.0/README.md#accessors
+	 * @param {number} accessorIndex
+	 * @return {Promise<THREE.BufferAttribute|THREE.InterleavedBufferAttribute>}
+	 */
+	GLTFParser.prototype.loadAccessor = function ( accessorIndex ) {
+
+		var parser = this;
+		var json = this.json;
+
+		var accessorDef = this.json.accessors[ accessorIndex ];
+
+		if ( accessorDef.bufferView === undefined && accessorDef.sparse === undefined ) {
+
+			// Ignore empty accessors, which may be used to declare runtime
+			// information about attributes coming from another source (e.g. Draco
+			// compression extension).
+			return Promise.resolve( null );
+
+		}
+
+		var pendingBufferViews = [];
+
+		if ( accessorDef.bufferView !== undefined ) {
+
+			pendingBufferViews.push( this.getDependency( 'bufferView', accessorDef.bufferView ) );
+
+		} else {
+
+			pendingBufferViews.push( null );
+
+		}
+
+		if ( accessorDef.sparse !== undefined ) {
+
+			pendingBufferViews.push( this.getDependency( 'bufferView', accessorDef.sparse.indices.bufferView ) );
+			pendingBufferViews.push( this.getDependency( 'bufferView', accessorDef.sparse.values.bufferView ) );
+
+		}
+
+		return Promise.all( pendingBufferViews ).then( function ( bufferViews ) {
+
+			var bufferView = bufferViews[ 0 ];
+
+			var itemSize = WEBGL_TYPE_SIZES[ accessorDef.type ];
+			var TypedArray = WEBGL_COMPONENT_TYPES[ accessorDef.componentType ];
+
+			// For VEC3: itemSize is 3, elementBytes is 4, itemBytes is 12.
+			var elementBytes = TypedArray.BYTES_PER_ELEMENT;
+			var itemBytes = elementBytes * itemSize;
+			var byteOffset = accessorDef.byteOffset || 0;
+			var byteStride = accessorDef.bufferView !== undefined ? json.bufferViews[ accessorDef.bufferView ].byteStride : undefined;
+			var normalized = accessorDef.normalized === true;
+			var array, bufferAttribute;
+
+			// The buffer is not interleaved if the stride is the item size in bytes.
+			if ( byteStride && byteStride !== itemBytes ) {
+
+				// Each "slice" of the buffer, as defined by 'count' elements of 'byteStride' bytes, gets its own InterleavedBuffer
+				// This makes sure that IBA.count reflects accessor.count properly
+				var ibSlice = Math.floor( byteOffset / byteStride );
+				var ibCacheKey = 'InterleavedBuffer:' + accessorDef.bufferView + ':' + accessorDef.componentType + ':' + ibSlice + ':' + accessorDef.count;
+				var ib = parser.cache.get( ibCacheKey );
+
+				if ( ! ib ) {
+
+					array = new TypedArray( bufferView, ibSlice * byteStride, accessorDef.count * byteStride / elementBytes );
+
+					// Integer parameters to IB/IBA are in array elements, not bytes.
+					ib = new THREE.InterleavedBuffer( array, byteStride / elementBytes );
+
+					parser.cache.add( ibCacheKey, ib );
+
+				}
+
+				bufferAttribute = new THREE.InterleavedBufferAttribute( ib, itemSize, ( byteOffset % byteStride ) / elementBytes, normalized );
+
+			} else {
+
+				if ( bufferView === null ) {
+
+					array = new TypedArray( accessorDef.count * itemSize );
+
+				} else {
+
+					array = new TypedArray( bufferView, byteOffset, accessorDef.count * itemSize );
+
+				}
+
+				bufferAttribute = new THREE.BufferAttribute( array, itemSize, normalized );
+
+			}
+
+			// https://github.com/KhronosGroup/glTF/blob/master/specification/2.0/README.md#sparse-accessors
+			if ( accessorDef.sparse !== undefined ) {
+
+				var itemSizeIndices = WEBGL_TYPE_SIZES.SCALAR;
+				var TypedArrayIndices = WEBGL_COMPONENT_TYPES[ accessorDef.sparse.indices.componentType ];
+
+				var byteOffsetIndices = accessorDef.sparse.indices.byteOffset || 0;
+				var byteOffsetValues = accessorDef.sparse.values.byteOffset || 0;
+
+				var sparseIndices = new TypedArrayIndices( bufferViews[ 1 ], byteOffsetIndices, accessorDef.sparse.count * itemSizeIndices );
+				var sparseValues = new TypedArray( bufferViews[ 2 ], byteOffsetValues, accessorDef.sparse.count * itemSize );
+
+				if ( bufferView !== null ) {
+
+					// Avoid modifying the original ArrayBuffer, if the bufferView wasn't initialized with zeroes.
+					bufferAttribute = new THREE.BufferAttribute( bufferAttribute.array.slice(), bufferAttribute.itemSize, bufferAttribute.normalized );
+
+				}
+
+				for ( var i = 0, il = sparseIndices.length; i < il; i ++ ) {
+
+					var index = sparseIndices[ i ];
+
+					bufferAttribute.setX( index, sparseValues[ i * itemSize ] );
+					if ( itemSize >= 2 ) bufferAttribute.setY( index, sparseValues[ i * itemSize + 1 ] );
+					if ( itemSize >= 3 ) bufferAttribute.setZ( index, sparseValues[ i * itemSize + 2 ] );
+					if ( itemSize >= 4 ) bufferAttribute.setW( index, sparseValues[ i * itemSize + 3 ] );
+					if ( itemSize >= 5 ) throw new Error( 'THREE.GLTFLoader: Unsupported itemSize in sparse BufferAttribute.' );
+
+				}
+
+			}
+
+			return bufferAttribute;
+
+		} );
+
+	};
+
+	/**
+	 * Specification: https://github.com/KhronosGroup/glTF/tree/master/specification/2.0#textures
+	 * @param {number} textureIndex
+	 * @return {Promise<THREE.Texture>}
+	 */
+	GLTFParser.prototype.loadTexture = function ( textureIndex ) {
+
+		var parser = this;
+		var json = this.json;
+		var options = this.options;
+		var textureLoader = this.textureLoader;
+
+		var URL = window.URL || window.webkitURL;
+
+		var textureDef = json.textures[ textureIndex ];
+
+		var textureExtensions = textureDef.extensions || {};
+
+		var source;
+
+		if ( textureExtensions[ EXTENSIONS.MSFT_TEXTURE_DDS ] ) {
+
+			source = json.images[ textureExtensions[ EXTENSIONS.MSFT_TEXTURE_DDS ].source ];
+
+		} else {
+
+			source = json.images[ textureDef.source ];
+
+		}
+
+		var sourceURI = source.uri;
+		var isObjectURL = false;
+
+		if ( source.bufferView !== undefined ) {
+
+			// Load binary image data from bufferView, if provided.
+
+			sourceURI = parser.getDependency( 'bufferView', source.bufferView ).then( function ( bufferView ) {
+
+				isObjectURL = true;
+				var blob = new Blob( [ bufferView ], { type: source.mimeType } );
+				sourceURI = URL.createObjectURL( blob );
+				return sourceURI;
+
+			} );
+
+		}
+
+		return Promise.resolve( sourceURI ).then( function ( sourceURI ) {
+
+			// Load Texture resource.
+
+			var loader = options.manager.getHandler( sourceURI );
+
+			if ( ! loader ) {
+
+				loader = textureExtensions[ EXTENSIONS.MSFT_TEXTURE_DDS ]
+					? parser.extensions[ EXTENSIONS.MSFT_TEXTURE_DDS ].ddsLoader
+					: textureLoader;
+
+			}
+
+			return new Promise( function ( resolve, reject ) {
+
+				loader.load( resolveURL( sourceURI, options.path ), resolve, undefined, reject );
+
+			} );
+
+		} ).then( function ( texture ) {
+
+			// Clean up resources and configure Texture.
+
+			if ( isObjectURL === true ) {
+
+				URL.revokeObjectURL( sourceURI );
+
+			}
+
+			texture.flipY = false;
+
+			if ( textureDef.name !== undefined ) texture.name = textureDef.name;
+
+			// Ignore unknown mime types, like DDS files.
+			if ( source.mimeType in MIME_TYPE_FORMATS ) {
+
+				texture.format = MIME_TYPE_FORMATS[ source.mimeType ];
+
+			}
+
+			var samplers = json.samplers || {};
+			var sampler = samplers[ textureDef.sampler ] || {};
+
+			texture.magFilter = WEBGL_FILTERS[ sampler.magFilter ] || THREE.LinearFilter;
+			texture.minFilter = WEBGL_FILTERS[ sampler.minFilter ] || THREE.LinearMipmapLinearFilter;
+			texture.wrapS = WEBGL_WRAPPINGS[ sampler.wrapS ] || THREE.RepeatWrapping;
+			texture.wrapT = WEBGL_WRAPPINGS[ sampler.wrapT ] || THREE.RepeatWrapping;
+
+			return texture;
+
+		} );
+
+	};
+
+	/**
+	 * Asynchronously assigns a texture to the given material parameters.
+	 * @param {Object} materialParams
+	 * @param {string} mapName
+	 * @param {Object} mapDef
+	 * @return {Promise}
+	 */
+	GLTFParser.prototype.assignTexture = function ( materialParams, mapName, mapDef ) {
+
+		var parser = this;
+
+		return this.getDependency( 'texture', mapDef.index ).then( function ( texture ) {
+
+			if ( ! texture.isCompressedTexture ) {
+
+				switch ( mapName ) {
+
+					case 'aoMap':
+					case 'emissiveMap':
+					case 'metalnessMap':
+					case 'normalMap':
+					case 'roughnessMap':
+						texture.format = THREE.RGBFormat;
+						break;
+
+				}
+
+			}
+
+			if ( parser.extensions[ EXTENSIONS.KHR_TEXTURE_TRANSFORM ] ) {
+
+				var transform = mapDef.extensions !== undefined ? mapDef.extensions[ EXTENSIONS.KHR_TEXTURE_TRANSFORM ] : undefined;
+
+				if ( transform ) {
+
+					texture = parser.extensions[ EXTENSIONS.KHR_TEXTURE_TRANSFORM ].extendTexture( texture, transform );
+
+				}
+
+			}
+
+			materialParams[ mapName ] = texture;
+
+		} );
+
+	};
+
+	/**
+	 * Assigns final material to a Mesh, Line, or Points instance. The instance
+	 * already has a material (generated from the glTF material options alone)
+	 * but reuse of the same glTF material may require multiple threejs materials
+	 * to accomodate different primitive types, defines, etc. New materials will
+	 * be created if necessary, and reused from a cache.
+	 * @param  {THREE.Object3D} mesh Mesh, Line, or Points instance.
+	 */
+	GLTFParser.prototype.assignFinalMaterial = function ( mesh ) {
+
+		var geometry = mesh.geometry;
+		var material = mesh.material;
+		var extensions = this.extensions;
+
+		var useVertexTangents = geometry.attributes.tangent !== undefined;
+		var useVertexColors = geometry.attributes.color !== undefined;
+		var useFlatShading = geometry.attributes.normal === undefined;
+		var useSkinning = mesh.isSkinnedMesh === true;
+		var useMorphTargets = Object.keys( geometry.morphAttributes ).length > 0;
+		var useMorphNormals = useMorphTargets && geometry.morphAttributes.normal !== undefined;
+
+		if ( mesh.isPoints ) {
+
+			var cacheKey = 'PointsMaterial:' + material.uuid;
+
+			var pointsMaterial = this.cache.get( cacheKey );
+
+			if ( ! pointsMaterial ) {
+
+				pointsMaterial = new THREE.PointsMaterial();
+				THREE.Material.prototype.copy.call( pointsMaterial, material );
+				pointsMaterial.color.copy( material.color );
+				pointsMaterial.map = material.map;
+				pointsMaterial.lights = false; // PointsMaterial doesn't support lights yet
+				pointsMaterial.sizeAttenuation = false; // glTF spec says points should be 1px
+
+				this.cache.add( cacheKey, pointsMaterial );
+
+			}
+
+			material = pointsMaterial;
+
+		} else if ( mesh.isLine ) {
+
+			var cacheKey = 'LineBasicMaterial:' + material.uuid;
+
+			var lineMaterial = this.cache.get( cacheKey );
+
+			if ( ! lineMaterial ) {
+
+				lineMaterial = new THREE.LineBasicMaterial();
+				THREE.Material.prototype.copy.call( lineMaterial, material );
+				lineMaterial.color.copy( material.color );
+				lineMaterial.lights = false; // LineBasicMaterial doesn't support lights yet
+
+				this.cache.add( cacheKey, lineMaterial );
+
+			}
+
+			material = lineMaterial;
+
+		}
+
+		// Clone the material if it will be modified
+		if ( useVertexTangents || useVertexColors || useFlatShading || useSkinning || useMorphTargets ) {
+
+			var cacheKey = 'ClonedMaterial:' + material.uuid + ':';
+
+			if ( material.isGLTFSpecularGlossinessMaterial ) cacheKey += 'specular-glossiness:';
+			if ( useSkinning ) cacheKey += 'skinning:';
+			if ( useVertexTangents ) cacheKey += 'vertex-tangents:';
+			if ( useVertexColors ) cacheKey += 'vertex-colors:';
+			if ( useFlatShading ) cacheKey += 'flat-shading:';
+			if ( useMorphTargets ) cacheKey += 'morph-targets:';
+			if ( useMorphNormals ) cacheKey += 'morph-normals:';
+
+			var cachedMaterial = this.cache.get( cacheKey );
+
+			if ( ! cachedMaterial ) {
+
+				cachedMaterial = material.isGLTFSpecularGlossinessMaterial
+					? extensions[ EXTENSIONS.KHR_MATERIALS_PBR_SPECULAR_GLOSSINESS ].cloneMaterial( material )
+					: material.clone();
+
+				if ( useSkinning ) cachedMaterial.skinning = true;
+				if ( useVertexTangents ) cachedMaterial.vertexTangents = true;
+				if ( useVertexColors ) cachedMaterial.vertexColors = THREE.VertexColors;
+				if ( useFlatShading ) cachedMaterial.flatShading = true;
+				if ( useMorphTargets ) cachedMaterial.morphTargets = true;
+				if ( useMorphNormals ) cachedMaterial.morphNormals = true;
+
+				this.cache.add( cacheKey, cachedMaterial );
+
+			}
+
+			material = cachedMaterial;
+
+		}
+
+		// workarounds for mesh and geometry
+
+		if ( material.aoMap && geometry.attributes.uv2 === undefined && geometry.attributes.uv !== undefined ) {
+
+			console.log( 'THREE.GLTFLoader: Duplicating UVs to support aoMap.' );
+			geometry.addAttribute( 'uv2', new THREE.BufferAttribute( geometry.attributes.uv.array, 2 ) );
+
+		}
+
+		if ( material.isGLTFSpecularGlossinessMaterial ) {
+
+			// for GLTFSpecularGlossinessMaterial(ShaderMaterial) uniforms runtime update
+			mesh.onBeforeRender = extensions[ EXTENSIONS.KHR_MATERIALS_PBR_SPECULAR_GLOSSINESS ].refreshUniforms;
+
+		}
+
+		mesh.material = material;
+
+	};
+
+	/**
+	 * Specification: https://github.com/KhronosGroup/glTF/blob/master/specification/2.0/README.md#materials
+	 * @param {number} materialIndex
+	 * @return {Promise<THREE.Material>}
+	 */
+	GLTFParser.prototype.loadMaterial = function ( materialIndex ) {
+
+		var parser = this;
+		var json = this.json;
+		var extensions = this.extensions;
+		var materialDef = json.materials[ materialIndex ];
+
+		var materialType;
+		var materialParams = {};
+		var materialExtensions = materialDef.extensions || {};
+
+		var pending = [];
+
+		if ( materialExtensions[ EXTENSIONS.KHR_MATERIALS_PBR_SPECULAR_GLOSSINESS ] ) {
+
+			var sgExtension = extensions[ EXTENSIONS.KHR_MATERIALS_PBR_SPECULAR_GLOSSINESS ];
+			materialType = sgExtension.getMaterialType();
+			pending.push( sgExtension.extendParams( materialParams, materialDef, parser ) );
+
+		} else if ( materialExtensions[ EXTENSIONS.KHR_MATERIALS_UNLIT ] ) {
+
+			var kmuExtension = extensions[ EXTENSIONS.KHR_MATERIALS_UNLIT ];
+			materialType = kmuExtension.getMaterialType();
+			pending.push( kmuExtension.extendParams( materialParams, materialDef, parser ) );
+
+		} else {
+
+			// Specification:
+			// https://github.com/KhronosGroup/glTF/tree/master/specification/2.0#metallic-roughness-material
+
+			materialType = THREE.MeshStandardMaterial;
+
+			var metallicRoughness = materialDef.pbrMetallicRoughness || {};
+
+			materialParams.color = new THREE.Color( 1.0, 1.0, 1.0 );
+			materialParams.opacity = 1.0;
+
+			if ( Array.isArray( metallicRoughness.baseColorFactor ) ) {
+
+				var array = metallicRoughness.baseColorFactor;
+
+				materialParams.color.fromArray( array );
+				materialParams.opacity = array[ 3 ];
+
+			}
+
+			if ( metallicRoughness.baseColorTexture !== undefined ) {
+
+				pending.push( parser.assignTexture( materialParams, 'map', metallicRoughness.baseColorTexture ) );
+
+			}
+
+			materialParams.metalness = metallicRoughness.metallicFactor !== undefined ? metallicRoughness.metallicFactor : 1.0;
+			materialParams.roughness = metallicRoughness.roughnessFactor !== undefined ? metallicRoughness.roughnessFactor : 1.0;
+
+			if ( metallicRoughness.metallicRoughnessTexture !== undefined ) {
+
+				pending.push( parser.assignTexture( materialParams, 'metalnessMap', metallicRoughness.metallicRoughnessTexture ) );
+				pending.push( parser.assignTexture( materialParams, 'roughnessMap', metallicRoughness.metallicRoughnessTexture ) );
+
+			}
+
+		}
+
+		if ( materialDef.doubleSided === true ) {
+
+			materialParams.side = THREE.DoubleSide;
+
+		}
+
+		var alphaMode = materialDef.alphaMode || ALPHA_MODES.OPAQUE;
+
+		if ( alphaMode === ALPHA_MODES.BLEND ) {
+
+			materialParams.transparent = true;
+
+		} else {
+
+			materialParams.transparent = false;
+
+			if ( alphaMode === ALPHA_MODES.MASK ) {
+
+				materialParams.alphaTest = materialDef.alphaCutoff !== undefined ? materialDef.alphaCutoff : 0.5;
+
+			}
+
+		}
+
+		if ( materialDef.normalTexture !== undefined && materialType !== THREE.MeshBasicMaterial ) {
+
+			pending.push( parser.assignTexture( materialParams, 'normalMap', materialDef.normalTexture ) );
+
+			materialParams.normalScale = new THREE.Vector2( 1, 1 );
+
+			if ( materialDef.normalTexture.scale !== undefined ) {
+
+				materialParams.normalScale.set( materialDef.normalTexture.scale, materialDef.normalTexture.scale );
+
+			}
+
+		}
+
+		if ( materialDef.occlusionTexture !== undefined && materialType !== THREE.MeshBasicMaterial ) {
+
+			pending.push( parser.assignTexture( materialParams, 'aoMap', materialDef.occlusionTexture ) );
+
+			if ( materialDef.occlusionTexture.strength !== undefined ) {
+
+				materialParams.aoMapIntensity = materialDef.occlusionTexture.strength;
+
+			}
+
+		}
+
+		if ( materialDef.emissiveFactor !== undefined && materialType !== THREE.MeshBasicMaterial ) {
+
+			materialParams.emissive = new THREE.Color().fromArray( materialDef.emissiveFactor );
+
+		}
+
+		if ( materialDef.emissiveTexture !== undefined && materialType !== THREE.MeshBasicMaterial ) {
+
+			pending.push( parser.assignTexture( materialParams, 'emissiveMap', materialDef.emissiveTexture ) );
+
+		}
+
+		return Promise.all( pending ).then( function () {
+
+			var material;
+
+			if ( materialType === THREE.ShaderMaterial ) {
+
+				material = extensions[ EXTENSIONS.KHR_MATERIALS_PBR_SPECULAR_GLOSSINESS ].createMaterial( materialParams );
+
+			} else {
+
+				material = new materialType( materialParams );
+
+			}
+
+			if ( materialDef.name !== undefined ) material.name = materialDef.name;
+
+			// baseColorTexture, emissiveTexture, and specularGlossinessTexture use sRGB encoding.
+			if ( material.map ) material.map.encoding = THREE.sRGBEncoding;
+			if ( material.emissiveMap ) material.emissiveMap.encoding = THREE.sRGBEncoding;
+			if ( material.specularMap ) material.specularMap.encoding = THREE.sRGBEncoding;
+
+			assignExtrasToUserData( material, materialDef );
+
+			if ( materialDef.extensions ) addUnknownExtensionsToUserData( extensions, material, materialDef );
+
+			return material;
+
+		} );
+
+	};
+
+	/**
+	 * @param {THREE.BufferGeometry} geometry
+	 * @param {GLTF.Primitive} primitiveDef
+	 * @param {GLTFParser} parser
+	 * @return {Promise<THREE.BufferGeometry>}
+	 */
+	function addPrimitiveAttributes( geometry, primitiveDef, parser ) {
+
+		var attributes = primitiveDef.attributes;
+
+		var pending = [];
+
+		function assignAttributeAccessor( accessorIndex, attributeName ) {
+
+			return parser.getDependency( 'accessor', accessorIndex )
+				.then( function ( accessor ) {
+
+					geometry.addAttribute( attributeName, accessor );
+
+				} );
+
+		}
+
+		for ( var gltfAttributeName in attributes ) {
+
+			var threeAttributeName = ATTRIBUTES[ gltfAttributeName ] || gltfAttributeName.toLowerCase();
+
+			// Skip attributes already provided by e.g. Draco extension.
+			if ( threeAttributeName in geometry.attributes ) continue;
+
+			pending.push( assignAttributeAccessor( attributes[ gltfAttributeName ], threeAttributeName ) );
+
+		}
+
+		if ( primitiveDef.indices !== undefined && ! geometry.index ) {
+
+			var accessor = parser.getDependency( 'accessor', primitiveDef.indices ).then( function ( accessor ) {
+
+				geometry.setIndex( accessor );
+
+			} );
+
+			pending.push( accessor );
+
+		}
+
+		assignExtrasToUserData( geometry, primitiveDef );
+
+		return Promise.all( pending ).then( function () {
+
+			return primitiveDef.targets !== undefined
+				? addMorphTargets( geometry, primitiveDef.targets, parser )
+				: geometry;
+
+		} );
+
+	}
+
+	/**
+	 * Specification: https://github.com/KhronosGroup/glTF/blob/master/specification/2.0/README.md#geometry
+	 *
+	 * Creates BufferGeometries from primitives.
+	 *
+	 * @param {Array<GLTF.Primitive>} primitives
+	 * @return {Promise<Array<THREE.BufferGeometry>>}
+	 */
+	GLTFParser.prototype.loadGeometries = function ( primitives ) {
+
+		var parser = this;
+		var extensions = this.extensions;
+		var cache = this.primitiveCache;
+
+		function createDracoPrimitive( primitive ) {
+
+			return extensions[ EXTENSIONS.KHR_DRACO_MESH_COMPRESSION ]
+				.decodePrimitive( primitive, parser )
+				.then( function ( geometry ) {
+
+					return addPrimitiveAttributes( geometry, primitive, parser );
+
+				} );
+
+		}
+
+		var pending = [];
+
+		for ( var i = 0, il = primitives.length; i < il; i ++ ) {
+
+			var primitive = primitives[ i ];
+			var cacheKey = createPrimitiveKey( primitive );
+
+			// See if we've already created this geometry
+			var cached = cache[ cacheKey ];
+
+			if ( cached ) {
+
+				// Use the cached geometry if it exists
+				pending.push( cached.promise );
+
+			} else {
+
+				var geometryPromise;
+
+				if ( primitive.extensions && primitive.extensions[ EXTENSIONS.KHR_DRACO_MESH_COMPRESSION ] ) {
+
+					// Use DRACO geometry if available
+					geometryPromise = createDracoPrimitive( primitive );
+
+				} else {
+
+					// Otherwise create a new geometry
+					geometryPromise = addPrimitiveAttributes( new THREE.BufferGeometry(), primitive, parser );
+
+				}
+
+				// Cache this geometry
+				cache[ cacheKey ] = { primitive: primitive, promise: geometryPromise };
+
+				pending.push( geometryPromise );
+
+			}
+
+		}
+
+		return Promise.all( pending );
+
+	};
+
+	/**
+	 * Specification: https://github.com/KhronosGroup/glTF/blob/master/specification/2.0/README.md#meshes
+	 * @param {number} meshIndex
+	 * @return {Promise<THREE.Group|THREE.Mesh|THREE.SkinnedMesh>}
+	 */
+	GLTFParser.prototype.loadMesh = function ( meshIndex ) {
+
+		var parser = this;
+		var json = this.json;
+
+		var meshDef = json.meshes[ meshIndex ];
+		var primitives = meshDef.primitives;
+
+		var pending = [];
+
+		for ( var i = 0, il = primitives.length; i < il; i ++ ) {
+
+			var material = primitives[ i ].material === undefined
+				? createDefaultMaterial()
+				: this.getDependency( 'material', primitives[ i ].material );
+
+			pending.push( material );
+
+		}
+
+		return Promise.all( pending ).then( function ( originalMaterials ) {
+
+			return parser.loadGeometries( primitives ).then( function ( geometries ) {
+
+				var meshes = [];
+
+				for ( var i = 0, il = geometries.length; i < il; i ++ ) {
+
+					var geometry = geometries[ i ];
+					var primitive = primitives[ i ];
+
+					// 1. create Mesh
+
+					var mesh;
+
+					var material = originalMaterials[ i ];
+
+					if ( primitive.mode === WEBGL_CONSTANTS.TRIANGLES ||
+						primitive.mode === WEBGL_CONSTANTS.TRIANGLE_STRIP ||
+						primitive.mode === WEBGL_CONSTANTS.TRIANGLE_FAN ||
+						primitive.mode === undefined ) {
+
+						// .isSkinnedMesh isn't in glTF spec. See .markDefs()
+						mesh = meshDef.isSkinnedMesh === true
+							? new THREE.SkinnedMesh( geometry, material )
+							: new THREE.Mesh( geometry, material );
+
+						if ( mesh.isSkinnedMesh === true && ! mesh.geometry.attributes.skinWeight.normalized ) {
+
+							// we normalize floating point skin weight array to fix malformed assets (see #15319)
+							// it's important to skip this for non-float32 data since normalizeSkinWeights assumes non-normalized inputs
+							mesh.normalizeSkinWeights();
+
+						}
+
+						if ( primitive.mode === WEBGL_CONSTANTS.TRIANGLE_STRIP ) {
+
+							mesh.drawMode = THREE.TriangleStripDrawMode;
+
+						} else if ( primitive.mode === WEBGL_CONSTANTS.TRIANGLE_FAN ) {
+
+							mesh.drawMode = THREE.TriangleFanDrawMode;
+
+						}
+
+					} else if ( primitive.mode === WEBGL_CONSTANTS.LINES ) {
+
+						mesh = new THREE.LineSegments( geometry, material );
+
+					} else if ( primitive.mode === WEBGL_CONSTANTS.LINE_STRIP ) {
+
+						mesh = new THREE.Line( geometry, material );
+
+					} else if ( primitive.mode === WEBGL_CONSTANTS.LINE_LOOP ) {
+
+						mesh = new THREE.LineLoop( geometry, material );
+
+					} else if ( primitive.mode === WEBGL_CONSTANTS.POINTS ) {
+
+						mesh = new THREE.Points( geometry, material );
+
+					} else {
+
+						throw new Error( 'THREE.GLTFLoader: Primitive mode unsupported: ' + primitive.mode );
+
+					}
+
+					if ( Object.keys( mesh.geometry.morphAttributes ).length > 0 ) {
+
+						updateMorphTargets( mesh, meshDef );
+
+					}
+
+					mesh.name = meshDef.name || ( 'mesh_' + meshIndex );
+
+					if ( geometries.length > 1 ) mesh.name += '_' + i;
+
+					assignExtrasToUserData( mesh, meshDef );
+
+					parser.assignFinalMaterial( mesh );
+
+					meshes.push( mesh );
+
+				}
+
+				if ( meshes.length === 1 ) {
+
+					return meshes[ 0 ];
+
+				}
+
+				var group = new THREE.Group();
+
+				for ( var i = 0, il = meshes.length; i < il; i ++ ) {
+
+					group.add( meshes[ i ] );
+
+				}
+
+				return group;
+
+			} );
+
+		} );
+
+	};
+
+	/**
+	 * Specification: https://github.com/KhronosGroup/glTF/tree/master/specification/2.0#cameras
+	 * @param {number} cameraIndex
+	 * @return {Promise<THREE.Camera>}
+	 */
+	GLTFParser.prototype.loadCamera = function ( cameraIndex ) {
+
+		var camera;
+		var cameraDef = this.json.cameras[ cameraIndex ];
+		var params = cameraDef[ cameraDef.type ];
+
+		if ( ! params ) {
+
+			console.warn( 'THREE.GLTFLoader: Missing camera parameters.' );
+			return;
+
+		}
+
+		if ( cameraDef.type === 'perspective' ) {
+
+			camera = new THREE.PerspectiveCamera( THREE.Math.radToDeg( params.yfov ), params.aspectRatio || 1, params.znear || 1, params.zfar || 2e6 );
+
+		} else if ( cameraDef.type === 'orthographic' ) {
+
+			camera = new THREE.OrthographicCamera( params.xmag / - 2, params.xmag / 2, params.ymag / 2, params.ymag / - 2, params.znear, params.zfar );
+
+		}
+
+		if ( cameraDef.name !== undefined ) camera.name = cameraDef.name;
+
+		assignExtrasToUserData( camera, cameraDef );
+
+		return Promise.resolve( camera );
+
+	};
+
+	/**
+	 * Specification: https://github.com/KhronosGroup/glTF/tree/master/specification/2.0#skins
+	 * @param {number} skinIndex
+	 * @return {Promise<Object>}
+	 */
+	GLTFParser.prototype.loadSkin = function ( skinIndex ) {
+
+		var skinDef = this.json.skins[ skinIndex ];
+
+		var skinEntry = { joints: skinDef.joints };
+
+		if ( skinDef.inverseBindMatrices === undefined ) {
+
+			return Promise.resolve( skinEntry );
+
+		}
+
+		return this.getDependency( 'accessor', skinDef.inverseBindMatrices ).then( function ( accessor ) {
+
+			skinEntry.inverseBindMatrices = accessor;
+
+			return skinEntry;
+
+		} );
+
+	};
+
+	/**
+	 * Specification: https://github.com/KhronosGroup/glTF/tree/master/specification/2.0#animations
+	 * @param {number} animationIndex
+	 * @return {Promise<THREE.AnimationClip>}
+	 */
+	GLTFParser.prototype.loadAnimation = function ( animationIndex ) {
+
+		var json = this.json;
+
+		var animationDef = json.animations[ animationIndex ];
+
+		var pendingNodes = [];
+		var pendingInputAccessors = [];
+		var pendingOutputAccessors = [];
+		var pendingSamplers = [];
+		var pendingTargets = [];
+
+		for ( var i = 0, il = animationDef.channels.length; i < il; i ++ ) {
+
+			var channel = animationDef.channels[ i ];
+			var sampler = animationDef.samplers[ channel.sampler ];
+			var target = channel.target;
+			var name = target.node !== undefined ? target.node : target.id; // NOTE: target.id is deprecated.
+			var input = animationDef.parameters !== undefined ? animationDef.parameters[ sampler.input ] : sampler.input;
+			var output = animationDef.parameters !== undefined ? animationDef.parameters[ sampler.output ] : sampler.output;
+
+			pendingNodes.push( this.getDependency( 'node', name ) );
+			pendingInputAccessors.push( this.getDependency( 'accessor', input ) );
+			pendingOutputAccessors.push( this.getDependency( 'accessor', output ) );
+			pendingSamplers.push( sampler );
+			pendingTargets.push( target );
+
+		}
+
+		return Promise.all( [
+
+			Promise.all( pendingNodes ),
+			Promise.all( pendingInputAccessors ),
+			Promise.all( pendingOutputAccessors ),
+			Promise.all( pendingSamplers ),
+			Promise.all( pendingTargets )
+
+		] ).then( function ( dependencies ) {
+
+			var nodes = dependencies[ 0 ];
+			var inputAccessors = dependencies[ 1 ];
+			var outputAccessors = dependencies[ 2 ];
+			var samplers = dependencies[ 3 ];
+			var targets = dependencies[ 4 ];
+
+			var tracks = [];
+
+			for ( var i = 0, il = nodes.length; i < il; i ++ ) {
+
+				var node = nodes[ i ];
+				var inputAccessor = inputAccessors[ i ];
+				var outputAccessor = outputAccessors[ i ];
+				var sampler = samplers[ i ];
+				var target = targets[ i ];
+
+				if ( node === undefined ) continue;
+
+				node.updateMatrix();
+				node.matrixAutoUpdate = true;
+
+				var TypedKeyframeTrack;
+
+				switch ( PATH_PROPERTIES[ target.path ] ) {
+
+					case PATH_PROPERTIES.weights:
+
+						TypedKeyframeTrack = THREE.NumberKeyframeTrack;
+						break;
+
+					case PATH_PROPERTIES.rotation:
+
+						TypedKeyframeTrack = THREE.QuaternionKeyframeTrack;
+						break;
+
+					case PATH_PROPERTIES.position:
+					case PATH_PROPERTIES.scale:
+					default:
+
+						TypedKeyframeTrack = THREE.VectorKeyframeTrack;
+						break;
+
+				}
+
+				var targetName = node.name ? node.name : node.uuid;
+
+				var interpolation = sampler.interpolation !== undefined ? INTERPOLATION[ sampler.interpolation ] : THREE.InterpolateLinear;
+
+				var targetNames = [];
+
+				if ( PATH_PROPERTIES[ target.path ] === PATH_PROPERTIES.weights ) {
+
+					// Node may be a THREE.Group (glTF mesh with several primitives) or a THREE.Mesh.
+					node.traverse( function ( object ) {
+
+						if ( object.isMesh === true && object.morphTargetInfluences ) {
+
+							targetNames.push( object.name ? object.name : object.uuid );
+
+						}
+
+					} );
+
+				} else {
+
+					targetNames.push( targetName );
+
+				}
+
+				var outputArray = outputAccessor.array;
+
+				if ( outputAccessor.normalized ) {
+
+					var scale;
+
+					if ( outputArray.constructor === Int8Array ) {
+
+						scale = 1 / 127;
+
+					} else if ( outputArray.constructor === Uint8Array ) {
+
+						scale = 1 / 255;
+
+					} else if ( outputArray.constructor == Int16Array ) {
+
+						scale = 1 / 32767;
+
+					} else if ( outputArray.constructor === Uint16Array ) {
+
+						scale = 1 / 65535;
+
+					} else {
+
+						throw new Error( 'THREE.GLTFLoader: Unsupported output accessor component type.' );
+
+					}
+
+					var scaled = new Float32Array( outputArray.length );
+
+					for ( var j = 0, jl = outputArray.length; j < jl; j ++ ) {
+
+						scaled[ j ] = outputArray[ j ] * scale;
+
+					}
+
+					outputArray = scaled;
+
+				}
+
+				for ( var j = 0, jl = targetNames.length; j < jl; j ++ ) {
+
+					var track = new TypedKeyframeTrack(
+						targetNames[ j ] + '.' + PATH_PROPERTIES[ target.path ],
+						inputAccessor.array,
+						outputArray,
+						interpolation
+					);
+
+					// Override interpolation with custom factory method.
+					if ( sampler.interpolation === 'CUBICSPLINE' ) {
+
+						track.createInterpolant = function InterpolantFactoryMethodGLTFCubicSpline( result ) {
+
+							// A CUBICSPLINE keyframe in glTF has three output values for each input value,
+							// representing inTangent, splineVertex, and outTangent. As a result, track.getValueSize()
+							// must be divided by three to get the interpolant's sampleSize argument.
+
+							return new GLTFCubicSplineInterpolant( this.times, this.values, this.getValueSize() / 3, result );
+
+						};
+
+						// Mark as CUBICSPLINE. `track.getInterpolation()` doesn't support custom interpolants.
+						track.createInterpolant.isInterpolantFactoryMethodGLTFCubicSpline = true;
+
+					}
+
+					tracks.push( track );
+
+				}
+
+			}
+
+			var name = animationDef.name !== undefined ? animationDef.name : 'animation_' + animationIndex;
+
+			return new THREE.AnimationClip( name, undefined, tracks );
+
+		} );
+
+	};
+
+	/**
+	 * Specification: https://github.com/KhronosGroup/glTF/tree/master/specification/2.0#nodes-and-hierarchy
+	 * @param {number} nodeIndex
+	 * @return {Promise<THREE.Object3D>}
+	 */
+	GLTFParser.prototype.loadNode = function ( nodeIndex ) {
+
+		var json = this.json;
+		var extensions = this.extensions;
+		var parser = this;
+
+		var meshReferences = json.meshReferences;
+		var meshUses = json.meshUses;
+
+		var nodeDef = json.nodes[ nodeIndex ];
+
+		return ( function () {
+
+			var pending = [];
+
+			if ( nodeDef.mesh !== undefined ) {
+
+				pending.push( parser.getDependency( 'mesh', nodeDef.mesh ).then( function ( mesh ) {
+
+					var node;
+
+					if ( meshReferences[ nodeDef.mesh ] > 1 ) {
+
+						var instanceNum = meshUses[ nodeDef.mesh ] ++;
+
+						node = mesh.clone();
+						node.name += '_instance_' + instanceNum;
+
+						// onBeforeRender copy for Specular-Glossiness
+						node.onBeforeRender = mesh.onBeforeRender;
+
+						for ( var i = 0, il = node.children.length; i < il; i ++ ) {
+
+							node.children[ i ].name += '_instance_' + instanceNum;
+							node.children[ i ].onBeforeRender = mesh.children[ i ].onBeforeRender;
+
+						}
+
+					} else {
+
+						node = mesh;
+
+					}
+
+					// if weights are provided on the node, override weights on the mesh.
+					if ( nodeDef.weights !== undefined ) {
+
+						node.traverse( function ( o ) {
+
+							if ( ! o.isMesh ) return;
+
+							for ( var i = 0, il = nodeDef.weights.length; i < il; i ++ ) {
+
+								o.morphTargetInfluences[ i ] = nodeDef.weights[ i ];
+
+							}
+
+						} );
+
+					}
+
+					return node;
+
+				} ) );
+
+			}
+
+			if ( nodeDef.camera !== undefined ) {
+
+				pending.push( parser.getDependency( 'camera', nodeDef.camera ) );
+
+			}
+
+			if ( nodeDef.extensions
+				&& nodeDef.extensions[ EXTENSIONS.KHR_LIGHTS_PUNCTUAL ]
+				&& nodeDef.extensions[ EXTENSIONS.KHR_LIGHTS_PUNCTUAL ].light !== undefined ) {
+
+				pending.push( parser.getDependency( 'light', nodeDef.extensions[ EXTENSIONS.KHR_LIGHTS_PUNCTUAL ].light ) );
+
+			}
+
+			return Promise.all( pending );
+
+		}() ).then( function ( objects ) {
+
+			var node;
+
+			// .isBone isn't in glTF spec. See .markDefs
+			if ( nodeDef.isBone === true ) {
+
+				node = new THREE.Bone();
+
+			} else if ( objects.length > 1 ) {
+
+				node = new THREE.Group();
+
+			} else if ( objects.length === 1 ) {
+
+				node = objects[ 0 ];
+
+			} else {
+
+				node = new THREE.Object3D();
+
+			}
+
+			if ( node !== objects[ 0 ] ) {
+
+				for ( var i = 0, il = objects.length; i < il; i ++ ) {
+
+					node.add( objects[ i ] );
+
+				}
+
+			}
+
+			if ( nodeDef.name !== undefined ) {
+
+				node.userData.name = nodeDef.name;
+				node.name = THREE.PropertyBinding.sanitizeNodeName( nodeDef.name );
+
+			}
+
+			assignExtrasToUserData( node, nodeDef );
+
+			if ( nodeDef.extensions ) addUnknownExtensionsToUserData( extensions, node, nodeDef );
+
+			if ( nodeDef.matrix !== undefined ) {
+
+				var matrix = new THREE.Matrix4();
+				matrix.fromArray( nodeDef.matrix );
+				node.applyMatrix( matrix );
+
+			} else {
+
+				if ( nodeDef.translation !== undefined ) {
+
+					node.position.fromArray( nodeDef.translation );
+
+				}
+
+				if ( nodeDef.rotation !== undefined ) {
+
+					node.quaternion.fromArray( nodeDef.rotation );
+
+				}
+
+				if ( nodeDef.scale !== undefined ) {
+
+					node.scale.fromArray( nodeDef.scale );
+
+				}
+
+			}
+
+			return node;
+
+		} );
+
+	};
+
+	/**
+	 * Specification: https://github.com/KhronosGroup/glTF/tree/master/specification/2.0#scenes
+	 * @param {number} sceneIndex
+	 * @return {Promise<THREE.Scene>}
+	 */
+	GLTFParser.prototype.loadScene = function () {
+
+		// scene node hierachy builder
+
+		function buildNodeHierachy( nodeId, parentObject, json, parser ) {
+
+			var nodeDef = json.nodes[ nodeId ];
+
+			return parser.getDependency( 'node', nodeId ).then( function ( node ) {
+
+				if ( nodeDef.skin === undefined ) return node;
+
+				// build skeleton here as well
+
+				var skinEntry;
+
+				return parser.getDependency( 'skin', nodeDef.skin ).then( function ( skin ) {
+
+					skinEntry = skin;
+
+					var pendingJoints = [];
+
+					for ( var i = 0, il = skinEntry.joints.length; i < il; i ++ ) {
+
+						pendingJoints.push( parser.getDependency( 'node', skinEntry.joints[ i ] ) );
+
+					}
+
+					return Promise.all( pendingJoints );
+
+				} ).then( function ( jointNodes ) {
+
+					node.traverse( function ( mesh ) {
+
+						if ( ! mesh.isMesh ) return;
+
+						var bones = [];
+						var boneInverses = [];
+
+						for ( var j = 0, jl = jointNodes.length; j < jl; j ++ ) {
+
+							var jointNode = jointNodes[ j ];
+
+							if ( jointNode ) {
+
+								bones.push( jointNode );
+
+								var mat = new THREE.Matrix4();
+
+								if ( skinEntry.inverseBindMatrices !== undefined ) {
+
+									mat.fromArray( skinEntry.inverseBindMatrices.array, j * 16 );
+
+								}
+
+								boneInverses.push( mat );
+
+							} else {
+
+								console.warn( 'THREE.GLTFLoader: Joint "%s" could not be found.', skinEntry.joints[ j ] );
+
+							}
+
+						}
+
+						mesh.bind( new THREE.Skeleton( bones, boneInverses ), mesh.matrixWorld );
+
+					} );
+
+					return node;
+
+				} );
+
+			} ).then( function ( node ) {
+
+				// build node hierachy
+
+				parentObject.add( node );
+
+				var pending = [];
+
+				if ( nodeDef.children ) {
+
+					var children = nodeDef.children;
+
+					for ( var i = 0, il = children.length; i < il; i ++ ) {
+
+						var child = children[ i ];
+						pending.push( buildNodeHierachy( child, node, json, parser ) );
+
+					}
+
+				}
+
+				return Promise.all( pending );
+
+			} );
+
+		}
+
+		return function loadScene( sceneIndex ) {
+
+			var json = this.json;
+			var extensions = this.extensions;
+			var sceneDef = this.json.scenes[ sceneIndex ];
+			var parser = this;
+
+			var scene = new THREE.Scene();
+			if ( sceneDef.name !== undefined ) scene.name = sceneDef.name;
+
+			assignExtrasToUserData( scene, sceneDef );
+
+			if ( sceneDef.extensions ) addUnknownExtensionsToUserData( extensions, scene, sceneDef );
+
+			var nodeIds = sceneDef.nodes || [];
+
+			var pending = [];
+
+			for ( var i = 0, il = nodeIds.length; i < il; i ++ ) {
+
+				pending.push( buildNodeHierachy( nodeIds[ i ], scene, json, parser ) );
+
+			}
+
+			return Promise.all( pending ).then( function () {
+
+				return scene;
+
+			} );
+
+		};
+
+	}();
+
+	return GLTFLoader;
+
+} )();
+
+
+/***/ }),
+
+/***/ "./src/vendor/OBJLoader.js":
+/*!*********************************!*\
+  !*** ./src/vendor/OBJLoader.js ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * @author mrdoob / http://mrdoob.com/
+ */
+
+THREE.OBJLoader = ( function () {
+
+	// o object_name | g group_name
+	var object_pattern = /^[og]\s*(.+)?/;
+	// mtllib file_reference
+	var material_library_pattern = /^mtllib /;
+	// usemtl material_name
+	var material_use_pattern = /^usemtl /;
+
+	function ParserState() {
+
+		var state = {
+			objects: [],
+			object: {},
+
+			vertices: [],
+			normals: [],
+			colors: [],
+			uvs: [],
+
+			materialLibraries: [],
+
+			startObject: function ( name, fromDeclaration ) {
+
+				// If the current object (initial from reset) is not from a g/o declaration in the parsed
+				// file. We need to use it for the first parsed g/o to keep things in sync.
+				if ( this.object && this.object.fromDeclaration === false ) {
+
+					this.object.name = name;
+					this.object.fromDeclaration = ( fromDeclaration !== false );
+					return;
+
+				}
+
+				var previousMaterial = ( this.object && typeof this.object.currentMaterial === 'function' ? this.object.currentMaterial() : undefined );
+
+				if ( this.object && typeof this.object._finalize === 'function' ) {
+
+					this.object._finalize( true );
+
+				}
+
+				this.object = {
+					name: name || '',
+					fromDeclaration: ( fromDeclaration !== false ),
+
+					geometry: {
+						vertices: [],
+						normals: [],
+						colors: [],
+						uvs: []
+					},
+					materials: [],
+					smooth: true,
+
+					startMaterial: function ( name, libraries ) {
+
+						var previous = this._finalize( false );
+
+						// New usemtl declaration overwrites an inherited material, except if faces were declared
+						// after the material, then it must be preserved for proper MultiMaterial continuation.
+						if ( previous && ( previous.inherited || previous.groupCount <= 0 ) ) {
+
+							this.materials.splice( previous.index, 1 );
+
+						}
+
+						var material = {
+							index: this.materials.length,
+							name: name || '',
+							mtllib: ( Array.isArray( libraries ) && libraries.length > 0 ? libraries[ libraries.length - 1 ] : '' ),
+							smooth: ( previous !== undefined ? previous.smooth : this.smooth ),
+							groupStart: ( previous !== undefined ? previous.groupEnd : 0 ),
+							groupEnd: - 1,
+							groupCount: - 1,
+							inherited: false,
+
+							clone: function ( index ) {
+
+								var cloned = {
+									index: ( typeof index === 'number' ? index : this.index ),
+									name: this.name,
+									mtllib: this.mtllib,
+									smooth: this.smooth,
+									groupStart: 0,
+									groupEnd: - 1,
+									groupCount: - 1,
+									inherited: false
+								};
+								cloned.clone = this.clone.bind( cloned );
+								return cloned;
+
+							}
+						};
+
+						this.materials.push( material );
+
+						return material;
+
+					},
+
+					currentMaterial: function () {
+
+						if ( this.materials.length > 0 ) {
+
+							return this.materials[ this.materials.length - 1 ];
+
+						}
+
+						return undefined;
+
+					},
+
+					_finalize: function ( end ) {
+
+						var lastMultiMaterial = this.currentMaterial();
+						if ( lastMultiMaterial && lastMultiMaterial.groupEnd === - 1 ) {
+
+							lastMultiMaterial.groupEnd = this.geometry.vertices.length / 3;
+							lastMultiMaterial.groupCount = lastMultiMaterial.groupEnd - lastMultiMaterial.groupStart;
+							lastMultiMaterial.inherited = false;
+
+						}
+
+						// Ignore objects tail materials if no face declarations followed them before a new o/g started.
+						if ( end && this.materials.length > 1 ) {
+
+							for ( var mi = this.materials.length - 1; mi >= 0; mi -- ) {
+
+								if ( this.materials[ mi ].groupCount <= 0 ) {
+
+									this.materials.splice( mi, 1 );
+
+								}
+
+							}
+
+						}
+
+						// Guarantee at least one empty material, this makes the creation later more straight forward.
+						if ( end && this.materials.length === 0 ) {
+
+							this.materials.push( {
+								name: '',
+								smooth: this.smooth
+							} );
+
+						}
+
+						return lastMultiMaterial;
+
+					}
+				};
+
+				// Inherit previous objects material.
+				// Spec tells us that a declared material must be set to all objects until a new material is declared.
+				// If a usemtl declaration is encountered while this new object is being parsed, it will
+				// overwrite the inherited material. Exception being that there was already face declarations
+				// to the inherited material, then it will be preserved for proper MultiMaterial continuation.
+
+				if ( previousMaterial && previousMaterial.name && typeof previousMaterial.clone === 'function' ) {
+
+					var declared = previousMaterial.clone( 0 );
+					declared.inherited = true;
+					this.object.materials.push( declared );
+
+				}
+
+				this.objects.push( this.object );
+
+			},
+
+			finalize: function () {
+
+				if ( this.object && typeof this.object._finalize === 'function' ) {
+
+					this.object._finalize( true );
+
+				}
+
+			},
+
+			parseVertexIndex: function ( value, len ) {
+
+				var index = parseInt( value, 10 );
+				return ( index >= 0 ? index - 1 : index + len / 3 ) * 3;
+
+			},
+
+			parseNormalIndex: function ( value, len ) {
+
+				var index = parseInt( value, 10 );
+				return ( index >= 0 ? index - 1 : index + len / 3 ) * 3;
+
+			},
+
+			parseUVIndex: function ( value, len ) {
+
+				var index = parseInt( value, 10 );
+				return ( index >= 0 ? index - 1 : index + len / 2 ) * 2;
+
+			},
+
+			addVertex: function ( a, b, c ) {
+
+				var src = this.vertices;
+				var dst = this.object.geometry.vertices;
+
+				dst.push( src[ a + 0 ], src[ a + 1 ], src[ a + 2 ] );
+				dst.push( src[ b + 0 ], src[ b + 1 ], src[ b + 2 ] );
+				dst.push( src[ c + 0 ], src[ c + 1 ], src[ c + 2 ] );
+
+			},
+
+			addVertexPoint: function ( a ) {
+
+				var src = this.vertices;
+				var dst = this.object.geometry.vertices;
+
+				dst.push( src[ a + 0 ], src[ a + 1 ], src[ a + 2 ] );
+
+			},
+
+			addVertexLine: function ( a ) {
+
+				var src = this.vertices;
+				var dst = this.object.geometry.vertices;
+
+				dst.push( src[ a + 0 ], src[ a + 1 ], src[ a + 2 ] );
+
+			},
+
+			addNormal: function ( a, b, c ) {
+
+				var src = this.normals;
+				var dst = this.object.geometry.normals;
+
+				dst.push( src[ a + 0 ], src[ a + 1 ], src[ a + 2 ] );
+				dst.push( src[ b + 0 ], src[ b + 1 ], src[ b + 2 ] );
+				dst.push( src[ c + 0 ], src[ c + 1 ], src[ c + 2 ] );
+
+			},
+
+			addColor: function ( a, b, c ) {
+
+				var src = this.colors;
+				var dst = this.object.geometry.colors;
+
+				dst.push( src[ a + 0 ], src[ a + 1 ], src[ a + 2 ] );
+				dst.push( src[ b + 0 ], src[ b + 1 ], src[ b + 2 ] );
+				dst.push( src[ c + 0 ], src[ c + 1 ], src[ c + 2 ] );
+
+			},
+
+			addUV: function ( a, b, c ) {
+
+				var src = this.uvs;
+				var dst = this.object.geometry.uvs;
+
+				dst.push( src[ a + 0 ], src[ a + 1 ] );
+				dst.push( src[ b + 0 ], src[ b + 1 ] );
+				dst.push( src[ c + 0 ], src[ c + 1 ] );
+
+			},
+
+			addUVLine: function ( a ) {
+
+				var src = this.uvs;
+				var dst = this.object.geometry.uvs;
+
+				dst.push( src[ a + 0 ], src[ a + 1 ] );
+
+			},
+
+			addFace: function ( a, b, c, ua, ub, uc, na, nb, nc ) {
+
+				var vLen = this.vertices.length;
+
+				var ia = this.parseVertexIndex( a, vLen );
+				var ib = this.parseVertexIndex( b, vLen );
+				var ic = this.parseVertexIndex( c, vLen );
+
+				this.addVertex( ia, ib, ic );
+
+				if ( ua !== undefined && ua !== '' ) {
+
+					var uvLen = this.uvs.length;
+					ia = this.parseUVIndex( ua, uvLen );
+					ib = this.parseUVIndex( ub, uvLen );
+					ic = this.parseUVIndex( uc, uvLen );
+					this.addUV( ia, ib, ic );
+
+				}
+
+				if ( na !== undefined && na !== '' ) {
+
+					// Normals are many times the same. If so, skip function call and parseInt.
+					var nLen = this.normals.length;
+					ia = this.parseNormalIndex( na, nLen );
+
+					ib = na === nb ? ia : this.parseNormalIndex( nb, nLen );
+					ic = na === nc ? ia : this.parseNormalIndex( nc, nLen );
+
+					this.addNormal( ia, ib, ic );
+
+				}
+
+				if ( this.colors.length > 0 ) {
+
+					this.addColor( ia, ib, ic );
+
+				}
+
+			},
+
+			addPointGeometry: function ( vertices ) {
+
+				this.object.geometry.type = 'Points';
+
+				var vLen = this.vertices.length;
+
+				for ( var vi = 0, l = vertices.length; vi < l; vi ++ ) {
+
+					this.addVertexPoint( this.parseVertexIndex( vertices[ vi ], vLen ) );
+
+				}
+
+			},
+
+			addLineGeometry: function ( vertices, uvs ) {
+
+				this.object.geometry.type = 'Line';
+
+				var vLen = this.vertices.length;
+				var uvLen = this.uvs.length;
+
+				for ( var vi = 0, l = vertices.length; vi < l; vi ++ ) {
+
+					this.addVertexLine( this.parseVertexIndex( vertices[ vi ], vLen ) );
+
+				}
+
+				for ( var uvi = 0, l = uvs.length; uvi < l; uvi ++ ) {
+
+					this.addUVLine( this.parseUVIndex( uvs[ uvi ], uvLen ) );
+
+				}
+
+			}
+
+		};
+
+		state.startObject( '', false );
+
+		return state;
+
+	}
+
+	//
+
+	function OBJLoader( manager ) {
+
+		this.manager = ( manager !== undefined ) ? manager : THREE.DefaultLoadingManager;
+
+		this.materials = null;
+
+	}
+
+	OBJLoader.prototype = {
+
+		constructor: OBJLoader,
+
+		load: function ( url, onLoad, onProgress, onError ) {
+
+			var scope = this;
+
+			var loader = new THREE.FileLoader( scope.manager );
+			loader.setPath( this.path );
+			loader.load( url, function ( text ) {
+
+				onLoad( scope.parse( text ) );
+
+			}, onProgress, onError );
+
+		},
+
+		setPath: function ( value ) {
+
+			this.path = value;
+
+			return this;
+
+		},
+
+		setMaterials: function ( materials ) {
+
+			this.materials = materials;
+
+			return this;
+
+		},
+
+		parse: function ( text ) {
+
+			console.time( 'OBJLoader' );
+
+			var state = new ParserState();
+
+			if ( text.indexOf( '\r\n' ) !== - 1 ) {
+
+				// This is faster than String.split with regex that splits on both
+				text = text.replace( /\r\n/g, '\n' );
+
+			}
+
+			if ( text.indexOf( '\\\n' ) !== - 1 ) {
+
+				// join lines separated by a line continuation character (\)
+				text = text.replace( /\\\n/g, '' );
+
+			}
+
+			var lines = text.split( '\n' );
+			var line = '', lineFirstChar = '';
+			var lineLength = 0;
+			var result = [];
+
+			// Faster to just trim left side of the line. Use if available.
+			var trimLeft = ( typeof ''.trimLeft === 'function' );
+
+			for ( var i = 0, l = lines.length; i < l; i ++ ) {
+
+				line = lines[ i ];
+
+				line = trimLeft ? line.trimLeft() : line.trim();
+
+				lineLength = line.length;
+
+				if ( lineLength === 0 ) continue;
+
+				lineFirstChar = line.charAt( 0 );
+
+				// @todo invoke passed in handler if any
+				if ( lineFirstChar === '#' ) continue;
+
+				if ( lineFirstChar === 'v' ) {
+
+					var data = line.split( /\s+/ );
+
+					switch ( data[ 0 ] ) {
+
+						case 'v':
+							state.vertices.push(
+								parseFloat( data[ 1 ] ),
+								parseFloat( data[ 2 ] ),
+								parseFloat( data[ 3 ] )
+							);
+							if ( data.length >= 7 ) {
+
+								state.colors.push(
+									parseFloat( data[ 4 ] ),
+									parseFloat( data[ 5 ] ),
+									parseFloat( data[ 6 ] )
+
+								);
+
+							}
+							break;
+						case 'vn':
+							state.normals.push(
+								parseFloat( data[ 1 ] ),
+								parseFloat( data[ 2 ] ),
+								parseFloat( data[ 3 ] )
+							);
+							break;
+						case 'vt':
+							state.uvs.push(
+								parseFloat( data[ 1 ] ),
+								parseFloat( data[ 2 ] )
+							);
+							break;
+
+					}
+
+				} else if ( lineFirstChar === 'f' ) {
+
+					var lineData = line.substr( 1 ).trim();
+					var vertexData = lineData.split( /\s+/ );
+					var faceVertices = [];
+
+					// Parse the face vertex data into an easy to work with format
+
+					for ( var j = 0, jl = vertexData.length; j < jl; j ++ ) {
+
+						var vertex = vertexData[ j ];
+
+						if ( vertex.length > 0 ) {
+
+							var vertexParts = vertex.split( '/' );
+							faceVertices.push( vertexParts );
+
+						}
+
+					}
+
+					// Draw an edge between the first vertex and all subsequent vertices to form an n-gon
+
+					var v1 = faceVertices[ 0 ];
+
+					for ( var j = 1, jl = faceVertices.length - 1; j < jl; j ++ ) {
+
+						var v2 = faceVertices[ j ];
+						var v3 = faceVertices[ j + 1 ];
+
+						state.addFace(
+							v1[ 0 ], v2[ 0 ], v3[ 0 ],
+							v1[ 1 ], v2[ 1 ], v3[ 1 ],
+							v1[ 2 ], v2[ 2 ], v3[ 2 ]
+						);
+
+					}
+
+				} else if ( lineFirstChar === 'l' ) {
+
+					var lineParts = line.substring( 1 ).trim().split( " " );
+					var lineVertices = [], lineUVs = [];
+
+					if ( line.indexOf( "/" ) === - 1 ) {
+
+						lineVertices = lineParts;
+
+					} else {
+
+						for ( var li = 0, llen = lineParts.length; li < llen; li ++ ) {
+
+							var parts = lineParts[ li ].split( "/" );
+
+							if ( parts[ 0 ] !== "" ) lineVertices.push( parts[ 0 ] );
+							if ( parts[ 1 ] !== "" ) lineUVs.push( parts[ 1 ] );
+
+						}
+
+					}
+					state.addLineGeometry( lineVertices, lineUVs );
+
+				} else if ( lineFirstChar === 'p' ) {
+
+					var lineData = line.substr( 1 ).trim();
+					var pointData = lineData.split( " " );
+
+					state.addPointGeometry( pointData );
+
+				} else if ( ( result = object_pattern.exec( line ) ) !== null ) {
+
+					// o object_name
+					// or
+					// g group_name
+
+					// WORKAROUND: https://bugs.chromium.org/p/v8/issues/detail?id=2869
+					// var name = result[ 0 ].substr( 1 ).trim();
+					var name = ( " " + result[ 0 ].substr( 1 ).trim() ).substr( 1 );
+
+					state.startObject( name );
+
+				} else if ( material_use_pattern.test( line ) ) {
+
+					// material
+
+					state.object.startMaterial( line.substring( 7 ).trim(), state.materialLibraries );
+
+				} else if ( material_library_pattern.test( line ) ) {
+
+					// mtl file
+
+					state.materialLibraries.push( line.substring( 7 ).trim() );
+
+				} else if ( lineFirstChar === 's' ) {
+
+					result = line.split( ' ' );
+
+					// smooth shading
+
+					// @todo Handle files that have varying smooth values for a set of faces inside one geometry,
+					// but does not define a usemtl for each face set.
+					// This should be detected and a dummy material created (later MultiMaterial and geometry groups).
+					// This requires some care to not create extra material on each smooth value for "normal" obj files.
+					// where explicit usemtl defines geometry groups.
+					// Example asset: examples/models/obj/cerberus/Cerberus.obj
+
+					/*
+					 * http://paulbourke.net/dataformats/obj/
+					 * or
+					 * http://www.cs.utah.edu/~boulos/cs3505/obj_spec.pdf
+					 *
+					 * From chapter "Grouping" Syntax explanation "s group_number":
+					 * "group_number is the smoothing group number. To turn off smoothing groups, use a value of 0 or off.
+					 * Polygonal elements use group numbers to put elements in different smoothing groups. For free-form
+					 * surfaces, smoothing groups are either turned on or off; there is no difference between values greater
+					 * than 0."
+					 */
+					if ( result.length > 1 ) {
+
+						var value = result[ 1 ].trim().toLowerCase();
+						state.object.smooth = ( value !== '0' && value !== 'off' );
+
+					} else {
+
+						// ZBrush can produce "s" lines #11707
+						state.object.smooth = true;
+
+					}
+					var material = state.object.currentMaterial();
+					if ( material ) material.smooth = state.object.smooth;
+
+				} else {
+
+					// Handle null terminated files without exception
+					if ( line === '\0' ) continue;
+
+					throw new Error( 'THREE.OBJLoader: Unexpected line: "' + line + '"' );
+
+				}
+
+			}
+
+			state.finalize();
+
+			var container = new THREE.Group();
+			container.materialLibraries = [].concat( state.materialLibraries );
+
+			for ( var i = 0, l = state.objects.length; i < l; i ++ ) {
+
+				var object = state.objects[ i ];
+				var geometry = object.geometry;
+				var materials = object.materials;
+				var isLine = ( geometry.type === 'Line' );
+				var isPoints = ( geometry.type === 'Points' );
+				var hasVertexColors = false;
+
+				// Skip o/g line declarations that did not follow with any faces
+				if ( geometry.vertices.length === 0 ) continue;
+
+				var buffergeometry = new THREE.BufferGeometry();
+
+				buffergeometry.addAttribute( 'position', new THREE.Float32BufferAttribute( geometry.vertices, 3 ) );
+
+				if ( geometry.normals.length > 0 ) {
+
+					buffergeometry.addAttribute( 'normal', new THREE.Float32BufferAttribute( geometry.normals, 3 ) );
+
+				} else {
+
+					buffergeometry.computeVertexNormals();
+
+				}
+
+				if ( geometry.colors.length > 0 ) {
+
+					hasVertexColors = true;
+					buffergeometry.addAttribute( 'color', new THREE.Float32BufferAttribute( geometry.colors, 3 ) );
+
+				}
+
+				if ( geometry.uvs.length > 0 ) {
+
+					buffergeometry.addAttribute( 'uv', new THREE.Float32BufferAttribute( geometry.uvs, 2 ) );
+
+				}
+
+				// Create materials
+
+				var createdMaterials = [];
+
+				for ( var mi = 0, miLen = materials.length; mi < miLen; mi ++ ) {
+
+					var sourceMaterial = materials[ mi ];
+					var material = undefined;
+
+					if ( this.materials !== null ) {
+
+						material = this.materials.create( sourceMaterial.name );
+
+						// mtl etc. loaders probably can't create line materials correctly, copy properties to a line material.
+						if ( isLine && material && ! ( material instanceof THREE.LineBasicMaterial ) ) {
+
+							var materialLine = new THREE.LineBasicMaterial();
+							THREE.Material.prototype.copy.call( materialLine, material );
+							materialLine.color.copy( material.color );
+							materialLine.lights = false;
+							material = materialLine;
+
+						} else if ( isPoints && material && ! ( material instanceof THREE.PointsMaterial ) ) {
+
+							var materialPoints = new THREE.PointsMaterial( { size: 10, sizeAttenuation: false } );
+							THREE.Material.prototype.copy.call( materialPoints, material );
+							materialPoints.color.copy( material.color );
+							materialPoints.map = material.map;
+							materialPoints.lights = false;
+							material = materialPoints;
+
+						}
+
+					}
+
+					if ( ! material ) {
+
+						if ( isLine ) {
+
+							material = new THREE.LineBasicMaterial();
+
+						} else if ( isPoints ) {
+
+							material = new THREE.PointsMaterial( { size: 1, sizeAttenuation: false } );
+
+						} else {
+
+							material = new THREE.MeshPhongMaterial();
+
+						}
+
+						material.name = sourceMaterial.name;
+
+					}
+
+					material.flatShading = sourceMaterial.smooth ? false : true;
+					material.vertexColors = hasVertexColors ? THREE.VertexColors : THREE.NoColors;
+
+					createdMaterials.push( material );
+
+				}
+
+				// Create mesh
+
+				var mesh;
+
+				if ( createdMaterials.length > 1 ) {
+
+					for ( var mi = 0, miLen = materials.length; mi < miLen; mi ++ ) {
+
+						var sourceMaterial = materials[ mi ];
+						buffergeometry.addGroup( sourceMaterial.groupStart, sourceMaterial.groupCount, mi );
+
+					}
+
+					if ( isLine ) {
+
+						mesh = new THREE.LineSegments( buffergeometry, createdMaterials );
+
+					} else if ( isPoints ) {
+
+						mesh = new THREE.Points( buffergeometry, createdMaterials );
+
+					} else {
+
+						mesh = new THREE.Mesh( buffergeometry, createdMaterials );
+
+					}
+
+				} else {
+
+					if ( isLine ) {
+
+						mesh = new THREE.LineSegments( buffergeometry, createdMaterials[ 0 ] );
+
+					} else if ( isPoints ) {
+
+						mesh = new THREE.Points( buffergeometry, createdMaterials[ 0 ] );
+
+					} else {
+
+						mesh = new THREE.Mesh( buffergeometry, createdMaterials[ 0 ] );
+
+					}
+
+				}
+
+				mesh.name = object.name;
+
+				container.add( mesh );
+
+			}
+
+			console.timeEnd( 'OBJLoader' );
+
+			return container;
+
+		}
+
+	};
+
+	return OBJLoader;
+
+} )();
+
+
+/***/ }),
+
+/***/ "./src/vendor/PointerLockControls.js":
+/*!*******************************************!*\
+  !*** ./src/vendor/PointerLockControls.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * @author mrdoob / http://mrdoob.com/
+ * @author Mugen87 / https://github.com/Mugen87
+ */
+
+
+function PointerLockControls ( camera, domElement ) {
+
+	this.domElement = domElement || document.body;
+	this.isLocked = false;
+
+	//
+	// internals
+	//
+
+	var scope = this;
+
+	var changeEvent = { type: 'change' };
+	var lockEvent = { type: 'lock' };
+	var unlockEvent = { type: 'unlock' };
+
+	var euler = new THREE.Euler( 0, 0, 0, 'YXZ' );
+
+	var PI_2 = Math.PI / 2;
+
+	var vec = new THREE.Vector3();
+
+	function onMouseMove( event ) {
+
+		if ( scope.isLocked === false ) return;
+
+		var movementX = event.movementX || event.mozMovementX || event.webkitMovementX || 0;
+		var movementY = event.movementY || event.mozMovementY || event.webkitMovementY || 0;
+
+		euler.setFromQuaternion( camera.quaternion );
+
+		euler.y -= movementX * 0.002;
+		euler.x -= movementY * 0.002;
+
+		euler.x = Math.max( - PI_2, Math.min( PI_2, euler.x ) );
+
+		camera.quaternion.setFromEuler( euler );
+
+		scope.dispatchEvent( changeEvent );
+
+	}
+
+	function onPointerlockChange() {
+
+		if ( document.pointerLockElement === scope.domElement ) {
+
+			scope.dispatchEvent( lockEvent );
+
+			scope.isLocked = true;
+
+		} else {
+
+			scope.dispatchEvent( unlockEvent );
+
+			scope.isLocked = false;
+
+		}
+
+	}
+
+	function onPointerlockError() {
+
+		console.error( 'THREE.PointerLockControls: Unable to use Pointer Lock API' );
+
+	}
+
+	this.connect = function () {
+
+		document.addEventListener( 'mousemove', onMouseMove, false );
+		document.addEventListener( 'pointerlockchange', onPointerlockChange, false );
+		document.addEventListener( 'pointerlockerror', onPointerlockError, false );
+
+	};
+
+	this.disconnect = function () {
+
+		document.removeEventListener( 'mousemove', onMouseMove, false );
+		document.removeEventListener( 'pointerlockchange', onPointerlockChange, false );
+		document.removeEventListener( 'pointerlockerror', onPointerlockError, false );
+
+	};
+
+	this.dispose = function () {
+
+		this.disconnect();
+
+	};
+
+	this.getObject = function () { // retaining this method for backward compatibility
+
+		return camera;
+
+	};
+
+	this.getDirection = function () {
+
+		var direction = new THREE.Vector3( 0, 0, - 1 );
+
+		return function ( v ) {
+
+			return v.copy( direction ).applyQuaternion( camera.quaternion );
+
+		};
+
+	}();
+
+	this.moveForward = function ( distance ) {
+
+		// move forward parallel to the xz-plane
+		// assumes camera.up is y-up
+
+		vec.setFromMatrixColumn( camera.matrix, 0 );
+
+		vec.crossVectors( camera.up, vec );
+
+		camera.position.addScaledVector( vec, distance );
+
+	};
+
+	this.moveRight = function ( distance ) {
+
+		vec.setFromMatrixColumn( camera.matrix, 0 );
+
+		camera.position.addScaledVector( vec, distance );
+
+	};
+
+	this.lock = function () {
+
+		this.domElement.requestPointerLock();
+
+	};
+
+	this.unlock = function () {
+
+		document.exitPointerLock();
+
+	};
+
+	this.connect();
+
+};
+
+THREE.PointerLockControls = PointerLockControls;
+
+
+/***/ }),
+
+/***/ "./src/vendor/WebVR.js":
+/*!*****************************!*\
+  !*** ./src/vendor/WebVR.js ***!
+  \*****************************/
+/*! exports provided: WEBVR */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WEBVR", function() { return WEBVR; });
+/**
+ * @author mrdoob / http://mrdoob.com
+ * @author Mugen87 / https://github.com/Mugen87
+ *
+ * Based on @tojiro's vr-samples-utils.js
+ */
+
+
+
+var WEBVR = {
+
+	createButton: function ( renderer, options ) {
+
+		if ( options && options.referenceSpaceType ) {
+
+			renderer.vr.setReferenceSpaceType( options.referenceSpaceType );
+
+		}
+
+		function showEnterVR( device ) {
+
+			button.style.display = '';
+
+			button.style.cursor = 'pointer';
+			button.style.left = 'calc(50% - 50px)';
+			button.style.width = '100px';
+
+			button.textContent = 'ENTER VR';
+
+			button.onmouseenter = function () {
+
+				button.style.opacity = '1.0';
+
+			};
+
+			button.onmouseleave = function () {
+
+				button.style.opacity = '0.5';
+
+			};
+
+			button.onclick = function () {
+
+				device.isPresenting ? device.exitPresent() : device.requestPresent( [ { source: renderer.domElement } ] );
+
+			};
+
+			renderer.vr.setDevice( device );
+
+		}
+
+		function showEnterXR( /*device*/ ) {
+
+			var currentSession = null;
+
+			function onSessionStarted( session ) {
+
+				session.addEventListener( 'end', onSessionEnded );
+
+				renderer.vr.setSession( session );
+				button.textContent = 'EXIT XR';
+
+				currentSession = session;
+
+			}
+
+			function onSessionEnded( /*event*/ ) {
+
+				currentSession.removeEventListener( 'end', onSessionEnded );
+
+				renderer.vr.setSession( null );
+				button.textContent = 'ENTER XR';
+
+				currentSession = null;
+
+			}
+
+			//
+
+			button.style.display = '';
+
+			button.style.cursor = 'pointer';
+			button.style.left = 'calc(50% - 50px)';
+			button.style.width = '100px';
+
+			button.textContent = 'ENTER XR';
+
+			button.onmouseenter = function () {
+
+				button.style.opacity = '1.0';
+
+			};
+
+			button.onmouseleave = function () {
+
+				button.style.opacity = '0.5';
+
+			};
+
+			button.onclick = function () {
+
+				if ( currentSession === null ) {
+
+					navigator.xr.requestSession( 'immersive-vr' ).then( onSessionStarted );
+
+				} else {
+
+					currentSession.end();
+
+				}
+
+			};
+
+		}
+
+		function disableButton() {
+
+			button.style.display = '';
+
+			button.style.cursor = 'auto';
+			button.style.left = 'calc(50% - 75px)';
+			button.style.width = '150px';
+
+			button.onmouseenter = null;
+			button.onmouseleave = null;
+
+			button.onclick = null;
+
+		}
+
+		function showVRNotFound() {
+
+			disableButton();
+
+			button.textContent = 'VR NOT FOUND';
+
+			renderer.vr.setDevice( null );
+
+		}
+
+		function showXRNotFound() {
+
+			disableButton();
+
+			button.textContent = 'XR NOT FOUND';
+
+		}
+
+		function stylizeElement( element ) {
+
+			element.style.position = 'absolute';
+			element.style.bottom = '20px';
+			element.style.padding = '12px 6px';
+			element.style.border = '1px solid #fff';
+			element.style.borderRadius = '4px';
+			element.style.background = 'rgba(0,0,0,0.1)';
+			element.style.color = '#fff';
+			element.style.font = 'normal 13px sans-serif';
+			element.style.textAlign = 'center';
+			element.style.opacity = '0.5';
+			element.style.outline = 'none';
+			element.style.zIndex = '999';
+
+		}
+
+		if ( 'xr' in navigator && 'supportsSession' in navigator.xr ) {
+
+			var button = document.createElement( 'button' );
+			button.style.display = 'none';
+
+			stylizeElement( button );
+
+			navigator.xr.supportsSession( 'immersive-vr' ).then( showEnterXR ).catch( showXRNotFound );
+
+			return button;
+
+		} else if ( 'getVRDisplays' in navigator ) {
+
+			var button = document.createElement( 'button' );
+			button.style.display = 'none';
+
+			stylizeElement( button );
+
+			window.addEventListener( 'vrdisplayconnect', function ( event ) {
+
+				showEnterVR( event.display );
+
+			}, false );
+
+			window.addEventListener( 'vrdisplaydisconnect', function ( /*event*/ ) {
+
+				showVRNotFound();
+
+			}, false );
+
+			window.addEventListener( 'vrdisplaypresentchange', function ( event ) {
+
+				button.textContent = event.display.isPresenting ? 'EXIT VR' : 'ENTER VR';
+
+			}, false );
+
+			window.addEventListener( 'vrdisplayactivate', function ( event ) {
+
+				event.display.requestPresent( [ { source: renderer.domElement } ] );
+
+			}, false );
+
+			navigator.getVRDisplays()
+				.then( function ( displays ) {
+
+					if ( displays.length > 0 ) {
+
+						showEnterVR( displays[ 0 ] );
+
+					} else {
+
+						showVRNotFound();
+
+					}
+
+				} ).catch( showVRNotFound );
+
+			return button;
+
+		} else {
+
+			var message = document.createElement( 'a' );
+			message.href = 'https://webvr.info';
+			message.innerHTML = 'WEBVR NOT SUPPORTED';
+
+			message.style.left = 'calc(50% - 90px)';
+			message.style.width = '180px';
+			message.style.textDecoration = 'none';
+
+			stylizeElement( message );
+
+			return message;
+
+		}
+
+	}
+
+};
+
+
+
+
+/***/ }),
+
+/***/ "./src/worldCity.mjs":
+/*!***************************!*\
+  !*** ./src/worldCity.mjs ***!
+  \***************************/
+/*! exports provided: setup, enter, exit, execute */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setup", function() { return setup; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "enter", function() { return enter; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "exit", function() { return exit; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "execute", function() { return execute; });
+var city = null;
+var light1 = null, light2 = null;
+var rig = null;
+
+function setup(ctx) {
+  const assets = ctx.assets;
+  var texture = assets['pavement_tex'];
+
+  texture.wrapS = THREE.RepeatWrapping;
+  texture.wrapT = THREE.RepeatWrapping;
+  texture.repeat.set(6,6);
+  const material = new THREE.MeshLambertMaterial({color: 0xffffff, map: texture} );
+
+  rig = new THREE.Object3D();
+  rig.position.set(-3, 200, -1.4);
+
+  city = assets['city_model'].scene;
+  light1 = new THREE.DirectionalLight(0xffffff, 1, 10);
+  light2 = new THREE.AmbientLight(0xffffff, 0.03);
+  light1.position.set(0, 8, -1);
+  light2.position.set(0, -40, -1);
+  city.traverse(o => {
+    if (o.type == 'Mesh') {
+      o.material = material;
+    }
+  });
+}
+
+function enter(ctx) {
+  ctx.renderer.setClearColor(0xc3d2e2);
+  ctx.scene.add(city);
+  ctx.scene.add(light1);
+  ctx.scene.add(light2);
+  ctx.scene.parent.fog = new THREE.FogExp2(0xc3d2e2, 0.003);
+  ctx.scene.add(rig);
+  rig.add(ctx.camera);
+}
+
+function exit(ctx) {
+  ctx.scene.remove(city);
+  ctx.scene.remove(light1);
+  ctx.scene.remove(light2);
+  ctx.scene.parent.fog = null;
+  ctx.scene.add(ctx.camera);
+  ctx.scene.remove(rig);
+}
+
+function execute(ctx, delta, time) {
+}
+
+
+
+/***/ }),
+
+/***/ "./src/worldElevator.mjs":
+/*!*******************************!*\
+  !*** ./src/worldElevator.mjs ***!
+  \*******************************/
+/*! exports provided: setup, enter, exit, execute */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setup", function() { return setup; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "enter", function() { return enter; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "exit", function() { return exit; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "execute", function() { return execute; });
+var elevator = null;
+var light1 = null, light2 = null;
+var cube = null;
+
+function setup(ctx) {
+  const assets = ctx.assets;
+  var texture = assets['lanes01_tex'];
+  var lightmap = assets['elevator_lm_tex'];
+  lightmap.flipY = false;
+  texture.wrapS = THREE.RepeatWrapping;
+  texture.wrapT = THREE.RepeatWrapping;
+  const material = new THREE.MeshBasicMaterial({color: 0xffffff, map: texture, lightMap: lightmap} );
+
+  cube = new THREE.Mesh(
+      new THREE.BoxBufferGeometry(),
+      new THREE.MeshLambertMaterial({map: texture})
+    );
+  cube.position.set(0, 1, -3);
+  elevator = assets['elevator_model'].scene;
+  light1 = new THREE.PointLight(0xffffff, 1, 10);
+  light2 = new THREE.AmbientLight(0xffffff, 0.03);
+  light1.position.set(0, 8, -1);
+  light2.position.set(0, -40, -1);
+  elevator.traverse(o => {
+    if (o.type == 'Mesh') {
+      o.material = material;
+    }
+  });
+}
+
+function enter(ctx) {
+  ctx.renderer.setClearColor(0xaaccff);
+  ctx.scene.add(elevator);
+  ctx.scene.add(cube);
+  ctx.scene.add(light1);
+  ctx.scene.add(light2);
+  ctx.camera.position.set(0, 1.6, 0);
+//  ctx.scene.parent.fog = new THREE.FogExp2(0xaaccff, 0.003);
+}
+
+function exit(ctx) {
+  ctx.scene.remove(elevator);
+  ctx.scene.remove(cube);
+  ctx.scene.remove(light1);
+  ctx.scene.remove(light2);
+}
+
+function execute(ctx, delta, time) {
+  cube.position.y = Math.sin(time/2) * 5;
+  cube.rotation.x += delta * 0.3;
+  cube.rotation.y += delta * 0.2;
+  cube.rotation.z += delta * 0.1;
+}
+
+
+
+/***/ }),
+
+/***/ "./src/worldHall.mjs":
+/*!***************************!*\
+  !*** ./src/worldHall.mjs ***!
+  \***************************/
+/*! exports provided: setup, enter, exit, execute */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setup", function() { return setup; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "enter", function() { return enter; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "exit", function() { return exit; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "execute", function() { return execute; });
+/* harmony import */ var _text_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./text.mjs */ "./src/text.mjs");
+/* harmony import */ var _utils_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils.mjs */ "./src/utils.mjs");
+
+
+
+
+var
+  scene,
+  hall,
+  teleportFloor,
+  fader,
+  panoBalls = [],
+  objectMaterials,
+  panoFxMaterial,
+  paintings,
+  controllers;
+
+var zoom = {object: null, widget: null, controller: null, animation: 0};
+const PAINTINGS = ['seurat', 'sorolla', 'bosch', 'degas', 'rembrandt'];
+const PAINTINGS_RATIOS = [1, 1, 1.875, 1, 1];
+
+var newsTicker = {
+  url: 'assets/twitter-example.json',
+  hashtag: '#helloWebXR.',
+  author: '@mozuser',
+  message: 'Hi from All Hands Berlin! Really excited to be here. :D #allhands #berlin',
+  hashtagText: null,
+  authorText: null,
+  messageText: null
+};
+
+function createDoorMaterial(ctx) {
+  return new THREE.ShaderMaterial({
+    uniforms: {
+      time: {value: 0},
+      selected: {value: 0},
+      tex: {value: ctx.assets['panoballfx_tex']}
+    },
+    vertexShader: ctx.shaders.basic_vert,
+    fragmentShader: ctx.shaders.door_frag
+  });
+}
+
+function setup(ctx) {
+  const assets = ctx.assets;
+  scene = new THREE.Object3D();
+
+  // setup hall model
+
+  const hallLightmapTex = assets['lightmap_tex'];
+  hallLightmapTex.encoding = THREE.sRGBEncoding;
+  hallLightmapTex.flipY = false;
+
+  objectMaterials = {
+    hall: new THREE.MeshBasicMaterial({
+      lightMap: hallLightmapTex
+    }),
+    lightpanels: new THREE.MeshBasicMaterial(),
+    doorA: createDoorMaterial(ctx),
+    doorB: createDoorMaterial(ctx),
+    doorC: createDoorMaterial(ctx),
+    doorD: createDoorMaterial(ctx)
+  };
+
+
+  hall = assets['hall_model'].scene;
+  hall.traverse(o => {
+    if (o.name == 'teleport') {
+      teleportFloor = o;
+      o.visible = false;
+      return;
+    }
+    if (o.type == 'Mesh' && objectMaterials[o.name]) {
+      o.material = objectMaterials[o.name];
+    }
+  });
+
+  // paintings
+
+  for (let i in PAINTINGS) {
+    let painting = PAINTINGS[i];
+    let mesh = hall.getObjectByName(painting);
+    if (!mesh) { continue; }
+
+    let paintingTexture = assets[`painting_${painting}_tex`];
+    paintingTexture.encoding = THREE.sRGBEncoding;
+    paintingTexture.flipY = false;
+    mesh.material = new THREE.MeshBasicMaterial({
+      map: paintingTexture
+    });
+    mesh.userData.paintingId = i;
+  }
+
+  paintings = hall.getObjectByName('paintings');
+
+  zoom.widget = new THREE.Mesh(new THREE.PlaneGeometry(), new THREE.MeshBasicMaterial({color:0xff0000}));
+  zoom.widget.geometry.rotateY(-Math.PI / 2);
+  zoom.widget.visible = false;
+
+  // news ticker
+  const newsTickerMesh = hall.getObjectByName('newsticker');
+
+  newsTicker.hashtagText = new _text_mjs__WEBPACK_IMPORTED_MODULE_0__["Text"]({
+    font: ctx.assets['inter_bold_font'],
+    map: ctx.assets['inter_bold_tex'],
+    size: 2.4,
+    align: 'right',
+    anchor: 'right',
+    width: 350,
+    color: 0xdaa056
+  });
+
+  newsTicker.authorText = new _text_mjs__WEBPACK_IMPORTED_MODULE_0__["Text"]({
+    font: ctx.assets['inter_bold_font'],
+    map: ctx.assets['inter_bold_tex'],
+    size: 3,
+    width: 350,
+    color: 0x67bccd
+  });
+
+  newsTicker.messageText = new _text_mjs__WEBPACK_IMPORTED_MODULE_0__["Text"]({
+    font: ctx.assets['inter_regular_font'],
+    map: ctx.assets['inter_regular_tex'],
+    size: 2.6,
+    width: 800,
+    baseline: 'top',
+    color: 0xffffff
+  });
+
+  ['hashtag', 'author', 'message'].forEach( i => {
+    //newsTickerMesh.add(Utils.newMarker(hall.getObjectByName(i).position));
+    newsTickerMesh.add(newsTicker[`${i}Text`]);
+    newsTicker[`${i}Text`].rotation.set(-Math.PI / 2, Math.PI, 0);
+    newsTicker[`${i}Text`].position.copy(hall.getObjectByName(i).position);
+    newsTicker[`${i}Text`].value = newsTicker[i];
+  });
+
+
+  // lights
+
+  const lightSun = new THREE.DirectionalLight(0xeeffff);
+  lightSun.position.set(0.2, 1, 0.1);
+  const lightFill = new THREE.DirectionalLight(0xfff0ee, 0.3);
+  lightFill.position.set(-0.2, -1, -0.1);
+
+  // panorama balls
+
+  const panoBallsConfig = [
+    {src: 'pano1small', position: new THREE.Vector3(2.0, 1.5, 0.5)},
+    {src: 'pano2small', position: new THREE.Vector3(-2.1, 1.5, 0)}
+  ];
+
+  const panoGeo = new THREE.SphereBufferGeometry(0.15, 30, 20);
+  assets['panoballfx_tex'].wrapT = THREE.RepeatWrapping;
+  assets['panoballfx_tex'].wrapS = THREE.RepeatWrapping;
+
+  for (var i = 0; i < panoBallsConfig.length; i++) {
+    const config = panoBallsConfig[i];
+    assets[config.src].encoding = THREE.sRGBEncoding;
+    var pano = new THREE.Mesh(
+      new THREE.SphereBufferGeometry(0.15, 30, 20),
+      new THREE.ShaderMaterial({
+        uniforms: {
+          time: {value: 0},
+          tex: {value: assets[config.src]},
+          texfx: {value: assets['panoballfx_tex']},
+        },
+        vertexShader: ctx.shaders.panoball_vert,
+        fragmentShader: ctx.shaders.panoball_frag,
+        side: THREE.BackSide,
+      })
+    );
+    pano.position.copy(config.position);
+    pano.resetPosition = new THREE.Vector3().copy(config.position);
+
+    panoBalls.push(pano);
+    scene.add(pano);
+  }
+
+  // fade camera to black on walls
+
+  fader = new THREE.Mesh(
+    new THREE.PlaneBufferGeometry(),
+    new THREE.MeshBasicMaterial({color: 0x000000, transparent: true, depthTest: false})
+  );
+  fader.position.z = -0.1;
+
+
+  scene.add(lightSun);
+  scene.add(lightFill);
+  scene.add(hall);
+  scene.add(zoom.widget);
+  ctx.camera.add(fader);
+}
+
+function enter(ctx) {
+  ctx.renderer.setClearColor( 0x92B4BB );
+  controllers = ctx.controllers;
+  ctx.controllers[1].addEventListener('selectstart', onSelectStart);
+  ctx.controllers[1].addEventListener('selectend', onSelectEnd);
+  ctx.scene.add(scene);
+}
+
+function exit(ctx) {
+  ctx.scene.remove(scene);
+  ctx.controllers[1].removeEventListener('selectstart', onSelectStart);
+  ctx.controllers[1].removeEventListener('selectend', onSelectEnd);
+}
+
+function execute(ctx, delta, time) {
+
+  for (var i = 0; i < panoBalls.length; i++) {
+    const ball = panoBalls[i];
+    const dist = ctx.camera.position.distanceTo(ball.position);
+    if (dist < 1) {
+      var v = ctx.camera.position.clone().sub(ball.position).multiplyScalar(0.08);
+      if (ball.scale.x < 2) {
+        ball.scale.multiplyScalar(1.1);
+      }
+      ball.position.add(v);
+
+      if (dist < 0.1){ ctx.goto = 'panorama' + i; }
+    } else {
+      ball.scale.set(1, 1, 1);
+      ball.position.copy(ball.resetPosition);
+      ball.position.y = 1.5 + Math.cos(i + time * 3) * 0.02;
+    }
+  }
+
+  if (zoom.painting) {
+    moveZoom(delta);
+  }
+
+  updateUniforms(time);
+  checkCameraBoundaries(ctx);
+}
+
+function updateUniforms(time) {
+  objectMaterials.doorA.uniforms.time.value = time;
+  objectMaterials.doorB.uniforms.time.value = time;
+  objectMaterials.doorC.uniforms.time.value = time;
+  objectMaterials.doorD.uniforms.time.value = time;
+  objectMaterials.doorD.uniforms.selected.value = 1; //test
+  panoBalls[0].material.uniforms.time.value = time;
+  panoBalls[1].material.uniforms.time.value = time;
+}
+
+function checkCameraBoundaries(ctx) {
+  const cam = ctx.camera.position;
+  const margin = 0.25;
+  var fade = 0;
+  if (cam.y < margin)     { fade = 1 - (cam.y / margin); }
+  else if (cam.x < -5.4)  { fade = (-cam.x - 5.4) / margin; }
+  else if (cam.x > 8)     { fade = (cam.x - 8) / margin; }
+  else if (cam.z < -6.45) { fade = (-cam.z - -6.45) / margin; }
+  else if (cam.z > 6.4)  { fade = (cam.z - 6.4) / margin; }
+  fader.material.opacity = Math.min(1, Math.max(0, fade));
+}
+
+
+var raycasterOrigin = new THREE.Vector3();
+var raycasterDirection = new THREE.Vector3();
+
+function onSelectStart(evt) {
+  let controller = evt.target;
+
+  controller.getWorldPosition(raycasterOrigin);
+  controller.getWorldDirection(raycasterDirection);
+  raycasterDirection.negate();
+
+  controller.raycaster.set(raycasterOrigin, raycasterDirection);
+  var intersects = controller.raycaster.intersectObject(paintings, true);
+
+  if (intersects.length == 0) { return; }
+
+  zoom.painting= intersects[0].object;
+  zoom.controller = controller;
+  zoom.widget.material = zoom.painting.material;
+  zoom.widget.visible = true;
+  refreshZoomUV(intersects[0]);
+}
+
+function onSelectEnd(evt) {
+  if (zoom.painting) {
+    zoom.painting = null;
+    zoom.animation = 0;
+    zoom.widget.visible = false;
+  }
+}
+
+function moveZoom(delta) {
+
+  if (zoom.animation < 1) {
+    zoom.animation += (1 - zoom.animation) * delta * 4.0;
+  }
+  const controller = zoom.controller;
+  controller.getWorldPosition(raycasterOrigin);
+  controller.getWorldDirection(raycasterDirection);
+  raycasterDirection.negate();
+
+  controller.raycaster.set(raycasterOrigin, raycasterDirection);
+  var intersects = controller.raycaster.intersectObject(paintings, true);
+  if (intersects.length == 0 || intersects[0].object !== zoom.painting) { return; }
+
+  refreshZoomUV(intersects[0]);
+}
+
+var minUV = new THREE.Vector2();
+var maxUV = new THREE.Vector2();
+const zoomAmount = 0.05;
+
+function refreshZoomUV(hit) {
+
+  zoom.widget.position.copy(hit.point);
+  zoom.widget.position.x -= 0.3 * zoom.animation;
+
+  const uvs = zoom.widget.geometry.faceVertexUvs[0];
+  const ratio = PAINTINGS_RATIOS[zoom.painting.userData.paintingId];
+  //const amount = zoomAmount  // TODO: adjust zoom amount depending on hit.distance
+  hit.uv.clampScalar(zoomAmount, 1 - zoomAmount);
+  minUV.set(hit.uv.x - zoomAmount, hit.uv.y + zoomAmount * ratio);
+  maxUV.set(hit.uv.x + zoomAmount, hit.uv.y - zoomAmount * ratio);
+  uvs[0][0].x = minUV.x;
+  uvs[0][0].y = maxUV.y;
+  uvs[0][1].x = minUV.x;
+  uvs[0][1].y = minUV.y;
+  uvs[0][2].x = maxUV.x;
+  uvs[0][2].y = maxUV.y;
+
+  uvs[1][0].x = minUV.x;
+  uvs[1][0].y = minUV.y;
+  uvs[1][1].x = maxUV.x;
+  uvs[1][1].y = minUV.y;
+  uvs[1][2].x = maxUV.x;
+  uvs[1][2].y = maxUV.y;
+  zoom.widget.geometry.uvsNeedUpdate = true;
+}
+
+
+/***/ }),
+
+/***/ "./src/worldPanorama.mjs":
+/*!*******************************!*\
+  !*** ./src/worldPanorama.mjs ***!
+  \*******************************/
+/*! exports provided: setup, enter, exit, execute */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setup", function() { return setup; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "enter", function() { return enter; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "exit", function() { return exit; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "execute", function() { return execute; });
+var pano = null;
+
+function setup(ctx) {
+  const assets = ctx.assets;
+  const geometry = new THREE.SphereBufferGeometry(5000, 60, 40);
+  assets['pano1'].encoding = THREE.sRGBEncoding;
+  const material = new THREE.MeshBasicMaterial( { map: assets['pano1'], side: THREE.BackSide } );
+  pano = new THREE.Mesh(geometry, material);
+
+}
+
+function enter(ctx) {
+  ctx.renderer.setClearColor(0x000000);
+  ctx.scene.add(pano);
+}
+
+function exit(ctx) {
+  ctx.scene.remove(pano);
+}
+
+function execute(ctx, delta, time) {
+}
+
+
+
+/***/ }),
+
+/***/ "./src/worldPanoramaStereo.mjs":
+/*!*************************************!*\
+  !*** ./src/worldPanoramaStereo.mjs ***!
+  \*************************************/
+/*! exports provided: setup, enter, exit, execute */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setup", function() { return setup; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "enter", function() { return enter; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "exit", function() { return exit; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "execute", function() { return execute; });
+var panoL, panoR;
+
+function setup(ctx) {
+  const assets = ctx.assets;
+  const geometry = new THREE.SphereBufferGeometry(5000, 60, 40);
+  assets['andesL'].encoding = THREE.sRGBEncoding;
+  assets['andesR'].encoding = THREE.sRGBEncoding;
+  const materialL = new THREE.MeshBasicMaterial( { map: assets['andesR'], side: THREE.BackSide } );
+  const materialR = new THREE.MeshBasicMaterial( { map: assets['andesL'], side: THREE.BackSide } );
+  panoL = new THREE.Mesh(geometry, materialL);
+  panoL.layers.set(1);
+  panoR = new THREE.Mesh(geometry, materialR);
+  panoR.layers.set(2);
+}
+
+function enter(ctx) {
+  ctx.renderer.setClearColor(0x000000);
+  ctx.scene.add(panoL);
+  ctx.scene.add(panoR);
+  ctx.camera.layers.enable(1);
+}
+
+function exit(ctx) {
+  ctx.scene.remove(panoL);
+  ctx.scene.remove(panoR);
+  ctx.camera.layers.disable(1);
+}
+
+function execute(ctx, delta, time) {
+}
+
+
+
+/***/ }),
+
+/***/ "./src/worldPhotogrammetryObject.mjs":
+/*!*******************************************!*\
+  !*** ./src/worldPhotogrammetryObject.mjs ***!
+  \*******************************************/
+/*! exports provided: setup, enter, exit, execute */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setup", function() { return setup; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "enter", function() { return enter; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "exit", function() { return exit; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "execute", function() { return execute; });
+var scene;
+
+function setup(ctx) {
+  const assets = ctx.assets;
+  scene = assets['pg_object_model'].scene;
+  assets['pg_object_tex'].encoding = THREE.sRGBEncoding;
+  assets['pg_object_tex'].flipY = false;
+  assets['pg_floor_tex'].encoding = THREE.sRGBEncoding;
+  assets['pg_floor_tex'].flipY = false;
+  assets['pg_floor_lm_tex'].encoding = THREE.sRGBEncoding;
+  assets['pg_floor_lm_tex'].flipY = false;
+
+  assets['pg_floor_tex'].wrapS = THREE.RepeatWrapping;
+  assets['pg_floor_tex'].wrapT = THREE.RepeatWrapping;
+
+  assets['pg_bg_tex'].encoding = THREE.sRGBEncoding;
+  assets['pg_bg_tex'].flipY = false;
+
+  assets['pg_flare_tex'].encoding = THREE.sRGBEncoding;
+  assets['pg_flare_tex'].flipY = false;
+
+  assets['pg_panel_tex'].encoding = THREE.sRGBEncoding;
+  assets['pg_panel_tex'].flipY = false;
+
+  scene.getObjectByName('object').material =
+    new THREE.MeshBasicMaterial({map: assets['pg_object_tex']});
+  scene.getObjectByName('floor').material =
+    new THREE.MeshBasicMaterial({map: assets['pg_floor_tex'], lightMap: assets['pg_floor_lm_tex']});
+  scene.getObjectByName('bg').material =
+    new THREE.MeshBasicMaterial({map: assets['pg_bg_tex']});
+  scene.getObjectByName('flare').material =
+    new THREE.MeshBasicMaterial({map: assets['pg_flare_tex'], blending: THREE.AdditiveBlending});
+  scene.getObjectByName('panel').material =
+    new THREE.MeshBasicMaterial({map: assets['pg_panel_tex']});
+}
+
+function enter(ctx) {
+  ctx.renderer.setClearColor(0x000000);
+  ctx.scene.add(scene);
+  ctx.camera.position.set(0, 1.6, 2);
+}
+
+function exit(ctx) {
+  ctx.scene.remove(scene);
+}
+
+function execute(ctx, delta, time) {
+}
+
+
+/***/ }),
+
+/***/ "./src/worldSound.mjs":
+/*!****************************!*\
+  !*** ./src/worldSound.mjs ***!
+  \****************************/
+/*! exports provided: setup, enter, exit, execute */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setup", function() { return setup; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "enter", function() { return enter; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "exit", function() { return exit; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "execute", function() { return execute; });
+var scene, listener, timeout, mixer;
+
+const soundNames = [
+  'bells',
+  'horn',
+  'cowbell',
+  'guiro',
+  'mandolin',
+  'squeaker',
+  'train',
+  'whistle',
+  'motorhorn',
+  'surdo',
+  'trumpet',
+];
+
+var sounds = {};
+soundNames.forEach( i => { sounds[i] = {animations: [], mesh: null, player: null, shadow: null} })
+
+const MAX_REPETITIONS = 5;
+var repetitions = MAX_REPETITIONS - 1;
+
+function setup(ctx) {
+  const assets = ctx.assets;
+  scene = assets['sound_model'].scene;
+
+  listener = new THREE.AudioListener();
+
+  mixer = new THREE.AnimationMixer(scene);
+
+  for (let id in sounds) {
+    const mesh = scene.getObjectByName(id);
+    if (!mesh) { continue; } // TODO: enable this
+
+    const sound = new THREE.PositionalAudio(listener);
+    const audioLoader = new THREE.AudioLoader();
+    audioLoader.load('assets/ogg/' + id + '.ogg', buffer => {
+      sound.setBuffer(buffer);
+      //sound.setRefDistance(20);
+    });
+
+    sounds[id].player = sound;
+    sounds[id].mesh = mesh;
+    mesh.visible = false;
+    mesh.add(sound);
+
+    const clip = THREE.AnimationClip.findByName(assets['sound_model'].animations, id);
+    if (clip) {
+      const action = mixer.clipAction(clip, mesh);
+      action.loop = THREE.LoopOnce;
+      sounds[id].animations.push(action);
+    }
+
+    for (let j = 0; j < mesh.children.length; j++) {
+      const obj = mesh.children[j];
+      const clip = THREE.AnimationClip.findByName(assets['sound_model'].animations, `${id}_${obj.name}`);
+      if (!clip) { continue; }
+      const action = mixer.clipAction(clip, mesh);
+      action.loop = THREE.LoopOnce;
+      sounds[id].animations.push(action);
+    }
+
+    let shadow = new THREE.Mesh(
+      new THREE.PlaneBufferGeometry(3, 3),
+      new THREE.MeshBasicMaterial({
+        color: mesh.children[0].material.color,
+        map: assets['sound_shadow_tex'],
+        transparent: true,
+        opacity: 0,
+        depthTest: false,
+        blending: THREE.AdditiveBlending
+      })
+    );
+    shadow.position.set(mesh.position.x, 0.001, mesh.position.z);
+    shadow.rotation.x = -Math.PI / 2;
+    scene.add(shadow);
+    sounds[id].shadow = shadow;
+  }
+
+  const gridHelper = new THREE.GridHelper(20, 20, 0x222222, 0x080808);
+  scene.add(gridHelper);
+}
+
+var currentSound = -1;
+
+function playSound() {
+  let sound;
+  if (currentSound >= 0) {
+    sound = sounds[soundNames[currentSound]];
+    sound.player.stop();
+    if (sound.animations.length) {
+      sound.mesh.visible = false;
+      sound.animations.forEach( i => {i.stop()});
+    }
+  }
+  repetitions ++;
+  if (repetitions == MAX_REPETITIONS) {
+    repetitions = 0;
+    // get next sound
+    do {
+      currentSound = (currentSound + 1) % soundNames.length;
+      sound = sounds[soundNames[currentSound]];
+    } while(!sound.mesh);
+  }
+
+  sound.player.play();
+  if (sound.animations.length) {
+    sound.mesh.visible = true;
+    sound.animations.forEach( i => {i.play()});
+  }
+  sound.shadow.material.opacity = 1;
+  timeout = setTimeout(playSound, 2000);
+}
+
+function enter(ctx) {
+  ctx.renderer.setClearColor(0x000000);
+  ctx.scene.add(scene);
+  ctx.camera.add(listener);
+  ctx.camera.position.set(0, 1.6, 0);
+  timeout = setTimeout(playSound, 2000);
+}
+
+function exit(ctx) {
+  ctx.scene.remove(scene);
+  ctx.camera.remove(listener);
+  clearTimeout(timeout);
+}
+
+function execute(ctx, delta, time) {
+  mixer.update(delta);
+  const sound = sounds[soundNames[currentSound]];
+  if (sound && sound.shadow.material.opacity > 0) {
+    sound.shadow.material.opacity -= delta * 0.5;
+  }
+}
+
+
+/***/ }),
+
+/***/ "./src/worldVertigo.mjs":
+/*!******************************!*\
+  !*** ./src/worldVertigo.mjs ***!
+  \******************************/
+/*! exports provided: setup, enter, exit, execute */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setup", function() { return setup; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "enter", function() { return enter; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "exit", function() { return exit; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "execute", function() { return execute; });
+var city = null;
+var rig = null;
+
+function setup(ctx) {
+  const assets = ctx.assets;
+  var texture = assets['checkboard_tex'];
+  texture.wrapS = THREE.RepeatWrapping;
+  texture.wrapT = THREE.RepeatWrapping;
+
+  var lightmap = assets['vertigo_lm_tex'];
+  lightmap.encoding = THREE.sRGBEncoding;
+  lightmap.flipY = false;
+  const material = new THREE.MeshBasicMaterial({color: 0xffffff, map: texture, lightMap: lightmap} );
+
+  city = assets['vertigo_model'].scene;
+  city.traverse(o => {
+    if (o.type == 'Mesh') {
+      o.material = material;
+    }
+  });
+}
+
+function enter(ctx) {
+  ctx.renderer.setClearColor(0x677FA7);
+  ctx.scene.add(city);
+  ctx.scene.parent.fog = new THREE.FogExp2(0x677FA7, 0.004);
+}
+
+function exit(ctx) {
+  ctx.scene.remove(city);
+  ctx.scene.parent.fog = null;
+}
+
+function execute(ctx, delta, time) {
+}
+
+
+
+/***/ })
+
+/******/ });
 //# sourceMappingURL=bundle.js.map

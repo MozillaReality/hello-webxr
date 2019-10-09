@@ -1,4 +1,5 @@
 module.exports = {
+  mode: 'development',
   entry: './src/index.mjs',
   output: {
     filename: 'bundle.js',
@@ -11,5 +12,8 @@ module.exports = {
       test: /\.mjs$/,
       type: 'javascript/auto',
     }]
+  },
+  watchOptions: {
+    ignored: [/node_modules/],
   }
 };

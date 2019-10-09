@@ -1,4 +1,4 @@
-import {createText} from './text.mjs';
+import {Text} from './text.mjs';
 import * as Utils from './utils.mjs';
 
 
@@ -14,10 +14,18 @@ var
   controllers;
 
 var zoom = {object: null, widget: null, controller: null, animation: 0};
-
 const PAINTINGS = ['seurat', 'sorolla', 'bosch', 'degas', 'rembrandt'];
 const PAINTINGS_RATIOS = [1, 1, 1.875, 1, 1];
 
+var newsTicker = {
+  url: 'assets/twitter-example.json',
+  hashtag: '#helloWebXR.',
+  author: '@mozuser',
+  message: 'Hi from All Hands Berlin! Really excited to be here. :D #allhands #berlin',
+  hashtagText: null,
+  authorText: null,
+  messageText: null
+};
 
 function createDoorMaterial(ctx) {
   return new THREE.ShaderMaterial({
@@ -33,6 +41,9 @@ function createDoorMaterial(ctx) {
 
 export function setup(ctx) {
   const assets = ctx.assets;
+  scene = new THREE.Object3D();
+
+  // setup hall model
 
   const hallLightmapTex = assets['lightmap_tex'];
   hallLightmapTex.encoding = THREE.sRGBEncoding;
@@ -49,7 +60,6 @@ export function setup(ctx) {
     doorD: createDoorMaterial(ctx)
   };
 
-  scene = new THREE.Object3D();
 
   hall = assets['hall_model'].scene;
   hall.traverse(o => {
@@ -64,6 +74,7 @@ export function setup(ctx) {
   });
 
   // paintings
+
   for (let i in PAINTINGS) {
     let painting = PAINTINGS[i];
     let mesh = hall.getObjectByName(painting);
@@ -84,10 +95,53 @@ export function setup(ctx) {
   zoom.widget.geometry.rotateY(-Math.PI / 2);
   zoom.widget.visible = false;
 
+  // news ticker
+  const newsTickerMesh = hall.getObjectByName('newsticker');
+
+  newsTicker.hashtagText = new Text({
+    font: ctx.assets['inter_bold_font'],
+    map: ctx.assets['inter_bold_tex'],
+    size: 2.4,
+    align: 'right',
+    anchor: 'right',
+    width: 350,
+    color: 0xdaa056
+  });
+
+  newsTicker.authorText = new Text({
+    font: ctx.assets['inter_bold_font'],
+    map: ctx.assets['inter_bold_tex'],
+    size: 3,
+    width: 350,
+    color: 0x67bccd
+  });
+
+  newsTicker.messageText = new Text({
+    font: ctx.assets['inter_regular_font'],
+    map: ctx.assets['inter_regular_tex'],
+    size: 2.6,
+    width: 800,
+    baseline: 'top',
+    color: 0xffffff
+  });
+
+  ['hashtag', 'author', 'message'].forEach( i => {
+    //newsTickerMesh.add(Utils.newMarker(hall.getObjectByName(i).position));
+    newsTickerMesh.add(newsTicker[`${i}Text`]);
+    newsTicker[`${i}Text`].rotation.set(-Math.PI / 2, Math.PI, 0);
+    newsTicker[`${i}Text`].position.copy(hall.getObjectByName(i).position);
+    newsTicker[`${i}Text`].value = newsTicker[i];
+  });
+
+
+  // lights
+
   const lightSun = new THREE.DirectionalLight(0xeeffff);
   lightSun.position.set(0.2, 1, 0.1);
   const lightFill = new THREE.DirectionalLight(0xfff0ee, 0.3);
   lightFill.position.set(-0.2, -1, -0.1);
+
+  // panorama balls
 
   const panoBallsConfig = [
     {src: 'pano1small', position: new THREE.Vector3(2.0, 1.5, 0.5)},
@@ -121,11 +175,14 @@ export function setup(ctx) {
     scene.add(pano);
   }
 
+  // fade camera to black on walls
+
   fader = new THREE.Mesh(
     new THREE.PlaneBufferGeometry(),
     new THREE.MeshBasicMaterial({color: 0x000000, transparent: true, depthTest: false})
   );
   fader.position.z = -0.1;
+
 
   scene.add(lightSun);
   scene.add(lightFill);
@@ -140,23 +197,6 @@ export function enter(ctx) {
   ctx.controllers[1].addEventListener('selectstart', onSelectStart);
   ctx.controllers[1].addEventListener('selectend', onSelectEnd);
   ctx.scene.add(scene);
-
-  ctx.scene.add(Utils.newMarker(0,1,0));
-
-  var text = createText({
-    font: ctx.assets['inter_bold_font'],
-    map: ctx.assets['inter_bold_tex'],
-    size: 3,
-    value: 'Lorem ipsum\nDolor sit ameeett!',
-    width: 350,
-    align: 'left',
-    color: 0xffffff,
-    negate: false
-  })
-  text.position.set(0, 1, 0);
-  text.rotation.x = 10 * Math.PI / 180;
-  ctx.scene.add(text);
-
 }
 
 export function exit(ctx) {

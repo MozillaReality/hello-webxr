@@ -2,77 +2,75 @@ var loadFont = require('load-bmfont');
 var createFontGeometry = require('three-bmfont-text');
 var MSDFShader = require('three-bmfont-text/shaders/msdf');
 
-/*
-createText({
-  font: ctx.assets['metropolis_bold_font'],
-  map: ctx.assets['metropolis_bold_tex'],
-  value: 'Lorem ipsum\nDolor sit ameeett!',
-  size: 1,
-  width: 400,
-  align: 'center',
-  anchor: 'left',
-  baseline: 'top',
-  color: 0xffffff,
-  negate: false
-})
-*/
-export function createText(opts){
+export class Text extends(THREE.Object3D){
 
-  if (!opts.font){
-    console.warn('createText(): <font> not defined');
-    return;
-  }
-  if (!opts.map){
-    console.warn('createText(): texture <map> not defined');
-    return;
-  }
+  constructor(opts){
+    super();
 
-  const value = opts.value || '[TEXT HERE]';
-  const width = opts.width || 300;
-  const size = opts.size || 1;
-  const align = opts.align || 'left';
-  const color = opts.color || 0xffffff;
-  const anchor = opts.anchor || opts.align;
-  const baseline = opts.baseline || 'bottom';
-  const negate = opts.negate !== true ? false : true;
+    if (!opts.font){
+      console.warn('createText(): <font> not defined');
+      return;
+    }
+    if (!opts.map){
+      console.warn('createText(): texture <map> not defined');
+      return;
+    }
 
-  const geometry = createFontGeometry({
-    width: width,
-    align: align,
-    font: opts.font
-  })
+    this.width = opts.width || 300;
+    this.size = opts.size || 1;
+    this.align = opts.align || 'left';
+    this.color = opts.color || 0xffffff;
+    this.anchor = opts.anchor || opts.align;
+    this.baseline = opts.baseline || 'bottom';
+    this.negate = opts.negate !== true ? false : true;
 
-  geometry.update(value);
+    this.geometry = createFontGeometry({
+      width: this.width,
+      align: this.align,
+      font: opts.font
+    })
 
-  const layout = geometry.layout;
-  let x = 0, y = 0;
+    this.material = new THREE.RawShaderMaterial(MSDFShader({
+      map: opts.map,
+      color: this.color,
+      negate: this.negate
+    }));
 
-  if (baseline === 'top') {
-    y = layout._height + layout._ascender;
-  } else if (baseline === 'center') {
-    y = layout._height / 2;
+    const mesh = new THREE.Mesh(this.geometry, this.material);
+    mesh.scale.set(0.001 * this.size, 0.001 * this.size, 1.0);
+    mesh.rotation.x = Math.PI / 2;
+    this.add(mesh);
+
+    this.value = opts.value || '[TEXT]';
   }
 
-  if (anchor === 'right') {
-    x = -layout._width;
-  } else if (anchor === 'center') {
-    x = -layout._width / 2;
+  set value(text) {
+    this.geometry.update(text);
+
+    const layout = this.geometry.layout;
+    let x = 0, y = 0;
+
+    if (this.baseline === 'top') {
+      y = layout._height + layout._ascender;
+    } else if (this.baseline === 'center') {
+      y = layout._height / 2;
+    }
+
+    if (this.anchor === 'right') {
+      x = -layout._width;
+    } else if (this.anchor === 'center') {
+      x = -layout._width / 2;
+    }
+
+    if (x !== 0 || y !== 0) {
+      this.geometry.translate(x, y, 0);
+    }
+
+    console.log(this.geometry.layout);
+
   }
-
-  if (x !== 0 || y !== 0) {
-    geometry.translate(x, y, 0);
-  }
-
-  const material = new THREE.RawShaderMaterial(MSDFShader({
-    map: opts.map,
-    color: color,
-    negate: negate
-  }));
-
-  const mesh = new THREE.Mesh(geometry, material);
-  mesh.scale.set(0.001 * size, 0.001 * size, 1.0);
-  mesh.rotation.x = Math.PI;
-  const obj = new THREE.Object3D();
-  obj.add(mesh);
-  return obj;
 }
+
+
+
+
