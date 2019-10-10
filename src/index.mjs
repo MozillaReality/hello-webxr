@@ -43,7 +43,7 @@ var assets = {
   metropolis_bold_tex: 'fonts/Metropolis-Bold.png',
 
   //
-  hall_model: 'hall.gltf',
+  hall_model: 'hall.glb',
   city_model: 'city.glb',
   vertigo_model: 'vertigo2.gltf',
   elevator_model: 'elevator.glb',
@@ -54,6 +54,7 @@ var assets = {
   controller_tex: 'controller.png',
   pano1: 'zapporthorn.basis',
   pano1small: 'zapporthorn_small.jpg',
+  doorfx_tex: 'doorfx.png',
   pano2small: 'andes_small.jpg',
   panoballfx_tex: 'ballfx.jpg',
   andesL: 'andesL.jpg',

@@ -6353,7 +6353,7 @@ var assets = {
   metropolis_bold_tex: 'fonts/Metropolis-Bold.png',
 
   //
-  hall_model: 'hall.gltf',
+  hall_model: 'hall.glb',
   city_model: 'city.glb',
   vertigo_model: 'vertigo2.gltf',
   elevator_model: 'elevator.glb',
@@ -6364,6 +6364,7 @@ var assets = {
   controller_tex: 'controller.png',
   pano1: 'zapporthorn.basis',
   pano1small: 'zapporthorn_small.jpg',
+  doorfx_tex: 'doorfx.png',
   pano2small: 'andes_small.jpg',
   panoballfx_tex: 'ballfx.jpg',
   andesL: 'andesL.jpg',
@@ -6536,10 +6537,17 @@ uniform sampler2D tex;
 varying vec2 vUv;
 
 void main( void ) {
-  float t = time * 0.3;
-  vec2 uv = vec2(vUv.x + sin(t) * cos(t * 0.1 + vUv.y), vUv.y * sin(t * 0.3) + t);
-  vec4 col = texture2D(tex, uv) * 0.5;
-  gl_FragColor = vec4(col.xyz, 1.0);
+  float t = time;
+  vec2 uv = vUv * 2.0 - 1.0;
+  vec2 puv = vec2(length(uv.xy), atan(uv.x, uv.y));
+  vec4 col = texture2D(tex, vec2(log(puv.x) + t / 5.0, puv.y / 3.1415926 ));
+  float glow = (1.0 - puv.x) * (0.5 + (sin(t) + 2.0 ) / 4.0);
+  // blue glow
+  col += vec4(118.0/255.0, 144.0/255.0, 219.0/255.0, 1.0) * (0.4 + glow * 1.0);
+  // white glow
+  col += vec4(0.2) * smoothstep(0.0, 2.0, glow * glow);
+  gl_FragColor = col;
+
 }
 `,
 
@@ -11932,11 +11940,13 @@ var newsTicker = {
 
 
 function createDoorMaterial(ctx) {
+  ctx.assets['doorfx_tex'].wrapT = THREE.RepeatWrapping;
+  ctx.assets['doorfx_tex'].wrapS = THREE.RepeatWrapping;
   return new THREE.ShaderMaterial({
     uniforms: {
       time: {value: 0},
       selected: {value: 0},
-      tex: {value: ctx.assets['panoballfx_tex']}
+      tex: {value: ctx.assets['doorfx_tex']}
     },
     vertexShader: ctx.shaders.basic_vert,
     fragmentShader: ctx.shaders.door_frag
@@ -11955,7 +11965,7 @@ function setup(ctx) {
 
   objectMaterials = {
     hall: new THREE.MeshBasicMaterial({
-      lightMap: hallLightmapTex
+      map: hallLightmapTex
     }),
     lightpanels: new THREE.MeshBasicMaterial(),
     doorA: createDoorMaterial(ctx),
@@ -12101,7 +12111,7 @@ function setup(ctx) {
 }
 
 function enter(ctx) {
-  ctx.renderer.setClearColor( 0x92B4BB );
+  ctx.renderer.setClearColor( 0xC0DFFB );
   controllers = ctx.controllers;
   ctx.controllers[1].addEventListener('selectstart', onSelectStart);
   ctx.controllers[1].addEventListener('selectend', onSelectEnd);

@@ -29,11 +29,13 @@ var newsTicker = {
 
 
 function createDoorMaterial(ctx) {
+  ctx.assets['doorfx_tex'].wrapT = THREE.RepeatWrapping;
+  ctx.assets['doorfx_tex'].wrapS = THREE.RepeatWrapping;
   return new THREE.ShaderMaterial({
     uniforms: {
       time: {value: 0},
       selected: {value: 0},
-      tex: {value: ctx.assets['panoballfx_tex']}
+      tex: {value: ctx.assets['doorfx_tex']}
     },
     vertexShader: ctx.shaders.basic_vert,
     fragmentShader: ctx.shaders.door_frag
@@ -52,7 +54,7 @@ export function setup(ctx) {
 
   objectMaterials = {
     hall: new THREE.MeshBasicMaterial({
-      lightMap: hallLightmapTex
+      map: hallLightmapTex
     }),
     lightpanels: new THREE.MeshBasicMaterial(),
     doorA: createDoorMaterial(ctx),
@@ -198,7 +200,7 @@ export function setup(ctx) {
 }
 
 export function enter(ctx) {
-  ctx.renderer.setClearColor( 0x92B4BB );
+  ctx.renderer.setClearColor( 0xC0DFFB );
   controllers = ctx.controllers;
   ctx.controllers[1].addEventListener('selectstart', onSelectStart);
   ctx.controllers[1].addEventListener('selectend', onSelectEnd);
