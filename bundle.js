@@ -6358,7 +6358,7 @@ var assets = {
   vertigo_model: 'vertigo2.gltf',
   elevator_model: 'elevator.glb',
   generic_controller_model: 'generic_controller.gltf',
-  lightmap_tex: 'lightmap.basis',
+  lightmap_tex: 'lightmap.png',
   travertine_tex: 'travertine.png',
   travertine2_tex: 'travertine2.jpg',
   controller_tex: 'controller.png',
