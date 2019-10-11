@@ -52,15 +52,23 @@ export function setup(ctx) {
   hallLightmapTex.encoding = THREE.sRGBEncoding;
   hallLightmapTex.flipY = false;
 
+  const skyTex = assets['sky_tex'];
+  skyTex.encoding = THREE.sRGBEncoding;
+  skyTex.flipY = false;
+
+  const cloudsTex = assets['clouds_tex'];
+  cloudsTex.encoding = THREE.sRGBEncoding;
+  cloudsTex.flipY = false;
+
   objectMaterials = {
-    hall: new THREE.MeshBasicMaterial({
-      map: hallLightmapTex
-    }),
+    hall: new THREE.MeshBasicMaterial({map: hallLightmapTex}),
     lightpanels: new THREE.MeshBasicMaterial(),
     doorA: createDoorMaterial(ctx),
     doorB: createDoorMaterial(ctx),
     doorC: createDoorMaterial(ctx),
-    doorD: createDoorMaterial(ctx)
+    doorD: createDoorMaterial(ctx),
+    sky: new THREE.MeshBasicMaterial({map: skyTex}),
+    clouds: new THREE.MeshBasicMaterial({map: cloudsTex, transparent: true})
   };
 
 

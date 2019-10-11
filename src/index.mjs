@@ -64,6 +64,8 @@ var assets = {
   pavement_tex: 'pavement.jpg',
   checkboard_tex: 'checkboard.png',
   vertigo_lm_tex: 'vertigo2_lm.jpg',
+  sky_tex: 'sky.png',
+  clouds_tex: 'clouds.png',
 
   // sound
   sound_model: 'sound.glb',
