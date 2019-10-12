@@ -47,7 +47,7 @@ var assets = {
   city_model: 'city.glb',
   vertigo_model: 'vertigo2.gltf',
   elevator_model: 'elevator.glb',
-  generic_controller_model: 'generic_controller.gltf',
+  generic_controller_model: 'generic_controller.glb',
   lightmap_tex: 'lightmap.png',
   travertine_tex: 'travertine.png',
   travertine2_tex: 'travertine2.jpg',
