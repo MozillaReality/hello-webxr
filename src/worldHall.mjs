@@ -106,6 +106,15 @@ export function setup(ctx) {
   zoom.widget.geometry.rotateY(-Math.PI / 2);
   zoom.widget.visible = false;
 
+  // xilophone
+  for (let i = 0; i < 13; i++) {
+    let noteName = 'xnote0' + (i < 10 ? '0' + i : i);
+    let note = hall.getObjectByName(noteName);
+    note.material = new THREE.MeshLambertMaterial();
+    note.material.color.setHSL(i / 13, 0.8, 0.3);
+  }
+
+
   // news ticker
   const newsTickerMesh = hall.getObjectByName('newsticker');
 
@@ -170,13 +179,14 @@ export function setup(ctx) {
 
   for (var i = 0; i < panoBallsConfig.length; i++) {
     const config = panoBallsConfig[i];
-    assets[config.src].encoding = THREE.sRGBEncoding;
+    let asset = assets[`pano${i + 1}small`];
+    asset.encoding = THREE.sRGBEncoding;
     var pano = new THREE.Mesh(
       new THREE.SphereBufferGeometry(0.15, 30, 20),
       new THREE.ShaderMaterial({
         uniforms: {
           time: {value: 0},
-          tex: {value: assets[config.src]},
+          tex: {value: asset},
           texfx: {value: assets['panoballfx_tex']},
         },
         vertexShader: ctx.shaders.panoball_vert,
@@ -184,8 +194,8 @@ export function setup(ctx) {
         side: THREE.BackSide,
       })
     );
-    pano.position.copy(config.position);
-    pano.resetPosition = new THREE.Vector3().copy(config.position);
+    pano.position.copy(hall.getObjectByName(`panoball${i + 1}`).position);
+    pano.resetPosition = pano.position.clone();
 
     panoBalls.push(pano);
     scene.add(pano);

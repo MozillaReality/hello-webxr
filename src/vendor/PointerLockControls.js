@@ -3,10 +3,16 @@
  * @author Mugen87 / https://github.com/Mugen87
  */
 
+THREE.PointerLockControls = function ( camera, domElement ) {
 
-function PointerLockControls ( camera, domElement ) {
+	if ( domElement === undefined ) {
 
-	this.domElement = domElement || document.body;
+		console.warn( 'THREE.PointerLockControls: The second parameter "domElement" is now mandatory.' );
+		domElement = document.body;
+
+	}
+
+	this.domElement = domElement;
 	this.isLocked = false;
 
 	//
@@ -146,4 +152,5 @@ function PointerLockControls ( camera, domElement ) {
 
 };
 
-THREE.PointerLockControls = PointerLockControls;
+THREE.PointerLockControls.prototype = Object.create( THREE.EventDispatcher.prototype );
+THREE.PointerLockControls.prototype.constructor = THREE.PointerLockControls;
