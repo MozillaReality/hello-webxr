@@ -12048,8 +12048,11 @@ function setup(ctx) {
     note.geometry.boundingBox.translate(note.position).translate(note.parent.position);
     note.material = new THREE.MeshLambertMaterial();
     note.material.color.setHSL(i / 13, 0.9, 0.2);
+    note.material.emissive = note.material.color.clone();
+    note.material.emissiveIntensity = 0;
     xyloNotes[i] = note;
-
+    note.animation = 0;
+    note.resetY = note.position.y;
     note.sound = new THREE.PositionalAudio(listener);
     audioLoader.load('assets/ogg/xylophone' + i + '.ogg', buffer => {
       note.sound.setBuffer(buffer);
@@ -12228,9 +12231,18 @@ function execute(ctx, delta, time) {
 
     bbox.setFromObject(xyloStickBalls[c]).expandByScalar(-0.01);
     for (var i = 0; i < xyloNotes.length; i++) {
-      if (bbox.intersectsBox(xyloNotes[i].geometry.boundingBox)) {
+      let note = xyloNotes[i];
+      if (note.animation > 0) {
+        note.animation = Math.max(0, note.animation - delta * 4);
+        note.material.emissiveIntensity = note.animation;
+        note.position.y = note.resetY - note.animation * 0.005;
+        console.log(note.animation);
+      }
+
+      if (note.animation < 0.5 && bbox.intersectsBox(note.geometry.boundingBox)) {
         //console.log('intersection', c ,'with note', i);
-        xyloNotes[i].sound.play();
+        note.sound.play();
+        note.animation = 1;
       }
     }
   }
