@@ -12,11 +12,11 @@ var
   panoFxMaterial,
   paintings,
   controllers,
+  listener,
   xyloSticks = [null, null],
   xyloStickBalls = [null, null],
   xyloNotes = new Array(13),
-  bbox0 = new THREE.Box3(),
-  bbox1 = new THREE.Box3();
+  bbox = new THREE.Box3();
 
 var zoom = {object: null, widget: null, controller: null, animation: 0};
 const PAINTINGS = ['seurat', 'sorolla', 'bosch', 'degas', 'rembrandt'];
@@ -112,6 +112,9 @@ export function setup(ctx) {
   zoom.widget.visible = false;
 
   // xylophone
+  const audioLoader = new THREE.AudioLoader();
+  listener = new THREE.AudioListener();
+
   for (let i = 0; i < 13; i++) {
     let noteName = 'xnote0' + (i < 10 ? '0' + i : i);
     let note = hall.getObjectByName(noteName);
@@ -120,16 +123,27 @@ export function setup(ctx) {
     note.material = new THREE.MeshLambertMaterial();
     note.material.color.setHSL(i / 13, 0.9, 0.2);
     xyloNotes[i] = note;
+
+    note.sound = new THREE.PositionalAudio(listener);
+    audioLoader.load('assets/ogg/xylophone' + i + '.ogg', buffer => {
+      note.sound.setBuffer(buffer);
+    });
   }
 
   xyloSticks[0] = hall.getObjectByName('xylostick-left');
   xyloSticks[1] = hall.getObjectByName('xylostick-right');
-  xyloSticks[0].geometry.computeBoundingBox();
-  xyloSticks[1].geometry.computeBoundingBox();
+  xyloSticks[0].resetPosition = xyloSticks[0].position.clone();
+  xyloSticks[1].resetPosition = xyloSticks[1].position.clone();
+  xyloSticks[0].resetRotation = xyloSticks[0].rotation.clone();
+  xyloSticks[1].resetRotation = xyloSticks[1].rotation.clone();
   xyloStickBalls[0] = hall.getObjectByName('xylostickball-left');
   xyloStickBalls[1] = hall.getObjectByName('xylostickball-right');
   xyloStickBalls[0].geometry.computeBoundingBox();
   xyloStickBalls[1].geometry.computeBoundingBox();
+
+
+  var helper = new THREE.Box3Helper(bbox, 0xff0000);
+  ctx.scene.add(helper);
 
   // news ticker
   const newsTickerMesh = hall.getObjectByName('newsticker');
@@ -241,41 +255,28 @@ export function enter(ctx) {
   controllers[1].addEventListener('selectstart', onSelectStart);
   controllers[1].addEventListener('selectend', onSelectEnd);
   ctx.scene.add(scene);
+  ctx.camera.add(listener);
 
-
-  controllers[0].grabbing = 0;
-  controllers[1].grabbing = 0;
-  xyloStickBalls[0].updateMatrixWorld(true);
-  xyloStickBalls[1].updateMatrixWorld(true);
-  bbox0.copy(xyloStickBalls[0].geometry.boundingBox).applyMatrix4(xyloStickBalls[0].matrixWorld);
-  bbox1.copy(xyloStickBalls[1].geometry.boundingBox).applyMatrix4(xyloStickBalls[1].matrixWorld);
-
-  for (var i = 0; i < xyloNotes.length; i++) {
-    if (bbox0.intersectsBox(xyloNotes[i].geometry.boundingBox)) {
-      console.log('intersection', 0, xyloNotes[i]);
-    }
-    if (bbox1.intersectsBox(xyloNotes[i].geometry.boundingBox)) {
-      console.log('intersection', 1, xyloNotes[i]);
-    }
-  }
+  controllers[0].grabbing = null;
+  controllers[1].grabbing = null;
 }
 
 export function exit(ctx) {
   ctx.scene.remove(scene);
+  ctx.camera.remove(listener);
   ctx.controllers[1].removeEventListener('selectstart', onSelectStart);
   ctx.controllers[1].removeEventListener('selectend', onSelectEnd);
 }
 
 export function execute(ctx, delta, time) {
 
-
   // pano balls
 
-  for (var i = 0; i < panoBalls.length; i++) {
+  for (let i = 0; i < panoBalls.length; i++) {
     const ball = panoBalls[i];
     const dist = ctx.camera.position.distanceTo(ball.position);
     if (dist < 1) {
-      var v = ctx.camera.position.clone().sub(ball.position).multiplyScalar(0.08);
+      let v = ctx.camera.position.clone().sub(ball.position).multiplyScalar(0.08);
       if (ball.scale.x < 2) {
         ball.scale.multiplyScalar(1.1);
       }
@@ -293,6 +294,19 @@ export function execute(ctx, delta, time) {
 
   if (zoom.painting) {
     moveZoom(delta);
+  }
+
+  // xylophone
+  for (var c = 0; c < 2; c++) {
+    if (controllers[c].grabbing === null) { continue; }
+
+    bbox.setFromObject(xyloStickBalls[c]).expandByScalar(-0.01);
+    for (var i = 0; i < xyloNotes.length; i++) {
+      if (bbox.intersectsBox(xyloNotes[i].geometry.boundingBox)) {
+        //console.log('intersection', c ,'with note', i);
+        xyloNotes[i].sound.play();
+      }
+    }
   }
 
   updateUniforms(time);
@@ -327,16 +341,18 @@ var raycasterDirection = new THREE.Vector3();
 
 function onSelectStart(evt) {
   let controller = evt.target;
-  if (controller.grabbing){ return; }
+  if (controller.grabbing !== null){ return; }
 
   // xylophone
   // hand grabs stick
-  console.log(controller.boundingBox);
   for (let i = 0; i < 2; i++) {
-    if (controller.boundingBox.intersectsBox(xyloSticks[i].geometry.boundingBox)){
+    bbox.setFromObject(xyloSticks[i]);
+    if (controller.boundingBox.intersectsBox(bbox)){
+      xyloSticks[i].position.set(0, 0, 0);
+      xyloSticks[i].rotation.set(0, 0, 0);
       controller.add(xyloSticks[i]);
-      controller.grabbing = i;
-      break;
+      controller.grabbing = xyloSticks[i];
+      return;
     }
   }
 
@@ -356,18 +372,17 @@ function onSelectStart(evt) {
   zoom.widget.material = zoom.painting.material;
   zoom.widget.visible = true;
   refreshZoomUV(intersects[0]);
-
-
-
-
 }
 
 function onSelectEnd(evt) {
   let controller = evt.target;
   // xylophone
-  if (controller.grabbing) {
-    hall.add(controller.grabbing);
-    controller.grabbing = 0;
+  if (controller.grabbing !== null) {
+    let stick = controller.grabbing;
+    hall.add(stick);
+    stick.position.copy(stick.resetPosition);
+    stick.rotation.copy(stick.resetRotation);
+    controller.grabbing = null;
     return;
   }
 

@@ -17,7 +17,6 @@ import {shaders} from './shaders.mjs';
 
 var clock = new THREE.Clock();
 
-
 var scene, parent, renderer, camera, controls, context;
 var controller1, controller2;
 
@@ -179,12 +178,9 @@ function setupControllers() {
   model.getObjectByName('trigger').material = material;
   controller1.add(model);
   controller2.add(model.clone());
-  let zero = new THREE.Vector3();
-  let controllerBboxSize = new THREE.Vector3(0.2, 0.2, 0.2);
   controller1.boundingBox = new THREE.Box3();
-  controller1.boundingBox.setFromCenterAndSize(zero, controllerBboxSize);
   controller2.boundingBox = new THREE.Box3();
-  controller2.boundingBox.setFromCenterAndSize(zero, controllerBboxSize);
+
 }
 
 function onSelectStart(ev) {
@@ -208,10 +204,12 @@ function animate() {
   var delta = clock.getDelta();
   var elapsedTime = clock.elapsedTime;
   context.goto = null;
-  controller1.boundingBox.translate(controller1.position);
-  controller2.boundingBox.translate(controller2.position);
+  // update controller bounding boxes
+  controller1.boundingBox.setFromObject(controller1);
+  controller2.boundingBox.setFromObject(controller2);
+  // render current world
   worlds[currentWorld].execute(context, delta, elapsedTime);
-  renderer.render( scene, camera );
+  renderer.render(scene, camera);
 }
 
 window.onload = () => {init()};
