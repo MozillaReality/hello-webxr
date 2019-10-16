@@ -179,6 +179,12 @@ function setupControllers() {
   model.getObjectByName('trigger').material = material;
   controller1.add(model);
   controller2.add(model.clone());
+  let zero = new THREE.Vector3();
+  let controllerBboxSize = new THREE.Vector3(0.2, 0.2, 0.2);
+  controller1.boundingBox = new THREE.Box3();
+  controller1.boundingBox.setFromCenterAndSize(zero, controllerBboxSize);
+  controller2.boundingBox = new THREE.Box3();
+  controller2.boundingBox.setFromCenterAndSize(zero, controllerBboxSize);
 }
 
 function onSelectStart(ev) {
@@ -202,6 +208,8 @@ function animate() {
   var delta = clock.getDelta();
   var elapsedTime = clock.elapsedTime;
   context.goto = null;
+  controller1.boundingBox.translate(controller1.position);
+  controller2.boundingBox.translate(controller2.position);
   worlds[currentWorld].execute(context, delta, elapsedTime);
   renderer.render( scene, camera );
 }

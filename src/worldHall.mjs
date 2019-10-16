@@ -11,7 +11,12 @@ var
   objectMaterials,
   panoFxMaterial,
   paintings,
-  controllers;
+  controllers,
+  xyloSticks = [null, null],
+  xyloStickBalls = [null, null],
+  xyloNotes = new Array(13),
+  bbox0 = new THREE.Box3(),
+  bbox1 = new THREE.Box3();
 
 var zoom = {object: null, widget: null, controller: null, animation: 0};
 const PAINTINGS = ['seurat', 'sorolla', 'bosch', 'degas', 'rembrandt'];
@@ -106,14 +111,25 @@ export function setup(ctx) {
   zoom.widget.geometry.rotateY(-Math.PI / 2);
   zoom.widget.visible = false;
 
-  // xilophone
+  // xylophone
   for (let i = 0; i < 13; i++) {
     let noteName = 'xnote0' + (i < 10 ? '0' + i : i);
     let note = hall.getObjectByName(noteName);
+    note.geometry.computeBoundingBox();
+    note.geometry.boundingBox.translate(note.position).translate(note.parent.position);
     note.material = new THREE.MeshLambertMaterial();
-    note.material.color.setHSL(i / 13, 0.8, 0.3);
+    note.material.color.setHSL(i / 13, 0.9, 0.2);
+    xyloNotes[i] = note;
   }
 
+  xyloSticks[0] = hall.getObjectByName('xylostick-left');
+  xyloSticks[1] = hall.getObjectByName('xylostick-right');
+  xyloSticks[0].geometry.computeBoundingBox();
+  xyloSticks[1].geometry.computeBoundingBox();
+  xyloStickBalls[0] = hall.getObjectByName('xylostickball-left');
+  xyloStickBalls[1] = hall.getObjectByName('xylostickball-right');
+  xyloStickBalls[0].geometry.computeBoundingBox();
+  xyloStickBalls[1].geometry.computeBoundingBox();
 
   // news ticker
   const newsTickerMesh = hall.getObjectByName('newsticker');
@@ -220,9 +236,28 @@ export function setup(ctx) {
 export function enter(ctx) {
   ctx.renderer.setClearColor( 0xC0DFFB );
   controllers = ctx.controllers;
-  ctx.controllers[1].addEventListener('selectstart', onSelectStart);
-  ctx.controllers[1].addEventListener('selectend', onSelectEnd);
+  controllers[0].addEventListener('selectstart', onSelectStart);
+  controllers[0].addEventListener('selectend', onSelectEnd);
+  controllers[1].addEventListener('selectstart', onSelectStart);
+  controllers[1].addEventListener('selectend', onSelectEnd);
   ctx.scene.add(scene);
+
+
+  controllers[0].grabbing = 0;
+  controllers[1].grabbing = 0;
+  xyloStickBalls[0].updateMatrixWorld(true);
+  xyloStickBalls[1].updateMatrixWorld(true);
+  bbox0.copy(xyloStickBalls[0].geometry.boundingBox).applyMatrix4(xyloStickBalls[0].matrixWorld);
+  bbox1.copy(xyloStickBalls[1].geometry.boundingBox).applyMatrix4(xyloStickBalls[1].matrixWorld);
+
+  for (var i = 0; i < xyloNotes.length; i++) {
+    if (bbox0.intersectsBox(xyloNotes[i].geometry.boundingBox)) {
+      console.log('intersection', 0, xyloNotes[i]);
+    }
+    if (bbox1.intersectsBox(xyloNotes[i].geometry.boundingBox)) {
+      console.log('intersection', 1, xyloNotes[i]);
+    }
+  }
 }
 
 export function exit(ctx) {
@@ -232,6 +267,9 @@ export function exit(ctx) {
 }
 
 export function execute(ctx, delta, time) {
+
+
+  // pano balls
 
   for (var i = 0; i < panoBalls.length; i++) {
     const ball = panoBalls[i];
@@ -250,6 +288,8 @@ export function execute(ctx, delta, time) {
       ball.position.y = 1.5 + Math.cos(i + time * 3) * 0.02;
     }
   }
+
+  // paintings
 
   if (zoom.painting) {
     moveZoom(delta);
@@ -287,6 +327,20 @@ var raycasterDirection = new THREE.Vector3();
 
 function onSelectStart(evt) {
   let controller = evt.target;
+  if (controller.grabbing){ return; }
+
+  // xylophone
+  // hand grabs stick
+  console.log(controller.boundingBox);
+  for (let i = 0; i < 2; i++) {
+    if (controller.boundingBox.intersectsBox(xyloSticks[i].geometry.boundingBox)){
+      controller.add(xyloSticks[i]);
+      controller.grabbing = i;
+      break;
+    }
+  }
+
+  // paintings
 
   controller.getWorldPosition(raycasterOrigin);
   controller.getWorldDirection(raycasterDirection);
@@ -302,9 +356,22 @@ function onSelectStart(evt) {
   zoom.widget.material = zoom.painting.material;
   zoom.widget.visible = true;
   refreshZoomUV(intersects[0]);
+
+
+
+
 }
 
 function onSelectEnd(evt) {
+  let controller = evt.target;
+  // xylophone
+  if (controller.grabbing) {
+    hall.add(controller.grabbing);
+    controller.grabbing = 0;
+    return;
+  }
+
+  // paintings
   if (zoom.painting) {
     zoom.painting = null;
     zoom.animation = 0;
