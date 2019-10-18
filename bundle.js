@@ -6269,6 +6269,77 @@ class PositionalAudioPolyphonic extends THREE.Object3D {
 
 /***/ }),
 
+/***/ "./src/RayCurve.mjs":
+/*!**************************!*\
+  !*** ./src/RayCurve.mjs ***!
+  \**************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return RayCurve; });
+/* global THREE */
+class RayCurve {
+  constructor(numPoints, width) {
+    this.geometry = new THREE.BufferGeometry();
+    this.vertices = new Float32Array(numPoints * 3 * 2);
+    this.uvs = new Float32Array(numPoints * 2 * 2);
+    this.width = width;
+
+    this.geometry.addAttribute('position', new THREE.BufferAttribute(this.vertices, 3).setDynamic(true));
+
+    this.material = new THREE.MeshBasicMaterial({
+      side: THREE.DoubleSide,
+      color: 0xff0000
+    });
+
+    this.mesh = new THREE.Mesh(this.geometry, this.material);
+    this.mesh.drawMode = THREE.TriangleStripDrawMode;
+
+    this.mesh.frustumCulled = false;
+    this.mesh.vertices = this.vertices;
+
+    this.direction = new THREE.Vector3();
+    this.numPoints = numPoints;
+  }
+
+  setDirection(direction) {
+    var UP = new THREE.Vector3(0, 1, 0);
+    this.direction
+      .copy(direction)
+      .cross(UP)
+      .normalize()
+      .multiplyScalar(this.width / 2);
+  }
+
+  setWidth(width) {
+    this.width = width;
+  }
+
+  setPoint() {
+    var posA = new THREE.Vector3();
+    var posB = new THREE.Vector3();
+
+    posA.copy(point).add(this.direction);
+    posB.copy(point).sub(this.direction);
+
+    var idx = 2 * 3 * i;
+    this.vertices[idx++] = posA.x;
+    this.vertices[idx++] = posA.y;
+    this.vertices[idx++] = posA.z;
+
+    this.vertices[idx++] = posB.x;
+    this.vertices[idx++] = posB.y;
+    this.vertices[idx++] = posB.z;
+
+    this.geometry.attributes.position.needsUpdate = true;
+  }
+}
+
+
+/***/ }),
+
 /***/ "./src/Teleport.mjs":
 /*!**************************!*\
   !*** ./src/Teleport.mjs ***!
@@ -6279,10 +6350,18 @@ class PositionalAudioPolyphonic extends THREE.Object3D {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Teleport; });
+/* harmony import */ var _RayCurve_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RayCurve.mjs */ "./src/RayCurve.mjs");
+
+
+var tempMatrix = new THREE.Matrix4();
+var intersected = [];
+
 class Teleport {
   constructor(ctx, mesh) {
     this.ctx = ctx;
+    this.raycaster = new THREE.Raycaster();
     this.colliderMesh = mesh;
+    this.targetPoint = new THREE.Vector3();
     this.data = {
       type: 'parabolic',
       button: 'trackpad',
@@ -6307,52 +6386,99 @@ class Teleport {
       landingMaxAngle: 45,
     }
 
+    // Holder for all the
+    this.teleportEntity = new THREE.Group();
+
     this.active = false;
+    this.line = this.createLine(this.data);
+
+    this.teleportHitGeometry = new THREE.Mesh(
+      new THREE.IcosahedronBufferGeometry(0.3, 1),
+      new THREE.MeshBasicMaterial({color: 0xffff00, wireframe: true})
+    );
+
+    this.teleportHitGeometry.visible = false;
+
+    this.teleportHitGeometry.position.set(-2, 0, -2);
+
+    this.teleportEntity.add(this.teleportHitGeometry);
+
+    this.ctx.scene.add(this.teleportEntity);
+
+    var geometry = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, - 1 ) ] );
+    var material = new THREE.LineBasicMaterial({
+      color: 0x0000ff
+    });
+    var line = new THREE.Line( geometry, material );
+    line.name = 'line';
+    line.scale.z = 5;
+
+    this.line0 = line.clone();
+    this.line1 = line.clone();
+    this.line0.visible = this.line1.visible = true;
+
+    ctx.controllers[0].add( this.line0 );
+    //ctx.controllers[1].add( this.line1 );
+
   }
 
-  onSelectStart() {
-    this.active = true;
+  onSelectStart(evt) {
+    if (evt.target === this.ctx.controllers[0])
+      this.active = true;
   }
 
-/*
-    let controller = evt.target;
+  getIntersections( controller ) {
 
-    controller.getWorldPosition(raycasterOrigin);
-    controller.getWorldDirection(raycasterDirection);
-    raycasterDirection.negate();
+    tempMatrix.identity().extractRotation( controller.matrixWorld );
 
-    controller.raycaster.set(raycasterOrigin, raycasterDirection);
-    var intersects = controller.raycaster.intersectObject(paintings, true);
+    this.raycaster.ray.origin.setFromMatrixPosition( controller.matrixWorld );
+    this.raycaster.ray.direction.set( 0, 0, - 1 ).applyMatrix4( tempMatrix );
 
-    if (intersects.length == 0) { return; }
+    return this.raycaster.intersectObject( this.colliderMesh, true, null, true );
 
-    zoom.painting= intersects[0].object;
-    zoom.controller = controller;
-    zoom.widget.material = zoom.painting.material;
-    zoom.widget.visible = true;
-    refreshZoomUV(intersects[0]);
-    return true;
   }
-*/
+
+  intersectObjects(controller) {
+    if ( controller.userData.selected !== undefined ) return;
+
+    var line = controller.getObjectByName( 'line' );
+    var intersections = this.getIntersections( controller );
+
+    if ( intersections.length > 0 ) {
+
+      var intersection = intersections[ 0 ];
+
+      var object = intersection.object;
+      object.material.emissive.r = 1;
+      intersected.push( object );
+
+      line.scale.z = intersection.distance;
+      line.material.color.setRGB(1,1,0);
+
+    } else {
+
+      line.scale.z = 5;
+      line.material.color.setRGB(1,0,0);
+
+    }
+  }
+
   execute(ctx, delta, time) {
     if (!this.active) { return; }
 
-    var raycasterOrigin = new THREE.Vector3();
-    var raycasterDirection = new THREE.Vector3();
+    //for (var c=0;c<2;c++)
+    {
+      var controller = ctx.controllers[0];
+      var intersections = this.getIntersections(controller);
 
-    var controller = ctx.controllers[0];
-
-    controller.getWorldPosition(raycasterOrigin);
-    controller.getWorldDirection(raycasterDirection);
-    raycasterDirection.negate();
-
-    controller.raycaster.set(raycasterOrigin, raycasterDirection);
-    var intersects = controller.raycaster.intersectObject(this.colliderMesh);
-
-    if (intersects.length === 0) { return; }
-
-    ctx.cameraRig.position.x += 0.5;
-
+      if (intersections.length > 0) {
+        this.targetPoint.copy(intersections[0].point);
+        this.teleportHitGeometry.visible = true;
+        this.teleportHitGeometry.position.copy(this.targetPoint);
+        this.hit = true;
+        return;
+      }
+    }
   }
 
   onSelectEnd() {
@@ -6363,56 +6489,23 @@ class Teleport {
     const handPosition = new THREE.Vector3();
 
     if (!this.active) { return; }
-/*
-    // Hide the hit point and the curve
+
+    if (this.hit) {
+      this.ctx.cameraRig.position.copy(this.targetPoint);
+      this.teleportHitGeometry.visible = false;
+    }
+
     this.active = false;
-    this.hitEntity.setAttribute('visible', false);
-    this.teleportEntity.setAttribute('visible', false);
+    this.hit = false;
+  }
 
-    if (!this.hit) {
-      // Button released but not hit point
-      return;
-    }
-
-    const rig = this.data.cameraRig || this.el.sceneEl.camera.el;
-    rig.object3D.getWorldPosition(this.rigWorldPosition);
-    this.newRigWorldPosition.copy(this.hitPoint);
-
-    // If a teleportOrigin exists, offset the rig such that the teleportOrigin is above the hitPoint
-    const teleportOrigin = this.data.teleportOrigin;
-    if (teleportOrigin) {
-      teleportOrigin.object3D.getWorldPosition(teleportOriginWorldPosition);
-      this.newRigWorldPosition.sub(teleportOriginWorldPosition).add(this.rigWorldPosition);
-    }
-
-    // Always keep the rig at the same offset off the ground after teleporting
-    this.newRigWorldPosition.y = this.rigWorldPosition.y + this.hitPoint.y - this.prevHitHeight;
-    this.prevHitHeight = this.hitPoint.y;
-
-    // Finally update the rigs position
-    newRigLocalPosition.copy(this.newRigWorldPosition);
-    if (rig.object3D.parent) {
-      rig.object3D.parent.worldToLocal(newRigLocalPosition);
-    }
-    rig.setAttribute('position', newRigLocalPosition);
-
-    // If a rig was not explicitly declared, look for hands and mvoe them proportionally as well
-    if (!this.data.cameraRig) {
-      var hands = document.querySelectorAll('a-entity[tracked-controls]');
-      for (var i = 0; i < hands.length; i++) {
-        hands[i].object3D.getWorldPosition(handPosition);
-
-        // diff = rigWorldPosition - handPosition
-        // newPos = newRigWorldPosition - diff
-        newHandPosition[i].copy(this.newRigWorldPosition).sub(this.rigWorldPosition).add(handPosition);
-        hands[i].setAttribute('position', newHandPosition[i]);
-      }
-    }
-
-    this.el.emit('teleported', this.teleportEventDetail);
-*/
+  createLine(data) {
+    return new _RayCurve_mjs__WEBPACK_IMPORTED_MODULE_0__["default"](
+      data.type === 'line' ? 2 : data.curveNumberPoints,
+      data.curveLineWidth);
   }
 }
+
 
 
 /***/ }),
@@ -12610,13 +12703,12 @@ function setup(ctx) {
     clouds: new THREE.MeshBasicMaterial({map: cloudsTex, transparent: true})
   };
 
-
   hall = assets['hall_model'].scene;
   hall.traverse(o => {
     if (o.name == 'teleport') {
       teleportFloor = o;
-      console.log(teleportFloor);
-      o.visible = false;
+      //o.visible = false;
+      o.material.visible = false;
       return;
     }
     if (o.type == 'Mesh' && objectMaterials[o.name]) {

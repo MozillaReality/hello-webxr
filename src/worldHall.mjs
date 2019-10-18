@@ -56,13 +56,12 @@ export function setup(ctx) {
     clouds: new THREE.MeshBasicMaterial({map: cloudsTex, transparent: true})
   };
 
-
   hall = assets['hall_model'].scene;
   hall.traverse(o => {
     if (o.name == 'teleport') {
       teleportFloor = o;
-      console.log(teleportFloor);
-      o.visible = false;
+      //o.visible = false;
+      o.material.visible = false;
       return;
     }
     if (o.type == 'Mesh' && objectMaterials[o.name]) {
