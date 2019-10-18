@@ -114,7 +114,7 @@ export function exit(ctx) {
   ctx.controllers[1].removeEventListener('selectstart', onSelectStart);
   ctx.controllers[1].removeEventListener('selectend', onSelectEnd);
 
-  xylophone.leave(ctx);
+  xylophone.exit(ctx);
 }
 
 export function execute(ctx, delta, time) {

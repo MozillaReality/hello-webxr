@@ -30,20 +30,22 @@ export function setup(ctx, hall) {
     note.material.emissive = note.material.color.clone();
     note.material.emissiveIntensity = 0;
     xyloNotes[i] = note;
-    note.animation = 0;
-    note.resetY = note.position.y;
-    note.sound = new PositionalAudioPolyphonic(listener, 10);
+    note.userData.animation = 0;
+    note.userData.resetY = note.position.y;
+    note.userData.sound = new PositionalAudioPolyphonic(listener, 10);
     audioLoader.load('assets/ogg/xylophone' + i + '.ogg', buffer => {
-      note.sound.setBuffer(buffer);
+      note.userData.sound.setBuffer(buffer);
     });
   }
 
   xyloSticks[0] = hall.getObjectByName('xylostick-left');
   xyloSticks[1] = hall.getObjectByName('xylostick-right');
-  xyloSticks[0].resetPosition = xyloSticks[0].position.clone();
-  xyloSticks[1].resetPosition = xyloSticks[1].position.clone();
-  xyloSticks[0].resetRotation = xyloSticks[0].rotation.clone();
-  xyloSticks[1].resetRotation = xyloSticks[1].rotation.clone();
+  xyloSticks[0].userData.resetPosition = xyloSticks[0].position.clone();
+  xyloSticks[1].userData.resetPosition = xyloSticks[1].position.clone();
+  xyloSticks[0].userData.resetRotation = xyloSticks[0].rotation.clone();
+  xyloSticks[1].userData.resetRotation = xyloSticks[1].rotation.clone();
+  xyloSticks[0].userData.grabbedBy = null;
+  xyloSticks[1].userData.grabbedBy = null;
   xyloStickBalls[0] = hall.getObjectByName('xylostickball-left');
   xyloStickBalls[1] = hall.getObjectByName('xylostickball-right');
   xyloStickBalls[0].geometry.computeBoundingBox();
@@ -65,19 +67,19 @@ export function execute(ctx, delta, time, controllers) {
     bbox.setFromObject(xyloStickBalls[c]).expandByScalar(-0.01);
     for (var i = 0; i < xyloNotes.length; i++) {
       let note = xyloNotes[i];
-      if (note.animation > 0) {
-        note.animation = Math.max(0, note.animation - delta * 4);
-        note.material.emissiveIntensity = note.animation;
-        note.position.y = note.resetY - note.animation * 0.005;
-        console.log(note.animation);
+      if (note.userData.animation > 0) {
+        note.userData.animation = Math.max(0, note.userData.animation - delta * 4);
+        note.material.emissiveIntensity = note.userData.animation;
+        note.position.y = note.userData.resetY - note.userData.animation * 0.005;
+        console.log(note.userData.animation);
       }
 
       if (bbox.intersectsBox(note.geometry.boundingBox)) {
         //console.log('intersection', c ,'with note', i);
         if (!stickNotesColliding[c][i]) {
           stickNotesColliding[c][i] = true;
-          note.sound.play();
-          note.animation = 1;  
+          note.userData.sound.play();
+          note.userData.animation = 1;
         }
       } else {
         stickNotesColliding[c][i] = false;
@@ -94,10 +96,15 @@ export function onSelectStart(evt) {
   for (let i = 0; i < 2; i++) {
     bbox.setFromObject(xyloSticks[i]);
     if (controller.boundingBox.intersectsBox(bbox)){
+      // stick grabbed from the other hand
+      if (xyloSticks[i].userData.grabbedBy) {
+        xyloSticks[i].userData.grabbedBy.grabbing = null;
+      }
       xyloSticks[i].position.set(0, 0, 0);
       xyloSticks[i].rotation.set(0, 0, 0);
       controller.add(xyloSticks[i]);
       controller.grabbing = xyloSticks[i];
+      xyloSticks[i].userData.grabbedBy = controller;
       return false;
     }
   }
@@ -109,8 +116,9 @@ export function onSelectEnd(evt) {
   if (controller.grabbing !== null) {
     let stick = controller.grabbing;
     hallRef.add(stick);
-    stick.position.copy(stick.resetPosition);
-    stick.rotation.copy(stick.resetRotation);
+    stick.position.copy(stick.userData.resetPosition);
+    stick.rotation.copy(stick.userData.resetRotation);
+    stick.userData.grabbedBy = null;
     controller.grabbing = null;
     return false;
   }
