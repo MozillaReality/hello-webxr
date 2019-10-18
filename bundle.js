@@ -6218,10 +6218,10 @@ function extend() {
 
 /***/ }),
 
-/***/ "./src/PositionalAudioPolyphonic.js":
-/*!******************************************!*\
-  !*** ./src/PositionalAudioPolyphonic.js ***!
-  \******************************************/
+/***/ "./src/PositionalAudioPolyphonic.mjs":
+/*!*******************************************!*\
+  !*** ./src/PositionalAudioPolyphonic.mjs ***!
+  \*******************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -6265,6 +6265,247 @@ class PositionalAudioPolyphonic extends THREE.Object3D {
 
   }
 }
+
+
+/***/ }),
+
+/***/ "./src/RayCurve.mjs":
+/*!**************************!*\
+  !*** ./src/RayCurve.mjs ***!
+  \**************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return RayCurve; });
+/* global THREE */
+class RayCurve {
+  constructor(numPoints, width) {
+    this.geometry = new THREE.BufferGeometry();
+    this.vertices = new Float32Array(numPoints * 3 * 2);
+    this.uvs = new Float32Array(numPoints * 2 * 2);
+    this.width = width;
+
+    this.geometry.addAttribute('position', new THREE.BufferAttribute(this.vertices, 3).setDynamic(true));
+
+    this.material = new THREE.MeshBasicMaterial({
+      side: THREE.DoubleSide,
+      color: 0xff0000
+    });
+
+    this.mesh = new THREE.Mesh(this.geometry, this.material);
+    this.mesh.drawMode = THREE.TriangleStripDrawMode;
+
+    this.mesh.frustumCulled = false;
+    this.mesh.vertices = this.vertices;
+
+    this.direction = new THREE.Vector3();
+    this.numPoints = numPoints;
+  }
+
+  setDirection(direction) {
+    var UP = new THREE.Vector3(0, 1, 0);
+    this.direction
+      .copy(direction)
+      .cross(UP)
+      .normalize()
+      .multiplyScalar(this.width / 2);
+  }
+
+  setWidth(width) {
+    this.width = width;
+  }
+
+  setPoint() {
+    var posA = new THREE.Vector3();
+    var posB = new THREE.Vector3();
+
+    posA.copy(point).add(this.direction);
+    posB.copy(point).sub(this.direction);
+
+    var idx = 2 * 3 * i;
+    this.vertices[idx++] = posA.x;
+    this.vertices[idx++] = posA.y;
+    this.vertices[idx++] = posA.z;
+
+    this.vertices[idx++] = posB.x;
+    this.vertices[idx++] = posB.y;
+    this.vertices[idx++] = posB.z;
+
+    this.geometry.attributes.position.needsUpdate = true;
+  }
+}
+
+
+/***/ }),
+
+/***/ "./src/Teleport.mjs":
+/*!**************************!*\
+  !*** ./src/Teleport.mjs ***!
+  \**************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Teleport; });
+/* harmony import */ var _RayCurve_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RayCurve.mjs */ "./src/RayCurve.mjs");
+
+
+var tempMatrix = new THREE.Matrix4();
+var intersected = [];
+
+class Teleport {
+  constructor(ctx, mesh) {
+    this.ctx = ctx;
+    this.raycaster = new THREE.Raycaster();
+    this.colliderMesh = mesh;
+    this.targetPoint = new THREE.Vector3();
+    this.data = {
+      type: 'parabolic',
+      button: 'trackpad',
+      startEvents: [],
+      endEvents: [],
+      collisionEntities: '',
+      hitEntity: '',
+      cameraRig: '',
+      teleportOrigin: '',
+      hitCylinderColor: '#99ff99',
+      hitCylinderRadius: 0.25,
+      hitCylinderHeight: 0.3,
+      interval: 0,
+      maxLength: 10,
+      curveNumberPoints: 30,
+      curveLineWidth: 0.025,
+      curveHitColor: '#99ff99',
+      curveMissColor: '#ff0000',
+      curveShootingSpeed: 5,
+      defaultPlaneSize: 100,
+      landingNormal: new THREE.Vector3(0, 1, 0),
+      landingMaxAngle: 45,
+    }
+
+    // Holder for all the
+    this.teleportEntity = new THREE.Group();
+
+    this.active = false;
+    this.line = this.createLine(this.data);
+
+    this.teleportHitGeometry = new THREE.Mesh(
+      new THREE.IcosahedronBufferGeometry(0.3, 1),
+      new THREE.MeshBasicMaterial({color: 0xffff00, wireframe: true})
+    );
+
+    this.teleportHitGeometry.visible = false;
+
+    this.teleportHitGeometry.position.set(-2, 0, -2);
+
+    this.teleportEntity.add(this.teleportHitGeometry);
+
+    this.ctx.scene.add(this.teleportEntity);
+
+    var geometry = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, - 1 ) ] );
+    var material = new THREE.LineBasicMaterial({
+      color: 0x0000ff
+    });
+    var line = new THREE.Line( geometry, material );
+    line.name = 'line';
+    line.scale.z = 5;
+
+    this.line0 = line.clone();
+    this.line1 = line.clone();
+    this.line0.visible = this.line1.visible = true;
+
+    ctx.controllers[0].add( this.line0 );
+    //ctx.controllers[1].add( this.line1 );
+
+  }
+
+  onSelectStart(evt) {
+    if (evt.target === this.ctx.controllers[0])
+      this.active = true;
+  }
+
+  getIntersections( controller ) {
+
+    tempMatrix.identity().extractRotation( controller.matrixWorld );
+
+    this.raycaster.ray.origin.setFromMatrixPosition( controller.matrixWorld );
+    this.raycaster.ray.direction.set( 0, 0, - 1 ).applyMatrix4( tempMatrix );
+
+    return this.raycaster.intersectObject( this.colliderMesh, true, null, true );
+
+  }
+
+  intersectObjects(controller) {
+    if ( controller.userData.selected !== undefined ) return;
+
+    var line = controller.getObjectByName( 'line' );
+    var intersections = this.getIntersections( controller );
+
+    if ( intersections.length > 0 ) {
+
+      var intersection = intersections[ 0 ];
+
+      var object = intersection.object;
+      object.material.emissive.r = 1;
+      intersected.push( object );
+
+      line.scale.z = intersection.distance;
+      line.material.color.setRGB(1,1,0);
+
+    } else {
+
+      line.scale.z = 5;
+      line.material.color.setRGB(1,0,0);
+
+    }
+  }
+
+  execute(ctx, delta, time) {
+    if (!this.active) { return; }
+
+    //for (var c=0;c<2;c++)
+    {
+      var controller = ctx.controllers[0];
+      var intersections = this.getIntersections(controller);
+
+      if (intersections.length > 0) {
+        this.targetPoint.copy(intersections[0].point);
+        this.teleportHitGeometry.visible = true;
+        this.teleportHitGeometry.position.copy(this.targetPoint);
+        this.hit = true;
+        return;
+      }
+    }
+  }
+
+  onSelectEnd() {
+
+    const teleportOriginWorldPosition = new THREE.Vector3();
+    const newRigLocalPosition = new THREE.Vector3();
+    const newHandPosition = [new THREE.Vector3(), new THREE.Vector3()]; // Left and right
+    const handPosition = new THREE.Vector3();
+
+    if (!this.active) { return; }
+
+    if (this.hit) {
+      this.ctx.cameraRig.position.copy(this.targetPoint);
+      this.teleportHitGeometry.visible = false;
+    }
+
+    this.active = false;
+    this.hit = false;
+  }
+
+  createLine(data) {
+    return new _RayCurve_mjs__WEBPACK_IMPORTED_MODULE_0__["default"](
+      data.type === 'line' ? 2 : data.curveNumberPoints,
+      data.curveLineWidth);
+  }
+}
+
 
 
 /***/ }),
@@ -6489,17 +6730,26 @@ function init() {
   }, 2000);
 
   controller1 = renderer.vr.getController(0);
-  scene.add(controller1);
+  //scene.add(controller1);
   controller1.addEventListener('selectstart', onSelectStart);
   controller1.addEventListener('selectend', onSelectEnd);
 
   controller2 = renderer.vr.getController(1);
-  scene.add(controller2);
+  //scene.add(controller2);
+  controller1.raycaster = new THREE.Raycaster();
+  controller1.raycaster.near = 0.1;
+
   controller2.raycaster = new THREE.Raycaster();
   controller2.raycaster.near = 0.1;
   //controller2.raycaster.far = 3;
   controller2.addEventListener('selectstart', onSelectStart);
   controller2.addEventListener('selectend', onSelectEnd);
+
+  var cameraRig = new THREE.Group();
+  cameraRig.add(camera);
+  cameraRig.add(controller1);
+  cameraRig.add(controller2);
+  scene.add(cameraRig);
 
   context = {
     assets: assets,
@@ -6507,8 +6757,11 @@ function init() {
     scene : parent,
     renderer: renderer,
     camera: camera,
+    cameraRig: cameraRig,
     controllers: [controller1, controller2]
   };
+
+  window.ctx = context;
 
   Object(_assetManager_mjs__WEBPACK_IMPORTED_MODULE_2__["loadAssets"])(renderer, '../assets/', assets, () => {
     setupControllers();
@@ -7086,7 +7339,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "execute", function() { return execute; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onSelectStart", function() { return onSelectStart; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onSelectEnd", function() { return onSelectEnd; });
-/* harmony import */ var _PositionalAudioPolyphonic_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PositionalAudioPolyphonic.js */ "./src/PositionalAudioPolyphonic.js");
+/* harmony import */ var _PositionalAudioPolyphonic_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PositionalAudioPolyphonic.mjs */ "./src/PositionalAudioPolyphonic.mjs");
 
 
 var
@@ -7121,7 +7374,7 @@ function setup(ctx, hall) {
     xyloNotes[i] = note;
     note.userData.animation = 0;
     note.userData.resetY = note.position.y;
-    note.userData.sound = new _PositionalAudioPolyphonic_js__WEBPACK_IMPORTED_MODULE_0__["default"](listener, 10);
+    note.userData.sound = new _PositionalAudioPolyphonic_mjs__WEBPACK_IMPORTED_MODULE_0__["default"](listener, 10);
     audioLoader.load('assets/ogg/xylophone' + i + '.ogg', buffer => {
       note.userData.sound.setBuffer(buffer);
     });
@@ -12391,6 +12644,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _stationPaintings_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./stationPaintings.mjs */ "./src/stationPaintings.mjs");
 /* harmony import */ var _stationNewsTicker_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./stationNewsTicker.mjs */ "./src/stationNewsTicker.mjs");
 /* harmony import */ var _stationXylophone_mjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./stationXylophone.mjs */ "./src/stationXylophone.mjs");
+/* harmony import */ var _Teleport_mjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Teleport.mjs */ "./src/Teleport.mjs");
+
 
 
 
@@ -12401,6 +12656,7 @@ var
   hall,
   teleportFloor,
   fader,
+  teleport,
   objectMaterials,
   controllers;
 
@@ -12447,12 +12703,12 @@ function setup(ctx) {
     clouds: new THREE.MeshBasicMaterial({map: cloudsTex, transparent: true})
   };
 
-
   hall = assets['hall_model'].scene;
   hall.traverse(o => {
     if (o.name == 'teleport') {
       teleportFloor = o;
-      o.visible = false;
+      //o.visible = false;
+      o.material.visible = false;
       return;
     }
     if (o.type == 'Mesh' && objectMaterials[o.name]) {
@@ -12464,6 +12720,8 @@ function setup(ctx) {
   _stationXylophone_mjs__WEBPACK_IMPORTED_MODULE_3__["setup"](ctx, hall);
   _stationNewsTicker_mjs__WEBPACK_IMPORTED_MODULE_2__["setup"](ctx, hall);
   _stationPanoBalls_mjs__WEBPACK_IMPORTED_MODULE_0__["setup"](ctx, hall);
+
+  teleport = new _Teleport_mjs__WEBPACK_IMPORTED_MODULE_4__["default"](ctx, teleportFloor);
 
   // lights
   const lightSun = new THREE.DirectionalLight(0xeeffff);
@@ -12514,6 +12772,7 @@ function execute(ctx, delta, time) {
   _stationPanoBalls_mjs__WEBPACK_IMPORTED_MODULE_0__["execute"](ctx, delta, time);
   _stationPaintings_mjs__WEBPACK_IMPORTED_MODULE_1__["execute"](ctx, delta, time);
   _stationXylophone_mjs__WEBPACK_IMPORTED_MODULE_3__["execute"](ctx, delta, time, controllers);
+  teleport.execute(ctx, delta, time);
 
   updateUniforms(time);
   checkCameraBoundaries(ctx);
@@ -12542,13 +12801,15 @@ function checkCameraBoundaries(ctx) {
 
 // if module returns false, do nothing else (prevents selecting two things at the same time)
 function onSelectStart(evt) {
-  if (!_stationXylophone_mjs__WEBPACK_IMPORTED_MODULE_3__["onSelectStart"](evt)) { return; }
-  if (!_stationPaintings_mjs__WEBPACK_IMPORTED_MODULE_1__["onSelectStart"](evt)) { return; }
+//  if (!xylophone.onSelectStart(evt)) { return; }
+//  if (!paintings.onSelectStart(evt)) { return; }
+  if (!teleport.onSelectStart(evt)) { return; }
 }
 
 function onSelectEnd(evt) {
-  if (!_stationXylophone_mjs__WEBPACK_IMPORTED_MODULE_3__["onSelectEnd"](evt)) { return; }
-  if (!_stationPaintings_mjs__WEBPACK_IMPORTED_MODULE_1__["onSelectEnd"](evt)) { return; }
+//  if (!xylophone.onSelectEnd(evt)) { return; }
+//  if (!paintings.onSelectEnd(evt)) { return; }
+  if (!teleport.onSelectEnd(evt)) { return; }
 }
 
 
