@@ -6218,10 +6218,10 @@ function extend() {
 
 /***/ }),
 
-/***/ "./src/PositionalAudioPolyphonic.js":
-/*!******************************************!*\
-  !*** ./src/PositionalAudioPolyphonic.js ***!
-  \******************************************/
+/***/ "./src/PositionalAudioPolyphonic.mjs":
+/*!*******************************************!*\
+  !*** ./src/PositionalAudioPolyphonic.mjs ***!
+  \*******************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -6263,6 +6263,154 @@ class PositionalAudioPolyphonic extends THREE.Object3D {
       return;
     }
 
+  }
+}
+
+
+/***/ }),
+
+/***/ "./src/Teleport.mjs":
+/*!**************************!*\
+  !*** ./src/Teleport.mjs ***!
+  \**************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Teleport; });
+class Teleport {
+  constructor(ctx, mesh) {
+    this.ctx = ctx;
+    this.colliderMesh = mesh;
+    this.data = {
+      type: 'parabolic',
+      button: 'trackpad',
+      startEvents: [],
+      endEvents: [],
+      collisionEntities: '',
+      hitEntity: '',
+      cameraRig: '',
+      teleportOrigin: '',
+      hitCylinderColor: '#99ff99',
+      hitCylinderRadius: 0.25,
+      hitCylinderHeight: 0.3,
+      interval: 0,
+      maxLength: 10,
+      curveNumberPoints: 30,
+      curveLineWidth: 0.025,
+      curveHitColor: '#99ff99',
+      curveMissColor: '#ff0000',
+      curveShootingSpeed: 5,
+      defaultPlaneSize: 100,
+      landingNormal: new THREE.Vector3(0, 1, 0),
+      landingMaxAngle: 45,
+    }
+
+    this.active = false;
+  }
+
+  onSelectStart() {
+    this.active = true;
+  }
+
+/*
+    let controller = evt.target;
+
+    controller.getWorldPosition(raycasterOrigin);
+    controller.getWorldDirection(raycasterDirection);
+    raycasterDirection.negate();
+
+    controller.raycaster.set(raycasterOrigin, raycasterDirection);
+    var intersects = controller.raycaster.intersectObject(paintings, true);
+
+    if (intersects.length == 0) { return; }
+
+    zoom.painting= intersects[0].object;
+    zoom.controller = controller;
+    zoom.widget.material = zoom.painting.material;
+    zoom.widget.visible = true;
+    refreshZoomUV(intersects[0]);
+    return true;
+  }
+*/
+  execute(ctx, delta, time) {
+    if (!this.active) { return; }
+
+    var raycasterOrigin = new THREE.Vector3();
+    var raycasterDirection = new THREE.Vector3();
+
+    var controller = ctx.controllers[0];
+
+    controller.getWorldPosition(raycasterOrigin);
+    controller.getWorldDirection(raycasterDirection);
+    raycasterDirection.negate();
+
+    controller.raycaster.set(raycasterOrigin, raycasterDirection);
+    var intersects = controller.raycaster.intersectObject(this.colliderMesh);
+
+    if (intersects.length === 0) { return; }
+
+    ctx.cameraRig.position.x += 0.5;
+
+  }
+
+  onSelectEnd() {
+
+    const teleportOriginWorldPosition = new THREE.Vector3();
+    const newRigLocalPosition = new THREE.Vector3();
+    const newHandPosition = [new THREE.Vector3(), new THREE.Vector3()]; // Left and right
+    const handPosition = new THREE.Vector3();
+
+    if (!this.active) { return; }
+/*
+    // Hide the hit point and the curve
+    this.active = false;
+    this.hitEntity.setAttribute('visible', false);
+    this.teleportEntity.setAttribute('visible', false);
+
+    if (!this.hit) {
+      // Button released but not hit point
+      return;
+    }
+
+    const rig = this.data.cameraRig || this.el.sceneEl.camera.el;
+    rig.object3D.getWorldPosition(this.rigWorldPosition);
+    this.newRigWorldPosition.copy(this.hitPoint);
+
+    // If a teleportOrigin exists, offset the rig such that the teleportOrigin is above the hitPoint
+    const teleportOrigin = this.data.teleportOrigin;
+    if (teleportOrigin) {
+      teleportOrigin.object3D.getWorldPosition(teleportOriginWorldPosition);
+      this.newRigWorldPosition.sub(teleportOriginWorldPosition).add(this.rigWorldPosition);
+    }
+
+    // Always keep the rig at the same offset off the ground after teleporting
+    this.newRigWorldPosition.y = this.rigWorldPosition.y + this.hitPoint.y - this.prevHitHeight;
+    this.prevHitHeight = this.hitPoint.y;
+
+    // Finally update the rigs position
+    newRigLocalPosition.copy(this.newRigWorldPosition);
+    if (rig.object3D.parent) {
+      rig.object3D.parent.worldToLocal(newRigLocalPosition);
+    }
+    rig.setAttribute('position', newRigLocalPosition);
+
+    // If a rig was not explicitly declared, look for hands and mvoe them proportionally as well
+    if (!this.data.cameraRig) {
+      var hands = document.querySelectorAll('a-entity[tracked-controls]');
+      for (var i = 0; i < hands.length; i++) {
+        hands[i].object3D.getWorldPosition(handPosition);
+
+        // diff = rigWorldPosition - handPosition
+        // newPos = newRigWorldPosition - diff
+        newHandPosition[i].copy(this.newRigWorldPosition).sub(this.rigWorldPosition).add(handPosition);
+        hands[i].setAttribute('position', newHandPosition[i]);
+      }
+    }
+
+    this.el.emit('teleported', this.teleportEventDetail);
+*/
   }
 }
 
@@ -6489,17 +6637,26 @@ function init() {
   }, 2000);
 
   controller1 = renderer.vr.getController(0);
-  scene.add(controller1);
+  //scene.add(controller1);
   controller1.addEventListener('selectstart', onSelectStart);
   controller1.addEventListener('selectend', onSelectEnd);
 
   controller2 = renderer.vr.getController(1);
-  scene.add(controller2);
+  //scene.add(controller2);
+  controller1.raycaster = new THREE.Raycaster();
+  controller1.raycaster.near = 0.1;
+
   controller2.raycaster = new THREE.Raycaster();
   controller2.raycaster.near = 0.1;
   //controller2.raycaster.far = 3;
   controller2.addEventListener('selectstart', onSelectStart);
   controller2.addEventListener('selectend', onSelectEnd);
+
+  var cameraRig = new THREE.Group();
+  cameraRig.add(camera);
+  cameraRig.add(controller1);
+  cameraRig.add(controller2);
+  scene.add(cameraRig);
 
   context = {
     assets: assets,
@@ -6507,8 +6664,11 @@ function init() {
     scene : parent,
     renderer: renderer,
     camera: camera,
+    cameraRig: cameraRig,
     controllers: [controller1, controller2]
   };
+
+  window.ctx = context;
 
   Object(_assetManager_mjs__WEBPACK_IMPORTED_MODULE_2__["loadAssets"])(renderer, '../assets/', assets, () => {
     setupControllers();
@@ -7086,7 +7246,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "execute", function() { return execute; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onSelectStart", function() { return onSelectStart; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onSelectEnd", function() { return onSelectEnd; });
-/* harmony import */ var _PositionalAudioPolyphonic_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PositionalAudioPolyphonic.js */ "./src/PositionalAudioPolyphonic.js");
+/* harmony import */ var _PositionalAudioPolyphonic_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PositionalAudioPolyphonic.mjs */ "./src/PositionalAudioPolyphonic.mjs");
 
 
 var
@@ -7121,7 +7281,7 @@ function setup(ctx, hall) {
     xyloNotes[i] = note;
     note.userData.animation = 0;
     note.userData.resetY = note.position.y;
-    note.userData.sound = new _PositionalAudioPolyphonic_js__WEBPACK_IMPORTED_MODULE_0__["default"](listener, 10);
+    note.userData.sound = new _PositionalAudioPolyphonic_mjs__WEBPACK_IMPORTED_MODULE_0__["default"](listener, 10);
     audioLoader.load('assets/ogg/xylophone' + i + '.ogg', buffer => {
       note.userData.sound.setBuffer(buffer);
     });
@@ -12391,6 +12551,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _stationPaintings_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./stationPaintings.mjs */ "./src/stationPaintings.mjs");
 /* harmony import */ var _stationNewsTicker_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./stationNewsTicker.mjs */ "./src/stationNewsTicker.mjs");
 /* harmony import */ var _stationXylophone_mjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./stationXylophone.mjs */ "./src/stationXylophone.mjs");
+/* harmony import */ var _Teleport_mjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Teleport.mjs */ "./src/Teleport.mjs");
+
 
 
 
@@ -12401,6 +12563,7 @@ var
   hall,
   teleportFloor,
   fader,
+  teleport,
   objectMaterials,
   controllers;
 
@@ -12452,6 +12615,7 @@ function setup(ctx) {
   hall.traverse(o => {
     if (o.name == 'teleport') {
       teleportFloor = o;
+      console.log(teleportFloor);
       o.visible = false;
       return;
     }
@@ -12464,6 +12628,8 @@ function setup(ctx) {
   _stationXylophone_mjs__WEBPACK_IMPORTED_MODULE_3__["setup"](ctx, hall);
   _stationNewsTicker_mjs__WEBPACK_IMPORTED_MODULE_2__["setup"](ctx, hall);
   _stationPanoBalls_mjs__WEBPACK_IMPORTED_MODULE_0__["setup"](ctx, hall);
+
+  teleport = new _Teleport_mjs__WEBPACK_IMPORTED_MODULE_4__["default"](ctx, teleportFloor);
 
   // lights
   const lightSun = new THREE.DirectionalLight(0xeeffff);
@@ -12514,6 +12680,7 @@ function execute(ctx, delta, time) {
   _stationPanoBalls_mjs__WEBPACK_IMPORTED_MODULE_0__["execute"](ctx, delta, time);
   _stationPaintings_mjs__WEBPACK_IMPORTED_MODULE_1__["execute"](ctx, delta, time);
   _stationXylophone_mjs__WEBPACK_IMPORTED_MODULE_3__["execute"](ctx, delta, time, controllers);
+  teleport.execute(ctx, delta, time);
 
   updateUniforms(time);
   checkCameraBoundaries(ctx);
@@ -12542,13 +12709,15 @@ function checkCameraBoundaries(ctx) {
 
 // if module returns false, do nothing else (prevents selecting two things at the same time)
 function onSelectStart(evt) {
-  if (!_stationXylophone_mjs__WEBPACK_IMPORTED_MODULE_3__["onSelectStart"](evt)) { return; }
-  if (!_stationPaintings_mjs__WEBPACK_IMPORTED_MODULE_1__["onSelectStart"](evt)) { return; }
+//  if (!xylophone.onSelectStart(evt)) { return; }
+//  if (!paintings.onSelectStart(evt)) { return; }
+  if (!teleport.onSelectStart(evt)) { return; }
 }
 
 function onSelectEnd(evt) {
-  if (!_stationXylophone_mjs__WEBPACK_IMPORTED_MODULE_3__["onSelectEnd"](evt)) { return; }
-  if (!_stationPaintings_mjs__WEBPACK_IMPORTED_MODULE_1__["onSelectEnd"](evt)) { return; }
+//  if (!xylophone.onSelectEnd(evt)) { return; }
+//  if (!paintings.onSelectEnd(evt)) { return; }
+  if (!teleport.onSelectEnd(evt)) { return; }
 }
 
 

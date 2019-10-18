@@ -128,17 +128,26 @@ export function init() {
   }, 2000);
 
   controller1 = renderer.vr.getController(0);
-  scene.add(controller1);
+  //scene.add(controller1);
   controller1.addEventListener('selectstart', onSelectStart);
   controller1.addEventListener('selectend', onSelectEnd);
 
   controller2 = renderer.vr.getController(1);
-  scene.add(controller2);
+  //scene.add(controller2);
+  controller1.raycaster = new THREE.Raycaster();
+  controller1.raycaster.near = 0.1;
+
   controller2.raycaster = new THREE.Raycaster();
   controller2.raycaster.near = 0.1;
   //controller2.raycaster.far = 3;
   controller2.addEventListener('selectstart', onSelectStart);
   controller2.addEventListener('selectend', onSelectEnd);
+
+  var cameraRig = new THREE.Group();
+  cameraRig.add(camera);
+  cameraRig.add(controller1);
+  cameraRig.add(controller2);
+  scene.add(cameraRig);
 
   context = {
     assets: assets,
@@ -146,8 +155,11 @@ export function init() {
     scene : parent,
     renderer: renderer,
     camera: camera,
+    cameraRig: cameraRig,
     controllers: [controller1, controller2]
   };
+
+  window.ctx = context;
 
   loadAssets(renderer, '../assets/', assets, () => {
     setupControllers();

@@ -2,12 +2,14 @@ import * as panoballs from './stationPanoBalls.mjs';
 import * as paintings from './stationPaintings.mjs';
 import * as newsticker from './stationNewsTicker.mjs';
 import * as xylophone from './stationXylophone.mjs';
+import Teleport from './Teleport.mjs';
 
 var
   scene,
   hall,
   teleportFloor,
   fader,
+  teleport,
   objectMaterials,
   controllers;
 
@@ -59,6 +61,7 @@ export function setup(ctx) {
   hall.traverse(o => {
     if (o.name == 'teleport') {
       teleportFloor = o;
+      console.log(teleportFloor);
       o.visible = false;
       return;
     }
@@ -71,6 +74,8 @@ export function setup(ctx) {
   xylophone.setup(ctx, hall);
   newsticker.setup(ctx, hall);
   panoballs.setup(ctx, hall);
+
+  teleport = new Teleport(ctx, teleportFloor);
 
   // lights
   const lightSun = new THREE.DirectionalLight(0xeeffff);
@@ -121,6 +126,7 @@ export function execute(ctx, delta, time) {
   panoballs.execute(ctx, delta, time);
   paintings.execute(ctx, delta, time);
   xylophone.execute(ctx, delta, time, controllers);
+  teleport.execute(ctx, delta, time);
 
   updateUniforms(time);
   checkCameraBoundaries(ctx);
@@ -149,11 +155,13 @@ function checkCameraBoundaries(ctx) {
 
 // if module returns false, do nothing else (prevents selecting two things at the same time)
 function onSelectStart(evt) {
-  if (!xylophone.onSelectStart(evt)) { return; }
-  if (!paintings.onSelectStart(evt)) { return; }
+//  if (!xylophone.onSelectStart(evt)) { return; }
+//  if (!paintings.onSelectStart(evt)) { return; }
+  if (!teleport.onSelectStart(evt)) { return; }
 }
 
 function onSelectEnd(evt) {
-  if (!xylophone.onSelectEnd(evt)) { return; }
-  if (!paintings.onSelectEnd(evt)) { return; }
+//  if (!xylophone.onSelectEnd(evt)) { return; }
+//  if (!paintings.onSelectEnd(evt)) { return; }
+  if (!teleport.onSelectEnd(evt)) { return; }
 }
