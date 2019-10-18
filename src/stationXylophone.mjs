@@ -1,3 +1,5 @@
+import PositionalAudioPolyphonic from './PositionalAudioPolyphonic.js';
+
 var
   listener,
   xyloSticks = [null, null],
@@ -6,12 +8,19 @@ var
   bbox = new THREE.Box3(),
   hallRef = null;
 
+var NUM_NOTES = 13;
+
+var stickNotesColliding = [
+  new Array(NUM_NOTES).fill(false),
+  new Array(NUM_NOTES).fill(false)
+];
+
 export function setup(ctx, hall) {
   const audioLoader = new THREE.AudioLoader();
   listener = new THREE.AudioListener();
   hallRef = hall;
 
-  for (let i = 0; i < 13; i++) {
+  for (let i = 0; i < NUM_NOTES; i++) {
     let noteName = 'xnote0' + (i < 10 ? '0' + i : i);
     let note = hall.getObjectByName(noteName);
     note.geometry.computeBoundingBox();
@@ -23,7 +32,7 @@ export function setup(ctx, hall) {
     xyloNotes[i] = note;
     note.animation = 0;
     note.resetY = note.position.y;
-    note.sound = new THREE.PositionalAudio(listener);
+    note.sound = new PositionalAudioPolyphonic(listener, 10);
     audioLoader.load('assets/ogg/xylophone' + i + '.ogg', buffer => {
       note.sound.setBuffer(buffer);
     });
@@ -65,8 +74,13 @@ export function execute(ctx, delta, time, controllers) {
 
       if (bbox.intersectsBox(note.geometry.boundingBox)) {
         //console.log('intersection', c ,'with note', i);
-        note.sound.play();
-        note.animation = 1;
+        if (!stickNotesColliding[c][i]) {
+          stickNotesColliding[c][i] = true;
+          note.sound.play();
+          note.animation = 1;  
+        }
+      } else {
+        stickNotesColliding[c][i] = false;
       }
     }
   }

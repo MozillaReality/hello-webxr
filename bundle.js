@@ -6218,6 +6218,57 @@ function extend() {
 
 /***/ }),
 
+/***/ "./src/PositionalAudioPolyphonic.js":
+/*!******************************************!*\
+  !*** ./src/PositionalAudioPolyphonic.js ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return PositionalAudioPolyphonic; });
+class PositionalAudioPolyphonic extends THREE.Object3D {
+  constructor(listener, poolSize) {
+    super();
+    this.listener = listener;
+    this.context = listener.context;
+
+    this.poolSize = poolSize || 5;
+    for (var i = 0; i < this.poolSize; i++) {
+      this.children.push(new THREE.PositionalAudio(listener));
+    }
+  }
+
+  setBuffer(buffer) {
+    this.children.forEach(sound => {
+      sound.setBuffer(buffer);
+    });
+  }
+
+  play() {
+    var found = false;
+    for (let i = 0;i<this.children.length; i++) {
+      let sound = this.children[i];
+      if (!sound.isPlaying && sound.buffer && !found) {
+        sound.play();
+        sound.isPaused = false;
+        found = true;
+        continue;
+      }
+    }
+
+    if (!found) {
+      console.warn('All the sounds are playing. If you need to play more sounds simultaneously consider increasing the pool size');
+      return;
+    }
+
+  }
+}
+
+
+/***/ }),
+
 /***/ "./src/assetManager.mjs":
 /*!******************************!*\
   !*** ./src/assetManager.mjs ***!
@@ -7035,6 +7086,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "execute", function() { return execute; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onSelectStart", function() { return onSelectStart; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onSelectEnd", function() { return onSelectEnd; });
+/* harmony import */ var _PositionalAudioPolyphonic_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PositionalAudioPolyphonic.js */ "./src/PositionalAudioPolyphonic.js");
+
+
 var
   listener,
   xyloSticks = [null, null],
@@ -7043,12 +7097,19 @@ var
   bbox = new THREE.Box3(),
   hallRef = null;
 
+var NUM_NOTES = 13;
+
+var stickNotesColliding = [
+  new Array(NUM_NOTES).fill(false),
+  new Array(NUM_NOTES).fill(false)
+];
+
 function setup(ctx, hall) {
   const audioLoader = new THREE.AudioLoader();
   listener = new THREE.AudioListener();
   hallRef = hall;
 
-  for (let i = 0; i < 13; i++) {
+  for (let i = 0; i < NUM_NOTES; i++) {
     let noteName = 'xnote0' + (i < 10 ? '0' + i : i);
     let note = hall.getObjectByName(noteName);
     note.geometry.computeBoundingBox();
@@ -7060,7 +7121,7 @@ function setup(ctx, hall) {
     xyloNotes[i] = note;
     note.animation = 0;
     note.resetY = note.position.y;
-    note.sound = new THREE.PositionalAudio(listener);
+    note.sound = new _PositionalAudioPolyphonic_js__WEBPACK_IMPORTED_MODULE_0__["default"](listener, 10);
     audioLoader.load('assets/ogg/xylophone' + i + '.ogg', buffer => {
       note.sound.setBuffer(buffer);
     });
@@ -7102,8 +7163,13 @@ function execute(ctx, delta, time, controllers) {
 
       if (bbox.intersectsBox(note.geometry.boundingBox)) {
         //console.log('intersection', c ,'with note', i);
-        note.sound.play();
-        note.animation = 1;
+        if (!stickNotesColliding[c][i]) {
+          stickNotesColliding[c][i] = true;
+          note.sound.play();
+          note.animation = 1;  
+        }
+      } else {
+        stickNotesColliding[c][i] = false;
       }
     }
   }
