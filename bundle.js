@@ -6726,6 +6726,423 @@ void main( void ) {
 
 /***/ }),
 
+/***/ "./src/stationNewsTicker.mjs":
+/*!***********************************!*\
+  !*** ./src/stationNewsTicker.mjs ***!
+  \***********************************/
+/*! exports provided: setup */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setup", function() { return setup; });
+/* harmony import */ var _text_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./text.mjs */ "./src/text.mjs");
+
+
+var newsTicker = {
+  url: 'assets/tweets.json',
+  hashtag: '#helloWebXR.',
+  hashtagText: null,
+  authorText: null,
+  messageText: null,
+  news: [],
+  current: 0
+};
+
+function setup(ctx, hall) {
+  const newsTickerMesh = hall.getObjectByName('newsticker');
+
+  newsTicker.hashtagText = new _text_mjs__WEBPACK_IMPORTED_MODULE_0__["Text"]({
+    font: ctx.assets['inter_bold_font'],
+    map: ctx.assets['inter_bold_tex'],
+    size: 2,
+    align: 'right',
+    anchor: 'right',
+    width: 350,
+    color: 0xdaa056
+  });
+
+  newsTicker.authorText = new _text_mjs__WEBPACK_IMPORTED_MODULE_0__["Text"]({
+    font: ctx.assets['inter_bold_font'],
+    map: ctx.assets['inter_bold_tex'],
+    size: 2,
+    width: 500,
+    color: 0x67bccd
+  });
+
+  newsTicker.messageText = new _text_mjs__WEBPACK_IMPORTED_MODULE_0__["Text"]({
+    font: ctx.assets['inter_regular_font'],
+    map: ctx.assets['inter_regular_tex'],
+    size: 2.6,
+    width: 900,
+    baseline: 'top',
+    color: 0xffffff
+  });
+
+  ['hashtag', 'author', 'message'].forEach( i => {
+    newsTickerMesh.add(newsTicker[`${i}Text`]);
+    newsTicker[`${i}Text`].rotation.set(-Math.PI / 2, Math.PI, 0);
+    newsTicker[`${i}Text`].position.copy(hall.getObjectByName(i).position);
+  });
+  newsTicker.hashtagText.value = newsTicker.hashtag;
+
+  fetch(newsTicker.url).then(res => res.json()).then(res => {
+    newsTicker.news = res;
+    nextNews();
+  });
+}
+
+function nextNews() {
+  const n = newsTicker;
+  n.authorText.value = n.news[n.current].author;
+  n.messageText.value = n.news[n.current].message;
+  n.current = (n.current + 1) % n.news.length;
+  setTimeout(nextNews, 3000);
+}
+
+
+/***/ }),
+
+/***/ "./src/stationPaintings.mjs":
+/*!**********************************!*\
+  !*** ./src/stationPaintings.mjs ***!
+  \**********************************/
+/*! exports provided: setup, execute, onSelectStart, onSelectEnd */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setup", function() { return setup; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "execute", function() { return execute; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onSelectStart", function() { return onSelectStart; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onSelectEnd", function() { return onSelectEnd; });
+var paintings;
+var zoom = {object: null, widget: null, controller: null, animation: 0};
+const PAINTINGS = ['seurat', 'sorolla', 'bosch', 'degas', 'rembrandt'];
+const PAINTINGS_RATIOS = [1, 1, 1.875, 1, 1];
+
+function setup(ctx, hall) {
+
+  for (let i in PAINTINGS) {
+    let painting = PAINTINGS[i];
+    let mesh = hall.getObjectByName(painting);
+    if (!mesh) { continue; }
+
+    let paintingTexture = ctx.assets[`painting_${painting}_tex`];
+    paintingTexture.encoding = THREE.sRGBEncoding;
+    paintingTexture.flipY = false;
+    mesh.material = new THREE.MeshBasicMaterial({
+      map: paintingTexture
+    });
+    mesh.userData.paintingId = i;
+  }
+
+  paintings = hall.getObjectByName('paintings');
+
+  zoom.widget = new THREE.Mesh(new THREE.PlaneGeometry(), new THREE.MeshBasicMaterial({color:0xff0000}));
+  zoom.widget.geometry.rotateY(-Math.PI / 2);
+  zoom.widget.visible = false;
+
+  ctx.scene.add(zoom.widget);
+}
+
+
+function execute(ctx, delta, time) {
+  if (zoom.painting) {
+    moveZoom(delta);
+  }
+}
+
+
+var raycasterOrigin = new THREE.Vector3();
+var raycasterDirection = new THREE.Vector3();
+
+function onSelectStart(evt) {
+  let controller = evt.target;
+
+  controller.getWorldPosition(raycasterOrigin);
+  controller.getWorldDirection(raycasterDirection);
+  raycasterDirection.negate();
+
+  controller.raycaster.set(raycasterOrigin, raycasterDirection);
+  var intersects = controller.raycaster.intersectObject(paintings, true);
+
+  if (intersects.length == 0) { return; }
+
+  zoom.painting= intersects[0].object;
+  zoom.controller = controller;
+  zoom.widget.material = zoom.painting.material;
+  zoom.widget.visible = true;
+  refreshZoomUV(intersects[0]);
+  return true;
+}
+
+function onSelectEnd(evt) {
+  if (zoom.painting) {
+    zoom.painting = null;
+    zoom.animation = 0;
+    zoom.widget.visible = false;
+  }
+  return true;
+}
+
+
+function moveZoom(delta) {
+
+  if (zoom.animation < 1) {
+    zoom.animation += (1 - zoom.animation) * delta * 4.0;
+  }
+  const controller = zoom.controller;
+  controller.getWorldPosition(raycasterOrigin);
+  controller.getWorldDirection(raycasterDirection);
+  raycasterDirection.negate();
+
+  controller.raycaster.set(raycasterOrigin, raycasterDirection);
+  var intersects = controller.raycaster.intersectObject(paintings, true);
+  if (intersects.length == 0 || intersects[0].object !== zoom.painting) { return; }
+
+  refreshZoomUV(intersects[0]);
+}
+
+var minUV = new THREE.Vector2();
+var maxUV = new THREE.Vector2();
+const zoomAmount = 0.05;
+
+function refreshZoomUV(hit) {
+
+  zoom.widget.position.copy(hit.point);
+  zoom.widget.position.x -= 0.3 * zoom.animation;
+
+  const uvs = zoom.widget.geometry.faceVertexUvs[0];
+  const ratio = PAINTINGS_RATIOS[zoom.painting.userData.paintingId];
+  //const amount = zoomAmount  // TODO: adjust zoom amount depending on hit.distance
+  hit.uv.clampScalar(zoomAmount, 1 - zoomAmount);
+  minUV.set(hit.uv.x - zoomAmount, hit.uv.y + zoomAmount * ratio);
+  maxUV.set(hit.uv.x + zoomAmount, hit.uv.y - zoomAmount * ratio);
+  uvs[0][0].x = minUV.x;
+  uvs[0][0].y = maxUV.y;
+  uvs[0][1].x = minUV.x;
+  uvs[0][1].y = minUV.y;
+  uvs[0][2].x = maxUV.x;
+  uvs[0][2].y = maxUV.y;
+
+  uvs[1][0].x = minUV.x;
+  uvs[1][0].y = minUV.y;
+  uvs[1][1].x = maxUV.x;
+  uvs[1][1].y = minUV.y;
+  uvs[1][2].x = maxUV.x;
+  uvs[1][2].y = maxUV.y;
+  zoom.widget.geometry.uvsNeedUpdate = true;
+}
+
+
+/***/ }),
+
+/***/ "./src/stationPanoBalls.mjs":
+/*!**********************************!*\
+  !*** ./src/stationPanoBalls.mjs ***!
+  \**********************************/
+/*! exports provided: setup, execute, updateUniforms */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setup", function() { return setup; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "execute", function() { return execute; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateUniforms", function() { return updateUniforms; });
+var
+  panoBalls = [],
+  panoFxMaterial;
+
+
+function setup(ctx, hall) {
+  const panoBallsConfig = [
+    {src: 'pano1small', position: new THREE.Vector3(2.0, 1.5, 0.5)},
+    {src: 'pano2small', position: new THREE.Vector3(-2.1, 1.5, 0)}
+  ];
+  const assets = ctx.assets;
+
+  const panoGeo = new THREE.SphereBufferGeometry(0.15, 30, 20);
+  assets['panoballfx_tex'].wrapT = THREE.RepeatWrapping;
+  assets['panoballfx_tex'].wrapS = THREE.RepeatWrapping;
+
+  for (var i = 0; i < panoBallsConfig.length; i++) {
+    const config = panoBallsConfig[i];
+    let asset = assets[`pano${i + 1}small`];
+    asset.encoding = THREE.sRGBEncoding;
+    var pano = new THREE.Mesh(
+      new THREE.SphereBufferGeometry(0.15, 30, 20),
+      new THREE.ShaderMaterial({
+        uniforms: {
+          time: {value: 0},
+          tex: {value: asset},
+          texfx: {value: assets['panoballfx_tex']},
+        },
+        vertexShader: ctx.shaders.panoball_vert,
+        fragmentShader: ctx.shaders.panoball_frag,
+        side: THREE.BackSide,
+      })
+    );
+    pano.position.copy(hall.getObjectByName(`panoball${i + 1}`).position);
+    pano.resetPosition = pano.position.clone();
+
+    panoBalls.push(pano);
+    hall.add(pano);
+  }
+}
+
+function execute(ctx, delta, time) {
+  for (let i = 0; i < panoBalls.length; i++) {
+    const ball = panoBalls[i];
+    const dist = ctx.camera.position.distanceTo(ball.position);
+    if (dist < 1) {
+      let v = ctx.camera.position.clone().sub(ball.position).multiplyScalar(0.08);
+      if (ball.scale.x < 2) {
+        ball.scale.multiplyScalar(1.1);
+      }
+      ball.position.add(v);
+
+      if (dist < 0.1){ ctx.goto = 'panorama' + i; }
+    } else {
+      ball.scale.set(1, 1, 1);
+      ball.position.copy(ball.resetPosition);
+      ball.position.y = 1.5 + Math.cos(i + time * 3) * 0.02;
+    }
+  }
+}
+
+function updateUniforms(time) {
+  panoBalls[0].material.uniforms.time.value = time;
+  panoBalls[1].material.uniforms.time.value = time;
+}
+
+
+
+/***/ }),
+
+/***/ "./src/stationXylophone.mjs":
+/*!**********************************!*\
+  !*** ./src/stationXylophone.mjs ***!
+  \**********************************/
+/*! exports provided: setup, enter, exit, execute, onSelectStart, onSelectEnd */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setup", function() { return setup; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "enter", function() { return enter; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "exit", function() { return exit; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "execute", function() { return execute; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onSelectStart", function() { return onSelectStart; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onSelectEnd", function() { return onSelectEnd; });
+var
+  listener,
+  xyloSticks = [null, null],
+  xyloStickBalls = [null, null],
+  xyloNotes = new Array(13),
+  bbox = new THREE.Box3(),
+  hallRef = null;
+
+function setup(ctx, hall) {
+  const audioLoader = new THREE.AudioLoader();
+  listener = new THREE.AudioListener();
+  hallRef = hall;
+
+  for (let i = 0; i < 13; i++) {
+    let noteName = 'xnote0' + (i < 10 ? '0' + i : i);
+    let note = hall.getObjectByName(noteName);
+    note.geometry.computeBoundingBox();
+    note.geometry.boundingBox.translate(note.position).translate(note.parent.position);
+    note.material = new THREE.MeshLambertMaterial();
+    note.material.color.setHSL(i / 13, 0.9, 0.2);
+    note.material.emissive = note.material.color.clone();
+    note.material.emissiveIntensity = 0;
+    xyloNotes[i] = note;
+    note.animation = 0;
+    note.resetY = note.position.y;
+    note.sound = new THREE.PositionalAudio(listener);
+    audioLoader.load('assets/ogg/xylophone' + i + '.ogg', buffer => {
+      note.sound.setBuffer(buffer);
+    });
+  }
+
+  xyloSticks[0] = hall.getObjectByName('xylostick-left');
+  xyloSticks[1] = hall.getObjectByName('xylostick-right');
+  xyloSticks[0].resetPosition = xyloSticks[0].position.clone();
+  xyloSticks[1].resetPosition = xyloSticks[1].position.clone();
+  xyloSticks[0].resetRotation = xyloSticks[0].rotation.clone();
+  xyloSticks[1].resetRotation = xyloSticks[1].rotation.clone();
+  xyloStickBalls[0] = hall.getObjectByName('xylostickball-left');
+  xyloStickBalls[1] = hall.getObjectByName('xylostickball-right');
+  xyloStickBalls[0].geometry.computeBoundingBox();
+  xyloStickBalls[1].geometry.computeBoundingBox();
+}
+
+function enter(ctx) {
+  ctx.camera.add(listener);
+}
+
+function exit(ctx) {
+  ctx.camera.remove(listener);
+}
+
+function execute(ctx, delta, time, controllers) {
+  for (var c = 0; c < 2; c++) {
+    if (controllers[c].grabbing === null) { continue; }
+
+    bbox.setFromObject(xyloStickBalls[c]).expandByScalar(-0.01);
+    for (var i = 0; i < xyloNotes.length; i++) {
+      let note = xyloNotes[i];
+      if (note.animation > 0) {
+        note.animation = Math.max(0, note.animation - delta * 4);
+        note.material.emissiveIntensity = note.animation;
+        note.position.y = note.resetY - note.animation * 0.005;
+        console.log(note.animation);
+      }
+
+      if (bbox.intersectsBox(note.geometry.boundingBox)) {
+        //console.log('intersection', c ,'with note', i);
+        note.sound.play();
+        note.animation = 1;
+      }
+    }
+  }
+}
+
+function onSelectStart(evt) {
+  let controller = evt.target;
+  if (controller.grabbing !== null){ return; }
+
+  // hand grabs stick
+  for (let i = 0; i < 2; i++) {
+    bbox.setFromObject(xyloSticks[i]);
+    if (controller.boundingBox.intersectsBox(bbox)){
+      xyloSticks[i].position.set(0, 0, 0);
+      xyloSticks[i].rotation.set(0, 0, 0);
+      controller.add(xyloSticks[i]);
+      controller.grabbing = xyloSticks[i];
+      return false;
+    }
+  }
+  return true;
+}
+
+function onSelectEnd(evt) {
+  let controller = evt.target;
+  if (controller.grabbing !== null) {
+    let stick = controller.grabbing;
+    hallRef.add(stick);
+    stick.position.copy(stick.resetPosition);
+    stick.rotation.copy(stick.resetRotation);
+    controller.grabbing = null;
+    return false;
+  }
+  return true;
+}
+
+
+/***/ }),
+
 /***/ "./src/text.mjs":
 /*!**********************!*\
   !*** ./src/text.mjs ***!
@@ -6809,32 +7226,6 @@ class Text extends(THREE.Object3D){
 
 
 
-
-
-/***/ }),
-
-/***/ "./src/utils.mjs":
-/*!***********************!*\
-  !*** ./src/utils.mjs ***!
-  \***********************/
-/*! exports provided: newMarker */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "newMarker", function() { return newMarker; });
-
-function newMarker(x, y, z, color){
-  const geo = new THREE.SphereBufferGeometry(0.04);
-  const mat = new THREE.MeshBasicMaterial({color: color ? color : 0xff0000});
-  const mesh = new THREE.Mesh(geo, mat);
-  if (typeof x === 'object') {
-    mesh.position.copy(x);
-  } else {
-    mesh.position.set(x, y, z);
-  }
-  return mesh;
-}
 
 
 /***/ }),
@@ -11922,8 +12313,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "enter", function() { return enter; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "exit", function() { return exit; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "execute", function() { return execute; });
-/* harmony import */ var _text_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./text.mjs */ "./src/text.mjs");
-/* harmony import */ var _utils_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils.mjs */ "./src/utils.mjs");
+/* harmony import */ var _stationPanoBalls_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./stationPanoBalls.mjs */ "./src/stationPanoBalls.mjs");
+/* harmony import */ var _stationPaintings_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./stationPaintings.mjs */ "./src/stationPaintings.mjs");
+/* harmony import */ var _stationNewsTicker_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./stationNewsTicker.mjs */ "./src/stationNewsTicker.mjs");
+/* harmony import */ var _stationXylophone_mjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./stationXylophone.mjs */ "./src/stationXylophone.mjs");
+
 
 
 
@@ -11933,31 +12327,8 @@ var
   hall,
   teleportFloor,
   fader,
-  panoBalls = [],
   objectMaterials,
-  panoFxMaterial,
-  paintings,
-  controllers,
-  listener,
-  xyloSticks = [null, null],
-  xyloStickBalls = [null, null],
-  xyloNotes = new Array(13),
-  bbox = new THREE.Box3();
-
-var zoom = {object: null, widget: null, controller: null, animation: 0};
-const PAINTINGS = ['seurat', 'sorolla', 'bosch', 'degas', 'rembrandt'];
-const PAINTINGS_RATIOS = [1, 1, 1.875, 1, 1];
-
-var newsTicker = {
-  url: 'assets/tweets.json',
-  hashtag: '#helloWebXR.',
-  hashtagText: null,
-  authorText: null,
-  messageText: null,
-  news: [],
-  current: 0
-};
-
+  controllers;
 
 function createDoorMaterial(ctx) {
   ctx.assets['doorfx_tex'].wrapT = THREE.RepeatWrapping;
@@ -12015,153 +12386,18 @@ function setup(ctx) {
     }
   });
 
-  // paintings
-
-  for (let i in PAINTINGS) {
-    let painting = PAINTINGS[i];
-    let mesh = hall.getObjectByName(painting);
-    if (!mesh) { continue; }
-
-    let paintingTexture = assets[`painting_${painting}_tex`];
-    paintingTexture.encoding = THREE.sRGBEncoding;
-    paintingTexture.flipY = false;
-    mesh.material = new THREE.MeshBasicMaterial({
-      map: paintingTexture
-    });
-    mesh.userData.paintingId = i;
-  }
-
-  paintings = hall.getObjectByName('paintings');
-
-  zoom.widget = new THREE.Mesh(new THREE.PlaneGeometry(), new THREE.MeshBasicMaterial({color:0xff0000}));
-  zoom.widget.geometry.rotateY(-Math.PI / 2);
-  zoom.widget.visible = false;
-
-  // xylophone
-  const audioLoader = new THREE.AudioLoader();
-  listener = new THREE.AudioListener();
-
-  for (let i = 0; i < 13; i++) {
-    let noteName = 'xnote0' + (i < 10 ? '0' + i : i);
-    let note = hall.getObjectByName(noteName);
-    note.geometry.computeBoundingBox();
-    note.geometry.boundingBox.translate(note.position).translate(note.parent.position);
-    note.material = new THREE.MeshLambertMaterial();
-    note.material.color.setHSL(i / 13, 0.9, 0.2);
-    note.material.emissive = note.material.color.clone();
-    note.material.emissiveIntensity = 0;
-    xyloNotes[i] = note;
-    note.animation = 0;
-    note.resetY = note.position.y;
-    note.sound = new THREE.PositionalAudio(listener);
-    audioLoader.load('assets/ogg/xylophone' + i + '.ogg', buffer => {
-      note.sound.setBuffer(buffer);
-    });
-  }
-
-  xyloSticks[0] = hall.getObjectByName('xylostick-left');
-  xyloSticks[1] = hall.getObjectByName('xylostick-right');
-  xyloSticks[0].resetPosition = xyloSticks[0].position.clone();
-  xyloSticks[1].resetPosition = xyloSticks[1].position.clone();
-  xyloSticks[0].resetRotation = xyloSticks[0].rotation.clone();
-  xyloSticks[1].resetRotation = xyloSticks[1].rotation.clone();
-  xyloStickBalls[0] = hall.getObjectByName('xylostickball-left');
-  xyloStickBalls[1] = hall.getObjectByName('xylostickball-right');
-  xyloStickBalls[0].geometry.computeBoundingBox();
-  xyloStickBalls[1].geometry.computeBoundingBox();
-
-
-  var helper = new THREE.Box3Helper(bbox, 0xff0000);
-  ctx.scene.add(helper);
-
-  // news ticker
-  const newsTickerMesh = hall.getObjectByName('newsticker');
-
-  newsTicker.hashtagText = new _text_mjs__WEBPACK_IMPORTED_MODULE_0__["Text"]({
-    font: ctx.assets['inter_bold_font'],
-    map: ctx.assets['inter_bold_tex'],
-    size: 2,
-    align: 'right',
-    anchor: 'right',
-    width: 350,
-    color: 0xdaa056
-  });
-
-  newsTicker.authorText = new _text_mjs__WEBPACK_IMPORTED_MODULE_0__["Text"]({
-    font: ctx.assets['inter_bold_font'],
-    map: ctx.assets['inter_bold_tex'],
-    size: 2,
-    width: 500,
-    color: 0x67bccd
-  });
-
-  newsTicker.messageText = new _text_mjs__WEBPACK_IMPORTED_MODULE_0__["Text"]({
-    font: ctx.assets['inter_regular_font'],
-    map: ctx.assets['inter_regular_tex'],
-    size: 2.6,
-    width: 900,
-    baseline: 'top',
-    color: 0xffffff
-  });
-
-  ['hashtag', 'author', 'message'].forEach( i => {
-    //newsTickerMesh.add(Utils.newMarker(hall.getObjectByName(i).position));
-    newsTickerMesh.add(newsTicker[`${i}Text`]);
-    newsTicker[`${i}Text`].rotation.set(-Math.PI / 2, Math.PI, 0);
-    newsTicker[`${i}Text`].position.copy(hall.getObjectByName(i).position);
-  });
-  newsTicker.hashtagText.value = newsTicker.hashtag;
-
-  fetch(newsTicker.url).then(res => res.json()).then(res => {
-    newsTicker.news = res;
-    nextNews();
-  });
-
+  _stationPaintings_mjs__WEBPACK_IMPORTED_MODULE_1__["setup"](ctx, hall);
+  _stationXylophone_mjs__WEBPACK_IMPORTED_MODULE_3__["setup"](ctx, hall);
+  _stationNewsTicker_mjs__WEBPACK_IMPORTED_MODULE_2__["setup"](ctx, hall);
+  _stationPanoBalls_mjs__WEBPACK_IMPORTED_MODULE_0__["setup"](ctx, hall);
 
   // lights
-
   const lightSun = new THREE.DirectionalLight(0xeeffff);
   lightSun.position.set(0.2, 1, 0.1);
   const lightFill = new THREE.DirectionalLight(0xfff0ee, 0.3);
   lightFill.position.set(-0.2, -1, -0.1);
 
-  // panorama balls
-
-  const panoBallsConfig = [
-    {src: 'pano1small', position: new THREE.Vector3(2.0, 1.5, 0.5)},
-    {src: 'pano2small', position: new THREE.Vector3(-2.1, 1.5, 0)}
-  ];
-
-  const panoGeo = new THREE.SphereBufferGeometry(0.15, 30, 20);
-  assets['panoballfx_tex'].wrapT = THREE.RepeatWrapping;
-  assets['panoballfx_tex'].wrapS = THREE.RepeatWrapping;
-
-  for (var i = 0; i < panoBallsConfig.length; i++) {
-    const config = panoBallsConfig[i];
-    let asset = assets[`pano${i + 1}small`];
-    asset.encoding = THREE.sRGBEncoding;
-    var pano = new THREE.Mesh(
-      new THREE.SphereBufferGeometry(0.15, 30, 20),
-      new THREE.ShaderMaterial({
-        uniforms: {
-          time: {value: 0},
-          tex: {value: asset},
-          texfx: {value: assets['panoballfx_tex']},
-        },
-        vertexShader: ctx.shaders.panoball_vert,
-        fragmentShader: ctx.shaders.panoball_frag,
-        side: THREE.BackSide,
-      })
-    );
-    pano.position.copy(hall.getObjectByName(`panoball${i + 1}`).position);
-    pano.resetPosition = pano.position.clone();
-
-    panoBalls.push(pano);
-    scene.add(pano);
-  }
-
   // fade camera to black on walls
-
   fader = new THREE.Mesh(
     new THREE.PlaneBufferGeometry(),
     new THREE.MeshBasicMaterial({color: 0x000000, transparent: true, depthTest: false})
@@ -12172,7 +12408,6 @@ function setup(ctx) {
   scene.add(lightSun);
   scene.add(lightFill);
   scene.add(hall);
-  scene.add(zoom.widget);
   ctx.camera.add(fader);
 }
 
@@ -12184,68 +12419,27 @@ function enter(ctx) {
   controllers[1].addEventListener('selectstart', onSelectStart);
   controllers[1].addEventListener('selectend', onSelectEnd);
   ctx.scene.add(scene);
-  ctx.camera.add(listener);
 
   controllers[0].grabbing = null;
   controllers[1].grabbing = null;
+
+  _stationXylophone_mjs__WEBPACK_IMPORTED_MODULE_3__["enter"](ctx);
 }
 
 function exit(ctx) {
   ctx.scene.remove(scene);
-  ctx.camera.remove(listener);
+  ctx.controllers[0].removeEventListener('selectstart', onSelectStart);
+  ctx.controllers[0].removeEventListener('selectend', onSelectEnd);
   ctx.controllers[1].removeEventListener('selectstart', onSelectStart);
   ctx.controllers[1].removeEventListener('selectend', onSelectEnd);
+
+  _stationXylophone_mjs__WEBPACK_IMPORTED_MODULE_3__["leave"](ctx);
 }
 
 function execute(ctx, delta, time) {
-
-  // pano balls
-
-  for (let i = 0; i < panoBalls.length; i++) {
-    const ball = panoBalls[i];
-    const dist = ctx.camera.position.distanceTo(ball.position);
-    if (dist < 1) {
-      let v = ctx.camera.position.clone().sub(ball.position).multiplyScalar(0.08);
-      if (ball.scale.x < 2) {
-        ball.scale.multiplyScalar(1.1);
-      }
-      ball.position.add(v);
-
-      if (dist < 0.1){ ctx.goto = 'panorama' + i; }
-    } else {
-      ball.scale.set(1, 1, 1);
-      ball.position.copy(ball.resetPosition);
-      ball.position.y = 1.5 + Math.cos(i + time * 3) * 0.02;
-    }
-  }
-
-  // paintings
-
-  if (zoom.painting) {
-    moveZoom(delta);
-  }
-
-  // xylophone
-  for (var c = 0; c < 2; c++) {
-    if (controllers[c].grabbing === null) { continue; }
-
-    bbox.setFromObject(xyloStickBalls[c]).expandByScalar(-0.01);
-    for (var i = 0; i < xyloNotes.length; i++) {
-      let note = xyloNotes[i];
-      if (note.animation > 0) {
-        note.animation = Math.max(0, note.animation - delta * 4);
-        note.material.emissiveIntensity = note.animation;
-        note.position.y = note.resetY - note.animation * 0.005;
-        console.log(note.animation);
-      }
-
-      if (note.animation < 0.5 && bbox.intersectsBox(note.geometry.boundingBox)) {
-        //console.log('intersection', c ,'with note', i);
-        note.sound.play();
-        note.animation = 1;
-      }
-    }
-  }
+  _stationPanoBalls_mjs__WEBPACK_IMPORTED_MODULE_0__["execute"](ctx, delta, time);
+  _stationPaintings_mjs__WEBPACK_IMPORTED_MODULE_1__["execute"](ctx, delta, time);
+  _stationXylophone_mjs__WEBPACK_IMPORTED_MODULE_3__["execute"](ctx, delta, time, controllers);
 
   updateUniforms(time);
   checkCameraBoundaries(ctx);
@@ -12257,8 +12451,7 @@ function updateUniforms(time) {
   objectMaterials.doorC.uniforms.time.value = time;
   objectMaterials.doorD.uniforms.time.value = time;
   objectMaterials.doorD.uniforms.selected.value = 1; //test
-  panoBalls[0].material.uniforms.time.value = time;
-  panoBalls[1].material.uniforms.time.value = time;
+  _stationPanoBalls_mjs__WEBPACK_IMPORTED_MODULE_0__["updateUniforms"](time);
 }
 
 function checkCameraBoundaries(ctx) {
@@ -12273,120 +12466,15 @@ function checkCameraBoundaries(ctx) {
   fader.material.opacity = Math.min(1, Math.max(0, fade));
 }
 
-
-var raycasterOrigin = new THREE.Vector3();
-var raycasterDirection = new THREE.Vector3();
-
+// if module returns false, do nothing else (prevents selecting two things at the same time)
 function onSelectStart(evt) {
-  let controller = evt.target;
-  if (controller.grabbing !== null){ return; }
-
-  // xylophone
-  // hand grabs stick
-  for (let i = 0; i < 2; i++) {
-    bbox.setFromObject(xyloSticks[i]);
-    if (controller.boundingBox.intersectsBox(bbox)){
-      xyloSticks[i].position.set(0, 0, 0);
-      xyloSticks[i].rotation.set(0, 0, 0);
-      controller.add(xyloSticks[i]);
-      controller.grabbing = xyloSticks[i];
-      return;
-    }
-  }
-
-  // paintings
-
-  controller.getWorldPosition(raycasterOrigin);
-  controller.getWorldDirection(raycasterDirection);
-  raycasterDirection.negate();
-
-  controller.raycaster.set(raycasterOrigin, raycasterDirection);
-  var intersects = controller.raycaster.intersectObject(paintings, true);
-
-  if (intersects.length == 0) { return; }
-
-  zoom.painting= intersects[0].object;
-  zoom.controller = controller;
-  zoom.widget.material = zoom.painting.material;
-  zoom.widget.visible = true;
-  refreshZoomUV(intersects[0]);
+  if (!_stationXylophone_mjs__WEBPACK_IMPORTED_MODULE_3__["onSelectStart"](evt)) { return; }
+  if (!_stationPaintings_mjs__WEBPACK_IMPORTED_MODULE_1__["onSelectStart"](evt)) { return; }
 }
 
 function onSelectEnd(evt) {
-  let controller = evt.target;
-  // xylophone
-  if (controller.grabbing !== null) {
-    let stick = controller.grabbing;
-    hall.add(stick);
-    stick.position.copy(stick.resetPosition);
-    stick.rotation.copy(stick.resetRotation);
-    controller.grabbing = null;
-    return;
-  }
-
-  // paintings
-  if (zoom.painting) {
-    zoom.painting = null;
-    zoom.animation = 0;
-    zoom.widget.visible = false;
-  }
-}
-
-function moveZoom(delta) {
-
-  if (zoom.animation < 1) {
-    zoom.animation += (1 - zoom.animation) * delta * 4.0;
-  }
-  const controller = zoom.controller;
-  controller.getWorldPosition(raycasterOrigin);
-  controller.getWorldDirection(raycasterDirection);
-  raycasterDirection.negate();
-
-  controller.raycaster.set(raycasterOrigin, raycasterDirection);
-  var intersects = controller.raycaster.intersectObject(paintings, true);
-  if (intersects.length == 0 || intersects[0].object !== zoom.painting) { return; }
-
-  refreshZoomUV(intersects[0]);
-}
-
-var minUV = new THREE.Vector2();
-var maxUV = new THREE.Vector2();
-const zoomAmount = 0.05;
-
-function refreshZoomUV(hit) {
-
-  zoom.widget.position.copy(hit.point);
-  zoom.widget.position.x -= 0.3 * zoom.animation;
-
-  const uvs = zoom.widget.geometry.faceVertexUvs[0];
-  const ratio = PAINTINGS_RATIOS[zoom.painting.userData.paintingId];
-  //const amount = zoomAmount  // TODO: adjust zoom amount depending on hit.distance
-  hit.uv.clampScalar(zoomAmount, 1 - zoomAmount);
-  minUV.set(hit.uv.x - zoomAmount, hit.uv.y + zoomAmount * ratio);
-  maxUV.set(hit.uv.x + zoomAmount, hit.uv.y - zoomAmount * ratio);
-  uvs[0][0].x = minUV.x;
-  uvs[0][0].y = maxUV.y;
-  uvs[0][1].x = minUV.x;
-  uvs[0][1].y = minUV.y;
-  uvs[0][2].x = maxUV.x;
-  uvs[0][2].y = maxUV.y;
-
-  uvs[1][0].x = minUV.x;
-  uvs[1][0].y = minUV.y;
-  uvs[1][1].x = maxUV.x;
-  uvs[1][1].y = minUV.y;
-  uvs[1][2].x = maxUV.x;
-  uvs[1][2].y = maxUV.y;
-  zoom.widget.geometry.uvsNeedUpdate = true;
-}
-
-
-function nextNews() {
-  const n = newsTicker;
-  n.authorText.value = n.news[n.current].author;
-  n.messageText.value = n.news[n.current].message;
-  n.current = (n.current + 1) % n.news.length;
-  setTimeout(nextNews, 3000);
+  if (!_stationXylophone_mjs__WEBPACK_IMPORTED_MODULE_3__["onSelectEnd"](evt)) { return; }
+  if (!_stationPaintings_mjs__WEBPACK_IMPORTED_MODULE_1__["onSelectEnd"](evt)) { return; }
 }
 
 
