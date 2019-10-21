@@ -8,6 +8,8 @@ var
   bbox = new THREE.Box3(),
   hallRef = null;
 
+var auxVec = new THREE.Vector3();
+
 var NUM_NOTES = 13;
 
 var stickNotesColliding = [
@@ -46,6 +48,8 @@ export function setup(ctx, hall) {
   xyloSticks[1].userData.resetRotation = xyloSticks[1].rotation.clone();
   xyloSticks[0].userData.grabbedBy = null;
   xyloSticks[1].userData.grabbedBy = null;
+  xyloSticks[0].userData.animation = 0;
+  xyloSticks[1].userData.animation = 0;
   xyloStickBalls[0] = hall.getObjectByName('xylostickball-left');
   xyloStickBalls[1] = hall.getObjectByName('xylostickball-right');
   xyloStickBalls[0].geometry.computeBoundingBox();
@@ -71,7 +75,6 @@ export function execute(ctx, delta, time, controllers) {
         note.userData.animation = Math.max(0, note.userData.animation - delta * 4);
         note.material.emissiveIntensity = note.userData.animation;
         note.position.y = note.userData.resetY - note.userData.animation * 0.005;
-        console.log(note.userData.animation);
       }
 
       if (bbox.intersectsBox(note.geometry.boundingBox)) {
@@ -85,6 +88,14 @@ export function execute(ctx, delta, time, controllers) {
         stickNotesColliding[c][i] = false;
       }
     }
+
+    if (xyloSticks[c].userData.animation > 0){
+      xyloSticks[c].userData.animation = Math.max(0, xyloSticks[c].userData.animation - delta * 4);
+      auxVec.copy(xyloSticks[c].userData.resetPosition);
+      auxVec.addScaledVector(xyloSticks[c].position, -xyloSticks[c].userData.animation);
+      xyloSticks[c].position.add(auxVec);
+    }
+
   }
 }
 
@@ -115,10 +126,12 @@ export function onSelectEnd(evt) {
   let controller = evt.target;
   if (controller.grabbing !== null) {
     let stick = controller.grabbing;
+    stick.position.getWorldPosition(auxVec);
     hallRef.add(stick);
-    stick.position.copy(stick.userData.resetPosition);
+    stick.position.copy(auxVec);
     stick.rotation.copy(stick.userData.resetRotation);
     stick.userData.grabbedBy = null;
+    stick.userData.animation = 1;
     controller.grabbing = null;
     return false;
   }
