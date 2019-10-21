@@ -12692,15 +12692,22 @@ function setup(ctx) {
   cloudsTex.encoding = THREE.sRGBEncoding;
   cloudsTex.flipY = false;
 
+  const hallMaterial = new THREE.MeshBasicMaterial({map: hallLightmapTex});
+
   objectMaterials = {
-    hall: new THREE.MeshBasicMaterial({map: hallLightmapTex}),
-    lightpanels: new THREE.MeshBasicMaterial(),
-    doorA: createDoorMaterial(ctx),
-    doorB: createDoorMaterial(ctx),
-    doorC: createDoorMaterial(ctx),
-    doorD: createDoorMaterial(ctx),
-    sky: new THREE.MeshBasicMaterial({map: skyTex}),
-    clouds: new THREE.MeshBasicMaterial({map: cloudsTex, transparent: true})
+    'hall': hallMaterial,
+    'xylophone': hallMaterial,
+    'xylostick-left': hallMaterial,
+    'xylostick-right': hallMaterial,
+    'xylostickball-left': hallMaterial,
+    'xylostickball-right': hallMaterial,
+    'lightpanels': new THREE.MeshBasicMaterial(),
+    'doorA': createDoorMaterial(ctx),
+    'doorB': createDoorMaterial(ctx),
+    'doorC': createDoorMaterial(ctx),
+    'doorD': createDoorMaterial(ctx),
+    'sky': new THREE.MeshBasicMaterial({map: skyTex}),
+    'clouds': new THREE.MeshBasicMaterial({map: cloudsTex, transparent: true}),
   };
 
   hall = assets['hall_model'].scene;
