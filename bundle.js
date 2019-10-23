@@ -6758,7 +6758,8 @@ function init() {
     renderer: renderer,
     camera: camera,
     cameraRig: cameraRig,
-    controllers: [controller1, controller2]
+    controllers: [controller1, controller2],
+    message: {text: '', data: null} // for message passing among worlds
   };
 
   window.ctx = context;
@@ -6794,7 +6795,8 @@ function setupControllers() {
   controller2.add(model.clone());
   controller1.boundingBox = new THREE.Box3();
   controller2.boundingBox = new THREE.Box3();
-
+  controller1.grabbing = null;
+  controller2.grabbing = null;
 }
 
 function onSelectStart(ev) {
@@ -6818,12 +6820,21 @@ function animate() {
   var delta = clock.getDelta();
   var elapsedTime = clock.elapsedTime;
   context.goto = null;
+  context.message = {text: '', data: null};
   // update controller bounding boxes
-  controller1.boundingBox.setFromObject(controller1);
-  controller2.boundingBox.setFromObject(controller2);
+  controller1.boundingBox.setFromObject(controller1.children[0]);
+  controller2.boundingBox.setFromObject(controller2.children[0]);
   // render current world
   worlds[currentWorld].execute(context, delta, elapsedTime);
   renderer.render(scene, camera);
+
+  if (context.goto !== null) {
+    switch(context.goto){
+      case 'hall': gotoWorld(0); break;
+      case 'panorama0': gotoWorld(6); break;
+      case 'panorama1': gotoWorld(7); break;
+    }
+  }
 }
 
 window.onload = () => {init()};
@@ -7246,7 +7257,7 @@ function refreshZoomUV(hit) {
 /*!**********************************!*\
   !*** ./src/stationPanoBalls.mjs ***!
   \**********************************/
-/*! exports provided: setup, execute, updateUniforms */
+/*! exports provided: setup, execute, updateUniforms, onSelectStart, onSelectEnd, releaseBall */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7254,27 +7265,30 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setup", function() { return setup; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "execute", function() { return execute; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateUniforms", function() { return updateUniforms; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onSelectStart", function() { return onSelectStart; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onSelectEnd", function() { return onSelectEnd; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "releaseBall", function() { return releaseBall; });
 var
   panoBalls = [],
-  panoFxMaterial;
+  bbox = new THREE.Box3(),
+  panoFxMaterial,
+  auxVec = new THREE.Vector3(),
+  hallRef = null;
 
+const NUM_PANOBALLS = 2;
 
 function setup(ctx, hall) {
-  const panoBallsConfig = [
-    {src: 'pano1small', position: new THREE.Vector3(2.0, 1.5, 0.5)},
-    {src: 'pano2small', position: new THREE.Vector3(-2.1, 1.5, 0)}
-  ];
   const assets = ctx.assets;
+  hallRef = hall;
 
   const panoGeo = new THREE.SphereBufferGeometry(0.15, 30, 20);
   assets['panoballfx_tex'].wrapT = THREE.RepeatWrapping;
   assets['panoballfx_tex'].wrapS = THREE.RepeatWrapping;
 
-  for (var i = 0; i < panoBallsConfig.length; i++) {
-    const config = panoBallsConfig[i];
+  for (var i = 0; i < NUM_PANOBALLS; i++) {
     let asset = assets[`pano${i + 1}small`];
     asset.encoding = THREE.sRGBEncoding;
-    var pano = new THREE.Mesh(
+    var ball = new THREE.Mesh(
       new THREE.SphereBufferGeometry(0.15, 30, 20),
       new THREE.ShaderMaterial({
         uniforms: {
@@ -7287,30 +7301,49 @@ function setup(ctx, hall) {
         side: THREE.BackSide,
       })
     );
-    pano.position.copy(hall.getObjectByName(`panoball${i + 1}`).position);
-    pano.resetPosition = pano.position.clone();
+    ball.position.copy(hall.getObjectByName(`panoball${i + 1}`).position);
+    ball.userData.grabbedBy = null;
+    ball.userData.animation = 0;
+    ball.userData.panoId = i;
+    ball.userData.resetPosition = ball.position.clone();
 
-    panoBalls.push(pano);
-    hall.add(pano);
+    panoBalls.push(ball);
+    hall.add(ball);
   }
 }
 
 function execute(ctx, delta, time) {
+
+  // animate balls
   for (let i = 0; i < panoBalls.length; i++) {
     const ball = panoBalls[i];
-    const dist = ctx.camera.position.distanceTo(ball.position);
-    if (dist < 1) {
-      let v = ctx.camera.position.clone().sub(ball.position).multiplyScalar(0.08);
-      if (ball.scale.x < 2) {
-        ball.scale.multiplyScalar(1.1);
-      }
-      ball.position.add(v);
-
-      if (dist < 0.1){ ctx.goto = 'panorama' + i; }
+    ball.visible = true;
+    if (ball.userData.grabbedBy){
+      // on hand
+      ball.position.y = Math.cos(i + time * 3) * 0.02;
     } else {
-      ball.scale.set(1, 1, 1);
-      ball.position.copy(ball.resetPosition);
+      // on pillar
+      ball.position.copy(ball.userData.resetPosition);
       ball.position.y = 1.5 + Math.cos(i + time * 3) * 0.02;
+    }
+    if (ball.userData.animation > 0) {
+      ball.userData.animation = Math.max(0, ball.userData.animation - delta * 4);
+      auxVec.copy(ball.userData.resetPosition);
+      auxVec.addScaledVector(ball.position, -ball.userData.animation);
+      ball.position.add(auxVec);
+    }
+  }
+
+  for (let i = 0; i < ctx.controllers.length; i++) {
+    let controller = ctx.controllers[i];
+    console.log(controller.grabbing);
+    if (!controller.grabbing) { continue; }
+    const dist = ctx.camera.position.distanceTo(controller.position);
+    if (dist < 0.2) {
+      // on head. Hide ball and change world
+      controller.grabbing.visible = false;
+      ctx.goto = 'panorama' + controller.grabbing.userData.panoId;
+      return;
     }
   }
 }
@@ -7320,6 +7353,53 @@ function updateUniforms(time) {
   panoBalls[1].material.uniforms.time.value = time;
 }
 
+function onSelectStart(evt) {
+  let controller = evt.target;
+  if (controller.grabbing !== null){ return; }
+
+  // hand grabs stick
+  for (let i = 0; i < panoBalls.length; i++) {
+    bbox.setFromObject(panoBalls[i]);
+    if (controller.boundingBox.intersectsBox(bbox)){
+      // stick grabbed from the other hand
+      if (panoBalls[i].userData.grabbedBy) { return; }
+      setVisibleChildren(controller, false);
+      panoBalls[i].position.set(0, 0, 0);
+      panoBalls[i].rotation.set(0, 0, 0);
+      controller.add(panoBalls[i]);
+      controller.grabbing = panoBalls[i];
+      panoBalls[i].userData.grabbedBy = controller;
+      return false;
+    }
+  }
+  return true;
+}
+
+function onSelectEnd(evt) {
+  let controller = evt.target;
+  if (controller.grabbing !== null) {
+    releaseBall(controller);
+    return false;
+  }
+  return true;
+}
+
+function releaseBall(controller){
+  if (!controller || !controller.grabbing) { return; }
+  let ball = controller.grabbing;
+  ball.position.copy(controller.position);
+  hallRef.add(ball);
+  ball.userData.grabbedBy = null;
+  ball.userData.animation = 1;
+  controller.grabbing = null;
+  setVisibleChildren(controller, true);
+}
+
+function setVisibleChildren(controller, visible) {
+  for (var i = 0; i < controller.children.length; i++) {
+    controller.children[i].visible = visible;
+  }
+}
 
 
 /***/ }),
@@ -7349,6 +7429,8 @@ var
   xyloNotes = new Array(13),
   bbox = new THREE.Box3(),
   hallRef = null;
+
+var auxVec = new THREE.Vector3();
 
 var NUM_NOTES = 13;
 
@@ -7388,6 +7470,8 @@ function setup(ctx, hall) {
   xyloSticks[1].userData.resetRotation = xyloSticks[1].rotation.clone();
   xyloSticks[0].userData.grabbedBy = null;
   xyloSticks[1].userData.grabbedBy = null;
+  xyloSticks[0].userData.animation = 0;
+  xyloSticks[1].userData.animation = 0;
   xyloStickBalls[0] = hall.getObjectByName('xylostickball-left');
   xyloStickBalls[1] = hall.getObjectByName('xylostickball-right');
   xyloStickBalls[0].geometry.computeBoundingBox();
@@ -7413,7 +7497,6 @@ function execute(ctx, delta, time, controllers) {
         note.userData.animation = Math.max(0, note.userData.animation - delta * 4);
         note.material.emissiveIntensity = note.userData.animation;
         note.position.y = note.userData.resetY - note.userData.animation * 0.005;
-        console.log(note.userData.animation);
       }
 
       if (bbox.intersectsBox(note.geometry.boundingBox)) {
@@ -7427,6 +7510,14 @@ function execute(ctx, delta, time, controllers) {
         stickNotesColliding[c][i] = false;
       }
     }
+
+    if (xyloSticks[c].userData.animation > 0){
+      xyloSticks[c].userData.animation = Math.max(0, xyloSticks[c].userData.animation - delta * 4);
+      auxVec.copy(xyloSticks[c].userData.resetPosition);
+      auxVec.addScaledVector(xyloSticks[c].position, -xyloSticks[c].userData.animation);
+      xyloSticks[c].position.add(auxVec);
+    }
+
   }
 }
 
@@ -7457,10 +7548,12 @@ function onSelectEnd(evt) {
   let controller = evt.target;
   if (controller.grabbing !== null) {
     let stick = controller.grabbing;
+    stick.position.getWorldPosition(auxVec);
     hallRef.add(stick);
-    stick.position.copy(stick.userData.resetPosition);
+    stick.position.copy(auxVec);
     stick.rotation.copy(stick.userData.resetRotation);
     stick.userData.grabbedBy = null;
+    stick.userData.animation = 1;
     controller.grabbing = null;
     return false;
   }
@@ -12759,10 +12852,11 @@ function enter(ctx) {
   controllers[1].addEventListener('selectend', onSelectEnd);
   ctx.scene.add(scene);
 
-  controllers[0].grabbing = null;
-  controllers[1].grabbing = null;
-
   _stationXylophone_mjs__WEBPACK_IMPORTED_MODULE_3__["enter"](ctx);
+
+  if (ctx.message.text == 'selectEnd'){
+    _stationPanoBalls_mjs__WEBPACK_IMPORTED_MODULE_0__["releaseBall"](ctx.message.data);
+  }
 }
 
 function exit(ctx) {
@@ -12810,12 +12904,14 @@ function checkCameraBoundaries(ctx) {
 function onSelectStart(evt) {
 //  if (!xylophone.onSelectStart(evt)) { return; }
 //  if (!paintings.onSelectStart(evt)) { return; }
+  if (!_stationPanoBalls_mjs__WEBPACK_IMPORTED_MODULE_0__["onSelectStart"](evt)) { return; }
   if (!teleport.onSelectStart(evt)) { return; }
 }
 
 function onSelectEnd(evt) {
 //  if (!xylophone.onSelectEnd(evt)) { return; }
 //  if (!paintings.onSelectEnd(evt)) { return; }
+  if (!_stationPanoBalls_mjs__WEBPACK_IMPORTED_MODULE_0__["onSelectEnd"](evt)) { return; }
   if (!teleport.onSelectEnd(evt)) { return; }
 }
 
@@ -12826,7 +12922,7 @@ function onSelectEnd(evt) {
 /*!*******************************!*\
   !*** ./src/worldPanorama.mjs ***!
   \*******************************/
-/*! exports provided: setup, enter, exit, execute */
+/*! exports provided: setup, enter, exit, execute, onSelectEnd */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12835,7 +12931,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "enter", function() { return enter; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "exit", function() { return exit; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "execute", function() { return execute; });
-var pano = null;
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onSelectEnd", function() { return onSelectEnd; });
+var pano = null, controller = null, exitRequested;
 
 function setup(ctx) {
   const assets = ctx.assets;
@@ -12849,15 +12946,42 @@ function setup(ctx) {
 function enter(ctx) {
   ctx.renderer.setClearColor(0x000000);
   ctx.scene.add(pano);
+  // get controller close to head
+  for (var i = 0; i < ctx.controllers.length; i++) {
+    const dist = ctx.camera.position.distanceTo(ctx.controllers[i].position);
+    if (dist < 0.2){
+      controller = ctx.controllers[i];
+      controller.addEventListener('selectend', onSelectEnd);
+      break;
+    }
+  }
+  exitRequested = false;
 }
 
 function exit(ctx) {
   ctx.scene.remove(pano);
+  controller.removeEventListener('selectend', onSelectEnd);
 }
 
 function execute(ctx, delta, time) {
+  if (!controller || exitRequested) {
+    if (exitRequested) {
+      ctx.message.text = 'selectEnd'; // send a selectEnd message to stationPanoBalls.mjs
+      ctx.message.data = controller;
+    }
+    ctx.goto = 'hall';
+    return;
+  }
+  const dist = ctx.camera.position.distanceTo(controller.position);
+  if (dist > 0.5){
+    ctx.goto = 'hall';
+    return;
+  }
 }
 
+function onSelectEnd(evt) {
+  exitRequested = true;
+}
 
 
 /***/ }),

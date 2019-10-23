@@ -156,7 +156,8 @@ export function init() {
     renderer: renderer,
     camera: camera,
     cameraRig: cameraRig,
-    controllers: [controller1, controller2]
+    controllers: [controller1, controller2],
+    message: {text: '', data: null} // for message passing among worlds
   };
 
   window.ctx = context;
@@ -192,7 +193,8 @@ function setupControllers() {
   controller2.add(model.clone());
   controller1.boundingBox = new THREE.Box3();
   controller2.boundingBox = new THREE.Box3();
-
+  controller1.grabbing = null;
+  controller2.grabbing = null;
 }
 
 function onSelectStart(ev) {
@@ -216,12 +218,21 @@ function animate() {
   var delta = clock.getDelta();
   var elapsedTime = clock.elapsedTime;
   context.goto = null;
+  context.message = {text: '', data: null};
   // update controller bounding boxes
-  controller1.boundingBox.setFromObject(controller1);
-  controller2.boundingBox.setFromObject(controller2);
+  controller1.boundingBox.setFromObject(controller1.children[0]);
+  controller2.boundingBox.setFromObject(controller2.children[0]);
   // render current world
   worlds[currentWorld].execute(context, delta, elapsedTime);
   renderer.render(scene, camera);
+
+  if (context.goto !== null) {
+    switch(context.goto){
+      case 'hall': gotoWorld(0); break;
+      case 'panorama0': gotoWorld(6); break;
+      case 'panorama1': gotoWorld(7); break;
+    }
+  }
 }
 
 window.onload = () => {init()};

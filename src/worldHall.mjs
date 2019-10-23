@@ -112,10 +112,11 @@ export function enter(ctx) {
   controllers[1].addEventListener('selectend', onSelectEnd);
   ctx.scene.add(scene);
 
-  controllers[0].grabbing = null;
-  controllers[1].grabbing = null;
-
   xylophone.enter(ctx);
+
+  if (ctx.message.text == 'selectEnd'){
+    panoballs.releaseBall(ctx.message.data);
+  }
 }
 
 export function exit(ctx) {
@@ -163,11 +164,13 @@ function checkCameraBoundaries(ctx) {
 function onSelectStart(evt) {
 //  if (!xylophone.onSelectStart(evt)) { return; }
 //  if (!paintings.onSelectStart(evt)) { return; }
+  if (!panoballs.onSelectStart(evt)) { return; }
   if (!teleport.onSelectStart(evt)) { return; }
 }
 
 function onSelectEnd(evt) {
 //  if (!xylophone.onSelectEnd(evt)) { return; }
 //  if (!paintings.onSelectEnd(evt)) { return; }
+  if (!panoballs.onSelectEnd(evt)) { return; }
   if (!teleport.onSelectEnd(evt)) { return; }
 }
