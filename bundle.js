@@ -6218,10 +6218,297 @@ function extend() {
 
 /***/ }),
 
-/***/ "./src/PositionalAudioPolyphonic.mjs":
-/*!*******************************************!*\
-  !*** ./src/PositionalAudioPolyphonic.mjs ***!
-  \*******************************************/
+/***/ "./src/index.mjs":
+/*!***********************!*\
+  !*** ./src/index.mjs ***!
+  \***********************/
+/*! exports provided: init */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "init", function() { return init; });
+/* harmony import */ var _vendor_PointerLockControls_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./vendor/PointerLockControls.js */ "./src/vendor/PointerLockControls.js");
+/* harmony import */ var _vendor_PointerLockControls_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_vendor_PointerLockControls_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _vendor_WebVR_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./vendor/WebVR.js */ "./src/vendor/WebVR.js");
+/* harmony import */ var _lib_assetManager_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./lib/assetManager.mjs */ "./src/lib/assetManager.mjs");
+/* harmony import */ var _vendor_BasisTextureLoader_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./vendor/BasisTextureLoader.js */ "./src/vendor/BasisTextureLoader.js");
+/* harmony import */ var _vendor_BasisTextureLoader_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_vendor_BasisTextureLoader_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _worlds_Hall_mjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./worlds/Hall.mjs */ "./src/worlds/Hall.mjs");
+/* harmony import */ var _worlds_Panorama_mjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./worlds/Panorama.mjs */ "./src/worlds/Panorama.mjs");
+/* harmony import */ var _worlds_PanoramaStereo_mjs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./worlds/PanoramaStereo.mjs */ "./src/worlds/PanoramaStereo.mjs");
+/* harmony import */ var _worlds_PhotogrammetryObject_mjs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./worlds/PhotogrammetryObject.mjs */ "./src/worlds/PhotogrammetryObject.mjs");
+/* harmony import */ var _worlds_City_mjs__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./worlds/City.mjs */ "./src/worlds/City.mjs");
+/* harmony import */ var _worlds_Elevator_mjs__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./worlds/Elevator.mjs */ "./src/worlds/Elevator.mjs");
+/* harmony import */ var _worlds_Vertigo_mjs__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./worlds/Vertigo.mjs */ "./src/worlds/Vertigo.mjs");
+/* harmony import */ var _worlds_Sound_mjs__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./worlds/Sound.mjs */ "./src/worlds/Sound.mjs");
+/* harmony import */ var _lib_shaders_mjs__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./lib/shaders.mjs */ "./src/lib/shaders.mjs");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var clock = new THREE.Clock();
+
+var scene, parent, renderer, camera, controls, context;
+var controller1, controller2;
+
+var worlds = [
+  _worlds_Hall_mjs__WEBPACK_IMPORTED_MODULE_4__,
+  _worlds_Sound_mjs__WEBPACK_IMPORTED_MODULE_11__,
+  _worlds_PhotogrammetryObject_mjs__WEBPACK_IMPORTED_MODULE_7__,
+  _worlds_Vertigo_mjs__WEBPACK_IMPORTED_MODULE_10__,
+  _worlds_City_mjs__WEBPACK_IMPORTED_MODULE_8__,
+  _worlds_Elevator_mjs__WEBPACK_IMPORTED_MODULE_9__,
+  _worlds_Panorama_mjs__WEBPACK_IMPORTED_MODULE_5__,
+  _worlds_PanoramaStereo_mjs__WEBPACK_IMPORTED_MODULE_6__,
+];
+
+const worldNames = [
+  'hall',
+  'sound',
+  'photogrammetry',
+  'vertigo',
+  'city',
+  'elevator',
+  'panorama',
+  'panoramastereo'
+];
+
+const urlObject = new URL(window.location);
+const worldName = urlObject.searchParams.get('stage');
+var currentWorld = worldNames.indexOf(worldName) !== -1 ? worldNames.indexOf(worldName) : 0;
+console.log(`Current world "${worldNames[currentWorld]}", ${currentWorld}`);
+
+var assets = {
+  // fonts
+  inter_bold_font: 'fonts/Inter-Bold.font',
+  inter_bold_tex: 'fonts/Inter-Bold.png',
+  inter_regular_font: 'fonts/Inter-Regular.font',
+  inter_regular_tex: 'fonts/Inter-Regular.png',
+  metropolis_bold_font: 'fonts/Metropolis-Bold.font',
+  metropolis_bold_tex: 'fonts/Metropolis-Bold.png',
+
+  //
+  hall_model: 'hall.glb',
+  city_model: 'city.glb',
+  vertigo_model: 'vertigo2.gltf',
+  elevator_model: 'elevator.glb',
+  generic_controller_model: 'generic_controller.glb',
+  lightmap_tex: 'lightmap.png',
+  travertine_tex: 'travertine.png',
+  travertine2_tex: 'travertine2.jpg',
+  controller_tex: 'controller.png',
+  pano1: 'zapporthorn.basis',
+  pano1small: 'zapporthorn_small.jpg',
+  doorfx_tex: 'doorfx.png',
+  pano2small: 'andes_small.jpg',
+  panoballfx_tex: 'ballfx.jpg',
+  andesL: 'andesL.jpg',
+  andesR: 'andesR.jpg',
+  elevator_lm_tex: 'elevator_lm.png',
+  lanes01_tex: 'lanes01.jpg',
+  pavement_tex: 'pavement.jpg',
+  checkboard_tex: 'checkboard.png',
+  vertigo_lm_tex: 'vertigo2_lm.jpg',
+  sky_tex: 'sky.png',
+  clouds_tex: 'clouds.png',
+
+  // sound
+  sound_model: 'sound.glb',
+  sound_shadow_tex: 'sound_shadow.png',
+
+  // photogrammetry object
+  pg_floor_tex: 'travertine2.jpg',
+  pg_floor_lm_tex: 'angel_floor_lm.jpg',
+  pg_object_tex: 'angel.basis',
+  pg_object_model: 'angel.glb', // TODO: try draco version, angel.min.glb
+  pg_bg_tex: 'pg_bg.jpg',
+  pg_flare_tex: 'flare.jpg',
+  pg_panel_tex: 'panel.jpg',
+
+  // paintings
+  painting_seurat_tex: 'paintings/seurat.basis',
+  painting_sorolla_tex: 'paintings/sorolla.basis',
+  painting_bosch_tex: 'paintings/bosch.basis',
+  painting_degas_tex: 'paintings/degas.basis',
+  painting_rembrandt_tex: 'paintings/rembrandt.basis',
+};
+
+function gotoWorld(world) {
+  worlds[currentWorld].exit(context);
+  currentWorld = world;
+  worlds[currentWorld].enter(context);
+}
+
+function init() {
+  var w = 100;
+  scene = new THREE.Scene();
+  camera = new THREE.PerspectiveCamera(80, window.innerWidth / window.innerHeight, 0.005, 10000);
+  camera.position.set(0, 1.6, 0);
+  camera.position.set(1.5, 1.6, 2.3); //near pano1
+  controls = new THREE.PointerLockControls(camera);
+  document.body.addEventListener('click', () => controls.lock());
+  document.body.addEventListener('keydown', ev => {
+    switch(ev.keyCode) {
+      case 87: controls.moveForward(0.2); break;
+      case 65: controls.moveRight(-0.2); break;
+      case 83: controls.moveForward(-0.2); break;
+      case 68: controls.moveRight(0.2); break;
+      case 78: gotoWorld((currentWorld + 1) % worlds.length); break;
+      default: {
+        var world = ev.keyCode - 48;
+        if (world >= 0 && world < worlds.length) {
+          gotoWorld(world);
+        }
+      }
+    }
+  });
+  scene.add(controls.getObject());
+
+  parent = new THREE.Object3D();
+  scene.add(parent);
+
+  renderer = new THREE.WebGLRenderer({antialias: true, logarithmicDepthBuffer: false});
+  renderer.gammaOutput = true;
+  renderer.gammaFactor = 2.2;
+  renderer.setPixelRatio( window.devicePixelRatio );
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.vr.enabled = true;
+
+  window.addEventListener('resize', onWindowResize, false);
+  setInterval(()=>{
+    console.log('render calls:', renderer.info.render.calls);
+  }, 2000);
+
+  controller1 = renderer.vr.getController(0);
+  //scene.add(controller1);
+  controller1.addEventListener('selectstart', onSelectStart);
+  controller1.addEventListener('selectend', onSelectEnd);
+
+  controller2 = renderer.vr.getController(1);
+  //scene.add(controller2);
+  controller1.raycaster = new THREE.Raycaster();
+  controller1.raycaster.near = 0.1;
+
+  controller2.raycaster = new THREE.Raycaster();
+  controller2.raycaster.near = 0.1;
+  //controller2.raycaster.far = 3;
+  controller2.addEventListener('selectstart', onSelectStart);
+  controller2.addEventListener('selectend', onSelectEnd);
+
+  var cameraRig = new THREE.Group();
+  cameraRig.add(camera);
+  cameraRig.add(controller1);
+  cameraRig.add(controller2);
+  scene.add(cameraRig);
+
+  context = {
+    assets: assets,
+    shaders: _lib_shaders_mjs__WEBPACK_IMPORTED_MODULE_12__["shaders"],
+    scene : parent,
+    renderer: renderer,
+    camera: camera,
+    cameraRig: cameraRig,
+    controllers: [controller1, controller2],
+    message: {text: '', data: null} // for message passing among worlds
+  };
+
+  window.ctx = context;
+
+  Object(_lib_assetManager_mjs__WEBPACK_IMPORTED_MODULE_2__["loadAssets"])(renderer, '../assets/', assets, () => {
+    setupControllers();
+    _worlds_Hall_mjs__WEBPACK_IMPORTED_MODULE_4__["setup"](context);
+    _worlds_Panorama_mjs__WEBPACK_IMPORTED_MODULE_5__["setup"](context);
+    _worlds_PanoramaStereo_mjs__WEBPACK_IMPORTED_MODULE_6__["setup"](context);
+    _worlds_PhotogrammetryObject_mjs__WEBPACK_IMPORTED_MODULE_7__["setup"](context);
+    _worlds_City_mjs__WEBPACK_IMPORTED_MODULE_8__["setup"](context);
+    _worlds_Elevator_mjs__WEBPACK_IMPORTED_MODULE_9__["setup"](context);
+    _worlds_Vertigo_mjs__WEBPACK_IMPORTED_MODULE_10__["setup"](context);
+    _worlds_Sound_mjs__WEBPACK_IMPORTED_MODULE_11__["setup"](context);
+
+    worlds[currentWorld].enter(context);
+
+    document.body.appendChild( renderer.domElement );
+    document.body.appendChild(_vendor_WebVR_js__WEBPACK_IMPORTED_MODULE_1__["WEBVR"].createButton(renderer));
+    renderer.setAnimationLoop(animate);
+  })
+}
+
+function setupControllers() {
+  var model = assets['generic_controller_model'].scene;
+  var material = new THREE.MeshLambertMaterial({
+    map: assets['controller_tex'],
+  });
+  model.getObjectByName('body').material = material;
+  model.getObjectByName('trigger').material = material;
+  controller1.add(model);
+  controller2.add(model.clone());
+  controller1.boundingBox = new THREE.Box3();
+  controller2.boundingBox = new THREE.Box3();
+  controller1.grabbing = null;
+  controller2.grabbing = null;
+}
+
+function onSelectStart(ev) {
+  const trigger = ev.target.getObjectByName('trigger');
+  trigger.rotation.x = -0.3;
+  //gotoWorld((currentWorld + 1) % worlds.length);
+}
+
+function onSelectEnd(ev) {
+  const trigger = ev.target.getObjectByName('trigger');
+  trigger.rotation.x = 0;
+}
+
+function onWindowResize() {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+}
+
+function animate() {
+  var delta = clock.getDelta();
+  var elapsedTime = clock.elapsedTime;
+  context.goto = null;
+  context.message = {text: '', data: null};
+  // update controller bounding boxes
+  controller1.boundingBox.setFromObject(controller1.children[0]);
+  controller2.boundingBox.setFromObject(controller2.children[0]);
+  // render current world
+  worlds[currentWorld].execute(context, delta, elapsedTime);
+  renderer.render(scene, camera);
+
+  if (context.goto !== null) {
+    switch(context.goto){
+      case 'hall': gotoWorld(0); break;
+      case 'panorama0': gotoWorld(6); break;
+      case 'panorama1': gotoWorld(7); break;
+    }
+  }
+}
+
+window.onload = () => {init()};
+
+
+/***/ }),
+
+/***/ "./src/lib/PositionalAudioPolyphonic.mjs":
+/*!***********************************************!*\
+  !*** ./src/lib/PositionalAudioPolyphonic.mjs ***!
+  \***********************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -6269,10 +6556,10 @@ class PositionalAudioPolyphonic extends THREE.Object3D {
 
 /***/ }),
 
-/***/ "./src/RayCurve.mjs":
-/*!**************************!*\
-  !*** ./src/RayCurve.mjs ***!
-  \**************************/
+/***/ "./src/lib/RayCurve.mjs":
+/*!******************************!*\
+  !*** ./src/lib/RayCurve.mjs ***!
+  \******************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -6340,17 +6627,17 @@ class RayCurve {
 
 /***/ }),
 
-/***/ "./src/Teleport.mjs":
-/*!**************************!*\
-  !*** ./src/Teleport.mjs ***!
-  \**************************/
+/***/ "./src/lib/Teleport.mjs":
+/*!******************************!*\
+  !*** ./src/lib/Teleport.mjs ***!
+  \******************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Teleport; });
-/* harmony import */ var _RayCurve_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RayCurve.mjs */ "./src/RayCurve.mjs");
+/* harmony import */ var _RayCurve_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RayCurve.mjs */ "./src/lib/RayCurve.mjs");
 
 
 var tempMatrix = new THREE.Matrix4();
@@ -6510,19 +6797,19 @@ class Teleport {
 
 /***/ }),
 
-/***/ "./src/assetManager.mjs":
-/*!******************************!*\
-  !*** ./src/assetManager.mjs ***!
-  \******************************/
+/***/ "./src/lib/assetManager.mjs":
+/*!**********************************!*\
+  !*** ./src/lib/assetManager.mjs ***!
+  \**********************************/
 /*! exports provided: loadAssets */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loadAssets", function() { return loadAssets; });
-/* harmony import */ var _vendor_GLTFLoader_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./vendor/GLTFLoader.js */ "./src/vendor/GLTFLoader.js");
+/* harmony import */ var _vendor_GLTFLoader_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../vendor/GLTFLoader.js */ "./src/vendor/GLTFLoader.js");
 /* harmony import */ var _vendor_GLTFLoader_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_vendor_GLTFLoader_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _vendor_OBJLoader_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./vendor/OBJLoader.js */ "./src/vendor/OBJLoader.js");
+/* harmony import */ var _vendor_OBJLoader_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../vendor/OBJLoader.js */ "./src/vendor/OBJLoader.js");
 /* harmony import */ var _vendor_OBJLoader_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_vendor_OBJLoader_js__WEBPACK_IMPORTED_MODULE_1__);
 
 
@@ -6575,277 +6862,10 @@ function loadAssets(renderer, basePath, assets, onComplete) {
 
 /***/ }),
 
-/***/ "./src/index.mjs":
-/*!***********************!*\
-  !*** ./src/index.mjs ***!
-  \***********************/
-/*! exports provided: init */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "init", function() { return init; });
-/* harmony import */ var _vendor_PointerLockControls_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./vendor/PointerLockControls.js */ "./src/vendor/PointerLockControls.js");
-/* harmony import */ var _vendor_PointerLockControls_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_vendor_PointerLockControls_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _vendor_WebVR_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./vendor/WebVR.js */ "./src/vendor/WebVR.js");
-/* harmony import */ var _assetManager_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./assetManager.mjs */ "./src/assetManager.mjs");
-/* harmony import */ var _vendor_BasisTextureLoader_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./vendor/BasisTextureLoader.js */ "./src/vendor/BasisTextureLoader.js");
-/* harmony import */ var _vendor_BasisTextureLoader_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_vendor_BasisTextureLoader_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _worldHall_mjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./worldHall.mjs */ "./src/worldHall.mjs");
-/* harmony import */ var _worldPanorama_mjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./worldPanorama.mjs */ "./src/worldPanorama.mjs");
-/* harmony import */ var _worldPanoramaStereo_mjs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./worldPanoramaStereo.mjs */ "./src/worldPanoramaStereo.mjs");
-/* harmony import */ var _worldPhotogrammetryObject_mjs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./worldPhotogrammetryObject.mjs */ "./src/worldPhotogrammetryObject.mjs");
-/* harmony import */ var _worldCity_mjs__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./worldCity.mjs */ "./src/worldCity.mjs");
-/* harmony import */ var _worldElevator_mjs__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./worldElevator.mjs */ "./src/worldElevator.mjs");
-/* harmony import */ var _worldVertigo_mjs__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./worldVertigo.mjs */ "./src/worldVertigo.mjs");
-/* harmony import */ var _worldSound_mjs__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./worldSound.mjs */ "./src/worldSound.mjs");
-/* harmony import */ var _shaders_mjs__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./shaders.mjs */ "./src/shaders.mjs");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var clock = new THREE.Clock();
-
-var scene, parent, renderer, camera, controls, context;
-var controller1, controller2;
-
-var worlds = [
-  _worldHall_mjs__WEBPACK_IMPORTED_MODULE_4__,
-  _worldSound_mjs__WEBPACK_IMPORTED_MODULE_11__,
-  _worldPhotogrammetryObject_mjs__WEBPACK_IMPORTED_MODULE_7__,
-  _worldVertigo_mjs__WEBPACK_IMPORTED_MODULE_10__,
-  _worldCity_mjs__WEBPACK_IMPORTED_MODULE_8__,
-  _worldElevator_mjs__WEBPACK_IMPORTED_MODULE_9__,
-  _worldPanorama_mjs__WEBPACK_IMPORTED_MODULE_5__,
-  _worldPanoramaStereo_mjs__WEBPACK_IMPORTED_MODULE_6__,
-];
-var currentWorld = 0;
-
-var assets = {
-  // fonts
-  inter_bold_font: 'fonts/Inter-Bold.font',
-  inter_bold_tex: 'fonts/Inter-Bold.png',
-  inter_regular_font: 'fonts/Inter-Regular.font',
-  inter_regular_tex: 'fonts/Inter-Regular.png',
-  metropolis_bold_font: 'fonts/Metropolis-Bold.font',
-  metropolis_bold_tex: 'fonts/Metropolis-Bold.png',
-
-  //
-  hall_model: 'hall.glb',
-  city_model: 'city.glb',
-  vertigo_model: 'vertigo2.gltf',
-  elevator_model: 'elevator.glb',
-  generic_controller_model: 'generic_controller.glb',
-  lightmap_tex: 'lightmap.png',
-  travertine_tex: 'travertine.png',
-  travertine2_tex: 'travertine2.jpg',
-  controller_tex: 'controller.png',
-  pano1: 'zapporthorn.basis',
-  pano1small: 'zapporthorn_small.jpg',
-  doorfx_tex: 'doorfx.png',
-  pano2small: 'andes_small.jpg',
-  panoballfx_tex: 'ballfx.jpg',
-  andesL: 'andesL.jpg',
-  andesR: 'andesR.jpg',
-  elevator_lm_tex: 'elevator_lm.png',
-  lanes01_tex: 'lanes01.jpg',
-  pavement_tex: 'pavement.jpg',
-  checkboard_tex: 'checkboard.png',
-  vertigo_lm_tex: 'vertigo2_lm.jpg',
-  sky_tex: 'sky.png',
-  clouds_tex: 'clouds.png',
-
-  // sound
-  sound_model: 'sound.glb',
-  sound_shadow_tex: 'sound_shadow.png',
-
-  // photogrammetry object
-  pg_floor_tex: 'travertine2.jpg',
-  pg_floor_lm_tex: 'angel_floor_lm.jpg',
-  pg_object_tex: 'angel.basis',
-  pg_object_model: 'angel.glb', // TODO: try draco version, angel.min.glb
-  pg_bg_tex: 'pg_bg.jpg',
-  pg_flare_tex: 'flare.jpg',
-  pg_panel_tex: 'panel.jpg',
-
-  // paintings
-  painting_seurat_tex: 'paintings/seurat.basis',
-  painting_sorolla_tex: 'paintings/sorolla.basis',
-  painting_bosch_tex: 'paintings/bosch.basis',
-  painting_degas_tex: 'paintings/degas.basis',
-  painting_rembrandt_tex: 'paintings/rembrandt.basis',
-};
-
-function gotoWorld(world) {
-  worlds[currentWorld].exit(context);
-  currentWorld = world;
-  worlds[currentWorld].enter(context);
-}
-
-function init() {
-  var w = 100;
-  scene = new THREE.Scene();
-  camera = new THREE.PerspectiveCamera(80, window.innerWidth / window.innerHeight, 0.005, 10000);
-  camera.position.set(0, 1.6, 0);
-  camera.position.set(1.5, 1.6, 2.3); //near pano1
-  controls = new THREE.PointerLockControls(camera);
-  document.body.addEventListener('click', () => controls.lock());
-  document.body.addEventListener('keydown', ev => {
-    switch(ev.keyCode) {
-      case 87: controls.moveForward(0.2); break;
-      case 65: controls.moveRight(-0.2); break;
-      case 83: controls.moveForward(-0.2); break;
-      case 68: controls.moveRight(0.2); break;
-      case 78: gotoWorld((currentWorld + 1) % worlds.length); break;
-    }
-  });
-  scene.add(controls.getObject());
-
-  parent = new THREE.Object3D();
-  scene.add(parent);
-
-  renderer = new THREE.WebGLRenderer({antialias: true, logarithmicDepthBuffer: false});
-  renderer.gammaOutput = true;
-  renderer.gammaFactor = 2.2;
-  renderer.setPixelRatio( window.devicePixelRatio );
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.vr.enabled = true;
-
-  window.addEventListener('resize', onWindowResize, false);
-  setInterval(()=>{
-    console.log('render calls:', renderer.info.render.calls);
-  }, 2000);
-
-  controller1 = renderer.vr.getController(0);
-  //scene.add(controller1);
-  controller1.addEventListener('selectstart', onSelectStart);
-  controller1.addEventListener('selectend', onSelectEnd);
-
-  controller2 = renderer.vr.getController(1);
-  //scene.add(controller2);
-  controller1.raycaster = new THREE.Raycaster();
-  controller1.raycaster.near = 0.1;
-
-  controller2.raycaster = new THREE.Raycaster();
-  controller2.raycaster.near = 0.1;
-  //controller2.raycaster.far = 3;
-  controller2.addEventListener('selectstart', onSelectStart);
-  controller2.addEventListener('selectend', onSelectEnd);
-
-  var cameraRig = new THREE.Group();
-  cameraRig.add(camera);
-  cameraRig.add(controller1);
-  cameraRig.add(controller2);
-  scene.add(cameraRig);
-
-  context = {
-    assets: assets,
-    shaders: _shaders_mjs__WEBPACK_IMPORTED_MODULE_12__["shaders"],
-    scene : parent,
-    renderer: renderer,
-    camera: camera,
-    cameraRig: cameraRig,
-    controllers: [controller1, controller2],
-    message: {text: '', data: null} // for message passing among worlds
-  };
-
-  window.ctx = context;
-
-  Object(_assetManager_mjs__WEBPACK_IMPORTED_MODULE_2__["loadAssets"])(renderer, '../assets/', assets, () => {
-    setupControllers();
-    _worldHall_mjs__WEBPACK_IMPORTED_MODULE_4__["setup"](context);
-    _worldPanorama_mjs__WEBPACK_IMPORTED_MODULE_5__["setup"](context);
-    _worldPanoramaStereo_mjs__WEBPACK_IMPORTED_MODULE_6__["setup"](context);
-    _worldPhotogrammetryObject_mjs__WEBPACK_IMPORTED_MODULE_7__["setup"](context);
-    _worldCity_mjs__WEBPACK_IMPORTED_MODULE_8__["setup"](context);
-    _worldElevator_mjs__WEBPACK_IMPORTED_MODULE_9__["setup"](context);
-    _worldVertigo_mjs__WEBPACK_IMPORTED_MODULE_10__["setup"](context);
-    _worldSound_mjs__WEBPACK_IMPORTED_MODULE_11__["setup"](context);
-
-    currentWorld = 0;
-    worlds[currentWorld].enter(context);
-
-    document.body.appendChild( renderer.domElement );
-    document.body.appendChild(_vendor_WebVR_js__WEBPACK_IMPORTED_MODULE_1__["WEBVR"].createButton(renderer));
-    renderer.setAnimationLoop(animate);
-  })
-}
-
-function setupControllers() {
-  var model = assets['generic_controller_model'].scene;
-  var material = new THREE.MeshLambertMaterial({
-    map: assets['controller_tex'],
-  });
-  model.getObjectByName('body').material = material;
-  model.getObjectByName('trigger').material = material;
-  controller1.add(model);
-  controller2.add(model.clone());
-  controller1.boundingBox = new THREE.Box3();
-  controller2.boundingBox = new THREE.Box3();
-  controller1.grabbing = null;
-  controller2.grabbing = null;
-}
-
-function onSelectStart(ev) {
-  const trigger = ev.target.getObjectByName('trigger');
-  trigger.rotation.x = -0.3;
-  //gotoWorld((currentWorld + 1) % worlds.length);
-}
-
-function onSelectEnd(ev) {
-  const trigger = ev.target.getObjectByName('trigger');
-  trigger.rotation.x = 0;
-}
-
-function onWindowResize() {
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
-}
-
-function animate() {
-  var delta = clock.getDelta();
-  var elapsedTime = clock.elapsedTime;
-  context.goto = null;
-  context.message = {text: '', data: null};
-  // update controller bounding boxes
-  controller1.boundingBox.setFromObject(controller1.children[0]);
-  controller2.boundingBox.setFromObject(controller2.children[0]);
-  // render current world
-  worlds[currentWorld].execute(context, delta, elapsedTime);
-  renderer.render(scene, camera);
-
-  if (context.goto !== null) {
-    switch(context.goto){
-      case 'hall': gotoWorld(0); break;
-      case 'panorama0': gotoWorld(6); break;
-      case 'panorama1': gotoWorld(7); break;
-    }
-  }
-}
-
-window.onload = () => {init()};
-
-
-/***/ }),
-
-/***/ "./src/shaders.mjs":
-/*!*************************!*\
-  !*** ./src/shaders.mjs ***!
-  \*************************/
+/***/ "./src/lib/shaders.mjs":
+/*!*****************************!*\
+  !*** ./src/lib/shaders.mjs ***!
+  \*****************************/
 /*! exports provided: shaders */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -7041,17 +7061,104 @@ void main( void ) {
 
 /***/ }),
 
-/***/ "./src/stationNewsTicker.mjs":
-/*!***********************************!*\
-  !*** ./src/stationNewsTicker.mjs ***!
-  \***********************************/
+/***/ "./src/lib/text.mjs":
+/*!**************************!*\
+  !*** ./src/lib/text.mjs ***!
+  \**************************/
+/*! exports provided: Text */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Text", function() { return Text; });
+var loadFont = __webpack_require__(/*! load-bmfont */ "./node_modules/load-bmfont/browser.js");
+var createFontGeometry = __webpack_require__(/*! three-bmfont-text */ "./node_modules/three-bmfont-text/index.js");
+var MSDFShader = __webpack_require__(/*! three-bmfont-text/shaders/msdf */ "./node_modules/three-bmfont-text/shaders/msdf.js");
+
+class Text extends(THREE.Object3D){
+
+  constructor(opts){
+    super();
+
+    if (!opts.font){
+      console.warn('createText(): <font> not defined');
+      return;
+    }
+    if (!opts.map){
+      console.warn('createText(): texture <map> not defined');
+      return;
+    }
+
+    this.width = opts.width || 300;
+    this.size = opts.size || 1;
+    this.align = opts.align || 'left';
+    this.color = opts.color || 0xffffff;
+    this.anchor = opts.anchor || opts.align;
+    this.baseline = opts.baseline || 'bottom';
+    this.negate = opts.negate !== true ? false : true;
+
+    this.geometry = createFontGeometry({
+      width: this.width,
+      align: this.align,
+      font: opts.font
+    })
+
+    this.material = new THREE.RawShaderMaterial(MSDFShader({
+      map: opts.map,
+      color: this.color,
+      negate: this.negate
+    }));
+
+    const mesh = new THREE.Mesh(this.geometry, this.material);
+    mesh.scale.set(0.001 * this.size, 0.001 * this.size, 1.0);
+    mesh.rotation.x = Math.PI / 2;
+    this.add(mesh);
+
+    this.value = opts.value || '[TEXT]';
+  }
+
+  set value(text) {
+    this.geometry.update(text);
+
+    const layout = this.geometry.layout;
+    let x = 0, y = 0;
+
+    if (this.baseline === 'top') {
+      y = layout._height + layout._ascender;
+    } else if (this.baseline === 'center') {
+      y = layout._height / 2;
+    }
+
+    if (this.anchor === 'right') {
+      x = -layout._width;
+    } else if (this.anchor === 'center') {
+      x = -layout._width / 2;
+    }
+
+    if (x !== 0 || y !== 0) {
+      this.geometry.translate(x, y, 0);
+    }
+  }
+}
+
+
+
+
+
+
+/***/ }),
+
+/***/ "./src/stations/NewsTicker.mjs":
+/*!*************************************!*\
+  !*** ./src/stations/NewsTicker.mjs ***!
+  \*************************************/
 /*! exports provided: setup */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setup", function() { return setup; });
-/* harmony import */ var _text_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./text.mjs */ "./src/text.mjs");
+/* harmony import */ var _lib_text_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../lib/text.mjs */ "./src/lib/text.mjs");
 
 
 var newsTicker = {
@@ -7067,7 +7174,7 @@ var newsTicker = {
 function setup(ctx, hall) {
   const newsTickerMesh = hall.getObjectByName('newsticker');
 
-  newsTicker.hashtagText = new _text_mjs__WEBPACK_IMPORTED_MODULE_0__["Text"]({
+  newsTicker.hashtagText = new _lib_text_mjs__WEBPACK_IMPORTED_MODULE_0__["Text"]({
     font: ctx.assets['inter_bold_font'],
     map: ctx.assets['inter_bold_tex'],
     size: 2,
@@ -7077,7 +7184,7 @@ function setup(ctx, hall) {
     color: 0xdaa056
   });
 
-  newsTicker.authorText = new _text_mjs__WEBPACK_IMPORTED_MODULE_0__["Text"]({
+  newsTicker.authorText = new _lib_text_mjs__WEBPACK_IMPORTED_MODULE_0__["Text"]({
     font: ctx.assets['inter_bold_font'],
     map: ctx.assets['inter_bold_tex'],
     size: 2,
@@ -7085,7 +7192,7 @@ function setup(ctx, hall) {
     color: 0x67bccd
   });
 
-  newsTicker.messageText = new _text_mjs__WEBPACK_IMPORTED_MODULE_0__["Text"]({
+  newsTicker.messageText = new _lib_text_mjs__WEBPACK_IMPORTED_MODULE_0__["Text"]({
     font: ctx.assets['inter_regular_font'],
     map: ctx.assets['inter_regular_tex'],
     size: 2.6,
@@ -7118,10 +7225,10 @@ function nextNews() {
 
 /***/ }),
 
-/***/ "./src/stationPaintings.mjs":
-/*!**********************************!*\
-  !*** ./src/stationPaintings.mjs ***!
-  \**********************************/
+/***/ "./src/stations/Paintings.mjs":
+/*!************************************!*\
+  !*** ./src/stations/Paintings.mjs ***!
+  \************************************/
 /*! exports provided: setup, execute, onSelectStart, onSelectEnd */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -7253,10 +7360,10 @@ function refreshZoomUV(hit) {
 
 /***/ }),
 
-/***/ "./src/stationPanoBalls.mjs":
-/*!**********************************!*\
-  !*** ./src/stationPanoBalls.mjs ***!
-  \**********************************/
+/***/ "./src/stations/PanoBalls.mjs":
+/*!************************************!*\
+  !*** ./src/stations/PanoBalls.mjs ***!
+  \************************************/
 /*! exports provided: setup, execute, updateUniforms, onSelectStart, onSelectEnd, releaseBall */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -7336,7 +7443,7 @@ function execute(ctx, delta, time) {
 
   for (let i = 0; i < ctx.controllers.length; i++) {
     let controller = ctx.controllers[i];
-    console.log(controller.grabbing);
+    // console.log(controller.grabbing);
     if (!controller.grabbing) { continue; }
     const dist = ctx.camera.position.distanceTo(controller.position);
     if (dist < 0.2) {
@@ -7404,10 +7511,10 @@ function setVisibleChildren(controller, visible) {
 
 /***/ }),
 
-/***/ "./src/stationXylophone.mjs":
-/*!**********************************!*\
-  !*** ./src/stationXylophone.mjs ***!
-  \**********************************/
+/***/ "./src/stations/Xylophone.mjs":
+/*!************************************!*\
+  !*** ./src/stations/Xylophone.mjs ***!
+  \************************************/
 /*! exports provided: setup, enter, exit, execute, onSelectStart, onSelectEnd */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -7419,7 +7526,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "execute", function() { return execute; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onSelectStart", function() { return onSelectStart; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onSelectEnd", function() { return onSelectEnd; });
-/* harmony import */ var _PositionalAudioPolyphonic_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PositionalAudioPolyphonic.mjs */ "./src/PositionalAudioPolyphonic.mjs");
+/* harmony import */ var _lib_PositionalAudioPolyphonic_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../lib/PositionalAudioPolyphonic.mjs */ "./src/lib/PositionalAudioPolyphonic.mjs");
 
 
 var
@@ -7456,7 +7563,7 @@ function setup(ctx, hall) {
     xyloNotes[i] = note;
     note.userData.animation = 0;
     note.userData.resetY = note.position.y;
-    note.userData.sound = new _PositionalAudioPolyphonic_mjs__WEBPACK_IMPORTED_MODULE_0__["default"](listener, 10);
+    note.userData.sound = new _lib_PositionalAudioPolyphonic_mjs__WEBPACK_IMPORTED_MODULE_0__["default"](listener, 10);
     audioLoader.load('assets/ogg/xylophone' + i + '.ogg', buffer => {
       note.userData.sound.setBuffer(buffer);
     });
@@ -7559,93 +7666,6 @@ function onSelectEnd(evt) {
   }
   return true;
 }
-
-
-/***/ }),
-
-/***/ "./src/text.mjs":
-/*!**********************!*\
-  !*** ./src/text.mjs ***!
-  \**********************/
-/*! exports provided: Text */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Text", function() { return Text; });
-var loadFont = __webpack_require__(/*! load-bmfont */ "./node_modules/load-bmfont/browser.js");
-var createFontGeometry = __webpack_require__(/*! three-bmfont-text */ "./node_modules/three-bmfont-text/index.js");
-var MSDFShader = __webpack_require__(/*! three-bmfont-text/shaders/msdf */ "./node_modules/three-bmfont-text/shaders/msdf.js");
-
-class Text extends(THREE.Object3D){
-
-  constructor(opts){
-    super();
-
-    if (!opts.font){
-      console.warn('createText(): <font> not defined');
-      return;
-    }
-    if (!opts.map){
-      console.warn('createText(): texture <map> not defined');
-      return;
-    }
-
-    this.width = opts.width || 300;
-    this.size = opts.size || 1;
-    this.align = opts.align || 'left';
-    this.color = opts.color || 0xffffff;
-    this.anchor = opts.anchor || opts.align;
-    this.baseline = opts.baseline || 'bottom';
-    this.negate = opts.negate !== true ? false : true;
-
-    this.geometry = createFontGeometry({
-      width: this.width,
-      align: this.align,
-      font: opts.font
-    })
-
-    this.material = new THREE.RawShaderMaterial(MSDFShader({
-      map: opts.map,
-      color: this.color,
-      negate: this.negate
-    }));
-
-    const mesh = new THREE.Mesh(this.geometry, this.material);
-    mesh.scale.set(0.001 * this.size, 0.001 * this.size, 1.0);
-    mesh.rotation.x = Math.PI / 2;
-    this.add(mesh);
-
-    this.value = opts.value || '[TEXT]';
-  }
-
-  set value(text) {
-    this.geometry.update(text);
-
-    const layout = this.geometry.layout;
-    let x = 0, y = 0;
-
-    if (this.baseline === 'top') {
-      y = layout._height + layout._ascender;
-    } else if (this.baseline === 'center') {
-      y = layout._height / 2;
-    }
-
-    if (this.anchor === 'right') {
-      x = -layout._width;
-    } else if (this.anchor === 'center') {
-      x = -layout._width / 2;
-    }
-
-    if (x !== 0 || y !== 0) {
-      this.geometry.translate(x, y, 0);
-    }
-  }
-}
-
-
-
-
 
 
 /***/ }),
@@ -12582,10 +12602,10 @@ var WEBVR = {
 
 /***/ }),
 
-/***/ "./src/worldCity.mjs":
-/*!***************************!*\
-  !*** ./src/worldCity.mjs ***!
-  \***************************/
+/***/ "./src/worlds/City.mjs":
+/*!*****************************!*\
+  !*** ./src/worlds/City.mjs ***!
+  \*****************************/
 /*! exports provided: setup, enter, exit, execute */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -12649,10 +12669,10 @@ function execute(ctx, delta, time) {
 
 /***/ }),
 
-/***/ "./src/worldElevator.mjs":
-/*!*******************************!*\
-  !*** ./src/worldElevator.mjs ***!
-  \*******************************/
+/***/ "./src/worlds/Elevator.mjs":
+/*!*********************************!*\
+  !*** ./src/worlds/Elevator.mjs ***!
+  \*********************************/
 /*! exports provided: setup, enter, exit, execute */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -12720,10 +12740,10 @@ function execute(ctx, delta, time) {
 
 /***/ }),
 
-/***/ "./src/worldHall.mjs":
-/*!***************************!*\
-  !*** ./src/worldHall.mjs ***!
-  \***************************/
+/***/ "./src/worlds/Hall.mjs":
+/*!*****************************!*\
+  !*** ./src/worlds/Hall.mjs ***!
+  \*****************************/
 /*! exports provided: setup, enter, exit, execute */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -12733,11 +12753,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "enter", function() { return enter; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "exit", function() { return exit; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "execute", function() { return execute; });
-/* harmony import */ var _stationPanoBalls_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./stationPanoBalls.mjs */ "./src/stationPanoBalls.mjs");
-/* harmony import */ var _stationPaintings_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./stationPaintings.mjs */ "./src/stationPaintings.mjs");
-/* harmony import */ var _stationNewsTicker_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./stationNewsTicker.mjs */ "./src/stationNewsTicker.mjs");
-/* harmony import */ var _stationXylophone_mjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./stationXylophone.mjs */ "./src/stationXylophone.mjs");
-/* harmony import */ var _Teleport_mjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Teleport.mjs */ "./src/Teleport.mjs");
+/* harmony import */ var _stations_PanoBalls_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../stations/PanoBalls.mjs */ "./src/stations/PanoBalls.mjs");
+/* harmony import */ var _stations_Paintings_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../stations/Paintings.mjs */ "./src/stations/Paintings.mjs");
+/* harmony import */ var _stations_NewsTicker_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../stations/NewsTicker.mjs */ "./src/stations/NewsTicker.mjs");
+/* harmony import */ var _stations_Xylophone_mjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../stations/Xylophone.mjs */ "./src/stations/Xylophone.mjs");
+/* harmony import */ var _lib_Teleport_mjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../lib/Teleport.mjs */ "./src/lib/Teleport.mjs");
 
 
 
@@ -12816,12 +12836,12 @@ function setup(ctx) {
     }
   });
 
-  _stationPaintings_mjs__WEBPACK_IMPORTED_MODULE_1__["setup"](ctx, hall);
-  _stationXylophone_mjs__WEBPACK_IMPORTED_MODULE_3__["setup"](ctx, hall);
-  _stationNewsTicker_mjs__WEBPACK_IMPORTED_MODULE_2__["setup"](ctx, hall);
-  _stationPanoBalls_mjs__WEBPACK_IMPORTED_MODULE_0__["setup"](ctx, hall);
+  _stations_Paintings_mjs__WEBPACK_IMPORTED_MODULE_1__["setup"](ctx, hall);
+  _stations_Xylophone_mjs__WEBPACK_IMPORTED_MODULE_3__["setup"](ctx, hall);
+  _stations_NewsTicker_mjs__WEBPACK_IMPORTED_MODULE_2__["setup"](ctx, hall);
+  _stations_PanoBalls_mjs__WEBPACK_IMPORTED_MODULE_0__["setup"](ctx, hall);
 
-  teleport = new _Teleport_mjs__WEBPACK_IMPORTED_MODULE_4__["default"](ctx, teleportFloor);
+  teleport = new _lib_Teleport_mjs__WEBPACK_IMPORTED_MODULE_4__["default"](ctx, teleportFloor);
 
   // lights
   const lightSun = new THREE.DirectionalLight(0xeeffff);
@@ -12835,7 +12855,7 @@ function setup(ctx) {
     new THREE.MeshBasicMaterial({color: 0x000000, transparent: true, depthTest: false})
   );
   fader.position.z = -0.1;
-
+  fader.material.opacity = 0;
 
   scene.add(lightSun);
   scene.add(lightFill);
@@ -12852,10 +12872,10 @@ function enter(ctx) {
   controllers[1].addEventListener('selectend', onSelectEnd);
   ctx.scene.add(scene);
 
-  _stationXylophone_mjs__WEBPACK_IMPORTED_MODULE_3__["enter"](ctx);
+  _stations_Xylophone_mjs__WEBPACK_IMPORTED_MODULE_3__["enter"](ctx);
 
   if (ctx.message.text == 'selectEnd'){
-    _stationPanoBalls_mjs__WEBPACK_IMPORTED_MODULE_0__["releaseBall"](ctx.message.data);
+    _stations_PanoBalls_mjs__WEBPACK_IMPORTED_MODULE_0__["releaseBall"](ctx.message.data);
   }
 }
 
@@ -12866,15 +12886,14 @@ function exit(ctx) {
   ctx.controllers[1].removeEventListener('selectstart', onSelectStart);
   ctx.controllers[1].removeEventListener('selectend', onSelectEnd);
 
-  _stationXylophone_mjs__WEBPACK_IMPORTED_MODULE_3__["exit"](ctx);
+  _stations_Xylophone_mjs__WEBPACK_IMPORTED_MODULE_3__["exit"](ctx);
 }
 
 function execute(ctx, delta, time) {
-  _stationPanoBalls_mjs__WEBPACK_IMPORTED_MODULE_0__["execute"](ctx, delta, time);
-  _stationPaintings_mjs__WEBPACK_IMPORTED_MODULE_1__["execute"](ctx, delta, time);
-  _stationXylophone_mjs__WEBPACK_IMPORTED_MODULE_3__["execute"](ctx, delta, time, controllers);
+  _stations_PanoBalls_mjs__WEBPACK_IMPORTED_MODULE_0__["execute"](ctx, delta, time);
+  _stations_Paintings_mjs__WEBPACK_IMPORTED_MODULE_1__["execute"](ctx, delta, time);
+  _stations_Xylophone_mjs__WEBPACK_IMPORTED_MODULE_3__["execute"](ctx, delta, time, controllers);
   teleport.execute(ctx, delta, time);
-
   updateUniforms(time);
   checkCameraBoundaries(ctx);
 }
@@ -12885,7 +12904,7 @@ function updateUniforms(time) {
   objectMaterials.doorC.uniforms.time.value = time;
   objectMaterials.doorD.uniforms.time.value = time;
   objectMaterials.doorD.uniforms.selected.value = 1; //test
-  _stationPanoBalls_mjs__WEBPACK_IMPORTED_MODULE_0__["updateUniforms"](time);
+  _stations_PanoBalls_mjs__WEBPACK_IMPORTED_MODULE_0__["updateUniforms"](time);
 }
 
 function checkCameraBoundaries(ctx) {
@@ -12904,24 +12923,24 @@ function checkCameraBoundaries(ctx) {
 function onSelectStart(evt) {
 //  if (!xylophone.onSelectStart(evt)) { return; }
 //  if (!paintings.onSelectStart(evt)) { return; }
-  if (!_stationPanoBalls_mjs__WEBPACK_IMPORTED_MODULE_0__["onSelectStart"](evt)) { return; }
+  if (!_stations_PanoBalls_mjs__WEBPACK_IMPORTED_MODULE_0__["onSelectStart"](evt)) { return; }
   if (!teleport.onSelectStart(evt)) { return; }
 }
 
 function onSelectEnd(evt) {
 //  if (!xylophone.onSelectEnd(evt)) { return; }
 //  if (!paintings.onSelectEnd(evt)) { return; }
-  if (!_stationPanoBalls_mjs__WEBPACK_IMPORTED_MODULE_0__["onSelectEnd"](evt)) { return; }
+  if (!_stations_PanoBalls_mjs__WEBPACK_IMPORTED_MODULE_0__["onSelectEnd"](evt)) { return; }
   if (!teleport.onSelectEnd(evt)) { return; }
 }
 
 
 /***/ }),
 
-/***/ "./src/worldPanorama.mjs":
-/*!*******************************!*\
-  !*** ./src/worldPanorama.mjs ***!
-  \*******************************/
+/***/ "./src/worlds/Panorama.mjs":
+/*!*********************************!*\
+  !*** ./src/worlds/Panorama.mjs ***!
+  \*********************************/
 /*! exports provided: setup, enter, exit, execute, onSelectEnd */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -12986,10 +13005,10 @@ function onSelectEnd(evt) {
 
 /***/ }),
 
-/***/ "./src/worldPanoramaStereo.mjs":
-/*!*************************************!*\
-  !*** ./src/worldPanoramaStereo.mjs ***!
-  \*************************************/
+/***/ "./src/worlds/PanoramaStereo.mjs":
+/*!***************************************!*\
+  !*** ./src/worlds/PanoramaStereo.mjs ***!
+  \***************************************/
 /*! exports provided: setup, enter, exit, execute */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -13034,10 +13053,10 @@ function execute(ctx, delta, time) {
 
 /***/ }),
 
-/***/ "./src/worldPhotogrammetryObject.mjs":
-/*!*******************************************!*\
-  !*** ./src/worldPhotogrammetryObject.mjs ***!
-  \*******************************************/
+/***/ "./src/worlds/PhotogrammetryObject.mjs":
+/*!*********************************************!*\
+  !*** ./src/worlds/PhotogrammetryObject.mjs ***!
+  \*********************************************/
 /*! exports provided: setup, enter, exit, execute */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -13099,10 +13118,10 @@ function execute(ctx, delta, time) {
 
 /***/ }),
 
-/***/ "./src/worldSound.mjs":
-/*!****************************!*\
-  !*** ./src/worldSound.mjs ***!
-  \****************************/
+/***/ "./src/worlds/Sound.mjs":
+/*!******************************!*\
+  !*** ./src/worlds/Sound.mjs ***!
+  \******************************/
 /*! exports provided: setup, enter, exit, execute */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -13251,10 +13270,10 @@ function execute(ctx, delta, time) {
 
 /***/ }),
 
-/***/ "./src/worldVertigo.mjs":
-/*!******************************!*\
-  !*** ./src/worldVertigo.mjs ***!
-  \******************************/
+/***/ "./src/worlds/Vertigo.mjs":
+/*!********************************!*\
+  !*** ./src/worlds/Vertigo.mjs ***!
+  \********************************/
 /*! exports provided: setup, enter, exit, execute */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 

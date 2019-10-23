@@ -1,19 +1,19 @@
 import './vendor/PointerLockControls.js';
 import {WEBVR} from './vendor/WebVR.js';
-import {loadAssets} from './assetManager.mjs';
+import {loadAssets} from './lib/assetManager.mjs';
 import './vendor/BasisTextureLoader.js';
 
 
-import * as worldHall from './worldHall.mjs';
-import * as worldPanorama from './worldPanorama.mjs';
-import * as worldPanoramaStereo from './worldPanoramaStereo.mjs';
-import * as worldPhotogrammetryObject from './worldPhotogrammetryObject.mjs';
-import * as worldCity from './worldCity.mjs';
-import * as worldElevator from './worldElevator.mjs'
-import * as worldVertigo from './worldVertigo.mjs';
-import * as worldSound from './worldSound.mjs';
-import {shaders} from './shaders.mjs';
+import * as worldHall from './worlds/Hall.mjs';
+import * as worldPanorama from './worlds/Panorama.mjs';
+import * as worldPanoramaStereo from './worlds/PanoramaStereo.mjs';
+import * as worldPhotogrammetryObject from './worlds/PhotogrammetryObject.mjs';
+import * as worldCity from './worlds/City.mjs';
+import * as worldElevator from './worlds/Elevator.mjs'
+import * as worldVertigo from './worlds/Vertigo.mjs';
+import * as worldSound from './worlds/Sound.mjs';
 
+import {shaders} from './lib/shaders.mjs';
 
 var clock = new THREE.Clock();
 

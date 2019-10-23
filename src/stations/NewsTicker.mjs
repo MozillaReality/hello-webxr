@@ -1,4 +1,4 @@
-import {Text} from './text.mjs';
+import {Text} from '../lib/text.mjs';
 
 var newsTicker = {
   url: 'assets/tweets.json',
