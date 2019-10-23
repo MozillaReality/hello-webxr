@@ -6238,13 +6238,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _worlds_Panorama_mjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./worlds/Panorama.mjs */ "./src/worlds/Panorama.mjs");
 /* harmony import */ var _worlds_PanoramaStereo_mjs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./worlds/PanoramaStereo.mjs */ "./src/worlds/PanoramaStereo.mjs");
 /* harmony import */ var _worlds_PhotogrammetryObject_mjs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./worlds/PhotogrammetryObject.mjs */ "./src/worlds/PhotogrammetryObject.mjs");
-/* harmony import */ var _worlds_City_mjs__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./worlds/City.mjs */ "./src/worlds/City.mjs");
-/* harmony import */ var _worlds_Elevator_mjs__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./worlds/Elevator.mjs */ "./src/worlds/Elevator.mjs");
-/* harmony import */ var _worlds_Vertigo_mjs__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./worlds/Vertigo.mjs */ "./src/worlds/Vertigo.mjs");
-/* harmony import */ var _worlds_Sound_mjs__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./worlds/Sound.mjs */ "./src/worlds/Sound.mjs");
-/* harmony import */ var _lib_shaders_mjs__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./lib/shaders.mjs */ "./src/lib/shaders.mjs");
-
-
+/* harmony import */ var _worlds_Vertigo_mjs__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./worlds/Vertigo.mjs */ "./src/worlds/Vertigo.mjs");
+/* harmony import */ var _worlds_Sound_mjs__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./worlds/Sound.mjs */ "./src/worlds/Sound.mjs");
+/* harmony import */ var _lib_shaders_mjs__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./lib/shaders.mjs */ "./src/lib/shaders.mjs");
 
 
 
@@ -6267,11 +6263,9 @@ var controller1, controller2;
 
 var worlds = [
   _worlds_Hall_mjs__WEBPACK_IMPORTED_MODULE_4__,
-  _worlds_Sound_mjs__WEBPACK_IMPORTED_MODULE_11__,
+  _worlds_Sound_mjs__WEBPACK_IMPORTED_MODULE_9__,
   _worlds_PhotogrammetryObject_mjs__WEBPACK_IMPORTED_MODULE_7__,
-  _worlds_Vertigo_mjs__WEBPACK_IMPORTED_MODULE_10__,
-  _worlds_City_mjs__WEBPACK_IMPORTED_MODULE_8__,
-  _worlds_Elevator_mjs__WEBPACK_IMPORTED_MODULE_9__,
+  _worlds_Vertigo_mjs__WEBPACK_IMPORTED_MODULE_8__,
   _worlds_Panorama_mjs__WEBPACK_IMPORTED_MODULE_5__,
   _worlds_PanoramaStereo_mjs__WEBPACK_IMPORTED_MODULE_6__,
 ];
@@ -6281,8 +6275,6 @@ const worldNames = [
   'sound',
   'photogrammetry',
   'vertigo',
-  'city',
-  'elevator',
   'panorama',
   'panoramastereo'
 ];
@@ -6303,9 +6295,7 @@ var assets = {
 
   //
   hall_model: 'hall.glb',
-  city_model: 'city.glb',
   vertigo_model: 'vertigo2.gltf',
-  elevator_model: 'elevator.glb',
   generic_controller_model: 'generic_controller.glb',
   lightmap_tex: 'lightmap.png',
   travertine_tex: 'travertine.png',
@@ -6318,9 +6308,6 @@ var assets = {
   panoballfx_tex: 'ballfx.jpg',
   andesL: 'andesL.jpg',
   andesR: 'andesR.jpg',
-  elevator_lm_tex: 'elevator_lm.png',
-  lanes01_tex: 'lanes01.jpg',
-  pavement_tex: 'pavement.jpg',
   checkboard_tex: 'checkboard.png',
   vertigo_lm_tex: 'vertigo2_lm.jpg',
   sky_tex: 'sky.png',
@@ -6332,7 +6319,8 @@ var assets = {
 
   // photogrammetry object
   pg_floor_tex: 'travertine2.jpg',
-  pg_floor_lm_tex: 'angel_floor_lm.jpg',
+  pg_floor_lm_tex: 'pg_floor_lm.png',
+  pg_door_lm_tex: 'pg_door_lm.png',
   pg_object_tex: 'angel.basis',
   pg_object_model: 'angel.glb', // TODO: try draco version, angel.min.glb
   pg_bg_tex: 'pg_bg.jpg',
@@ -6417,7 +6405,7 @@ function init() {
 
   context = {
     assets: assets,
-    shaders: _lib_shaders_mjs__WEBPACK_IMPORTED_MODULE_12__["shaders"],
+    shaders: _lib_shaders_mjs__WEBPACK_IMPORTED_MODULE_10__["shaders"],
     scene : parent,
     renderer: renderer,
     camera: camera,
@@ -6434,10 +6422,8 @@ function init() {
     _worlds_Panorama_mjs__WEBPACK_IMPORTED_MODULE_5__["setup"](context);
     _worlds_PanoramaStereo_mjs__WEBPACK_IMPORTED_MODULE_6__["setup"](context);
     _worlds_PhotogrammetryObject_mjs__WEBPACK_IMPORTED_MODULE_7__["setup"](context);
-    _worlds_City_mjs__WEBPACK_IMPORTED_MODULE_8__["setup"](context);
-    _worlds_Elevator_mjs__WEBPACK_IMPORTED_MODULE_9__["setup"](context);
-    _worlds_Vertigo_mjs__WEBPACK_IMPORTED_MODULE_10__["setup"](context);
-    _worlds_Sound_mjs__WEBPACK_IMPORTED_MODULE_11__["setup"](context);
+    _worlds_Vertigo_mjs__WEBPACK_IMPORTED_MODULE_8__["setup"](context);
+    _worlds_Sound_mjs__WEBPACK_IMPORTED_MODULE_9__["setup"](context);
 
     worlds[currentWorld].enter(context);
 
@@ -12602,144 +12588,6 @@ var WEBVR = {
 
 /***/ }),
 
-/***/ "./src/worlds/City.mjs":
-/*!*****************************!*\
-  !*** ./src/worlds/City.mjs ***!
-  \*****************************/
-/*! exports provided: setup, enter, exit, execute */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setup", function() { return setup; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "enter", function() { return enter; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "exit", function() { return exit; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "execute", function() { return execute; });
-var city = null;
-var light1 = null, light2 = null;
-var rig = null;
-
-function setup(ctx) {
-  const assets = ctx.assets;
-  var texture = assets['pavement_tex'];
-
-  texture.wrapS = THREE.RepeatWrapping;
-  texture.wrapT = THREE.RepeatWrapping;
-  texture.repeat.set(6,6);
-  const material = new THREE.MeshLambertMaterial({color: 0xffffff, map: texture} );
-
-  rig = new THREE.Object3D();
-  rig.position.set(-3, 200, -1.4);
-
-  city = assets['city_model'].scene;
-  light1 = new THREE.DirectionalLight(0xffffff, 1, 10);
-  light2 = new THREE.AmbientLight(0xffffff, 0.03);
-  light1.position.set(0, 8, -1);
-  light2.position.set(0, -40, -1);
-  city.traverse(o => {
-    if (o.type == 'Mesh') {
-      o.material = material;
-    }
-  });
-}
-
-function enter(ctx) {
-  ctx.renderer.setClearColor(0xc3d2e2);
-  ctx.scene.add(city);
-  ctx.scene.add(light1);
-  ctx.scene.add(light2);
-  ctx.scene.parent.fog = new THREE.FogExp2(0xc3d2e2, 0.003);
-  ctx.scene.add(rig);
-  rig.add(ctx.camera);
-}
-
-function exit(ctx) {
-  ctx.scene.remove(city);
-  ctx.scene.remove(light1);
-  ctx.scene.remove(light2);
-  ctx.scene.parent.fog = null;
-  ctx.scene.add(ctx.camera);
-  ctx.scene.remove(rig);
-}
-
-function execute(ctx, delta, time) {
-}
-
-
-
-/***/ }),
-
-/***/ "./src/worlds/Elevator.mjs":
-/*!*********************************!*\
-  !*** ./src/worlds/Elevator.mjs ***!
-  \*********************************/
-/*! exports provided: setup, enter, exit, execute */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setup", function() { return setup; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "enter", function() { return enter; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "exit", function() { return exit; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "execute", function() { return execute; });
-var elevator = null;
-var light1 = null, light2 = null;
-var cube = null;
-
-function setup(ctx) {
-  const assets = ctx.assets;
-  var texture = assets['lanes01_tex'];
-  var lightmap = assets['elevator_lm_tex'];
-  lightmap.flipY = false;
-  texture.wrapS = THREE.RepeatWrapping;
-  texture.wrapT = THREE.RepeatWrapping;
-  const material = new THREE.MeshBasicMaterial({color: 0xffffff, map: texture, lightMap: lightmap} );
-
-  cube = new THREE.Mesh(
-      new THREE.BoxBufferGeometry(),
-      new THREE.MeshLambertMaterial({map: texture})
-    );
-  cube.position.set(0, 1, -3);
-  elevator = assets['elevator_model'].scene;
-  light1 = new THREE.PointLight(0xffffff, 1, 10);
-  light2 = new THREE.AmbientLight(0xffffff, 0.03);
-  light1.position.set(0, 8, -1);
-  light2.position.set(0, -40, -1);
-  elevator.traverse(o => {
-    if (o.type == 'Mesh') {
-      o.material = material;
-    }
-  });
-}
-
-function enter(ctx) {
-  ctx.renderer.setClearColor(0xaaccff);
-  ctx.scene.add(elevator);
-  ctx.scene.add(cube);
-  ctx.scene.add(light1);
-  ctx.scene.add(light2);
-  ctx.camera.position.set(0, 1.6, 0);
-//  ctx.scene.parent.fog = new THREE.FogExp2(0xaaccff, 0.003);
-}
-
-function exit(ctx) {
-  ctx.scene.remove(elevator);
-  ctx.scene.remove(cube);
-  ctx.scene.remove(light1);
-  ctx.scene.remove(light2);
-}
-
-function execute(ctx, delta, time) {
-  cube.position.y = Math.sin(time/2) * 5;
-  cube.rotation.x += delta * 0.3;
-  cube.rotation.y += delta * 0.2;
-  cube.rotation.z += delta * 0.1;
-}
-
-
-
-/***/ }),
-
 /***/ "./src/worlds/Hall.mjs":
 /*!*****************************!*\
   !*** ./src/worlds/Hall.mjs ***!
@@ -13066,7 +12914,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "enter", function() { return enter; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "exit", function() { return exit; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "execute", function() { return execute; });
-var scene;
+var scene, doorMaterial;
+
+function createDoorMaterial(ctx) {
+  ctx.assets['doorfx_tex'].wrapT = THREE.RepeatWrapping;
+  ctx.assets['doorfx_tex'].wrapS = THREE.RepeatWrapping;
+  return new THREE.ShaderMaterial({
+    uniforms: {
+      time: {value: 0},
+      selected: {value: 0},
+      tex: {value: ctx.assets['doorfx_tex']}
+    },
+    vertexShader: ctx.shaders.basic_vert,
+    fragmentShader: ctx.shaders.door_frag
+  });
+}
 
 function setup(ctx) {
   const assets = ctx.assets;
@@ -13090,6 +12952,9 @@ function setup(ctx) {
   assets['pg_panel_tex'].encoding = THREE.sRGBEncoding;
   assets['pg_panel_tex'].flipY = false;
 
+  assets['pg_door_lm_tex'].encoding = THREE.sRGBEncoding;
+  assets['pg_door_lm_tex'].flipY = false;
+
   scene.getObjectByName('object').material =
     new THREE.MeshBasicMaterial({map: assets['pg_object_tex']});
   scene.getObjectByName('floor').material =
@@ -13100,6 +12965,13 @@ function setup(ctx) {
     new THREE.MeshBasicMaterial({map: assets['pg_flare_tex'], blending: THREE.AdditiveBlending});
   scene.getObjectByName('panel').material =
     new THREE.MeshBasicMaterial({map: assets['pg_panel_tex']});
+  scene.getObjectByName('door_frame').material =
+    new THREE.MeshBasicMaterial({map: assets['pg_door_lm_tex']});
+
+  doorMaterial = createDoorMaterial(ctx);
+  scene.getObjectByName('door').material = doorMaterial;
+
+  scene.getObjectByName('teleport').visible = false;
 }
 
 function enter(ctx) {
@@ -13113,6 +12985,7 @@ function exit(ctx) {
 }
 
 function execute(ctx, delta, time) {
+  doorMaterial.uniforms.time.value = time;
 }
 
 

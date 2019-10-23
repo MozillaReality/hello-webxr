@@ -76,7 +76,8 @@ var assets = {
 
   // photogrammetry object
   pg_floor_tex: 'travertine2.jpg',
-  pg_floor_lm_tex: 'angel_floor_lm.jpg',
+  pg_floor_lm_tex: 'pg_floor_lm.png',
+  pg_door_lm_tex: 'pg_door_lm.png',
   pg_object_tex: 'angel.basis',
   pg_object_model: 'angel.glb', // TODO: try draco version, angel.min.glb
   pg_bg_tex: 'pg_bg.jpg',
