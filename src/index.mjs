@@ -8,8 +8,6 @@ import * as worldHall from './worlds/Hall.mjs';
 import * as worldPanorama from './worlds/Panorama.mjs';
 import * as worldPanoramaStereo from './worlds/PanoramaStereo.mjs';
 import * as worldPhotogrammetryObject from './worlds/PhotogrammetryObject.mjs';
-import * as worldCity from './worlds/City.mjs';
-import * as worldElevator from './worlds/Elevator.mjs'
 import * as worldVertigo from './worlds/Vertigo.mjs';
 import * as worldSound from './worlds/Sound.mjs';
 
@@ -25,8 +23,6 @@ var worlds = [
   worldSound,
   worldPhotogrammetryObject,
   worldVertigo,
-  worldCity,
-  worldElevator,
   worldPanorama,
   worldPanoramaStereo,
 ];
@@ -36,8 +32,6 @@ const worldNames = [
   'sound',
   'photogrammetry',
   'vertigo',
-  'city',
-  'elevator',
   'panorama',
   'panoramastereo'
 ];
@@ -58,9 +52,7 @@ var assets = {
 
   //
   hall_model: 'hall.glb',
-  city_model: 'city.glb',
   vertigo_model: 'vertigo2.gltf',
-  elevator_model: 'elevator.glb',
   generic_controller_model: 'generic_controller.glb',
   lightmap_tex: 'lightmap.png',
   travertine_tex: 'travertine.png',
@@ -73,9 +65,6 @@ var assets = {
   panoballfx_tex: 'ballfx.jpg',
   andesL: 'andesL.jpg',
   andesR: 'andesR.jpg',
-  elevator_lm_tex: 'elevator_lm.png',
-  lanes01_tex: 'lanes01.jpg',
-  pavement_tex: 'pavement.jpg',
   checkboard_tex: 'checkboard.png',
   vertigo_lm_tex: 'vertigo2_lm.jpg',
   sky_tex: 'sky.png',
@@ -189,8 +178,6 @@ export function init() {
     worldPanorama.setup(context);
     worldPanoramaStereo.setup(context);
     worldPhotogrammetryObject.setup(context);
-    worldCity.setup(context);
-    worldElevator.setup(context);
     worldVertigo.setup(context);
     worldSound.setup(context);
 
