@@ -30,7 +30,22 @@ var worlds = [
   worldPanorama,
   worldPanoramaStereo,
 ];
-var currentWorld = 0;
+
+const worldNames = [
+  'hall',
+  'sound',
+  'photogrammetry',
+  'vertigo',
+  'city',
+  'elevator',
+  'panorama',
+  'panoramastereo'
+];
+
+const urlObject = new URL(window.location);
+const worldName = urlObject.searchParams.get('stage');
+var currentWorld = worldNames.indexOf(worldName) !== -1 ? worldNames.indexOf(worldName) : 0;
+console.log(`Current world "${worldNames[currentWorld]}", ${currentWorld}`);
 
 var assets = {
   // fonts
@@ -179,7 +194,6 @@ export function init() {
     worldVertigo.setup(context);
     worldSound.setup(context);
 
-    currentWorld = 0;
     worlds[currentWorld].enter(context);
 
     document.body.appendChild( renderer.domElement );
