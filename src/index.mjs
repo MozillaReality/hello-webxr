@@ -108,6 +108,12 @@ export function init() {
       case 83: controls.moveForward(-0.2); break;
       case 68: controls.moveRight(0.2); break;
       case 78: gotoWorld((currentWorld + 1) % worlds.length); break;
+      default: {
+        var world = ev.keyCode - 48;
+        if (world >= 0 && world < worlds.length) {
+          gotoWorld(world);
+        }
+      }
     }
   });
   scene.add(controls.getObject());
@@ -126,13 +132,6 @@ export function init() {
   setInterval(()=>{
     console.log('render calls:', renderer.info.render.calls);
   }, 2000);
-
-  window.addEventListener('keydown', (e) => {
-    var num = parseInt(e.key);
-    if (num >= 0 && num < worlds.length) {
-      gotoWorld(num);
-    }
-  })
 
   controller1 = renderer.vr.getController(0);
   //scene.add(controller1);
