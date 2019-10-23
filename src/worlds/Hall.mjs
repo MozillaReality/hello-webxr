@@ -1,8 +1,8 @@
-import * as panoballs from './stationPanoBalls.mjs';
-import * as paintings from './stationPaintings.mjs';
-import * as newsticker from './stationNewsTicker.mjs';
-import * as xylophone from './stationXylophone.mjs';
-import Teleport from './Teleport.mjs';
+import * as panoballs from '../stations/PanoBalls.mjs';
+import * as paintings from '../stations/Paintings.mjs';
+import * as newsticker from '../stations/NewsTicker.mjs';
+import * as xylophone from '../stations/Xylophone.mjs';
+import Teleport from '../lib/Teleport.mjs';
 
 var
   scene,
