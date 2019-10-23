@@ -1,4 +1,4 @@
-var scene, listener, timeout, mixer;
+var scene, listener, timeout, mixer, door, doorMaterial;
 
 const soundNames = [
   'bells',
@@ -14,15 +14,46 @@ const soundNames = [
   'trumpet',
 ];
 
+
 var sounds = {};
 soundNames.forEach( i => { sounds[i] = {animations: [], mesh: null, player: null, shadow: null} })
 
 const MAX_REPETITIONS = 5;
 var repetitions = MAX_REPETITIONS - 1;
 
+
+function createDoorMaterial(ctx) {
+  ctx.assets['doorfx_tex'].wrapT = THREE.RepeatWrapping;
+  ctx.assets['doorfx_tex'].wrapS = THREE.RepeatWrapping;
+  return new THREE.ShaderMaterial({
+    uniforms: {
+      time: {value: 0},
+      selected: {value: 0},
+      tex: {value: ctx.assets['doorfx_tex']}
+    },
+    vertexShader: ctx.shaders.basic_vert,
+    fragmentShader: ctx.shaders.door_frag
+  });
+}
+
 export function setup(ctx) {
   const assets = ctx.assets;
   scene = assets['sound_model'].scene;
+  door = assets['sound_door_model'].scene;
+
+
+
+  assets['sound_door_lm_tex'].encoding = THREE.sRGBEncoding;
+  assets['sound_door_lm_tex'].flipY = false;
+  door.getObjectByName('door_frame').material =
+    new THREE.MeshBasicMaterial({map: assets['sound_door_lm_tex']});
+
+  doorMaterial = createDoorMaterial(ctx);
+  door.getObjectByName('door').material = doorMaterial;
+
+  door.scale.set(0.5, 0.5, 0.5);
+  door.position.set(0.4, 0.6, 1);
+  door.rotation.set(0, 0.4, 0);
 
   listener = new THREE.AudioListener();
 
@@ -115,6 +146,7 @@ function playSound() {
 export function enter(ctx) {
   ctx.renderer.setClearColor(0x000000);
   ctx.scene.add(scene);
+  ctx.scene.add(door);
   ctx.camera.add(listener);
   ctx.camera.position.set(0, 1.6, 0);
   timeout = setTimeout(playSound, 2000);
@@ -122,6 +154,7 @@ export function enter(ctx) {
 
 export function exit(ctx) {
   ctx.scene.remove(scene);
+  ctx.scene.remove(door);
   ctx.camera.remove(listener);
   clearTimeout(timeout);
 }
@@ -132,4 +165,5 @@ export function execute(ctx, delta, time) {
   if (sound && sound.shadow.material.opacity > 0) {
     sound.shadow.material.opacity -= delta * 0.5;
   }
+  doorMaterial.uniforms.time.value = time;
 }
