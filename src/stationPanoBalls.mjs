@@ -66,7 +66,7 @@ export function execute(ctx, delta, time) {
 
   for (let i = 0; i < ctx.controllers.length; i++) {
     let controller = ctx.controllers[i];
-    console.log(controller.grabbing);
+    // console.log(controller.grabbing);
     if (!controller.grabbing) { continue; }
     const dist = ctx.camera.position.distanceTo(controller.position);
     if (dist < 0.2) {

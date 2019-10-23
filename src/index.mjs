@@ -127,6 +127,13 @@ export function init() {
     console.log('render calls:', renderer.info.render.calls);
   }, 2000);
 
+  window.addEventListener('keydown', (e) => {
+    var num = parseInt(e.key);
+    if (num >= 0 && num < worlds.length) {
+      gotoWorld(num);
+    }
+  })
+
   controller1 = renderer.vr.getController(0);
   //scene.add(controller1);
   controller1.addEventListener('selectstart', onSelectStart);
