@@ -95,7 +95,7 @@ export function setup(ctx) {
     new THREE.MeshBasicMaterial({color: 0x000000, transparent: true, depthTest: false})
   );
   fader.position.z = -0.1;
-
+  fader.material.opacity = 0;
 
   scene.add(lightSun);
   scene.add(lightFill);
@@ -134,7 +134,6 @@ export function execute(ctx, delta, time) {
   paintings.execute(ctx, delta, time);
   xylophone.execute(ctx, delta, time, controllers);
   teleport.execute(ctx, delta, time);
-
   updateUniforms(time);
   checkCameraBoundaries(ctx);
 }
