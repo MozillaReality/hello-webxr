@@ -4,6 +4,24 @@ const PAINTINGS = ['seurat', 'sorolla', 'bosch', 'degas', 'rembrandt'];
 const PAINTINGS_RATIOS = [1, 1, 1.875, 1, 1];
 
 export function setup(ctx, hall) {
+  ctx.raycontrol.addState('paintings', {
+    colliderMesh: hall.getObjectByName('paintings'),
+    onHover: (intersection, active) => {
+      intersection.object.scale.z = 5;
+    },
+    onHoverLeave: (intersection) => {
+      intersection.object.scale.z = 1;
+    },
+    onSelectStart: (intersection) => {
+      console.log('paintings start');
+
+    },
+    onSelectEnd: (intersection) => {
+
+    }
+  }, true);
+
+
 
   for (let i in PAINTINGS) {
     let painting = PAINTINGS[i];

@@ -4,6 +4,8 @@ import {loadAssets} from './lib/assetManager.mjs';
 import './vendor/BasisTextureLoader.js';
 
 
+import RayControl from './lib/RayControl.mjs';
+
 import * as worldHall from './worlds/Hall.mjs';
 import * as worldPanorama from './worlds/Panorama.mjs';
 import * as worldPanoramaStereo from './worlds/PanoramaStereo.mjs';
@@ -174,6 +176,9 @@ export function init() {
     message: {text: '', data: null} // for message passing among worlds
   };
 
+  let raycontrol = new RayControl(context);
+  context.raycontrol = raycontrol;
+
   window.ctx = context;
 
   loadAssets(renderer, '../assets/', assets, () => {
@@ -233,6 +238,7 @@ function animate() {
   controller1.boundingBox.setFromObject(controller1.children[0]);
   controller2.boundingBox.setFromObject(controller2.children[0]);
   // render current world
+  context.raycontrol.execute(context, delta, elapsedTime);
   worlds[currentWorld].execute(context, delta, elapsedTime);
   renderer.render(scene, camera);
   if (context.goto !== null) {

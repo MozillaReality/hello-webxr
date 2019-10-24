@@ -3,7 +3,6 @@ import * as paintings from '../stations/Paintings.mjs';
 import * as newsticker from '../stations/NewsTicker.mjs';
 import * as xylophone from '../stations/Xylophone.mjs';
 import Teleport from '../lib/Teleport.mjs';
-import RayControl from '../lib/RayControl.mjs';
 
 var
   scene,
@@ -88,8 +87,8 @@ export function setup(ctx) {
   panoballs.setup(ctx, hall);
 
   teleport = new Teleport(ctx);
-  raycontrol = new RayControl(ctx);
-  raycontrol.addState('teleport', {
+
+  ctx.raycontrol.addState('teleport', {
     colliderMesh: teleportFloor,
     onHover: (intersection, active) => {
       teleport.onHover(intersection.point, active);
@@ -105,7 +104,7 @@ export function setup(ctx) {
     }
   }, true);
 
-  raycontrol.addState('doors', {
+  ctx.raycontrol.addState('doors', {
     colliderMesh: doors,
     onHover: (intersection, active) => {
       intersection.object.scale.z = 5;
@@ -125,7 +124,6 @@ export function setup(ctx) {
     },
     onSelectEnd: (intersection) => {}
   }, true);
-
 
   // lights
   const lightSun = new THREE.DirectionalLight(0xeeffff);
@@ -177,7 +175,6 @@ export function execute(ctx, delta, time) {
   panoballs.execute(ctx, delta, time);
   paintings.execute(ctx, delta, time);
   xylophone.execute(ctx, delta, time, controllers);
-  raycontrol.execute(ctx, delta, time);
   //teleport.execute(ctx, delta, time);
   updateUniforms(time);
   checkCameraBoundaries(ctx);
