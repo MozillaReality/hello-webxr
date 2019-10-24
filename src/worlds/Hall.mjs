@@ -3,6 +3,7 @@ import * as paintings from '../stations/Paintings.mjs';
 import * as newsticker from '../stations/NewsTicker.mjs';
 import * as xylophone from '../stations/Xylophone.mjs';
 import Teleport from '../lib/Teleport.mjs';
+import RayControl from '../lib/RayControl.mjs';
 
 var
   scene,
@@ -10,6 +11,7 @@ var
   teleportFloor,
   fader,
   teleport,
+  raycontrol,
   objectMaterials,
   controllers;
 
@@ -81,7 +83,23 @@ export function setup(ctx) {
   newsticker.setup(ctx, hall);
   panoballs.setup(ctx, hall);
 
-  teleport = new Teleport(ctx, teleportFloor);
+  teleport = new Teleport(ctx);
+  raycontrol = new RayControl(ctx);
+  raycontrol.addState('teleport', {
+    colliderMesh: teleportFloor,
+    onHover: (hitPoint, active) => {
+      teleport.onHover(hitPoint, active);
+    },
+    onHoverLeave: () => {
+      teleport.onHoverLeave();
+    },
+    onSelectStart: (e) => {
+      teleport.onSelectStart(e);
+    },
+    onSelectEnd: (e) => {
+      teleport.onSelectEnd(e);
+    }
+  }, true);
 
   // lights
   const lightSun = new THREE.DirectionalLight(0xeeffff);
@@ -133,7 +151,8 @@ export function execute(ctx, delta, time) {
   panoballs.execute(ctx, delta, time);
   paintings.execute(ctx, delta, time);
   xylophone.execute(ctx, delta, time, controllers);
-  teleport.execute(ctx, delta, time);
+  raycontrol.execute(ctx, delta, time);
+  //teleport.execute(ctx, delta, time);
   updateUniforms(time);
   checkCameraBoundaries(ctx);
 }
@@ -164,12 +183,12 @@ function onSelectStart(evt) {
 //  if (!xylophone.onSelectStart(evt)) { return; }
 //  if (!paintings.onSelectStart(evt)) { return; }
   if (!panoballs.onSelectStart(evt)) { return; }
-  if (!teleport.onSelectStart(evt)) { return; }
+  if (!raycontrol.onSelectStart(evt)) { return; }
 }
 
 function onSelectEnd(evt) {
 //  if (!xylophone.onSelectEnd(evt)) { return; }
 //  if (!paintings.onSelectEnd(evt)) { return; }
   if (!panoballs.onSelectEnd(evt)) { return; }
-  if (!teleport.onSelectEnd(evt)) { return; }
+  if (!raycontrol.onSelectEnd(evt)) { return; }
 }

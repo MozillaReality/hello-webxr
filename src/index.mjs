@@ -117,7 +117,7 @@ export function init() {
       case 78: gotoWorld((currentWorld + 1) % worlds.length); break;
       default: {
         var world = ev.keyCode - 48;
-        if (world >= 0 && world < worlds.length) {
+        if (!ev.metaKey && world >= 0 && world < worlds.length) {
           gotoWorld(world);
         }
       }

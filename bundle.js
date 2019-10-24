@@ -6360,7 +6360,7 @@ function init() {
       case 78: gotoWorld((currentWorld + 1) % worlds.length); break;
       default: {
         var world = ev.keyCode - 48;
-        if (world >= 0 && world < worlds.length) {
+        if (!ev.metaKey && world >= 0 && world < worlds.length) {
           gotoWorld(world);
         }
       }
@@ -6544,6 +6544,140 @@ class PositionalAudioPolyphonic extends THREE.Object3D {
 
 /***/ }),
 
+/***/ "./src/lib/RayControl.mjs":
+/*!********************************!*\
+  !*** ./src/lib/RayControl.mjs ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return RayControl; });
+var tempMatrix = new THREE.Matrix4();
+var intersected = [];
+
+class RayControl {
+  /*
+  state = {
+    colliderMesh,
+    onHover: hit => {}
+    onClick: hit => {}
+  }
+  */
+  addState(name, state, activate) {
+    this.states[name] = state;
+    state.targetPoint = new THREE.Vector3();
+    state.hit = false;
+
+    if (activate === true) {
+      this.currentStates.push(state);
+    }
+  }
+
+
+  activateState(name) {
+    if (this.states[name]) {
+      this.currentStates.push(this.states[name]);
+    }
+  }
+
+  deactivateState(name) {
+    this.currentStates.splice(this.currentStates.indexOf(name), 1);
+  }
+
+  constructor(ctx) {
+    this.ctx = ctx;
+    this.raycaster = new THREE.Raycaster();
+    this.states = {};
+    this.currentStates = [];
+
+    this.active = false;
+    // this.line = this.createLine(this.data);
+
+    var geometry = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, - 1 ) ] );
+    var material = new THREE.LineBasicMaterial({
+      color: 0x0000ff
+    });
+    var line = new THREE.Line( geometry, material );
+    line.name = 'line';
+    this.rayLength = 5;
+    line.scale.z = this.rayLength;
+
+    this.line0 = line.clone();
+    this.line1 = line.clone();
+    this.line0.visible = this.line1.visible = true;
+
+    ctx.controllers[0].add( this.line0 );
+    //ctx.controllers[1].add( this.line1 );
+  }
+
+  onSelectStart(evt) {
+    if (evt.target === this.ctx.controllers[0]) {
+      this.active = true;
+    }
+  }
+
+  execute(ctx, delta, time) {
+    //if (!this.active || this.currentStates.length === 0) { return; }
+    if (this.currentStates.length === 0) { return; }
+
+    //for (var c=0;c<2;c++)
+    this.currentStates.forEach(state => {
+      var controller = ctx.controllers[0];
+      var intersections = this.getIntersections(controller, state.colliderMesh);
+
+      if (intersections.length > 0) {
+        let intersection = intersections[0]
+        state.targetPoint.copy(intersection.point);
+        state.hit = true;
+        state.onHover(state.targetPoint, this.active);
+        this.line0.scale.z = intersection.distance;
+        //return;
+      } else {
+        if (state.hit) {
+          state.onHoverLeave();
+          state.hit = false;
+        }
+        this.line0.scale.z = this.rayLength;
+      }
+    });
+  }
+
+  getIntersections( controller, colliderMesh ) {
+
+    tempMatrix.identity().extractRotation( controller.matrixWorld );
+
+    this.raycaster.ray.origin.setFromMatrixPosition( controller.matrixWorld );
+    this.raycaster.ray.direction.set( 0, 0, - 1 ).applyMatrix4( tempMatrix );
+
+    return this.raycaster.intersectObject( colliderMesh, true);
+
+  }
+
+  onSelectEnd() {
+    if (!this.active) { return; }
+
+    this.currentStates.forEach(state => {
+      if (state.hit) {
+        state.onSelectEnd(state.targetPoint);
+        state.hit = false;
+      }
+    });
+
+    this.active = false;
+  }
+
+  createLine(data) {
+    return new RayCurve(
+      data.type === 'line' ? 2 : data.curveNumberPoints,
+      data.curveLineWidth);
+  }
+}
+
+
+/***/ }),
+
 /***/ "./src/lib/RayCurve.mjs":
 /*!******************************!*\
   !*** ./src/lib/RayCurve.mjs ***!
@@ -6634,43 +6768,25 @@ var intersected = [];
 class Teleport {
   constructor(ctx, mesh) {
     this.ctx = ctx;
-    this.raycaster = new THREE.Raycaster();
-    this.colliderMesh = mesh;
-    this.targetPoint = new THREE.Vector3();
-    this.data = {
-      type: 'parabolic',
-      button: 'trackpad',
-      startEvents: [],
-      endEvents: [],
-      collisionEntities: '',
-      hitEntity: '',
-      cameraRig: '',
-      teleportOrigin: '',
-      hitCylinderColor: '#99ff99',
-      hitCylinderRadius: 0.25,
-      hitCylinderHeight: 0.3,
-      interval: 0,
-      maxLength: 10,
-      curveNumberPoints: 30,
-      curveLineWidth: 0.025,
-      curveHitColor: '#99ff99',
-      curveMissColor: '#ff0000',
-      curveShootingSpeed: 5,
-      defaultPlaneSize: 100,
-      landingNormal: new THREE.Vector3(0, 1, 0),
-      landingMaxAngle: 45,
-    }
 
     // Holder for all the
     this.teleportEntity = new THREE.Group();
 
     this.active = false;
-    this.line = this.createLine(this.data);
 
     this.teleportHitGeometry = new THREE.Mesh(
       new THREE.IcosahedronBufferGeometry(0.3, 1),
       new THREE.MeshBasicMaterial({color: 0xffff00, wireframe: true})
     );
+
+    this.ballColliding = new THREE.Mesh(
+      new THREE.IcosahedronBufferGeometry(0.02, 1),
+      new THREE.MeshBasicMaterial({color: 0xffffff})
+    );
+
+    this.ballColliding.visible = false;
+
+    this.teleportEntity.add(this.ballColliding);
 
     this.teleportHitGeometry.visible = false;
 
@@ -6679,99 +6795,36 @@ class Teleport {
     this.teleportEntity.add(this.teleportHitGeometry);
 
     this.ctx.scene.add(this.teleportEntity);
-
-    var geometry = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, - 1 ) ] );
-    var material = new THREE.LineBasicMaterial({
-      color: 0x0000ff
-    });
-    var line = new THREE.Line( geometry, material );
-    line.name = 'line';
-    line.scale.z = 5;
-
-    this.line0 = line.clone();
-    this.line1 = line.clone();
-    this.line0.visible = this.line1.visible = true;
-
-    ctx.controllers[0].add( this.line0 );
-    //ctx.controllers[1].add( this.line1 );
-
   }
 
-  onSelectStart(evt) {
+  onSelectStart() {
     if (evt.target === this.ctx.controllers[0])
       this.active = true;
   }
 
-  getIntersections( controller ) {
-
-    tempMatrix.identity().extractRotation( controller.matrixWorld );
-
-    this.raycaster.ray.origin.setFromMatrixPosition( controller.matrixWorld );
-    this.raycaster.ray.direction.set( 0, 0, - 1 ).applyMatrix4( tempMatrix );
-
-    return this.raycaster.intersectObject( this.colliderMesh, true, null, true );
-
+  onHoverLeave() {
+    this.ballColliding.visible = false;
+    this.teleportHitGeometry.visible = false;
   }
 
-  intersectObjects(controller) {
-    if ( controller.userData.selected !== undefined ) return;
-
-    var line = controller.getObjectByName( 'line' );
-    var intersections = this.getIntersections( controller );
-
-    if ( intersections.length > 0 ) {
-
-      var intersection = intersections[ 0 ];
-
-      var object = intersection.object;
-      object.material.emissive.r = 1;
-      intersected.push( object );
-
-      line.scale.z = intersection.distance;
-      line.material.color.setRGB(1,1,0);
-
+  onHover(hitPoint, active) {
+    if (active) {
+      this.teleportHitGeometry.visible = true;
+      this.teleportHitGeometry.position.copy(hitPoint);
+      this.hit = true;
+      this.ballColliding.visible = false;
     } else {
-
-      line.scale.z = 5;
-      line.material.color.setRGB(1,0,0);
-
+      this.ballColliding.visible = true;
+      this.ballColliding.position.copy(hitPoint);
     }
   }
 
-  execute(ctx, delta, time) {
-    if (!this.active) { return; }
+  onSelectEnd(targetPoint) {
 
-    //for (var c=0;c<2;c++)
-    {
-      var controller = ctx.controllers[0];
-      var intersections = this.getIntersections(controller);
-
-      if (intersections.length > 0) {
-        this.targetPoint.copy(intersections[0].point);
-        this.teleportHitGeometry.visible = true;
-        this.teleportHitGeometry.position.copy(this.targetPoint);
-        this.hit = true;
-        return;
-      }
-    }
-  }
-
-  onSelectEnd() {
-
-    const teleportOriginWorldPosition = new THREE.Vector3();
-    const newRigLocalPosition = new THREE.Vector3();
-    const newHandPosition = [new THREE.Vector3(), new THREE.Vector3()]; // Left and right
-    const handPosition = new THREE.Vector3();
-
-    if (!this.active) { return; }
-
-    if (this.hit) {
-      this.ctx.cameraRig.position.copy(this.targetPoint);
-      this.teleportHitGeometry.visible = false;
-    }
+    this.ctx.cameraRig.position.copy(targetPoint);
+    this.teleportHitGeometry.visible = false;
 
     this.active = false;
-    this.hit = false;
   }
 
   createLine(data) {
@@ -12608,6 +12661,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _stations_NewsTicker_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../stations/NewsTicker.mjs */ "./src/stations/NewsTicker.mjs");
 /* harmony import */ var _stations_Xylophone_mjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../stations/Xylophone.mjs */ "./src/stations/Xylophone.mjs");
 /* harmony import */ var _lib_Teleport_mjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../lib/Teleport.mjs */ "./src/lib/Teleport.mjs");
+/* harmony import */ var _lib_RayControl_mjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../lib/RayControl.mjs */ "./src/lib/RayControl.mjs");
+
 
 
 
@@ -12620,6 +12675,7 @@ var
   teleportFloor,
   fader,
   teleport,
+  raycontrol,
   objectMaterials,
   controllers;
 
@@ -12691,7 +12747,23 @@ function setup(ctx) {
   _stations_NewsTicker_mjs__WEBPACK_IMPORTED_MODULE_2__["setup"](ctx, hall);
   _stations_PanoBalls_mjs__WEBPACK_IMPORTED_MODULE_0__["setup"](ctx, hall);
 
-  teleport = new _lib_Teleport_mjs__WEBPACK_IMPORTED_MODULE_4__["default"](ctx, teleportFloor);
+  teleport = new _lib_Teleport_mjs__WEBPACK_IMPORTED_MODULE_4__["default"](ctx);
+  raycontrol = new _lib_RayControl_mjs__WEBPACK_IMPORTED_MODULE_5__["default"](ctx);
+  raycontrol.addState('teleport', {
+    colliderMesh: teleportFloor,
+    onHover: (hitPoint, active) => {
+      teleport.onHover(hitPoint, active);
+    },
+    onHoverLeave: () => {
+      teleport.onHoverLeave();
+    },
+    onSelectStart: (e) => {
+      teleport.onSelectStart(e);
+    },
+    onSelectEnd: (e) => {
+      teleport.onSelectEnd(e);
+    }
+  }, true);
 
   // lights
   const lightSun = new THREE.DirectionalLight(0xeeffff);
@@ -12743,7 +12815,8 @@ function execute(ctx, delta, time) {
   _stations_PanoBalls_mjs__WEBPACK_IMPORTED_MODULE_0__["execute"](ctx, delta, time);
   _stations_Paintings_mjs__WEBPACK_IMPORTED_MODULE_1__["execute"](ctx, delta, time);
   _stations_Xylophone_mjs__WEBPACK_IMPORTED_MODULE_3__["execute"](ctx, delta, time, controllers);
-  teleport.execute(ctx, delta, time);
+  raycontrol.execute(ctx, delta, time);
+  //teleport.execute(ctx, delta, time);
   updateUniforms(time);
   checkCameraBoundaries(ctx);
 }
@@ -12774,14 +12847,14 @@ function onSelectStart(evt) {
 //  if (!xylophone.onSelectStart(evt)) { return; }
 //  if (!paintings.onSelectStart(evt)) { return; }
   if (!_stations_PanoBalls_mjs__WEBPACK_IMPORTED_MODULE_0__["onSelectStart"](evt)) { return; }
-  if (!teleport.onSelectStart(evt)) { return; }
+  if (!raycontrol.onSelectStart(evt)) { return; }
 }
 
 function onSelectEnd(evt) {
 //  if (!xylophone.onSelectEnd(evt)) { return; }
 //  if (!paintings.onSelectEnd(evt)) { return; }
   if (!_stations_PanoBalls_mjs__WEBPACK_IMPORTED_MODULE_0__["onSelectEnd"](evt)) { return; }
-  if (!teleport.onSelectEnd(evt)) { return; }
+  if (!raycontrol.onSelectEnd(evt)) { return; }
 }
 
 
