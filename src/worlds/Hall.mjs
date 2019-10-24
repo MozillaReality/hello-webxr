@@ -11,6 +11,7 @@ var
   teleportFloor,
   fader,
   teleport,
+  doors = [],
   raycontrol,
   objectMaterials,
   controllers;
@@ -72,7 +73,10 @@ export function setup(ctx) {
       //o.visible = false;
       o.material.visible = false;
       return;
+    } else if (o.name.startsWith('door')) {
+      doors.push(o);
     }
+
     if (o.type == 'Mesh' && objectMaterials[o.name]) {
       o.material = objectMaterials[o.name];
     }
@@ -87,19 +91,41 @@ export function setup(ctx) {
   raycontrol = new RayControl(ctx);
   raycontrol.addState('teleport', {
     colliderMesh: teleportFloor,
-    onHover: (hitPoint, active) => {
-      teleport.onHover(hitPoint, active);
+    onHover: (intersection, active) => {
+      teleport.onHover(intersection.point, active);
     },
     onHoverLeave: () => {
       teleport.onHoverLeave();
     },
-    onSelectStart: (e) => {
+    onSelectStart: (intersection, e) => {
       teleport.onSelectStart(e);
     },
-    onSelectEnd: (e) => {
-      teleport.onSelectEnd(e);
+    onSelectEnd: (intersection) => {
+      teleport.onSelectEnd(intersection.point);
     }
   }, true);
+
+  raycontrol.addState('doors', {
+    colliderMesh: doors,
+    onHover: (intersection, active) => {
+      intersection.object.scale.z = 5;
+    },
+    onHoverLeave: (intersection) => {
+      intersection.object.scale.z = 1;
+    },
+    onSelectStart: (intersection) => {
+      console.log('doors start');
+      const transitions = {
+        doorA: 1,
+        doorB: 2,
+        doorC: 3,
+        doorD: 4
+      };
+      ctx.goto = transitions[intersection.object.name];
+    },
+    onSelectEnd: (intersection) => {}
+  }, true);
+
 
   // lights
   const lightSun = new THREE.DirectionalLight(0xeeffff);

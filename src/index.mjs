@@ -168,6 +168,7 @@ export function init() {
     scene : parent,
     renderer: renderer,
     camera: camera,
+    goto: null,
     cameraRig: cameraRig,
     controllers: [controller1, controller2],
     message: {text: '', data: null} // for message passing among worlds
@@ -227,7 +228,6 @@ function onWindowResize() {
 function animate() {
   var delta = clock.getDelta();
   var elapsedTime = clock.elapsedTime;
-  context.goto = null;
   context.message = {text: '', data: null};
   // update controller bounding boxes
   controller1.boundingBox.setFromObject(controller1.children[0]);
@@ -235,13 +235,16 @@ function animate() {
   // render current world
   worlds[currentWorld].execute(context, delta, elapsedTime);
   renderer.render(scene, camera);
-
   if (context.goto !== null) {
-    switch(context.goto){
+    /*
+    switch(context.goto) {
       case 'hall': gotoWorld(0); break;
       case 'panorama0': gotoWorld(6); break;
       case 'panorama1': gotoWorld(7); break;
     }
+    */
+    gotoWorld(context.goto);
+    context.goto = null;
   }
 }
 

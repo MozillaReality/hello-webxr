@@ -35,9 +35,9 @@ export default class Teleport {
     this.ctx.scene.add(this.teleportEntity);
   }
 
-  onSelectStart() {
-    if (evt.target === this.ctx.controllers[0])
-      this.active = true;
+  onSelectStart(evt) {
+    //if (evt.target === this.ctx.controllers[0])
+    this.active = true;
   }
 
   onHoverLeave() {
