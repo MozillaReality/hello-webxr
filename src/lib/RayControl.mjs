@@ -74,12 +74,12 @@ export default class RayControl {
         let intersection = intersections[0]
         state.intersection = intersection;
         state.hit = true;
-        state.onHover && state.onHover(intersection, this.active);
+        state.onHover && state.onHover(intersection, this.active, controller);
         this.line0.scale.z = intersection.distance;
         //return;
       } else {
         if (state.hit && state.onHoverLeave) {
-          state.onHoverLeave(state.intersection);
+          state.onHoverLeave(state.intersection, this.active, controller);
         }
         state.hit = false;
         state.intersection = null;

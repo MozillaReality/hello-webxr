@@ -29,10 +29,19 @@ export function setup(ctx, hall) {
 
   paintRayState = ctx.raycontrol.addState('paintings', {
     colliderMesh: hall.getObjectByName('paintings'),
-    onHover: (intersection, active) => {
-      //intersection.object.scale.z = 5;
+    onHover: (intersection, active, controller) => {
+      if (active) {
+        zoom.painting = intersection.object;
+        zoom.controller = controller;
+        zoom.widget.material = zoom.painting.material;
+        zoom.widget.visible = true;
+        refreshZoomUV(intersection);
+      }
     },
     onHoverLeave: (intersection) => {
+      zoom.painting = null;
+      zoom.animation = 0;
+      zoom.widget.visible = false;
     },
     onSelectStart: (intersection, controller) => {
       // controller = evt.target;
@@ -52,15 +61,10 @@ export function setup(ctx, hall) {
 
 export function execute(ctx, delta, time) {
   if (zoom.painting) {
-    moveZoom(delta, ctx.raycontrol.states['paintings']);
+      if (zoom.animation < 1) {
+        zoom.animation += (1 - zoom.animation) * delta * 4.0;
+      }
   }
-}
-
-function moveZoom(delta, intersection) {
-  if (zoom.animation < 1) {
-    zoom.animation += (1 - zoom.animation) * delta * 4.0;
-  }
-  refreshZoomUV(paintRayState.intersection);
 }
 
 var minUV = new THREE.Vector2();
