@@ -53,6 +53,7 @@ var assets = {
   metropolis_bold_tex: 'fonts/Metropolis-Bold.png',
 
   //
+  foxr_tex: 'foxr.png',
   hall_model: 'hall.glb',
   vertigo_model: 'vertigo2.gltf',
   generic_controller_model: 'generic_controller.glb',

@@ -47,6 +47,10 @@ export function setup(ctx) {
   cloudsTex.encoding = THREE.sRGBEncoding;
   cloudsTex.flipY = false;
 
+  const foxrTex = assets['foxr_tex'];
+  foxrTex.encoding = THREE.sRGBEncoding;
+  foxrTex.flipY = false;
+
   const hallMaterial = new THREE.MeshBasicMaterial({map: hallLightmapTex});
 
   objectMaterials = {
@@ -63,6 +67,7 @@ export function setup(ctx) {
     'doorD': createDoorMaterial(ctx),
     'sky': new THREE.MeshBasicMaterial({map: skyTex}),
     'clouds': new THREE.MeshBasicMaterial({map: cloudsTex, transparent: true}),
+    'foxr': new THREE.MeshBasicMaterial({map: foxrTex, transparent: true})
   };
 
   hall = assets['hall_model'].scene;
