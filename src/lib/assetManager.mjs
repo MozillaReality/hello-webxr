@@ -1,7 +1,7 @@
 import '../vendor/GLTFLoader.js';
 import '../vendor/OBJLoader.js';
 
-const BASIS_LIB_PATH = '../src/vendor/';
+const BASIS_LIB_PATH = 'src/vendor/';
 
 function allAssetsLoaded(assets) {
   for (var i in assets) {
