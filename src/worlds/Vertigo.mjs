@@ -13,11 +13,8 @@ export function setup(ctx) {
   const material = new THREE.MeshBasicMaterial({color: 0xffffff, map: texture, lightMap: lightmap} );
 
   city = assets['vertigo_model'].scene;
-  city.traverse(o => {
-    if (o.type == 'Mesh') {
-      o.material = material;
-    }
-  });
+  city.getObjectByName('city').material = material;
+  city.getObjectByName('teleport').visible = false;
 }
 
 export function enter(ctx) {

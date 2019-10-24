@@ -55,7 +55,7 @@ var assets = {
   //
   foxr_tex: 'foxr.png',
   hall_model: 'hall.glb',
-  vertigo_model: 'vertigo2.gltf',
+  vertigo_model: 'vertigo.glb',
   generic_controller_model: 'generic_controller.glb',
   lightmap_tex: 'lightmap.png',
   travertine_tex: 'travertine.png',
@@ -69,7 +69,7 @@ var assets = {
   andesL: 'andesL.jpg',
   andesR: 'andesR.jpg',
   checkboard_tex: 'checkboard.png',
-  vertigo_lm_tex: 'vertigo2_lm.jpg',
+  vertigo_lm_tex: 'vertigo_lm.png',
   sky_tex: 'sky.png',
   clouds_tex: 'clouds.png',
 
