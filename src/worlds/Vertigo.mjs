@@ -24,6 +24,7 @@ export function enter(ctx) {
   ctx.renderer.setClearColor(0x677FA7);
   ctx.scene.add(city);
   ctx.scene.parent.fog = new THREE.FogExp2(0x677FA7, 0.004);
+  ctx.cameraRig.position.set(0,0,0);
 }
 
 export function exit(ctx) {

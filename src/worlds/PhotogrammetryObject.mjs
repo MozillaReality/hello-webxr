@@ -61,7 +61,7 @@ export function setup(ctx) {
 export function enter(ctx) {
   ctx.renderer.setClearColor(0x000000);
   ctx.scene.add(scene);
-  ctx.camera.position.set(0, 1.6, 2);
+  ctx.cameraRig.position.set(0, 0, 2);
 }
 
 export function exit(ctx) {

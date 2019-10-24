@@ -148,7 +148,8 @@ export function enter(ctx) {
   ctx.scene.add(scene);
   ctx.scene.add(door);
   ctx.camera.add(listener);
-  ctx.camera.position.set(0, 1.6, 0);
+  ctx.cameraRig.position.set(0,0,0);
+
   timeout = setTimeout(playSound, 2000);
 }
 
