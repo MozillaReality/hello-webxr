@@ -181,7 +181,7 @@ export function init() {
 
   window.ctx = context;
 
-  loadAssets(renderer, '../assets/', assets, () => {
+  loadAssets(renderer, 'assets/', assets, () => {
     setupControllers();
     worldHall.setup(context);
     worldPanorama.setup(context);
