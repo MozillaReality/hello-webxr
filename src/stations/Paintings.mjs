@@ -2,27 +2,9 @@ var paintings;
 var zoom = {object: null, widget: null, controller: null, animation: 0};
 const PAINTINGS = ['seurat', 'sorolla', 'bosch', 'degas', 'rembrandt'];
 const PAINTINGS_RATIOS = [1, 1, 1.875, 1, 1];
+var paintRayState;
 
 export function setup(ctx, hall) {
-  ctx.raycontrol.addState('paintings', {
-    colliderMesh: hall.getObjectByName('paintings'),
-    onHover: (intersection, active) => {
-      intersection.object.scale.z = 5;
-    },
-    onHoverLeave: (intersection) => {
-      intersection.object.scale.z = 1;
-    },
-    onSelectStart: (intersection) => {
-      console.log('paintings start');
-
-    },
-    onSelectEnd: (intersection) => {
-
-    }
-  }, true);
-
-
-
   for (let i in PAINTINGS) {
     let painting = PAINTINGS[i];
     let mesh = hall.getObjectByName(painting);
@@ -44,64 +26,41 @@ export function setup(ctx, hall) {
   zoom.widget.visible = false;
 
   ctx.scene.add(zoom.widget);
-}
 
+  paintRayState = ctx.raycontrol.addState('paintings', {
+    colliderMesh: hall.getObjectByName('paintings'),
+    onHover: (intersection, active) => {
+      //intersection.object.scale.z = 5;
+    },
+    onHoverLeave: (intersection) => {
+    },
+    onSelectStart: (intersection, controller) => {
+      // controller = evt.target;
+      zoom.painting = intersection.object;
+      zoom.controller = controller;
+      zoom.widget.material = zoom.painting.material;
+      zoom.widget.visible = true;
+      refreshZoomUV(intersection);
+    },
+    onSelectEnd: (intersection) => {
+      zoom.painting = null;
+      zoom.animation = 0;
+      zoom.widget.visible = false;
+    }
+  }, true);
+}
 
 export function execute(ctx, delta, time) {
   if (zoom.painting) {
-    moveZoom(delta);
+    moveZoom(delta, ctx.raycontrol.states['paintings']);
   }
 }
 
-
-var raycasterOrigin = new THREE.Vector3();
-var raycasterDirection = new THREE.Vector3();
-
-export function onSelectStart(evt) {
-  let controller = evt.target;
-
-  controller.getWorldPosition(raycasterOrigin);
-  controller.getWorldDirection(raycasterDirection);
-  raycasterDirection.negate();
-
-  controller.raycaster.set(raycasterOrigin, raycasterDirection);
-  var intersects = controller.raycaster.intersectObject(paintings, true);
-
-  if (intersects.length == 0) { return; }
-
-  zoom.painting= intersects[0].object;
-  zoom.controller = controller;
-  zoom.widget.material = zoom.painting.material;
-  zoom.widget.visible = true;
-  refreshZoomUV(intersects[0]);
-  return true;
-}
-
-export function onSelectEnd(evt) {
-  if (zoom.painting) {
-    zoom.painting = null;
-    zoom.animation = 0;
-    zoom.widget.visible = false;
-  }
-  return true;
-}
-
-
-function moveZoom(delta) {
-
+function moveZoom(delta, intersection) {
   if (zoom.animation < 1) {
     zoom.animation += (1 - zoom.animation) * delta * 4.0;
   }
-  const controller = zoom.controller;
-  controller.getWorldPosition(raycasterOrigin);
-  controller.getWorldDirection(raycasterDirection);
-  raycasterDirection.negate();
-
-  controller.raycaster.set(raycasterOrigin, raycasterDirection);
-  var intersects = controller.raycaster.intersectObject(paintings, true);
-  if (intersects.length == 0 || intersects[0].object !== zoom.painting) { return; }
-
-  refreshZoomUV(intersects[0]);
+  refreshZoomUV(paintRayState.intersection);
 }
 
 var minUV = new THREE.Vector2();
@@ -109,7 +68,6 @@ var maxUV = new THREE.Vector2();
 const zoomAmount = 0.05;
 
 function refreshZoomUV(hit) {
-
   zoom.widget.position.copy(hit.point);
   zoom.widget.position.x -= 0.3 * zoom.animation;
 

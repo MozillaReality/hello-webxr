@@ -206,12 +206,10 @@ function onSelectStart(evt) {
 //  if (!xylophone.onSelectStart(evt)) { return; }
 //  if (!paintings.onSelectStart(evt)) { return; }
   if (!panoballs.onSelectStart(evt)) { return; }
-  if (!raycontrol.onSelectStart(evt)) { return; }
 }
 
 function onSelectEnd(evt) {
 //  if (!xylophone.onSelectEnd(evt)) { return; }
 //  if (!paintings.onSelectEnd(evt)) { return; }
   if (!panoballs.onSelectEnd(evt)) { return; }
-  if (!raycontrol.onSelectEnd(evt)) { return; }
 }

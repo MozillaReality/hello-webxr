@@ -18,7 +18,7 @@ import {shaders} from './lib/shaders.mjs';
 var clock = new THREE.Clock();
 
 var scene, parent, renderer, camera, controls, context;
-var controller1, controller2;
+var controller1, controller2, raycontrol;
 
 var worlds = [
   worldHall,
@@ -176,7 +176,7 @@ export function init() {
     message: {text: '', data: null} // for message passing among worlds
   };
 
-  let raycontrol = new RayControl(context);
+  raycontrol = new RayControl(context);
   context.raycontrol = raycontrol;
 
   window.ctx = context;
@@ -216,12 +216,15 @@ function setupControllers() {
 function onSelectStart(ev) {
   const trigger = ev.target.getObjectByName('trigger');
   trigger.rotation.x = -0.3;
+  raycontrol.onSelectStart(ev);
+
   //gotoWorld((currentWorld + 1) % worlds.length);
 }
 
 function onSelectEnd(ev) {
   const trigger = ev.target.getObjectByName('trigger');
   trigger.rotation.x = 0;
+  raycontrol.onSelectEnd(ev);
 }
 
 function onWindowResize() {

@@ -10,6 +10,8 @@ export default class RayControl {
     if (activate === true) {
       this.currentStates.push(state);
     }
+
+    return state;
   }
 
   activateState(name) {
@@ -49,15 +51,16 @@ export default class RayControl {
   }
 
   onSelectStart(evt) {
-    if (evt.target === this.ctx.controllers[0]) {
+    let controller = evt.target;
+    if (controller === this.ctx.controllers[0]) {
       this.active = true;
-    }
 
-    this.currentStates.forEach(state => {
-      if (state.intersection && state.onSelectStart) {
-        state.onSelectStart(state.intersection);
-      }
-    });
+      this.currentStates.forEach(state => {
+        if (state.intersection && state.onSelectStart) {
+          state.onSelectStart(state.intersection, controller);
+        }
+      });
+    }
   }
 
   execute(ctx) {
