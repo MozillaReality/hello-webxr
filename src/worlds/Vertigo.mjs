@@ -37,6 +37,23 @@ export function setup(ctx) {
   doorMaterial = createDoorMaterial(ctx);
   scene.getObjectByName('door').material = doorMaterial;
 
+  ctx.raycontrol.addState('doorPhotogrammetry', {
+    colliderMesh: scene.getObjectByName('door'),
+    onHover: (intersection, active) => {
+      //teleport.onHover(intersection.point, active);
+    },
+    onHoverLeave: () => {
+      //teleport.onHoverLeave();
+    },
+    onSelectStart: (intersection, e) => {
+      ctx.goto = 0;
+      //teleport.onSelectStart(e);
+    },
+    onSelectEnd: (intersection) => {
+      //teleport.onSelectEnd(intersection.point);
+    }
+  });
+
   let teleport = scene.getObjectByName('teleport');
   teleport.visible = true;
   teleport.material.visible = false;
