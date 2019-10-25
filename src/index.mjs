@@ -5,6 +5,7 @@ import './vendor/BasisTextureLoader.js';
 
 
 import RayControl from './lib/RayControl.mjs';
+import Teleport from './lib/Teleport.mjs';
 
 import * as worldHall from './worlds/Hall.mjs';
 import * as worldPanorama from './worlds/Panorama.mjs';
@@ -18,7 +19,7 @@ import {shaders} from './lib/shaders.mjs';
 var clock = new THREE.Clock();
 
 var scene, parent, renderer, camera, controls, context;
-var controller1, controller2, raycontrol;
+var controller1, controller2, raycontrol, teleport;
 
 var worlds = [
   worldHall,
@@ -185,7 +186,8 @@ export function init() {
   raycontrol = new RayControl(context);
   context.raycontrol = raycontrol;
 
-  window.ctx = context;
+  teleport = new Teleport(ctx);
+  context.teleport = teleport;
 
   loadAssets(renderer, 'assets/', assets, () => {
     setupControllers();

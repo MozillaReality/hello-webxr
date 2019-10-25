@@ -73,6 +73,24 @@ export function setup(ctx) {
       //teleport.onSelectEnd(intersection.point);
     }
   }, true);
+
+  ctx.raycontrol.addState('teleportPhotogrammetry', {
+    colliderMesh: scene.getObjectByName('teleport'),
+    onHover: (intersection, active) => {
+      //teleport.onHover(intersection.point, active);
+    },
+    onHoverLeave: () => {
+      //teleport.onHoverLeave();
+    },
+    onSelectStart: (intersection, e) => {
+      ctx.goto = 0;
+      //teleport.onSelectStart(e);
+    },
+    onSelectEnd: (intersection) => {
+      //teleport.onSelectEnd(intersection.point);
+    }
+  }, true);
+
 }
 
 export function enter(ctx) {

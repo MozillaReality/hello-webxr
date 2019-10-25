@@ -2,16 +2,13 @@ import * as panoballs from '../stations/PanoBalls.mjs';
 import * as paintings from '../stations/Paintings.mjs';
 import * as newsticker from '../stations/NewsTicker.mjs';
 import * as xylophone from '../stations/Xylophone.mjs';
-import Teleport from '../lib/Teleport.mjs';
 
 var
   scene,
   hall,
   teleportFloor,
   fader,
-  teleport,
   doors = [],
-  raycontrol,
   objectMaterials,
   controllers;
 
@@ -91,21 +88,19 @@ export function setup(ctx) {
   newsticker.setup(ctx, hall);
   panoballs.setup(ctx, hall);
 
-  teleport = new Teleport(ctx);
-
   ctx.raycontrol.addState('teleport', {
     colliderMesh: teleportFloor,
     onHover: (intersection, active) => {
-      teleport.onHover(intersection.point, active);
+      ctx.teleport.onHover(intersection.point, active);
     },
     onHoverLeave: () => {
-      teleport.onHoverLeave();
+      ctx.teleport.onHoverLeave();
     },
     onSelectStart: (intersection, e) => {
-      teleport.onSelectStart(e);
+      ctx.teleport.onSelectStart(e);
     },
     onSelectEnd: (intersection) => {
-      teleport.onSelectEnd(intersection.point);
+      ctx.teleport.onSelectEnd(intersection.point);
     }
   }, true);
 
