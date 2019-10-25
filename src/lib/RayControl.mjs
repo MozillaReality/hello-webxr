@@ -20,6 +20,10 @@ export default class RayControl {
     }
   }
 
+  deactivateAll(name) {
+    this.currentStates = [];
+  }
+
   deactivateState(name) {
     this.currentStates.splice(this.currentStates.indexOf(name), 1);
   }
