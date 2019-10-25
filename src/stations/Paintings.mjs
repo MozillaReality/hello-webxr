@@ -60,7 +60,7 @@ export function setup(ctx, hall) {
       zoom.animation = 0;
       zoom.widget.visible = false;
     }
-  }, true);
+  });
 }
 
 export function execute(ctx, delta, time) {

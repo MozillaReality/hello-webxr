@@ -186,7 +186,7 @@ export function init() {
   raycontrol = new RayControl(context);
   context.raycontrol = raycontrol;
 
-  teleport = new Teleport(ctx);
+  teleport = new Teleport(context);
   context.teleport = teleport;
 
   loadAssets(renderer, 'assets/', assets, () => {

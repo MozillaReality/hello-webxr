@@ -102,7 +102,7 @@ export function setup(ctx) {
     onSelectEnd: (intersection) => {
       ctx.teleport.onSelectEnd(intersection.point);
     }
-  }, true);
+  });
 
   ctx.raycontrol.addState('doors', {
     colliderMesh: doors,
@@ -122,7 +122,7 @@ export function setup(ctx) {
       ctx.goto = transitions[intersection.object.name];
     },
     onSelectEnd: (intersection) => {}
-  }, true);
+  });
 
   // lights
   const lightSun = new THREE.DirectionalLight(0xeeffff);

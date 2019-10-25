@@ -124,7 +124,7 @@ export function setup(ctx) {
     onSelectEnd: (intersection) => {
       //teleport.onSelectEnd(intersection.point);
     }
-  }, true);
+  });
 }
 
 var currentSound = -1;

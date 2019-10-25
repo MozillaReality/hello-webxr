@@ -72,24 +72,30 @@ export function setup(ctx) {
     onSelectEnd: (intersection) => {
       //teleport.onSelectEnd(intersection.point);
     }
-  }, true);
+  });
 
+  let teleport = scene.getObjectByName('teleport');
+  teleport.visible = true;
+  teleport.material.visible = false;
   ctx.raycontrol.addState('teleportPhotogrammetry', {
-    colliderMesh: scene.getObjectByName('teleport'),
+    colliderMesh: teleport,
     onHover: (intersection, active) => {
-      //teleport.onHover(intersection.point, active);
+      console.log('hover');
+      ctx.teleport.onHover(intersection.point, active);
     },
     onHoverLeave: () => {
-      //teleport.onHoverLeave();
+      console.log('hoverleave');
+      ctx.teleport.onHoverLeave();
     },
     onSelectStart: (intersection, e) => {
-      ctx.goto = 0;
-      //teleport.onSelectStart(e);
+      console.log('start');
+      ctx.teleport.onSelectStart(e);
     },
     onSelectEnd: (intersection) => {
-      //teleport.onSelectEnd(intersection.point);
+      console.log('lolaso');
+      ctx.teleport.onSelectEnd(intersection.point);
     }
-  }, true);
+  });
 
 }
 
@@ -98,6 +104,7 @@ export function enter(ctx) {
   ctx.scene.add(scene);
   ctx.cameraRig.position.set(0, 0, 2);
   ctx.raycontrol.activateState('photogrammetry');
+  ctx.raycontrol.activateState('teleportPhotogrammetry');
 }
 
 export function exit(ctx) {
