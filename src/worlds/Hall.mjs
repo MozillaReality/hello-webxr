@@ -171,6 +171,9 @@ export function exit(ctx) {
   ctx.controllers[1].removeEventListener('selectstart', onSelectStart);
   ctx.controllers[1].removeEventListener('selectend', onSelectEnd);
 
+  ctx.raycontrol.deactivateState('doors');
+  ctx.raycontrol.deactivateState('teleport');
+
   xylophone.exit(ctx);
 }
 

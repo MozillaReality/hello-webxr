@@ -3,6 +3,10 @@ var intersected = [];
 
 export default class RayControl {
   addState(name, state, activate) {
+    if (this.states[name]) {
+      console.error(`RayControl state '${name}' already exist, please use a different name.`);
+      return;
+    }
     this.states[name] = state;
     state.hit = false;
     state.intersection = null;

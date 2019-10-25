@@ -80,19 +80,15 @@ export function setup(ctx) {
   ctx.raycontrol.addState('teleportPhotogrammetry', {
     colliderMesh: teleport,
     onHover: (intersection, active) => {
-      console.log('hover');
       ctx.teleport.onHover(intersection.point, active);
     },
     onHoverLeave: () => {
-      console.log('hoverleave');
       ctx.teleport.onHoverLeave();
     },
     onSelectStart: (intersection, e) => {
-      console.log('start');
       ctx.teleport.onSelectStart(e);
     },
     onSelectEnd: (intersection) => {
-      console.log('lolaso');
       ctx.teleport.onSelectEnd(intersection.point);
     }
   });
@@ -107,6 +103,9 @@ export function enter(ctx) {
 }
 
 export function exit(ctx) {
+  ctx.raycontrol.deactivateState('doorPhotogrammetry');
+  ctx.raycontrol.deactivateState('teleportPhotogrammetry');
+
   ctx.scene.remove(scene);
 }
 

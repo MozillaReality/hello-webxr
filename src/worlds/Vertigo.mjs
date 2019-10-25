@@ -37,7 +37,7 @@ export function setup(ctx) {
   doorMaterial = createDoorMaterial(ctx);
   scene.getObjectByName('door').material = doorMaterial;
 
-  ctx.raycontrol.addState('doorPhotogrammetry', {
+  ctx.raycontrol.addState('doorVertigo', {
     colliderMesh: scene.getObjectByName('door'),
     onHover: (intersection, active) => {
       //teleport.onHover(intersection.point, active);
@@ -81,11 +81,15 @@ export function enter(ctx) {
   ctx.cameraRig.position.set(0,0,0);
 
   ctx.raycontrol.activateState('teleportVertigo');
+  ctx.raycontrol.activateState('doorVertigo');
 }
 
 export function exit(ctx) {
   ctx.scene.remove(scene);
   ctx.scene.parent.fog = null;
+
+  ctx.raycontrol.deactivateState('teleportVertigo');
+  ctx.raycontrol.deactivateState('doorVertigo');
 }
 
 export function execute(ctx, delta, time) {
