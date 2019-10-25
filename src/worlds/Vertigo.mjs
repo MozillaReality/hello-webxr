@@ -36,6 +36,25 @@ export function setup(ctx) {
     new THREE.MeshBasicMaterial({map: assets['vertigo_door_lm_tex']});
   doorMaterial = createDoorMaterial(ctx);
   scene.getObjectByName('door').material = doorMaterial;
+
+  let teleport = scene.getObjectByName('teleport');
+  teleport.visible = true;
+  teleport.material.visible = false;
+  ctx.raycontrol.addState('teleportVertigo', {
+    colliderMesh: teleport,
+    onHover: (intersection, active) => {
+      ctx.teleport.onHover(intersection.point, active);
+    },
+    onHoverLeave: () => {
+      ctx.teleport.onHoverLeave();
+    },
+    onSelectStart: (intersection, e) => {
+      ctx.teleport.onSelectStart(e);
+    },
+    onSelectEnd: (intersection) => {
+      ctx.teleport.onSelectEnd(intersection.point);
+    }
+  });
 }
 
 export function enter(ctx) {
@@ -43,6 +62,8 @@ export function enter(ctx) {
   ctx.scene.add(scene);
   ctx.scene.parent.fog = new THREE.FogExp2(0x677FA7, 0.004);
   ctx.cameraRig.position.set(0,0,0);
+
+  ctx.raycontrol.activateState('teleportVertigo');
 }
 
 export function exit(ctx) {

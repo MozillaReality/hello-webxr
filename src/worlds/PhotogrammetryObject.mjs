@@ -57,7 +57,7 @@ export function setup(ctx) {
 
   scene.getObjectByName('teleport').visible = false;
 
-  ctx.raycontrol.addState('photogrammetry', {
+  ctx.raycontrol.addState('doorPhotogrammetry', {
     colliderMesh: scene.getObjectByName('door'),
     onHover: (intersection, active) => {
       //teleport.onHover(intersection.point, active);
@@ -96,14 +96,13 @@ export function setup(ctx) {
       ctx.teleport.onSelectEnd(intersection.point);
     }
   });
-
 }
 
 export function enter(ctx) {
   ctx.renderer.setClearColor(0x000000);
   ctx.scene.add(scene);
   ctx.cameraRig.position.set(0, 0, 2);
-  ctx.raycontrol.activateState('photogrammetry');
+  ctx.raycontrol.activateState('doorPhotogrammetry');
   ctx.raycontrol.activateState('teleportPhotogrammetry');
 }
 
