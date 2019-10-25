@@ -99,6 +99,8 @@ var assets = {
 
 function gotoWorld(world) {
   worlds[currentWorld].exit(context);
+  raycontrol.deactivateAll();
+
   currentWorld = world;
   worlds[currentWorld].enter(context);
 }

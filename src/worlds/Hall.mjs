@@ -118,7 +118,6 @@ export function setup(ctx) {
       intersection.object.scale.z = 1;
     },
     onSelectStart: (intersection) => {
-      console.log('doors start');
       const transitions = {
         doorA: 1,
         doorB: 2,
@@ -164,6 +163,10 @@ export function enter(ctx) {
   if (ctx.message.text == 'selectEnd'){
     panoballs.releaseBall(ctx.message.data);
   }
+
+  ctx.raycontrol.activateState('doors');
+  ctx.raycontrol.activateState('teleport');
+  paintings.enter(ctx);
 }
 
 export function exit(ctx) {

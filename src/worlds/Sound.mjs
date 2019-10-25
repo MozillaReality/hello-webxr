@@ -41,8 +41,6 @@ export function setup(ctx) {
   scene = assets['sound_model'].scene;
   door = assets['sound_door_model'].scene;
 
-
-
   assets['sound_door_lm_tex'].encoding = THREE.sRGBEncoding;
   assets['sound_door_lm_tex'].flipY = false;
   door.getObjectByName('door_frame').material =
@@ -110,6 +108,23 @@ export function setup(ctx) {
 
   const gridHelper = new THREE.GridHelper(20, 20, 0x222222, 0x080808);
   scene.add(gridHelper);
+
+  ctx.raycontrol.addState('sound', {
+    colliderMesh: door.getObjectByName('door'),
+    onHover: (intersection, active) => {
+      //teleport.onHover(intersection.point, active);
+    },
+    onHoverLeave: () => {
+      //teleport.onHoverLeave();
+    },
+    onSelectStart: (intersection, e) => {
+      ctx.goto = 0;
+      //teleport.onSelectStart(e);
+    },
+    onSelectEnd: (intersection) => {
+      //teleport.onSelectEnd(intersection.point);
+    }
+  }, true);
 }
 
 var currentSound = -1;
@@ -151,6 +166,7 @@ export function enter(ctx) {
   ctx.cameraRig.position.set(0,0,0);
 
   timeout = setTimeout(playSound, 2000);
+  ctx.raycontrol.activateState('sound');
 }
 
 export function exit(ctx) {

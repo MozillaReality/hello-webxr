@@ -4,6 +4,10 @@ const PAINTINGS = ['seurat', 'sorolla', 'bosch', 'degas', 'rembrandt'];
 const PAINTINGS_RATIOS = [1, 1, 1.875, 1, 1];
 var paintRayState;
 
+export function enter(ctx) {
+  ctx.raycontrol.activateState('paintings');
+}
+
 export function setup(ctx, hall) {
   for (let i in PAINTINGS) {
     let painting = PAINTINGS[i];
