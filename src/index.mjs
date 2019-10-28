@@ -96,7 +96,8 @@ var assets = {
   // paintings
   painting_seurat_tex: 'paintings/seurat.basis',
   painting_sorolla_tex: 'paintings/sorolla.basis',
-  painting_bosch_tex: 'paintings/bosch.basis',
+  painting_bosch1_tex: 'paintings/bosch1.basis',
+  painting_bosch2_tex: 'paintings/bosch2.basis',
   painting_degas_tex: 'paintings/degas.basis',
   painting_rembrandt_tex: 'paintings/rembrandt.basis',
 };

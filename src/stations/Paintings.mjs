@@ -1,7 +1,7 @@
 var paintings;
 var zoom = {object: null, widget: null, controller: null, animation: 0};
-const PAINTINGS = ['seurat', 'sorolla', 'bosch', 'degas', 'rembrandt'];
-const PAINTINGS_RATIOS = [1, 1, 1.875, 1, 1];
+const PAINTINGS = ['seurat', 'sorolla', 'bosch1', 'bosch2', 'degas', 'rembrandt'];
+const PAINTINGS_RATIOS = [1, 1, 1, 1, 1, 1];
 
 export function enter(ctx) {
   ctx.raycontrol.activateState('paintings');
@@ -76,7 +76,7 @@ const zoomAmount = 0.05;
 
 function refreshZoomUV(hit) {
   zoom.widget.position.copy(hit.point);
-  zoom.widget.position.x -= 0.3 * zoom.animation;
+  zoom.widget.position.x -= 0.5 * zoom.animation;
 
   const uvs = zoom.widget.geometry.faceVertexUvs[0];
   const ratio = PAINTINGS_RATIOS[zoom.painting.userData.paintingId];
