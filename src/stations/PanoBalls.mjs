@@ -54,9 +54,9 @@ export function setup(ctx, hall) {
     onHoverLeave: (intersection) => {
     },
     onSelectStart: (intersection, controller) => {
-      ctx.goto = intersection.object.userData.panoId;
     },
     onSelectEnd: (intersection) => {
+      ctx.goto = intersection.object.userData.panoId;
     }
   });
 }

@@ -18,23 +18,23 @@ export function enter(ctx) {
   ctx.scene.add(panoL);
   ctx.scene.add(panoR);
   ctx.camera.layers.enable(1);
-  ctx.controllers[0].addEventListener('selectstart', onSelectStart);
-  ctx.controllers[1].addEventListener('selectstart', onSelectStart);
+  ctx.controllers[0].addEventListener('selectend', onSelectEnd);
+  ctx.controllers[1].addEventListener('selectend', onSelectEnd);
   context = ctx;
 }
 
 export function exit(ctx) {
   ctx.scene.remove(panoL);
   ctx.scene.remove(panoR);
-  ctx.controllers[0].removeEventListener('selectstart', onSelectStart);
-  ctx.controllers[1].removeEventListener('selectstart', onSelectStart);
+  ctx.controllers[0].removeEventListener('selectend', onSelectEnd);
+  ctx.controllers[1].removeEventListener('selectend', onSelectEnd);
   ctx.camera.layers.disable(1);
 }
 
 export function execute(ctx, delta, time) {
 }
 
-export function onSelectStart(evt) {
+export function onSelectEnd(evt) {
   context.goto = 0;
 }
 

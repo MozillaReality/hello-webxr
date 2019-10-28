@@ -14,21 +14,21 @@ export function enter(ctx) {
   ctx.renderer.setClearColor(0x000000);
   ctx.scene.add(pano);
 
-  ctx.controllers[0].addEventListener('selectstart', onSelectStart);
-  ctx.controllers[1].addEventListener('selectstart', onSelectStart);
+  ctx.controllers[0].addEventListener('selectend', onSelectEnd);
+  ctx.controllers[1].addEventListener('selectend', onSelectEnd);
 
   context = ctx;
 }
 
 export function exit(ctx) {
   ctx.scene.remove(pano);
-  ctx.controllers[0].removeEventListener('selectstart', onSelectStart);
-  ctx.controllers[1].removeEventListener('selectstart', onSelectStart);
+  ctx.controllers[0].removeEventListener('selectend', onSelectEnd);
+  ctx.controllers[1].removeEventListener('selectend', onSelectEnd);
 }
 
 export function execute(ctx, delta, time) {
 }
 
-export function onSelectStart(evt) {
+export function onSelectEnd(evt) {
   context.goto = 0;
 }
