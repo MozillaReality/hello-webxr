@@ -33,8 +33,8 @@ export function setup(ctx, hall) {
     );
     ball.position.copy(hall.getObjectByName(`panoball${i + 1}`).position);
     ball.userData.grabbedBy = null;
-    ball.userData.animation = 0;
-    ball.userData.panoId = i;
+    ball.userData.flying = false;
+    ball.userData.panoId = 4 + i;
     ball.userData.resetPosition = ball.position.clone();
 
     panoBalls.push(ball);
@@ -52,27 +52,32 @@ export function execute(ctx, delta, time) {
       // on hand
       ball.position.y = Math.cos(i + time * 3) * 0.02;
     } else {
-      // on pillar
-      ball.position.copy(ball.userData.resetPosition);
-      ball.position.y = 1.5 + Math.cos(i + time * 3) * 0.02;
-    }
-    if (ball.userData.animation > 0) {
-      ball.userData.animation = Math.max(0, ball.userData.animation - delta * 4);
+
       auxVec.copy(ball.userData.resetPosition);
-      auxVec.addScaledVector(ball.position, -ball.userData.animation);
-      ball.position.add(auxVec);
+      auxVec.y = 1.5 + Math.cos(i + time * 3) * 0.02;
+
+      // returning to pillar
+      if (ball.userData.flying) {
+        auxVec.sub(ball.position)
+        auxVec.multiplyScalar(0.1);
+        ball.position.add(auxVec);
+
+        if (auxVec.length < 0.01) { ball.userData.flying = false; }
+      } else {
+        // on pillar
+        ball.position.copy(auxVec);
+      }
     }
   }
 
   for (let i = 0; i < ctx.controllers.length; i++) {
     let controller = ctx.controllers[i];
-    // console.log(controller.grabbing);
     if (!controller.grabbing) { continue; }
     const dist = ctx.camera.position.distanceTo(controller.position);
     if (dist < 0.2) {
       // on head. Hide ball and change world
       controller.grabbing.visible = false;
-      ctx.goto = 'panorama' + controller.grabbing.userData.panoId;
+      ctx.goto = controller.grabbing.userData.panoId;
       return;
     }
   }
@@ -120,7 +125,7 @@ export function releaseBall(controller){
   ball.position.copy(controller.position);
   hallRef.add(ball);
   ball.userData.grabbedBy = null;
-  ball.userData.animation = 1;
+  ball.userData.flying = true;
   controller.grabbing = null;
   setVisibleChildren(controller, true);
 }

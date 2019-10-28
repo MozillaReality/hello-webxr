@@ -35,12 +35,12 @@ export function execute(ctx, delta, time) {
       ctx.message.text = 'selectEnd'; // send a selectEnd message to stationPanoBalls.mjs
       ctx.message.data = controller;
     }
-    ctx.goto = 'hall';
+    ctx.goto = 0;
     return;
   }
   const dist = ctx.camera.position.distanceTo(controller.position);
   if (dist > 0.5){
-    ctx.goto = 'hall';
+    ctx.goto = 0;
     return;
   }
 }
