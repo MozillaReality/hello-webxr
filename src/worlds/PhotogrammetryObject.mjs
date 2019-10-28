@@ -1,4 +1,4 @@
-var scene, doorMaterial;
+var scene, doorMaterial, door;
 
 function createDoorMaterial(ctx) {
   ctx.assets['doorfx_tex'].wrapT = THREE.RepeatWrapping;
@@ -53,7 +53,8 @@ export function setup(ctx) {
     new THREE.MeshBasicMaterial({map: assets['pg_door_lm_tex']});
 
   doorMaterial = createDoorMaterial(ctx);
-  scene.getObjectByName('door').material = doorMaterial;
+  door = scene.getObjectByName('door');
+  door.material = doorMaterial;
 
   scene.getObjectByName('teleport').visible = false;
 
@@ -61,6 +62,8 @@ export function setup(ctx) {
     colliderMesh: scene.getObjectByName('door'),
     onHover: (intersection, active) => {
       //teleport.onHover(intersection.point, active);
+      const scale = intersection.object.scale;
+      scale.z = Math.min(scale.z + 0.05 * (2 - door.scale.z), 1.5);
     },
     onHoverLeave: () => {
       //teleport.onHoverLeave();
@@ -111,4 +114,8 @@ export function exit(ctx) {
 
 export function execute(ctx, delta, time) {
   doorMaterial.uniforms.time.value = time;
+
+  if (door.scale.z > 0.5) {
+    door.scale.z = Math.max(door.scale.z - delta * door.scale.z, 0.5);
+  }
 }

@@ -1,4 +1,4 @@
-var scene, doorMaterial;
+var scene, doorMaterial, door;
 
 function createDoorMaterial(ctx) {
   ctx.assets['doorfx_tex'].wrapT = THREE.RepeatWrapping;
@@ -35,12 +35,15 @@ export function setup(ctx) {
   scene.getObjectByName('door_frame').material =
     new THREE.MeshBasicMaterial({map: assets['vertigo_door_lm_tex']});
   doorMaterial = createDoorMaterial(ctx);
-  scene.getObjectByName('door').material = doorMaterial;
+  door = scene.getObjectByName('door');
+  door.material = doorMaterial;
 
   ctx.raycontrol.addState('doorVertigo', {
     colliderMesh: scene.getObjectByName('door'),
     onHover: (intersection, active) => {
       //teleport.onHover(intersection.point, active);
+      const scale = intersection.object.scale;
+      scale.z = Math.min(scale.z + 0.02 * (2 - door.scale.z), 0.8);
     },
     onHoverLeave: () => {
       //teleport.onHoverLeave();
@@ -94,5 +97,9 @@ export function exit(ctx) {
 
 export function execute(ctx, delta, time) {
   doorMaterial.uniforms.time.value = time;
+
+  if (door.scale.z > 0.2) {
+    door.scale.z = Math.max(door.scale.z - delta * door.scale.z, 0.2);
+  }
 }
 

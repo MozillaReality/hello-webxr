@@ -108,10 +108,10 @@ export function setup(ctx) {
   ctx.raycontrol.addState('doors', {
     colliderMesh: doors,
     onHover: (intersection, active) => {
-      intersection.object.scale.z = 5;
+      const scale = intersection.object.scale;
+      scale.z = Math.min(scale.z + 0.05 * (5.5 - scale.z), 5);
     },
     onHoverLeave: (intersection) => {
-      intersection.object.scale.z = 1;
     },
     onSelectStart: (intersection) => {
       const transitions = {
@@ -172,6 +172,13 @@ export function execute(ctx, delta, time) {
   xylophone.execute(ctx, delta, time, controllers);
   updateUniforms(time);
   checkCameraBoundaries(ctx);
+
+  for (var i = 0; i < doors.length; i++) {
+    if (doors[i].scale.z > 1) {
+      doors[i].scale.z = Math.max(doors[i].scale.z - delta * doors[i].scale.z, 1);
+    }
+  }
+
 }
 
 function updateUniforms(time) {

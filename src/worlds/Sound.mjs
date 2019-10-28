@@ -113,6 +113,8 @@ export function setup(ctx) {
     colliderMesh: door.getObjectByName('door'),
     onHover: (intersection, active) => {
       //teleport.onHover(intersection.point, active);
+      const scale = intersection.object.scale;
+      scale.z = Math.min(scale.z + 0.05 * (2 - door.scale.z), 1.5);
     },
     onHoverLeave: () => {
       //teleport.onHoverLeave();
@@ -183,4 +185,8 @@ export function execute(ctx, delta, time) {
     sound.shadow.material.opacity -= delta * 0.5;
   }
   doorMaterial.uniforms.time.value = time;
+
+  if (door.scale.z > 0.5) {
+    door.scale.z = Math.max(door.scale.z - delta * door.scale.z, 0.5);
+  }
 }
