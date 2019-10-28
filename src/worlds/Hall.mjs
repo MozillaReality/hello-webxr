@@ -146,30 +146,18 @@ export function setup(ctx) {
 
 export function enter(ctx) {
   ctx.renderer.setClearColor( 0xC0DFFB );
-  controllers = ctx.controllers;
-  controllers[0].addEventListener('selectstart', onSelectStart);
-  controllers[0].addEventListener('selectend', onSelectEnd);
-  controllers[1].addEventListener('selectstart', onSelectStart);
-  controllers[1].addEventListener('selectend', onSelectEnd);
   ctx.scene.add(scene);
 
   xylophone.enter(ctx);
 
-  if (ctx.message.text == 'selectEnd'){
-    panoballs.releaseBall(ctx.message.data);
-  }
-
   ctx.raycontrol.activateState('doors');
   ctx.raycontrol.activateState('teleport');
   paintings.enter(ctx);
+  panoballs.enter(ctx);
 }
 
 export function exit(ctx) {
   ctx.scene.remove(scene);
-  ctx.controllers[0].removeEventListener('selectstart', onSelectStart);
-  ctx.controllers[0].removeEventListener('selectend', onSelectEnd);
-  ctx.controllers[1].removeEventListener('selectstart', onSelectStart);
-  ctx.controllers[1].removeEventListener('selectend', onSelectEnd);
 
   ctx.raycontrol.deactivateState('doors');
   ctx.raycontrol.deactivateState('teleport');
@@ -207,15 +195,3 @@ function checkCameraBoundaries(ctx) {
   fader.material.opacity = Math.min(1, Math.max(0, fade));
 }
 
-// if module returns false, do nothing else (prevents selecting two things at the same time)
-function onSelectStart(evt) {
-//  if (!xylophone.onSelectStart(evt)) { return; }
-//  if (!paintings.onSelectStart(evt)) { return; }
-  if (!panoballs.onSelectStart(evt)) { return; }
-}
-
-function onSelectEnd(evt) {
-//  if (!xylophone.onSelectEnd(evt)) { return; }
-//  if (!paintings.onSelectEnd(evt)) { return; }
-  if (!panoballs.onSelectEnd(evt)) { return; }
-}

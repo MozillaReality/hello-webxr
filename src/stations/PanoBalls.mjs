@@ -1,11 +1,16 @@
 var
   panoBalls = [],
+  panoballsParent = new THREE.Object3D(),
   bbox = new THREE.Box3(),
   panoFxMaterial,
   auxVec = new THREE.Vector3(),
   hallRef = null;
 
 const NUM_PANOBALLS = 2;
+
+export function enter(ctx) {
+  ctx.raycontrol.activateState('panoballs');
+}
 
 export function setup(ctx, hall) {
   const assets = ctx.assets;
@@ -32,106 +37,38 @@ export function setup(ctx, hall) {
       })
     );
     ball.position.copy(hall.getObjectByName(`panoball${i + 1}`).position);
-    ball.userData.grabbedBy = null;
-    ball.userData.flying = false;
     ball.userData.panoId = 4 + i;
-    ball.userData.resetPosition = ball.position.clone();
 
     panoBalls.push(ball);
-    hall.add(ball);
+    panoballsParent.add(ball);
   }
+
+  hall.add(panoballsParent);
+
+  ctx.raycontrol.addState('panoballs', {
+    colliderMesh: panoballsParent,
+    onHover: (intersection, active, controller) => {
+      if (active) {
+      }
+    },
+    onHoverLeave: (intersection) => {
+    },
+    onSelectStart: (intersection, controller) => {
+      ctx.goto = intersection.object.userData.panoId;
+    },
+    onSelectEnd: (intersection) => {
+    }
+  });
 }
 
 export function execute(ctx, delta, time) {
-
-  // animate balls
   for (let i = 0; i < panoBalls.length; i++) {
     const ball = panoBalls[i];
-    ball.visible = true;
-    if (ball.userData.grabbedBy){
-      // on hand
-      ball.position.y = Math.cos(i + time * 3) * 0.02;
-    } else {
-
-      auxVec.copy(ball.userData.resetPosition);
-      auxVec.y = 1.5 + Math.cos(i + time * 3) * 0.02;
-
-      // returning to pillar
-      if (ball.userData.flying) {
-        auxVec.sub(ball.position)
-        auxVec.multiplyScalar(0.1);
-        ball.position.add(auxVec);
-
-        if (auxVec.length < 0.01) { ball.userData.flying = false; }
-      } else {
-        // on pillar
-        ball.position.copy(auxVec);
-      }
-    }
-  }
-
-  for (let i = 0; i < ctx.controllers.length; i++) {
-    let controller = ctx.controllers[i];
-    if (!controller.grabbing) { continue; }
-    const dist = ctx.camera.position.distanceTo(controller.position);
-    if (dist < 0.2) {
-      // on head. Hide ball and change world
-      controller.grabbing.visible = false;
-      ctx.goto = controller.grabbing.userData.panoId;
-      return;
-    }
+    ball.position.y = 1.5 + Math.cos(i + time * 3) * 0.02;
   }
 }
 
 export function updateUniforms(time) {
   panoBalls[0].material.uniforms.time.value = time;
   panoBalls[1].material.uniforms.time.value = time;
-}
-
-export function onSelectStart(evt) {
-  let controller = evt.target;
-  if (controller.grabbing !== null){ return; }
-
-  // hand grabs stick
-  for (let i = 0; i < panoBalls.length; i++) {
-    bbox.setFromObject(panoBalls[i]);
-    if (controller.boundingBox.intersectsBox(bbox)){
-      // stick grabbed from the other hand
-      if (panoBalls[i].userData.grabbedBy) { return; }
-      setVisibleChildren(controller, false);
-      panoBalls[i].position.set(0, 0, 0);
-      panoBalls[i].rotation.set(0, 0, 0);
-      controller.add(panoBalls[i]);
-      controller.grabbing = panoBalls[i];
-      panoBalls[i].userData.grabbedBy = controller;
-      return false;
-    }
-  }
-  return true;
-}
-
-export function onSelectEnd(evt) {
-  let controller = evt.target;
-  if (controller.grabbing !== null) {
-    releaseBall(controller);
-    return false;
-  }
-  return true;
-}
-
-export function releaseBall(controller){
-  if (!controller || !controller.grabbing) { return; }
-  let ball = controller.grabbing;
-  ball.position.copy(controller.position);
-  hallRef.add(ball);
-  ball.userData.grabbedBy = null;
-  ball.userData.flying = true;
-  controller.grabbing = null;
-  setVisibleChildren(controller, true);
-}
-
-function setVisibleChildren(controller, visible) {
-  for (var i = 0; i < controller.children.length; i++) {
-    controller.children[i].visible = visible;
-  }
 }

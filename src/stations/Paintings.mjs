@@ -2,7 +2,6 @@ var paintings;
 var zoom = {object: null, widget: null, controller: null, animation: 0};
 const PAINTINGS = ['seurat', 'sorolla', 'bosch', 'degas', 'rembrandt'];
 const PAINTINGS_RATIOS = [1, 1, 1.875, 1, 1];
-var paintRayState;
 
 export function enter(ctx) {
   ctx.raycontrol.activateState('paintings');
@@ -31,7 +30,7 @@ export function setup(ctx, hall) {
 
   ctx.scene.add(zoom.widget);
 
-  paintRayState = ctx.raycontrol.addState('paintings', {
+  ctx.raycontrol.addState('paintings', {
     colliderMesh: hall.getObjectByName('paintings'),
     onHover: (intersection, active, controller) => {
       if (active) {

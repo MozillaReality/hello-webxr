@@ -1,4 +1,4 @@
-var pano = null, controller = null, exitRequested;
+var pano = null, context;
 
 export function setup(ctx) {
   const assets = ctx.assets;
@@ -12,39 +12,22 @@ export function setup(ctx) {
 export function enter(ctx) {
   ctx.renderer.setClearColor(0x000000);
   ctx.scene.add(pano);
-  // get controller close to head
-  for (var i = 0; i < ctx.controllers.length; i++) {
-    const dist = ctx.camera.position.distanceTo(ctx.controllers[i].position);
-    if (dist < 0.2){
-      controller = ctx.controllers[i];
-      controller.addEventListener('selectend', onSelectEnd);
-      break;
-    }
-  }
-  exitRequested = false;
+
+  ctx.controllers[0].addEventListener('selectstart', onSelectStart);
+  ctx.controllers[1].addEventListener('selectstart', onSelectStart);
+
+  context = ctx;
 }
 
 export function exit(ctx) {
   ctx.scene.remove(pano);
-  controller.removeEventListener('selectend', onSelectEnd);
+  ctx.controllers[0].removeEventListener('selectstart', onSelectStart);
+  ctx.controllers[1].removeEventListener('selectstart', onSelectStart);
 }
 
 export function execute(ctx, delta, time) {
-  if (!controller || exitRequested) {
-    if (exitRequested) {
-      ctx.message.text = 'selectEnd'; // send a selectEnd message to stationPanoBalls.mjs
-      ctx.message.data = controller;
-    }
-    ctx.goto = 0;
-    return;
-  }
-  const dist = ctx.camera.position.distanceTo(controller.position);
-  if (dist > 0.5){
-    ctx.goto = 0;
-    return;
-  }
 }
 
-export function onSelectEnd(evt) {
-  exitRequested = true;
+export function onSelectStart(evt) {
+  context.goto = 0;
 }

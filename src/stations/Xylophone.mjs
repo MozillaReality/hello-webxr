@@ -65,6 +65,7 @@ export function exit(ctx) {
 }
 
 export function execute(ctx, delta, time, controllers) {
+  if (!controllers) {return;}
   for (var c = 0; c < 2; c++) {
     if (controllers[c].grabbing === null) { continue; }
 

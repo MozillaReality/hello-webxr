@@ -180,7 +180,6 @@ export function init() {
     goto: null,
     cameraRig: cameraRig,
     controllers: [controller1, controller2],
-    message: {text: '', data: null} // for message passing among worlds
   };
 
   raycontrol = new RayControl(context);
@@ -244,7 +243,6 @@ function onWindowResize() {
 function animate() {
   var delta = clock.getDelta();
   var elapsedTime = clock.elapsedTime;
-  context.message = {text: '', data: null};
   // update controller bounding boxes
   controller1.boundingBox.setFromObject(controller1.children[0]);
   controller2.boundingBox.setFromObject(controller2.children[0]);
@@ -253,13 +251,6 @@ function animate() {
   worlds[currentWorld].execute(context, delta, elapsedTime);
   renderer.render(scene, camera);
   if (context.goto !== null) {
-    /*
-    switch(context.goto) {
-      case 'hall': gotoWorld(0); break;
-      case 'panorama0': gotoWorld(6); break;
-      case 'panorama1': gotoWorld(7); break;
-    }
-    */
     gotoWorld(context.goto);
     context.goto = null;
   }
