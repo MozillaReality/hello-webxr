@@ -53,25 +53,27 @@ var assets = {
   metropolis_bold_font: 'fonts/Metropolis-Bold.font',
   metropolis_bold_tex: 'fonts/Metropolis-Bold.png',
 
-  //
+  // hall
   foxr_tex: 'foxr.png',
   hall_model: 'hall.glb',
   generic_controller_model: 'generic_controller.glb',
   lightmap_tex: 'lightmap.png',
-  travertine_tex: 'travertine.png',
-  travertine2_tex: 'travertine2.jpg',
   controller_tex: 'controller.png',
+  doorfx_tex: 'doorfx.png',
+  sky_tex: 'sky.png',
+  clouds_tex: 'clouds.png',
+
+  // vertigo
+  vertigo_lm_tex: 'vertigo_lm.png',
+  checkboard_tex: 'checkboard.png',
+
+  // panoramas
   pano1: 'zapporthorn.basis',
   pano1small: 'zapporthorn_small.jpg',
-  doorfx_tex: 'doorfx.png',
   pano2small: 'andes_small.jpg',
   panoballfx_tex: 'ballfx.jpg',
   andesL: 'andesL.jpg',
   andesR: 'andesR.jpg',
-  checkboard_tex: 'checkboard.png',
-  vertigo_lm_tex: 'vertigo_lm.png',
-  sky_tex: 'sky.png',
-  clouds_tex: 'clouds.png',
 
   // vertigo
   vertigo_model: 'vertigo.glb',
