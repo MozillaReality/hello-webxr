@@ -10,7 +10,8 @@ var
   fader,
   doors = [],
   objectMaterials,
-  controllers;
+  controllers,
+  auxVec = new THREE.Vector3();
 
 function createDoorMaterial(ctx) {
   ctx.assets['doorfx_tex'].wrapT = THREE.RepeatWrapping;
@@ -169,7 +170,6 @@ export function execute(ctx, delta, time) {
   panoballs.execute(ctx, delta, time);
   paintings.execute(ctx, delta, time);
   xylophone.execute(ctx, delta, time, controllers);
-  //teleport.execute(ctx, delta, time);
   updateUniforms(time);
   checkCameraBoundaries(ctx);
 }
@@ -184,13 +184,14 @@ function updateUniforms(time) {
 }
 
 function checkCameraBoundaries(ctx) {
-  const cam = ctx.camera.position;
+  auxVec.copy(ctx.camera.position).add(ctx.cameraRig.position);
+  const cam = auxVec;
   const margin = 0.25;
   var fade = 0;
   if (cam.y < margin)     { fade = 1 - (cam.y / margin); }
   else if (cam.x < -5.4)  { fade = (-cam.x - 5.4) / margin; }
   else if (cam.x > 8)     { fade = (cam.x - 8) / margin; }
-  else if (cam.z < -6.45) { fade = (-cam.z - -6.45) / margin; }
+  else if (cam.z < -6.45) { fade = (-cam.z - 6.45) / margin; }
   else if (cam.z > 6.4)  { fade = (cam.z - 6.4) / margin; }
   fader.material.opacity = Math.min(1, Math.max(0, fade));
 }
