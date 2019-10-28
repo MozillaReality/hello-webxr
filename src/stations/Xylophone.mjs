@@ -58,10 +58,14 @@ export function setup(ctx, hall) {
 
 export function enter(ctx) {
   ctx.camera.add(listener);
+  ctx.controllers[0].addEventListener('selectstart', onSelectStart);
+  ctx.controllers[1].addEventListener('selectstart', onSelectStart);
 }
 
 export function exit(ctx) {
   ctx.camera.remove(listener);
+  ctx.controllers[0].removeEventListener('selectend', onSelectEnd);
+  ctx.controllers[1].removeEventListener('selectend', onSelectEnd);
 }
 
 export function execute(ctx, delta, time, controllers) {
