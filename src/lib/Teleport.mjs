@@ -1,4 +1,3 @@
-import RayCurve from "./RayCurve.mjs";
 import {rayMaterial} from "./RayControl.mjs";
 
 var tempMatrix = new THREE.Matrix4();
