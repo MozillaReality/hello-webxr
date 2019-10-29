@@ -83,7 +83,7 @@ export function exit(ctx) {
 
 export function execute(ctx, delta, time) {
   let controllers = ctx.controllers;
-  
+
   if (!controllers) {return;}
 
   for (var c = 0; c < 2; c++) {
@@ -156,7 +156,7 @@ export function onSelectEnd(evt) {
     stick.position.copy(auxVec);
     stick.rotation.copy(stick.userData.resetRotation);
     stick.userData.grabbedBy = null;
-    stick.userData.animation = 1;
+    //stick.userData.animation = 1;
     controller.grabbing = null;
     return false;
   }

@@ -176,6 +176,7 @@ export function init() {
   cameraRig.add(camera);
   cameraRig.add(controller1);
   cameraRig.add(controller2);
+  cameraRig.position.set(1.5,0,-0.5);  
   scene.add(cameraRig);
 
   context = {
