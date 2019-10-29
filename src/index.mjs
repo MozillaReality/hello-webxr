@@ -62,6 +62,9 @@ var assets = {
   doorfx_tex: 'doorfx.png',
   sky_tex: 'sky.png',
   clouds_tex: 'clouds.png',
+  teleport_model: 'teleport.glb',
+  beam_tex: 'beamfx.png',
+  glow_tex: 'glow.png',
 
   // vertigo
   vertigo_lm_tex: 'vertigo_lm.png',
@@ -185,13 +188,14 @@ export function init() {
     controllers: [controller1, controller2],
   };
 
-  raycontrol = new RayControl(context);
-  context.raycontrol = raycontrol;
-
-  teleport = new Teleport(context);
-  context.teleport = teleport;
-
   loadAssets(renderer, 'assets/', assets, () => {
+
+    raycontrol = new RayControl(context);
+    context.raycontrol = raycontrol;
+
+    teleport = new Teleport(context);
+    context.teleport = teleport;
+
     setupControllers();
     worldHall.setup(context);
     worldPanorama.setup(context);
@@ -199,6 +203,7 @@ export function init() {
     worldPhotogrammetryObject.setup(context);
     worldVertigo.setup(context);
     worldSound.setup(context);
+
 
     worlds[currentWorld].enter(context);
 

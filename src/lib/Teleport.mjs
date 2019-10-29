@@ -1,3 +1,9 @@
+import RayCurve from "./RayCurve.mjs";
+import {rayMaterial} from "./RayControl.mjs";
+
+var tempMatrix = new THREE.Matrix4();
+var intersected = [];
+
 export default class Teleport {
   constructor(ctx, mesh) {
     this.ctx = ctx;
@@ -7,15 +13,17 @@ export default class Teleport {
 
     this.active = false;
 
-    this.teleportHitGeometry = new THREE.Mesh(
-      new THREE.IcosahedronBufferGeometry(0.3, 1),
-      new THREE.MeshBasicMaterial({color: 0xffff00, wireframe: true})
-    );
+    this.teleportHitGeometry = ctx.assets['teleport_model'].scene.getObjectByName('goal');
+    this.teleportHitGeometry.material = rayMaterial;
 
-    this.ballColliding = new THREE.Mesh(
-      new THREE.IcosahedronBufferGeometry(0.02, 1),
-      new THREE.MeshBasicMaterial({color: 0xffffff})
-    );
+    this.ballColliding = ctx.assets['teleport_model'].scene.getObjectByName('glow');
+    ctx.assets['glow_tex'].encoding = THREE.sRGBEncoding;
+    this.ballColliding.material = new THREE.MeshBasicMaterial({
+      color: 0x00257b,
+      map: ctx.assets['glow_tex'],
+      transparent: true,
+      blending: THREE.AdditiveBlending
+    });
 
     this.ballColliding.visible = false;
 

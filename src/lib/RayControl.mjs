@@ -1,5 +1,6 @@
 var tempMatrix = new THREE.Matrix4();
 var intersected = [];
+export var rayMaterial;
 
 export default class RayControl {
   addState(name, state, activate) {
@@ -40,11 +41,21 @@ export default class RayControl {
 
     this.active = false;
 
-    var geometry = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, - 1 ) ] );
-    var material = new THREE.LineBasicMaterial({
-      color: 0x0000ff
+    var line = ctx.assets['teleport_model'].scene.getObjectByName('beam');
+
+    ctx.assets['beam_tex'].wrapT = THREE.RepeatWrapping;
+    ctx.assets['beam_tex'].wrapS = THREE.RepeatWrapping;
+    rayMaterial = line.material = new THREE.ShaderMaterial({
+      uniforms: {
+        time: {value: 0},
+        active: {value: 0},
+        tex: {value: ctx.assets['beam_tex']}
+      },
+      vertexShader: ctx.shaders.basic_vert,
+      fragmentShader: ctx.shaders.beam_frag,
+      blending: THREE.AdditiveBlending
     });
-    var line = new THREE.Line( geometry, material );
+
     line.name = 'line';
     this.rayLength = 5;
     line.scale.z = this.rayLength;
@@ -70,8 +81,10 @@ export default class RayControl {
     }
   }
 
-  execute(ctx) {
+  execute(ctx, delta, time) {
     if (this.currentStates.length === 0) { return; }
+
+    rayMaterial.uniforms.time.value = time;
 
     this.currentStates.forEach(state => {
       var controller = ctx.controllers[0];
@@ -82,7 +95,7 @@ export default class RayControl {
         state.intersection = intersection;
         state.hit = true;
         state.onHover && state.onHover(intersection, this.active, controller);
-        this.line0.scale.z = intersection.distance;
+        this.line0.scale.z = Math.min(intersection.distance, 1);
         //return;
       } else {
         if (state.hit && state.onHoverLeave) {
@@ -90,7 +103,7 @@ export default class RayControl {
         }
         state.hit = false;
         state.intersection = null;
-        this.line0.scale.z = this.rayLength;
+        this.line0.scale.z = Math.min(this.rayLength, 1);
       }
     });
   }
