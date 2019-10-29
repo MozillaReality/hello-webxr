@@ -39,7 +39,6 @@ export default class RayControl {
     this.currentStates = [];
 
     this.active = false;
-    // this.line = this.createLine(this.data);
 
     var geometry = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, - 1 ) ] );
     var material = new THREE.LineBasicMaterial({
@@ -121,11 +120,5 @@ export default class RayControl {
     });
 
     this.active = false;
-  }
-
-  createLine(data) {
-    return new RayCurve(
-      data.type === 'line' ? 2 : data.curveNumberPoints,
-      data.curveLineWidth);
   }
 }

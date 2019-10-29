@@ -1,8 +1,3 @@
-import RayCurve from "./RayCurve.mjs";
-
-var tempMatrix = new THREE.Matrix4();
-var intersected = [];
-
 export default class Teleport {
   constructor(ctx, mesh) {
     this.ctx = ctx;
@@ -63,12 +58,6 @@ export default class Teleport {
     this.teleportHitGeometry.visible = false;
 
     this.active = false;
-  }
-
-  createLine(data) {
-    return new RayCurve(
-      data.type === 'line' ? 2 : data.curveNumberPoints,
-      data.curveLineWidth);
   }
 }
 
