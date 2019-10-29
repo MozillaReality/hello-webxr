@@ -209,6 +209,8 @@ export function init() {
 
     worlds[currentWorld].enter(context);
 
+
+
     document.body.appendChild( renderer.domElement );
     document.body.appendChild(WEBVR.createButton(renderer));
     renderer.setAnimationLoop(animate);

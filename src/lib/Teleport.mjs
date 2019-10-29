@@ -15,6 +15,8 @@ export default class Teleport {
     this.teleportHitGeometry = ctx.assets['teleport_model'].scene.getObjectByName('goal');
     this.teleportHitGeometry.material = rayMaterial;
 
+    this.teleportHitGeometry.renderOrder = 10;
+
     this.ballColliding = ctx.assets['teleport_model'].scene.getObjectByName('glow');
     ctx.assets['glow_tex'].encoding = THREE.sRGBEncoding;
     this.ballColliding.material = new THREE.MeshBasicMaterial({
@@ -23,6 +25,9 @@ export default class Teleport {
       transparent: true,
       blending: THREE.AdditiveBlending
     });
+
+    this.ballColliding.renderOrder = 10;
+
 
     this.ballColliding.visible = false;
 

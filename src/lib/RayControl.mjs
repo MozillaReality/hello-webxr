@@ -68,6 +68,9 @@ export default class RayControl {
       blending: THREE.AdditiveBlending
     });
 
+    line.renderOrder = 10;
+
+
     line.name = 'line';
     this.rayLength = 5;
     line.scale.z = this.rayLength;
