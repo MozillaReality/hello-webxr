@@ -81,16 +81,35 @@ export function exit(ctx) {
   ctx.controllers[1].removeEventListener('selectend', selectEnd);
 }
 
+function getStickHittingController(controller) {
+  bbox.setFromObject(xyloSticks[0]);
+  if (controller.boundingBox.intersectsBox(bbox)){
+    return xyloSticks[0];
+  }
+  bbox.setFromObject(xyloSticks[1]);
+  if (controller.boundingBox.intersectsBox(bbox)){
+    return xyloSticks[1];
+  }
+}
+
 export function execute(ctx, delta, time) {
   let controllers = ctx.controllers;
 
   if (!controllers) {return;}
 
-  for (var c = 0; c < 2; c++) {
+  for (let c = 0; c < 2; c++) {
+    let stick = getStickHittingController(controllers[0]);
+    if (stick){
+      ctx.raycontrol.disable();
+    } else {
+      ctx.raycontrol.enable();
+    }
+
     if (controllers[c].grabbing === null) { continue; }
 
+
     bbox.setFromObject(xyloStickBalls[c]).expandByScalar(-0.01);
-    for (var i = 0; i < xyloNotes.length; i++) {
+    for (let i = 0; i < xyloNotes.length; i++) {
       let note = xyloNotes[i];
       if (note.userData.animation > 0) {
         note.userData.animation = Math.max(0, note.userData.animation - delta * 4);
