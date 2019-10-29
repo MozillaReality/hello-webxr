@@ -156,6 +156,7 @@ export function init() {
   }, 2000);
 
   controller1 = renderer.vr.getController(0);
+
   //scene.add(controller1);
   controller1.addEventListener('selectstart', onSelectStart);
   controller1.addEventListener('selectend', onSelectEnd);
@@ -176,6 +177,7 @@ export function init() {
   cameraRig.add(controller1);
   cameraRig.add(controller2);
   scene.add(cameraRig);
+  cameraRig.position.set(1.5,0,-0.5);
 
   context = {
     assets: assets,
@@ -252,8 +254,9 @@ function animate() {
   var delta = clock.getDelta();
   var elapsedTime = clock.elapsedTime;
   // update controller bounding boxes
-  controller1.boundingBox.setFromObject(controller1.children[0]);
-  controller2.boundingBox.setFromObject(controller2.children[0]);
+  controller1.boundingBox.setFromObject(controller1.getObjectByName('Scene'));
+  controller2.boundingBox.setFromObject(controller2.getObjectByName('Scene'));
+
   // render current world
   context.raycontrol.execute(context, delta, elapsedTime);
   worlds[currentWorld].execute(context, delta, elapsedTime);
