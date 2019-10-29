@@ -81,15 +81,12 @@ export function exit(ctx) {
   ctx.controllers[1].removeEventListener('selectend', selectEnd);
 }
 
-function getStickHittingController(controller) {
-  bbox.setFromObject(xyloSticks[0]);
-  if (controller.boundingBox.intersectsBox(bbox)){
-    return xyloSticks[0];
+function hitTest(obj1, obj2) {
+  bbox.setFromObject(obj2);
+  if (obj1.boundingBox.intersectsBox(bbox)){
+    return true;
   }
-  bbox.setFromObject(xyloSticks[1]);
-  if (controller.boundingBox.intersectsBox(bbox)){
-    return xyloSticks[1];
-  }
+  return false;
 }
 
 export function execute(ctx, delta, time) {
@@ -98,12 +95,19 @@ export function execute(ctx, delta, time) {
   if (!controllers) {return;}
 
   for (let c = 0; c < 2; c++) {
-    let stick = getStickHittingController(controllers[0]);
-    if (stick){
+    let stick0 = hitTest(controllers[0], xyloSticks[0]);
+    let stick1 = hitTest(controllers[0], xyloSticks[1]);
+    if (stick0 || stick1){
       ctx.raycontrol.disable();
     } else {
       ctx.raycontrol.enable();
     }
+
+    if (!stick0) stick0 = hitTest(controllers[1], xyloSticks[0]);
+    if (!stick1) stick1 = hitTest(controllers[1], xyloSticks[1]);
+
+    xyloSticks[0].children[0].material.color.set(stick0 ? 0xffffff : 0xaaaaaa);
+    xyloSticks[1].children[0].material.color.set(stick1 ? 0xffffff : 0xaaaaaa);
 
     if (controllers[c].grabbing === null) { continue; }
 
