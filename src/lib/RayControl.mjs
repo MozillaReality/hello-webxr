@@ -3,6 +3,17 @@ var intersected = [];
 export var rayMaterial;
 
 export default class RayControl {
+  enable() {
+    this.line0.visible = this.line1.visible = true;
+    this.enabled = true;
+  }
+
+  disable() {
+    this.line0.visible = this.line1.visible = false;
+    this.enabled = false;
+    this.active = false;
+  }
+
   addState(name, state, activate) {
     if (this.states[name]) {
       console.error(`RayControl state '${name}' already exist, please use a different name.`);
@@ -35,6 +46,7 @@ export default class RayControl {
 
   constructor(ctx) {
     this.ctx = ctx;
+    this.enabled = true;
     this.raycaster = new THREE.Raycaster();
     this.states = {};
     this.currentStates = [];
@@ -69,6 +81,8 @@ export default class RayControl {
   }
 
   onSelectStart(evt) {
+    if (!this.enabled) { return; }
+
     let controller = evt.target;
     if (controller === this.ctx.controllers[0]) {
       this.active = true;
@@ -82,7 +96,7 @@ export default class RayControl {
   }
 
   execute(ctx, delta, time) {
-    if (this.currentStates.length === 0) { return; }
+    if (!this.enabled || this.currentStates.length === 0) { return; }
 
     rayMaterial.uniforms.time.value = time;
 
@@ -123,7 +137,7 @@ export default class RayControl {
   }
 
   onSelectEnd() {
-    if (!this.active) { return; }
+    if (!this.enabled || !this.active) { return; }
 
     this.currentStates.forEach(state => {
       if (state.hit) {
