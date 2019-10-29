@@ -150,7 +150,6 @@ export function enter(ctx) {
   ctx.scene.add(scene);
 
   xylophone.enter(ctx);
-
   ctx.raycontrol.activateState('doors');
   ctx.raycontrol.activateState('teleport');
   paintings.enter(ctx);
@@ -202,4 +201,3 @@ function checkCameraBoundaries(ctx) {
   else if (cam.z > 6.4)  { fade = (cam.z - 6.4) / margin; }
   fader.material.opacity = Math.min(1, Math.max(0, fade));
 }
-

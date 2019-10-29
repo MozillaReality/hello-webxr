@@ -18,6 +18,7 @@ var stickNotesColliding = [
 ];
 
 export function setup(ctx, hall) {
+  this.ctx = ctx;
   const audioLoader = new THREE.AudioLoader();
   listener = new THREE.AudioListener();
   hallRef = hall;
@@ -58,18 +59,31 @@ export function setup(ctx, hall) {
 
 export function enter(ctx) {
   ctx.camera.add(listener);
-  ctx.controllers[0].addEventListener('selectstart', onSelectStart);
-  ctx.controllers[1].addEventListener('selectstart', onSelectStart);
+
+  let selectStart = onSelectStart.bind(this);
+  let selectEnd = onSelectEnd.bind(this);
+
+  ctx.controllers[0].addEventListener('selectstart', selectStart);
+  ctx.controllers[1].addEventListener('selectstart', selectStart);
+  ctx.controllers[0].addEventListener('selectend', selectEnd);
+  ctx.controllers[1].addEventListener('selectend', selectEnd);
 }
 
 export function exit(ctx) {
   ctx.camera.remove(listener);
-  ctx.controllers[0].removeEventListener('selectend', onSelectEnd);
-  ctx.controllers[1].removeEventListener('selectend', onSelectEnd);
+
+  let selectStart = onSelectStart.bind(this);
+  let selectEnd = onSelectEnd.bind(this);
+
+  ctx.controllers[0].removeEventListener('selectstart', selectStart);
+  ctx.controllers[1].removeEventListener('selectstart', selectStart);
+  ctx.controllers[0].removeEventListener('selectend', selectEnd);
+  ctx.controllers[1].removeEventListener('selectend', selectEnd);
 }
 
 export function execute(ctx, delta, time, controllers) {
   if (!controllers) {return;}
+
   for (var c = 0; c < 2; c++) {
     if (controllers[c].grabbing === null) { continue; }
 
@@ -112,6 +126,9 @@ export function onSelectStart(evt) {
   for (let i = 0; i < 2; i++) {
     bbox.setFromObject(xyloSticks[i]);
     if (controller.boundingBox.intersectsBox(bbox)){
+
+      this.ctx.raycontrol.disable();
+
       // stick grabbed from the other hand
       if (xyloSticks[i].userData.grabbedBy) {
         xyloSticks[i].userData.grabbedBy.grabbing = null;
@@ -128,10 +145,12 @@ export function onSelectStart(evt) {
 }
 
 export function onSelectEnd(evt) {
+  this.ctx.raycontrol.enable();
+
   let controller = evt.target;
   if (controller.grabbing !== null) {
     let stick = controller.grabbing;
-    stick.position.getWorldPosition(auxVec);
+    stick.getWorldPosition(auxVec);
     hallRef.add(stick);
     stick.position.copy(auxVec);
     stick.rotation.copy(stick.userData.resetRotation);
