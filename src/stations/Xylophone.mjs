@@ -81,7 +81,9 @@ export function exit(ctx) {
   ctx.controllers[1].removeEventListener('selectend', selectEnd);
 }
 
-export function execute(ctx, delta, time, controllers) {
+export function execute(ctx, delta, time) {
+  let controllers = ctx.controllers;
+  
   if (!controllers) {return;}
 
   for (var c = 0; c < 2; c++) {
@@ -97,7 +99,6 @@ export function execute(ctx, delta, time, controllers) {
       }
 
       if (bbox.intersectsBox(note.geometry.boundingBox)) {
-        //console.log('intersection', c ,'with note', i);
         if (!stickNotesColliding[c][i]) {
           stickNotesColliding[c][i] = true;
           note.userData.sound.play();
