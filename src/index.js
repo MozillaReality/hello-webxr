@@ -159,8 +159,9 @@ export function init() {
 
   var textExample = ecsyWorld.createEntity();
   textExample.addComponent(Text, {
-    text: 'Heloooorlslkjdflkjasdf\nqweroiasdklfj lqweroi asldkfj oiqwe roqiuwe rlaskdjf qwer\n qwelrjqwerioasudflkj qwoeuir asj asdlfkj qwer \n qwleruioqweur alskdjf',
-    fontSize: 2,
+    text: 'Hello!',
+    fontSize: 1,
+    font: 'https://fonts.gstatic.com/s/cutivemono/v6/m8JWjfRfY7WVjVi2E-K9H6RCTmg.woff',
     color: 0x9966fFF
   });
   var object3D = new THREE.Group();
@@ -169,7 +170,7 @@ export function init() {
   });
 
   parent.add(object3D);
-  object3D.position.set(2,2,2);
+  object3D.position.set(2,2,-4);
 
 
   renderer = new THREE.WebGLRenderer({antialias: true, logarithmicDepthBuffer: false});
