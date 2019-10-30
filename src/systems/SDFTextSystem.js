@@ -32,7 +32,7 @@ export class SDFTextSystem extends System {
       object3D.add(textMesh);
 
       // set properties to configure:
-      textMesh.text = 'feiss es una puta';
+      textMesh.text = 'text example';
       textMesh.font = 'https://fonts.gstatic.com/s/cutivemono/v6/m8JWjfRfY7WVjVi2E-K9H6RCTmg.woff';
       textMesh.fontSize = 0.2;
       textMesh.position.set(0,0,-1);
