@@ -71,12 +71,14 @@ var assets = {
   checkboard_tex: 'checkboard.png',
 
   // panoramas
-  pano1: 'zapporthorn.basis',
-  pano1small: 'zapporthorn_small.jpg',
-  pano2small: 'andes_small.jpg',
   panoballfx_tex: 'ballfx.jpg',
-  andesL: 'andesL.jpg',
-  andesR: 'andesR.jpg',
+  pano1small: 'zapporthorn_small.jpg',
+  pano2small: 'stereopano_small.jpg',
+  pano1: 'zapporthorn.basis',
+  //andesL: 'andesL.jpg',
+  //andesR: 'andesR.jpg',
+  stereopanoL: 'stereopanoL.basis',
+  stereopanoR: 'stereopanoR.basis',
 
   // vertigo
   vertigo_model: 'vertigo.glb',
