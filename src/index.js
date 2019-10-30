@@ -134,19 +134,6 @@ export function init() {
   camera.position.set(0, 1.6, 0);
   camera.position.set(1.5, 1.6, 2.3); //near pano1
 
-  var textExample = ecsyWorld.createEntity();
-  textExample.addComponent(Text, {
-    text: 'Heloooorlslkjdflkjasdf\nqweroiasdklfj lqweroi asldkfj oiqwe roqiuwe rlaskdjf qwer\n qwelrjqwerioasudflkj qwoeuir asj asdlfkj qwer \n qwleruioqweur alskdjf',
-    fontSize: 2,
-    color: 0x9966fFF
-  });
-  var object3D = new THREE.Group();
-  textExample.addComponent(Object3D, {
-    value: object3D
-  });
-
-  scene.add(object3D);
-
   controls = new PointerLockControls(camera);
   document.body.addEventListener('click', () => controls.lock());
   document.body.addEventListener('keydown', ev => {
@@ -168,6 +155,22 @@ export function init() {
 
   parent = new THREE.Object3D();
   scene.add(parent);
+
+
+  var textExample = ecsyWorld.createEntity();
+  textExample.addComponent(Text, {
+    text: 'Heloooorlslkjdflkjasdf\nqweroiasdklfj lqweroi asldkfj oiqwe roqiuwe rlaskdjf qwer\n qwelrjqwerioasudflkj qwoeuir asj asdlfkj qwer \n qwleruioqweur alskdjf',
+    fontSize: 2,
+    color: 0x9966fFF
+  });
+  var object3D = new THREE.Group();
+  textExample.addComponent(Object3D, {
+    value: object3D
+  });
+
+  parent.add(object3D);
+  object3D.position.set(2,2,2);
+
 
   renderer = new THREE.WebGLRenderer({antialias: true, logarithmicDepthBuffer: false});
   renderer.gammaOutput = true;
@@ -216,6 +219,8 @@ export function init() {
     controllers: [controller1, controller2],
     world: ecsyWorld
   };
+
+  window.context = context;
 
   loadAssets(renderer, 'assets/', assets, () => {
     raycontrol = new RayControl(context);

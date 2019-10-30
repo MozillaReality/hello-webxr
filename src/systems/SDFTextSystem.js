@@ -1,3 +1,4 @@
+import * as THREE from 'three';
 import {System} from '../vendor/ecsy.module.js';
 import {TextMesh} from 'troika-3d-text/dist/textmesh-standalone.esm.js';
 import {Object3D, Text} from '../components/index.js';
@@ -12,13 +13,12 @@ export class SDFTextSystem extends System {
       // textMesh.anchor[1] = baselineMapping[textComponent.baseline];
       //textMesh.color = textComponent.color;
       textMesh.font = 'https://fonts.gstatic.com/s/cutivemono/v6/m8JWjfRfY7WVjVi2E-K9H6RCTmg.woff';
-      textMesh.fontSize = 10; //textComponent.fontSize;
+      textMesh.fontSize = 1; //textComponent.fontSize;
       // textMesh.letterSpacing = textComponent.letterSpacing || 0;
       // textMesh.lineHeight = textComponent.lineHeight || null;
       // textMesh.overflowWrap = textComponent.overflowWrap;
       // textMesh.whiteSpace = textComponent.whiteSpace;
       // textMesh.maxWidth = textComponent.maxWidth;
-      debugger;
       textMesh.sync();
   }
 
@@ -32,10 +32,10 @@ export class SDFTextSystem extends System {
       object3D.add(textMesh);
 
       // set properties to configure:
-      textMesh.text = 'Hello world!';
+      textMesh.text = 'feiss es una puta';
       textMesh.font = 'https://fonts.gstatic.com/s/cutivemono/v6/m8JWjfRfY7WVjVi2E-K9H6RCTmg.woff';
       textMesh.fontSize = 0.2;
-      textMesh.position.z = -2;
+      textMesh.position.set(0,0,-1);
       textMesh.color = 0x9966FF;
 
       // be sure to call sync() after all properties are set to update the rendering:
@@ -61,6 +61,7 @@ export class SDFTextSystem extends System {
     });
 
     entities.changed.forEach(e => {
+      /*
       var object3D = e.getComponent(Object3D).value;
       var textComponent = e.getComponent(Text);
       var textMesh = object3D.getObjectByName('textMesh');

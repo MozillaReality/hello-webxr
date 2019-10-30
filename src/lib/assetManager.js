@@ -1,6 +1,5 @@
 import * as THREE from 'three';
-//import { BasisTextureLoader } from 'three/examples/jsm/loaders/BasisTextureLoader.js';
-import { BasisTextureLoader } from '../vendor/BasisTextureLoader.js';
+import { BasisTextureLoader } from 'three/examples/jsm/loaders/BasisTextureLoader.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js';
 
@@ -42,9 +41,6 @@ export function loadAssets(renderer, basePath, assets, onComplete) {
     let assetId = i;
     let assetPath = assets[i];
     let ext = assetPath.substr(assetPath.lastIndexOf('.') + 1).toLowerCase();
-    if (ext === 'basis') {
-      assets[i] = {};
-    }
     loaders[ext].load(basePath + assetPath, asset => {
       console.info(`%c ${assetPath} loaded`, 'color:green');
       assets[assetId] = ext == 'font'? asset.data : asset;
