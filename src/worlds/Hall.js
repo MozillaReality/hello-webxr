@@ -1,7 +1,8 @@
-import * as panoballs from '../stations/PanoBalls.mjs';
-import * as paintings from '../stations/Paintings.mjs';
-import * as newsticker from '../stations/NewsTicker.mjs';
-import * as xylophone from '../stations/Xylophone.mjs';
+import * as THREE from 'three';
+import * as panoballs from '../stations/PanoBalls.js';
+import * as paintings from '../stations/Paintings.js';
+import * as newsticker from '../stations/NewsTicker.js';
+import * as xylophone from '../stations/Xylophone.js';
 
 var
   scene,

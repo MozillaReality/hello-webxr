@@ -1,3 +1,4 @@
+import * as THREE from 'three';
 var panoL, panoR, context;
 
 export function setup(ctx) {

@@ -1,7 +1,11 @@
-import '../vendor/GLTFLoader.js';
-import '../vendor/OBJLoader.js';
+import * as THREE from 'three';
+//import { BasisTextureLoader } from 'three/examples/jsm/loaders/BasisTextureLoader.js';
+import { BasisTextureLoader } from '../vendor/BasisTextureLoader.js';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js';
 
-const BASIS_LIB_PATH = 'src/vendor/';
+//const BASIS_LIB_PATH = 'src/vendor/';
+const BASIS_LIB_PATH = '/src/vendor/';
 
 function allAssetsLoaded(assets) {
   for (var i in assets) {
@@ -15,12 +19,12 @@ export function loadAssets(renderer, basePath, assets, onComplete) {
     basePath += '/';
   }
 
-  var basisLoader = new THREE.BasisTextureLoader();
+  var basisLoader = new BasisTextureLoader();
   basisLoader.setTranscoderPath(BASIS_LIB_PATH);
   basisLoader.detectSupport(renderer);
   var texLoader = new THREE.TextureLoader();
-  var gltfLoader = new THREE.GLTFLoader();
-  var objLoader = new THREE.OBJLoader();
+  var gltfLoader = new GLTFLoader();
+  var objLoader = new OBJLoader();
   var fontLoader = new THREE.FontLoader();
 
   var loaders = {
@@ -38,10 +42,19 @@ export function loadAssets(renderer, basePath, assets, onComplete) {
     let assetId = i;
     let assetPath = assets[i];
     let ext = assetPath.substr(assetPath.lastIndexOf('.') + 1).toLowerCase();
+    if (ext === 'basis') {
+      assets[i] = {};
+    }
     loaders[ext].load(basePath + assetPath, asset => {
       console.info(`%c ${assetPath} loaded`, 'color:green');
       assets[assetId] = ext == 'font'? asset.data : asset;
       if (onComplete && allAssetsLoaded(assets)) { onComplete(); }
-    });
+    }, () => {
+      /* on progress */
+    },
+    (e) => {
+      console.error('Error loading asset', e);
+    }
+    );
   }
 }

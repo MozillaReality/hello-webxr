@@ -1,3 +1,4 @@
+import * as THREE from 'three';
 var scene, listener, timeout, mixer, door, doorMaterial;
 
 const soundNames = [

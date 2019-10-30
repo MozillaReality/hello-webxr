@@ -1,3 +1,5 @@
+import * as THREE from 'three';
+
 var paintings;
 var zoom = {object: null, widget: null, controller: null, animation: 0};
 const PAINTINGS = ['seurat', 'sorolla', 'bosch1', 'bosch2', 'degas', 'rembrandt'];

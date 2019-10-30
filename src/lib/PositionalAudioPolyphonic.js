@@ -1,3 +1,5 @@
+import * as THREE from 'three';
+
 export default class PositionalAudioPolyphonic extends THREE.Object3D {
   constructor(listener, poolSize) {
     super();

@@ -1,3 +1,5 @@
+import * as THREE from 'three';
+
 var
   panoBalls = [],
   panoballsParent = new THREE.Object3D(),
