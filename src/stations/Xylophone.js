@@ -1,4 +1,5 @@
-import PositionalAudioPolyphonic from '../lib/PositionalAudioPolyphonic.mjs';
+import * as THREE from 'three';
+import PositionalAudioPolyphonic from '../lib/PositionalAudioPolyphonic.js';
 
 var
   listener,

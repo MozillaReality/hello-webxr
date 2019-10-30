@@ -1,20 +1,25 @@
-import './vendor/PointerLockControls.js';
+import * as THREE from 'three';
+import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls.js';
+
 import {WEBVR} from './vendor/WebVR.js';
-import {loadAssets} from './lib/assetManager.mjs';
-import './vendor/BasisTextureLoader.js';
+import {loadAssets} from './lib/assetManager.js';
 
+// ECSY
+import { World } from './vendor/ecsy.module.js';
+import { SDFTextSystem } from './systems/SDFTextSystem.js';
+import { Text, Object3D } from './components/index.js';
 
-import RayControl from './lib/RayControl.mjs';
-import Teleport from './lib/Teleport.mjs';
+import RayControl from './lib/RayControl.js';
+import Teleport from './lib/Teleport.js';
 
-import * as worldHall from './worlds/Hall.mjs';
-import * as worldPanorama from './worlds/Panorama.mjs';
-import * as worldPanoramaStereo from './worlds/PanoramaStereo.mjs';
-import * as worldPhotogrammetryObject from './worlds/PhotogrammetryObject.mjs';
-import * as worldVertigo from './worlds/Vertigo.mjs';
-import * as worldSound from './worlds/Sound.mjs';
+import * as worldHall from './worlds/Hall.js';
+import * as worldPanorama from './worlds/Panorama.js';
+import * as worldPanoramaStereo from './worlds/PanoramaStereo.js';
+import * as worldPhotogrammetryObject from './worlds/PhotogrammetryObject.js';
+import * as worldVertigo from './worlds/Vertigo.js';
+import * as worldSound from './worlds/Sound.js';
 
-import {shaders} from './lib/shaders.mjs';
+import {shaders} from './lib/shaders.js';
 
 var clock = new THREE.Clock();
 
@@ -117,13 +122,19 @@ function gotoWorld(world) {
   worlds[currentWorld].enter(context);
 }
 
+var ecsyWorld;
+
 export function init() {
   var w = 100;
+  ecsyWorld = new World();
+  ecsyWorld.registerSystem(SDFTextSystem);
+
   scene = new THREE.Scene();
   camera = new THREE.PerspectiveCamera(80, window.innerWidth / window.innerHeight, 0.005, 10000);
   camera.position.set(0, 1.6, 0);
   camera.position.set(1.5, 1.6, 2.3); //near pano1
-  controls = new THREE.PointerLockControls(camera);
+
+  controls = new PointerLockControls(camera);
   document.body.addEventListener('click', () => controls.lock());
   document.body.addEventListener('keydown', ev => {
     switch(ev.keyCode) {
@@ -144,6 +155,22 @@ export function init() {
 
   parent = new THREE.Object3D();
   scene.add(parent);
+
+
+  var textExample = ecsyWorld.createEntity();
+  textExample.addComponent(Text, {
+    text: 'Heloooorlslkjdflkjasdf\nqweroiasdklfj lqweroi asldkfj oiqwe roqiuwe rlaskdjf qwer\n qwelrjqwerioasudflkj qwoeuir asj asdlfkj qwer \n qwleruioqweur alskdjf',
+    fontSize: 2,
+    color: 0x9966fFF
+  });
+  var object3D = new THREE.Group();
+  textExample.addComponent(Object3D, {
+    value: object3D
+  });
+
+  parent.add(object3D);
+  object3D.position.set(2,2,2);
+
 
   renderer = new THREE.WebGLRenderer({antialias: true, logarithmicDepthBuffer: false});
   renderer.gammaOutput = true;
@@ -190,10 +217,12 @@ export function init() {
     goto: null,
     cameraRig: cameraRig,
     controllers: [controller1, controller2],
+    world: ecsyWorld
   };
 
-  loadAssets(renderer, 'assets/', assets, () => {
+  window.context = context;
 
+  loadAssets(renderer, 'assets/', assets, () => {
     raycontrol = new RayControl(context);
     context.raycontrol = raycontrol;
 
@@ -257,6 +286,9 @@ function onWindowResize() {
 function animate() {
   var delta = clock.getDelta();
   var elapsedTime = clock.elapsedTime;
+
+  ecsyWorld.execute(delta, elapsedTime);
+
   // update controller bounding boxes
   controller1.boundingBox.setFromObject(controller1.getObjectByName('Scene'));
   controller2.boundingBox.setFromObject(controller2.getObjectByName('Scene'));

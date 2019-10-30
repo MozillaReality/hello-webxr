@@ -1,6 +1,6 @@
 module.exports = {
   mode: 'development',
-  entry: './src/index.mjs',
+  entry: './src/index.js',
   output: {
     filename: 'bundle.js',
     path: __dirname
@@ -9,9 +9,16 @@ module.exports = {
   module: {
     rules: [
     {
-      test: /\.mjs$/,
-      type: 'javascript/auto',
-    }]
+      test: /\.(js|mjs)$/,
+      exclude: /(node_modules)/,
+      use: {
+        loader: 'babel-loader',
+        options: {
+          presets: ['@babel/preset-env']
+        }
+      }
+    }
+  ]
   },
   watchOptions: {
     ignored: [/node_modules/],

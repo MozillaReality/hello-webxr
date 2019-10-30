@@ -1,3 +1,5 @@
+import * as THREE from 'three';
+
 var pano = null, context;
 
 export function setup(ctx) {

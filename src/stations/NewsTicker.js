@@ -1,4 +1,5 @@
-import {Text} from '../lib/text.mjs';
+//import {Text} from '../lib/text.mjs';
+import * as THREE from 'three';
 
 var newsTicker = {
   url: 'assets/tweets.json',
@@ -12,7 +13,7 @@ var newsTicker = {
 
 export function setup(ctx, hall) {
   const newsTickerMesh = hall.getObjectByName('newsticker');
-
+  return;
   newsTicker.hashtagText = new Text({
     font: ctx.assets['inter_bold_font'],
     map: ctx.assets['inter_bold_tex'],

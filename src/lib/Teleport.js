@@ -1,4 +1,5 @@
-import {rayMaterial} from "./RayControl.mjs";
+import {rayMaterial} from "./RayControl.js";
+import * as THREE from 'three';
 
 var tempMatrix = new THREE.Matrix4();
 var intersected = [];

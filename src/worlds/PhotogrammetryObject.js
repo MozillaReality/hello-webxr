@@ -1,3 +1,4 @@
+import * as THREE from 'three';
 var scene, doorMaterial, door;
 
 function createDoorMaterial(ctx) {
