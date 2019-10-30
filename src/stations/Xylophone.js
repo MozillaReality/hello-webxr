@@ -147,13 +147,12 @@ export function execute(ctx, delta, time) {
           }
         }
       }
-
-      if (xyloSticks[c].userData.animation > 0){
-        xyloSticks[c].userData.animation = Math.max(0, xyloSticks[c].userData.animation - delta * 4);
-        auxVec.copy(xyloSticks[c].userData.resetPosition);
-        auxVec.addScaledVector(xyloSticks[c].position, -xyloSticks[c].userData.animation);
-        xyloSticks[c].position.add(auxVec);
-      }
+    }
+    if (xyloSticks[c].userData.animation > 0){
+      auxVec.copy(xyloSticks[c].userData.resetPosition).sub(xyloSticks[c].position);
+      auxVec.multiplyScalar(0.1);
+      xyloSticks[c].position.add(auxVec);
+      if (auxVec.length < 0.01) { xyloSticks[c].userData.animation = 0; }
     }
   }
 }
@@ -197,7 +196,7 @@ export function onSelectEnd(evt) {
     stick.position.copy(auxVec);
     stick.rotation.copy(stick.userData.resetRotation);
     stick.userData.grabbedBy = null;
-    //stick.userData.animation = 1;
+    stick.userData.animation = 1;
     controller.userData.grabbing = null;
     return false;
   }
