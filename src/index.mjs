@@ -176,7 +176,7 @@ export function init() {
   cameraRig.add(camera);
   cameraRig.add(controller1);
   cameraRig.add(controller2);
-  cameraRig.position.set(1.5,0,-0.5);  
+  cameraRig.position.set(1.5,0,-0.5);
   scene.add(cameraRig);
 
   context = {
@@ -228,8 +228,8 @@ function setupControllers() {
   controller2.add(model.clone());
   controller1.boundingBox = new THREE.Box3();
   controller2.boundingBox = new THREE.Box3();
-  controller1.grabbing = null;
-  controller2.grabbing = null;
+  controller1.userData.grabbing = null;
+  controller2.userData.grabbing = null;
 }
 
 function onSelectStart(ev) {
