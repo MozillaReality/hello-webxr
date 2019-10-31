@@ -20,7 +20,7 @@ export function setup(ctx, hall) {
 
   newsTicker.hashtagText = ctx.world.createEntity();
   newsTicker.hashtagText.addComponent(Text, {
-    color: 0xdaa056,
+    color: '#22f', //0xdaa056,
     fontSize: 0.1,
     anchor: 'right',
     textAlign: 'right'
@@ -31,7 +31,7 @@ export function setup(ctx, hall) {
 
   newsTicker.authorText = ctx.world.createEntity();
   newsTicker.authorText.addComponent(Text, {
-    color: 0x67bccd,
+    color: '#00f', //0x67bccd,
     fontSize: 0.1,
     anchor: 'left',
   });
