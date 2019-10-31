@@ -42,7 +42,7 @@ export function loadAssets(renderer, basePath, assets, onComplete) {
     let assetPath = assets[i];
     let ext = assetPath.substr(assetPath.lastIndexOf('.') + 1).toLowerCase();
     loaders[ext].load(basePath + assetPath, asset => {
-      console.info(`%c ${assetPath} loaded`, 'color:green');
+      // console.info(`%c ${assetPath} loaded`, 'color:green');
       assets[assetId] = ext == 'font'? asset.data : asset;
       if (onComplete && allAssetsLoaded(assets)) { onComplete(); }
     }, () => {

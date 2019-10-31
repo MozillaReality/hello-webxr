@@ -156,10 +156,11 @@ export function init() {
   renderer.vr.enabled = true;
 
   window.addEventListener('resize', onWindowResize, false);
+/*
   setInterval(()=>{
     console.log('render calls:', renderer.info.render.calls);
   }, 2000);
-
+*/
   controller1 = renderer.vr.getController(0);
 
   //scene.add(controller1);
