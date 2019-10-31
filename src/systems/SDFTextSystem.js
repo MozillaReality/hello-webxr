@@ -3,6 +3,8 @@ import {System} from '../vendor/ecsy.module.js';
 import {TextMesh} from 'troika-3d-text/dist/textmesh-standalone.esm.js';
 import {Object3D, Text} from '../components/index.js';
 
+window.Text = Text;
+
 const anchorMapping = {
   'left': 0,
   'center': 0.5,
@@ -18,7 +20,7 @@ export class SDFTextSystem extends System {
 
   updateText(textMesh, textComponent) {
     textMesh.text = textComponent.text;
-    textMesh.textAlign = textComponent.align;
+    textMesh.textAlign = textComponent.textAlign;
     textMesh.anchor[0] = anchorMapping[textComponent.anchor];
     textMesh.anchor[1] = baselineMapping[textComponent.baseline];
     textMesh.color = textComponent.color;
@@ -40,6 +42,7 @@ export class SDFTextSystem extends System {
       var textComponent = e.getComponent(Text);
 
       const textMesh = new TextMesh();
+      textMesh.name = 'textMesh';
       textMesh.anchor = [0, 0];
       object3D.add(textMesh);
 
@@ -54,23 +57,11 @@ export class SDFTextSystem extends System {
     });
 
     entities.changed.forEach(e => {
-      /*
       var object3D = e.getComponent(Object3D).value;
       var textComponent = e.getComponent(Text);
       var textMesh = object3D.getObjectByName('textMesh');
 
       this.updateText(textMesh, textComponent);
-/*
-      // Pass material config down to child entity
-      if (entity !== this.el) {
-        var materialAttr = this.el.getAttribute('troika-text-material')
-        if (materialAttr) {
-          entity.setAttribute('material', materialAttr)
-        } else {
-          entity.removeAttribute('material')
-        }
-      }
-*/
     });
   }
 }

@@ -1,5 +1,6 @@
 //import {Text} from '../lib/text.mjs';
 import * as THREE from 'three';
+import { Text, Object3D } from '../components/index.js';
 
 var newsTicker = {
   url: 'assets/tweets.json',
@@ -13,40 +14,67 @@ var newsTicker = {
 
 export function setup(ctx, hall) {
   const newsTickerMesh = hall.getObjectByName('newsticker');
-  return;
-  newsTicker.hashtagText = new Text({
-    font: ctx.assets['inter_bold_font'],
-    map: ctx.assets['inter_bold_tex'],
-    size: 2,
-    align: 'right',
+
+  ctx.world.createEntity();
+
+
+  newsTicker.hashtagText = ctx.world.createEntity();
+  newsTicker.hashtagText.addComponent(Text, {
+    color: 0xdaa056,
+    fontSize: 0.1,
     anchor: 'right',
-    width: 350,
-    color: 0xdaa056
+    textAlign: 'right'
+  });
+  let object3D = new THREE.Group();
+  newsTickerMesh.add(object3D);
+  newsTicker.hashtagText.addComponent(Object3D, { value: object3D });
+
+  newsTicker.authorText = ctx.world.createEntity();
+  newsTicker.authorText.addComponent(Text, {
+    color: 0x67bccd,
+    fontSize: 0.1,
+    anchor: 'left',
   });
 
-  newsTicker.authorText = new Text({
-    font: ctx.assets['inter_bold_font'],
-    map: ctx.assets['inter_bold_tex'],
-    size: 2,
-    width: 500,
-    color: 0x67bccd
-  });
+  object3D = new THREE.Group();
+  newsTickerMesh.add(object3D);
+  newsTicker.authorText.addComponent(Object3D, { value: object3D });
 
-  newsTicker.messageText = new Text({
-    font: ctx.assets['inter_regular_font'],
-    map: ctx.assets['inter_regular_tex'],
-    size: 2.6,
-    width: 900,
+  newsTicker.messageText = ctx.world.createEntity();
+  newsTicker.messageText.addComponent(Text, {
+    color: 0x000000,
+    fontSize: 0.15,
+    maxWidth: 2.3,
+    lineHeight: 1,
+    textAlign: 'left',
     baseline: 'top',
-    color: 0xffffff
+    anchor: 'left'
   });
+  object3D = new THREE.Group();
+  newsTickerMesh.add(object3D);
+  newsTicker.messageText.addComponent(Object3D, { value: object3D });
+
+  const geo = new THREE.SphereBufferGeometry(0.04);
+  const mat = new THREE.MeshBasicMaterial({color: 0xff0000});
+  var debugMeshes = {
+    hashtag: new THREE.Mesh(geo, mat),
+    author: new THREE.Mesh(geo, mat),
+    message: new THREE.Mesh(geo, mat)
+  };
 
   ['hashtag', 'author', 'message'].forEach( i => {
-    newsTickerMesh.add(newsTicker[`${i}Text`]);
-    newsTicker[`${i}Text`].rotation.set(-Math.PI / 2, Math.PI, 0);
-    newsTicker[`${i}Text`].position.copy(hall.getObjectByName(i).position);
+
+    newsTickerMesh.add(debugMeshes[i]);
+
+    let object3D = newsTicker[`${i}Text`].getMutableComponent(Object3D).value;
+    //newsTickerMesh.add(newsTicker[`${i}Text`]);
+    object3D.rotation.set(0, Math.PI, 0);
+    console.log(hall.getObjectByName(i).position);
+
+    debugMeshes[i].position.copy(hall.getObjectByName(i).position);
+    object3D.position.copy(hall.getObjectByName(i).position);
   });
-  newsTicker.hashtagText.value = newsTicker.hashtag;
+  newsTicker.hashtagText.getMutableComponent(Text).text = newsTicker.hashtag;
 
   fetch(newsTicker.url).then(res => res.json()).then(res => {
     newsTicker.news = res;
@@ -56,8 +84,8 @@ export function setup(ctx, hall) {
 
 function nextNews() {
   const n = newsTicker;
-  n.authorText.value = n.news[n.current].author;
-  n.messageText.value = n.news[n.current].message;
+  n.authorText.getMutableComponent(Text).text = n.news[n.current].author;
+  n.messageText.getMutableComponent(Text).text = n.news[n.current].message;
   n.current = (n.current + 1) % n.news.length;
   setTimeout(nextNews, 3000);
 }
