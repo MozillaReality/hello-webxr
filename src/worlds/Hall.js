@@ -55,6 +55,8 @@ export function setup(ctx) {
 
   objectMaterials = {
     'hall': hallMaterial,
+    'graffiti': hallMaterial,
+    'screen': new THREE.MeshBasicMaterial({color: 0x333333}),
     'xylophone': hallMaterial,
     'xylostick-left': hallMaterial,
     'xylostick-right': hallMaterial,
