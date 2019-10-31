@@ -69,7 +69,6 @@ export function setup(ctx, hall) {
     let object3D = newsTicker[`${i}Text`].getMutableComponent(Object3D).value;
     //newsTickerMesh.add(newsTicker[`${i}Text`]);
     object3D.rotation.set(0, Math.PI, 0);
-    console.log(hall.getObjectByName(i).position);
 
     debugMeshes[i].position.copy(hall.getObjectByName(i).position);
     object3D.position.copy(hall.getObjectByName(i).position);

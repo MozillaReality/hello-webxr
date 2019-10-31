@@ -3,6 +3,7 @@ import * as panoballs from '../stations/PanoBalls.js';
 import * as paintings from '../stations/Paintings.js';
 import * as newsticker from '../stations/NewsTicker.js';
 import * as xylophone from '../stations/Xylophone.js';
+import * as graffiti from '../stations/Graffiti.js';
 
 var
   scene,
@@ -87,6 +88,7 @@ export function setup(ctx) {
 
   paintings.setup(ctx, hall);
   xylophone.setup(ctx, hall);
+  graffiti.setup(ctx, hall);
   newsticker.setup(ctx, hall);
   panoballs.setup(ctx, hall);
 
@@ -151,6 +153,7 @@ export function enter(ctx) {
   ctx.scene.add(scene);
 
   xylophone.enter(ctx);
+  graffiti.enter(ctx);
   ctx.raycontrol.activateState('doors');
   ctx.raycontrol.activateState('teleport');
   paintings.enter(ctx);
@@ -170,6 +173,7 @@ export function execute(ctx, delta, time) {
   panoballs.execute(ctx, delta, time);
   paintings.execute(ctx, delta, time);
   xylophone.execute(ctx, delta, time, controllers);
+  graffiti.execute(ctx, delta, time);
   updateUniforms(time);
   checkCameraBoundaries(ctx);
 
@@ -191,7 +195,6 @@ function updateUniforms(time) {
 }
 
 function checkCameraBoundaries(ctx) {
-  return;
   auxVec.copy(ctx.camera.position).add(ctx.cameraRig.position);
   const cam = auxVec;
   const margin = 0.25;
