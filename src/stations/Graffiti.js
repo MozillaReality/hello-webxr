@@ -26,10 +26,24 @@ var paintImg = new Image();
 paintImg.src = 'assets/spray_black.png';
 //paintImg.width = 10;
 
+var lastController;
+
 export function setup(ctx, hall) {
+
+  let listener = new THREE.AudioListener();
+
+  const sound = new THREE.PositionalAudio(listener);
+  sound.loop = true;
+  const audioLoader = new THREE.AudioLoader();
+  audioLoader.load('assets/ogg/spray.ogg', buffer => {
+    sound.setBuffer(buffer);
+    sound.name = 'spraySound';
+    ctx.controllers[0].add(sound);
+  });
+
   const geo = new THREE.PlaneBufferGeometry(5, 4, 1);
 
-  this.width = 2048;
+  this.width = 1024;
   this.height = 1024;
 
   var drawingCanvas = document.createElement('canvas');
@@ -131,6 +145,9 @@ export function setup(ctx, hall) {
       */
     },
     onSelectStart: (intersection, controller) => {
+      lastController = controller;
+      controller.getObjectByName('spraySound').play();
+
       drawContext.lineJoin = drawContext.lineCap = 'round';
 
       let x = intersection.uv.x * 1024;
@@ -139,6 +156,7 @@ export function setup(ctx, hall) {
       lastPosition.set(x,y);
     },
     onSelectEnd: (intersection) => {
+      lastController.getObjectByName('spraySound').stop();
       /*
       zoom.painting = null;
       zoom.animation = 0;
