@@ -64,7 +64,7 @@ export function setup(ctx, hall) {
 
   ['hashtag', 'author', 'message'].forEach( i => {
 
-    newsTickerMesh.add(debugMeshes[i]);
+    //newsTickerMesh.add(debugMeshes[i]);
 
     let object3D = newsTicker[`${i}Text`].getMutableComponent(Object3D).value;
     //newsTickerMesh.add(newsTicker[`${i}Text`]);
