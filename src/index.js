@@ -50,14 +50,6 @@ var currentWorld = worldNames.indexOf(worldName) !== -1 ? worldNames.indexOf(wor
 console.log(`Current world "${worldNames[currentWorld]}", ${currentWorld}`);
 
 var assets = {
-  // fonts
-  inter_bold_font: 'fonts/Inter-Bold.font',
-  inter_bold_tex: 'fonts/Inter-Bold.png',
-  inter_regular_font: 'fonts/Inter-Regular.font',
-  inter_regular_tex: 'fonts/Inter-Regular.png',
-  metropolis_bold_font: 'fonts/Metropolis-Bold.font',
-  metropolis_bold_tex: 'fonts/Metropolis-Bold.png',
-
   // hall
   foxr_tex: 'foxr.png',
   hall_model: 'hall.glb',
@@ -156,23 +148,6 @@ export function init() {
   parent = new THREE.Object3D();
   scene.add(parent);
 
-
-  var textExample = ecsyWorld.createEntity();
-  textExample.addComponent(Text, {
-    text: 'Hello!',
-    fontSize: 1,
-    font: 'https://fonts.gstatic.com/s/cutivemono/v6/m8JWjfRfY7WVjVi2E-K9H6RCTmg.woff',
-    color: 0x9966fFF
-  });
-  var object3D = new THREE.Group();
-  textExample.addComponent(Object3D, {
-    value: object3D
-  });
-
-  parent.add(object3D);
-  object3D.position.set(2,2,-4);
-
-
   renderer = new THREE.WebGLRenderer({antialias: true, logarithmicDepthBuffer: false});
   renderer.gammaOutput = true;
   renderer.gammaFactor = 2.2;
@@ -206,7 +181,8 @@ export function init() {
   cameraRig.add(camera);
   cameraRig.add(controller1);
   cameraRig.add(controller2);
-  cameraRig.position.set(1.5,0,-0.5);
+  cameraRig.position.set(1.5,0,5);
+  cameraRig.rotation.set(0, Math.PI, 0);
   scene.add(cameraRig);
 
   context = {
