@@ -11,7 +11,7 @@ export class Object3D {
 export class Text {
   constructor() {
     this.text = '';
-    this.align = 'left'; // ['left', 'right', 'center']
+    this.textAlign = 'left'; // ['left', 'right', 'center']
     this.anchor = 'center'; // ['left', 'right', 'center', 'align']
     this.baseline = 'center'; // ['top', 'center', 'bottom']
     this.color = '#FFF';
