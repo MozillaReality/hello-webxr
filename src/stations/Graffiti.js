@@ -33,7 +33,7 @@ export function setup(ctx, hall) {
   this.height = 1024;
 
   var drawingCanvas = document.createElement('canvas');
-  document.body.appendChild(drawingCanvas);
+  // document.body.appendChild(drawingCanvas);
   drawingCanvas.style.position = "absolute";
   drawingCanvas.style.width = "20%";
 
