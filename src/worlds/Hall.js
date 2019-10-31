@@ -195,6 +195,7 @@ function updateUniforms(time) {
 }
 
 function checkCameraBoundaries(ctx) {
+  return;
   auxVec.copy(ctx.camera.position).add(ctx.cameraRig.position);
   const cam = auxVec;
   const margin = 0.25;
