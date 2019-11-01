@@ -100,7 +100,7 @@ export function setup(ctx) {
   paintings.setup(ctx, hall);
   xylophone.setup(ctx, hall);
   graffiti.setup(ctx, hall);
-  newsticker.setup(ctx, hall);
+  //newsticker.setup(ctx, hall);
   panoballs.setup(ctx, hall);
   infopanels.setup(ctx, hall);
 
