@@ -40,6 +40,7 @@ export function setup(ctx, hall) {
 
   let width = 2048;
   let height = 1024;
+  let maxDistance = 1;
 
   var drawingCanvas = document.createElement('canvas');
   // document.body.appendChild(drawingCanvas);
@@ -72,7 +73,7 @@ export function setup(ctx, hall) {
       {
         var distance = intersection.distance;
 
-        if (distance > 1) { return; }
+        if (distance > maxDistance) { return; }
 
         let x = intersection.uv.x * width;
         let y = height - intersection.uv.y * height;
@@ -106,7 +107,7 @@ export function setup(ctx, hall) {
 
         drawContext.globalAlpha = alpha;
 
-        for (var i = 0; i < dist; i += 4) {
+        for (var i = 0; i < dist; i ++ /* +=4 */) {
             var _x = lastPosition.x + (Math.sin(angle) * i);
             var _y = lastPosition.y + (Math.cos(angle) * i);
             drawContext.save();
@@ -130,6 +131,10 @@ export function setup(ctx, hall) {
     onHoverLeave: (intersection) => {
     },
     onSelectStart: (intersection, controller) => {
+      var distance = intersection.distance;
+
+      if (distance > maxDistance) { return; }
+
       lastController = controller;
       controller.getObjectByName('spraySound').play();
 
