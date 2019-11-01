@@ -16,12 +16,24 @@ function getRandomInt(min, max) {
 
 var material, wall, drawContext;
 var lastPosition = new THREE.Vector2();
-var paintImg = new Image();
-//paintImg.src = 'assets/spray.png';
-paintImg.src = 'assets/spray_black.png';
-//paintImg.width = 10;
+var brushImg, canvasTmp, ctxTmp;
 
 var lastController;
+var paintImg = new Image();
+
+
+function colorize(r, g, b) {
+  ctxTmp.clearRect(0, 0, canvasTmp.width, canvasTmp.height);
+  ctxTmp.drawImage(brushImg, 0, 0);
+  let imgData = ctxTmp.getImageData(0, 0, canvasTmp.width, canvasTmp.height);
+  for (var t = 0; t < imgData.data.length; t += 4) {
+     imgData.data[t]= r * imgData.data[t] / 255;
+     imgData.data[t + 1]= g * imgData.data[t + 1] / 255;
+     imgData.data[t + 2]= b * imgData.data[t + 2] / 255;
+  }
+  ctxTmp.putImageData(imgData,0,0);
+  paintImg.src = canvasTmp.toDataURL();
+}
 
 export function setup(ctx, hall) {
 
@@ -42,10 +54,26 @@ export function setup(ctx, hall) {
   let height = 1024;
   let maxDistance = 1;
 
+  brushImg = new Image();
+  canvasTmp = document.createElement('canvas');
+  canvasTmp.style.position = "absolute";
+  canvasTmp.style.width = "20%";
+  //canvasTmp.style.backgroundColor = "#333";
+
+  ctxTmp = canvasTmp.getContext('2d');
+  document.body.appendChild(canvasTmp);
+
+  brushImg.onload = () => {
+    canvasTmp.width = brushImg.width;
+    canvasTmp.height = brushImg.height;
+  }
+  brushImg.src = 'assets/spray.png';
+
+
   var drawingCanvas = document.createElement('canvas');
   // document.body.appendChild(drawingCanvas);
-  drawingCanvas.style.position = "absolute";
-  drawingCanvas.style.width = "20%";
+  //drawingCanvas.style.position = "absolute";
+  //drawingCanvas.style.width = "20%";
 
   drawingCanvas.width = width;
   drawingCanvas.height = height;
@@ -119,7 +147,8 @@ export function setup(ctx, hall) {
             drawContext.scale(r, r);
 
             drawContext.rotate(Math.PI * 180 / getRandomInt(0, 180));
-            drawContext.drawImage(paintImg, -paintImg.width / 2, -paintImg.height / 2);
+
+            drawContext.drawImage(paintImg, -brushImg.width / 2, -brushImg.height / 2);
             drawContext.restore();
         }
 
@@ -131,6 +160,10 @@ export function setup(ctx, hall) {
     onHoverLeave: (intersection) => {
     },
     onSelectStart: (intersection, controller) => {
+      colorize(
+        Math.random() * 255,
+        Math.random() * 255,
+        Math.random() * 255);
       var distance = intersection.distance;
 
       if (distance > maxDistance) { return; }
