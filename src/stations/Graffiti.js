@@ -76,7 +76,6 @@ export function setup(ctx, hall) {
 
         let x = intersection.uv.x * width;
         let y = height - intersection.uv.y * height;
-        drawContext.beginPath();
 
         //let radius = 0.5 + distance * 10;
 /*
@@ -97,7 +96,7 @@ export function setup(ctx, hall) {
         drawContext.strokeStyle = '#0f0';
         var dist = lastPosition.distanceTo(position);
         var angle = angleBetween(lastPosition, position);
-        let alpha = (1 / distance * 2);
+        let alpha = 1 - distance;
         if (alpha < 0) {alpha = 0}
         if (alpha > 1) {alpha = 1}
 
@@ -105,10 +104,9 @@ export function setup(ctx, hall) {
           return ( 1 - t ) * start+ t * end;
         }
 
-        drawContext.globalAlpha = 1 - distance;
-        drawContext.fillStyle="rgba(255,255,255, 0.5)";
+        drawContext.globalAlpha = alpha;
 
-        for (var i = 0; i < dist; i++) {
+        for (var i = 0; i < dist; i += 4) {
             var _x = lastPosition.x + (Math.sin(angle) * i);
             var _y = lastPosition.y + (Math.cos(angle) * i);
             drawContext.save();
@@ -117,7 +115,6 @@ export function setup(ctx, hall) {
             //let r = 0.5;
             //let r = 0.5;
             let r = lerp(0.001, 0.2, distance);
-            console.log(r);
             drawContext.scale(r, r);
 
             drawContext.rotate(Math.PI * 180 / getRandomInt(0, 180));
@@ -135,8 +132,6 @@ export function setup(ctx, hall) {
     onSelectStart: (intersection, controller) => {
       lastController = controller;
       controller.getObjectByName('spraySound').play();
-
-      drawContext.lineJoin = drawContext.lineCap = 'round';
 
       let x = intersection.uv.x * width;
       let y = height - intersection.uv.y * height;
