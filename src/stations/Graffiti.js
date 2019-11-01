@@ -2,11 +2,6 @@ import * as THREE from 'three';
 import { isContext } from 'vm';
 import { LoopRepeat } from 'three';
 
-var paintings;
-var zoom = {object: null, widget: null, controller: null, animation: 0};
-const PAINTINGS = ['seurat', 'sorolla', 'bosch1', 'bosch2', 'degas', 'rembrandt'];
-const PAINTINGS_RATIOS = [1, 1, 1, 1, 1, 1];
-
 function angleBetween(point1, point2) {
   return Math.atan2(point2.x - point1.x, point2.y - point1.y);
 }
@@ -43,34 +38,32 @@ export function setup(ctx, hall) {
 
   const geo = new THREE.PlaneBufferGeometry(5, 4, 1);
 
-  this.width = 1024;
-  this.height = 1024;
+  let width = 2048;
+  let height = 1024;
 
   var drawingCanvas = document.createElement('canvas');
   // document.body.appendChild(drawingCanvas);
   drawingCanvas.style.position = "absolute";
   drawingCanvas.style.width = "20%";
 
-  drawingCanvas.width = this.width;
-  drawingCanvas.height = this.height;
+  drawingCanvas.width = width;
+  drawingCanvas.height = height;
   drawContext = drawingCanvas.getContext('2d');
-  drawContext.clearRect(0,0,1024,1024);
+  drawContext.clearRect(0, 0, width, height);
   //drawContext.fillStyle = '#333';
   drawContext.fillStyle = '#fff';
-  drawContext.fillRect(0,0,this.width, this.height);
+  drawContext.fillRect(0, 0, width, height);
 
   let map = new THREE.CanvasTexture( drawingCanvas );
 
   material = new THREE.MeshBasicMaterial({
     color: 0xffffff,
+    lightMap: ctx.assets['lightmap_tex'],
     map: map
   });
 
-  wall = new THREE.Mesh(geo, material);
-  wall.position.set(0,0,6);
-  wall.rotation.set(0,Math.PI,0);
-
-  hall.add(wall);
+  wall = hall.getObjectByName('graffiti');
+  wall.material = material;
 
   ctx.raycontrol.addState('graffiti', {
     colliderMesh: wall,
@@ -81,8 +74,8 @@ export function setup(ctx, hall) {
 
         if (distance > 1) { return; }
 
-        let x = intersection.uv.x * 1024;
-        let y = 1024 - intersection.uv.y * 1024;
+        let x = intersection.uv.x * width;
+        let y = height - intersection.uv.y * height;
         drawContext.beginPath();
 
         //let radius = 0.5 + distance * 10;
@@ -98,7 +91,7 @@ export function setup(ctx, hall) {
         drawContext.stroke();
 */
 
-        var position = new THREE.Vector2(x,y);
+        var position = new THREE.Vector2(x, y);
         drawContext.imageSmoothingEnabled = true;
         drawContext.fillStyle = '#f00';
         drawContext.strokeStyle = '#0f0';
@@ -125,7 +118,7 @@ export function setup(ctx, hall) {
             //let r = 0.5;
             let r = lerp(0.001, 0.2, distance);
             console.log(r);
-            drawContext.scale(r,r);
+            drawContext.scale(r, r);
 
             drawContext.rotate(Math.PI * 180 / getRandomInt(0, 180));
             drawContext.drawImage(paintImg, -paintImg.width / 2, -paintImg.height / 2);
@@ -138,11 +131,6 @@ export function setup(ctx, hall) {
       }
     },
     onHoverLeave: (intersection) => {
-      /*
-      zoom.painting = null;
-      zoom.animation = 0;
-      zoom.widget.visible = false;
-      */
     },
     onSelectStart: (intersection, controller) => {
       lastController = controller;
@@ -150,18 +138,13 @@ export function setup(ctx, hall) {
 
       drawContext.lineJoin = drawContext.lineCap = 'round';
 
-      let x = intersection.uv.x * 1024;
-      let y = 1024 - intersection.uv.y * 1024;
+      let x = intersection.uv.x * width;
+      let y = height - intersection.uv.y * height;
 
-      lastPosition.set(x,y);
+      lastPosition.set(x, y);
     },
     onSelectEnd: (intersection) => {
       lastController.getObjectByName('spraySound').stop();
-      /*
-      zoom.painting = null;
-      zoom.animation = 0;
-      zoom.widget.visible = false;
-      */
     }
   });
 }
