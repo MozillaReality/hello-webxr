@@ -133,7 +133,6 @@ export function execute(ctx, delta, time) {
         }
 
         if (bbox.intersectsBox(note.geometry.boundingBox)) {
-          console.log(c, i);
           if (!stickNotesColliding[c][i]) {
             stickNotesColliding[c][i] = true;
             note.userData.sound.play();
@@ -177,6 +176,7 @@ export function onSelectStart(evt) {
       xyloSticks[i].position.set(0, 0, 0);
       xyloSticks[i].rotation.set(0, 0, 0);
       controller.add(xyloSticks[i]);
+      xyloSticks[i].userData.animation = 0;
       controller.userData.grabbing = xyloSticks[i];
       xyloSticks[i].userData.grabbedBy = controller;
       return false;
