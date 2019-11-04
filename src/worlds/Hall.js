@@ -51,11 +51,15 @@ export function setup(ctx) {
   foxrTex.encoding = THREE.sRGBEncoding;
   foxrTex.flipY = false;
 
+  const newstickerTex = assets['newsticker_tex'];
+  newstickerTex.encoding = THREE.sRGBEncoding;
+  newstickerTex.flipY = false;
+
   const hallMaterial = new THREE.MeshBasicMaterial({map: hallLightmapTex});
 
   objectMaterials = {
     'hall': hallMaterial,
-    'screen': new THREE.MeshBasicMaterial({color: 0x333333}),
+    'screen': new THREE.MeshBasicMaterial({map: newstickerTex}),
     'xylophone': hallMaterial,
     'xylostick-left': hallMaterial,
     'xylostick-right': hallMaterial,
@@ -175,6 +179,7 @@ export function execute(ctx, delta, time) {
   paintings.execute(ctx, delta, time);
   xylophone.execute(ctx, delta, time, controllers);
   graffiti.execute(ctx, delta, time);
+  newsticker.execute(ctx, delta, time);
   updateUniforms(time);
   checkCameraBoundaries(ctx);
 

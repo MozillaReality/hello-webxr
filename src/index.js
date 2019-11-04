@@ -62,6 +62,7 @@ var assets = {
   teleport_model: 'teleport.glb',
   beam_tex: 'beamfx.png',
   glow_tex: 'glow.png',
+  newsticker_tex: 'newsticker.png',
 
   // vertigo
   vertigo_lm_tex: 'vertigo_lm.png',

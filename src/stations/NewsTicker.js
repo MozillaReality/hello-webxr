@@ -4,7 +4,7 @@ import { Text, Object3D } from '../components/index.js';
 
 var newsTicker = {
   url: 'assets/tweets.json',
-  hashtag: '#helloWebXR.',
+  hashtag: '#helloWebXR',
   hashtagText: null,
   authorText: null,
   messageText: null,
@@ -12,15 +12,18 @@ var newsTicker = {
   current: 0
 };
 
+var screenMaterial;
+
 export function setup(ctx, hall) {
   const newsTickerMesh = hall.getObjectByName('newsticker');
 
   ctx.world.createEntity();
 
+  screenMaterial = hall.getObjectByName('screen').material;
 
   newsTicker.hashtagText = ctx.world.createEntity();
   newsTicker.hashtagText.addComponent(Text, {
-    color: '#22f', //0xdaa056,
+    color: '#f6cdde', //0xdaa056,
     fontSize: 0.1,
     anchor: 'right',
     textAlign: 'right'
@@ -31,7 +34,7 @@ export function setup(ctx, hall) {
 
   newsTicker.authorText = ctx.world.createEntity();
   newsTicker.authorText.addComponent(Text, {
-    color: '#00f', //0x67bccd,
+    color: '#7f0c38', //0x67bccd,
     fontSize: 0.1,
     anchor: 'left',
   });
@@ -43,7 +46,7 @@ export function setup(ctx, hall) {
   newsTicker.messageText = ctx.world.createEntity();
   newsTicker.messageText.addComponent(Text, {
     color: 0x000000,
-    fontSize: 0.15,
+    fontSize: 0.13,
     maxWidth: 2.3,
     lineHeight: 1,
     textAlign: 'left',
@@ -87,4 +90,9 @@ function nextNews() {
   n.messageText.getMutableComponent(Text).text = n.news[n.current].message;
   n.current = (n.current + 1) % n.news.length;
   setTimeout(nextNews, 3000);
+}
+
+export function execute(ctx, delta, time) {
+  var v = 0.98 + Math.sin(time * 40) * 0.02;
+  screenMaterial.color.setRGB(v, v, v);
 }
