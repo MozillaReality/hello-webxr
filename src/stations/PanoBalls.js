@@ -32,7 +32,7 @@ export function setup(ctx, hall) {
           time: {value: 0},
           tex: {value: asset},
           texfx: {value: assets['panoballfx_tex']},
-          selected: {value: 1}
+          selected: {value: 0}
         },
         vertexShader: ctx.shaders.panoball_vert,
         fragmentShader: ctx.shaders.panoball_frag,
@@ -42,6 +42,7 @@ export function setup(ctx, hall) {
     ball.position.copy(hall.getObjectByName(`panoball${i + 1}`).position);
     ball.userData.floatY = ball.position.y;
     ball.userData.panoId = 4 + i;
+    ball.userData.selected = 0;
 
     panoBalls.push(ball);
     panoballsParent.add(ball);
@@ -52,10 +53,10 @@ export function setup(ctx, hall) {
   ctx.raycontrol.addState('panoballs', {
     colliderMesh: panoballsParent,
     onHover: (intersection, active, controller) => {
-      if (active) {
-      }
+      intersection.object.userData.selected = 1;
     },
     onHoverLeave: (intersection) => {
+      intersection.object.userData.selected = 0;
     },
     onSelectStart: (intersection, controller) => {
     },
@@ -73,6 +74,9 @@ export function execute(ctx, delta, time) {
 }
 
 export function updateUniforms(time) {
-  panoBalls[0].material.uniforms.time.value = time;
-  panoBalls[1].material.uniforms.time.value = time;
+  for (let i = 0; i < panoBalls.length; i++) {
+    panoBalls[i].material.uniforms.time.value = i + time;
+    panoBalls[i].material.uniforms.selected.value +=
+      (panoBalls[i].userData.selected - panoBalls[i].material.uniforms.selected.value) * 0.1;
+  }
 }

@@ -3,6 +3,7 @@ varying vec3 vPosition;
 varying vec3 vNormal;
 varying vec3 vWorldPos;
 uniform float time;
+uniform float selected;
 
 mat4 inverse(mat4 m) {
   float
@@ -64,16 +65,19 @@ void main()
 {
   vUv = uv;
 
+  vPosition = position;
+
   vec3 offset = vec3(
     sin(position.x * 50.0 + time),
     sin(position.y * 10.0 + time * 2.0),
     cos(position.z * 40.0 + time)
   ) * 0.003;
 
-  vNormal = normalize(inverse(transpose(modelMatrix)) * vec4(normalize(normal), 1.0)).xyz;
-  vWorldPos = (modelMatrix * vec4( position, 1.0 )).xyz;
+  vPosition *= 1.0 + selected * 0.2;
 
-  vPosition = position;
-  vec4 mvPosition = modelViewMatrix * vec4(position + offset, 1.0);
+  vNormal = normalize(inverse(transpose(modelMatrix)) * vec4(normalize(normal), 1.0)).xyz;
+  vWorldPos = (modelMatrix * vec4(vPosition, 1.0)).xyz;
+
+  vec4 mvPosition = modelViewMatrix * vec4(vPosition + offset, 1.0);
   gl_Position = projectionMatrix * mvPosition;
 }

@@ -23,7 +23,7 @@ void main( void ) {
 
   col = mix(col * 0.7, vec3(1.0), 0.7 - fresnel);
 
-  col += fresnel * selected;
+  col += selected * 0.3;
 
   float t = time * 0.4 + vPosition.x + vPosition.z;
   uv = vec2(vUv.x + t * 0.2, vUv.y + t);

@@ -2,7 +2,7 @@ import glob, os.path, time, sys
 
 
 def pack():
-  output = open('./src/lib/shaders.mjs', 'wt')
+  output = open('./src/lib/shaders.js', 'wt')
   files = glob.glob('./src/shaders/*.glsl')
 
   output.write('export var shaders = {\n')

@@ -20,24 +20,6 @@ void main( void ) {
 }
 `,
 
-ballfx_frag : `
-uniform float time;
-uniform sampler2D tex;
-varying vec2 vUv;
-varying vec3 vPosition;
-varying vec3 vNormal;
-
-
-void main( void ) {
-  float t = time + vPosition.x + vPosition.z;
-  vec2 uv = vec2(vUv.x + t * 0.2, vUv.y + t);
-  vec4 col = texture2D(tex, uv);
-  col.a = 0.5 + sin(t * 5.0) * 0.3;
-
-  gl_FragColor = col;
-}
-`,
-
 basic_vert : `
 varying vec2 vUv;
 varying vec3 vPosition;
@@ -56,6 +38,7 @@ varying vec3 vPosition;
 varying vec3 vNormal;
 varying vec3 vWorldPos;
 uniform float time;
+uniform float selected;
 
 mat4 inverse(mat4 m) {
   float
@@ -117,34 +100,20 @@ void main()
 {
   vUv = uv;
 
+  vPosition = position;
+
   vec3 offset = vec3(
     sin(position.x * 50.0 + time),
     sin(position.y * 10.0 + time * 2.0),
     cos(position.z * 40.0 + time)
   ) * 0.003;
 
+  vPosition *= 1.0 + selected * 0.2;
+
   vNormal = normalize(inverse(transpose(modelMatrix)) * vec4(normalize(normal), 1.0)).xyz;
-  vWorldPos = (modelMatrix * vec4( position, 1.0 )).xyz;
+  vWorldPos = (modelMatrix * vec4(vPosition, 1.0)).xyz;
 
-  vPosition = position;
-  vec4 mvPosition = modelViewMatrix * vec4(position + offset, 1.0);
-  gl_Position = projectionMatrix * mvPosition;
-}
-`,
-
-ballfx_vert : `
-varying vec2 vUv;
-varying vec3 vPosition;
-varying vec3 vNormal;
-
-void main()
-{
-  vUv = uv;
-
-  vNormal = normalize(normalMatrix * normal);
-
-  vPosition = position;
-  vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+  vec4 mvPosition = modelViewMatrix * vec4(vPosition + offset, 1.0);
   gl_Position = projectionMatrix * mvPosition;
 }
 `,
@@ -152,6 +121,7 @@ void main()
 panoball_frag : `
 uniform sampler2D tex, texfx;
 uniform float time;
+uniform float selected;
 varying vec2 vUv;
 varying vec3 vPosition;
 varying vec3 vNormal;
@@ -173,6 +143,8 @@ void main( void ) {
   );
 
   col = mix(col * 0.7, vec3(1.0), 0.7 - fresnel);
+
+  col += selected * 0.3;
 
   float t = time * 0.4 + vPosition.x + vPosition.z;
   uv = vec2(vUv.x + t * 0.2, vUv.y + t);
