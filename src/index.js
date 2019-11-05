@@ -12,42 +12,50 @@ import { Text, Object3D } from './components/index.js';
 import RayControl from './lib/RayControl.js';
 import Teleport from './lib/Teleport.js';
 
-import * as worldHall from './worlds/Hall.js';
-import * as worldPanorama from './worlds/Panorama.js';
-import * as worldPanoramaStereo from './worlds/PanoramaStereo.js';
-import * as worldPhotogrammetryObject from './worlds/PhotogrammetryObject.js';
-import * as worldVertigo from './worlds/Vertigo.js';
-import * as worldSound from './worlds/Sound.js';
+import * as roomHall from './rooms/Hall.js';
+import * as roomPanorama from './rooms/Panorama.js';
+import * as roomPanoramaStereo from './rooms/PanoramaStereo.js';
+import * as roomPhotogrammetryObject from './rooms/PhotogrammetryObject.js';
+import * as roomVertigo from './rooms/Vertigo.js';
+import * as roomSound from './rooms/Sound.js';
 
 import {shaders} from './lib/shaders.js';
 
 var clock = new THREE.Clock();
 
-var scene, parent, renderer, camera, controls, context;
+var scene, parent, renderer, camera, controls, context = {};
 var controller1, controller2, raycontrol, teleport;
 
-var worlds = [
-  worldHall,
-  worldSound,
-  worldPhotogrammetryObject,
-  worldVertigo,
-  worldPanorama,
-  worldPanoramaStereo,
+var rooms = [
+  roomHall,
+  roomSound,
+  roomPhotogrammetryObject,
+  roomVertigo,
+  roomPanoramaStereo,
+  roomPanorama,
+  roomPanorama,
+  roomPanorama,
+  roomPanorama,
+  roomPanorama,
 ];
 
-const worldNames = [
+const roomNames = [
   'hall',
   'sound',
   'photogrammetry',
   'vertigo',
-  'panorama',
-  'panoramastereo'
+  'panoramastereo',
+  'panorama1',
+  'panorama2',
+  'panorama3',
+  'panorama4',
+  'panorama5',
 ];
 
 const urlObject = new URL(window.location);
-const worldName = urlObject.searchParams.get('stage');
-var currentWorld = worldNames.indexOf(worldName) !== -1 ? worldNames.indexOf(worldName) : 0;
-console.log(`Current world "${worldNames[currentWorld]}", ${currentWorld}`);
+const roomName = urlObject.searchParams.get('stage');
+context.room = roomNames.indexOf(roomName) !== -1 ? roomNames.indexOf(roomName) : 0;
+console.log(`Current room "${roomNames[context.room]}", ${context.room}`);
 
 var assets = {
   // hall
@@ -70,13 +78,23 @@ var assets = {
 
   // panoramas
   panoballfx_tex: 'ballfx.jpg',
-  pano1small: 'zapporthorn_small.jpg',
-  pano2small: 'stereopano_small.jpg',
-  pano1: 'zapporthorn.basis',
-  //andesL: 'andesL.jpg',
-  //andesR: 'andesR.jpg',
+
+
   stereopanoL: 'stereopanoL.basis',
   stereopanoR: 'stereopanoR.basis',
+  pano1small: 'stereopano_small.jpg',
+
+  pano2: 'tigerturtle.basis',
+  pano3: 'lakebyllesby.basis',
+  pano4: 'haldezollern.basis',
+  pano5: 'zapporthorn.basis',
+  pano6: 'thuringen.basis',
+  pano2small: 'tigerturtle_small.png',
+  pano3small: 'lakebyllesby_small.png',
+  pano4small: 'haldezollern_small.png',
+  pano5small: 'zapporthorn_small.png',
+  pano6small: 'thuringen_small.png',
+
 
   // vertigo
   vertigo_model: 'vertigo.glb',
@@ -107,12 +125,12 @@ var assets = {
   painting_rembrandt_tex: 'paintings/rembrandt.basis',
 };
 
-function gotoWorld(world) {
-  worlds[currentWorld].exit(context);
+function gotoRoom(room) {
+  rooms[context.room].exit(context);
   raycontrol.deactivateAll();
 
-  currentWorld = world;
-  worlds[currentWorld].enter(context);
+  context.room = room;
+  rooms[context.room].enter(context);
 }
 
 var ecsyWorld;
@@ -135,11 +153,11 @@ export function init() {
       case 65: controls.moveRight(-0.2); break;
       case 83: controls.moveForward(-0.2); break;
       case 68: controls.moveRight(0.2); break;
-      case 78: gotoWorld((currentWorld + 1) % worlds.length); break;
+      case 78: gotoRoom((context.room + 1) % rooms.length); break;
       default: {
-        var world = ev.keyCode - 48;
-        if (!ev.metaKey && world >= 0 && world < worlds.length) {
-          gotoWorld(world);
+        var room = ev.keyCode - 48;
+        if (!ev.metaKey && room >= 0 && room < rooms.length) {
+          gotoRoom(room);
         }
       }
     }
@@ -179,6 +197,16 @@ export function init() {
   controller2.addEventListener('selectstart', onSelectStart);
   controller2.addEventListener('selectend', onSelectEnd);
 
+  // global lights
+  const lightSun = new THREE.DirectionalLight(0xeeffff);
+  lightSun.name = 'sun';
+  lightSun.position.set(0.2, 1, 0.1);
+  const lightFill = new THREE.DirectionalLight(0xfff0ee, 0.3);
+  lightFill.name = 'fillLight';
+  lightFill.position.set(-0.2, -1, -0.1);
+
+  scene.add(lightSun, lightFill);
+
   var cameraRig = new THREE.Group();
   cameraRig.add(camera);
   cameraRig.add(controller1);
@@ -187,17 +215,15 @@ export function init() {
   cameraRig.rotation.set(0, Math.PI, 0);
   scene.add(cameraRig);
 
-  context = {
-    assets: assets,
-    shaders: shaders,
-    scene : parent,
-    renderer: renderer,
-    camera: camera,
-    goto: null,
-    cameraRig: cameraRig,
-    controllers: [controller1, controller2],
-    world: ecsyWorld
-  };
+  context.assets = assets;
+  context.shaders = shaders;
+  context.scene = parent;
+  context.renderer = renderer;
+  context.camera = camera;
+  context.goto = null;
+  context.cameraRig = cameraRig;
+  context.controllers = [controller1, controller2];
+  context.world = ecsyWorld;
 
   window.context = context;
 
@@ -209,15 +235,15 @@ export function init() {
     context.teleport = teleport;
 
     setupControllers();
-    worldHall.setup(context);
-    worldPanorama.setup(context);
-    worldPanoramaStereo.setup(context);
-    worldPhotogrammetryObject.setup(context);
-    worldVertigo.setup(context);
-    worldSound.setup(context);
+    roomHall.setup(context);
+    roomPanorama.setup(context);
+    roomPanoramaStereo.setup(context);
+    roomPhotogrammetryObject.setup(context);
+    roomVertigo.setup(context);
+    roomSound.setup(context);
 
 
-    worlds[currentWorld].enter(context);
+    rooms[context.room].enter(context);
 
 
 
@@ -246,8 +272,6 @@ function onSelectStart(ev) {
   const trigger = ev.target.getObjectByName('trigger');
   trigger.rotation.x = -0.3;
   raycontrol.onSelectStart(ev);
-
-  //gotoWorld((currentWorld + 1) % worlds.length);
 }
 
 function onSelectEnd(ev) {
@@ -272,12 +296,12 @@ function animate() {
   controller1.boundingBox.setFromObject(controller1.getObjectByName('Scene'));
   controller2.boundingBox.setFromObject(controller2.getObjectByName('Scene'));
 
-  // render current world
+  // render current room
   context.raycontrol.execute(context, delta, elapsedTime);
-  worlds[currentWorld].execute(context, delta, elapsedTime);
+  rooms[context.room].execute(context, delta, elapsedTime);
   renderer.render(scene, camera);
   if (context.goto !== null) {
-    gotoWorld(context.goto);
+    gotoRoom(context.goto);
     context.goto = null;
   }
 }

@@ -8,7 +8,7 @@ var
   auxVec = new THREE.Vector3(),
   hallRef = null;
 
-const NUM_PANOBALLS = 2;
+const NUM_PANOBALLS = 6;
 
 export function enter(ctx) {
   ctx.raycontrol.activateState('panoballs');
@@ -32,6 +32,7 @@ export function setup(ctx, hall) {
           time: {value: 0},
           tex: {value: asset},
           texfx: {value: assets['panoballfx_tex']},
+          selected: {value: 1}
         },
         vertexShader: ctx.shaders.panoball_vert,
         fragmentShader: ctx.shaders.panoball_frag,
@@ -39,6 +40,7 @@ export function setup(ctx, hall) {
       })
     );
     ball.position.copy(hall.getObjectByName(`panoball${i + 1}`).position);
+    ball.userData.floatY = ball.position.y;
     ball.userData.panoId = 4 + i;
 
     panoBalls.push(ball);
@@ -66,7 +68,7 @@ export function setup(ctx, hall) {
 export function execute(ctx, delta, time) {
   for (let i = 0; i < panoBalls.length; i++) {
     const ball = panoBalls[i];
-    ball.position.y = 1.5 + Math.cos(i + time * 3) * 0.02;
+    ball.position.y = ball.userData.floatY + Math.cos(i + time * 3) * 0.02;
   }
 }
 
