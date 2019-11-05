@@ -177,6 +177,7 @@ export function setup(ctx, hall) {
       lastPosition.set(x, y);
     },
     onSelectEnd: (intersection) => {
+      if (!lastController) { return; }
       lastController.getObjectByName('spraySound').stop();
     }
   });
