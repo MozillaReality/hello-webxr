@@ -22,6 +22,7 @@ export class Text {
     this.maxWidth = Infinity;
     this.overflowWrap = 'normal'; // ['normal', 'break-word']
     this.whiteSpace = 'normal'; // ['normal', 'nowrap']
+    this.opacity = 1;
   }
 
   reset() {

@@ -4,6 +4,7 @@ import * as paintings from '../stations/Paintings.js';
 import * as newsticker from '../stations/NewsTicker.js';
 import * as xylophone from '../stations/Xylophone.js';
 import * as graffiti from '../stations/Graffiti.js';
+import * as infopanels from '../stations/InfoPanels.js';
 
 var
   scene,
@@ -72,7 +73,7 @@ export function setup(ctx) {
     'doorD': createDoorMaterial(ctx),
     'sky': new THREE.MeshBasicMaterial({map: skyTex}),
     'clouds': new THREE.MeshBasicMaterial({map: cloudsTex, transparent: true}),
-    'foxr': new THREE.MeshBasicMaterial({map: foxrTex, transparent: true})
+    'foxr': new THREE.MeshBasicMaterial({map: foxrTex, transparent: true}),
   };
 
   hall = assets['hall_model'].scene;
@@ -96,6 +97,7 @@ export function setup(ctx) {
   graffiti.setup(ctx, hall);
   newsticker.setup(ctx, hall);
   panoballs.setup(ctx, hall);
+  infopanels.setup(ctx, hall);
 
   ctx.raycontrol.addState('teleport', {
     colliderMesh: teleportFloor,
@@ -151,6 +153,7 @@ export function enter(ctx) {
 
   xylophone.enter(ctx);
   graffiti.enter(ctx);
+  infopanels.enter(ctx);
   ctx.raycontrol.activateState('doors');
   ctx.raycontrol.activateState('teleport');
   paintings.enter(ctx);
@@ -172,6 +175,7 @@ export function execute(ctx, delta, time) {
   xylophone.execute(ctx, delta, time, controllers);
   graffiti.execute(ctx, delta, time);
   newsticker.execute(ctx, delta, time);
+  infopanels.execute(ctx, delta, time);
   updateUniforms(time);
   //checkCameraBoundaries(ctx);
 

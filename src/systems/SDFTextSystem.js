@@ -31,6 +31,7 @@ export class SDFTextSystem extends System {
     textMesh.overflowWrap = textComponent.overflowWrap;
     textMesh.whiteSpace = textComponent.whiteSpace;
     textMesh.maxWidth = textComponent.maxWidth;
+    textMesh.material.opacity = textComponent.opacity;
     textMesh.sync();
   }
 

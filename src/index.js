@@ -143,7 +143,7 @@ export function init() {
   scene = new THREE.Scene();
   camera = new THREE.PerspectiveCamera(80, window.innerWidth / window.innerHeight, 0.005, 10000);
   camera.position.set(0, 1.6, 0);
-  camera.position.set(1.5, 1.6, 2.3); //near pano1
+  //camera.position.set(1.5, 1.6, 2.3); //near pano1
 
   controls = new PointerLockControls(camera);
   document.body.addEventListener('click', () => controls.lock());
@@ -211,8 +211,8 @@ export function init() {
   cameraRig.add(camera);
   cameraRig.add(controller1);
   cameraRig.add(controller2);
-  cameraRig.position.set(1.5,0,5);
-  cameraRig.rotation.set(0, Math.PI, 0);
+  cameraRig.position.set(0, 0, 2);
+  //cameraRig.rotation.set(0, -0.5, 0);
   scene.add(cameraRig);
 
   context.assets = assets;
