@@ -107,9 +107,6 @@ export function setup(ctx) {
     sounds[id].shadow = shadow;
   }
 
-  const gridHelper = new THREE.GridHelper(20, 20, 0x222222, 0x080808);
-  scene.add(gridHelper);
-
   ctx.raycontrol.addState('sound', {
     colliderMesh: door.getObjectByName('door'),
     onHover: (intersection, active) => {
@@ -126,6 +123,33 @@ export function setup(ctx) {
     },
     onSelectEnd: (intersection) => {
       //teleport.onSelectEnd(intersection.point);
+    }
+  });
+
+  const floorTexture = assets['grid_tex'];
+  floorTexture.wrapS = THREE.RepeatWrapping;
+  floorTexture.wrapT = THREE.RepeatWrapping;
+  floorTexture.repeat.set(20, 20);
+  const floor = new THREE.Mesh(
+    new THREE.PlaneBufferGeometry(20, 20),
+    new THREE.MeshBasicMaterial({map: floorTexture})
+  );
+  scene.add(floor);
+  floor.rotation.x = -Math.PI / 2;
+
+  ctx.raycontrol.addState('teleportSound', {
+    colliderMesh: floor,
+    onHover: (intersection, active) => {
+      ctx.teleport.onHover(intersection.point, active);
+    },
+    onHoverLeave: () => {
+      ctx.teleport.onHoverLeave();
+    },
+    onSelectStart: (intersection, e) => {
+      ctx.teleport.onSelectStart(e);
+    },
+    onSelectEnd: (intersection) => {
+      ctx.teleport.onSelectEnd(intersection.point);
     }
   });
 }
@@ -169,6 +193,7 @@ export function enter(ctx) {
   ctx.cameraRig.position.set(0,0,0);
 
   timeout = setTimeout(playSound, 2000);
+  ctx.raycontrol.activateState('teleportSound');
   ctx.raycontrol.activateState('sound');
 }
 
@@ -176,6 +201,8 @@ export function exit(ctx) {
   ctx.scene.remove(scene);
   ctx.scene.remove(door);
   ctx.camera.remove(listener);
+  ctx.raycontrol.deactivateState('teleportSound');
+  ctx.raycontrol.deactivateState('sound');
   clearTimeout(timeout);
 }
 

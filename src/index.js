@@ -106,6 +106,7 @@ var assets = {
   sound_door_model: 'sound_door.glb',
   sound_shadow_tex: 'sound_shadow.png',
   sound_door_lm_tex: 'sound_door_lm.png',
+  grid_tex: 'grid.png',
 
   // photogrammetry object
   pg_floor_tex: 'travertine2.jpg',
