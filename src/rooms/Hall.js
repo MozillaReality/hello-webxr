@@ -56,6 +56,10 @@ export function setup(ctx) {
   newstickerTex.encoding = THREE.sRGBEncoding;
   newstickerTex.flipY = false;
 
+  const mozillamrTex = assets['mozillamr_tex'];
+  mozillamrTex.encoding = THREE.sRGBEncoding;
+  mozillamrTex.flipY = false;
+
   const hallMaterial = new THREE.MeshBasicMaterial({map: hallLightmapTex});
 
   objectMaterials = {
@@ -74,6 +78,7 @@ export function setup(ctx) {
     'sky': new THREE.MeshBasicMaterial({map: skyTex}),
     'clouds': new THREE.MeshBasicMaterial({map: cloudsTex, transparent: true}),
     'foxr': new THREE.MeshBasicMaterial({map: foxrTex, transparent: true}),
+    'mozillamr': new THREE.MeshBasicMaterial({map: mozillamrTex, transparent: true}),
   };
 
   hall = assets['hall_model'].scene;
