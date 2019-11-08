@@ -20,6 +20,22 @@ void main( void ) {
 }
 `,
 
+zoom_frag : `
+uniform float time;
+uniform sampler2D tex;
+uniform vec2 zoomPos;
+uniform float zoomAmount;
+varying vec2 vUv;
+
+void main( void ) {
+  float t = time;
+  vec2 uv = vec2(vUv.x - 0.5, (1.0 - vUv.y) - 0.5);
+  vec4 col = texture2D(tex, zoomPos + uv * zoomAmount);
+  col.a = smoothstep(0.0, 0.1, 1.0 - length(uv) * 2.0);
+  gl_FragColor = col;
+}
+`,
+
 basic_vert : `
 varying vec2 vUv;
 varying vec3 vPosition;

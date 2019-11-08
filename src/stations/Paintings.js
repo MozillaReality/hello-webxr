@@ -3,7 +3,6 @@ import * as THREE from 'three';
 var paintings;
 var zoom = {object: null, widget: null, controller: null, animation: 0};
 const PAINTINGS = ['seurat', 'sorolla', 'bosch1', 'bosch2', 'degas', 'rembrandt'];
-const PAINTINGS_RATIOS = [1, 1, 1, 1, 1, 1];
 
 export function enter(ctx) {
   ctx.raycontrol.activateState('paintings');
@@ -26,7 +25,20 @@ export function setup(ctx, hall) {
 
   paintings = hall.getObjectByName('paintings');
 
-  zoom.widget = new THREE.Mesh(new THREE.PlaneGeometry(), new THREE.MeshBasicMaterial({color:0xff0000}));
+  zoom.widget = new THREE.Mesh(
+    new THREE.PlaneGeometry(),
+    new THREE.ShaderMaterial({
+        uniforms: {
+          time: {value: 0},
+          tex: {value: null},
+          zoomPos: {value: new THREE.Vector2()},
+          zoomAmount: {value: 0},
+        },
+        vertexShader: ctx.shaders.basic_vert,
+        fragmentShader: ctx.shaders.zoom_frag,
+        transparent: true
+      })
+  );
   zoom.widget.geometry.rotateY(-Math.PI / 2);
   zoom.widget.visible = false;
 
@@ -38,7 +50,7 @@ export function setup(ctx, hall) {
       if (active) {
         zoom.painting = intersection.object;
         zoom.controller = controller;
-        zoom.widget.material = zoom.painting.material;
+        zoom.widget.material.uniforms.tex.value = zoom.painting.material.map;
         zoom.widget.visible = true;
         refreshZoomUV(intersection);
       }
@@ -52,7 +64,7 @@ export function setup(ctx, hall) {
       // controller = evt.target;
       zoom.painting = intersection.object;
       zoom.controller = controller;
-      zoom.widget.material = zoom.painting.material;
+      zoom.widget.material.uniforms.tex.value = zoom.painting.material.map;
       zoom.widget.visible = true;
       refreshZoomUV(intersection);
     },
@@ -69,35 +81,21 @@ export function execute(ctx, delta, time) {
       if (zoom.animation < 1) {
         zoom.animation += (1 - zoom.animation) * delta * 4.0;
       }
+    zoom.widget.material.uniforms.time.value = time;
   }
 }
 
 var minUV = new THREE.Vector2();
 var maxUV = new THREE.Vector2();
-const zoomAmount = 0.05;
+const zoomAmount = 0.2;
 
 function refreshZoomUV(hit) {
   zoom.widget.position.copy(hit.point);
   zoom.widget.position.x -= 0.5 * zoom.animation;
 
   const uvs = zoom.widget.geometry.faceVertexUvs[0];
-  const ratio = PAINTINGS_RATIOS[zoom.painting.userData.paintingId];
-  //const amount = zoomAmount  // TODO: adjust zoom amount depending on hit.distance
-  hit.uv.clampScalar(zoomAmount, 1 - zoomAmount);
-  minUV.set(hit.uv.x - zoomAmount, hit.uv.y + zoomAmount * ratio);
-  maxUV.set(hit.uv.x + zoomAmount, hit.uv.y - zoomAmount * ratio);
-  uvs[0][0].x = minUV.x;
-  uvs[0][0].y = maxUV.y;
-  uvs[0][1].x = minUV.x;
-  uvs[0][1].y = minUV.y;
-  uvs[0][2].x = maxUV.x;
-  uvs[0][2].y = maxUV.y;
 
-  uvs[1][0].x = minUV.x;
-  uvs[1][0].y = minUV.y;
-  uvs[1][1].x = maxUV.x;
-  uvs[1][1].y = minUV.y;
-  uvs[1][2].x = maxUV.x;
-  uvs[1][2].y = maxUV.y;
-  zoom.widget.geometry.uvsNeedUpdate = true;
+  hit.uv.clampScalar(zoomAmount, 1 - zoomAmount);
+  zoom.widget.material.uniforms.zoomPos.value.copy(hit.uv);
+  zoom.widget.material.uniforms.zoomAmount.value = zoomAmount;
 }
