@@ -59,7 +59,7 @@ export default class ColorWheel {
     this.ui.add(this.mesh);
     this.ui.add(this.blackMesh);
 
-    var geometryRing = new THREE.RingGeometry( 0.01, 0.02, 32 );
+    var geometryRing = new THREE.RingGeometry( 0.005, 0.01, 32 );
     var materialRing = new THREE.MeshBasicMaterial( { color: 0xffff00, side: THREE.DoubleSide } );
     this.colorSelector = new THREE.Mesh( geometryRing, materialRing );
     this.colorSelector.position.z = 0.01;
@@ -77,11 +77,18 @@ export default class ColorWheel {
       colliderMesh: this.ui,
       order: -1,
       onHover: (intersection, active, controller) => {
+        var point = intersection.point.clone();
+        this.mesh.worldToLocal(point);
+
+        this.colorSelector.position.x = point.x;
+        this.colorSelector.position.y = point.y;
       },
       onHoverLeave: (intersection) => {
       },
       onSelectStart: (intersection, controller) => {
         if (intersection.object.name === 'colorWheel') {
+          console.log(intersection);
+
           var point = intersection.point.clone();
           this.mesh.updateMatrixWorld();
           this.mesh.worldToLocal(point);
@@ -123,4 +130,3 @@ export default class ColorWheel {
     this.ctx.raycontrol.deactivateState('colorwheel');
   }
 }
-
