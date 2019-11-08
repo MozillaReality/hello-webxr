@@ -58,6 +58,14 @@ export default class ColorWheel {
     this.ui = new THREE.Group();
     this.ui.add(this.mesh);
     this.ui.add(this.blackMesh);
+
+    var geometryRing = new THREE.RingGeometry( 0.01, 0.02, 32 );
+    var materialRing = new THREE.MeshBasicMaterial( { color: 0xffff00, side: THREE.DoubleSide } );
+    this.colorSelector = new THREE.Mesh( geometryRing, materialRing );
+    this.colorSelector.position.z = 0.01;
+    this.colorSelector.name = 'colorSelector';
+    this.ui.add(this.colorSelector);
+
     this.ui.name = 'ColorWheel';
     this.ui.visible = false;
     //this.ui.rotation.x = -Math.PI / 3;
@@ -103,6 +111,7 @@ export default class ColorWheel {
 
   updateColor () {
     this.rgb = hsv2rgb(this.hsv);
+    this.colorSelector.material.color.setRGB(this.rgb.r / 255, this.rgb.g / 255, this.rgb.b / 255);
     this.onColorChanged(this.rgb);
   }
 
