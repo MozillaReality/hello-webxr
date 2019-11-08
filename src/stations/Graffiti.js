@@ -3,7 +3,7 @@ import * as THREE from 'three';
 class ColorWheel {
   constructor(ctx, controller, onColorChanged) {
     this.ctx = ctx;
-    this.radius = 0.3;
+    this.radius = 0.1;
     this.hsv = { h: 0.0, s: 0.0, v: 1.0 };
     this.rgb = {r: 0, g: 0, b: 0};
     this.onColorChanged = onColorChanged;
@@ -46,11 +46,25 @@ class ColorWheel {
     this.mesh = new THREE.Mesh(geometry, material);
     this.mesh.name = 'colorWheel';
     this.controller = controller;
-    controller.add(this.mesh);
 
+
+    const geometryLast = new THREE.CircleBufferGeometry(0.025, 12);
+    let materialBlack = new THREE.MeshBasicMaterial({color: 0x000000});
+    this.blackMesh = new THREE.Mesh(geometryLast, materialBlack);
+    this.blackMesh.name = 'black';
+    this.blackMesh.position.set(0, 0.15, 0);
+
+    this.ui = new THREE.Group();
+    this.ui.add(this.mesh);
+    this.ui.add(this.blackMesh);
+    //this.ui.rotation.x = -Math.PI / 3;
+    this.ui.position.y = 0.1;
+
+    controller.add(this.ui);
 
     ctx.raycontrol.addState('colorwheel', {
-      colliderMesh: this.mesh,
+      colliderMesh: this.ui,
+      order: -1,
       onHover: (intersection, active, controller) => {
         //console.log('lolaso');
       },
@@ -58,27 +72,29 @@ class ColorWheel {
         //console.log('lolaso');
       },
       onSelectStart: (intersection, controller) => {
-        //console.log('lolaso');
-        var point = intersection.point.clone();
-        this.mesh.updateMatrixWorld();
-        this.mesh.worldToLocal(point);
+        if (intersection.object.name === 'colorWheel') {
+          var point = intersection.point.clone();
+          this.mesh.updateMatrixWorld();
+          this.mesh.worldToLocal(point);
 
-        //this.objects.hueCursor.position.copy(position);
-        let uv = intersection.uv.clone();
-        uv.x=uv.x*2 - 1;
-        uv.y=uv.y*2 - 1;
-        console.log(uv, intersection.point, point);
+          //this.objects.hueCursor.position.copy(position);
+          let uv = intersection.uv.clone();
+          uv.x=uv.x*2 - 1;
+          uv.y=uv.y*2 - 1;
+          console.log(uv, intersection.point, point);
 
-        let polarPosition = {
-          r: this.radius * Math.sqrt(uv.x * uv.x + uv.y * uv.y),
-          theta: Math.PI + Math.atan2(uv.y, uv.x)
-        };
-        var angle = ((polarPosition.theta * (180 / Math.PI)) + 180) % 360;
-        console.log(angle, polarPosition.theta, polarPosition.r);
-        this.hsv.h = angle / 360;
-        this.hsv.s = polarPosition.r / this.radius;
-        this.updateColor();
-
+          let polarPosition = {
+            r: this.radius * Math.sqrt(uv.x * uv.x + uv.y * uv.y),
+            theta: Math.PI + Math.atan2(uv.y, uv.x)
+          };
+          var angle = ((polarPosition.theta * (180 / Math.PI)) + 180) % 360;
+          console.log(angle, polarPosition.theta, polarPosition.r);
+          this.hsv.h = angle / 360;
+          this.hsv.s = polarPosition.r / this.radius;
+          this.updateColor();
+        } else {
+          this.onColorChanged(intersection.object.material.color.clone().multiplyScalar(255));
+        }
       },
       onSelectEnd: (intersection) => {
         //console.log('lolaso');

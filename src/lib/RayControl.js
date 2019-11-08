@@ -10,6 +10,14 @@ export default class RayControl {
     this.enabled = true;
   }
 
+  _sort() {
+    this.currentStates = this.currentStates.sort((a,b) => {
+      let pa = a.order || 0;
+      let pb = b.order || 0;
+      return pa - pb;
+    });
+  }
+
   disable() {
     this.line0.visible = this.line1.visible = false;
     this.enabled = false;
@@ -35,6 +43,7 @@ export default class RayControl {
   activateState(name) {
     if (this.states[name]) {
       this.currentStates.push(this.states[name]);
+      this._sort();
     }
   }
 
@@ -44,10 +53,12 @@ export default class RayControl {
 
   deactivateState(name) {
     this.currentStates.splice(this.currentStates.indexOf(name), 1);
+    this._sort();
   }
 
   constructor(ctx) {
     this.ctx = ctx;
+    this.exclusiveMode = true; // it wil return on first hit
     this.enabled = true;
     this.raycaster = new THREE.Raycaster();
     this.states = {};
@@ -105,26 +116,36 @@ export default class RayControl {
 
     rayMaterial.uniforms.time.value = time;
 
-    this.currentStates.forEach(state => {
+    let firstHit = false;
+
+    for (var i = 0; i < this.currentStates.length; i++) {
+      let state = this.currentStates[i];
       var controller = ctx.controllers[0];
       var intersections = this.getIntersections(controller, state.colliderMesh);
 
       if (intersections.length > 0) {
         let intersection = intersections[0]
-        state.intersection = intersection;
-        state.hit = true;
-        state.onHover && state.onHover(intersection, this.active, controller);
-        this.line0.scale.z = Math.min(intersection.distance, 1);
-        //return;
+
+        if (!this.exclusiveMode || !firstHit) {
+          state.intersection = intersection;
+          state.hit = true;
+          state.onHover && state.onHover(intersection, this.active, controller);
+          this.line0.scale.z = Math.min(intersection.distance, 1);
+        }
+
+        firstHit = true;
       } else {
         if (state.hit && state.onHoverLeave) {
           state.onHoverLeave(state.intersection, this.active, controller);
         }
         state.hit = false;
         state.intersection = null;
-        this.line0.scale.z = Math.min(this.rayLength, 1);
       }
-    });
+    }
+
+    if (!firstHit) {
+      this.line0.scale.z = Math.min(this.rayLength, 1);
+    }
   }
 
   getIntersections( controller, colliderMesh ) {
