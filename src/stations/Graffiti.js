@@ -50,7 +50,7 @@ export function setup(ctx, hall) {
   let area = ctx.world.createEntity();
   area.addComponent(BoundingBox).addComponent(DebugHelper).addComponent(Area);
   let component = area.getMutableComponent(BoundingBox);
-  component.min.set(-5,0,4);
+  component.min.set(-5,0,4.4);
   component.max.set(3,3,7);
 
   let checker = ctx.world.createEntity();

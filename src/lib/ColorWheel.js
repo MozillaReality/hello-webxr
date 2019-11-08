@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import {hsv2rgb} from '../lib/ColorUtils.js';
 
 export default class ColorWheel {
   constructor(ctx, controller, onColorChanged) {
@@ -68,10 +69,8 @@ export default class ColorWheel {
       colliderMesh: this.ui,
       order: -1,
       onHover: (intersection, active, controller) => {
-        //console.log('lolaso');
       },
       onHoverLeave: (intersection) => {
-        //console.log('lolaso');
       },
       onSelectStart: (intersection, controller) => {
         if (intersection.object.name === 'colorWheel') {
@@ -81,9 +80,8 @@ export default class ColorWheel {
 
           //this.objects.hueCursor.position.copy(position);
           let uv = intersection.uv.clone();
-          uv.x=uv.x*2 - 1;
-          uv.y=uv.y*2 - 1;
-          console.log(uv, intersection.point, point);
+          uv.x = uv.x * 2 - 1;
+          uv.y = uv.y * 2 - 1;
 
           let polarPosition = {
             r: this.radius * Math.sqrt(uv.x * uv.x + uv.y * uv.y),
@@ -99,62 +97,13 @@ export default class ColorWheel {
         }
       },
       onSelectEnd: (intersection) => {
-        //console.log('lolaso');
       }
     });
   }
 
   updateColor () {
-    this.rgb = this.hsv2rgb(this.hsv);
+    this.rgb = hsv2rgb(this.hsv);
     this.onColorChanged(this.rgb);
-    //var color = 'rgb(' + rgb.r + ', ' + rgb.g + ', ' + rgb.b + ')';
-    //this.handEl.setAttribute('brush', 'color', color);
-    //this.colorHasChanged = true;
-  }
-
-  hsv2rgb(hsv) {
-    var r, g, b, i, f, p, q, t;
-    var h = THREE.Math.clamp(hsv.h, 0, 1);
-    var s = THREE.Math.clamp(hsv.s, 0, 1);
-    var v = hsv.v;
-
-    i = Math.floor(h * 6);
-    f = h * 6 - i;
-    p = v * (1 - s);
-    q = v * (1 - f * s);
-    t = v * (1 - (1 - f) * s);
-    switch (i % 6) {
-      case 0: r = v; g = t; b = p; break;
-      case 1: r = q; g = v; b = p; break;
-      case 2: r = p; g = v; b = t; break;
-      case 3: r = p; g = q; b = v; break;
-      case 4: r = t; g = p; b = v; break;
-      case 5: r = v; g = p; b = q; break;
-    }
-    return {
-      r: Math.round(r * 255),
-      g: Math.round(g * 255),
-      b: Math.round(b * 255)
-    };
-  }
-
-  rgb2hsv(r, g, b) {
-    var max = Math.max(r, g, b);
-    var min = Math.min(r, g, b);
-    var d = max - min;
-    var h;
-    var s = (max === 0 ? 0 : d / max);
-    var v = max;
-
-    if (arguments.length === 1) { g = r.g; b = r.b; r = r.r; }
-
-    switch (max) {
-      case min: h = 0; break;
-      case r: h = (g - b) + d * (g < b ? 6 : 0); h /= 6 * d; break;
-      case g: h = (b - r) + d * 2; h /= 6 * d; break;
-      case b: h = (r - g) + d * 4; h /= 6 * d; break;
-    }
-    return {h: h, s: s, v: v};
   }
 
   enter() {
