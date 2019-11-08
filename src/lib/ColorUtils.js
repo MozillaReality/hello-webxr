@@ -1,7 +1,11 @@
+function clamp(value, min, max) {
+  return Math.min(Math.max(value, min), max);
+}
+
 export function hsv2rgb(hsv) {
   var r, g, b, i, f, p, q, t;
-  var h = THREE.Math.clamp(hsv.h, 0, 1);
-  var s = THREE.Math.clamp(hsv.s, 0, 1);
+  var h = clamp(hsv.h, 0, 1);
+  var s = clamp(hsv.s, 0, 1);
   var v = hsv.v;
 
   i = Math.floor(h * 6);
