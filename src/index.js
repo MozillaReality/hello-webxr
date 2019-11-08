@@ -7,6 +7,10 @@ import {loadAssets} from './lib/assetManager.js';
 // ECSY
 import { World } from './vendor/ecsy.module.js';
 import { SDFTextSystem } from './systems/SDFTextSystem.js';
+import { DebugHelperSystem } from './systems/DebugHelperSystem.js';
+import { AreaCheckerSystem } from './systems/AreaCheckerSystem.js';
+import { ControllersSystem } from './systems/ControllersSystem.js';
+
 import { Text, Object3D } from './components/index.js';
 
 import RayControl from './lib/RayControl.js';
@@ -176,7 +180,11 @@ var ecsyWorld;
 export function init() {
   var w = 100;
   ecsyWorld = new World();
-  ecsyWorld.registerSystem(SDFTextSystem);
+  ecsyWorld
+    .registerSystem(SDFTextSystem)
+    .registerSystem(AreaCheckerSystem)
+    .registerSystem(ControllersSystem)
+    .registerSystem(DebugHelperSystem);
 
   scene = new THREE.Scene();
   camera = new THREE.PerspectiveCamera(80, window.innerWidth / window.innerHeight, 0.005, 10000);
