@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 
 var paintings;
-var zoom = {object: null, widget: null, controller: null, animation: 0};
+var zoom = {object: null, widget: null, controller: null, animation: 0, icon: null};
 const PAINTINGS = ['seurat', 'sorolla', 'bosch1', 'bosch2', 'degas', 'rembrandt'];
 
 export function enter(ctx) {
@@ -42,31 +42,52 @@ export function setup(ctx, hall) {
   zoom.widget.geometry.rotateY(-Math.PI / 2);
   zoom.widget.visible = false;
 
+
+  zoom.icon = new THREE.Mesh(
+    new THREE.PlaneGeometry(0.2, 0.2),
+    new THREE.MeshBasicMaterial({
+      map: ctx.assets['zoomicon_tex'],
+      transparent: true
+    })
+  );
+  zoom.icon.geometry.rotateY(-Math.PI / 2);
+  zoom.icon.visible = false;
+
+
+
+  ctx.scene.add(zoom.icon);
   ctx.scene.add(zoom.widget);
 
   ctx.raycontrol.addState('paintings', {
     colliderMesh: hall.getObjectByName('paintings'),
     onHover: (intersection, active, controller) => {
-      if (active) {
+      if (active && intersection.distance < 3) {
         zoom.painting = intersection.object;
         zoom.controller = controller;
         zoom.widget.material.uniforms.tex.value = zoom.painting.material.map;
         zoom.widget.visible = true;
         refreshZoomUV(intersection);
+      } else {
+        zoom.icon.visible = true;
+        zoom.icon.position.copy(intersection.point);
+        zoom.icon.position.x -= 0.01;
       }
     },
     onHoverLeave: (intersection) => {
       zoom.painting = null;
       zoom.animation = 0;
       zoom.widget.visible = false;
+      zoom.icon.visible = false;
     },
     onSelectStart: (intersection, controller) => {
-      // controller = evt.target;
-      zoom.painting = intersection.object;
-      zoom.controller = controller;
-      zoom.widget.material.uniforms.tex.value = zoom.painting.material.map;
-      zoom.widget.visible = true;
-      refreshZoomUV(intersection);
+      if (intersection.distance < 3) {
+        // controller = evt.target;
+        zoom.painting = intersection.object;
+        zoom.controller = controller;
+        zoom.widget.material.uniforms.tex.value = zoom.painting.material.map;
+        zoom.widget.visible = true;
+        refreshZoomUV(intersection);
+      }
     },
     onSelectEnd: (intersection) => {
       zoom.painting = null;
