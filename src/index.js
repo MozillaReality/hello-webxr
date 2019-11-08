@@ -72,6 +72,7 @@ var assets = {
   glow_tex: 'glow.png',
   newsticker_tex: 'newsticker.png',
   mozillamr_tex: 'mozillamr.png',
+  zoomicon_tex: 'zoomicon.png',
 
   // vertigo
   vertigo_lm_tex: 'vertigo_lm.png',
