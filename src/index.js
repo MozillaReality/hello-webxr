@@ -26,6 +26,8 @@ var clock = new THREE.Clock();
 var scene, parent, renderer, camera, controls, context = {};
 var controller1, controller2, raycontrol, teleport;
 
+var listener, ambientMusic;
+
 var rooms = [
   roomHall,
   roomSound,
@@ -50,6 +52,19 @@ const roomNames = [
   'panorama3',
   'panorama4',
   'panorama5',
+];
+
+const musicThemes = [
+  false,
+  false,
+  'chopin_snd',
+  'wind_snd',
+  false,
+  'birds_snd',
+  'birds_snd',
+  'forest_snd',
+  'wind_snd',
+  'birds_snd',
 ];
 
 const urlObject = new URL(window.location);
@@ -126,14 +141,34 @@ var assets = {
   painting_bosch2_tex: 'paintings/bosch2.basis',
   painting_degas_tex: 'paintings/degas.basis',
   painting_rembrandt_tex: 'paintings/rembrandt.basis',
+
+  // sounds
+  birds_snd: 'ogg/birds.ogg',
+  chopin_snd: 'ogg/chopin.ogg',
+  forest_snd: 'ogg/forest.ogg',
+  wind_snd: 'ogg/wind.ogg',
 };
 
 function gotoRoom(room) {
   rooms[context.room].exit(context);
   raycontrol.deactivateAll();
 
+  playMusic(room);
+
   context.room = room;
   rooms[context.room].enter(context);
+}
+
+function playMusic(room) {
+  if (ambientMusic.source) ambientMusic.stop();
+
+  const music = musicThemes[room];
+  if (!music) { return; }
+  ambientMusic.setBuffer(assets[music]);
+  ambientMusic.setLoop(true);
+  ambientMusic.setVolume(1.0);
+  ambientMusic.offset = Math.random();
+  ambientMusic.play();
 }
 
 var ecsyWorld;
@@ -147,6 +182,10 @@ export function init() {
   camera = new THREE.PerspectiveCamera(80, window.innerWidth / window.innerHeight, 0.005, 10000);
   camera.position.set(0, 1.6, 0);
   //camera.position.set(1.5, 1.6, 2.3); //near pano1
+  listener = new THREE.AudioListener();
+  camera.add(listener);
+
+  ambientMusic = new THREE.Audio(listener);
 
   controls = new PointerLockControls(camera);
   document.body.addEventListener('click', () => controls.lock());

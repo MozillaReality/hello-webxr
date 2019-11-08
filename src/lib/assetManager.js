@@ -25,6 +25,7 @@ export function loadAssets(renderer, basePath, assets, onComplete) {
   var gltfLoader = new GLTFLoader();
   var objLoader = new OBJLoader();
   var fontLoader = new THREE.FontLoader();
+  var audioLoader = new THREE.AudioLoader();
 
   var loaders = {
     'gltf': gltfLoader,
@@ -34,7 +35,8 @@ export function loadAssets(renderer, basePath, assets, onComplete) {
     'png': texLoader,
     'jpg': texLoader,
     'basis': basisLoader,
-    'font': fontLoader
+    'font': fontLoader,
+    'ogg': audioLoader
   };
 
   for (var i in assets) {
