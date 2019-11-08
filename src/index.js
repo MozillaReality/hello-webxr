@@ -167,7 +167,7 @@ function playMusic(room) {
   ambientMusic.setBuffer(assets[music]);
   ambientMusic.setLoop(true);
   ambientMusic.setVolume(1.0);
-  ambientMusic.offset = Math.random();
+  ambientMusic.offset = Math.random() * 60;
   ambientMusic.play();
 }
 
