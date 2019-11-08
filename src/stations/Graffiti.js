@@ -88,7 +88,7 @@ export function setup(ctx, hall) {
   //canvasTmp.style.backgroundColor = "#333";
 
   ctxTmp = canvasTmp.getContext('2d');
-  document.body.appendChild(canvasTmp);
+  // document.body.appendChild(canvasTmp);
 
   brushImg.onload = () => {
     canvasTmp.width = brushImg.width;
