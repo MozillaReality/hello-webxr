@@ -100,7 +100,6 @@ var assets = {
   // panoramas
   panoballfx_tex: 'ballfx.jpg',
 
-
   stereopanoL: 'stereopanoL.basis',
   stereopanoR: 'stereopanoR.basis',
   pano1small: 'stereopano_small.jpg',
@@ -116,6 +115,9 @@ var assets = {
   pano5small: 'zapporthorn_small.png',
   pano6small: 'thuringen_small.png',
 
+  // graffiti
+  spray_model: 'spray.glb',
+  spray_tex: 'spray.png',
 
   // vertigo
   vertigo_model: 'vertigo.glb',
