@@ -67,15 +67,16 @@ export function setup(ctx, hall) {
     ctx.controllers[0].add(sound);
   });
 
+  const spray = ctx.assets['spray_model'].scene;
 
   colorWheel = new ColorWheel(ctx, ctx.controllers[1], (rgb) => {
     colorize(
       rgb.r,
       rgb.g,
       rgb.b);
+    spray.getObjectByName('spraycolor').material.color.setRGB(rgb.r / 255, rgb.g / 255, rgb.b / 255);
   });
 
-  const spray = ctx.assets['spray_model'].scene;
   spray.name = 'spray';
   //spray.visible = false;
   const sprayTex = ctx.assets['spray_tex'];
