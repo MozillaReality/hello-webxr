@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import {System} from '../vendor/ecsy.module.js';
-import {Area, AreaInside, AreaExiting, AreaEntering, Object3D, AreaChecker, BoundingBox} from '../components/index.js';
+import {Area, AreaReactor, AreaInside, AreaExiting, AreaEntering, Object3D, AreaChecker, BoundingBox} from '../components/index.js';
 
 export class ControllersSystem extends System {
   execute(delta, time) {
@@ -9,16 +9,14 @@ export class ControllersSystem extends System {
 
     for (let i = 0; i < added.length; i++) {
       const entity = added[i];
-      const obj3D = entity.getComponent(Object3D).value;
-      obj3D.getObjectByName('Scene').visible = false;
-      obj3D.getObjectByName('ColorWheel').visible = true;
+      const reactor = entity.getComponent(AreaReactor);
+      reactor.onEntering(entity);
     }
 
     for (let i = 0; i < removed.length; i++) {
       const entity = removed[i];
-      const obj3D = entity.getComponent(Object3D).value;
-      obj3D.getObjectByName('Scene').visible = true;
-      obj3D.getObjectByName('ColorWheel').visible = false;
+      const reactor = entity.getComponent(AreaReactor);
+      reactor.onExiting(entity);
     }
   }
 }

@@ -6,7 +6,7 @@ export var rayMaterial;
 
 export default class RayControl {
   enable() {
-    this.line0.visible = this.line1.visible = true;
+    this.setLineStyle(this.previousLineStyle);
     this.enabled = true;
   }
 
@@ -19,7 +19,7 @@ export default class RayControl {
   }
 
   disable() {
-    this.line0.visible = this.line1.visible = false;
+    this.lineBasic.visible = this.line0.visible = this.line1.visible = false;
     this.enabled = false;
     this.active = false;
   }
@@ -58,6 +58,7 @@ export default class RayControl {
 
   constructor(ctx) {
     this.ctx = ctx;
+    this.previousLineStyle = 'pretty';
     this.exclusiveMode = true; // it wil return on first hit
     this.enabled = true;
     this.raycaster = new THREE.Raycaster();
@@ -92,8 +93,27 @@ export default class RayControl {
     this.line1 = line.clone();
     this.line0.visible = this.line1.visible = true;
 
-    ctx.controllers[0].add( this.line0 );
-    //ctx.controllers[1].add( this.line1 );
+    let raycasterContext = new THREE.Group();
+    raycasterContext.add(this.line0);
+    raycasterContext.name = 'raycasterContext';
+
+    //ctx.controllers[0].add( this.line0 );
+    ctx.controllers[0].add( raycasterContext );
+
+    var geometry = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, - 1 ) ] );
+
+    this.lineBasic = new THREE.Line( geometry );
+    this.lineBasic.name = 'line';
+    this.lineBasic.scale.z = 5;
+    this.lineBasic.visible = false;
+    raycasterContext.add(this.lineBasic);
+  }
+
+  setLineStyle(lineStyle) {
+    const basic = lineStyle === 'basic';
+    this.lineBasic.visible = basic;
+    this.line0.visible = !basic;
+    this.previousLineStyle = lineStyle;
   }
 
   onSelectStart(evt) {
@@ -129,8 +149,14 @@ export default class RayControl {
         if (!this.exclusiveMode || !firstHit) {
           state.intersection = intersection;
           state.hit = true;
+          if (state.lineStyleOnIntersection) {
+            this.setLineStyle(state.lineStyleOnIntersection);
+          } else {
+            this.setLineStyle('advanced');
+          }
           state.onHover && state.onHover(intersection, this.active, controller);
           this.line0.scale.z = Math.min(intersection.distance, 1);
+          this.lineBasic.scale.z = Math.min(intersection.distance, 1);
         }
 
         firstHit = true;
@@ -145,14 +171,17 @@ export default class RayControl {
 
     if (!firstHit) {
       this.line0.scale.z = Math.min(this.rayLength, 1);
+      this.lineBasic.scale.z = Math.min(this.rayLength, 1);
     }
   }
 
   getIntersections( controller, colliderMesh ) {
 
-    tempMatrix.identity().extractRotation( controller.matrixWorld );
+    let raycasterContext = controller.getObjectByName('raycasterContext');
 
-    this.raycaster.ray.origin.setFromMatrixPosition( controller.matrixWorld );
+    tempMatrix.identity().extractRotation( raycasterContext.matrixWorld );
+
+    this.raycaster.ray.origin.setFromMatrixPosition( raycasterContext.matrixWorld );
     this.raycaster.ray.direction.set( 0, 0, - 1 ).applyMatrix4( tempMatrix );
 
     if (Array.isArray(colliderMesh)) {

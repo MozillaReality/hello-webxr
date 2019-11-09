@@ -84,4 +84,17 @@ export class AreaChecker {
   }
 }
 
+const empty = () => {};
+
+export class AreaReactor {
+  constructor() {
+    this.reset();
+  }
+
+  reset() {
+    this.onEntering = empty;
+    this.onExiting = empty;
+  }
+}
+
 export class DebugHelper extends TagComponent {}

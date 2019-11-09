@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import ColorWheel from '../lib/ColorWheel';
-import {Area, AreaChecker, Object3D, BoundingBox, DebugHelper} from '../components/index';
+import {Area, AreaReactor, AreaChecker, Object3D, BoundingBox, DebugHelper} from '../components/index';
 
 function angleBetween(point1, point2) {
   return Math.atan2(point2.x - point1.x, point2.y - point1.y);
@@ -9,7 +9,7 @@ function angleBetween(point1, point2) {
 var colorWheel;
 
 export function enter(ctx) {
-  ctx.raycontrol.activateState('graffiti');
+  //ctx.raycontrol.activateState('graffiti');
   colorWheel.enter();
 }
 
@@ -54,7 +54,47 @@ export function setup(ctx, hall) {
   component.max.set(3,3,7);
 
   let checker = ctx.world.createEntity();
-  checker.addComponent(AreaChecker).addComponent(Object3D, {value: ctx.controllers[1]});
+  checker
+    .addComponent(AreaChecker)
+    .addComponent(Object3D, {value: ctx.controllers[1]})
+    .addComponent(AreaReactor, {
+      onEntering: entity => {
+        const obj3D = entity.getComponent(Object3D).value;
+        obj3D.getObjectByName('Scene').visible = false;
+        obj3D.getObjectByName('ColorWheel').visible = true;
+      },
+      onExiting: entity => {
+        const obj3D = entity.getComponent(Object3D).value;
+        obj3D.getObjectByName('Scene').visible = true;
+        obj3D.getObjectByName('ColorWheel').visible = false;
+      }
+    });
+  let checker2 = ctx.world.createEntity();
+  checker2
+    .addComponent(AreaChecker)
+    .addComponent(Object3D, {value: ctx.controllers[0]})
+    .addComponent(AreaReactor, {
+      onEntering: entity => {
+        const obj3D = entity.getComponent(Object3D).value;
+        obj3D.getObjectByName('Scene').visible = false;
+        obj3D.getObjectByName('spray').visible = true;
+        let raycasterContext = obj3D.getObjectByName('raycasterContext');
+        raycasterContext.rotation.set(-Math.PI / 2, Math.PI / 2, 0);
+        raycasterContext.position.set(0,-0.015,-0.025)
+        ctx.raycontrol.setLineStyle('basic');
+        ctx.raycontrol.activateState('graffiti');
+      },
+      onExiting: entity => {
+        const obj3D = entity.getComponent(Object3D).value;
+        obj3D.getObjectByName('Scene').visible = true;
+        obj3D.getObjectByName('spray').visible = false;
+        let raycasterContext = obj3D.getObjectByName('raycasterContext');
+        raycasterContext.rotation.set(0,0,0);
+        raycasterContext.position.set(0,0,0);
+        ctx.raycontrol.setLineStyle('advanced');
+        ctx.raycontrol.deactivateState('graffiti');
+      }
+    });
 
   let listener = new THREE.AudioListener();
 
@@ -68,6 +108,7 @@ export function setup(ctx, hall) {
   });
 
   const spray = ctx.assets['spray_model'].scene;
+  spray.getObjectByName('spraycan').geometry.rotateY(Math.PI / 2);
 
   colorWheel = new ColorWheel(ctx, ctx.controllers[1], (rgb) => {
     colorize(
@@ -78,7 +119,7 @@ export function setup(ctx, hall) {
   });
 
   spray.name = 'spray';
-  //spray.visible = false;
+  spray.visible = false;
   const sprayTex = ctx.assets['spray_tex'];
   sprayTex.encoding = THREE.sRGBEncoding;
   sprayTex.flipY = false;
@@ -106,7 +147,7 @@ export function setup(ctx, hall) {
     canvasTmp.height = brushImg.height;
     colorize(0,0,0);
   }
-  brushImg.src = 'assets/spray.png';
+  brushImg.src = 'assets/spray_brush.png';
 
   var drawingCanvas = document.createElement('canvas');
 
@@ -132,6 +173,7 @@ export function setup(ctx, hall) {
 
   ctx.raycontrol.addState('graffiti', {
     colliderMesh: wall,
+    lineStyleOnIntersection: 'basic',
     onHover: (intersection, active, controller) => {
       if (active)
       {
