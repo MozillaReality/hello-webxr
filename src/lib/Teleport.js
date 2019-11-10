@@ -41,11 +41,22 @@ export default class Teleport {
     this.teleportEntity.add(this.teleportHitGeometry);
 
     this.ctx.scene.add(this.teleportEntity);
+
+    // sounds
+    this.startSound = new THREE.Audio(ctx.audioListener);
+    this.startSound.setBuffer(ctx.assets['teleport_a_snd']);
+    this.startSound.setLoop(true);
+    this.endSound = new THREE.Audio(ctx.audioListener);
+    this.endSound.setBuffer(ctx.assets['teleport_b_snd']);
+    this.endSound.setLoop(false);
   }
+
 
   onSelectStart(evt) {
     //if (evt.target === this.ctx.controllers[0])
     this.active = true;
+    this.endSound.pause();
+    this.startSound.play();
   }
 
   onHoverLeave() {
@@ -71,6 +82,9 @@ export default class Teleport {
     this.teleportHitGeometry.visible = false;
 
     this.active = false;
+
+    this.startSound.pause();
+    this.endSound.play();
   }
 }
 

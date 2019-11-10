@@ -153,6 +153,8 @@ var assets = {
   chopin_snd: 'ogg/chopin.ogg',
   forest_snd: 'ogg/forest.ogg',
   wind_snd: 'ogg/wind.ogg',
+  teleport_a_snd: 'ogg/teleport_a.ogg',
+  teleport_b_snd: 'ogg/teleport_b.ogg',
 };
 
 function gotoRoom(room) {
@@ -272,6 +274,7 @@ export function init() {
   context.scene = parent;
   context.renderer = renderer;
   context.camera = camera;
+  context.audioListener = listener;
   context.goto = null;
   context.cameraRig = cameraRig;
   context.controllers = [controller1, controller2];
