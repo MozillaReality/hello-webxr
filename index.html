@@ -3,9 +3,88 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hello WebXR!</title>
-  <style>body{margin: 0; overflow: hidden;}</style>
+  <title>Hello WebXR! - Mozilla Mixed Reality</title>
+  <style>
+
+@font-face{
+    font-family: 'Zilla Slab';
+    src: url('https://code.cdn.mozilla.net/fonts/woff/ZillaSlab-Regular.woff');
+    src: url('https://code.cdn.mozilla.net/fonts/woff2/ZillaSlab-Regular.woff2') format('woff2'),
+         url('https://code.cdn.mozilla.net/fonts/woff/ZillaSlab-Regular.woff') format('woff'),
+         url('https://code.cdn.mozilla.net/fonts/otf/ZillaSlab(-Regular).otf') format('opentype'),
+         url('https://code.cdn.mozilla.net/fonts/ttf/ZillaSlab-Regular.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+body{
+  margin: 0;
+  overflow: hidden;
+  font-family: 'Zilla Slab', sans-serif;
+}
+footer {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  width: 100vw;
+  height: 3rem;
+  justify-content: space-between;
+  align-items: center;
+}
+footer>div {
+  flex: 0 1 auto;
+}
+#mrlogo {
+  margin: 0.3rem;
+}
+footer a {
+  flex: 1 auto;
+  text-decoration: none;
+  background: black;
+  color: white;
+  padding: 0.4rem 0.8rem;
+  margin-right: 0.3rem;
+  border-radius: 2px;
+}
+footer a:hover {
+  color: #84bae6;
+}
+footer a:hover path{
+  fill: #84bae6;
+}
+
+
+@media (max-width: 720px) {
+  footer {
+    flex-direction: column;
+    top: 0;
+    bottom: auto;
+  }
+  #mrlogo {
+    width: 60vw;
+  }
+  footer a {
+    margin: 0.2rem;
+    display: inline-block;
+  }
+}
+
+  </style>
   <script src="bundle.js"></script>
 </head>
-<body></body>
+<body>
+<footer>
+  <div><img src="assets/mozillamr.svg" id="mrlogo"></div>
+  <div>
+    <a href="https://blog.mozvr.com/hello-webxr">What is this about?</a>
+    <a href="http://twitter.com/share?text=Check%20out%20%22Hello%20WebX%22,%20a%20demo%20from%20@mozillareality%20celebrating%20the%20final%20WebXR%20API!%20https://blog.mozvr.com/hello-webxr&url=http://hellowebxr.io"><svg width="17" height="14" viewBox="0 0 16 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M5.03168 13C11.0694 13 14.3718 7.99808 14.3718 3.66044C14.3718 3.51837 14.3718 3.37694 14.3622 3.23615C15.0047 2.77148 15.5593 2.19613 16 1.53705C15.4009 1.80251 14.7653 1.9766 14.1146 2.0535C14.7998 1.64328 15.3127 0.998062 15.5578 0.237937C14.9134 0.620284 14.2084 0.889743 13.4733 1.03469C12.9783 0.508438 12.3237 0.15997 11.6108 0.0432057C10.8978 -0.073558 10.1663 0.0478923 9.52931 0.388763C8.89234 0.729633 8.38548 1.27092 8.08716 1.92886C7.78884 2.5868 7.71569 3.32472 7.87904 4.02841C6.57392 3.96299 5.29715 3.62385 4.13161 3.03302C2.96607 2.44218 1.93782 1.61285 1.1136 0.598874C0.693819 1.32149 0.565248 2.17692 0.754066 2.991C0.942885 3.80508 1.43489 4.51659 2.12992 4.98067C1.60751 4.96519 1.0965 4.82428 0.64 4.56982C0.64 4.58326 0.64 4.59734 0.64 4.61142C0.640207 5.36927 0.902567 6.10372 1.38258 6.6902C1.86259 7.27667 2.53071 7.67907 3.2736 7.82913C2.79032 7.96092 2.28325 7.98019 1.79136 7.88545C2.00113 8.53767 2.40951 9.10803 2.95941 9.51675C3.5093 9.92547 4.17319 10.1521 4.85824 10.165C3.69583 11.0785 2.25988 11.5744 0.78144 11.5729C0.520258 11.5724 0.259331 11.5566 0 11.5255C1.50121 12.4888 3.24794 12.9998 5.03168 12.9974" fill="white"/>
+</svg>
+</a>
+    <a href="http://www.facebook.com/sharer.php?u=http://hellowebxr.io"><svg width="17" height="17" viewBox="0 -5 25 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M24 0H1C0.446875 0 0 0.446875 0 1V24C0 24.5531 0.446875 25 1 25H24C24.5531 25 25 24.5531 25 24V1C25 0.446875 24.5531 0 24 0ZM21.1125 7.29688H19.1156C17.55 7.29688 17.2469 8.04062 17.2469 9.13437V11.5437H20.9844L20.4969 15.3156H17.2469V25H13.35V15.3188H10.0906V11.5437H13.35V8.7625C13.35 5.53437 15.3219 3.775 18.2031 3.775C19.5844 3.775 20.7688 3.87813 21.1156 3.925V7.29688H21.1125Z" fill="white"/>
+</svg></a>
+  </div>
+</footer>
+</body>
 </html>
