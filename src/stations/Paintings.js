@@ -4,7 +4,7 @@ var paintings;
 var zoom = {object: null, widget: null, controller: null, animation: 0, icon: null};
 const PAINTINGS = ['seurat', 'sorolla', 'bosch', 'degas', 'rembrandt'];
 const RATIOS = [1, 1, 0.5, 0.5, 1];
-const ZOOMS = [0.4, 0.2, 0.15, 0.4, 0.25];
+const ZOOMS = [0.4, 0.2, 0.2, 0.4, 0.25];
 
 
 export function enter(ctx) {
@@ -41,7 +41,8 @@ export function setup(ctx, hall) {
         vertexShader: ctx.shaders.basic_vert,
         fragmentShader: ctx.shaders.zoom_frag,
         transparent: true,
-        depthTest: false
+        depthTest: false,
+        depthWrite: false
       })
   );
   zoom.widget.geometry.rotateY(-Math.PI / 2);
@@ -66,7 +67,8 @@ export function setup(ctx, hall) {
   ctx.raycontrol.addState('paintings', {
     colliderMesh: hall.getObjectByName('paintings'),
     onHover: (intersection, active, controller) => {
-      if (active && intersection.distance < 3) {
+      if (intersection.distance > 3) { return; }
+      if (active) {
         zoom.painting = intersection.object;
         zoom.controller = controller;
         zoom.widget.material.uniforms.tex.value = zoom.painting.material.map;
