@@ -20,6 +20,7 @@ export function setup(ctx) {
   var texture = assets['checkboard_tex'];
   texture.wrapS = THREE.RepeatWrapping;
   texture.wrapT = THREE.RepeatWrapping;
+  texture.repeat.set(4, 4);
 
   var lightmap = assets['vertigo_lm_tex'];
   lightmap.encoding = THREE.sRGBEncoding;

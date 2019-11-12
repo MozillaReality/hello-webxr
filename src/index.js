@@ -81,7 +81,7 @@ var assets = {
   foxr_tex: 'foxr.png',
   hall_model: 'hall.glb',
   generic_controller_model: 'generic_controller.glb',
-  lightmap_tex: 'lightmap.png',
+  lightmap_tex: 'lightmap.jpg',
   controller_tex: 'controller.png',
   doorfx_tex: 'doorfx.png',
   sky_tex: 'sky.png',
@@ -92,10 +92,6 @@ var assets = {
   newsticker_tex: 'newsticker.png',
   mozillamr_tex: 'mozillamr.png',
   zoomicon_tex: 'zoomicon.png',
-
-  // vertigo
-  vertigo_lm_tex: 'vertigo_lm.png',
-  checkboard_tex: 'checkboard.png',
 
   // panoramas
   panoballfx_tex: 'ballfx.jpg',
@@ -122,6 +118,8 @@ var assets = {
   // vertigo
   vertigo_model: 'vertigo.glb',
   vertigo_door_lm_tex: 'vertigo_door_lm.png',
+  vertigo_lm_tex: 'vertigo_lm.basis',
+  checkboard_tex: 'checkboard.basis',
 
   // sound
   sound_model: 'sound.glb',
