@@ -10,8 +10,11 @@ import { SDFTextSystem } from './systems/SDFTextSystem.js';
 import { DebugHelperSystem } from './systems/DebugHelperSystem.js';
 import { AreaCheckerSystem } from './systems/AreaCheckerSystem.js';
 import { ControllersSystem } from './systems/ControllersSystem.js';
+import HierarchySystem from './systems/HierarchySystem.js';
 
-import { Text, Object3D } from './components/index.js';
+import SystemsGroup from './systems/SystemsGroup.js';
+
+import { Text, Object3D, AreaChecker } from './components/index.js';
 
 import RayControl from './lib/RayControl.js';
 import Teleport from './lib/Teleport.js';
@@ -177,6 +180,7 @@ function playMusic(room) {
 }
 
 var ecsyWorld;
+var systemsGroup = {};
 
 export function init() {
   var w = 100;
@@ -185,7 +189,12 @@ export function init() {
     .registerSystem(SDFTextSystem)
     .registerSystem(AreaCheckerSystem)
     .registerSystem(ControllersSystem)
+    .registerSystem(HierarchySystem)
     .registerSystem(DebugHelperSystem);
+
+  systemsGroup['roomHall'] = new SystemsGroup(ecsyWorld, [
+    AreaCheckerSystem, ControllersSystem, DebugHelperSystem
+  ]);
 
   scene = new THREE.Scene();
   camera = new THREE.PerspectiveCamera(80, window.innerWidth / window.innerHeight, 0.005, 10000);
@@ -276,6 +285,7 @@ export function init() {
   context.cameraRig = cameraRig;
   context.controllers = [controller1, controller2];
   context.world = ecsyWorld;
+  context.systemsGroup = systemsGroup;
 
   window.context = context;
 
