@@ -1,4 +1,4 @@
-import {DebugHelper, BoundingBox} from '../components/index.js';
+import {Object3D, DebugHelper, BoundingBox} from '../components/index.js';
 import {System, SystemStateComponent, Not} from '../vendor/ecsy.module.js';
 import * as THREE from 'three';
 
@@ -29,21 +29,20 @@ class DebugHelperMesh extends SystemStateComponent {
 
 export class DebugHelperSystem extends System {
   execute(delta, time) {
-    var added = this.queries.added.results;
-    for (let i = 0; i < added.length; i++) {
-      var entity = added[i];
-      var boundingBox = entity.getComponent(BoundingBox);
+    this.queries.added.results.forEach(entity => {
       entity.addComponent(DebugHelperMesh);
+      var boundingBox = entity.getComponent(BoundingBox);
       let debugMesh = entity.getMutableComponent(DebugHelperMesh);
       debugMesh.boxHelper.setFromMinMax(boundingBox.min, boundingBox.max);
-      window.context.scene.add(debugMesh.boxHelper);
-    }
+
+      entity.addComponent(Object3D, {value: debugMesh.boxHelper});
+    });
   }
 }
 
 DebugHelperSystem.queries = {
   added: {
-    components: [DebugHelper, Not(DebugHelperMesh)],
+    components: [DebugHelper, Not(DebugHelperMesh)]
   },
   removed: {
     components: [Not(DebugHelper), DebugHelperMesh]
