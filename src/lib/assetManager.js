@@ -2,9 +2,11 @@ import * as THREE from 'three';
 import { BasisTextureLoader } from 'three/examples/jsm/loaders/BasisTextureLoader.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js';
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 
 //const BASIS_LIB_PATH = 'src/vendor/';
 const BASIS_LIB_PATH = '/src/vendor/';
+const DRACO_LIB_PATH = '/src/vendor/';
 
 function allAssetsLoaded(assets) {
   for (var i in assets) {
@@ -21,11 +23,17 @@ export function loadAssets(renderer, basePath, assets, onComplete) {
   var basisLoader = new BasisTextureLoader();
   basisLoader.setTranscoderPath(BASIS_LIB_PATH);
   basisLoader.detectSupport(renderer);
-  var texLoader = new THREE.TextureLoader();
+
   var gltfLoader = new GLTFLoader();
+  var dracoLoader = new DRACOLoader();
+  dracoLoader.setDecoderPath(DRACO_LIB_PATH);
+  gltfLoader.setDRACOLoader(dracoLoader);
+
+  var texLoader = new THREE.TextureLoader();
   var objLoader = new OBJLoader();
   var fontLoader = new THREE.FontLoader();
   var audioLoader = new THREE.AudioLoader();
+
 
   var loaders = {
     'gltf': gltfLoader,

@@ -57,7 +57,7 @@ export default {
   pg_floor_lm_tex: { url: 'pg_floor_lm.jpg', options: { encoding: THREE.sRGBEncoding, flipY: false} },
   pg_door_lm_tex: { url: 'pg_door_lm.jpg', options: { encoding: THREE.sRGBEncoding, flipY: false} },
   pg_object_tex: { url: 'angel.basis', options: { encoding: THREE.sRGBEncoding, flipY: false} },
-  pg_object_model: { url: 'angel.glb' }, // TODO: try draco version, angel.min.gl
+  pg_object_model: { url: 'angel.min.glb' }, // TODO: try draco version, angel.min.gl
   pg_bg_tex: { url: 'pg_bg.jpg', options: { encoding: THREE.sRGBEncoding, flipY: false} },
   pg_flare_tex: { url: 'flare.jpg', options: { encoding: THREE.sRGBEncoding, flipY: false} },
   pg_panel_tex: { url: 'panel.basis', options: { encoding: THREE.sRGBEncoding, flipY: false} },
