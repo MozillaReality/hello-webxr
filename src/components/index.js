@@ -1,6 +1,16 @@
 import * as THREE from 'three';
 import {TagComponent} from '../vendor/ecsy.module.js';
 
+export class ParentObject3D {
+  constructor() {
+    this.value = null;
+  }
+
+  reset() {
+    this.value = null;
+  }
+}
+
 export class Object3D {
   constructor() {
     this.value = null;
