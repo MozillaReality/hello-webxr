@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import ColorWheel from '../lib/ColorWheel';
-import {Area, AreaReactor, AreaChecker, Object3D, BoundingBox, DebugHelper} from '../components/index';
+import {Area, AreaReactor, AreaChecker, Object3D, BoundingBox, ParentObject3D, DebugHelper} from '../components/index';
 
 function angleBetween(point1, point2) {
   return Math.atan2(point2.x - point1.x, point2.y - point1.y);
@@ -47,11 +47,18 @@ function colorize(r, g, b) {
 
 export function setup(ctx, hall) {
 
+  window.DebugHelper = DebugHelper;
   let area = ctx.world.createEntity();
-  area.addComponent(BoundingBox).addComponent(DebugHelper).addComponent(Area);
-  let component = area.getMutableComponent(BoundingBox);
-  component.min.set(-5,0,4.4);
-  component.max.set(3,3,7);
+  area.name = 'area';
+  area
+    .addComponent(BoundingBox)
+    .addComponent(DebugHelper)
+    .addComponent(ParentObject3D, {value: hall})
+    .addComponent(Area);
+
+    let component = area.getMutableComponent(BoundingBox);
+  component.min.set(-5, 0, 4.4);
+  component.max.set(3, 3, 7);
 
   let checker = ctx.world.createEntity();
   checker

@@ -37,6 +37,19 @@ export class DebugHelperSystem extends System {
 
       entity.addComponent(Object3D, {value: debugMesh.boxHelper});
     });
+
+    this.queries.removed.results.forEach(entity => {
+      //var boundingBox = entity.getComponent(DebugHelperMesh);
+      entity.removeComponent(Object3D).removeComponent(DebugHelperMesh);
+
+/*
+      entity.addComponent(Object3D, {value: debugMesh.boxHelper});
+
+      let debugMesh = entity.getMutableComponent(DebugHelperMesh);
+      debugMesh.boxHelper.setFromMinMax(boundingBox.min, boundingBox.max);
+      entity.addComponent(Object3D, {value: debugMesh.boxHelper});
+*/
+    });
   }
 }
 

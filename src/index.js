@@ -189,8 +189,8 @@ export function init() {
     .registerSystem(SDFTextSystem)
     .registerSystem(AreaCheckerSystem)
     .registerSystem(ControllersSystem)
-    .registerSystem(HierarchySystem)
-    .registerSystem(DebugHelperSystem);
+    .registerSystem(DebugHelperSystem)
+    .registerSystem(HierarchySystem);      
 
   systemsGroup['roomHall'] = new SystemsGroup(ecsyWorld, [
     AreaCheckerSystem, ControllersSystem, DebugHelperSystem

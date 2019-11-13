@@ -56,6 +56,10 @@ class SystemManager {
     }
   }
 
+  stop() {
+    this._executeSystems.forEach(system => system.stop());
+  }
+
   execute(delta, time, forcePlay) {
     this._executeSystems.forEach(
       system =>
@@ -614,6 +618,8 @@ class QueryManager {
 
 class SystemStateComponent {}
 
+SystemStateComponent.isSystemStateComponent = true;
+
 /**
  * @private
  * @class EntityManager
@@ -1064,7 +1070,9 @@ class World {
     this.eventQueues = {};
 
     if (typeof CustomEvent !== "undefined") {
-      var event = new CustomEvent("ecsy-world-created", { detail: { world: this, version: Version }});
+      var event = new CustomEvent("ecsy-world-created", {
+        detail: { world: this, version: Version }
+      });
       window.dispatchEvent(event);
     }
   }
@@ -1313,8 +1321,7 @@ function Not(Component) {
   };
 }
 
-class Component {
-}
+class Component {}
 
 Component.isComponent = true;
 

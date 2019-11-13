@@ -153,6 +153,7 @@ export function setup(ctx) {
 }
 
 export function enter(ctx) {
+  ctx.systemsGroup['roomHall'].play();
   ctx.renderer.setClearColor( 0xC0DFFB );
   ctx.scene.add(scene);
 
@@ -166,6 +167,7 @@ export function enter(ctx) {
 }
 
 export function exit(ctx) {
+  ctx.systemsGroup['roomHall'].stop();
   ctx.scene.remove(scene);
 
   ctx.raycontrol.deactivateState('doors');
