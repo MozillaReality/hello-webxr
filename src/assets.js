@@ -50,7 +50,7 @@ export default {
   sound_door_model: { url: 'sound_door.glb' },
   sound_shadow_tex: { url: 'sound_shadow.png' },
   sound_door_lm_tex: { url: 'sound_door_lm.jpg', options: { wrapT: THREE.RepeatWrapping, wrapS: THREE.RepeatWrapping} },
-  grid_tex: { url: 'grid.png' },
+  grid_tex: { url: 'grid.png', options: { wrapT: THREE.RepeatWrapping, wrapS: THREE.RepeatWrapping, repeat: [20, 20] } },
 
   // photogrammetry object
   pg_floor_tex: { url: 'travertine2.basis', options: { encoding: THREE.sRGBEncoding, flipY: false, wrapT: THREE.RepeatWrapping, wrapS: THREE.RepeatWrapping} },

@@ -15,13 +15,11 @@ const soundNames = [
   'trumpet',
 ];
 
-
 var sounds = {};
 soundNames.forEach( i => { sounds[i] = {animations: [], mesh: null, player: null, shadow: null} })
 
 const MAX_REPETITIONS = 5;
 var repetitions = MAX_REPETITIONS - 1;
-
 
 function createDoorMaterial(ctx) {
   return new THREE.ShaderMaterial({
@@ -123,9 +121,6 @@ export function setup(ctx) {
   });
 
   const floorTexture = assets['grid_tex'];
-  floorTexture.wrapS = THREE.RepeatWrapping;
-  floorTexture.wrapT = THREE.RepeatWrapping;
-  floorTexture.repeat.set(20, 20);
   const floor = new THREE.Mesh(
     new THREE.PlaneBufferGeometry(20, 20),
     new THREE.MeshBasicMaterial({map: floorTexture})
