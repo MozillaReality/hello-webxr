@@ -4,8 +4,6 @@ var panoL, panoR, context;
 export function setup(ctx) {
   const assets = ctx.assets;
   const geometry = new THREE.SphereBufferGeometry(5000, 60, 40);
-  assets['stereopanoL'].encoding = THREE.sRGBEncoding;
-  assets['stereopanoR'].encoding = THREE.sRGBEncoding;
   const materialL = new THREE.MeshBasicMaterial( { map: assets['stereopanoR'], side: THREE.BackSide } );
   const materialR = new THREE.MeshBasicMaterial( { map: assets['stereopanoL'], side: THREE.BackSide } );
   panoL = new THREE.Mesh(geometry, materialL);

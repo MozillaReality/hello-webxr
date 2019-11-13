@@ -20,8 +20,6 @@ export function setup(ctx) {
   const geometry = new THREE.SphereBufferGeometry(5000, 60, 40);
   for (var i = 0; i < NUM_PANOS; i++) {
     const panoName = 'pano'+(i + 2);
-    assets[panoName].encoding = THREE.sRGBEncoding;
-    assets[panoName].flipY = false;
     panoMaterials[i] = new THREE.MeshBasicMaterial( { map: assets[panoName], side: THREE.BackSide });
   }
   pano = new THREE.Mesh(geometry, panoMaterials[0]);

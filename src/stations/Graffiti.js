@@ -128,8 +128,6 @@ export function setup(ctx, hall) {
   spray.name = 'spray';
   spray.visible = false;
   const sprayTex = ctx.assets['spray_tex'];
-  sprayTex.encoding = THREE.sRGBEncoding;
-  sprayTex.flipY = false;
   spray.getObjectByName('spraycan').material = new THREE.MeshPhongMaterial({map: sprayTex});
   spray.getObjectByName('spraycolor').material = new THREE.MeshLambertMaterial({color: 0xFF0000});
   ctx.controllers[0].add(spray);

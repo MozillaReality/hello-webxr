@@ -18,8 +18,6 @@ export function setup(ctx, hall) {
     if (!mesh) { continue; }
 
     let paintingTexture = ctx.assets[`painting_${painting}_tex`];
-    paintingTexture.encoding = THREE.sRGBEncoding;
-    paintingTexture.flipY = false;
     mesh.material = new THREE.MeshBasicMaterial({
       map: paintingTexture
     });

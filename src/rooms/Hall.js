@@ -17,8 +17,6 @@ var
   auxVec = new THREE.Vector3();
 
 function createDoorMaterial(ctx) {
-  ctx.assets['doorfx_tex'].wrapT = THREE.RepeatWrapping;
-  ctx.assets['doorfx_tex'].wrapS = THREE.RepeatWrapping;
   return new THREE.ShaderMaterial({
     uniforms: {
       time: {value: 0},
@@ -37,28 +35,11 @@ export function setup(ctx) {
   // setup hall model
 
   const hallLightmapTex = assets['lightmap_tex'];
-  hallLightmapTex.encoding = THREE.sRGBEncoding;
-  hallLightmapTex.flipY = false;
-
   const skyTex = assets['sky_tex'];
-  skyTex.encoding = THREE.sRGBEncoding;
-  skyTex.flipY = false;
-
   const cloudsTex = assets['clouds_tex'];
-  cloudsTex.encoding = THREE.sRGBEncoding;
-  cloudsTex.flipY = false;
-
   const foxrTex = assets['foxr_tex'];
-  foxrTex.encoding = THREE.sRGBEncoding;
-  foxrTex.flipY = false;
-
   const newstickerTex = assets['newsticker_tex'];
-  newstickerTex.encoding = THREE.sRGBEncoding;
-  newstickerTex.flipY = false;
-
   const mozillamrTex = assets['mozillamr_tex'];
-  mozillamrTex.encoding = THREE.sRGBEncoding;
-  mozillamrTex.flipY = false;
 
   const hallMaterial = new THREE.MeshBasicMaterial({map: hallLightmapTex});
 

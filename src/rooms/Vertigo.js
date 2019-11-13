@@ -2,8 +2,6 @@ import * as THREE from 'three';
 var scene, doorMaterial, door;
 
 function createDoorMaterial(ctx) {
-  ctx.assets['doorfx_tex'].wrapT = THREE.RepeatWrapping;
-  ctx.assets['doorfx_tex'].wrapS = THREE.RepeatWrapping;
   return new THREE.ShaderMaterial({
     uniforms: {
       time: {value: 0},
@@ -18,21 +16,13 @@ function createDoorMaterial(ctx) {
 export function setup(ctx) {
   const assets = ctx.assets;
   var texture = assets['checkboard_tex'];
-  texture.wrapS = THREE.RepeatWrapping;
-  texture.wrapT = THREE.RepeatWrapping;
-  texture.repeat.set(4, 4);
 
   var lightmap = assets['vertigo_lm_tex'];
-  lightmap.encoding = THREE.sRGBEncoding;
-  lightmap.flipY = false;
   const material = new THREE.MeshBasicMaterial({color: 0xffffff, map: texture, lightMap: lightmap} );
 
   scene = assets['vertigo_model'].scene;
   scene.getObjectByName('city').material = material;
   scene.getObjectByName('teleport').visible = false;
-
-  assets['vertigo_door_lm_tex'].encoding = THREE.sRGBEncoding;
-  assets['vertigo_door_lm_tex'].flipY = false;
 
   scene.getObjectByName('door_frame').material =
     new THREE.MeshBasicMaterial({map: assets['vertigo_door_lm_tex']});

@@ -19,12 +19,9 @@ export function setup(ctx, hall) {
   hallRef = hall;
 
   const panoGeo = new THREE.SphereBufferGeometry(0.15, 30, 20);
-  assets['panoballfx_tex'].wrapT = THREE.RepeatWrapping;
-  assets['panoballfx_tex'].wrapS = THREE.RepeatWrapping;
 
   for (var i = 0; i < NUM_PANOBALLS; i++) {
     let asset = assets[`pano${i + 1}small`];
-    asset.encoding = THREE.sRGBEncoding;
     var ball = new THREE.Mesh(
       new THREE.SphereBufferGeometry(0.15, 30, 20),
       new THREE.ShaderMaterial({

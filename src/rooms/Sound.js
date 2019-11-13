@@ -24,8 +24,6 @@ var repetitions = MAX_REPETITIONS - 1;
 
 
 function createDoorMaterial(ctx) {
-  ctx.assets['doorfx_tex'].wrapT = THREE.RepeatWrapping;
-  ctx.assets['doorfx_tex'].wrapS = THREE.RepeatWrapping;
   return new THREE.ShaderMaterial({
     uniforms: {
       time: {value: 0},
@@ -42,8 +40,6 @@ export function setup(ctx) {
   scene = assets['sound_model'].scene;
   door = assets['sound_door_model'].scene;
 
-  assets['sound_door_lm_tex'].encoding = THREE.sRGBEncoding;
-  assets['sound_door_lm_tex'].flipY = false;
   door.getObjectByName('door_frame').material =
     new THREE.MeshBasicMaterial({map: assets['sound_door_lm_tex']});
 

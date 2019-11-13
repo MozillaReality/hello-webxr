@@ -82,8 +82,6 @@ const DATA = [
 ];
 
 export function setup(ctx, hall) {
-  const assets = ctx.assets;
-
   for (var i = 0; i < NUM_PANELS; i++) {
     const id = i < 10 ? '0' + i : i;
     panels[i] = hall.getObjectByName('infopanel0'+id);

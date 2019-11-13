@@ -46,7 +46,19 @@ export function loadAssets(renderer, basePath, assets, onComplete) {
     let ext = assetPath.substr(assetPath.lastIndexOf('.') + 1).toLowerCase();
     loaders[ext].load(basePath + assetPath, asset => {
       // console.info(`%c ${assetPath} loaded`, 'color:green');
+      var options = assets[assetId].options;
       assets[assetId] = ext == 'font'? asset.data : asset;
+      if (typeof options !== "undefined") {
+        if (typeof options.repeat !== "undefined") {
+          assets[assetId].repeat.set(options.repeat[0], options.repeat[1]);
+          delete options.repeat;
+        }
+
+        for (let opt in options) {
+          assets[assetId][opt] = options[opt];
+        }
+      }
+
       if (onComplete && allAssetsLoaded(assets)) { onComplete(); }
     }, () => {
       /* on progress */
