@@ -36,6 +36,7 @@ export function setup(ctx, hall) {
         side: THREE.BackSide,
       })
     );
+    ball.rotation.set(Math.PI, 0, 0);
     ball.position.copy(hall.getObjectByName(`panoball${i + 1}`).position);
     ball.userData.floatY = ball.position.y;
     ball.userData.panoId = 4 + i;
