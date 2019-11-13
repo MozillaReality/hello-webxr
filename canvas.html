@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>canvas test</title>
+  <style type="text/css">
+    body{
+      background: #333;
+      color: white;
+      font: 15px sans-serif;
+    }
+    canvas {
+      background: white;
+    }
+    input{
+      width: 360px;
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="c"></canvas>
+<br>
+<input id="range" type="range" name="" min="1" value="500" max="1000" onchange="setAlpha(this.value/1000)">
+<span id="rangeval">0.5</span>
+<p>
+  Picker: <span id="picker"></span>
+</p>
+
+
+<script type="text/javascript">
+var can = document.getElementById('c');
+can.width = 400;
+can.height = 400;
+c = can.getContext('2d');
+
+c.fillStyle = '#fff';
+c.fillRect(0, 0, 400, 400);
+c.fillStyle = '#000';
+
+c.fillRect(150, 150, 100, 100);
+
+//c.globalCompositeOperation = 'multiply';
+
+
+let p = {x: 0, y: 0};
+let painting = false;
+
+can.addEventListener('mousedown', ev => {
+  if (ev.button == 1){ picker(ev); return; }
+  painting = true;
+ });
+
+can.addEventListener('mouseup', ev => { painting = false; });
+can.addEventListener('mousemove', ev => {
+  if (ev.button == 1){ picker(ev); return; }
+  p.x = ev.offsetX - 25;
+  p.y = ev.offsetY - 25;
+});
+
+function loop(){
+  requestAnimationFrame(loop);
+
+  if (painting) {
+    c.fillRect(p.x, p.y, 50, 50);
+  }
+
+}
+
+loop();
+
+function picker(ev){
+  let im = c.getImageData(ev.offsetX, ev.offsetY, 1, 1);
+  document.getElementById('picker').innerHTML = im.data[0];
+}
+
+
+function setAlpha(a){
+  c.globalAlpha = a;
+  document.getElementById('rangeval').innerHTML = a;
+}
+
+setAlpha(document.getElementById('range').value / 1000);
+
+</script>
+</body>
+</html>
