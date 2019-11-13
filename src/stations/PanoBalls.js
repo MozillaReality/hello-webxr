@@ -62,6 +62,7 @@ export function setup(ctx, hall) {
     },
     onSelectEnd: (intersection) => {
       ctx.goto = intersection.object.userData.panoId;
+      intersection.object.userData.selected = 0;
     }
   });
 }
