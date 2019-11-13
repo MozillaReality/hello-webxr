@@ -8,7 +8,7 @@ const BASIS_LIB_PATH = '/src/vendor/';
 
 function allAssetsLoaded(assets) {
   for (var i in assets) {
-    if (typeof assets[i] === 'string') { return false; }
+    if (assets[i].loading === true) { return false; }
   }
   return true;
 }
@@ -41,7 +41,8 @@ export function loadAssets(renderer, basePath, assets, onComplete) {
 
   for (var i in assets) {
     let assetId = i;
-    let assetPath = assets[i];
+    let assetPath = assets[i].url;
+    assets[i].loading = true;
     let ext = assetPath.substr(assetPath.lastIndexOf('.') + 1).toLowerCase();
     loaders[ext].load(basePath + assetPath, asset => {
       // console.info(`%c ${assetPath} loaded`, 'color:green');

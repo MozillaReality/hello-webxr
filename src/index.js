@@ -196,7 +196,6 @@ export function init() {
   cameraRig.add(controller1);
   cameraRig.add(controller2);
   cameraRig.position.set(0, 0, 2);
-  //cameraRig.rotation.set(0, -0.5, 0);
   scene.add(cameraRig);
 
   context.assets = assets;
@@ -228,12 +227,9 @@ export function init() {
     roomVertigo.setup(context);
     roomSound.setup(context);
 
-
     rooms[context.room].enter(context);
 
-
-
-    document.body.appendChild( renderer.domElement );
+    document.body.appendChild(renderer.domElement);
     document.body.appendChild(WEBVR.createButton(renderer));
     renderer.setAnimationLoop(animate);
   })
