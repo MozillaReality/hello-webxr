@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { Text, Object3D } from '../components/index.js';
+import { Text, Position, ParentObject3D } from '../components/index.js';
 
 var panels = [], panelTexts = [], cameraPosition;
 
@@ -10,78 +10,80 @@ const SHOW_DISTANCE = 4;
 const DATA = [
   {
     title: '360 Panoramas',
-    description: 'Photographs wrapped around spheres provide an environment, but without stereo effect nor depth.',
+    description: '0123456789asdñlfkj,asdlfk',
     offsety: 0.04
   },
   {
     title: 'Xylophone Toy',
-    description: 'Example of object grabbing and simple interaction.',
+    description: '0123456789asdñlfkj,asdlfk',
     offsety: 0.04
   },
   {
     title: '360 Stereo Panorama',
-    description: 'By using one photo for each eye, panoramas can have some depth and stereo effect.',
+    description: '0123456789asdñlfkj,asdlfk',
     offsety: 0.03
   },
   {
     title: 'Photogrammetry Room',
-    description: 'Example of an object created out of photographs using an automated software.',
+    description: '0123456789asdñlfkj,asdlfk',
     offsety: 0.04
   },
   {
     title: 'Twitter Feed',
-    description: 'Bringing external realtime data to an XR environment.',
+    description: '0123456789asdñlfkj,asdlfk',
     offsety: 0.02
   },
   {
     title: 'Vertigo Room',
-    description: 'An example of how this new medium can play with your perception and senses.',
+    description: '0123456789asdñlfkj,asdlfk',
     offsety: 0.04
   },
   {
     title: 'Hello WebXR!',
-    description: 'A small compendium of interactions and little experiences introducing and celebrating the final specification of the WebXR API.\n \nMade by the Mozilla Mixed Reality team\nmixedreality.mozilla.org',
+    description: '0123456789asdñlfkj,asdlfk',
     offsety: 0.06
   },
   {
     title: 'The Pink Robe. After the Bath',
-    description: 'Joaquín Sorolla, 1916\n208 x 126.5 cm. Oil on canvas.',
+    description: '0123456789asdñlfkj,asdlfk',
   },
   {
     title: 'The Garden of Earthly Delights',
-    description: 'Hieronymus Bosch, 1490 - 1510\n205.5 x 384.9 cm. Oil on oak panels.',
+    description: '0123456789asdñlfkj,asdlfk',
   },
   {
     title: 'Self-Portrait',
-    description: 'Rembrandt van Rijn, 1659\n84.5 x 66 cm. Oil on canvas.',
+    description: '0123456789asdñlfkj,asdlfk',
   },
   {
     title: 'The Dance Lesson',
-    description: 'Edgar Degas, 1879\n38 x 88 cm. Oil on canvas.',
+    description: '0123456789asdñlfkj,asdlfk',
   },
   {
     title: 'Gray Weather, Grande Jatte',
-    description: 'Georges Seurat, 1888\n71 x 66 cm. Oil on canvas.',
+    description: '0123456789asdñlfkj,asdlfk',
     offsety: 0.04
   },
   {
     title: 'Sound Room',
-    description: 'Showcase of positional audio, very useful on XR experiences.\nTry to find where the sounds come from!.',
+    description: '0123456789asdñlfkj,asdlfk',
     offsety: 0.04
   },
   {
     title: 'Graffiti Wall',
-    description: 'Get close and spray the wall!.\nLet\'s collaborate on a full masterpiece.',
+    description: '0123456789asdñlfkj,asdlfk',
     offsety: 0.04
   },
   {
     title: 'Paintings',
-    description: 'Real-scale paintings that can be inspected very closely using the controller.',
+    description: '0123456789asdñlfkj,asdlfk',
     offsety: 0.04
   },
 ];
 
 export function setup(ctx, hall) {
+  const assets = ctx.assets;
+
   for (var i = 0; i < NUM_PANELS; i++) {
     const id = i < 10 ? '0' + i : i;
     panels[i] = hall.getObjectByName('infopanel0'+id);
@@ -94,20 +96,19 @@ export function setup(ctx, hall) {
     panels[i].material = new THREE.MeshBasicMaterial({color: 0x040404, transparent: true});
 
     panelTexts[i] = ctx.world.createEntity();
-    panelTexts[i].addComponent(Text, {
-      color: '#ffffff', //0xdaa056,
-      fontSize: 0.05,
-      anchor: 'left',
-      textAlign: 'left',
-      baseline: 'top',
-      maxWidth: panelWidth * 0.8,
-      lineHeight: 1.3,
-      text: DATA[i].title + '\n \n' + DATA[i].description,
-    });
-    let object3D = new THREE.Group();
-    panels[i].add(object3D);
-    object3D.position.set(-panelWidth / 2 * 0.82, panelHeight / 2 * 0.65 + offsety, 0.01);
-    panelTexts[i].addComponent(Object3D, {value: object3D});
+    panelTexts[i]
+      .addComponent(Text, {
+        color: '#ffffff', //0xdaa056,
+        fontSize: 0.05,
+        anchor: 'left',
+        textAlign: 'left',
+        baseline: 'top',
+        maxWidth: panelWidth * 0.8,
+        lineHeight: 1.3,
+        text: DATA[i].title + '\n \n' + DATA[i].description,
+      })
+      .addComponent(ParentObject3D, {value: panels[i]})
+      .addComponent(Position, {x: -panelWidth / 2 * 0.82, y: panelHeight / 2 * 0.65 + offsety, z: 0.01});
   }
 }
 
@@ -126,8 +127,10 @@ export function execute(ctx, delta, time) {
       panels[i].lookAt(cameraPosition);
     }
 
-    panels[i].material.transparent = opacity < 1;
     panels[i].material.opacity = opacity;
-    panelTexts[i].getMutableComponent(Text).opacity = opacity;
+    let prevOpacity = panelTexts[i].getComponent(Text).opacity;
+    if (prevOpacity !== opacity) {
+      panelTexts[i].getMutableComponent(Text).opacity = opacity;
+    }
   }
 }

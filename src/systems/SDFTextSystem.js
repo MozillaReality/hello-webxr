@@ -3,8 +3,6 @@ import {System} from '../vendor/ecsy.module.js';
 import {TextMesh} from 'troika-3d-text/dist/textmesh-standalone.esm.js';
 import {Object3D, Text} from '../components/index.js';
 
-window.Text = Text;
-
 const anchorMapping = {
   'left': 0,
   'center': 0.5,
@@ -39,15 +37,14 @@ export class SDFTextSystem extends System {
     var entities = this.queries.entities;
 
     entities.added.forEach(e => {
-      var object3D = e.getComponent(Object3D).value;
+      console.log('Added', e.id);
       var textComponent = e.getComponent(Text);
 
       const textMesh = new TextMesh();
       textMesh.name = 'textMesh';
       textMesh.anchor = [0, 0];
-      object3D.add(textMesh);
-
       this.updateText(textMesh, textComponent);
+      e.addComponent(Object3D, {value: textMesh});
     });
 
     entities.removed.forEach(e => {
@@ -58,18 +55,19 @@ export class SDFTextSystem extends System {
     });
 
     entities.changed.forEach(e => {
+      console.log('changed', e.id);
       var object3D = e.getComponent(Object3D).value;
-      var textComponent = e.getComponent(Text);
-      var textMesh = object3D.getObjectByName('textMesh');
-
-      this.updateText(textMesh, textComponent);
+      if (object3D instanceof TextMesh) {
+        var textComponent = e.getComponent(Text);
+        this.updateText(object3D, textComponent);
+      }
     });
   }
 }
 
 SDFTextSystem.queries = {
   entities: {
-    components: [Text, Object3D],
+    components: [Text],
     listen: {
       added: true,
       removed: true,

@@ -11,6 +11,22 @@ export class Object3D {
   }
 }
 
+export class Rotation {
+  constructor() {
+    this.rotation = new THREE.Vector3();
+  }
+
+  reset() {}
+}
+
+export class Position {
+  constructor() {
+    this.position = new THREE.Vector3();
+  }
+
+  reset() {}
+}
+
 export class ParentObject3D {
   constructor() {
     this.value = null;

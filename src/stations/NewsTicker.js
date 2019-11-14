@@ -1,6 +1,6 @@
 //import {Text} from '../lib/text.mjs';
 import * as THREE from 'three';
-import { Text, Object3D } from '../components/index.js';
+import { Text, Rotation, Position, ParentObject3D } from '../components/index.js';
 
 var newsTicker = {
   url: 'assets/tweets.json',
@@ -27,21 +27,14 @@ export function setup(ctx, hall) {
     fontSize: 0.1,
     anchor: 'right',
     textAlign: 'right'
-  });
-  let object3D = new THREE.Group();
-  newsTickerMesh.add(object3D);
-  newsTicker.hashtagText.addComponent(Object3D, { value: object3D });
+  }).addComponent(ParentObject3D, {value: newsTickerMesh});
 
   newsTicker.authorText = ctx.world.createEntity();
   newsTicker.authorText.addComponent(Text, {
     color: '#7f0c38', //0x67bccd,
     fontSize: 0.1,
     anchor: 'left',
-  });
-
-  object3D = new THREE.Group();
-  newsTickerMesh.add(object3D);
-  newsTicker.authorText.addComponent(Object3D, { value: object3D });
+  }).addComponent(ParentObject3D, {value: newsTickerMesh});
 
   newsTicker.messageText = ctx.world.createEntity();
   newsTicker.messageText.addComponent(Text, {
@@ -52,29 +45,12 @@ export function setup(ctx, hall) {
     textAlign: 'left',
     baseline: 'top',
     anchor: 'left'
-  });
-  object3D = new THREE.Group();
-  newsTickerMesh.add(object3D);
-  newsTicker.messageText.addComponent(Object3D, { value: object3D });
-
-  const geo = new THREE.SphereBufferGeometry(0.04);
-  const mat = new THREE.MeshBasicMaterial({color: 0xff0000});
-  var debugMeshes = {
-    hashtag: new THREE.Mesh(geo, mat),
-    author: new THREE.Mesh(geo, mat),
-    message: new THREE.Mesh(geo, mat)
-  };
+  }).addComponent(ParentObject3D, {value: newsTickerMesh});
 
   ['hashtag', 'author', 'message'].forEach( i => {
 
-    //newsTickerMesh.add(debugMeshes[i]);
-
-    let object3D = newsTicker[`${i}Text`].getMutableComponent(Object3D).value;
-    //newsTickerMesh.add(newsTicker[`${i}Text`]);
-    object3D.rotation.set(0, Math.PI, 0);
-
-    debugMeshes[i].position.copy(hall.getObjectByName(i).position);
-    object3D.position.copy(hall.getObjectByName(i).position);
+    newsTicker[`${i}Text`].addComponent(Position, hall.getObjectByName(i).position);
+    newsTicker[`${i}Text`].addComponent(Rotation, {x: 0, y: Math.PI, z: 0});
   });
   newsTicker.hashtagText.getMutableComponent(Text).text = newsTicker.hashtag;
 

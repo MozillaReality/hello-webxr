@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { Text, Object3D } from '../components/index.js';
+import { Text, Position, ParentObject3D } from '../components/index.js';
 
 var pano = null, context, panel, panelText;
 
@@ -30,20 +30,19 @@ export function setup(ctx) {
   panel.parent.remove(panel);
 
   panelText = ctx.world.createEntity();
-  panelText.addComponent(Text, {
-    color: '#ffffff',
-    fontSize: 0.02,
-    anchor: 'left',
-    textAlign: 'left',
-    baseline: 'center',
-    maxWidth: 0.34,
-    lineHeight: 1.3,
-    text: DATA[i],
-  });
-  let object3D = new THREE.Group();
-  panel.add(object3D);
-  object3D.position.set(-0.17, 0.003, 0.01);
-  panelText.addComponent(Object3D, {value: object3D});
+  panelText
+    .addComponent(Text, {
+      color: '#ffffff',
+      fontSize: 0.02,
+      anchor: 'left',
+      textAlign: 'left',
+      baseline: 'center',
+      maxWidth: 0.34,
+      lineHeight: 1.3,
+      text: DATA[i],
+    })
+    .addComponent(ParentObject3D, {value: panel})
+    .addComponent(Position, {x: -0.17, y: 0.003, z: 0.01});
 }
 
 export function enter(ctx) {
