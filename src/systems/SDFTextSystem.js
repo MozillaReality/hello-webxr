@@ -55,7 +55,6 @@ export class SDFTextSystem extends System {
     });
 
     entities.changed.forEach(e => {
-      console.log('changed', e.id);
       var object3D = e.getComponent(Object3D).value;
       if (object3D instanceof TextMesh) {
         var textComponent = e.getComponent(Text);

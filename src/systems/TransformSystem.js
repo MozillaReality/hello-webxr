@@ -1,6 +1,4 @@
-import * as THREE from 'three';
 import {System} from '../vendor/ecsy.module.js';
-import {TextMesh} from 'troika-3d-text/dist/textmesh-standalone.esm.js';
 import {Object3D, Rotation, Position} from '../components/index.js';
 
 let updateRotation = entity => {
@@ -17,11 +15,9 @@ let updatePosition = entity => {
 
 export default class TransformSystem extends System {
   execute(delta, time) {
-    const added = this.queries.position.added;
-    added.forEach(updatePosition);
-
-    const changed = this.queries.position.changed;
-    changed.forEach(updatePosition);
+    // Position
+    this.queries.position.added.forEach(updatePosition);
+    this.queries.position.changed.forEach(updatePosition);
 
     // Rotation
     this.queries.rotation.added.forEach(updateRotation);
@@ -34,16 +30,14 @@ TransformSystem.queries = {
     components: [Position, Object3D],
     listen: {
       added: true,
-      removed: true,
-      changed: true // [Position]
+      changed: true
     }
   },
   rotation: {
     components: [Rotation, Object3D],
     listen: {
       added: true,
-      removed: true,
-      changed: true // [Position]
+      changed: true
     }
   }
 }
