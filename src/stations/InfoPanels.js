@@ -126,6 +126,7 @@ export function execute(ctx, delta, time) {
       panels[i].lookAt(cameraPosition);
     }
 
+    panels[i].material.transparent = opacity < 1;
     panels[i].material.opacity = opacity;
     panelTexts[i].getMutableComponent(Text).opacity = opacity;
   }
