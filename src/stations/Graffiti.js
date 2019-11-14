@@ -1,10 +1,7 @@
 import * as THREE from 'three';
 import ColorWheel from '../lib/ColorWheel';
 import {Area, AreaReactor, AreaChecker, Object3D, BoundingBox, ParentObject3D, DebugHelper} from '../components/index';
-
-function angleBetween(point1, point2) {
-  return Math.atan2(point2.x - point1.x, point2.y - point1.y);
-}
+import {angleBetween, getRandomInt} from '../lib/utils.js';
 
 var colorWheel;
 
@@ -13,24 +10,12 @@ export function enter(ctx) {
   colorWheel.enter();
 }
 
-function getRandomInt(min, max) {
-  return Math.floor(Math.random() * (max - min)) + min;
-}
-
 var material, wall, drawContext;
 var lastPosition = new THREE.Vector2();
 var brushImg, canvasTmp, ctxTmp;
 
 var lastController;
 var paintImg = new Image();
-
-function clamp(value, min, max) {
-  return Math.min(Math.max(value, min), max);
-}
-
-function lerp(start, end, t) {
-  return ( 1 - t ) * start+ t * end;
-}
 
 function colorize(r, g, b) {
   ctxTmp.clearRect(0, 0, canvasTmp.width, canvasTmp.height);
@@ -47,7 +32,6 @@ function colorize(r, g, b) {
 
 export function setup(ctx, hall) {
 
-  window.DebugHelper = DebugHelper;
   let area = ctx.world.createEntity();
   area.name = 'area';
   area
@@ -140,10 +124,9 @@ export function setup(ctx, hall) {
 
   brushImg = new Image();
   canvasTmp = document.createElement('canvas');
-  canvasTmp.style.position = "absolute";
-  canvasTmp.style.width = "20%";
+  //canvasTmp.style.position = "absolute";
+  //canvasTmp.style.width = "20%";
   //canvasTmp.style.backgroundColor = "#333";
-
   ctxTmp = canvasTmp.getContext('2d');
   // document.body.appendChild(canvasTmp);
 
@@ -195,7 +178,7 @@ export function setup(ctx, hall) {
         drawContext.strokeStyle = '#0f0';
         var dist = lastPosition.distanceTo(aux2);
         var angle = angleBetween(lastPosition, aux2);
-        let alpha = clamp(1 - distance, 0, 1);
+        let alpha = THREE.Math.clamp(1 - distance, 0, 1);
 
         drawContext.globalAlpha = alpha;
 
@@ -204,7 +187,7 @@ export function setup(ctx, hall) {
             var _y = lastPosition.y + (Math.cos(angle) * i);
             drawContext.save();
             drawContext.translate(_x, _y);
-            let r = lerp(0.001, 0.2, distance);
+            let r = THREE.Math.lerp(0.001, 0.2, distance);
             drawContext.scale(r, r);
 
             drawContext.rotate(Math.PI * 180 / getRandomInt(0, 180));
