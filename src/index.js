@@ -1,3 +1,4 @@
+
 import * as THREE from 'three';
 import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls.js';
 
@@ -33,7 +34,7 @@ import {shaders} from './lib/shaders.js';
 var clock = new THREE.Clock();
 
 var scene, parent, renderer, camera, controls, context = {};
-var controller1, controller2, raycontrol, teleport;
+var raycontrol, teleport, controllers = [];
 
 var listener, ambientMusic;
 
@@ -123,7 +124,6 @@ export function init() {
   scene = new THREE.Scene();
   camera = new THREE.PerspectiveCamera(80, window.innerWidth / window.innerHeight, 0.005, 10000);
   camera.position.set(0, 1.6, 0);
-  //camera.position.set(1.5, 1.6, 2.3); //near pano1
   listener = new THREE.AudioListener();
   camera.add(listener);
 
@@ -159,27 +159,14 @@ export function init() {
   renderer.vr.enabled = true;
 
   window.addEventListener('resize', onWindowResize, false);
-/*
-  setInterval(()=>{
-    console.log('render calls:', renderer.info.render.calls);
-  }, 2000);
-*/
-  controller1 = renderer.vr.getController(0);
 
-  //scene.add(controller1);
-  controller1.addEventListener('selectstart', onSelectStart);
-  controller1.addEventListener('selectend', onSelectEnd);
-
-  controller2 = renderer.vr.getController(1);
-  //scene.add(controller2);
-  controller1.raycaster = new THREE.Raycaster();
-  controller1.raycaster.near = 0.1;
-
-  controller2.raycaster = new THREE.Raycaster();
-  controller2.raycaster.near = 0.1;
-  //controller2.raycaster.far = 3;
-  controller2.addEventListener('selectstart', onSelectStart);
-  controller2.addEventListener('selectend', onSelectEnd);
+  for (let i = 0; i < 2; i++) {
+    controllers[i] = renderer.vr.getController(i);
+    controllers[i].raycaster = new THREE.Raycaster();
+    controllers[i].raycaster.near = 0.1;
+    controllers[i].addEventListener('selectstart', onSelectStart);
+    controllers[i].addEventListener('selectend', onSelectEnd);
+  }
 
   // global lights
   const lightSun = new THREE.DirectionalLight(0xeeffff);
@@ -193,8 +180,8 @@ export function init() {
 
   var cameraRig = new THREE.Group();
   cameraRig.add(camera);
-  cameraRig.add(controller1);
-  cameraRig.add(controller2);
+  cameraRig.add(controllers[0]);
+  cameraRig.add(controllers[1]);
   cameraRig.position.set(0, 0, 2);
   scene.add(cameraRig);
 
@@ -206,7 +193,7 @@ export function init() {
   context.audioListener = listener;
   context.goto = null;
   context.cameraRig = cameraRig;
-  context.controllers = [controller1, controller2];
+  context.controllers = controllers;
   context.world = ecsyWorld;
   context.systemsGroup = systemsGroup;
 
@@ -242,12 +229,12 @@ function setupControllers() {
   });
   model.getObjectByName('body').material = material;
   model.getObjectByName('trigger').material = material;
-  controller1.add(model);
-  controller2.add(model.clone());
-  controller1.boundingBox = new THREE.Box3();
-  controller2.boundingBox = new THREE.Box3();
-  controller1.userData.grabbing = null;
-  controller2.userData.grabbing = null;
+
+  for (let i = 0;i < 2; i++) {
+    controllers[i].add(model.clone());
+    controllers[i].boundingBox = new THREE.Box3();
+    controllers[i].userData.grabbing = null;
+  }
 }
 
 function onSelectStart(ev) {
@@ -275,8 +262,9 @@ function animate() {
   ecsyWorld.execute(delta, elapsedTime);
 
   // update controller bounding boxes
-  controller1.boundingBox.setFromObject(controller1.getObjectByName('Scene'));
-  controller2.boundingBox.setFromObject(controller2.getObjectByName('Scene'));
+  for (let i = 0; i < controllers.length; i++) {
+    controllers[i].boundingBox.setFromObject(controllers[i].getObjectByName('Scene'));
+  }
 
   // render current room
   context.raycontrol.execute(context, delta, elapsedTime);
