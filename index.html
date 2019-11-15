@@ -101,6 +101,30 @@ header a:hover path, #mrlogo:hover path.mrlogobg{
   }
 }
 
+#loading {
+  z-index: 9999;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: url(assets/loadingbg.jpg);
+  background-size: cover;
+  background-position: center;
+}
+#loading h1 {
+  color: white;
+  font-size: 6rem;
+  margin: 1rem;
+  text-shadow: 1px 3px 5px rgba(0, 0, 0, 0.1);
+}
+#loading div {
+  text-align: center;
+  position: absolute;
+  width: 100vw;
+  top: calc(50vh - 120px);
+  font-size: 2rem;
+}
+
   </style>
 
   <script src="bundle.js"></script>
@@ -108,6 +132,16 @@ header a:hover path, #mrlogo:hover path.mrlogobg{
   <script type="text/javascript">function aclick(ev) {ev.stopPropagation();}</script>
 </head>
 <body>
+
+<div id="loading">
+  <div>
+    <h1> Hello!</h1>
+    <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" version="1.1">
+      <path stroke="#000" stroke-width="8px" fill="none" d="M 50 5 a 45 45 0 1 0 0.0001 0"
+      stroke-dasharray="282 282" stroke-dashoffset="282" id="progressbar"/>
+    </svg>
+  </div>
+</div>
 <header>
   <a href="https://blog.mozvr.com/hello-webxr" onclick="aclick(event)">What is this about?</a>
   <a href="http://twitter.com/share?text=Check%20out%20%22Hello%20WebX%22,%20a%20demo%20from%20@mozillareality%20celebrating%20the%20final%20WebXR%20API!%20https://blog.mozvr.com/hello-webxr&url=http://hellowebxr.io"  onclick="aclick(event)"><svg width="20" height="20" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">

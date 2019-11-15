@@ -8,6 +8,15 @@ import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 const BASIS_LIB_PATH = '/src/vendor/';
 const DRACO_LIB_PATH = '/src/vendor/';
 
+
+function getLoadedCount(assets) {
+  let count = 0;
+  for (var i in assets) {
+    if (assets[i].loading !== true) { count ++; }
+  }
+  return count;
+}
+
 function allAssetsLoaded(assets) {
   for (var i in assets) {
     if (assets[i].loading === true) { return false; }
@@ -15,7 +24,7 @@ function allAssetsLoaded(assets) {
   return true;
 }
 
-export function loadAssets(renderer, basePath, assets, onComplete) {
+export function loadAssets(renderer, basePath, assets, onComplete, onProgress) {
   if (basePath && basePath[basePath.length - 1] != '/') {
     basePath += '/';
   }
@@ -65,6 +74,8 @@ export function loadAssets(renderer, basePath, assets, onComplete) {
         for (let opt in options) {
           assets[assetId][opt] = options[opt];
         }
+
+        if (onProgress) { onProgress(getLoadedCount(assets)) };
       }
 
       if (onComplete && allAssetsLoaded(assets)) { onComplete(); }

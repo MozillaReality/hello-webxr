@@ -201,6 +201,9 @@ export function init() {
 
   window.context = context;
 
+  const loadTotal = Object.keys(assets).length;
+
+
   loadAssets(renderer, 'assets/', assets, () => {
     raycontrol = new RayControl(context);
     context.raycontrol = raycontrol;
@@ -221,6 +224,13 @@ export function init() {
     document.body.appendChild(renderer.domElement);
     document.body.appendChild(WEBVR.createButton(renderer));
     renderer.setAnimationLoop(animate);
+
+    document.getElementById('loading').style.display = 'none';
+  },
+
+  loadProgress => {
+    document.querySelector('#progressbar').setAttribute('stroke-dashoffset',
+      - (282 - Math.floor(loadProgress / loadTotal * 282)));
   })
 }
 
