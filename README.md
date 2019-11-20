@@ -9,7 +9,7 @@ This is a WebXR demo made to celebrate the [WebXR spec](https://github.com/immer
 ## How to build
 
 1. `npm install`
-2. `npm run build` (or `npm run watch`)
+2. `npm run watch`
 3. start any http server on the folder and go to localhost url
 
 
