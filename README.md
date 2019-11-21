@@ -2,7 +2,7 @@
 
 ![screenshot](assets/sshot.jpg)
 
-[Try it here!](https://url-of-hello-webxr-not-ready-yet)
+[Try it here!](https://mixedreality.mozilla.org/hello-webxr/index.html)
 
 This is a WebXR demo made to celebrate the [WebXR spec](https://github.com/immersive-web/webxr) release at the end of 2019. It showcases several small experiences, perfect to test different kind of interactions and situations in Virtual Reality. For newcomers, it's a nice entry point to the medium, and web developers may find many things they can reuse and learn (make sure you read the [postmortem article](https://url-of-article-not-ready-yet)!).
 
