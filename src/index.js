@@ -90,6 +90,7 @@ function gotoRoom(room) {
   playMusic(room);
 
   context.room = room;
+
   rooms[context.room].enter(context);
 }
 
