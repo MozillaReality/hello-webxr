@@ -37,7 +37,6 @@ export class SDFTextSystem extends System {
     var entities = this.queries.entities;
 
     entities.added.forEach(e => {
-      console.log('Added', e.id);
       var textComponent = e.getComponent(Text);
 
       const textMesh = new TextMesh();

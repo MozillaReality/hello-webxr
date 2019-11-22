@@ -61,6 +61,7 @@ export function setup(ctx, hall) {
 }
 
 function nextNews() {
+  return;
   const n = newsTicker;
   n.authorText.getMutableComponent(Text).text = n.news[n.current].author;
   n.messageText.getMutableComponent(Text).text = n.news[n.current].message;

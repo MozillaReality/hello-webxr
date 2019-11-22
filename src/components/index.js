@@ -124,3 +124,33 @@ export class AreaReactor {
 }
 
 export class DebugHelper extends TagComponent {}
+
+export class Billboard {
+  constructor() {
+    this.camera3D = null;
+  }
+
+  reset() {
+    this.camera3D = null;
+  }
+}
+
+export class Children {
+  constructor() {
+    this.value = [];
+  }
+
+  reset() {
+    this.value.array.length = 0;
+  }
+}
+
+export class Opacity {
+  constructor() {
+    this.opacity = 0;
+  }
+
+  reset() {
+    this.opacity = 0;
+  }
+}

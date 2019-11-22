@@ -13,6 +13,7 @@ import { AreaCheckerSystem } from './systems/AreaCheckerSystem.js';
 import { ControllersSystem } from './systems/ControllersSystem.js';
 import HierarchySystem from './systems/HierarchySystem.js';
 import TransformSystem from './systems/TransformSystem.js';
+import BillboardSystem from './systems/BillboardSystem.js';
 
 import SystemsGroup from './systems/SystemsGroup.js';
 
@@ -118,6 +119,7 @@ export function init() {
     .registerSystem(ControllersSystem)
     .registerSystem(DebugHelperSystem)
     .registerSystem(TransformSystem)
+    .registerSystem(BillboardSystem)
     .registerSystem(HierarchySystem);
 
   systemsGroup['roomHall'] = new SystemsGroup(ecsyWorld, [
