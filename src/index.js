@@ -1,8 +1,8 @@
-
 import * as THREE from 'three';
+window.THREE = THREE;
 import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls.js';
 
-import {WEBVR} from './vendor/WebVR.js';
+import {VRButton} from 'three/examples/jsm/webxr/VRButton.js';
 import {loadAssets} from './lib/assetManager.js';
 
 // ECSY
@@ -225,7 +225,7 @@ export function init() {
     rooms[context.room].enter(context);
 
     document.body.appendChild(renderer.domElement);
-    document.body.appendChild(WEBVR.createButton(renderer));
+    document.body.appendChild(VRButton.createButton(renderer));
     renderer.setAnimationLoop(animate);
 
     document.getElementById('loading').style.display = 'none';
