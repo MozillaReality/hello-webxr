@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import {System} from '../vendor/ecsy.module.js';
+import {System} from 'ecsy';
 import {TextMesh} from 'troika-3d-text/dist/textmesh-standalone.esm.js';
 import {Object3D, Text} from '../components/index.js';
 

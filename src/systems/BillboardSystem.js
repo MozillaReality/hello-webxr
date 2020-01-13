@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import {System} from '../vendor/ecsy.module.js';
+import {System} from 'ecsy';
 import {Billboard, Object3D, Children, Text, Position} from '../components/index.js';
 
 const SHOW_DISTANCE = 4;

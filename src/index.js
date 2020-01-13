@@ -1,12 +1,11 @@
 import * as THREE from 'three';
-window.THREE = THREE;
 import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls.js';
 
 import {VRButton} from 'three/examples/jsm/webxr/VRButton.js';
 import {loadAssets} from './lib/assetManager.js';
 
 // ECSY
-import { World } from './vendor/ecsy.module.js';
+import { World } from 'ecsy';
 import { SDFTextSystem } from './systems/SDFTextSystem.js';
 import { DebugHelperSystem } from './systems/DebugHelperSystem.js';
 import { AreaCheckerSystem } from './systems/AreaCheckerSystem.js';
