@@ -1,12 +1,11 @@
-
 import * as THREE from 'three';
 import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls.js';
 
-import {WEBVR} from './vendor/WebVR.js';
+import {VRButton} from 'three/examples/jsm/webxr/VRButton.js';
 import {loadAssets} from './lib/assetManager.js';
 
 // ECSY
-import { World } from './vendor/ecsy.module.js';
+import { World } from 'ecsy';
 import { SDFTextSystem } from './systems/SDFTextSystem.js';
 import { DebugHelperSystem } from './systems/DebugHelperSystem.js';
 import { AreaCheckerSystem } from './systems/AreaCheckerSystem.js';
@@ -225,7 +224,7 @@ export function init() {
     rooms[context.room].enter(context);
 
     document.body.appendChild(renderer.domElement);
-    document.body.appendChild(WEBVR.createButton(renderer));
+    document.body.appendChild(VRButton.createButton(renderer));
     renderer.setAnimationLoop(animate);
 
     document.getElementById('loading').style.display = 'none';

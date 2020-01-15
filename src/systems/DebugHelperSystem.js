@@ -1,5 +1,5 @@
 import {Object3D, DebugHelper, BoundingBox} from '../components/index.js';
-import {System, SystemStateComponent, Not} from '../vendor/ecsy.module.js';
+import {System, SystemStateComponent, Not} from 'ecsy';
 import * as THREE from 'three';
 
 THREE.BoxHelper.prototype.setFromMinMax = function(min, max) {

@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import {System} from '../vendor/ecsy.module.js';
+import {System} from 'ecsy';
 import {Object3D, ParentObject3D} from '../components/index.js';
 
 export default class HierarchySystem extends System {

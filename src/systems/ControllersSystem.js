@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import {System} from '../vendor/ecsy.module.js';
+import {System} from 'ecsy';
 import {Area, AreaReactor, AreaInside, AreaExiting, AreaEntering, Object3D, AreaChecker, BoundingBox} from '../components/index.js';
 
 export class ControllersSystem extends System {

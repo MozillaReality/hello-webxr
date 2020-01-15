@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import {TagComponent} from '../vendor/ecsy.module.js';
+import {TagComponent} from 'ecsy';
 
 export class Object3D {
   constructor() {

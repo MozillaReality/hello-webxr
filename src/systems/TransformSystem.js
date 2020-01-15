@@ -1,4 +1,4 @@
-import {System} from '../vendor/ecsy.module.js';
+import {System} from 'ecsy';
 import {Object3D, Rotation, Position} from '../components/index.js';
 
 let updateRotation = entity => {
