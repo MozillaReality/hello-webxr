@@ -87,7 +87,6 @@ export default class ColorWheel {
       },
       onSelectStart: (intersection, controller) => {
         if (intersection.object.name === 'colorWheel') {
-          console.log(intersection);
 
           var point = intersection.point.clone();
           this.mesh.updateMatrixWorld();
@@ -103,7 +102,6 @@ export default class ColorWheel {
             theta: Math.PI + Math.atan2(uv.y, uv.x)
           };
           var angle = ((polarPosition.theta * (180 / Math.PI)) + 180) % 360;
-          console.log(angle, polarPosition.theta, polarPosition.r);
           this.hsv.h = angle / 360;
           this.hsv.s = polarPosition.r / this.radius;
           this.updateColor();

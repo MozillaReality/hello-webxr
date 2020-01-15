@@ -81,7 +81,7 @@ const musicThemes = [
 const urlObject = new URL(window.location);
 const roomName = urlObject.searchParams.get('stage');
 context.room = roomNames.indexOf(roomName) !== -1 ? roomNames.indexOf(roomName) : 0;
-console.log(`Current room "${roomNames[context.room]}", ${context.room}`);
+// console.log(`Current room "${roomNames[context.room]}", ${context.room}`);
 
 function gotoRoom(room) {
   rooms[context.room].exit(context);
