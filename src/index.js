@@ -163,12 +163,12 @@ export function init() {
   renderer.gammaFactor = 2.2;
   renderer.setPixelRatio( window.devicePixelRatio );
   renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.vr.enabled = true;
+  renderer.xr.enabled = true;
 
   window.addEventListener('resize', onWindowResize, false);
 
   for (let i = 0; i < 2; i++) {
-    controllers[i] = renderer.vr.getController(i);
+    controllers[i] = renderer.xr.getController(i);
     controllers[i].raycaster = new THREE.Raycaster();
     controllers[i].raycaster.near = 0.1;
     controllers[i].addEventListener('selectstart', onSelectStart);
