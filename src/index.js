@@ -128,6 +128,13 @@ export function init() {
     AreaCheckerSystem, ControllersSystem, DebugHelperSystem
   ]);
 
+  renderer = new THREE.WebGLRenderer({antialias: true, logarithmicDepthBuffer: false});
+  renderer.gammaFactor = 2.2;
+  renderer.outputEncoding = THREE.sRGBEncoding;
+  renderer.setPixelRatio( window.devicePixelRatio );
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.xr.enabled = true;
+
   scene = new THREE.Scene();
   camera = new THREE.PerspectiveCamera(80, window.innerWidth / window.innerHeight, 0.005, 10000);
   camera.position.set(0, 1.6, 0);
@@ -136,7 +143,7 @@ export function init() {
 
   ambientMusic = new THREE.Audio(listener);
 
-  controls = new PointerLockControls(camera);
+  controls = new PointerLockControls(camera, renderer.domElement);
   document.body.addEventListener('click', () => controls.lock());
   document.body.addEventListener('keydown', ev => {
     switch(ev.keyCode) {
@@ -157,13 +164,6 @@ export function init() {
 
   parent = new THREE.Object3D();
   scene.add(parent);
-
-  renderer = new THREE.WebGLRenderer({antialias: true, logarithmicDepthBuffer: false});
-  renderer.gammaOutput = true;
-  renderer.gammaFactor = 2.2;
-  renderer.setPixelRatio( window.devicePixelRatio );
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.xr.enabled = true;
 
   window.addEventListener('resize', onWindowResize, false);
 
