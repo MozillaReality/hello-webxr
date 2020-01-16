@@ -32,6 +32,9 @@ import * as roomSound from './rooms/Sound.js';
 
 import {shaders} from './lib/shaders.js';
 
+import WebXRPolyfill from 'webxr-polyfill';
+const polyfill = new WebXRPolyfill();
+
 var clock = new THREE.Clock();
 
 var scene, parent, renderer, camera, controls, context = {};
