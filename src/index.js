@@ -208,7 +208,6 @@ export function init() {
 
   const loadTotal = Object.keys(assets).length;
 
-
   loadAssets(renderer, 'assets/', assets, () => {
     raycontrol = new RayControl(context);
     context.raycontrol = raycontrol;
