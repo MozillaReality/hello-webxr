@@ -97,8 +97,8 @@ export default class RayControl {
     raycasterContext.add(this.line0);
     raycasterContext.name = 'raycasterContext';
 
-    //ctx.controllers[0].add( this.line0 );
-    ctx.controllers[0].add( raycasterContext );
+    //ctx.controllers[1].add( this.line0 );
+    ctx.controllers[1].add( raycasterContext );
 
     var geometry = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, - 1 ) ] );
 
@@ -120,7 +120,7 @@ export default class RayControl {
     if (!this.enabled) { return; }
 
     let controller = evt.target;
-    if (controller === this.ctx.controllers[0]) {
+    if (controller === this.ctx.controllers[1]) {
       this.active = true;
 
       this.currentStates.forEach(state => {
@@ -140,7 +140,7 @@ export default class RayControl {
 
     for (var i = 0; i < this.currentStates.length; i++) {
       let state = this.currentStates[i];
-      var controller = ctx.controllers[0];
+      var controller = ctx.controllers[1];
       var intersections = this.getIntersections(controller, state.colliderMesh);
 
       if (intersections.length > 0) {
