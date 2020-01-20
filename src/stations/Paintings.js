@@ -46,18 +46,16 @@ export function setup(ctx, hall) {
   zoom.widget.geometry.rotateY(-Math.PI / 2);
   zoom.widget.visible = false;
 
-
   zoom.icon = new THREE.Mesh(
     new THREE.PlaneGeometry(0.2, 0.2),
     new THREE.MeshBasicMaterial({
       map: ctx.assets['zoomicon_tex'],
       transparent: true
+      //side: THREE.DoubleSide
     })
   );
   zoom.icon.geometry.rotateY(-Math.PI / 2);
   zoom.icon.visible = false;
-
-
 
   ctx.scene.add(zoom.icon);
   ctx.scene.add(zoom.widget);

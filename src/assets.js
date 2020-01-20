@@ -15,7 +15,7 @@ export default {
   glow_tex: { url: 'glow.basis', options: { encoding: THREE.sRGBEncoding} },
   newsticker_tex: { url: 'newsticker.jpg', options: { encoding: THREE.sRGBEncoding, flipY: false} },
   mozillamr_tex: { url: 'mozillamr.basis', options: { encoding: THREE.sRGBEncoding, flipY: false} },
-  zoomicon_tex: { url: 'zoomicon.basis' },
+  zoomicon_tex: { url: 'zoomicon.png', options: { encoding: THREE.sRGBEncoding } },
 
   // panoramas
   panoballfx_tex: { url: 'ballfx.basis', options: { wrapT: THREE.RepeatWrapping, wrapS: THREE.RepeatWrapping } },
