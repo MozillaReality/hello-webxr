@@ -112,7 +112,21 @@ function playMusic(room) {
 var ecsyWorld;
 var systemsGroup = {};
 
+function detectWebXR() {
+  if ('xr' in navigator) {
+    navigator.xr.isSessionSupported('immersive-vr').then( supported => {
+      if (!supported) document.getElementById('no-webxr').classList.remove('hidden');
+    } );
+
+  } else {
+    document.getElementById('no-webxr').classList.remove('hidden');
+  }
+}
+
 export function init() {
+
+  detectWebXR();
+
   var w = 100;
   ecsyWorld = new World();
   ecsyWorld

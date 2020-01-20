@@ -7,7 +7,6 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'UA-77033033-28');
   </script>
   <meta charset="utf-8">
@@ -134,6 +133,15 @@ header a:hover path, #mrlogo:hover path.mrlogobg{
   font-size: 2rem;
 }
 
+.hidden {
+  display: none;
+}
+
+#no-webxr {
+  padding: 20px;
+  text-align: center;
+}
+
   </style>
 
   <script src="bundle.js"></script>
@@ -151,6 +159,12 @@ header a:hover path, #mrlogo:hover path.mrlogobg{
     </svg>
   </div>
 </div>
+
+<div id="no-webxr" class="hidden">
+  TODO WARNING MESSAGE WEBXR NOT AVAILABLE
+</div>
+
+
 <header>
   <a href="https://blog.mozvr.com/hello-webxr" onclick="aclick(event)">What is this about?</a>
   <a href="http://twitter.com/share?text=Check%20out%20%22Hello%20WebX%22,%20a%20demo%20from%20@mozillareality%20celebrating%20the%20final%20WebXR%20API!%20https://blog.mozvr.com/hello-webxr&url=https://mixedreality.mozilla.org/hello-webxr/"  onclick="aclick(event)"><svg width="20" height="20" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -160,7 +174,6 @@ header a:hover path, #mrlogo:hover path.mrlogobg{
     <path d="M0 0V29H29V0H0ZM20.8614 3.78431C21.0721 3.77984 21.2914 3.78668 21.5181 3.802C22.3513 3.80313 23.2215 3.87824 24.0846 3.95422L23.9908 7.38806H21.6721C20.5849 7.36399 20.1923 7.78616 20.157 9.01293V11.7104H24.0846L23.9289 15.3885H20.157V25.6281H16.3249V15.3886H13.6646V11.7104H16.3249V8.55273C16.3249 6.27601 17.2874 4.82686 19.1835 4.09229C19.6704 3.90069 20.2296 3.79772 20.8614 3.78431Z" fill="black"/></svg>
 </a>
 </header>
-
 
 
 
