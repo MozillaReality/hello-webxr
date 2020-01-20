@@ -253,13 +253,41 @@ function setupControllers() {
   }
 }
 
+// @FIXME Hack for Oculus Browser issue
+var selectStartSkip = {};
+var selectEndSkip = {};
+var OculusBrowser = navigator.userAgent.indexOf("OculusBrowser") !== -1;
+// <@FIXME
+
 function onSelectStart(ev) {
+  // @FIXME Hack for Oculus Browser issue
+  if (OculusBrowser) {
+    const controller = ev.target;
+    if (!selectStartSkip[controller]) {
+      selectStartSkip[controller] = true;
+      return;
+    }
+    selectStartSkip[controller] = false;
+  }
+  // <@FIXME
+
   const trigger = ev.target.getObjectByName('trigger');
   trigger.rotation.x = -0.3;
   raycontrol.onSelectStart(ev);
 }
 
 function onSelectEnd(ev) {
+  // @FIXME Hack for Oculus Browser issue
+  if (OculusBrowser) {
+    const controller = ev.target;
+    if (!selectEndSkip[controller]) {
+      selectEndSkip[controller] = true;
+      return;
+    }
+    selectEndSkip[controller] = false;
+  }
+  // <@FIXME
+
   const trigger = ev.target.getObjectByName('trigger');
   trigger.rotation.x = 0;
   raycontrol.onSelectEnd(ev);
