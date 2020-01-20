@@ -8,7 +8,6 @@ import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 const BASIS_LIB_PATH = 'src/vendor/';
 const DRACO_LIB_PATH = 'src/vendor/';
 
-
 function getLoadedCount(assets) {
   let count = 0;
   for (var i in assets) {
