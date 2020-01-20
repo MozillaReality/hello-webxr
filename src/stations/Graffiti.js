@@ -63,7 +63,7 @@ export function setup(ctx, hall) {
   let checker2 = ctx.world.createEntity();
   checker2
     .addComponent(AreaChecker)
-    .addComponent(Object3D, {value: ctx.controllers[0]})
+    .addComponent(Object3D, {value: ctx.controllers[1]})
     .addComponent(AreaReactor, {
       onEntering: entity => {
         const obj3D = entity.getComponent(Object3D).value;
@@ -95,13 +95,13 @@ export function setup(ctx, hall) {
   audioLoader.load('assets/ogg/spray.ogg', buffer => {
     sound.setBuffer(buffer);
     sound.name = 'spraySound';
-    ctx.controllers[0].add(sound);
+    ctx.controllers[1].add(sound);
   });
 
   const spray = ctx.assets['spray_model'].scene;
   spray.getObjectByName('spraycan').geometry.rotateY(Math.PI / 2);
 
-  colorWheel = new ColorWheel(ctx, ctx.controllers[1], (rgb) => {
+  colorWheel = new ColorWheel(ctx, ctx.controllers[0], (rgb) => {
     colorize(
       rgb.r,
       rgb.g,
@@ -114,7 +114,7 @@ export function setup(ctx, hall) {
   const sprayTex = ctx.assets['spray_tex'];
   spray.getObjectByName('spraycan').material = new THREE.MeshPhongMaterial({map: sprayTex});
   spray.getObjectByName('spraycolor').material = new THREE.MeshLambertMaterial({color: 0xFF0000});
-  ctx.controllers[0].add(spray);
+  ctx.controllers[1].add(spray);
 
   const geo = new THREE.PlaneBufferGeometry(5, 4, 1);
 
