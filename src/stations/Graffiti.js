@@ -47,7 +47,7 @@ export function setup(ctx, hall) {
   let checker = ctx.world.createEntity();
   checker
     .addComponent(AreaChecker)
-    .addComponent(Object3D, {value: ctx.controllers[1]})
+    .addComponent(Object3D, {value: ctx.controllers[0]})
     .addComponent(AreaReactor, {
       onEntering: entity => {
         const obj3D = entity.getComponent(Object3D).value;

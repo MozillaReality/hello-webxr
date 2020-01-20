@@ -73370,7 +73370,7 @@ function setup(ctx, hall) {
   component.max.set(3, 3, 7);
   var checker = ctx.world.createEntity();
   checker.addComponent(_components_index__WEBPACK_IMPORTED_MODULE_2__["AreaChecker"]).addComponent(_components_index__WEBPACK_IMPORTED_MODULE_2__["Object3D"], {
-    value: ctx.controllers[1]
+    value: ctx.controllers[0]
   }).addComponent(_components_index__WEBPACK_IMPORTED_MODULE_2__["AreaReactor"], {
     onEntering: function onEntering(entity) {
       var obj3D = entity.getComponent(_components_index__WEBPACK_IMPORTED_MODULE_2__["Object3D"]).value;
