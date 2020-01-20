@@ -90,6 +90,7 @@ export function setup(ctx, hall) {
         zoom.widget.material.uniforms.tex.value = zoom.painting.material.map;
         zoom.widget.material.uniforms.zoomRatio.value = RATIOS[intersection.object.userData.paintingId];
         zoom.widget.visible = true;
+        zoom.icon.visible = false;
         refreshZoomUV(intersection);
       }
     },
