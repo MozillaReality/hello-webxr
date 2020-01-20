@@ -17,7 +17,7 @@ var panoMaterials = [];
 
 export function setup(ctx) {
   const assets = ctx.assets;
-  const geometry = new THREE.SphereBufferGeometry(5000, 60, 40);
+  const geometry = new THREE.SphereBufferGeometry(500, 60, 40);
   for (var i = 0; i < NUM_PANOS; i++) {
     const panoName = 'pano'+(i + 2);
     panoMaterials[i] = new THREE.MeshBasicMaterial( { map: assets[panoName], side: THREE.BackSide });
