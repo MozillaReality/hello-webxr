@@ -4,6 +4,7 @@
   "description": "A showcase of different WebXR experiences and interaction examples",
   "private": true,
   "scripts": {
+    "start": "webpack-dev-server --mode development",
     "build": "webpack -p",
     "watch": "webpack --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -28,11 +29,12 @@
   },
   "homepage": "https://github.com/MozillaReality/hello-webxr#readme",
   "dependencies": {
-    "ecsy": "^0.2.1",
+    "ecsy": "^0.2.2",
     "three": "^0.112.0",
     "three-obj-loader": "^1.1.3",
     "three-pointerlock": "0.0.2",
     "troika-3d-text": "^0.16",
+    "webpack-dev-server": "^3.10.1",
     "webxr-polyfill": "^2.0.1"
   },
   "devDependencies": {
