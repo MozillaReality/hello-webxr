@@ -36,7 +36,7 @@ export function setup(ctx, hall) {
   area.name = 'area';
   area
     .addComponent(BoundingBox)
-    .addComponent(DebugHelper)
+    //.addComponent(DebugHelper)
     .addComponent(ParentObject3D, {value: hall})
     .addComponent(Area);
 
