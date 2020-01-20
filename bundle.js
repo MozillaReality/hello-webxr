@@ -71329,6 +71329,8 @@ var urlObject = new URL(window.location);
 var roomName = urlObject.searchParams.get('stage');
 context.room = roomNames.indexOf(roomName) !== -1 ? roomNames.indexOf(roomName) : 0; // console.log(`Current room "${roomNames[context.room]}", ${context.room}`);
 
+var debug = urlObject.searchParams.has('debug');
+
 function gotoRoom(room) {
   rooms[context.room].exit(context);
   raycontrol.deactivateAll();
@@ -71390,38 +71392,42 @@ function init() {
   document.body.addEventListener('click', function () {
     return controls.lock();
   });
-  document.body.addEventListener('keydown', function (ev) {
-    switch (ev.keyCode) {
-      case 87:
-        controls.moveForward(0.2);
-        break;
 
-      case 65:
-        controls.moveRight(-0.2);
-        break;
+  if (debug) {
+    document.body.addEventListener('keydown', function (ev) {
+      switch (ev.keyCode) {
+        case 87:
+          controls.moveForward(0.2);
+          break;
 
-      case 83:
-        controls.moveForward(-0.2);
-        break;
+        case 65:
+          controls.moveRight(-0.2);
+          break;
 
-      case 68:
-        controls.moveRight(0.2);
-        break;
+        case 83:
+          controls.moveForward(-0.2);
+          break;
 
-      case 78:
-        gotoRoom((context.room + 1) % rooms.length);
-        break;
+        case 68:
+          controls.moveRight(0.2);
+          break;
 
-      default:
-        {
-          var room = ev.keyCode - 48;
+        case 78:
+          gotoRoom((context.room + 1) % rooms.length);
+          break;
 
-          if (!ev.metaKey && room >= 0 && room < rooms.length) {
-            gotoRoom(room);
+        default:
+          {
+            var room = ev.keyCode - 48;
+
+            if (!ev.metaKey && room >= 0 && room < rooms.length) {
+              gotoRoom(room);
+            }
           }
-        }
-    }
-  });
+      }
+    });
+  }
+
   scene.add(controls.getObject());
   parent = new three__WEBPACK_IMPORTED_MODULE_0__["Object3D"]();
   scene.add(parent);
