@@ -85,6 +85,7 @@ const urlObject = new URL(window.location);
 const roomName = urlObject.searchParams.get('stage');
 context.room = roomNames.indexOf(roomName) !== -1 ? roomNames.indexOf(roomName) : 0;
 // console.log(`Current room "${roomNames[context.room]}", ${context.room}`);
+const debug = urlObject.searchParams.has('debug');
 
 function gotoRoom(room) {
   rooms[context.room].exit(context);
@@ -159,21 +160,23 @@ export function init() {
 
   controls = new PointerLockControls(camera, renderer.domElement);
   document.body.addEventListener('click', () => controls.lock());
-  document.body.addEventListener('keydown', ev => {
-    switch(ev.keyCode) {
-      case 87: controls.moveForward(0.2); break;
-      case 65: controls.moveRight(-0.2); break;
-      case 83: controls.moveForward(-0.2); break;
-      case 68: controls.moveRight(0.2); break;
-      case 78: gotoRoom((context.room + 1) % rooms.length); break;
-      default: {
-        var room = ev.keyCode - 48;
-        if (!ev.metaKey && room >= 0 && room < rooms.length) {
-          gotoRoom(room);
+  if (debug) {
+    document.body.addEventListener('keydown', ev => {
+      switch(ev.keyCode) {
+        case 87: controls.moveForward(0.2); break;
+        case 65: controls.moveRight(-0.2); break;
+        case 83: controls.moveForward(-0.2); break;
+        case 68: controls.moveRight(0.2); break;
+        case 78: gotoRoom((context.room + 1) % rooms.length); break;
+        default: {
+          var room = ev.keyCode - 48;
+          if (!ev.metaKey && room >= 0 && room < rooms.length) {
+            gotoRoom(room);
+          }
         }
       }
-    }
-  });
+    });
+  }
   scene.add(controls.getObject());
 
   parent = new THREE.Object3D();
