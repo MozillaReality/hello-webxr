@@ -71354,7 +71354,19 @@ function playMusic(room) {
 
 var ecsyWorld;
 var systemsGroup = {};
+
+function detectWebXR() {
+  if ('xr' in navigator) {
+    navigator.xr.isSessionSupported('immersive-vr').then(function (supported) {
+      if (!supported) document.getElementById('no-webxr').classList.remove('hidden');
+    });
+  } else {
+    document.getElementById('no-webxr').classList.remove('hidden');
+  }
+}
+
 function init() {
+  detectWebXR();
   var w = 100;
   ecsyWorld = new ecsy__WEBPACK_IMPORTED_MODULE_4__["World"]();
   ecsyWorld.registerSystem(_systems_SDFTextSystem_js__WEBPACK_IMPORTED_MODULE_5__["SDFTextSystem"]).registerSystem(_systems_AreaCheckerSystem_js__WEBPACK_IMPORTED_MODULE_7__["AreaCheckerSystem"]).registerSystem(_systems_ControllersSystem_js__WEBPACK_IMPORTED_MODULE_8__["ControllersSystem"]).registerSystem(_systems_DebugHelperSystem_js__WEBPACK_IMPORTED_MODULE_6__["DebugHelperSystem"]).registerSystem(_systems_TransformSystem_js__WEBPACK_IMPORTED_MODULE_10__["default"]).registerSystem(_systems_BillboardSystem_js__WEBPACK_IMPORTED_MODULE_11__["default"]).registerSystem(_systems_HierarchySystem_js__WEBPACK_IMPORTED_MODULE_9__["default"]);
