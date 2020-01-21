@@ -71343,8 +71343,14 @@ var targetPositions = {
     'vertigo': THREE.Vector3()
   },
   */
+  photogrammetry: {
+    hall: new three__WEBPACK_IMPORTED_MODULE_0__["Vector3"](-3.6, 0, 2.8)
+  },
   sound: {
-    hall: three__WEBPACK_IMPORTED_MODULE_0__["Vector3"]()
+    hall: new three__WEBPACK_IMPORTED_MODULE_0__["Vector3"](4.4, 0, 4.8)
+  },
+  vertigo: {
+    hall: new three__WEBPACK_IMPORTED_MODULE_0__["Vector3"](-1.8, 0, -5)
   }
 };
 
@@ -71352,16 +71358,16 @@ function gotoRoom(room) {
   rooms[context.room].exit(context);
   raycontrol.deactivateAll();
   playMusic(room);
-  debugger;
   var prevRoom = roomNames[context.room];
   var nextRoom = roomNames[room];
 
   if (targetPositions[prevRoom] && targetPositions[prevRoom][nextRoom]) {
     var deltaPosition = new three__WEBPACK_IMPORTED_MODULE_0__["Vector3"]();
-    var targetPosition = targetPositions[context.room][room];
-    deltaPosition.subVectors(context.camera.position, targetPosition);
-    console.log(deltaPosition);
-    cameraRig.position.add(deltaPosition);
+    var targetPosition = targetPositions[prevRoom][nextRoom];
+    var camera = renderer.xr.getCamera(context.camera);
+    deltaPosition.x = camera.position.x - targetPosition.x;
+    deltaPosition.z = camera.position.z - targetPosition.z;
+    context.cameraRig.position.sub(deltaPosition);
   }
 
   context.room = room;
@@ -73039,7 +73045,7 @@ soundNames.forEach(function (i) {
     shadow: null
   };
 });
-var MAX_REPETITIONS = 5;
+var MAX_REPETITIONS = 3;
 var repetitions = MAX_REPETITIONS - 1;
 
 function createDoorMaterial(ctx) {

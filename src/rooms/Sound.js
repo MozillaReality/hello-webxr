@@ -18,7 +18,7 @@ const soundNames = [
 var sounds = {};
 soundNames.forEach( i => { sounds[i] = {animations: [], mesh: null, player: null, shadow: null} })
 
-const MAX_REPETITIONS = 5;
+const MAX_REPETITIONS = 3;
 var repetitions = MAX_REPETITIONS - 1;
 
 function createDoorMaterial(ctx) {
