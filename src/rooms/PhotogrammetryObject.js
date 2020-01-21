@@ -16,7 +16,7 @@ function createDoorMaterial(ctx) {
 export function setup(ctx) {
   const assets = ctx.assets;
   scene = assets['pg_object_model'].scene;
-  scene.rotation.y = Math.PI;
+  scene.rotation.y = -Math.PI / 2;
 
   scene.getObjectByName('object').material =
     new THREE.MeshBasicMaterial({map: assets['pg_object_tex']});

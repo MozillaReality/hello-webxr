@@ -71334,7 +71334,7 @@ var debug = urlObject.searchParams.has('debug'); // Target positions when moving
 var targetPositions = {
   hall: {
     sound: new three__WEBPACK_IMPORTED_MODULE_0__["Vector3"](0, 0, 0),
-    photogrammetry: new three__WEBPACK_IMPORTED_MODULE_0__["Vector3"](0, 0, 1),
+    photogrammetry: new three__WEBPACK_IMPORTED_MODULE_0__["Vector3"](1, 0, 0),
     vertigo: new three__WEBPACK_IMPORTED_MODULE_0__["Vector3"](0, 0, 0)
   },
   photogrammetry: {
@@ -72933,7 +72933,7 @@ function createDoorMaterial(ctx) {
 function setup(ctx) {
   var assets = ctx.assets;
   scene = assets['pg_object_model'].scene;
-  scene.rotation.y = Math.PI;
+  scene.rotation.y = -Math.PI / 2;
   scene.getObjectByName('object').material = new three__WEBPACK_IMPORTED_MODULE_0__["MeshBasicMaterial"]({
     map: assets['pg_object_tex']
   });
