@@ -78,7 +78,6 @@ export function setup(ctx) {
 export function enter(ctx) {
   ctx.renderer.setClearColor(0x000000);
   ctx.scene.add(scene);
-  ctx.cameraRig.position.set(0, 0, 2);
   ctx.raycontrol.activateState('doorPhotogrammetry');
   ctx.raycontrol.activateState('teleportPhotogrammetry');
 }

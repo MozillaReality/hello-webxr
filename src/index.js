@@ -121,19 +121,10 @@ function gotoRoom(room) {
     const targetPosition = targetPositions[prevRoom][nextRoom];
     var camera = renderer.xr.getCamera(context.camera);
 
-    console.log('----------------------------------');
-    console.log(prevRoom, '=>', nextRoom);
-
     deltaPosition.x = camera.position.x - targetPosition.x;
     deltaPosition.z = camera.position.z - targetPosition.z;
 
-    console.log('prevCameraPos', camera.position);
-    console.log('targetPosition', targetPosition);
-    console.log('delta', deltaPosition);
-    console.log('prevCameraRig', context.cameraRig.position);
-
     context.cameraRig.position.sub(deltaPosition);
-    console.log('newCameraRig', context.cameraRig.position);
   }
 
   context.room = room;
