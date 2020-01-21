@@ -61,7 +61,6 @@ export function enter(ctx) {
 
   ctx.controllers[1].add(panel);
 
-  debugger;
   ctx.raycontrol.activateState('panorama');
 
   //ctx.controllers[0].addEventListener('selectend', onSelectEnd);

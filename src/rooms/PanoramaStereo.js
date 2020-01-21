@@ -10,6 +10,11 @@ export function setup(ctx) {
   panoL.layers.set(1);
   panoR = new THREE.Mesh(geometry, materialR);
   panoR.layers.set(2);
+
+  ctx.raycontrol.addState('panoramaStereo', {
+    raycaster: false,
+    onSelectEnd: onSelectEnd
+  });
 }
 
 export function enter(ctx) {
@@ -17,17 +22,16 @@ export function enter(ctx) {
   ctx.scene.add(panoL);
   ctx.scene.add(panoR);
   ctx.camera.layers.enable(1);
-  ctx.controllers[0].addEventListener('selectend', onSelectEnd);
-  ctx.controllers[1].addEventListener('selectend', onSelectEnd);
   context = ctx;
+
+  ctx.raycontrol.activateState('panoramaStereo');
 }
 
 export function exit(ctx) {
   ctx.scene.remove(panoL);
   ctx.scene.remove(panoR);
-  ctx.controllers[0].removeEventListener('selectend', onSelectEnd);
-  ctx.controllers[1].removeEventListener('selectend', onSelectEnd);
   ctx.camera.layers.disable(1);
+  ctx.raycontrol.deactivateState('panoramaStereo');
 }
 
 export function execute(ctx, delta, time) {

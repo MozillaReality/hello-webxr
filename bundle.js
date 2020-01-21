@@ -72153,7 +72153,6 @@ function () {
         this.active = true;
         this.currentStates.forEach(function (state) {
           if ((!state.raycaster || state.intersection) && state.onSelectStart) {
-            debugger;
             state.onSelectStart(state.intersection, controller);
           }
         });
@@ -72235,7 +72234,7 @@ function () {
       }
 
       this.currentStates.forEach(function (state) {
-        if (state.hit) {
+        if (!state.raycaster || state.hit) {
           state.onSelectEnd && state.onSelectEnd(state.intersection);
           state.hit = false;
         }
@@ -72836,7 +72835,6 @@ function enter(ctx) {
   pano.material = panoMaterials[room];
   ctx.scene.add(pano);
   ctx.controllers[1].add(panel);
-  debugger;
   ctx.raycontrol.activateState('panorama'); //ctx.controllers[0].addEventListener('selectend', onSelectEnd);
   //ctx.controllers[1].addEventListener('selectend', onSelectEnd);
 
@@ -72887,22 +72885,24 @@ function setup(ctx) {
   panoL.layers.set(1);
   panoR = new three__WEBPACK_IMPORTED_MODULE_0__["Mesh"](geometry, materialR);
   panoR.layers.set(2);
+  ctx.raycontrol.addState('panoramaStereo', {
+    raycaster: false,
+    onSelectEnd: onSelectEnd
+  });
 }
 function enter(ctx) {
   ctx.renderer.setClearColor(0x000000);
   ctx.scene.add(panoL);
   ctx.scene.add(panoR);
   ctx.camera.layers.enable(1);
-  ctx.controllers[0].addEventListener('selectend', onSelectEnd);
-  ctx.controllers[1].addEventListener('selectend', onSelectEnd);
   context = ctx;
+  ctx.raycontrol.activateState('panoramaStereo');
 }
 function exit(ctx) {
   ctx.scene.remove(panoL);
   ctx.scene.remove(panoR);
-  ctx.controllers[0].removeEventListener('selectend', onSelectEnd);
-  ctx.controllers[1].removeEventListener('selectend', onSelectEnd);
   ctx.camera.layers.disable(1);
+  ctx.raycontrol.deactivateState('panoramaStereo');
 }
 function execute(ctx, delta, time) {}
 function onSelectEnd(evt) {
