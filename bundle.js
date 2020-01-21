@@ -71336,10 +71336,10 @@ var debug = urlObject.searchParams.has('debug'); // Target positions when moving
 // }
 
 var targetPositions = {
-  'hall': {
-    'sound': three__WEBPACK_IMPORTED_MODULE_0__["Vector3"](0, 0, 0),
-    'photogrammetry': three__WEBPACK_IMPORTED_MODULE_0__["Vector3"](0, 0, -1.4),
-    'vertigo': three__WEBPACK_IMPORTED_MODULE_0__["Vector3"](0, 0, 0)
+  hall: {
+    sound: new three__WEBPACK_IMPORTED_MODULE_0__["Vector3"](0, 0, 0),
+    photogrammetry: new three__WEBPACK_IMPORTED_MODULE_0__["Vector3"](0, 0, -1.4),
+    vertigo: new three__WEBPACK_IMPORTED_MODULE_0__["Vector3"](0, 0, 0)
   },
   photogrammetry: {
     hall: new three__WEBPACK_IMPORTED_MODULE_0__["Vector3"](-3.6, 0, 2.8)
@@ -71358,6 +71358,7 @@ function gotoRoom(room) {
   playMusic(room);
   var prevRoom = roomNames[context.room];
   var nextRoom = roomNames[room];
+  debugger;
 
   if (targetPositions[prevRoom] && targetPositions[prevRoom][nextRoom]) {
     var deltaPosition = new three__WEBPACK_IMPORTED_MODULE_0__["Vector3"]();

@@ -93,10 +93,10 @@ const debug = urlObject.searchParams.has('debug');
 //  targetB: Vector3
 // }
 const targetPositions = {
-  'hall': {
-    'sound': THREE.Vector3(0, 0, 0),
-    'photogrammetry': THREE.Vector3(0, 0, -1.4),
-    'vertigo': THREE.Vector3(0, 0, 0)
+  hall: {
+    sound: new THREE.Vector3(0, 0, 0),
+    photogrammetry: new THREE.Vector3(0, 0, -1.4),
+    vertigo: new THREE.Vector3(0, 0, 0)
   },
   photogrammetry: {
     hall: new THREE.Vector3(-3.6, 0, 2.8)
@@ -118,6 +118,7 @@ function gotoRoom(room) {
   const prevRoom = roomNames[context.room];
   const nextRoom = roomNames[room];
 
+  debugger;
   if (targetPositions[prevRoom] && targetPositions[prevRoom][nextRoom]) {
     let deltaPosition = new THREE.Vector3();
     const targetPosition = targetPositions[prevRoom][nextRoom];
