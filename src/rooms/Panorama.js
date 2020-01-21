@@ -63,9 +63,6 @@ export function enter(ctx) {
 
   ctx.raycontrol.activateState('panorama');
 
-  //ctx.controllers[0].addEventListener('selectend', onSelectEnd);
-  //ctx.controllers[1].addEventListener('selectend', onSelectEnd);
-
   context = ctx;
 }
 
@@ -74,9 +71,6 @@ export function exit(ctx) {
   ctx.controllers[1].remove(panel);
 
   ctx.raycontrol.deactivateState('panorama');
-
-  //ctx.controllers[0].removeEventListener('selectend', onSelectEnd);
-  //ctx.controllers[1].removeEventListener('selectend', onSelectEnd);
 }
 
 export function execute(ctx, delta, time) {
