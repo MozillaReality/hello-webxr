@@ -113,24 +113,32 @@ function gotoRoom(room) {
   rooms[context.room].exit(context);
   raycontrol.deactivateAll();
 
-  playMusic(room);
-
   const prevRoom = roomNames[context.room];
   const nextRoom = roomNames[room];
 
-  debugger;
   if (targetPositions[prevRoom] && targetPositions[prevRoom][nextRoom]) {
     let deltaPosition = new THREE.Vector3();
     const targetPosition = targetPositions[prevRoom][nextRoom];
     var camera = renderer.xr.getCamera(context.camera);
 
+    console.log('----------------------------------');
+    console.log(prevRoom, '=>', nextRoom);
+
     deltaPosition.x = camera.position.x - targetPosition.x;
     deltaPosition.z = camera.position.z - targetPosition.z;
 
+    console.log('prevCameraPos', camera.position);
+    console.log('targetPosition', targetPosition);
+    console.log('delta', deltaPosition);
+    console.log('prevCameraRig', context.cameraRig.position);
+
     context.cameraRig.position.sub(deltaPosition);
+    console.log('newCameraRig', context.cameraRig.position);
   }
 
   context.room = room;
+
+  playMusic(room);
 
   rooms[context.room].enter(context);
 }

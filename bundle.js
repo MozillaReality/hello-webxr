@@ -71355,7 +71355,6 @@ var targetPositions = {
 function gotoRoom(room) {
   rooms[context.room].exit(context);
   raycontrol.deactivateAll();
-  playMusic(room);
   var prevRoom = roomNames[context.room];
   var nextRoom = roomNames[room];
   debugger;
@@ -71370,6 +71369,7 @@ function gotoRoom(room) {
   }
 
   context.room = room;
+  playMusic(room);
   rooms[context.room].enter(context);
 }
 

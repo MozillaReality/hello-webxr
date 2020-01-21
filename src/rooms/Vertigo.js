@@ -73,7 +73,7 @@ export function enter(ctx) {
   ctx.renderer.setClearColor(0x677FA7);
   ctx.scene.add(scene);
   ctx.scene.parent.fog = new THREE.FogExp2(0x677FA7, 0.004);
-  ctx.cameraRig.position.set(0,0,0);
+  //ctx.cameraRig.position.set(0,0,0);
 
   ctx.raycontrol.activateState('teleportVertigo');
   ctx.raycontrol.activateState('doorVertigo');
