@@ -71326,19 +71326,15 @@ var rooms = [_rooms_Hall_js__WEBPACK_IMPORTED_MODULE_17__, _rooms_Sound_js__WEBP
 var roomNames = ['hall', 'sound', 'photogrammetry', 'vertigo', 'panoramastereo', 'panorama1', 'panorama2', 'panorama3', 'panorama4', 'panorama5'];
 var musicThemes = [false, false, 'chopin_snd', 'wind_snd', false, 'birds_snd', 'birds_snd', 'forest_snd', 'wind_snd', 'birds_snd'];
 var urlObject = new URL(window.location);
-var roomName = urlObject.searchParams.get('stage');
+var roomName = urlObject.searchParams.get('room');
 context.room = roomNames.indexOf(roomName) !== -1 ? roomNames.indexOf(roomName) : 0; // console.log(`Current room "${roomNames[context.room]}", ${context.room}`);
 
 var debug = urlObject.searchParams.has('debug'); // Target positions when moving from one room to another
-// origin: {
-//  targetA: Vector3,
-//  targetB: Vector3
-// }
 
 var targetPositions = {
   hall: {
     sound: new three__WEBPACK_IMPORTED_MODULE_0__["Vector3"](0, 0, 0),
-    photogrammetry: new three__WEBPACK_IMPORTED_MODULE_0__["Vector3"](0, 0, -1.4),
+    photogrammetry: new three__WEBPACK_IMPORTED_MODULE_0__["Vector3"](0, 0, 1),
     vertigo: new three__WEBPACK_IMPORTED_MODULE_0__["Vector3"](0, 0, 0)
   },
   photogrammetry: {
@@ -71357,7 +71353,6 @@ function gotoRoom(room) {
   raycontrol.deactivateAll();
   var prevRoom = roomNames[context.room];
   var nextRoom = roomNames[room];
-  debugger;
 
   if (targetPositions[prevRoom] && targetPositions[prevRoom][nextRoom]) {
     var deltaPosition = new three__WEBPACK_IMPORTED_MODULE_0__["Vector3"]();
@@ -72938,6 +72933,7 @@ function createDoorMaterial(ctx) {
 function setup(ctx) {
   var assets = ctx.assets;
   scene = assets['pg_object_model'].scene;
+  scene.rotation.y = Math.PI;
   scene.getObjectByName('object').material = new three__WEBPACK_IMPORTED_MODULE_0__["MeshBasicMaterial"]({
     map: assets['pg_object_tex']
   });
@@ -72999,7 +72995,6 @@ function setup(ctx) {
 function enter(ctx) {
   ctx.renderer.setClearColor(0x000000);
   ctx.scene.add(scene);
-  ctx.cameraRig.position.set(0, 0, 2);
   ctx.raycontrol.activateState('doorPhotogrammetry');
   ctx.raycontrol.activateState('teleportPhotogrammetry');
 }
@@ -73223,7 +73218,6 @@ function enter(ctx) {
   ctx.scene.add(scene);
   ctx.scene.add(door);
   ctx.camera.add(listener);
-  ctx.cameraRig.position.set(0, 0, 0);
   timeout = setTimeout(playSound, 2000);
   ctx.raycontrol.activateState('teleportSound');
   ctx.raycontrol.activateState('sound');
@@ -73343,8 +73337,8 @@ function setup(ctx) {
 function enter(ctx) {
   ctx.renderer.setClearColor(0x677FA7);
   ctx.scene.add(scene);
-  ctx.scene.parent.fog = new three__WEBPACK_IMPORTED_MODULE_0__["FogExp2"](0x677FA7, 0.004);
-  ctx.cameraRig.position.set(0, 0, 0);
+  ctx.scene.parent.fog = new three__WEBPACK_IMPORTED_MODULE_0__["FogExp2"](0x677FA7, 0.004); //ctx.cameraRig.position.set(0,0,0);
+
   ctx.raycontrol.activateState('teleportVertigo');
   ctx.raycontrol.activateState('doorVertigo');
 }

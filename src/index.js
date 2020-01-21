@@ -91,7 +91,7 @@ const debug = urlObject.searchParams.has('debug');
 const targetPositions = {
   hall: {
     sound: new THREE.Vector3(0, 0, 0),
-    photogrammetry: new THREE.Vector3(0, 0, -0.4),
+    photogrammetry: new THREE.Vector3(0, 0, 1),
     vertigo: new THREE.Vector3(0, 0, 0)
   },
   photogrammetry: {
