@@ -181,7 +181,6 @@ export function enter(ctx) {
   ctx.scene.add(scene);
   ctx.scene.add(door);
   ctx.camera.add(listener);
-  ctx.cameraRig.position.set(0,0,0);
 
   timeout = setTimeout(playSound, 2000);
   ctx.raycontrol.activateState('teleportSound');
