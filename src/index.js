@@ -296,9 +296,15 @@ function setupControllers() {
   model.getObjectByName('trigger').material = material;
 
   for (let i = 0;i < 2; i++) {
-    controllers[i].add(model.clone());
-    controllers[i].boundingBox = new THREE.Box3();
-    controllers[i].userData.grabbing = null;
+    let controller = controllers[i];
+    controller.boundingBox = new THREE.Box3();
+    controller.userData.grabbing = null;
+    controller.addEventListener( 'connected', function ( event ) {
+      this.add(model.clone());
+    } );
+    controller.addEventListener( 'disconnect', function () {
+      this.remove(this.children[0]);
+    });
   }
 }
 
@@ -356,7 +362,10 @@ function animate() {
 
   // update controller bounding boxes
   for (let i = 0; i < controllers.length; i++) {
-    controllers[i].boundingBox.setFromObject(controllers[i].getObjectByName('Scene'));
+    const model = controllers[i].getObjectByName('Scene');
+    if (model) {
+      controllers[i].boundingBox.setFromObject(model);
+    }
   }
 
   // render current room

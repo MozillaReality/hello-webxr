@@ -71528,9 +71528,15 @@ function setupControllers() {
   model.getObjectByName('trigger').material = material;
 
   for (var i = 0; i < 2; i++) {
-    controllers[i].add(model.clone());
-    controllers[i].boundingBox = new three__WEBPACK_IMPORTED_MODULE_0__["Box3"]();
-    controllers[i].userData.grabbing = null;
+    var controller = controllers[i];
+    controller.boundingBox = new three__WEBPACK_IMPORTED_MODULE_0__["Box3"]();
+    controller.userData.grabbing = null;
+    controller.addEventListener('connected', function (event) {
+      this.add(model.clone());
+    });
+    controller.addEventListener('disconnect', function () {
+      this.remove(this.children[0]);
+    });
   }
 } // @FIXME Hack for Oculus Browser issue
 
@@ -71589,7 +71595,11 @@ function animate() {
   ecsyWorld.execute(delta, elapsedTime); // update controller bounding boxes
 
   for (var i = 0; i < controllers.length; i++) {
-    controllers[i].boundingBox.setFromObject(controllers[i].getObjectByName('Scene'));
+    var model = controllers[i].getObjectByName('Scene');
+
+    if (model) {
+      controllers[i].boundingBox.setFromObject(model);
+    }
   } // render current room
 
 
@@ -72835,16 +72845,13 @@ function enter(ctx) {
   pano.material = panoMaterials[room];
   ctx.scene.add(pano);
   ctx.controllers[1].add(panel);
-  ctx.raycontrol.activateState('panorama'); //ctx.controllers[0].addEventListener('selectend', onSelectEnd);
-  //ctx.controllers[1].addEventListener('selectend', onSelectEnd);
-
+  ctx.raycontrol.activateState('panorama');
   context = ctx;
 }
 function exit(ctx) {
   ctx.scene.remove(pano);
   ctx.controllers[1].remove(panel);
-  ctx.raycontrol.deactivateState('panorama'); //ctx.controllers[0].removeEventListener('selectend', onSelectEnd);
-  //ctx.controllers[1].removeEventListener('selectend', onSelectEnd);
+  ctx.raycontrol.deactivateState('panorama');
 }
 function execute(ctx, delta, time) {}
 function onSelectEnd(evt) {
