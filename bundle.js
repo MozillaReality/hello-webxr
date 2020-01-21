@@ -71338,7 +71338,7 @@ var debug = urlObject.searchParams.has('debug'); // Target positions when moving
 var targetPositions = {
   'hall': {
     'sound': three__WEBPACK_IMPORTED_MODULE_0__["Vector3"](0, 0, 0),
-    'photogrammetry': three__WEBPACK_IMPORTED_MODULE_0__["Vector3"](0, 0, 0),
+    'photogrammetry': three__WEBPACK_IMPORTED_MODULE_0__["Vector3"](0, 0, -1.4),
     'vertigo': three__WEBPACK_IMPORTED_MODULE_0__["Vector3"](0, 0, 0)
   },
   photogrammetry: {
