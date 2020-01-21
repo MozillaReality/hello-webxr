@@ -82,20 +82,16 @@ const musicThemes = [
 ];
 
 const urlObject = new URL(window.location);
-const roomName = urlObject.searchParams.get('stage');
+const roomName = urlObject.searchParams.get('room');
 context.room = roomNames.indexOf(roomName) !== -1 ? roomNames.indexOf(roomName) : 0;
 // console.log(`Current room "${roomNames[context.room]}", ${context.room}`);
 const debug = urlObject.searchParams.has('debug');
 
 // Target positions when moving from one room to another
-// origin: {
-//  targetA: Vector3,
-//  targetB: Vector3
-// }
 const targetPositions = {
   hall: {
     sound: new THREE.Vector3(0, 0, 0),
-    photogrammetry: new THREE.Vector3(0, 0, -1.4),
+    photogrammetry: new THREE.Vector3(0, 0, -0.4),
     vertigo: new THREE.Vector3(0, 0, 0)
   },
   photogrammetry: {
