@@ -72044,6 +72044,10 @@ function () {
         return;
       }
 
+      if (typeof state.raycaster === "undefined") {
+        state.raycaster = true;
+      }
+
       this.states[name] = state;
       state.hit = false;
       state.intersection = null;
@@ -72148,7 +72152,8 @@ function () {
       if (controller === this.ctx.controllers[1]) {
         this.active = true;
         this.currentStates.forEach(function (state) {
-          if (state.intersection && state.onSelectStart) {
+          if ((!state.raycaster || state.intersection) && state.onSelectStart) {
+            debugger;
             state.onSelectStart(state.intersection, controller);
           }
         });
@@ -72166,6 +72171,11 @@ function () {
 
       for (var i = 0; i < this.currentStates.length; i++) {
         var state = this.currentStates[i];
+
+        if (!state.raycaster) {
+          continue;
+        }
+
         var controller = ctx.controllers[1];
         var intersections = this.getIntersections(controller, state.colliderMesh);
 
@@ -72814,6 +72824,10 @@ function setup(ctx) {
     y: 0.003,
     z: 0.01
   });
+  ctx.raycontrol.addState('panorama', {
+    raycaster: false,
+    onSelectEnd: onSelectEnd
+  });
 }
 function enter(ctx) {
   ctx.renderer.setClearColor(0x000000);
@@ -72822,15 +72836,17 @@ function enter(ctx) {
   pano.material = panoMaterials[room];
   ctx.scene.add(pano);
   ctx.controllers[1].add(panel);
-  ctx.controllers[0].addEventListener('selectend', onSelectEnd);
-  ctx.controllers[1].addEventListener('selectend', onSelectEnd);
+  debugger;
+  ctx.raycontrol.activateState('panorama'); //ctx.controllers[0].addEventListener('selectend', onSelectEnd);
+  //ctx.controllers[1].addEventListener('selectend', onSelectEnd);
+
   context = ctx;
 }
 function exit(ctx) {
   ctx.scene.remove(pano);
   ctx.controllers[1].remove(panel);
-  ctx.controllers[0].removeEventListener('selectend', onSelectEnd);
-  ctx.controllers[1].removeEventListener('selectend', onSelectEnd);
+  ctx.raycontrol.deactivateState('panorama'); //ctx.controllers[0].removeEventListener('selectend', onSelectEnd);
+  //ctx.controllers[1].removeEventListener('selectend', onSelectEnd);
 }
 function execute(ctx, delta, time) {}
 function onSelectEnd(evt) {

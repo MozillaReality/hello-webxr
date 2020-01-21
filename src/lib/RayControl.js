@@ -29,6 +29,11 @@ export default class RayControl {
       console.error(`RayControl state '${name}' already exist, please use a different name.`);
       return;
     }
+
+    if (typeof state.raycaster === "undefined") {
+      state.raycaster = true;
+    }
+
     this.states[name] = state;
     state.hit = false;
     state.intersection = null;
@@ -124,7 +129,7 @@ export default class RayControl {
       this.active = true;
 
       this.currentStates.forEach(state => {
-        if (state.intersection && state.onSelectStart) {
+        if ((!state.raycaster || state.intersection) && state.onSelectStart) {
           state.onSelectStart(state.intersection, controller);
         }
       });
@@ -140,6 +145,10 @@ export default class RayControl {
 
     for (var i = 0; i < this.currentStates.length; i++) {
       let state = this.currentStates[i];
+      if (!state.raycaster) {
+        continue;
+      }
+
       var controller = ctx.controllers[1];
       var intersections = this.getIntersections(controller, state.colliderMesh);
 
@@ -195,7 +204,7 @@ export default class RayControl {
     if (!this.enabled || !this.active) { return; }
 
     this.currentStates.forEach(state => {
-      if (state.hit) {
+      if (!state.raycaster || state.hit) {
         state.onSelectEnd && state.onSelectEnd(state.intersection);
         state.hit = false;
       }

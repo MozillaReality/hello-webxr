@@ -43,6 +43,11 @@ export function setup(ctx) {
     })
     .addComponent(ParentObject3D, {value: panel})
     .addComponent(Position, {x: -0.17, y: 0.003, z: 0.01});
+
+  ctx.raycontrol.addState('panorama', {
+    raycaster: false,
+    onSelectEnd: onSelectEnd
+  });
 }
 
 export function enter(ctx) {
@@ -56,8 +61,11 @@ export function enter(ctx) {
 
   ctx.controllers[1].add(panel);
 
-  ctx.controllers[0].addEventListener('selectend', onSelectEnd);
-  ctx.controllers[1].addEventListener('selectend', onSelectEnd);
+  debugger;
+  ctx.raycontrol.activateState('panorama');
+
+  //ctx.controllers[0].addEventListener('selectend', onSelectEnd);
+  //ctx.controllers[1].addEventListener('selectend', onSelectEnd);
 
   context = ctx;
 }
@@ -65,8 +73,11 @@ export function enter(ctx) {
 export function exit(ctx) {
   ctx.scene.remove(pano);
   ctx.controllers[1].remove(panel);
-  ctx.controllers[0].removeEventListener('selectend', onSelectEnd);
-  ctx.controllers[1].removeEventListener('selectend', onSelectEnd);
+
+  ctx.raycontrol.deactivateState('panorama');
+
+  //ctx.controllers[0].removeEventListener('selectend', onSelectEnd);
+  //ctx.controllers[1].removeEventListener('selectend', onSelectEnd);
 }
 
 export function execute(ctx, delta, time) {
