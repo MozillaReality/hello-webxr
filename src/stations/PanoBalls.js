@@ -55,7 +55,6 @@ export function setup(ctx, hall) {
       intersection.object.userData.selected = 1;
     },
     onHoverLeave: (intersection) => {
-      panoBalls.forEach(panoBall => panoBall.userData.selected = 1);
       intersection.object.userData.selected = 0;
     },
     onSelectStart: (intersection, controller) => {

@@ -74042,9 +74042,6 @@ function setup(ctx, hall) {
       intersection.object.userData.selected = 1;
     },
     onHoverLeave: function onHoverLeave(intersection) {
-      panoBalls.forEach(function (panoBall) {
-        return panoBall.userData.selected = 1;
-      });
       intersection.object.userData.selected = 0;
     },
     onSelectStart: function onSelectStart(intersection, controller) {},
