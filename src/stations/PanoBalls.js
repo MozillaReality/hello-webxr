@@ -51,9 +51,11 @@ export function setup(ctx, hall) {
   ctx.raycontrol.addState('panoballs', {
     colliderMesh: panoballsParent,
     onHover: (intersection, active, controller) => {
+      panoBalls.forEach(panoBall => panoBall.userData.selected = 0);
       intersection.object.userData.selected = 1;
     },
     onHoverLeave: (intersection) => {
+      panoBalls.forEach(panoBall => panoBall.userData.selected = 1);
       intersection.object.userData.selected = 0;
     },
     onSelectStart: (intersection, controller) => {

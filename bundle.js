@@ -74036,9 +74036,15 @@ function setup(ctx, hall) {
   ctx.raycontrol.addState('panoballs', {
     colliderMesh: panoballsParent,
     onHover: function onHover(intersection, active, controller) {
+      panoBalls.forEach(function (panoBall) {
+        return panoBall.userData.selected = 0;
+      });
       intersection.object.userData.selected = 1;
     },
     onHoverLeave: function onHoverLeave(intersection) {
+      panoBalls.forEach(function (panoBall) {
+        return panoBall.userData.selected = 1;
+      });
       intersection.object.userData.selected = 0;
     },
     onSelectStart: function onSelectStart(intersection, controller) {},
