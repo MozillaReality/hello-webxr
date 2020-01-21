@@ -71329,12 +71329,41 @@ var urlObject = new URL(window.location);
 var roomName = urlObject.searchParams.get('stage');
 context.room = roomNames.indexOf(roomName) !== -1 ? roomNames.indexOf(roomName) : 0; // console.log(`Current room "${roomNames[context.room]}", ${context.room}`);
 
-var debug = urlObject.searchParams.has('debug');
+var debug = urlObject.searchParams.has('debug'); // Target positions when moving from one room to another
+// origin: {
+//  targetA: Vector3,
+//  targetB: Vector3
+// }
+
+var targetPositions = {
+  /*
+  'hall': {
+    'sound': THREE.Vector3(),
+    'photogrammetry': THREE.Vector3(),
+    'vertigo': THREE.Vector3()
+  },
+  */
+  sound: {
+    hall: three__WEBPACK_IMPORTED_MODULE_0__["Vector3"]()
+  }
+};
 
 function gotoRoom(room) {
   rooms[context.room].exit(context);
   raycontrol.deactivateAll();
   playMusic(room);
+  debugger;
+  var prevRoom = roomNames[context.room];
+  var nextRoom = roomNames[room];
+
+  if (targetPositions[prevRoom] && targetPositions[prevRoom][nextRoom]) {
+    var deltaPosition = new three__WEBPACK_IMPORTED_MODULE_0__["Vector3"]();
+    var targetPosition = targetPositions[context.room][room];
+    deltaPosition.subVectors(context.camera.position, targetPosition);
+    console.log(deltaPosition);
+    cameraRig.position.add(deltaPosition);
+  }
+
   context.room = room;
   rooms[context.room].enter(context);
 }

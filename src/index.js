@@ -87,11 +87,49 @@ context.room = roomNames.indexOf(roomName) !== -1 ? roomNames.indexOf(roomName) 
 // console.log(`Current room "${roomNames[context.room]}", ${context.room}`);
 const debug = urlObject.searchParams.has('debug');
 
+// Target positions when moving from one room to another
+// origin: {
+//  targetA: Vector3,
+//  targetB: Vector3
+// }
+const targetPositions = {
+  /*
+  'hall': {
+    'sound': THREE.Vector3(),
+    'photogrammetry': THREE.Vector3(),
+    'vertigo': THREE.Vector3()
+  },
+*/
+  photogrammetry: {
+    hall: new THREE.Vector3(-3.6, 0, 2.8)
+  },
+  sound: {
+    hall: new THREE.Vector3(4.4, 0, 4.8)
+  },
+  vertigo: {
+    hall: new THREE.Vector3(-1.8, 0, -5)
+  }
+};
+
 function gotoRoom(room) {
   rooms[context.room].exit(context);
   raycontrol.deactivateAll();
 
   playMusic(room);
+
+  const prevRoom = roomNames[context.room];
+  const nextRoom = roomNames[room];
+
+  if (targetPositions[prevRoom] && targetPositions[prevRoom][nextRoom]) {
+    let deltaPosition = new THREE.Vector3();
+    const targetPosition = targetPositions[prevRoom][nextRoom];
+    var camera = renderer.xr.getCamera(context.camera);
+
+    deltaPosition.x = camera.position.x - targetPosition.x;
+    deltaPosition.z = camera.position.z - targetPosition.z;
+
+    context.cameraRig.position.sub(deltaPosition);
+  }
 
   context.room = room;
 
