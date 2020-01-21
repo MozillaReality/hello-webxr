@@ -93,13 +93,11 @@ const debug = urlObject.searchParams.has('debug');
 //  targetB: Vector3
 // }
 const targetPositions = {
-  /*
   'hall': {
-    'sound': THREE.Vector3(),
-    'photogrammetry': THREE.Vector3(),
-    'vertigo': THREE.Vector3()
+    'sound': THREE.Vector3(0, 0, 0),
+    'photogrammetry': THREE.Vector3(0, 0, 0),
+    'vertigo': THREE.Vector3(0, 0, 0)
   },
-*/
   photogrammetry: {
     hall: new THREE.Vector3(-3.6, 0, 2.8)
   },

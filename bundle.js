@@ -71336,13 +71336,11 @@ var debug = urlObject.searchParams.has('debug'); // Target positions when moving
 // }
 
 var targetPositions = {
-  /*
   'hall': {
-    'sound': THREE.Vector3(),
-    'photogrammetry': THREE.Vector3(),
-    'vertigo': THREE.Vector3()
+    'sound': three__WEBPACK_IMPORTED_MODULE_0__["Vector3"](0, 0, 0),
+    'photogrammetry': three__WEBPACK_IMPORTED_MODULE_0__["Vector3"](0, 0, 0),
+    'vertigo': three__WEBPACK_IMPORTED_MODULE_0__["Vector3"](0, 0, 0)
   },
-  */
   photogrammetry: {
     hall: new three__WEBPACK_IMPORTED_MODULE_0__["Vector3"](-3.6, 0, 2.8)
   },
