@@ -72091,12 +72091,26 @@ function () {
   }, {
     key: "deactivateAll",
     value: function deactivateAll(name) {
+      var _this = this;
+
       this.currentStates = [];
+      this.controllers.forEach(function (c) {
+        _this.currentStates.forEach(function (s) {
+          if (c.intersections[s.name]) {
+            c.intersections[s.name] = null;
+          }
+        });
+      });
     }
   }, {
     key: "deactivateState",
     value: function deactivateState(name) {
       this.currentStates.splice(this.currentStates.indexOf(name), 1);
+      this.controllers.forEach(function (c) {
+        if (c.intersections[name]) {
+          c.intersections[name] = null;
+        }
+      });
 
       this._sort();
     }
@@ -72108,8 +72122,8 @@ function () {
         inputSource: inputSource,
         active: false,
         stateHit: {},
-        intersections: [],
-        closestIntersection: null,
+        intersections: {},
+        currentIntersection: null,
         hit: false
       };
       this.controllers.push(controllerData); // @TODO Determine if we should add it to this hand or not
@@ -72210,8 +72224,19 @@ function () {
 
       if (controllerData) {
         controllerData.active = true;
-        if (controllerData.closestIntersection.state) this.currentStates.forEach(function (state) {
-          if (state.onSelectStart && (!state.raycaster || controllerData.closestIntersection.state === state)) {//state.onSelectStart(controllerData.intersections[state.name], controller);
+
+        if (controllerData.currentIntersection) {
+          var state = controllerData.currentIntersection.state;
+
+          if (state.onSelectStart) {
+            state.onSelectStart(controllerData.currentIntersection.intersection, controllerData.controller);
+          }
+        } // Check no raycaster states
+
+
+        this.currentStates.forEach(function (state) {
+          if (state.onSelectStart && !state.raycaster) {
+            state.onSelectStart(controllerData.intersections[state.name], controller);
           }
         });
       }
@@ -72219,7 +72244,7 @@ function () {
   }, {
     key: "execute",
     value: function execute(ctx, delta, time) {
-      var _this = this;
+      var _this2 = this;
 
       if (!this.enabled || this.currentStates.length === 0) {
         return;
@@ -72232,30 +72257,25 @@ function () {
       for (var c = 0; c < this.controllers.length; c++) {
         var controllerData = this.controllers[c];
 
-        var _loop = function _loop() {
-          var state = _this.currentStates[i];
+        for (var i = 0; i < this.currentStates.length; i++) {
+          var state = this.currentStates[i];
 
           if (!state.raycaster) {
-            return "continue";
+            continue;
           } // Check if this controller should be active on this state
 
 
-          if (!_this.matchController(controllerData, state.controller)) {
-            return "continue";
+          if (!this.matchController(controllerData, state.controller)) {
+            continue;
           }
 
           var controller = controllerData.controller;
           var active = controllerData.active;
-
-          var intersections = _this.getIntersections(controller, state.colliderMesh);
+          var intersections = this.getIntersections(controller, state.colliderMesh);
 
           if (intersections.length > 0) {
             // Use just the closest object
-            var intersection = intersections[0];
-            controllerData.intersections.push({
-              state: state,
-              intersection: intersection
-            });
+            controllerData.intersections[state.name] = intersections[0];
             controllerData.stateHit[state.name] = true;
           } else {
             /*
@@ -72265,16 +72285,8 @@ function () {
             controllerData.stateHit[state.name] = false;
             controllerData.intersections[state.name] = null;
             */
-            controllerData.intersections.splice(controllerData.intersections.findIndex(function (i) {
-              return i.state === state;
-            }), 1);
+            controllerData.intersections[state.name] = null;
           }
-        };
-
-        for (var i = 0; i < this.currentStates.length; i++) {
-          var _ret = _loop();
-
-          if (_ret === "continue") continue;
         }
       } // For each controller, find the closest intersection from all the states
 
@@ -72282,27 +72294,35 @@ function () {
       for (var c = 0; c < this.controllers.length; c++) {
         var _controllerData = this.controllers[c];
 
-        if (_controllerData.intersections.length > 0) {
-          _controllerData.intersections.sort(function (a, b) {
+        var _intersections = Object.entries(_controllerData.intersections).filter(function (i) {
+          return i[1] !== null;
+        });
+
+        if (_intersections.length > 0) {
+          _intersections.sort(function (a, b) {
             return a[1].distance - b[1].distance;
           });
 
-          _controllerData.prevIntersection = _controllerData.closestIntersection;
-          _controllerData.closestIntersection = _controllerData.intersections[0];
-          var state = _controllerData.closestIntersection.state;
-          var intersection = _controllerData.closestIntersection.intersection;
+          var intersectionData = _intersections[0];
+          var intersection = intersectionData[1];
+          var _state = this.states[intersectionData[0]];
+          _controllerData.prevIntersection = _controllerData.currentIntersection;
+          _controllerData.currentIntersection = {
+            state: _state,
+            intersection: intersection
+          };
 
-          if (state.lineStyleOnIntersection) {
-            this.setLineStyle(state.lineStyleOnIntersection);
+          if (_state.lineStyleOnIntersection) {
+            this.setLineStyle(_state.lineStyleOnIntersection);
           } else {
             this.setLineStyle('advanced');
           }
 
-          state.onHover && state.onHover(intersection, _controllerData.active, _controllerData.controller);
+          _state.onHover && _state.onHover(intersection, _controllerData.active, _controllerData.controller);
           this.line0.scale.z = Math.min(intersection.distance, 1);
           this.lineBasic.scale.z = Math.min(intersection.distance, 1);
         } else {
-          _controllerData.closestIntersection = null;
+          _controllerData.currentIntersection = null;
         }
         /*
               if (intersections.length > 0) {
@@ -72335,17 +72355,17 @@ function () {
       } // Handle onHoverLeave
 
 
-      var _loop2 = function _loop2() {
-        var controllerData = _this.controllers[c];
+      var _loop = function _loop() {
+        var controllerData = _this2.controllers[c];
 
         if (!controllerData.prevIntersection) {
           return "continue";
         } // If we can't find the previous intersection currently enabled, we should emit hoverLeave
 
 
-        if (!_this.controllers.find(function (c) {
+        if (!_this2.controllers.find(function (c) {
           var prev = controllerData.prevIntersection;
-          var current = c.closestIntersection;
+          var current = c.currentIntersection;
           return current && prev.state.name === current.state.name && prev.intersection.object === current.intersection.object;
         })) {
           console.log('emiting hover leave');
@@ -72355,9 +72375,9 @@ function () {
       };
 
       for (var c = 0; c < this.controllers.length; c++) {
-        var _ret2 = _loop2();
+        var _ret = _loop();
 
-        if (_ret2 === "continue") continue;
+        if (_ret === "continue") continue;
       }
 
       if (!firstHit) {
@@ -72388,8 +72408,6 @@ function () {
   }, {
     key: "onSelectEnd",
     value: function onSelectEnd(evt) {
-      var _this2 = this;
-
       if (!this.enabled) {
         return;
       }
@@ -72402,12 +72420,34 @@ function () {
         return;
       }
 
-      this.currentStates.forEach(function (state) {
-        if (_this2.matchController(controllerData, state.controller) && (!state.raycaster || controllerData.stateHit[state.name])) {
-          state.onSelectEnd && state.onSelectEnd(controllerData.intersections[state.name]);
-          controllerData.stateHit[state.name] = false;
-        }
-      });
+      if (controllerData) {
+        if (controllerData.currentIntersection) {
+          var state = controllerData.currentIntersection.state;
+
+          if (state.onSelectEnd) {
+            state.onSelectEnd(controllerData.currentIntersection.intersection, controllerData.controller);
+          }
+        } // Check no raycaster states
+
+
+        this.currentStates.forEach(function (state) {
+          if (state.onSelectEnd && !state.raycaster) {
+            // @fixme null?
+            state.onSelectEnd(controllerData.intersections[state.name], controllerData.controller);
+          }
+        });
+      }
+      /*
+          this.currentStates.forEach(state => {
+            if (this.matchController(controllerData, state.controller) &&
+               (!state.raycaster || controllerData.stateHit[state.name])) {
+              state.onSelectEnd && state.onSelectEnd(controllerData.intersections[state.name]);
+              controllerData.stateHit[state.name] = false;
+            }
+          });
+      */
+
+
       controllerData.active = false;
     }
   }]);

@@ -256,11 +256,11 @@ export default class RayControl {
       let controllerData = this.controllers[c];
       let intersections = Object.entries(controllerData.intersections).filter(i => i[1] !== null);
       if (intersections.length > 0) {
-/*
+
         intersections.sort((a,b) => {
-          return a[1].distance - b[1].distance
+          return a[1].distance - b[1].distance;
         });
-*/
+
         const intersectionData = intersections[0];
         const intersection = intersectionData[1];
         const state = this.states[intersectionData[0]];
