@@ -72060,6 +72060,8 @@ function () {
         return;
       }
 
+      state.name = name;
+
       if (typeof state.raycaster === "undefined") {
         state.raycaster = true;
       }
@@ -72103,16 +72105,19 @@ function () {
   }, {
     key: "addController",
     value: function addController(controller, inputSource) {
-      this.controllers.push({
+      var controllerData = {
         controller: controller,
         inputSource: inputSource,
         active: false,
         stateHit: {},
-        intersection: null,
+        intersection: {},
         hit: false
-      }); // @TODO Determine if we should add it to this hand or not
+      };
+      this.controllers.push(controllerData); // @TODO Determine if we should add it to this hand or not
 
-      controller.add(this.raycasterContext.clone());
+      if (this.matchController(controllerData, "primary")) {
+        controller.add(this.raycasterContext);
+      }
     }
   }, {
     key: "removeController",
@@ -72210,8 +72215,8 @@ function () {
       if (controllerData) {
         controllerData.active = true;
         this.currentStates.forEach(function (state) {
-          if (state.onSelectStart && _this.matchController(controllerData, state.controller) && (!state.raycaster || controllerData.intersection && controllerData.intersection.state === state)) {
-            state.onSelectStart(controllerData.intersection, controller);
+          if (state.onSelectStart && _this.matchController(controllerData, state.controller) && (!state.raycaster || controllerData.intersection[state.name])) {
+            state.onSelectStart(controllerData.intersection[state.name], controller);
           }
         });
       }
@@ -72225,6 +72230,7 @@ function () {
 
       rayMaterial.uniforms.time.value = time;
       var firstHit = false;
+      var stateIntersections = {};
 
       for (var i = 0; i < this.currentStates.length; i++) {
         var state = this.currentStates[i];
@@ -72247,31 +72253,55 @@ function () {
           if (intersections.length > 0) {
             var intersection = intersections[0];
 
-            if (!this.exclusiveMode || !firstHit) {
-              controllerData.intersection = intersection;
-              controllerData.intersection.state = state;
-              controllerData.stateHit[state] = true;
+            if (!this.exclusiveMode
+            /* || !firstHit*/
+            ) {
+                controllerData.intersection[state.name] = intersection;
+                controllerData.stateHit[state.name] = true;
 
-              if (state.lineStyleOnIntersection) {
-                this.setLineStyle(state.lineStyleOnIntersection);
-              } else {
-                this.setLineStyle('advanced');
-              }
+                if (state.lineStyleOnIntersection) {
+                  this.setLineStyle(state.lineStyleOnIntersection);
+                } else {
+                  this.setLineStyle('advanced');
+                }
 
-              state.onHover && state.onHover(intersection, active, controller);
-              this.line0.scale.z = Math.min(intersection.distance, 1);
-              this.lineBasic.scale.z = Math.min(intersection.distance, 1);
-            }
+                state.onHover && state.onHover(intersection, active, controller);
+                this.line0.scale.z = Math.min(intersection.distance, 1);
+                this.lineBasic.scale.z = Math.min(intersection.distance, 1);
+              } //firstHit = true;
 
-            firstHit = true;
-          } else {
-            if (controllerData.stateHit[state] && state.onHoverLeave) {
-              state.onHoverLeave(controllerData.intersection, active, controller);
-            }
-
-            controllerData.stateHit[state] = false;
-            controllerData.intersection = null;
           }
+          /*else {
+          if (controllerData.stateHit[state.name] && state.onHoverLeave) {
+            state.onHoverLeave(controllerData.intersection[state.name], active, controller);
+          }
+          controllerData.stateHit[state.name] = false;
+          controllerData.intersection[state.name] = null;
+          }
+          */
+
+        }
+      }
+
+      for (var i = 0; i < this.currentStates.length; i++) {
+        var _state = this.currentStates[i];
+
+        if (!_state.raycaster) {
+          continue;
+        }
+
+        for (var c = 0; c < this.controllers.length; c++) {
+          var _controllerData = this.controllers[c];
+
+          var _intersections = Object.entries(_controllerData.intersection);
+
+          console.log(JSON.stringify(_intersections));
+
+          _intersections.sort(function (a, b) {
+            return a[1].distance - b[1].distance;
+          });
+
+          console.log(JSON.stringify(_intersections));
         }
       }
 
@@ -72318,9 +72348,9 @@ function () {
       }
 
       this.currentStates.forEach(function (state) {
-        if (_this2.matchController(controllerData, state.controller) && (!state.raycaster || controllerData.stateHit[state])) {
-          state.onSelectEnd && state.onSelectEnd(controllerData.intersection);
-          controllerData.stateHit[state] = false;
+        if (_this2.matchController(controllerData, state.controller) && (!state.raycaster || controllerData.stateHit[state.name])) {
+          state.onSelectEnd && state.onSelectEnd(controllerData.intersection[state.name]);
+          controllerData.stateHit[state.name] = false;
         }
       });
       controllerData.active = false;
