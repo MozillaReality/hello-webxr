@@ -21,7 +21,7 @@ export default class RayControl {
   disable() {
     this.lineBasic.visible = this.line0.visible = this.line1.visible = false;
     this.enabled = false;
-    this.active = false;
+    this.controllers.forEach(controller => controller.active = false);
   }
 
   addState(name, state, activate) {
@@ -61,16 +61,29 @@ export default class RayControl {
     this._sort();
   }
 
+  addController(controller) {
+    this.controllers.push({
+      active: false,
+      controller: controller
+    });
+  }
+
+  removeController(controller) {
+    const index = this.controllers.findIndex(controllerData => controllerData.controller === controller);
+    this.controllers.splice(index, 1);
+  }
+
   constructor(ctx) {
     this.ctx = ctx;
+
+    this.controllers = [];
+
     this.previousLineStyle = 'pretty';
     this.exclusiveMode = true; // it wil return on first hit
     this.enabled = true;
     this.raycaster = new THREE.Raycaster();
     this.states = {};
     this.currentStates = [];
-
-    this.active = false;
 
     var line = ctx.assets['teleport_model'].scene.getObjectByName('beam');
 
@@ -89,7 +102,6 @@ export default class RayControl {
 
     line.renderOrder = 10;
 
-
     line.name = 'line';
     this.rayLength = 5;
     line.scale.z = this.rayLength;
@@ -98,12 +110,12 @@ export default class RayControl {
     this.line1 = line.clone();
     this.line0.visible = this.line1.visible = true;
 
-    let raycasterContext = new THREE.Group();
-    raycasterContext.add(this.line0);
-    raycasterContext.name = 'raycasterContext';
+    this.raycasterContext = new THREE.Group();
+    this.raycasterContext.add(this.line0);
+    this.raycasterContext.name = 'raycasterContext';
 
     //ctx.controllers[1].add( this.line0 );
-    ctx.controllers[1].add( raycasterContext );
+    ctx.controllers[1].add( this.raycasterContext );
 
     var geometry = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, - 1 ) ] );
 
@@ -111,7 +123,7 @@ export default class RayControl {
     this.lineBasic.name = 'line';
     this.lineBasic.scale.z = 5;
     this.lineBasic.visible = false;
-    raycasterContext.add(this.lineBasic);
+    this.raycasterContext.add(this.lineBasic);
   }
 
   setLineStyle(lineStyle) {
