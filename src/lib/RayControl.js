@@ -66,6 +66,9 @@ export default class RayControl {
       active: false,
       controller: controller
     });
+
+    // @TODO Determine if we should add it to this hand or not
+    controller.add( this.raycasterContext );
   }
 
   removeController(controller) {
@@ -114,9 +117,6 @@ export default class RayControl {
     this.raycasterContext.add(this.line0);
     this.raycasterContext.name = 'raycasterContext';
 
-    //ctx.controllers[1].add( this.line0 );
-    ctx.controllers[1].add( this.raycasterContext );
-
     var geometry = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, - 1 ) ] );
 
     this.lineBasic = new THREE.Line( geometry );
@@ -137,8 +137,9 @@ export default class RayControl {
     if (!this.enabled) { return; }
 
     let controller = evt.target;
-    if (controller === this.ctx.controllers[1]) {
-      this.active = true;
+    let controllerData = this.controllers.find(c => c.controller === controller);
+    if (controllerData) {
+      controllerData.active = true;
 
       this.currentStates.forEach(state => {
         if ((!state.raycaster || state.intersection) && state.onSelectStart) {
@@ -161,32 +162,36 @@ export default class RayControl {
         continue;
       }
 
-      var controller = ctx.controllers[1];
-      var intersections = this.getIntersections(controller, state.colliderMesh);
+      for (var c = 0; c < this.controllers.length; c++) {
+        let controller = this.controllers[c].controller;
+        let active = this.controllers[c].active;
 
-      if (intersections.length > 0) {
-        let intersection = intersections[0]
+        var intersections = this.getIntersections(controller, state.colliderMesh);
 
-        if (!this.exclusiveMode || !firstHit) {
-          state.intersection = intersection;
-          state.hit = true;
-          if (state.lineStyleOnIntersection) {
-            this.setLineStyle(state.lineStyleOnIntersection);
-          } else {
-            this.setLineStyle('advanced');
+        if (intersections.length > 0) {
+          let intersection = intersections[0]
+
+          if (!this.exclusiveMode || !firstHit) {
+            state.intersection = intersection;
+            state.hit = true;
+            if (state.lineStyleOnIntersection) {
+              this.setLineStyle(state.lineStyleOnIntersection);
+            } else {
+              this.setLineStyle('advanced');
+            }
+            state.onHover && state.onHover(intersection, active, controller);
+            this.line0.scale.z = Math.min(intersection.distance, 1);
+            this.lineBasic.scale.z = Math.min(intersection.distance, 1);
           }
-          state.onHover && state.onHover(intersection, this.active, controller);
-          this.line0.scale.z = Math.min(intersection.distance, 1);
-          this.lineBasic.scale.z = Math.min(intersection.distance, 1);
+  
+          firstHit = true;
+        } else {
+          if (state.hit && state.onHoverLeave) {
+            state.onHoverLeave(state.intersection, active, controller);
+          }
+          state.hit = false;
+          state.intersection = null;
         }
-
-        firstHit = true;
-      } else {
-        if (state.hit && state.onHoverLeave) {
-          state.onHoverLeave(state.intersection, this.active, controller);
-        }
-        state.hit = false;
-        state.intersection = null;
       }
     }
 
@@ -199,6 +204,10 @@ export default class RayControl {
   getIntersections( controller, colliderMesh ) {
 
     let raycasterContext = controller.getObjectByName('raycasterContext');
+    if (!raycasterContext) {
+      console.warn('No raycasterContext found for this controller', controller);
+      return [];
+    }
 
     tempMatrix.identity().extractRotation( raycasterContext.matrixWorld );
 
@@ -212,8 +221,11 @@ export default class RayControl {
     }
   }
 
-  onSelectEnd() {
-    if (!this.enabled || !this.active) { return; }
+  onSelectEnd(evt) {
+    if (!this.enabled) { return; }
+
+    let controllerData = this.controllers.find(c => c.controller === evt.target)
+    if (!controllerData || !controllerData.active) { return; }
 
     this.currentStates.forEach(state => {
       if (!state.raycaster || state.hit) {
@@ -222,6 +234,6 @@ export default class RayControl {
       }
     });
 
-    this.active = false;
+    controllerData.active = false;
   }
 }
