@@ -86,11 +86,11 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "../ecsy/build/ecsy.module.js":
+/***/ "../core/build/ecsy.module.js":
 /*!************************************!*\
-  !*** ../ecsy/build/ecsy.module.js ***!
+  !*** ../core/build/ecsy.module.js ***!
   \************************************/
-/*! exports provided: Component, Not, System, SystemStateComponent, TagComponent, Types, Version, World, createComponentClass, createType */
+/*! exports provided: Component, Not, System, SystemStateComponent, TagComponent, Types, Version, World, createComponentClass, createType, enableRemoteDevtools */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -105,6 +105,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "World", function() { return World; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createComponentClass", function() { return createComponentClass; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createType", function() { return createType; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "enableRemoteDevtools", function() { return enableRemoteDevtools; });
 function isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function _construct(Parent, args, Class) { if (isNativeReflectConstruct()) { _construct = Reflect.construct; } else { _construct = function _construct(Parent, args, Class) { var a = [null]; a.push.apply(a, args); var Constructor = Function.bind.apply(Parent, a); var instance = new Constructor(); if (Class) _setPrototypeOf(instance, Class.prototype); return instance; }; } return _construct.apply(null, arguments); }
@@ -156,8 +157,12 @@ function () {
 
       this._systems.push(system);
 
-      if (system.execute) this._executeSystems.push(system);
-      this.sortSystems();
+      if (system.execute) {
+        this._executeSystems.push(system);
+
+        this.sortSystems();
+      }
+
       return this;
     }
   }, {
@@ -196,10 +201,9 @@ function () {
           var startTime = performance.now();
           system.execute(delta, time);
           system.executeTime = performance.now() - startTime;
+          this.lastExecutedSystem = system;
+          system.clearEvents();
         }
-
-        this.lastExecutedSystem = system;
-        system.clearEvents();
       }
     }
   }, {
@@ -1228,7 +1232,7 @@ function () {
 }();
 
 var name = "ecsy";
-var version = "0.1.4";
+var version = "0.2.1";
 var description = "Entity Component System in JS";
 var main = "build/ecsy.js";
 var module = "build/ecsy.module.js";
@@ -1328,6 +1332,8 @@ function () {
       });
       window.dispatchEvent(event);
     }
+
+    this.lastTime = performance.now();
   }
 
   _createClass(World, [{
@@ -1355,6 +1361,13 @@ function () {
   }, {
     key: "execute",
     value: function execute(delta, time) {
+      if (!delta) {
+        var _time = performance.now();
+
+        delta = _time - this.lastTime;
+        this.lastTime = _time;
+      }
+
       if (this.enabled) {
         this.systemManager.execute(delta, time);
         this.entityManager.processDeferredRemoval();
@@ -1846,6 +1859,158 @@ function createComponentClass(schema, name) {
   }
 
   return Component;
+}
+
+function generateId(length) {
+  var result = "";
+  var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  var charactersLength = characters.length;
+
+  for (var i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+
+  return result;
+}
+
+function injectScript(src, onLoad) {
+  var script = document.createElement("script"); // @todo Use link to the ecsy-devtools repo?
+
+  script.src = src;
+  script.onload = onLoad;
+  (document.head || document.documentElement).appendChild(script);
+}
+/* global Peer */
+
+
+function hookConsoleAndErrors(connection) {
+  var wrapFunctions = ["error", "warning", "log"];
+  wrapFunctions.forEach(function (key) {
+    if (typeof console[key] === "function") {
+      var fn = console[key].bind(console);
+
+      console[key] = function () {
+        for (var _len = arguments.length, args = new Array(_len), _key8 = 0; _key8 < _len; _key8++) {
+          args[_key8] = arguments[_key8];
+        }
+
+        connection.send({
+          method: "console",
+          type: key,
+          args: JSON.stringify(args)
+        });
+        return fn.apply(null, args);
+      };
+    }
+  });
+  window.addEventListener("error", function (error) {
+    connection.send({
+      method: "error",
+      error: JSON.stringify({
+        message: error.error.message,
+        stack: error.error.stack
+      })
+    });
+  });
+}
+
+function includeRemoteIdHTML(remoteId) {
+  var infoDiv = document.createElement("div");
+  infoDiv.style.cssText = "\n    align-items: center;\n    background-color: #333;\n    color: #aaa;\n    display:flex;\n    font-family: Arial;\n    font-size: 1.1em;\n    height: 40px;\n    justify-content: center;\n    left: 0;\n    opacity: 0.9;\n    position: absolute;\n    right: 0;\n    text-align: center;\n    top: 0;\n  ";
+  infoDiv.innerHTML = "Open ECSY devtools to connect to this page using the code:&nbsp;<b style=\"color: #fff\">".concat(remoteId, "</b>&nbsp;<button onClick=\"generateNewCode()\">Generate new code</button>");
+  document.body.appendChild(infoDiv);
+  return infoDiv;
+}
+
+function enableRemoteDevtools(remoteId) {
+  window.generateNewCode = function () {
+    window.localStorage.clear();
+    remoteId = generateId(6);
+    window.localStorage.setItem("ecsyRemoteId", remoteId);
+    window.location.reload(false);
+  };
+
+  remoteId = remoteId || window.localStorage.getItem("ecsyRemoteId");
+
+  if (!remoteId) {
+    remoteId = generateId(6);
+    window.localStorage.setItem("ecsyRemoteId", remoteId);
+  }
+
+  var infoDiv = includeRemoteIdHTML(remoteId);
+  window.__ECSY_REMOTE_DEVTOOLS_INJECTED = true;
+  window.__ECSY_REMOTE_DEVTOOLS = {};
+  var Version = ""; // This is used to collect the worlds created before the communication is being established
+
+  var worldsBeforeLoading = [];
+
+  var onWorldCreated = function onWorldCreated(e) {
+    var world = e.detail.world;
+    Version = e.detail.version;
+    worldsBeforeLoading.push(world);
+  };
+
+  window.addEventListener("ecsy-world-created", onWorldCreated);
+
+  var onLoaded = function onLoaded() {
+    var peer = new Peer(remoteId);
+    peer.on("open", function ()
+    /* id */
+    {
+      peer.on("connection", function (connection) {
+        window.__ECSY_REMOTE_DEVTOOLS.connection = connection;
+        connection.on("open", function () {
+          // infoDiv.style.visibility = "hidden";
+          infoDiv.innerHTML = "Connected"; // Receive messages
+
+          connection.on("data", function (data) {
+            if (data.type === "init") {
+              var script = document.createElement("script");
+              script.setAttribute("type", "text/javascript");
+
+              script.onload = function () {
+                script.parentNode.removeChild(script); // Once the script is injected we don't need to listen
+
+                window.removeEventListener("ecsy-world-created", onWorldCreated);
+                worldsBeforeLoading.forEach(function (world) {
+                  var event = new CustomEvent("ecsy-world-created", {
+                    detail: {
+                      world: world,
+                      version: Version
+                    }
+                  });
+                  window.dispatchEvent(event);
+                });
+              };
+
+              script.innerHTML = data.script;
+              (document.head || document.documentElement).appendChild(script);
+              script.onload();
+              hookConsoleAndErrors(connection);
+            } else if (data.type === "executeScript") {
+              var value = eval(data.script);
+
+              if (data.returnEval) {
+                connection.send({
+                  method: "evalReturn",
+                  value: value
+                });
+              }
+            }
+          });
+        });
+      });
+    });
+  }; // Inject PeerJS script
+
+
+  injectScript("https://cdn.jsdelivr.net/npm/peerjs@0.3.20/dist/peer.min.js", onLoaded);
+}
+
+var urlParams = new URLSearchParams(window.location.search); // @todo Provide a way to disable it if needed
+
+if (urlParams.has("enable-remote-devtools")) {
+  enableRemoteDevtools();
 }
 
 
@@ -70760,7 +70925,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Children", function() { return Children; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Opacity", function() { return Opacity; });
 /* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.module.js");
-/* harmony import */ var ecsy__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ecsy */ "../ecsy/build/ecsy.module.js");
+/* harmony import */ var ecsy__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ecsy */ "../core/build/ecsy.module.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
@@ -71098,7 +71263,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var three_examples_jsm_controls_PointerLockControls_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! three/examples/jsm/controls/PointerLockControls.js */ "./node_modules/three/examples/jsm/controls/PointerLockControls.js");
 /* harmony import */ var three_examples_jsm_webxr_VRButton_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! three/examples/jsm/webxr/VRButton.js */ "./node_modules/three/examples/jsm/webxr/VRButton.js");
 /* harmony import */ var _lib_assetManager_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./lib/assetManager.js */ "./src/lib/assetManager.js");
-/* harmony import */ var ecsy__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ecsy */ "../ecsy/build/ecsy.module.js");
+/* harmony import */ var ecsy__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ecsy */ "../core/build/ecsy.module.js");
 /* harmony import */ var _systems_SDFTextSystem_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./systems/SDFTextSystem.js */ "./src/systems/SDFTextSystem.js");
 /* harmony import */ var _systems_DebugHelperSystem_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./systems/DebugHelperSystem.js */ "./src/systems/DebugHelperSystem.js");
 /* harmony import */ var _systems_AreaCheckerSystem_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./systems/AreaCheckerSystem.js */ "./src/systems/AreaCheckerSystem.js");
@@ -74148,7 +74313,7 @@ function onSelectEnd(evt) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AreaCheckerSystem", function() { return AreaCheckerSystem; });
 /* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.module.js");
-/* harmony import */ var ecsy__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ecsy */ "../ecsy/build/ecsy.module.js");
+/* harmony import */ var ecsy__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ecsy */ "../core/build/ecsy.module.js");
 /* harmony import */ var _components_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/index.js */ "./src/components/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -74230,7 +74395,7 @@ AreaCheckerSystem.queries = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return BillboardSystem; });
 /* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.module.js");
-/* harmony import */ var ecsy__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ecsy */ "../ecsy/build/ecsy.module.js");
+/* harmony import */ var ecsy__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ecsy */ "../core/build/ecsy.module.js");
 /* harmony import */ var _components_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/index.js */ "./src/components/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -74319,7 +74484,7 @@ BillboardSystem.queries = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ControllersSystem", function() { return ControllersSystem; });
 /* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.module.js");
-/* harmony import */ var ecsy__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ecsy */ "../ecsy/build/ecsy.module.js");
+/* harmony import */ var ecsy__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ecsy */ "../core/build/ecsy.module.js");
 /* harmony import */ var _components_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/index.js */ "./src/components/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -74400,7 +74565,7 @@ ControllersSystem.queries = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DebugHelperSystem", function() { return DebugHelperSystem; });
 /* harmony import */ var _components_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/index.js */ "./src/components/index.js");
-/* harmony import */ var ecsy__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ecsy */ "../ecsy/build/ecsy.module.js");
+/* harmony import */ var ecsy__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ecsy */ "../core/build/ecsy.module.js");
 /* harmony import */ var three__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.module.js");
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
@@ -74534,7 +74699,7 @@ DebugHelperSystem.queries = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return HierarchySystem; });
 /* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.module.js");
-/* harmony import */ var ecsy__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ecsy */ "../ecsy/build/ecsy.module.js");
+/* harmony import */ var ecsy__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ecsy */ "../core/build/ecsy.module.js");
 /* harmony import */ var _components_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/index.js */ "./src/components/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -74618,7 +74783,7 @@ HierarchySystem.queries = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SDFTextSystem", function() { return SDFTextSystem; });
 /* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.module.js");
-/* harmony import */ var ecsy__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ecsy */ "../ecsy/build/ecsy.module.js");
+/* harmony import */ var ecsy__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ecsy */ "../core/build/ecsy.module.js");
 /* harmony import */ var troika_3d_text_dist_textmesh_standalone_esm_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! troika-3d-text/dist/textmesh-standalone.esm.js */ "./node_modules/troika-3d-text/dist/textmesh-standalone.esm.js");
 /* harmony import */ var _components_index_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/index.js */ "./src/components/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -74796,7 +74961,7 @@ function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return TransformSystem; });
-/* harmony import */ var ecsy__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ecsy */ "../ecsy/build/ecsy.module.js");
+/* harmony import */ var ecsy__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ecsy */ "../core/build/ecsy.module.js");
 /* harmony import */ var _components_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/index.js */ "./src/components/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
