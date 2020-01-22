@@ -86,6 +86,7 @@ export default class ColorWheel {
       onHoverLeave: (intersection) => {
       },
       onSelectStart: (intersection, controller) => {
+        debugger;
         if (intersection.object.name === 'colorWheel') {
 
           var point = intersection.point.clone();

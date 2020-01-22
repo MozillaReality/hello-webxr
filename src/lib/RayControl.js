@@ -1,8 +1,14 @@
 import * as THREE from 'three';
 
 var tempMatrix = new THREE.Matrix4();
-var intersected = [];
 export var rayMaterial;
+const validStateController = [
+  "primary",
+  "secondary",
+  "both",
+  "left",
+  "right"
+];
 
 export default class RayControl {
   enable() {
@@ -34,9 +40,14 @@ export default class RayControl {
       state.raycaster = true;
     }
 
+    if (typeof state.controller === "undefined") {
+      state.controller = "primary";
+    } else if (!validStateController.includes(state.controller)) {
+      console.warn("Invalid controller selector:", state.controller);
+      state.controller = "primary";
+    }
+
     this.states[name] = state;
-    state.hit = false;
-    state.intersection = null;
 
     if (activate === true) {
       this.currentStates.push(state);
@@ -61,14 +72,18 @@ export default class RayControl {
     this._sort();
   }
 
-  addController(controller) {
+  addController(controller, inputSource) {
     this.controllers.push({
+      controller: controller,
+      inputSource: inputSource,
       active: false,
-      controller: controller
+      stateHit: {},
+      intersection: null,
+      hit: false
     });
 
     // @TODO Determine if we should add it to this hand or not
-    controller.add( this.raycasterContext );
+    controller.add( this.raycasterContext.clone() );
   }
 
   removeController(controller) {
@@ -133,6 +148,23 @@ export default class RayControl {
     this.previousLineStyle = lineStyle;
   }
 
+  /*
+  selector could be: left, right, both, primary, secondary
+  */
+  matchController(controllerData, selector) {
+    const primary = "right";
+    const secondary = "left";
+
+    const handedness = controllerData.inputSource.handedness;
+
+    return (
+      (selector === handedness)  ||
+      (selector === "both" && (handedness === "right" || handedness === "left")) ||
+      (selector === "primary" && primary === handedness) ||
+      (selector === "secondary" && secondary === handedness)
+    );
+  }
+
   onSelectStart(evt) {
     if (!this.enabled) { return; }
 
@@ -142,8 +174,10 @@ export default class RayControl {
       controllerData.active = true;
 
       this.currentStates.forEach(state => {
-        if ((!state.raycaster || state.intersection) && state.onSelectStart) {
-          state.onSelectStart(state.intersection, controller);
+        if (state.onSelectStart &&
+            this.matchController(controllerData, state.controller) &&
+            (!state.raycaster || controllerData.intersection && controllerData.intersection.state === state)) {
+          state.onSelectStart(controllerData.intersection, controller);
         }
       });
     }
@@ -163,17 +197,23 @@ export default class RayControl {
       }
 
       for (var c = 0; c < this.controllers.length; c++) {
-        let controller = this.controllers[c].controller;
-        let active = this.controllers[c].active;
+        let controllerData = this.controllers[c];
 
-        var intersections = this.getIntersections(controller, state.colliderMesh);
+        if (!this.matchController(controllerData, state.controller)) {
+          continue;
+        }
+
+        let controller = controllerData.controller;
+        let active = controllerData.active;
+        let intersections = this.getIntersections(controller, state.colliderMesh);
 
         if (intersections.length > 0) {
           let intersection = intersections[0]
 
           if (!this.exclusiveMode || !firstHit) {
-            state.intersection = intersection;
-            state.hit = true;
+            controllerData.intersection = intersection;
+            controllerData.intersection.state = state;
+            controllerData.stateHit[state] = true;
             if (state.lineStyleOnIntersection) {
               this.setLineStyle(state.lineStyleOnIntersection);
             } else {
@@ -183,14 +223,14 @@ export default class RayControl {
             this.line0.scale.z = Math.min(intersection.distance, 1);
             this.lineBasic.scale.z = Math.min(intersection.distance, 1);
           }
-  
+
           firstHit = true;
         } else {
-          if (state.hit && state.onHoverLeave) {
-            state.onHoverLeave(state.intersection, active, controller);
+          if (controllerData.stateHit[state] && state.onHoverLeave) {
+            state.onHoverLeave(controllerData.intersection, active, controller);
           }
-          state.hit = false;
-          state.intersection = null;
+          controllerData.stateHit[state] = false;
+          controllerData.intersection = null;
         }
       }
     }
@@ -202,10 +242,9 @@ export default class RayControl {
   }
 
   getIntersections( controller, colliderMesh ) {
-
     let raycasterContext = controller.getObjectByName('raycasterContext');
     if (!raycasterContext) {
-      console.warn('No raycasterContext found for this controller', controller);
+      //console.warn('No raycasterContext found for this controller', controller);
       return [];
     }
 
@@ -228,9 +267,10 @@ export default class RayControl {
     if (!controllerData || !controllerData.active) { return; }
 
     this.currentStates.forEach(state => {
-      if (!state.raycaster || state.hit) {
-        state.onSelectEnd && state.onSelectEnd(state.intersection);
-        state.hit = false;
+      if (this.matchController(controllerData, state.controller) &&
+         (!state.raycaster || controllerData.stateHit[state])) {
+        state.onSelectEnd && state.onSelectEnd(controllerData.intersection);
+        controllerData.stateHit[state] = false;
       }
     });
 

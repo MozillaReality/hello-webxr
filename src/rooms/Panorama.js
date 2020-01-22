@@ -46,6 +46,7 @@ export function setup(ctx) {
 
   ctx.raycontrol.addState('panorama', {
     raycaster: false,
+    controller: 'both',
     onSelectEnd: onSelectEnd
   });
 }

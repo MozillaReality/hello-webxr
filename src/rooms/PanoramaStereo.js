@@ -13,6 +13,7 @@ export function setup(ctx) {
 
   ctx.raycontrol.addState('panoramaStereo', {
     raycaster: false,
+    controller: 'both',
     onSelectEnd: onSelectEnd
   });
 }

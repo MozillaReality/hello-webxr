@@ -71533,9 +71533,11 @@ function setupControllers() {
     controller.userData.grabbing = null;
     controller.addEventListener('connected', function (event) {
       this.add(model.clone());
+      raycontrol.addController(this, event.data);
     });
     controller.addEventListener('disconnect', function () {
       this.remove(this.children[0]);
+      raycontrol.removeController(this, event.data);
     });
   }
 } // @FIXME Hack for Oculus Browser issue
@@ -71854,6 +71856,8 @@ function () {
       },
       onHoverLeave: function onHoverLeave(intersection) {},
       onSelectStart: function onSelectStart(intersection, controller) {
+        debugger;
+
         if (intersection.object.name === 'colorWheel') {
           var point = intersection.point.clone();
 
@@ -72018,8 +72022,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 var tempMatrix = new three__WEBPACK_IMPORTED_MODULE_0__["Matrix4"]();
-var intersected = [];
 var rayMaterial;
+var validStateController = ["primary", "secondary", "both", "left", "right"];
 
 var RayControl =
 /*#__PURE__*/
@@ -72044,7 +72048,9 @@ function () {
     value: function disable() {
       this.lineBasic.visible = this.line0.visible = this.line1.visible = false;
       this.enabled = false;
-      this.active = false;
+      this.controllers.forEach(function (controller) {
+        return controller.active = false;
+      });
     }
   }, {
     key: "addState",
@@ -72058,9 +72064,14 @@ function () {
         state.raycaster = true;
       }
 
+      if (typeof state.controller === "undefined") {
+        state.controller = "primary";
+      } else if (!validStateController.includes(state.controller)) {
+        console.warn("Invalid controller selector:", state.controller);
+        state.controller = "primary";
+      }
+
       this.states[name] = state;
-      state.hit = false;
-      state.intersection = null;
 
       if (activate === true) {
         this.currentStates.push(state);
@@ -72089,12 +72100,35 @@ function () {
 
       this._sort();
     }
+  }, {
+    key: "addController",
+    value: function addController(controller, inputSource) {
+      this.controllers.push({
+        controller: controller,
+        inputSource: inputSource,
+        active: false,
+        stateHit: {},
+        intersection: null,
+        hit: false
+      }); // @TODO Determine if we should add it to this hand or not
+
+      controller.add(this.raycasterContext.clone());
+    }
+  }, {
+    key: "removeController",
+    value: function removeController(controller) {
+      var index = this.controllers.findIndex(function (controllerData) {
+        return controllerData.controller === controller;
+      });
+      this.controllers.splice(index, 1);
+    }
   }]);
 
   function RayControl(ctx) {
     _classCallCheck(this, RayControl);
 
     this.ctx = ctx;
+    this.controllers = [];
     this.previousLineStyle = 'pretty';
     this.exclusiveMode = true; // it wil return on first hit
 
@@ -72102,7 +72136,6 @@ function () {
     this.raycaster = new three__WEBPACK_IMPORTED_MODULE_0__["Raycaster"]();
     this.states = {};
     this.currentStates = [];
-    this.active = false;
     var line = ctx.assets['teleport_model'].scene.getObjectByName('beam');
     ctx.assets['beam_tex'].wrapT = three__WEBPACK_IMPORTED_MODULE_0__["RepeatWrapping"];
     ctx.assets['beam_tex'].wrapS = three__WEBPACK_IMPORTED_MODULE_0__["RepeatWrapping"];
@@ -72129,17 +72162,15 @@ function () {
     this.line0 = line.clone();
     this.line1 = line.clone();
     this.line0.visible = this.line1.visible = true;
-    var raycasterContext = new three__WEBPACK_IMPORTED_MODULE_0__["Group"]();
-    raycasterContext.add(this.line0);
-    raycasterContext.name = 'raycasterContext'; //ctx.controllers[1].add( this.line0 );
-
-    ctx.controllers[1].add(raycasterContext);
+    this.raycasterContext = new three__WEBPACK_IMPORTED_MODULE_0__["Group"]();
+    this.raycasterContext.add(this.line0);
+    this.raycasterContext.name = 'raycasterContext';
     var geometry = new three__WEBPACK_IMPORTED_MODULE_0__["BufferGeometry"]().setFromPoints([new three__WEBPACK_IMPORTED_MODULE_0__["Vector3"](0, 0, 0), new three__WEBPACK_IMPORTED_MODULE_0__["Vector3"](0, 0, -1)]);
     this.lineBasic = new three__WEBPACK_IMPORTED_MODULE_0__["Line"](geometry);
     this.lineBasic.name = 'line';
     this.lineBasic.scale.z = 5;
     this.lineBasic.visible = false;
-    raycasterContext.add(this.lineBasic);
+    this.raycasterContext.add(this.lineBasic);
   }
 
   _createClass(RayControl, [{
@@ -72150,20 +72181,37 @@ function () {
       this.line0.visible = !basic;
       this.previousLineStyle = lineStyle;
     }
+    /*
+    selector could be: left, right, both, primary, secondary
+    */
+
+  }, {
+    key: "matchController",
+    value: function matchController(controllerData, selector) {
+      var primary = "right";
+      var secondary = "left";
+      var handedness = controllerData.inputSource.handedness;
+      return selector === handedness || selector === "both" && (handedness === "right" || handedness === "left") || selector === "primary" && primary === handedness || selector === "secondary" && secondary === handedness;
+    }
   }, {
     key: "onSelectStart",
     value: function onSelectStart(evt) {
+      var _this = this;
+
       if (!this.enabled) {
         return;
       }
 
       var controller = evt.target;
+      var controllerData = this.controllers.find(function (c) {
+        return c.controller === controller;
+      });
 
-      if (controller === this.ctx.controllers[1]) {
-        this.active = true;
+      if (controllerData) {
+        controllerData.active = true;
         this.currentStates.forEach(function (state) {
-          if ((!state.raycaster || state.intersection) && state.onSelectStart) {
-            state.onSelectStart(state.intersection, controller);
+          if (state.onSelectStart && _this.matchController(controllerData, state.controller) && (!state.raycaster || controllerData.intersection && controllerData.intersection.state === state)) {
+            state.onSelectStart(controllerData.intersection, controller);
           }
         });
       }
@@ -72185,35 +72233,45 @@ function () {
           continue;
         }
 
-        var controller = ctx.controllers[1];
-        var intersections = this.getIntersections(controller, state.colliderMesh);
+        for (var c = 0; c < this.controllers.length; c++) {
+          var controllerData = this.controllers[c];
 
-        if (intersections.length > 0) {
-          var intersection = intersections[0];
+          if (!this.matchController(controllerData, state.controller)) {
+            continue;
+          }
 
-          if (!this.exclusiveMode || !firstHit) {
-            state.intersection = intersection;
-            state.hit = true;
+          var controller = controllerData.controller;
+          var active = controllerData.active;
+          var intersections = this.getIntersections(controller, state.colliderMesh);
 
-            if (state.lineStyleOnIntersection) {
-              this.setLineStyle(state.lineStyleOnIntersection);
-            } else {
-              this.setLineStyle('advanced');
+          if (intersections.length > 0) {
+            var intersection = intersections[0];
+
+            if (!this.exclusiveMode || !firstHit) {
+              controllerData.intersection = intersection;
+              controllerData.intersection.state = state;
+              controllerData.stateHit[state] = true;
+
+              if (state.lineStyleOnIntersection) {
+                this.setLineStyle(state.lineStyleOnIntersection);
+              } else {
+                this.setLineStyle('advanced');
+              }
+
+              state.onHover && state.onHover(intersection, active, controller);
+              this.line0.scale.z = Math.min(intersection.distance, 1);
+              this.lineBasic.scale.z = Math.min(intersection.distance, 1);
             }
 
-            state.onHover && state.onHover(intersection, this.active, controller);
-            this.line0.scale.z = Math.min(intersection.distance, 1);
-            this.lineBasic.scale.z = Math.min(intersection.distance, 1);
-          }
+            firstHit = true;
+          } else {
+            if (controllerData.stateHit[state] && state.onHoverLeave) {
+              state.onHoverLeave(controllerData.intersection, active, controller);
+            }
 
-          firstHit = true;
-        } else {
-          if (state.hit && state.onHoverLeave) {
-            state.onHoverLeave(state.intersection, this.active, controller);
+            controllerData.stateHit[state] = false;
+            controllerData.intersection = null;
           }
-
-          state.hit = false;
-          state.intersection = null;
         }
       }
 
@@ -72226,6 +72284,12 @@ function () {
     key: "getIntersections",
     value: function getIntersections(controller, colliderMesh) {
       var raycasterContext = controller.getObjectByName('raycasterContext');
+
+      if (!raycasterContext) {
+        //console.warn('No raycasterContext found for this controller', controller);
+        return [];
+      }
+
       tempMatrix.identity().extractRotation(raycasterContext.matrixWorld);
       this.raycaster.ray.origin.setFromMatrixPosition(raycasterContext.matrixWorld);
       this.raycaster.ray.direction.set(0, 0, -1).applyMatrix4(tempMatrix);
@@ -72238,18 +72302,28 @@ function () {
     }
   }, {
     key: "onSelectEnd",
-    value: function onSelectEnd() {
-      if (!this.enabled || !this.active) {
+    value: function onSelectEnd(evt) {
+      var _this2 = this;
+
+      if (!this.enabled) {
+        return;
+      }
+
+      var controllerData = this.controllers.find(function (c) {
+        return c.controller === evt.target;
+      });
+
+      if (!controllerData || !controllerData.active) {
         return;
       }
 
       this.currentStates.forEach(function (state) {
-        if (!state.raycaster || state.hit) {
-          state.onSelectEnd && state.onSelectEnd(state.intersection);
-          state.hit = false;
+        if (_this2.matchController(controllerData, state.controller) && (!state.raycaster || controllerData.stateHit[state])) {
+          state.onSelectEnd && state.onSelectEnd(controllerData.intersection);
+          controllerData.stateHit[state] = false;
         }
       });
-      this.active = false;
+      controllerData.active = false;
     }
   }]);
 
@@ -72835,6 +72909,7 @@ function setup(ctx) {
   });
   ctx.raycontrol.addState('panorama', {
     raycaster: false,
+    controller: 'both',
     onSelectEnd: onSelectEnd
   });
 }
@@ -72894,6 +72969,7 @@ function setup(ctx) {
   panoR.layers.set(2);
   ctx.raycontrol.addState('panoramaStereo', {
     raycaster: false,
+    controller: 'both',
     onSelectEnd: onSelectEnd
   });
 }
