@@ -69,5 +69,10 @@ export default [
     title: 'Paintings',
     description: 'Real-scale paintings that can be inspected very closely using the controller.',
     offsety: 0.04
+  },
+  {
+    title: 'WELCOME!',
+    description: 'Aim your controller and press the trigger to teleport around and interact with objects.\n\nWe currently have 3 rooms and 5 experiences to explore. Try them all!',
+    offsety: 0.06
   }
 ];

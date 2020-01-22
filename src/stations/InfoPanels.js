@@ -8,7 +8,7 @@ export function setup(ctx, hall) {
   for (var i = 0; i < INFO_DATA.length; i++) {
     const id = i < 10 ? '0' + i : i;
     panels[i] = hall.getObjectByName('infopanel0'+id);
-
+console.log(panels[i].name);
     panels[i].geometry.computeBoundingBox();
     const panelWidth = panels[i].geometry.boundingBox.max.x - panels[i].geometry.boundingBox.min.x;
     const panelHeight = panels[i].geometry.boundingBox.max.y - panels[i].geometry.boundingBox.min.y;
