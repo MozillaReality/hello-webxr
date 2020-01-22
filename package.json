@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/MozillaReality/hello-webxr#readme",
   "dependencies": {
-    "ecsy": "^0.2.2",
+    "ecsy": "github:mozillareality/ecsy#master",
     "three": "^0.112.0",
     "three-obj-loader": "^1.1.3",
     "three-pointerlock": "0.0.2",
