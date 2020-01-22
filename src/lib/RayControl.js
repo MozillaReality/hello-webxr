@@ -219,11 +219,7 @@ export default class RayControl {
 
         if (intersections.length > 0) {
           // Use just the closest object
-          let intersection = intersections[0];
-          controllerData.intersections.push({
-            state: state,
-            intersection: intersection
-          });
+          controllerData.intersections[state.name] = intersections[0];
           controllerData.stateHit[state.name] = true;
         } else {
           /*
@@ -233,7 +229,7 @@ export default class RayControl {
           controllerData.stateHit[state.name] = false;
           controllerData.intersections[state.name] = null;
           */
-         controllerData.intersections.splice(controllerData.intersections.findIndex(i => i.state === state), 1);
+          controllerData.intersections[state.name] = null;
         }
       }
     }
@@ -241,27 +237,34 @@ export default class RayControl {
     // For each controller, find the closest intersection from all the states
     for (var c = 0; c < this.controllers.length; c++) {
       let controllerData = this.controllers[c];
-      if (controllerData.intersections.length > 0) {
-        controllerData.intersections.sort((a,b) => {
+      /*if (controllerData.intersections.length > 0) {
+        */
+        let intersections = Object.entries(controllerData.intersections).filter(i => i[1] !== null);
+      if (intersections.length > 0) {
+
+        intersections.sort((a,b) => {
           return a[1].distance - b[1].distance
         });
 
+        const intersectionData = intersections[0];
+        const intersection = intersectionData[1];
+        const state = this.states[intersectionData[0]];
+
         controllerData.prevIntersection = controllerData.closestIntersection;
-        controllerData.closestIntersection = controllerData.intersections[0];
+        controllerData.closestIntersection = {
+          state, intersection
+        };
 
-        let state = controllerData.closestIntersection.state;
-        let intersection = controllerData.closestIntersection.intersection;
-
-        if (state.lineStyleOnIntersection) {
+        //if (state.lineStyleOnIntersection) {
           this.setLineStyle(state.lineStyleOnIntersection);
-        } else {
-          this.setLineStyle('advanced');
-        }
+        //} else {
+//          this.setLineStyle('advanced');
+        //}
 
+        console.log('data', intersectionData, 'intersection', intersection, 'state', state);
         state.onHover && state.onHover(intersection, controllerData.active, controllerData.controller);
         this.line0.scale.z = Math.min(intersection.distance, 1);
         this.lineBasic.scale.z = Math.min(intersection.distance, 1);
-
       } else {
         controllerData.closestIntersection = null;
       }
