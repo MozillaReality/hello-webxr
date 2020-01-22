@@ -67,10 +67,23 @@ export default class RayControl {
 
   deactivateAll(name) {
     this.currentStates = [];
+    this.controllers.forEach(c => {
+      this.currentStates.forEach(s => {
+        if (c.intersections[s.name]) {
+          c.intersections[s.name] = null;
+        }
+      });
+    });
   }
 
   deactivateState(name) {
     this.currentStates.splice(this.currentStates.indexOf(name), 1);
+    this.controllers.forEach(c => {
+      if (c.intersections[name]) {
+        c.intersections[name] = null;
+      }
+    });
+
     this._sort();
   }
 
@@ -80,8 +93,8 @@ export default class RayControl {
       inputSource: inputSource,
       active: false,
       stateHit: {},
-      intersections: [],
-      closestIntersection: null,
+      intersections: {},
+      currentIntersection: null,
       hit: false
     };
 
@@ -179,13 +192,17 @@ export default class RayControl {
     let controllerData = this.controllers.find(c => c.controller === controller);
     if (controllerData) {
       controllerData.active = true;
+      if (controllerData.currentIntersection) {
+        const state = controllerData.currentIntersection.state;
+        if (state.onSelectStart) {
+          state.onSelectStart(controllerData.currentIntersection.intersection, controllerData.controller);
+        }
+      }
 
-      if (controllerData.closestIntersection.state)
-
+      // Check no raycaster states
       this.currentStates.forEach(state => {
-        if (state.onSelectStart &&
-            (!state.raycaster || controllerData.closestIntersection.state === state)) {
-          //state.onSelectStart(controllerData.intersections[state.name], controller);
+        if (state.onSelectStart && !state.raycaster) {
+          state.onSelectStart(controllerData.intersections[state.name], controller);
         }
       });
     }
@@ -237,21 +254,19 @@ export default class RayControl {
     // For each controller, find the closest intersection from all the states
     for (var c = 0; c < this.controllers.length; c++) {
       let controllerData = this.controllers[c];
-      /*if (controllerData.intersections.length > 0) {
-        */
-        let intersections = Object.entries(controllerData.intersections).filter(i => i[1] !== null);
+      let intersections = Object.entries(controllerData.intersections).filter(i => i[1] !== null);
       if (intersections.length > 0) {
-
+/*
         intersections.sort((a,b) => {
           return a[1].distance - b[1].distance
         });
-
+*/
         const intersectionData = intersections[0];
         const intersection = intersectionData[1];
         const state = this.states[intersectionData[0]];
 
-        controllerData.prevIntersection = controllerData.closestIntersection;
-        controllerData.closestIntersection = {
+        controllerData.prevIntersection = controllerData.currentIntersection;
+        controllerData.currentIntersection = {
           state, intersection
         };
 
@@ -261,12 +276,11 @@ export default class RayControl {
           this.setLineStyle('advanced');
         }
 
-        console.log('data', intersectionData, 'intersection', intersection, 'state', state);
         state.onHover && state.onHover(intersection, controllerData.active, controllerData.controller);
         this.line0.scale.z = Math.min(intersection.distance, 1);
         this.lineBasic.scale.z = Math.min(intersection.distance, 1);
       } else {
-        controllerData.closestIntersection = null;
+        controllerData.currentIntersection = null;
       }
 
 
@@ -309,7 +323,7 @@ export default class RayControl {
       // If we can't find the previous intersection currently enabled, we should emit hoverLeave
       if (!this.controllers.find(c => {
         let prev = controllerData.prevIntersection;
-        let current = c.closestIntersection;
+        let current = c.currentIntersection;
         return current && prev.state.name === current.state.name &&
           prev.intersection.object === current.intersection.object;
       }
@@ -356,6 +370,23 @@ export default class RayControl {
     let controllerData = this.controllers.find(c => c.controller === evt.target)
     if (!controllerData || !controllerData.active) { return; }
 
+    if (controllerData) {
+      if (controllerData.currentIntersection) {
+        const state = controllerData.currentIntersection.state;
+        if (state.onSelectEnd) {
+          state.onSelectEnd(controllerData.currentIntersection.intersection, controllerData.controller);
+        }
+      }
+
+      // Check no raycaster states
+      this.currentStates.forEach(state => {
+        if (state.onSelectEnd && !state.raycaster) {
+          // @fixme null?
+          state.onSelectEnd(controllerData.intersections[state.name], controllerData.controller);
+        }
+      });
+    }
+/*
     this.currentStates.forEach(state => {
       if (this.matchController(controllerData, state.controller) &&
          (!state.raycaster || controllerData.stateHit[state.name])) {
@@ -363,7 +394,7 @@ export default class RayControl {
         controllerData.stateHit[state.name] = false;
       }
     });
-
+*/
     controllerData.active = false;
   }
 }
