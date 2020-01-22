@@ -255,11 +255,11 @@ export default class RayControl {
           state, intersection
         };
 
-        //if (state.lineStyleOnIntersection) {
+        if (state.lineStyleOnIntersection) {
           this.setLineStyle(state.lineStyleOnIntersection);
-        //} else {
-//          this.setLineStyle('advanced');
-        //}
+        } else {
+          this.setLineStyle('advanced');
+        }
 
         console.log('data', intersectionData, 'intersection', intersection, 'state', state);
         state.onHover && state.onHover(intersection, controllerData.active, controllerData.controller);
