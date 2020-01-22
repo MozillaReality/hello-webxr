@@ -301,11 +301,11 @@ function setupControllers() {
     controller.userData.grabbing = null;
     controller.addEventListener( 'connected', function ( event ) {
       this.add(model.clone());
-      raycontrol.addController(this);
+      raycontrol.addController(this, event.data);
     } );
     controller.addEventListener( 'disconnect', function () {
       this.remove(this.children[0]);
-      raycontrol.removeController(this);
+      raycontrol.removeController(this, event.data);
     });
   }
 }
