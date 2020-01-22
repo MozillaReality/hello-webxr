@@ -9,8 +9,8 @@ This is a WebXR demo made to celebrate the [WebXR spec](https://immersive-web.gi
 ## How to build
 
 1. `npm install`
-2. `npm run watch`
-3. start any http server on the folder and go to localhost url
+2. `npm start`
+3. Open `http://localhost:8080`
 
 
 ### Shader packing
