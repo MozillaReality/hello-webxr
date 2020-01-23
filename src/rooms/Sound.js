@@ -54,7 +54,7 @@ export function setup(ctx) {
 
   for (let id in sounds) {
     const mesh = scene.getObjectByName(id);
-    if (!mesh) { continue; } // TODO: enable this
+    if (!mesh) { continue; } 
 
     const sound = new THREE.PositionalAudio(listener);
     const audioLoader = new THREE.AudioLoader();

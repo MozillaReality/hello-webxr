@@ -100,7 +100,6 @@ export default class RayControl {
 
     this.controllers.push(controllerData);
 
-    // @TODO Determine if we should add it to this hand or not
     if (this.matchController(controllerData, "primary")) {
       controller.add( this.raycasterContext );
     }
