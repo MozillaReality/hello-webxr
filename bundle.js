@@ -72546,7 +72546,9 @@ function () {
   }, {
     key: "onSelectEnd",
     value: function onSelectEnd(targetPoint) {
-      this.ctx.cameraRig.position.copy(targetPoint);
+      var headPosition = this.ctx.renderer.xr.getCamera(this.ctx.camera).position;
+      var offset = targetPoint.sub(headPosition);
+      this.ctx.cameraRig.position.add(offset);
       this.teleportHitGeometry.visible = false;
       this.active = false;
       this.startSound.pause();
