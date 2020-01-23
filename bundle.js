@@ -73816,7 +73816,7 @@ function setup(ctx, hall) {
           obj3D.getObjectByName('Scene').visible = false;
           obj3D.getObjectByName('spray').visible = true;
           var raycasterContext = obj3D.getObjectByName('raycasterContext');
-          raycasterContext.rotation.set(-Math.PI / 2, (controllerData.inputSource.handedness === "right" ? -1 : 1) * Math.PI / 2, 0);
+          raycasterContext.rotation.set(-Math.PI / 2, (controllerData.inputSource.handedness === "right" ? 1 : -1) * Math.PI / 2, 0);
           raycasterContext.position.set(0, -0.015, -0.025);
           ctx.raycontrol.setLineStyle('basic');
           ctx.raycontrol.activateState('graffiti');
