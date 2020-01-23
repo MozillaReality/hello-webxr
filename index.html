@@ -101,7 +101,13 @@ header a:hover {
 header a:hover path, #mrlogo:hover path.mrlogobg{
   fill: #059;
 }
-
+.activehand {
+  background: #000;
+  color: #fff;
+  padding: 3px 12px;
+  border-radius: 5px;
+  pointer-events: none;
+}
 
 @media (max-width: 580px) {
   #mrlogo{
@@ -150,7 +156,17 @@ header a:hover path, #mrlogo:hover path.mrlogobg{
 
   <script src="bundle.js"></script>
 
-  <script type="text/javascript">function aclick(ev) {ev.stopPropagation();}</script>
+  <script type="text/javascript">
+    function aclick(ev) {
+      ev.stopPropagation();
+    }
+
+    function setHandedness(link, hand) {
+      var currentURL = new URL(window.location);
+      currentURL.searchParams.set('handedness', hand);
+      link.href = currentURL.href;
+    }
+  </script>
 </head>
 <body>
 
@@ -170,6 +186,13 @@ header a:hover path, #mrlogo:hover path.mrlogobg{
 
 
 <header>
+  <span>
+    Handedness:
+    <a href="#" id="lefthand" onclick="setHandedness(this, 'left')">Left</a>
+    <a href="#" id="righthand" onclick="setHandedness(this, 'right')">Right</a>
+  </span>
+  <span>&nbsp;</span>
+
   <a href="https://blog.mozvr.com/hello-webxr" onclick="aclick(event)">What is this about?</a>
   <a href="http://twitter.com/share?text=Check%20out%20%22Hello%20WebX%22,%20a%20demo%20from%20@mozillareality%20celebrating%20the%20final%20WebXR%20API!%20https://blog.mozvr.com/hello-webxr&url=https://mixedreality.mozilla.org/hello-webxr/"  onclick="aclick(event)"><svg width="20" height="20" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M29 6.72442C28.1924 7.89722 27.2017 8.89697 26.0277 9.72368C26.0393 9.9454 26.0451 10.196 26.0451 10.4755C26.0451 12.0283 25.8132 13.5831 25.3495 15.1397C24.8857 16.6963 24.1773 18.1863 23.2243 19.6096C22.2712 21.0329 21.136 22.2938 19.8185 23.3923C18.5011 24.4909 16.9174 25.3668 15.0676 26.0201C13.2178 26.6734 11.2353 27 9.12006 27C5.81892 27 2.7789 26.1299 0 24.3897C0.493223 24.4433 0.966265 24.47 1.41913 24.47C4.17695 24.47 6.64014 23.6407 8.80868 21.982C7.52282 21.959 6.37124 21.5725 5.35394 20.8226C4.33663 20.0727 3.63655 19.1144 3.25368 17.9479C3.63212 18.0182 4.00562 18.0534 4.3742 18.0534C4.90474 18.0534 5.42678 17.9859 5.94032 17.8507C4.56807 17.5824 3.42968 16.9151 2.52513 15.8488C1.62062 14.7826 1.16836 13.5519 1.16836 12.1568V12.0849C2.01065 12.5402 2.90909 12.7824 3.86367 12.8115C3.05076 12.2824 2.40625 11.5924 1.93013 10.7415C1.45397 9.89069 1.2159 8.9699 1.2159 7.9792C1.2159 6.93434 1.48407 5.96138 2.0204 5.06032C3.51269 6.84829 5.32092 8.2773 7.44508 9.34733C9.56927 10.4174 11.8481 11.0117 14.2816 11.1302C14.1778 10.7078 14.1258 10.2671 14.1257 9.808C14.1257 8.20496 14.7067 6.8362 15.8687 5.70172C17.0308 4.56724 18.4328 4 20.0746 4C21.7936 4 23.2415 4.61112 24.4184 5.83335C25.763 5.57331 27.022 5.10297 28.1954 4.42233C27.7433 5.81137 26.8722 6.88292 25.5821 7.63699C26.7678 7.49942 27.9071 7.19523 29 6.72442H29Z" fill="black"/></svg>

@@ -159,6 +159,8 @@ function detectWebXR() {
 
 export function init() {
 
+  document.getElementById(handedness + 'hand').classList.add('activehand');
+
   detectWebXR();
 
   var w = 100;
