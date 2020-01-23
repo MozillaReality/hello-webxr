@@ -116,7 +116,6 @@ export default class RayControl {
     this.controllers = [];
 
     this.previousLineStyle = 'pretty';
-    //this.exclusiveMode = true; // it wil return on first hit
     this.enabled = true;
     this.raycaster = new THREE.Raycaster();
     this.states = {};
@@ -238,13 +237,6 @@ export default class RayControl {
           controllerData.intersections[state.name] = intersections[0];
           controllerData.stateHit[state.name] = true;
         } else {
-          /*
-          if (controllerData.stateHit[state.name] && state.onHoverLeave) {
-            state.onHoverLeave(controllerData.intersections[state.name], active, controller);
-          }
-          controllerData.stateHit[state.name] = false;
-          controllerData.intersections[state.name] = null;
-          */
           controllerData.intersections[state.name] = null;
         }
       }
@@ -281,35 +273,6 @@ export default class RayControl {
       } else {
         controllerData.currentIntersection = null;
       }
-
-
-/*
-      if (intersections.length > 0) {
-
-      }
-      /* else {
-        if (controllerData.stateHit[state.name] && state.onHoverLeave) {
-          state.onHoverLeave(controllerData.intersections[state.name], active, controller);
-        }
-        controllerData.stateHit[state.name] = false;
-        controllerData.intersections[state.name] = null;
-      }
-*/
-
-/*
-      for (var i = 0; i < this.currentStates.length; i++) {
-        let state = this.currentStates[i];
-        if (!state.raycaster) {
-          continue;
-        }
-
-
-        if (intersections.length > 0) {
-
-        } else {
-
-        }
-*/
     }
 
     // Handle onHoverLeave
@@ -346,7 +309,7 @@ export default class RayControl {
   getIntersections( controller, colliderMesh ) {
     let raycasterContext = controller.getObjectByName('raycasterContext');
     if (!raycasterContext) {
-      //console.warn('No raycasterContext found for this controller', controller);
+      console.warn('No raycasterContext found for this controller', controller);
       return [];
     }
 
@@ -383,15 +346,7 @@ export default class RayControl {
         }
       });
     }
-/*
-    this.currentStates.forEach(state => {
-      if (this.matchController(controllerData, state.controller) &&
-         (!state.raycaster || controllerData.stateHit[state.name])) {
-        state.onSelectEnd && state.onSelectEnd(controllerData.intersections[state.name]);
-        controllerData.stateHit[state.name] = false;
-      }
-    });
-*/
+
     controllerData.active = false;
   }
 }
