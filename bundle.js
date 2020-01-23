@@ -71329,7 +71329,8 @@ var urlObject = new URL(window.location);
 var roomName = urlObject.searchParams.get('room');
 context.room = roomNames.indexOf(roomName) !== -1 ? roomNames.indexOf(roomName) : 0; // console.log(`Current room "${roomNames[context.room]}", ${context.room}`);
 
-var debug = urlObject.searchParams.has('debug'); // Target positions when moving from one room to another
+var debug = urlObject.searchParams.has('debug');
+var handedness = urlObject.searchParams.has('handedness') ? urlObject.searchParams.get('handedness') : "right"; // Target positions when moving from one room to another
 
 var targetPositions = {
   hall: {
@@ -71498,7 +71499,7 @@ function init() {
   window.context = context;
   var loadTotal = Object.keys(_assets_js__WEBPACK_IMPORTED_MODULE_13__["default"]).length;
   Object(_lib_assetManager_js__WEBPACK_IMPORTED_MODULE_3__["loadAssets"])(renderer, 'assets/', _assets_js__WEBPACK_IMPORTED_MODULE_13__["default"], function () {
-    raycontrol = new _lib_RayControl_js__WEBPACK_IMPORTED_MODULE_15__["default"](context);
+    raycontrol = new _lib_RayControl_js__WEBPACK_IMPORTED_MODULE_15__["default"](context, handedness);
     context.raycontrol = raycontrol;
     teleport = new _lib_Teleport_js__WEBPACK_IMPORTED_MODULE_16__["default"](context);
     context.teleport = teleport;
@@ -71516,7 +71517,7 @@ function init() {
     document.getElementById('loading').style.display = 'none';
   }, function (loadProgress) {
     document.querySelector('#progressbar').setAttribute('stroke-dashoffset', -(282 - Math.floor(loadProgress / loadTotal * 282)));
-  }), debug;
+  }, debug);
 }
 
 function setupControllers() {
@@ -72142,13 +72143,21 @@ function () {
     }
   }]);
 
-  function RayControl(ctx) {
+  function RayControl(ctx, primary) {
     _classCallCheck(this, RayControl);
 
     this.ctx = ctx;
-    this.controllers = [];
-    this.previousLineStyle = 'pretty'; //this.exclusiveMode = true; // it wil return on first hit
 
+    if (typeof primary === "undefined") {
+      this.primary = "right";
+      this.secondary = "left";
+    } else {
+      this.primary = primary;
+      this.secondary = primary === "right" ? "left" : "right";
+    }
+
+    this.controllers = [];
+    this.previousLineStyle = 'pretty';
     this.enabled = true;
     this.raycaster = new three__WEBPACK_IMPORTED_MODULE_0__["Raycaster"]();
     this.states = {};
@@ -72205,10 +72214,8 @@ function () {
   }, {
     key: "matchController",
     value: function matchController(controllerData, selector) {
-      var primary = "right";
-      var secondary = "left";
       var handedness = controllerData.inputSource.handedness;
-      return selector === handedness || selector === "both" && (handedness === "right" || handedness === "left") || selector === "primary" && primary === handedness || selector === "secondary" && secondary === handedness;
+      return selector === handedness || selector === "both" && (handedness === "right" || handedness === "left") || selector === "primary" && this.primary === handedness || selector === "secondary" && this.secondary === handedness;
     }
   }, {
     key: "onSelectStart",
@@ -72278,13 +72285,6 @@ function () {
             controllerData.intersections[state.name] = intersections[0];
             controllerData.stateHit[state.name] = true;
           } else {
-            /*
-            if (controllerData.stateHit[state.name] && state.onHoverLeave) {
-              state.onHoverLeave(controllerData.intersections[state.name], active, controller);
-            }
-            controllerData.stateHit[state.name] = false;
-            controllerData.intersections[state.name] = null;
-            */
             controllerData.intersections[state.name] = null;
           }
         }
@@ -72324,34 +72324,6 @@ function () {
         } else {
           _controllerData.currentIntersection = null;
         }
-        /*
-              if (intersections.length > 0) {
-        
-              }
-              /* else {
-                if (controllerData.stateHit[state.name] && state.onHoverLeave) {
-                  state.onHoverLeave(controllerData.intersections[state.name], active, controller);
-                }
-                controllerData.stateHit[state.name] = false;
-                controllerData.intersections[state.name] = null;
-              }
-        */
-
-        /*
-              for (var i = 0; i < this.currentStates.length; i++) {
-                let state = this.currentStates[i];
-                if (!state.raycaster) {
-                  continue;
-                }
-        
-        
-                if (intersections.length > 0) {
-        
-                } else {
-        
-                }
-        */
-
       } // Handle onHoverLeave
 
 
@@ -72390,7 +72362,7 @@ function () {
       var raycasterContext = controller.getObjectByName('raycasterContext');
 
       if (!raycasterContext) {
-        //console.warn('No raycasterContext found for this controller', controller);
+        console.warn('No raycasterContext found for this controller', controller);
         return [];
       }
 
@@ -72435,16 +72407,6 @@ function () {
           }
         });
       }
-      /*
-          this.currentStates.forEach(state => {
-            if (this.matchController(controllerData, state.controller) &&
-               (!state.raycaster || controllerData.stateHit[state.name])) {
-              state.onSelectEnd && state.onSelectEnd(controllerData.intersections[state.name]);
-              controllerData.stateHit[state.name] = false;
-            }
-          });
-      */
-
 
       controllerData.active = false;
     }
@@ -73680,32 +73642,40 @@ function setup(ctx, hall) {
       ctx.raycontrol.deactivateState('graffiti');
     }
   });
-  var listener = new three__WEBPACK_IMPORTED_MODULE_0__["AudioListener"]();
-  var sound = new three__WEBPACK_IMPORTED_MODULE_0__["PositionalAudio"](listener);
-  sound.loop = true;
-  var audioLoader = new three__WEBPACK_IMPORTED_MODULE_0__["AudioLoader"]();
-  audioLoader.load('assets/ogg/spray.ogg', function (buffer) {
-    sound.setBuffer(buffer);
-    sound.name = 'spraySound';
-    ctx.controllers[1].add(sound);
-  });
-  var spray = ctx.assets['spray_model'].scene;
-  spray.getObjectByName('spraycan').geometry.rotateY(Math.PI / 2);
-  colorWheel = new _lib_ColorWheel__WEBPACK_IMPORTED_MODULE_1__["default"](ctx, ctx.controllers[0], function (rgb) {
-    colorize(rgb.r, rgb.g, rgb.b);
-    spray.getObjectByName('spraycolor').material.color.setRGB(rgb.r / 255, rgb.g / 255, rgb.b / 255);
-  });
-  spray.name = 'spray';
-  spray.visible = false;
-  var sprayTex = ctx.assets['spray_tex'];
-  spray.getObjectByName('spraycan').material = new three__WEBPACK_IMPORTED_MODULE_0__["MeshPhongMaterial"]({
-    map: sprayTex
-  });
-  spray.getObjectByName('spraycolor').material = new three__WEBPACK_IMPORTED_MODULE_0__["MeshLambertMaterial"]({
-    color: 0xFF0000
-  });
-  ctx.controllers[1].add(spray);
-  var geo = new three__WEBPACK_IMPORTED_MODULE_0__["PlaneBufferGeometry"](5, 4, 1);
+
+  function attachSprayCan(controller) {
+    var listener = new three__WEBPACK_IMPORTED_MODULE_0__["AudioListener"]();
+    var sound = new three__WEBPACK_IMPORTED_MODULE_0__["PositionalAudio"](listener);
+    sound.loop = true;
+    var audioLoader = new three__WEBPACK_IMPORTED_MODULE_0__["AudioLoader"]();
+    audioLoader.load('assets/ogg/spray.ogg', function (buffer) {
+      sound.setBuffer(buffer);
+      sound.name = 'spraySound';
+      controller.add(sound);
+    });
+    var spray = ctx.assets['spray_model'].scene;
+    spray.getObjectByName('spraycan').geometry.rotateY(Math.PI / 2);
+    spray.name = 'spray';
+    spray.visible = false;
+    var sprayTex = ctx.assets['spray_tex'];
+    spray.getObjectByName('spraycan').material = new three__WEBPACK_IMPORTED_MODULE_0__["MeshPhongMaterial"]({
+      map: sprayTex
+    });
+    spray.getObjectByName('spraycolor').material = new three__WEBPACK_IMPORTED_MODULE_0__["MeshLambertMaterial"]({
+      color: 0xFF0000
+    });
+    controller.add(spray);
+  }
+
+  function attachColorWheel(controller) {
+    colorWheel = new _lib_ColorWheel__WEBPACK_IMPORTED_MODULE_1__["default"](ctx, controller, function (rgb) {
+      colorize(rgb.r, rgb.g, rgb.b);
+      spray.getObjectByName('spraycolor').material.color.setRGB(rgb.r / 255, rgb.g / 255, rgb.b / 255);
+    });
+  }
+
+  attachSprayCan(ctx.controllers[1]);
+  attachColorWheel(ctx.controllers[0]);
   var width = 2048;
   var height = 1024;
   var maxDistance = 1;

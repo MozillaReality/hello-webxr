@@ -87,36 +87,41 @@ export function setup(ctx, hall) {
       }
     });
 
-  let listener = new THREE.AudioListener();
 
-  const sound = new THREE.PositionalAudio(listener);
-  sound.loop = true;
-  const audioLoader = new THREE.AudioLoader();
-  audioLoader.load('assets/ogg/spray.ogg', buffer => {
-    sound.setBuffer(buffer);
-    sound.name = 'spraySound';
-    ctx.controllers[1].add(sound);
-  });
+  function attachSprayCan(controller) {
+    let listener = new THREE.AudioListener();
 
-  const spray = ctx.assets['spray_model'].scene;
-  spray.getObjectByName('spraycan').geometry.rotateY(Math.PI / 2);
+    const sound = new THREE.PositionalAudio(listener);
+    sound.loop = true;
+    const audioLoader = new THREE.AudioLoader();
+    audioLoader.load('assets/ogg/spray.ogg', buffer => {
+      sound.setBuffer(buffer);
+      sound.name = 'spraySound';
+      controller.add(sound);
+    });
 
-  colorWheel = new ColorWheel(ctx, ctx.controllers[0], (rgb) => {
-    colorize(
-      rgb.r,
-      rgb.g,
-      rgb.b);
-    spray.getObjectByName('spraycolor').material.color.setRGB(rgb.r / 255, rgb.g / 255, rgb.b / 255);
-  });
+    const spray = ctx.assets['spray_model'].scene;
+    spray.getObjectByName('spraycan').geometry.rotateY(Math.PI / 2);
+    spray.name = 'spray';
+    spray.visible = false;
+    const sprayTex = ctx.assets['spray_tex'];
+    spray.getObjectByName('spraycan').material = new THREE.MeshPhongMaterial({map: sprayTex});
+    spray.getObjectByName('spraycolor').material = new THREE.MeshLambertMaterial({color: 0xFF0000});
+    controller.add(spray);
+  }
 
-  spray.name = 'spray';
-  spray.visible = false;
-  const sprayTex = ctx.assets['spray_tex'];
-  spray.getObjectByName('spraycan').material = new THREE.MeshPhongMaterial({map: sprayTex});
-  spray.getObjectByName('spraycolor').material = new THREE.MeshLambertMaterial({color: 0xFF0000});
-  ctx.controllers[1].add(spray);
+  function attachColorWheel(controller) {
+    colorWheel = new ColorWheel(ctx, controller, (rgb) => {
+      colorize(
+        rgb.r,
+        rgb.g,
+        rgb.b);
+      spray.getObjectByName('spraycolor').material.color.setRGB(rgb.r / 255, rgb.g / 255, rgb.b / 255);
+    });
+  }
 
-  const geo = new THREE.PlaneBufferGeometry(5, 4, 1);
+  attachSprayCan(ctx.controllers[1]);
+  attachColorWheel(ctx.controllers[0]);
 
   let width = 2048;
   let height = 1024;
