@@ -72548,6 +72548,7 @@ function () {
     value: function onSelectEnd(targetPoint) {
       var headPosition = this.ctx.renderer.xr.getCamera(this.ctx.camera).position;
       var offset = targetPoint.sub(headPosition);
+      offset.y = 0;
       this.ctx.cameraRig.position.add(offset);
       this.teleportHitGeometry.visible = false;
       this.active = false;

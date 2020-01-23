@@ -78,6 +78,7 @@ export default class Teleport {
   onSelectEnd(targetPoint) {
     const headPosition = this.ctx.renderer.xr.getCamera(this.ctx.camera).position;
     const offset = targetPoint.sub(headPosition);
+    offset.y = 0;
 
     this.ctx.cameraRig.position.add(offset);
     this.teleportHitGeometry.visible = false;
