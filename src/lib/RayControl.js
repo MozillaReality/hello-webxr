@@ -379,8 +379,7 @@ export default class RayControl {
       // Check no raycaster states
       this.currentStates.forEach(state => {
         if (state.onSelectEnd && !state.raycaster) {
-          // @fixme null?
-          state.onSelectEnd(controllerData.intersections[state.name], controllerData.controller);
+          state.onSelectEnd(null, controllerData.controller);
         }
       });
     }

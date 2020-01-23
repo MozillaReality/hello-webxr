@@ -72126,7 +72126,7 @@ function () {
         currentIntersection: null,
         hit: false
       };
-      this.controllers.push(controllerData); // @TODO Determine if we should add it to this hand or not
+      this.controllers.push(controllerData);
 
       if (this.matchController(controllerData, "primary")) {
         controller.add(this.raycasterContext);
@@ -72431,8 +72431,7 @@ function () {
 
         this.currentStates.forEach(function (state) {
           if (state.onSelectEnd && !state.raycaster) {
-            // @fixme null?
-            state.onSelectEnd(controllerData.intersections[state.name], controllerData.controller);
+            state.onSelectEnd(null, controllerData.controller);
           }
         });
       }
@@ -73301,8 +73300,7 @@ function setup(ctx) {
 
     if (!mesh) {
       return "continue";
-    } // TODO: enable this
-
+    }
 
     var sound = new three__WEBPACK_IMPORTED_MODULE_0__["PositionalAudio"](listener);
     var audioLoader = new three__WEBPACK_IMPORTED_MODULE_0__["AudioLoader"]();
