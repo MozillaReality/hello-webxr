@@ -73,7 +73,6 @@ export default class ColorWheel {
 
     controller.add(this.ui);
 
-
     ctx.raycontrol.addState('colorwheel', {
       colliderMesh: this.ui,
       order: -1,
@@ -83,7 +82,7 @@ export default class ColorWheel {
           this.mesh.worldToLocal(point);
   
           this.colorSelector.position.x = point.x;
-          this.colorSelector.position.y = point.y;  
+          this.colorSelector.position.y = point.y;
         }
       },
       onHoverLeave: (intersection) => {

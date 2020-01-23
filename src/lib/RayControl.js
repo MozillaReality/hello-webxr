@@ -262,6 +262,9 @@ export default class RayControl extends EventDispatcher {
       }
     }
 
+    this.line0.scale.z = Math.min(this.rayLength, 1);
+    this.lineBasic.scale.z = Math.min(this.rayLength, 1);
+
     // For each controller, find the closest intersection from all the states
     for (var c = 0; c < this.controllers.length; c++) {
       let controllerData = this.controllers[c];
@@ -318,11 +321,6 @@ export default class RayControl extends EventDispatcher {
 
         controllerData.prevIntersection = null;
       }
-    }
-
-    if (!firstHit) {
-      this.line0.scale.z = Math.min(this.rayLength, 1);
-      this.lineBasic.scale.z = Math.min(this.rayLength, 1);
     }
   }
 

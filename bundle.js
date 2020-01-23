@@ -72454,8 +72454,10 @@ function (_EventDispatcher) {
             controllerData.intersections[state.name] = null;
           }
         }
-      } // For each controller, find the closest intersection from all the states
+      }
 
+      this.line0.scale.z = Math.min(this.rayLength, 1);
+      this.lineBasic.scale.z = Math.min(this.rayLength, 1); // For each controller, find the closest intersection from all the states
 
       for (var c = 0; c < this.controllers.length; c++) {
         var _controllerData = this.controllers[c];
@@ -72515,11 +72517,6 @@ function (_EventDispatcher) {
         var _ret = _loop();
 
         if (_ret === "continue") continue;
-      }
-
-      if (!firstHit) {
-        this.line0.scale.z = Math.min(this.rayLength, 1);
-        this.lineBasic.scale.z = Math.min(this.rayLength, 1);
       }
     }
   }, {
