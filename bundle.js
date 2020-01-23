@@ -71850,12 +71850,14 @@ function () {
       colliderMesh: this.ui,
       order: -1,
       onHover: function onHover(intersection, active, controller) {
-        var point = intersection.point.clone();
+        if (active) {
+          var point = intersection.point.clone();
 
-        _this.mesh.worldToLocal(point);
+          _this.mesh.worldToLocal(point);
 
-        _this.colorSelector.position.x = point.x;
-        _this.colorSelector.position.y = point.y;
+          _this.colorSelector.position.x = point.x;
+          _this.colorSelector.position.y = point.y;
+        }
       },
       onHoverLeave: function onHoverLeave(intersection) {},
       onSelectStart: function onSelectStart(intersection, controller) {
