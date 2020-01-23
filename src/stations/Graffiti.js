@@ -132,7 +132,6 @@ export function setup(ctx, hall) {
         }
       });
     }
-
   });
 
   let width = 2048;

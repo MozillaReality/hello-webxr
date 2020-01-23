@@ -71398,6 +71398,7 @@ function detectWebXR() {
 }
 
 function init() {
+  document.getElementById(handedness + 'hand').classList.add('activehand');
   detectWebXR();
   var w = 100;
   ecsyWorld = new ecsy__WEBPACK_IMPORTED_MODULE_4__["World"]();

@@ -35,7 +35,7 @@ export default class RayControl extends EventDispatcher {
     if (primary !== this.primary) {
       this.primary = primary;
       this.secondary = primary === "right" ? "left" : "right";
-  
+
       this.dispatchEvent("handednessChanged", {primary: this.primary, secondary: this.secondary});
     }
   }
