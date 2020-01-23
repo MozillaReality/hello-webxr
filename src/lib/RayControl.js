@@ -328,7 +328,6 @@ export default class RayControl {
           prev.intersection.object === current.intersection.object;
       }
         )) {
-        console.log('emiting hover leave');
         controllerData.prevIntersection.state.onHoverLeave(
           controllerData.prevIntersection.intersection,
           false,

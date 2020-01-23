@@ -1232,7 +1232,7 @@ function () {
 }();
 
 var name = "ecsy";
-var version = "0.2.1";
+var version = "0.2.2";
 var description = "Entity Component System in JS";
 var main = "build/ecsy.js";
 var module = "build/ecsy.module.js";
@@ -1279,16 +1279,16 @@ var devDependencies = {
   "docsify-cli": "^4.4.0",
   eslint: "^5.16.0",
   "eslint-config-prettier": "^4.3.0",
-  "eslint-plugin-prettier": "^3.1.1",
+  "eslint-plugin-prettier": "^3.1.2",
   "http-server": "^0.11.1",
   nodemon: "^1.19.4",
   prettier: "^1.19.1",
-  rollup: "^1.27.8",
+  rollup: "^1.29.0",
   "rollup-plugin-json": "^4.0.0",
-  "rollup-plugin-terser": "^5.1.2",
-  typedoc: "^0.15.3",
-  "typedoc-plugin-markdown": "^2.2.11",
-  typescript: "^3.7.2"
+  "rollup-plugin-terser": "^5.2.0",
+  typedoc: "^0.15.8",
+  "typedoc-plugin-markdown": "^2.2.16",
+  typescript: "^3.7.5"
 };
 var pjson = {
   name: name,
@@ -72368,7 +72368,6 @@ function () {
           var current = c.currentIntersection;
           return current && prev.state.name === current.state.name && prev.intersection.object === current.intersection.object;
         })) {
-          console.log('emiting hover leave');
           controllerData.prevIntersection.state.onHoverLeave(controllerData.prevIntersection.intersection, false, controllerData.controller);
           controllerData.prevIntersection = null;
         }
@@ -73829,7 +73828,6 @@ function setup(ctx, hall) {
   for (var i = 0; i < _InfoPanelsData_js__WEBPACK_IMPORTED_MODULE_2__["default"].length; i++) {
     var id = i < 10 ? '0' + i : i;
     panels[i] = hall.getObjectByName('infopanel0' + id);
-    console.log(panels[i].name);
     panels[i].geometry.computeBoundingBox();
     var panelWidth = panels[i].geometry.boundingBox.max.x - panels[i].geometry.boundingBox.min.x;
     var panelHeight = panels[i].geometry.boundingBox.max.y - panels[i].geometry.boundingBox.min.y;
