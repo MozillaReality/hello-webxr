@@ -86,6 +86,7 @@ const roomName = urlObject.searchParams.get('room');
 context.room = roomNames.indexOf(roomName) !== -1 ? roomNames.indexOf(roomName) : 0;
 // console.log(`Current room "${roomNames[context.room]}", ${context.room}`);
 const debug = urlObject.searchParams.has('debug');
+console.log('>>>', debug);
 
 // Target positions when moving from one room to another
 const targetPositions = {
@@ -284,7 +285,10 @@ export function init() {
   loadProgress => {
     document.querySelector('#progressbar').setAttribute('stroke-dashoffset',
       - (282 - Math.floor(loadProgress / loadTotal * 282)));
-  })
+  },
+  debug);
+
+
 }
 
 function setupControllers() {

@@ -71516,7 +71516,7 @@ function init() {
     document.getElementById('loading').style.display = 'none';
   }, function (loadProgress) {
     document.querySelector('#progressbar').setAttribute('stroke-dashoffset', -(282 - Math.floor(loadProgress / loadTotal * 282)));
-  });
+  }), debug;
 }
 
 function setupControllers() {
@@ -72611,7 +72611,7 @@ function allAssetsLoaded(assets) {
   return true;
 }
 
-function loadAssets(renderer, basePath, assets, onComplete, onProgress) {
+function loadAssets(renderer, basePath, assets, onComplete, onProgress, debug) {
   if (basePath && basePath[basePath.length - 1] != '/') {
     basePath += '/';
   }
@@ -72645,7 +72645,10 @@ function loadAssets(renderer, basePath, assets, onComplete, onProgress) {
     assets[i].loading = true;
     var ext = assetPath.substr(assetPath.lastIndexOf('.') + 1).toLowerCase();
     loaders[ext].load(basePath + assetPath, function (asset) {
-      // console.info(`%c ${assetPath} loaded`, 'color:green');
+      if (debug) {
+        console.info("%c ".concat(assetPath, " loaded"), 'color:green');
+      }
+
       var options = assets[assetId].options;
       assets[assetId] = ext == 'font' ? asset.data : asset;
 

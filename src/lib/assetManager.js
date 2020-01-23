@@ -23,7 +23,7 @@ function allAssetsLoaded(assets) {
   return true;
 }
 
-export function loadAssets(renderer, basePath, assets, onComplete, onProgress) {
+export function loadAssets(renderer, basePath, assets, onComplete, onProgress, debug) {
   if (basePath && basePath[basePath.length - 1] != '/') {
     basePath += '/';
   }
@@ -61,7 +61,9 @@ export function loadAssets(renderer, basePath, assets, onComplete, onProgress) {
     assets[i].loading = true;
     let ext = assetPath.substr(assetPath.lastIndexOf('.') + 1).toLowerCase();
     loaders[ext].load(basePath + assetPath, asset => {
-      // console.info(`%c ${assetPath} loaded`, 'color:green');
+      if (debug) {
+        console.info(`%c ${assetPath} loaded`, 'color:green');
+      }
       var options = assets[assetId].options;
       assets[assetId] = ext == 'font'? asset.data : asset;
 
