@@ -47,50 +47,12 @@ export function setup(ctx, hall) {
   component.max.set(3, 3, 7);
 
   let checker = ctx.world.createEntity();
-  checker
-    .addComponent(AreaChecker)
-    .addComponent(Object3D, {value: ctx.controllers[0]})
-    .addComponent(AreaReactor, {
-      onEntering: entity => {
-        const obj3D = entity.getComponent(Object3D).value;
-        obj3D.getObjectByName('Scene').visible = false;
-        obj3D.getObjectByName('ColorWheel').visible = true;
-      },
-      onExiting: entity => {
-        const obj3D = entity.getComponent(Object3D).value;
-        obj3D.getObjectByName('Scene').visible = true;
-        obj3D.getObjectByName('ColorWheel').visible = false;
-      }
-    });
-  let checker2 = ctx.world.createEntity();
-  checker2
-    .addComponent(AreaChecker)
-    .addComponent(Object3D, {value: ctx.controllers[1]})
-    .addComponent(AreaReactor, {
-      onEntering: entity => {
-        const obj3D = entity.getComponent(Object3D).value;
-        obj3D.getObjectByName('Scene').visible = false;
-        obj3D.getObjectByName('spray').visible = true;
-        let raycasterContext = obj3D.getObjectByName('raycasterContext');
-        raycasterContext.rotation.set(-Math.PI / 2, Math.PI / 2, 0);
-        raycasterContext.position.set(0,-0.015,-0.025)
-        ctx.raycontrol.setLineStyle('basic');
-        ctx.raycontrol.activateState('graffiti');
-      },
-      onExiting: entity => {
-        const obj3D = entity.getComponent(Object3D).value;
-        obj3D.getObjectByName('Scene').visible = true;
-        obj3D.getObjectByName('spray').visible = false;
-        let raycasterContext = obj3D.getObjectByName('raycasterContext');
-        raycasterContext.rotation.set(0,0,0);
-        raycasterContext.position.set(0,0,0);
-        ctx.raycontrol.setLineStyle('advanced');
-        ctx.raycontrol.deactivateState('graffiti');
-      }
-    });
+  let checkerSpray = ctx.world.createEntity();
+  let spray = ctx.assets['spray_model'].scene;
 
-
-  function attachSprayCan(controller) {
+  function attachSprayCan(controllerData) {
+    let controller = controllerData.controller;
+    const handedness = controllerData.inputSource.handedness;
     let listener = new THREE.AudioListener();
 
     const sound = new THREE.PositionalAudio(listener);
@@ -102,8 +64,7 @@ export function setup(ctx, hall) {
       controller.add(sound);
     });
 
-    const spray = ctx.assets['spray_model'].scene;
-    spray.getObjectByName('spraycan').geometry.rotateY(Math.PI / 2);
+    spray.getObjectByName('spraycan').geometry.rotateY(handedness === "right" ? Math.PI / 2 : -Math.PI / 2);
     spray.name = 'spray';
     spray.visible = false;
     const sprayTex = ctx.assets['spray_tex'];
@@ -112,7 +73,8 @@ export function setup(ctx, hall) {
     controller.add(spray);
   }
 
-  function attachColorWheel(controller) {
+  function attachColorWheel(controllerData) {
+    let controller = controllerData.controller;
     colorWheel = new ColorWheel(ctx, controller, (rgb) => {
       colorize(
         rgb.r,
@@ -125,8 +87,52 @@ export function setup(ctx, hall) {
   }
 
   ctx.raycontrol.addEventListener('controllerConnected', controllerData => {
-    ctx.raycontrol.matchController(controllerData, "primary") ?
-      attachSprayCan(controllerData.controller) : attachColorWheel(controllerData.controller);
+    if (ctx.raycontrol.matchController(controllerData, "primary")) {
+      attachSprayCan(controllerData);
+      checkerSpray
+      .addComponent(AreaChecker)
+      .addComponent(Object3D, {value: controllerData.controller})
+      .addComponent(AreaReactor, {
+        onEntering: entity => {
+          const obj3D = entity.getComponent(Object3D).value;
+          obj3D.getObjectByName('Scene').visible = false;
+          obj3D.getObjectByName('spray').visible = true;
+          let raycasterContext = obj3D.getObjectByName('raycasterContext');
+          raycasterContext.rotation.set(-Math.PI / 2, Math.PI / 2, 0);
+          raycasterContext.position.set(0,-0.015,-0.025)
+          ctx.raycontrol.setLineStyle('basic');
+          ctx.raycontrol.activateState('graffiti');
+        },
+        onExiting: entity => {
+          const obj3D = entity.getComponent(Object3D).value;
+          obj3D.getObjectByName('Scene').visible = true;
+          obj3D.getObjectByName('spray').visible = false;
+          let raycasterContext = obj3D.getObjectByName('raycasterContext');
+          raycasterContext.rotation.set(0,0,0);
+          raycasterContext.position.set(0,0,0);
+          ctx.raycontrol.setLineStyle('advanced');
+          ctx.raycontrol.deactivateState('graffiti');
+        }
+      });
+    } else {
+      attachColorWheel(controllerData);
+      checker
+      .addComponent(AreaChecker)
+      .addComponent(Object3D, {value: controllerData.controller})
+      .addComponent(AreaReactor, {
+        onEntering: entity => {
+          const obj3D = entity.getComponent(Object3D).value;
+          obj3D.getObjectByName('Scene').visible = false;
+          obj3D.getObjectByName('ColorWheel').visible = true;
+        },
+        onExiting: entity => {
+          const obj3D = entity.getComponent(Object3D).value;
+          obj3D.getObjectByName('Scene').visible = true;
+          obj3D.getObjectByName('ColorWheel').visible = false;
+        }
+      });
+    }
+
   });
 
   let width = 2048;

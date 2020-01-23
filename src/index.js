@@ -253,6 +253,7 @@ export function init() {
   context.controllers = controllers;
   context.world = ecsyWorld;
   context.systemsGroup = systemsGroup;
+  context.handedness = handedness;
 
   window.context = context;
 

@@ -71496,6 +71496,7 @@ function init() {
   context.controllers = controllers;
   context.world = ecsyWorld;
   context.systemsGroup = systemsGroup;
+  context.handedness = handedness;
   window.context = context;
   var loadTotal = Object.keys(_assets_js__WEBPACK_IMPORTED_MODULE_13__["default"]).length;
   Object(_lib_assetManager_js__WEBPACK_IMPORTED_MODULE_3__["loadAssets"])(renderer, 'assets/', _assets_js__WEBPACK_IMPORTED_MODULE_13__["default"], function () {
@@ -73767,47 +73768,12 @@ function setup(ctx, hall) {
   component.min.set(-5, 0, 4.4);
   component.max.set(3, 3, 7);
   var checker = ctx.world.createEntity();
-  checker.addComponent(_components_index__WEBPACK_IMPORTED_MODULE_2__["AreaChecker"]).addComponent(_components_index__WEBPACK_IMPORTED_MODULE_2__["Object3D"], {
-    value: ctx.controllers[0]
-  }).addComponent(_components_index__WEBPACK_IMPORTED_MODULE_2__["AreaReactor"], {
-    onEntering: function onEntering(entity) {
-      var obj3D = entity.getComponent(_components_index__WEBPACK_IMPORTED_MODULE_2__["Object3D"]).value;
-      obj3D.getObjectByName('Scene').visible = false;
-      obj3D.getObjectByName('ColorWheel').visible = true;
-    },
-    onExiting: function onExiting(entity) {
-      var obj3D = entity.getComponent(_components_index__WEBPACK_IMPORTED_MODULE_2__["Object3D"]).value;
-      obj3D.getObjectByName('Scene').visible = true;
-      obj3D.getObjectByName('ColorWheel').visible = false;
-    }
-  });
-  var checker2 = ctx.world.createEntity();
-  checker2.addComponent(_components_index__WEBPACK_IMPORTED_MODULE_2__["AreaChecker"]).addComponent(_components_index__WEBPACK_IMPORTED_MODULE_2__["Object3D"], {
-    value: ctx.controllers[1]
-  }).addComponent(_components_index__WEBPACK_IMPORTED_MODULE_2__["AreaReactor"], {
-    onEntering: function onEntering(entity) {
-      var obj3D = entity.getComponent(_components_index__WEBPACK_IMPORTED_MODULE_2__["Object3D"]).value;
-      obj3D.getObjectByName('Scene').visible = false;
-      obj3D.getObjectByName('spray').visible = true;
-      var raycasterContext = obj3D.getObjectByName('raycasterContext');
-      raycasterContext.rotation.set(-Math.PI / 2, Math.PI / 2, 0);
-      raycasterContext.position.set(0, -0.015, -0.025);
-      ctx.raycontrol.setLineStyle('basic');
-      ctx.raycontrol.activateState('graffiti');
-    },
-    onExiting: function onExiting(entity) {
-      var obj3D = entity.getComponent(_components_index__WEBPACK_IMPORTED_MODULE_2__["Object3D"]).value;
-      obj3D.getObjectByName('Scene').visible = true;
-      obj3D.getObjectByName('spray').visible = false;
-      var raycasterContext = obj3D.getObjectByName('raycasterContext');
-      raycasterContext.rotation.set(0, 0, 0);
-      raycasterContext.position.set(0, 0, 0);
-      ctx.raycontrol.setLineStyle('advanced');
-      ctx.raycontrol.deactivateState('graffiti');
-    }
-  });
+  var checkerSpray = ctx.world.createEntity();
+  var spray = ctx.assets['spray_model'].scene;
 
-  function attachSprayCan(controller) {
+  function attachSprayCan(controllerData) {
+    var controller = controllerData.controller;
+    var handedness = controllerData.inputSource.handedness;
     var listener = new three__WEBPACK_IMPORTED_MODULE_0__["AudioListener"]();
     var sound = new three__WEBPACK_IMPORTED_MODULE_0__["PositionalAudio"](listener);
     sound.loop = true;
@@ -73817,8 +73783,7 @@ function setup(ctx, hall) {
       sound.name = 'spraySound';
       controller.add(sound);
     });
-    var spray = ctx.assets['spray_model'].scene;
-    spray.getObjectByName('spraycan').geometry.rotateY(Math.PI / 2);
+    spray.getObjectByName('spraycan').geometry.rotateY(handedness === "right" ? Math.PI / 2 : -Math.PI / 2);
     spray.name = 'spray';
     spray.visible = false;
     var sprayTex = ctx.assets['spray_tex'];
@@ -73831,7 +73796,8 @@ function setup(ctx, hall) {
     controller.add(spray);
   }
 
-  function attachColorWheel(controller) {
+  function attachColorWheel(controllerData) {
+    var controller = controllerData.controller;
     colorWheel = new _lib_ColorWheel__WEBPACK_IMPORTED_MODULE_1__["default"](ctx, controller, function (rgb) {
       colorize(rgb.r, rgb.g, rgb.b);
       spray.getObjectByName('spraycolor').material.color.setRGB(rgb.r / 255, rgb.g / 255, rgb.b / 255);
@@ -73840,7 +73806,49 @@ function setup(ctx, hall) {
   }
 
   ctx.raycontrol.addEventListener('controllerConnected', function (controllerData) {
-    ctx.raycontrol.matchController(controllerData, "primary") ? attachSprayCan(controllerData.controller) : attachColorWheel(controllerData.controller);
+    if (ctx.raycontrol.matchController(controllerData, "primary")) {
+      attachSprayCan(controllerData);
+      checkerSpray.addComponent(_components_index__WEBPACK_IMPORTED_MODULE_2__["AreaChecker"]).addComponent(_components_index__WEBPACK_IMPORTED_MODULE_2__["Object3D"], {
+        value: controllerData.controller
+      }).addComponent(_components_index__WEBPACK_IMPORTED_MODULE_2__["AreaReactor"], {
+        onEntering: function onEntering(entity) {
+          var obj3D = entity.getComponent(_components_index__WEBPACK_IMPORTED_MODULE_2__["Object3D"]).value;
+          obj3D.getObjectByName('Scene').visible = false;
+          obj3D.getObjectByName('spray').visible = true;
+          var raycasterContext = obj3D.getObjectByName('raycasterContext');
+          raycasterContext.rotation.set(-Math.PI / 2, Math.PI / 2, 0);
+          raycasterContext.position.set(0, -0.015, -0.025);
+          ctx.raycontrol.setLineStyle('basic');
+          ctx.raycontrol.activateState('graffiti');
+        },
+        onExiting: function onExiting(entity) {
+          var obj3D = entity.getComponent(_components_index__WEBPACK_IMPORTED_MODULE_2__["Object3D"]).value;
+          obj3D.getObjectByName('Scene').visible = true;
+          obj3D.getObjectByName('spray').visible = false;
+          var raycasterContext = obj3D.getObjectByName('raycasterContext');
+          raycasterContext.rotation.set(0, 0, 0);
+          raycasterContext.position.set(0, 0, 0);
+          ctx.raycontrol.setLineStyle('advanced');
+          ctx.raycontrol.deactivateState('graffiti');
+        }
+      });
+    } else {
+      attachColorWheel(controllerData);
+      checker.addComponent(_components_index__WEBPACK_IMPORTED_MODULE_2__["AreaChecker"]).addComponent(_components_index__WEBPACK_IMPORTED_MODULE_2__["Object3D"], {
+        value: controllerData.controller
+      }).addComponent(_components_index__WEBPACK_IMPORTED_MODULE_2__["AreaReactor"], {
+        onEntering: function onEntering(entity) {
+          var obj3D = entity.getComponent(_components_index__WEBPACK_IMPORTED_MODULE_2__["Object3D"]).value;
+          obj3D.getObjectByName('Scene').visible = false;
+          obj3D.getObjectByName('ColorWheel').visible = true;
+        },
+        onExiting: function onExiting(entity) {
+          var obj3D = entity.getComponent(_components_index__WEBPACK_IMPORTED_MODULE_2__["Object3D"]).value;
+          obj3D.getObjectByName('Scene').visible = true;
+          obj3D.getObjectByName('ColorWheel').visible = false;
+        }
+      });
+    }
   });
   var width = 2048;
   var height = 1024;
