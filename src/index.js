@@ -86,6 +86,7 @@ const roomName = urlObject.searchParams.get('room');
 context.room = roomNames.indexOf(roomName) !== -1 ? roomNames.indexOf(roomName) : 0;
 // console.log(`Current room "${roomNames[context.room]}", ${context.room}`);
 const debug = urlObject.searchParams.has('debug');
+const handedness = urlObject.searchParams.has('handedness') ? urlObject.searchParams.get('handedness') : "right";
 
 // Target positions when moving from one room to another
 const targetPositions = {
@@ -258,7 +259,7 @@ export function init() {
   const loadTotal = Object.keys(assets).length;
 
   loadAssets(renderer, 'assets/', assets, () => {
-    raycontrol = new RayControl(context);
+    raycontrol = new RayControl(context, handedness);
     context.raycontrol = raycontrol;
 
     teleport = new Teleport(context);

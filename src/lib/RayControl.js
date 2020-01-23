@@ -110,8 +110,16 @@ export default class RayControl {
     this.controllers.splice(index, 1);
   }
 
-  constructor(ctx) {
+  constructor(ctx, primary) {
     this.ctx = ctx;
+
+    if (typeof primary === "undefined") {
+      this.primary = "right";
+      this.secondary = "left";
+    } else {
+      this.primary = primary;
+      this.secondary = primary === "right" ? "left" : "right";
+    }
 
     this.controllers = [];
 
@@ -170,16 +178,13 @@ export default class RayControl {
   selector could be: left, right, both, primary, secondary
   */
   matchController(controllerData, selector) {
-    const primary = "right";
-    const secondary = "left";
-
     const handedness = controllerData.inputSource.handedness;
 
     return (
       (selector === handedness)  ||
       (selector === "both" && (handedness === "right" || handedness === "left")) ||
-      (selector === "primary" && primary === handedness) ||
-      (selector === "secondary" && secondary === handedness)
+      (selector === "primary" && this.primary === handedness) ||
+      (selector === "secondary" && this.secondary === handedness)
     );
   }
 
