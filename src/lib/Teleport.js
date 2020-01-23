@@ -78,7 +78,7 @@ export default class Teleport {
   onSelectEnd(targetPoint) {
     const headPosition = this.ctx.renderer.xr.getCamera(this.ctx.camera).position;
     const offset = targetPoint.sub(headPosition);
-    offset.y = 0;
+    offset.y = 0; // We don't want to change height to floor's level
 
     this.ctx.cameraRig.position.add(offset);
     this.teleportHitGeometry.visible = false;
