@@ -101,6 +101,9 @@ header a:hover {
 header a:hover path, #mrlogo:hover path.mrlogobg{
   fill: #059;
 }
+#handedness a{
+  margin-left: 0.3rem;
+}
 .activehand {
   background: #000;
   color: #fff;
@@ -186,7 +189,7 @@ header a:hover path, #mrlogo:hover path.mrlogobg{
 
 
 <header>
-  <span>
+  <span id="handedness">
     Handedness:
     <a href="#" id="lefthand" onclick="setHandedness(this, 'left')">Left</a>
     <a href="#" id="righthand" onclick="setHandedness(this, 'right')">Right</a>
