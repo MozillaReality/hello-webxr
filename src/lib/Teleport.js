@@ -61,6 +61,7 @@ export default class Teleport {
   onHoverLeave() {
     this.ballColliding.visible = false;
     this.teleportHitGeometry.visible = false;
+    this.startSound.pause();
   }
 
   onHover(hitPoint, active) {
