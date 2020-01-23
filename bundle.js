@@ -71911,6 +71911,126 @@ function () {
 
 /***/ }),
 
+/***/ "./src/lib/EventDispatcher.js":
+/*!************************************!*\
+  !*** ./src/lib/EventDispatcher.js ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return EventDispatcher; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+/**
+ * @private
+ * @class EventDispatcher
+ */
+var EventDispatcher =
+/*#__PURE__*/
+function () {
+  function EventDispatcher() {
+    _classCallCheck(this, EventDispatcher);
+
+    this._listeners = {};
+    this.stats = {
+      fired: 0,
+      handled: 0
+    };
+  }
+  /**
+   * Add an event listener
+   * @param {String} eventName Name of the event to listen
+   * @param {Function} listener Callback to trigger when the event is fired
+   */
+
+
+  _createClass(EventDispatcher, [{
+    key: "addEventListener",
+    value: function addEventListener(eventName, listener) {
+      var listeners = this._listeners;
+
+      if (listeners[eventName] === undefined) {
+        listeners[eventName] = [];
+      }
+
+      if (listeners[eventName].indexOf(listener) === -1) {
+        listeners[eventName].push(listener);
+      }
+    }
+    /**
+     * Check if an event listener is already added to the list of listeners
+     * @param {String} eventName Name of the event to check
+     * @param {Function} listener Callback for the specified event
+     */
+
+  }, {
+    key: "hasEventListener",
+    value: function hasEventListener(eventName, listener) {
+      return this._listeners[eventName] !== undefined && this._listeners[eventName].indexOf(listener) !== -1;
+    }
+    /**
+     * Remove an event listener
+     * @param {String} eventName Name of the event to remove
+     * @param {Function} listener Callback for the specified event
+     */
+
+  }, {
+    key: "removeEventListener",
+    value: function removeEventListener(eventName, listener) {
+      var listenerArray = this._listeners[eventName];
+
+      if (listenerArray !== undefined) {
+        var index = listenerArray.indexOf(listener);
+
+        if (index !== -1) {
+          listenerArray.splice(index, 1);
+        }
+      }
+    }
+    /**
+     * Dispatch an event
+     * @param {String} eventName Name of the event to dispatch
+     * @param {Data} data to eit
+     */
+
+  }, {
+    key: "dispatchEvent",
+    value: function dispatchEvent(eventName, data) {
+      this.stats.fired++;
+      var listenerArray = this._listeners[eventName];
+
+      if (listenerArray !== undefined) {
+        var array = listenerArray.slice(0);
+
+        for (var i = 0; i < array.length; i++) {
+          array[i].call(this, data);
+        }
+      }
+    }
+    /**
+     * Reset stats counters
+     */
+
+  }, {
+    key: "resetCounters",
+    value: function resetCounters() {
+      this.stats.fired = this.stats.handled = 0;
+    }
+  }]);
+
+  return EventDispatcher;
+}();
+
+
+
+/***/ }),
+
 /***/ "./src/lib/PositionalAudioPolyphonic.js":
 /*!**********************************************!*\
   !*** ./src/lib/PositionalAudioPolyphonic.js ***!
@@ -72013,11 +72133,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "rayMaterial", function() { return rayMaterial; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return RayControl; });
 /* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.module.js");
+/* harmony import */ var _EventDispatcher_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EventDispatcher.js */ "./src/lib/EventDispatcher.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 var tempMatrix = new three__WEBPACK_IMPORTED_MODULE_0__["Matrix4"]();
@@ -72026,7 +72160,9 @@ var validStateController = ["primary", "secondary", "both", "left", "right"];
 
 var RayControl =
 /*#__PURE__*/
-function () {
+function (_EventDispatcher) {
+  _inherits(RayControl, _EventDispatcher);
+
   _createClass(RayControl, [{
     key: "enable",
     value: function enable() {
@@ -72050,6 +72186,18 @@ function () {
       this.controllers.forEach(function (controller) {
         return controller.active = false;
       });
+    }
+  }, {
+    key: "changeHandedness",
+    value: function changeHandedness(primary) {
+      if (primary !== this.primary) {
+        this.primary = primary;
+        this.secondary = primary === "right" ? "left" : "right";
+        this.dispatchEvent("handednessChanged", {
+          primary: this.primary,
+          secondary: this.secondary
+        });
+      }
     }
   }, {
     key: "addState",
@@ -72092,11 +72240,11 @@ function () {
   }, {
     key: "deactivateAll",
     value: function deactivateAll(name) {
-      var _this = this;
+      var _this2 = this;
 
       this.currentStates = [];
       this.controllers.forEach(function (c) {
-        _this.currentStates.forEach(function (s) {
+        _this2.currentStates.forEach(function (s) {
           if (c.intersections[s.name]) {
             c.intersections[s.name] = null;
           }
@@ -72132,6 +72280,8 @@ function () {
       if (this.matchController(controllerData, "primary")) {
         controller.add(this.raycasterContext);
       }
+
+      this.dispatchEvent("controllerConnected", controllerData);
     }
   }, {
     key: "removeController",
@@ -72139,29 +72289,36 @@ function () {
       var index = this.controllers.findIndex(function (controllerData) {
         return controllerData.controller === controller;
       });
+      var controllerData = this.controllers.find(function (controllerData) {
+        return controllerData.controller === controller;
+      });
       this.controllers.splice(index, 1);
+      this.dispatchEvent("controllerDisconnected", controllerData);
     }
   }]);
 
   function RayControl(ctx, primary) {
+    var _this;
+
     _classCallCheck(this, RayControl);
 
-    this.ctx = ctx;
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(RayControl).call(this));
+    _this.ctx = ctx;
 
     if (typeof primary === "undefined") {
-      this.primary = "right";
-      this.secondary = "left";
+      _this.primary = "right";
+      _this.secondary = "left";
     } else {
-      this.primary = primary;
-      this.secondary = primary === "right" ? "left" : "right";
+      _this.primary = primary;
+      _this.secondary = primary === "right" ? "left" : "right";
     }
 
-    this.controllers = [];
-    this.previousLineStyle = 'pretty';
-    this.enabled = true;
-    this.raycaster = new three__WEBPACK_IMPORTED_MODULE_0__["Raycaster"]();
-    this.states = {};
-    this.currentStates = [];
+    _this.controllers = [];
+    _this.previousLineStyle = 'pretty';
+    _this.enabled = true;
+    _this.raycaster = new three__WEBPACK_IMPORTED_MODULE_0__["Raycaster"]();
+    _this.states = {};
+    _this.currentStates = [];
     var line = ctx.assets['teleport_model'].scene.getObjectByName('beam');
     ctx.assets['beam_tex'].wrapT = three__WEBPACK_IMPORTED_MODULE_0__["RepeatWrapping"];
     ctx.assets['beam_tex'].wrapS = three__WEBPACK_IMPORTED_MODULE_0__["RepeatWrapping"];
@@ -72183,20 +72340,25 @@ function () {
     });
     line.renderOrder = 10;
     line.name = 'line';
-    this.rayLength = 5;
-    line.scale.z = this.rayLength;
-    this.line0 = line.clone();
-    this.line1 = line.clone();
-    this.line0.visible = this.line1.visible = true;
-    this.raycasterContext = new three__WEBPACK_IMPORTED_MODULE_0__["Group"]();
-    this.raycasterContext.add(this.line0);
-    this.raycasterContext.name = 'raycasterContext';
+    _this.rayLength = 5;
+    line.scale.z = _this.rayLength;
+    _this.line0 = line.clone();
+    _this.line1 = line.clone();
+    _this.line0.visible = _this.line1.visible = true;
+    _this.raycasterContext = new three__WEBPACK_IMPORTED_MODULE_0__["Group"]();
+
+    _this.raycasterContext.add(_this.line0);
+
+    _this.raycasterContext.name = 'raycasterContext';
     var geometry = new three__WEBPACK_IMPORTED_MODULE_0__["BufferGeometry"]().setFromPoints([new three__WEBPACK_IMPORTED_MODULE_0__["Vector3"](0, 0, 0), new three__WEBPACK_IMPORTED_MODULE_0__["Vector3"](0, 0, -1)]);
-    this.lineBasic = new three__WEBPACK_IMPORTED_MODULE_0__["Line"](geometry);
-    this.lineBasic.name = 'line';
-    this.lineBasic.scale.z = 5;
-    this.lineBasic.visible = false;
-    this.raycasterContext.add(this.lineBasic);
+    _this.lineBasic = new three__WEBPACK_IMPORTED_MODULE_0__["Line"](geometry);
+    _this.lineBasic.name = 'line';
+    _this.lineBasic.scale.z = 5;
+    _this.lineBasic.visible = false;
+
+    _this.raycasterContext.add(_this.lineBasic);
+
+    return _this;
   }
 
   _createClass(RayControl, [{
@@ -72251,7 +72413,7 @@ function () {
   }, {
     key: "execute",
     value: function execute(ctx, delta, time) {
-      var _this2 = this;
+      var _this3 = this;
 
       if (!this.enabled || this.currentStates.length === 0) {
         return;
@@ -72328,14 +72490,14 @@ function () {
 
 
       var _loop = function _loop() {
-        var controllerData = _this2.controllers[c];
+        var controllerData = _this3.controllers[c];
 
         if (!controllerData.prevIntersection) {
           return "continue";
         } // If we can't find the previous intersection currently enabled, we should emit hoverLeave
 
 
-        if (!_this2.controllers.find(function (c) {
+        if (!_this3.controllers.find(function (c) {
           var prev = controllerData.prevIntersection;
           var current = c.currentIntersection;
           return current && prev.state.name === current.state.name && prev.intersection.object === current.intersection.object;
@@ -72413,7 +72575,7 @@ function () {
   }]);
 
   return RayControl;
-}();
+}(_EventDispatcher_js__WEBPACK_IMPORTED_MODULE_1__["default"]);
 
 
 
@@ -73569,7 +73731,9 @@ __webpack_require__.r(__webpack_exports__);
 var colorWheel;
 function enter(ctx) {
   //ctx.raycontrol.activateState('graffiti');
-  colorWheel.enter();
+  if (colorWheel) {
+    colorWheel.enter();
+  }
 }
 var material, wall, drawContext;
 var lastPosition = new three__WEBPACK_IMPORTED_MODULE_0__["Vector2"]();
@@ -73672,10 +73836,12 @@ function setup(ctx, hall) {
       colorize(rgb.r, rgb.g, rgb.b);
       spray.getObjectByName('spraycolor').material.color.setRGB(rgb.r / 255, rgb.g / 255, rgb.b / 255);
     });
+    colorWheel.enter();
   }
 
-  attachSprayCan(ctx.controllers[1]);
-  attachColorWheel(ctx.controllers[0]);
+  ctx.raycontrol.addEventListener('controllerConnected', function (controllerData) {
+    ctx.raycontrol.matchController(controllerData, "primary") ? attachSprayCan(controllerData.controller) : attachColorWheel(controllerData.controller);
+  });
   var width = 2048;
   var height = 1024;
   var maxDistance = 1;

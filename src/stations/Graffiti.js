@@ -7,7 +7,9 @@ var colorWheel;
 
 export function enter(ctx) {
   //ctx.raycontrol.activateState('graffiti');
-  colorWheel.enter();
+  if (colorWheel) {
+    colorWheel.enter();
+  }
 }
 
 var material, wall, drawContext;
@@ -118,10 +120,14 @@ export function setup(ctx, hall) {
         rgb.b);
       spray.getObjectByName('spraycolor').material.color.setRGB(rgb.r / 255, rgb.g / 255, rgb.b / 255);
     });
+
+    colorWheel.enter();
   }
 
-  attachSprayCan(ctx.controllers[1]);
-  attachColorWheel(ctx.controllers[0]);
+  ctx.raycontrol.addEventListener('controllerConnected', controllerData => {
+    ctx.raycontrol.matchController(controllerData, "primary") ?
+      attachSprayCan(controllerData.controller) : attachColorWheel(controllerData.controller);
+  });
 
   let width = 2048;
   let height = 1024;

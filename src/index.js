@@ -288,7 +288,6 @@ export function init() {
   },
   debug);
 
-
 }
 
 function setupControllers() {

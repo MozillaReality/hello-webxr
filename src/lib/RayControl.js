@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import EventDispatcher from './EventDispatcher.js';
 
 var tempMatrix = new THREE.Matrix4();
 export var rayMaterial;
@@ -10,7 +11,7 @@ const validStateController = [
   "right"
 ];
 
-export default class RayControl {
+export default class RayControl extends EventDispatcher {
   enable() {
     this.setLineStyle(this.previousLineStyle);
     this.enabled = true;
@@ -28,6 +29,15 @@ export default class RayControl {
     this.lineBasic.visible = this.line0.visible = this.line1.visible = false;
     this.enabled = false;
     this.controllers.forEach(controller => controller.active = false);
+  }
+
+  changeHandedness(primary) {
+    if (primary !== this.primary) {
+      this.primary = primary;
+      this.secondary = primary === "right" ? "left" : "right";
+  
+      this.dispatchEvent("handednessChanged", {primary: this.primary, secondary: this.secondary});
+    }
   }
 
   addState(name, state, activate) {
@@ -103,14 +113,19 @@ export default class RayControl {
     if (this.matchController(controllerData, "primary")) {
       controller.add( this.raycasterContext );
     }
+
+    this.dispatchEvent("controllerConnected", controllerData);
   }
 
   removeController(controller) {
     const index = this.controllers.findIndex(controllerData => controllerData.controller === controller);
+    const controllerData = this.controllers.find(controllerData => controllerData.controller === controller)
     this.controllers.splice(index, 1);
+    this.dispatchEvent("controllerDisconnected", controllerData);
   }
 
   constructor(ctx, primary) {
+    super();
     this.ctx = ctx;
 
     if (typeof primary === "undefined") {
