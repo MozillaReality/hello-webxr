@@ -75205,6 +75205,7 @@ function (_System) {
         var textMesh = new troika_3d_text_dist_textmesh_standalone_esm_js__WEBPACK_IMPORTED_MODULE_2__["TextMesh"]();
         textMesh.name = 'textMesh';
         textMesh.anchor = [0, 0];
+        textMesh.renderOrder = 1; //brute-force fix for ugly antialiasing, see issue #67
 
         _this.updateText(textMesh, textComponent);
 
