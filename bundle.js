@@ -71548,7 +71548,8 @@ function setupControllers() {
 
 var selectStartSkip = {};
 var selectEndSkip = {};
-var OculusBrowser = navigator.userAgent.indexOf("OculusBrowser") !== -1; // <@FIXME
+var OculusBrowser = navigator.userAgent.indexOf("OculusBrowser") !== -1 && parseInt(navigator.userAgent.match(/OculusBrowser\/([0-9]+)./)[1]) < 8;
+console.log('Oculus', OculusBrowser); // <@FIXME
 
 function onSelectStart(ev) {
   // @FIXME Hack for Oculus Browser issue
