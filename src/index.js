@@ -22,6 +22,7 @@ import { Text, Object3D, AreaChecker } from './components/index.js';
 
 import RayControl from './lib/RayControl.js';
 import Teleport from './lib/Teleport.js';
+import SnapTurn from './lib/SnapTurn.js';
 
 import * as roomHall from './rooms/Hall.js';
 import * as roomPanorama from './rooms/Panorama.js';
@@ -38,7 +39,7 @@ const polyfill = new WebXRPolyfill();
 var clock = new THREE.Clock();
 
 var scene, parent, renderer, camera, controls, context = {};
-var raycontrol, teleport, controllers = [];
+var raycontrol, teleport, snapturn, controllers = [];
 
 var listener, ambientMusic;
 
@@ -268,6 +269,9 @@ export function init() {
     teleport = new Teleport(context);
     context.teleport = teleport;
 
+    snapturn = new SnapTurn(context);
+    context.snapturn = snapturn;
+
     setupControllers();
     roomHall.setup(context);
     roomPanorama.setup(context);
@@ -308,10 +312,12 @@ function setupControllers() {
     controller.addEventListener( 'connected', function ( event ) {
       this.add(model.clone());
       raycontrol.addController(this, event.data);
+      snapturn.addController(this, event.data);
     } );
     controller.addEventListener( 'disconnect', function () {
       this.remove(this.children[0]);
       raycontrol.removeController(this, event.data);
+      snapturn.addController(this, event.data);
     });
   }
 }
@@ -379,6 +385,7 @@ function animate() {
   }
 
   // render current room
+  context.snapturn.execute(context, delta, elapsedTime);
   context.raycontrol.execute(context, delta, elapsedTime);
   rooms[context.room].execute(context, delta, elapsedTime);
   renderer.render(scene, camera);
