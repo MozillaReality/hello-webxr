@@ -4,7 +4,7 @@
   "description": "A showcase of different WebXR experiences and interaction examples",
   "private": true,
   "scripts": {
-    "start": "webpack-dev-server -d",
+    "start": "webpack-dev-server -d --https",
     "build": "webpack -p",
     "watch": "webpack --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
