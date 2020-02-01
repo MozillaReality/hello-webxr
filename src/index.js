@@ -317,7 +317,7 @@ function setupControllers() {
     controller.addEventListener( 'disconnect', function () {
       this.remove(this.children[0]);
       raycontrol.removeController(this, event.data);
-      snapturn.addController(this, event.data);
+      snapturn.removeController(this, event.data);
     });
   }
 }
