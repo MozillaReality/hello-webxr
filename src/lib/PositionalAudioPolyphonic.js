@@ -8,7 +8,7 @@ export default class PositionalAudioPolyphonic extends THREE.Object3D {
 
     this.poolSize = poolSize || 5;
     for (var i = 0; i < this.poolSize; i++) {
-      this.children.push(new THREE.PositionalAudio(listener));
+      this.add(new THREE.PositionalAudio(listener));
     }
   }
 

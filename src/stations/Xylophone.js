@@ -37,6 +37,7 @@ export function setup(ctx, hall) {
     note.userData.animation = 0;
     note.userData.resetY = note.position.y;
     note.userData.sound = new PositionalAudioPolyphonic(listener, 10);
+    note.add(note.userData.sound);
     audioLoader.load('assets/ogg/xylophone' + (i + 1) + '.ogg', buffer => {
       note.userData.sound.setBuffer(buffer);
     });
