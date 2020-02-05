@@ -11,7 +11,7 @@ export default {
   sky_tex: { url: 'sky.png', options: { encoding: THREE.sRGBEncoding, flipY: false} },
   clouds_tex: { url: 'clouds.basis', options: { encoding: THREE.sRGBEncoding, flipY: false} },
   teleport_model: { url: 'teleport.glb' },
-  beam_tex: { url: 'beamfx.basis' },
+  beam_tex: { url: 'beamfx.png' },
   glow_tex: { url: 'glow.basis', options: { encoding: THREE.sRGBEncoding} },
   newsticker_tex: { url: 'newsticker.jpg', options: { encoding: THREE.sRGBEncoding, flipY: false} },
   mozillamr_tex: { url: 'mozillamr.basis', options: { encoding: THREE.sRGBEncoding, flipY: false} },

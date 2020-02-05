@@ -1,5 +1,4 @@
 uniform float time;
-uniform float active;
 uniform sampler2D tex;
 varying vec2 vUv;
 

@@ -26,7 +26,7 @@ export default class RayControl extends EventDispatcher {
   }
 
   disable() {
-    this.lineBasic.visible = this.line0.visible = this.line1.visible = false;
+    this.lineBasic.visible = this.line0.visible = false;
     this.enabled = false;
     this.controllers.forEach(controller => controller.active = false);
   }
@@ -156,7 +156,8 @@ export default class RayControl extends EventDispatcher {
       },
       vertexShader: ctx.shaders.basic_vert,
       fragmentShader: ctx.shaders.beam_frag,
-      blending: THREE.AdditiveBlending
+      blending: THREE.AdditiveBlending,
+      transparent: true
     });
 
     line.renderOrder = 10;
@@ -166,8 +167,7 @@ export default class RayControl extends EventDispatcher {
     line.scale.z = this.rayLength;
 
     this.line0 = line.clone();
-    this.line1 = line.clone();
-    this.line0.visible = this.line1.visible = true;
+    this.line0.visible = true;
 
     this.raycasterContext = new THREE.Group();
     this.raycasterContext.add(this.line0);
