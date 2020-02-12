@@ -18,8 +18,10 @@ var stickNotesColliding = [
   new Array(NUM_NOTES).fill(false)
 ];
 
+var _ctx = null;
+
 export function setup(ctx, hall) {
-  this.ctx = ctx;
+  _ctx = ctx;
   const audioLoader = new THREE.AudioLoader();
   listener = new THREE.AudioListener();
   hallRef = hall;
@@ -167,7 +169,7 @@ export function onSelectStart(evt) {
 
       setStickColor(i, 0xaaaaaa);
 
-      this.ctx.raycontrol.disable();
+      _ctx.raycontrol.disable();
 
       // stick grabbed from the other hand
       if (xyloSticks[i].userData.grabbedBy) {
@@ -186,7 +188,7 @@ export function onSelectStart(evt) {
 }
 
 export function onSelectEnd(evt) {
-  this.ctx.raycontrol.enable();
+  _ctx.raycontrol.enable();
 
   let controller = evt.target;
   if (controller.userData.grabbing !== null) {
