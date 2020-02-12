@@ -45,9 +45,12 @@ export default class Teleport {
     this.startSound = new THREE.Audio(ctx.audioListener);
     this.startSound.setBuffer(ctx.assets['teleport_a_snd']);
     this.startSound.setLoop(true);
+    this.startSound.pause();
+
     this.endSound = new THREE.Audio(ctx.audioListener);
     this.endSound.setBuffer(ctx.assets['teleport_b_snd']);
     this.endSound.setLoop(false);
+    this.endSound.pause();
   }
 
 
