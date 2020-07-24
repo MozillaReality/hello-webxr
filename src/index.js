@@ -178,6 +178,18 @@ export function init() {
     AreaCheckerSystem, ControllersSystem, DebugHelperSystem
   ]);
 
+ // increase the framebufferScaleFactor by monkeypatching XRWebGLLayer()
+ // This increases the image quality, but lowers performance
+ // credits go to @mortimerGoro
+ var realConstructor = XRWebGLLayer;
+  window.XRWebGLLayer = function(session, context, options) {
+    options = options || {};
+    options.framebufferScaleFactor = 1.68;
+    return new realConstructor(session, context, options);
+  }
+  window.XRWebGLLayer.prototype = realConstructor.prototype;
+
+
   renderer = new THREE.WebGLRenderer({antialias: true, logarithmicDepthBuffer: false});
   renderer.gammaFactor = 2.2;
   renderer.outputEncoding = THREE.sRGBEncoding;
