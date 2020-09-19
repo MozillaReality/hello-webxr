@@ -1,7 +1,8 @@
 import * as THREE from 'three';
 import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls.js';
 
-import {VRButton} from 'three/examples/jsm/webxr/VRButton.js';
+import {VRButton} from './lib/VRButton.js';
+import {slideshow} from './lib/slideshow.js';
 import {loadAssets} from './lib/assetManager.js';
 
 // ECSY
@@ -194,8 +195,8 @@ export function init() {
   ambientMusic = new THREE.Audio(listener);
 
   controls = new PointerLockControls(camera, renderer.domElement);
-  document.body.addEventListener('click', () => controls.lock());
   if (debug) {
+    document.body.addEventListener('click', () => controls.lock());
     document.body.addEventListener('keydown', ev => {
       switch(ev.keyCode) {
         case 87: controls.moveForward(0.2); break;
@@ -244,6 +245,7 @@ export function init() {
   cameraRig.position.set(0, 0, 2);
   scene.add(cameraRig);
 
+  context.vrMode = false; // in vr
   context.assets = assets;
   context.shaders = shaders;
   context.scene = parent;
@@ -278,8 +280,12 @@ export function init() {
 
     rooms[context.room].enter(context);
 
+    slideshow.setup(context);
+
     document.body.appendChild(renderer.domElement);
-    document.body.appendChild(VRButton.createButton(renderer));
+    document.body.appendChild(VRButton.createButton(renderer, status => {
+      context.vrMode = status === 'sessionStarted';
+    }));
     renderer.setAnimationLoop(animate);
 
     document.getElementById('loading').style.display = 'none';
@@ -381,6 +387,10 @@ function animate() {
   // render current room
   context.raycontrol.execute(context, delta, elapsedTime);
   rooms[context.room].execute(context, delta, elapsedTime);
+  if (!context.vrMode) {
+    slideshow.execute(context, delta, elapsedTime);
+  }
+
   renderer.render(scene, camera);
   if (context.goto !== null) {
     gotoRoom(context.goto);
