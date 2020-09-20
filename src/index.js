@@ -285,6 +285,13 @@ export function init() {
     document.body.appendChild(renderer.domElement);
     document.body.appendChild(VRButton.createButton(renderer, status => {
       context.vrMode = status === 'sessionStarted';
+      if (context.vrMode) {
+        gotoRoom(0);
+        context.cameraRig.position.set(0, 0, 2);
+        context.goto = null;
+      } else {
+        slideshow.setup(context);
+      }
     }));
     renderer.setAnimationLoop(animate);
 

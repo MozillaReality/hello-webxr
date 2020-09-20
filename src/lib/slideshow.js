@@ -119,6 +119,8 @@ slideshow.setup = function (context) {
   this.room = undefined;
   this.path = undefined;
   this.next(context);
+  context.camera.position.set(0, 1.6, 0);
+  context.cameraRig.position.set(0, 0, 2);
   context.goto = this.room;
 };
 
@@ -133,8 +135,13 @@ slideshow.next = function (context) {
       // find next room with paths
       do {
         this.room ++;
-        if (this.room >= this.paths.length) { this.room = 0; }
+        if (this.room >= this.paths.length) {
+          this.room = 0;
+          context.cameraRig.position.set(0, 0, 2);
+        }
       } while (!this.paths[this.room].length);
+      var camera = context.renderer.xr.getCamera(context.camera);
+      camera.position.set(0, 1.6, 0);
       context.goto = this.room;
       this.path = 0;
     }
