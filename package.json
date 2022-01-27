@@ -31,7 +31,7 @@
   "homepage": "https://github.com/MozillaReality/hello-webxr#readme",
   "dependencies": {
     "ecsy": "0.2.6",
-    "three": "^0.112.0",
+    "three": "^0.137.0",
     "three-obj-loader": "^1.1.3",
     "three-pointerlock": "0.0.2",
     "troika-3d-text": "^0.16",
